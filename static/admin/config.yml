@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "email"
+    label: "Email"
+    folder: "content/emails"
+    create: true
+    path: "{{title}}/index"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
