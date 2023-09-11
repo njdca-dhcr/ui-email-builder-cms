@@ -12,11 +12,18 @@ This repo contains the entirety of the Email Builder CMS. It uses the following 
 
 Before beginning, make sure you have NodeJS v18 or higher installed.
 
+### Running the Development Server
+
 To work on this project on your local machine:
 
 1. Clone the repo with `git clone git@github.com:newjersey/ui-email-builder-cms.git`
 2. Install dependencies with `npm install`
 3. Run the development server with `npm run development`
 4. Visit `localhost:8000/` to visit the homepage and `localhost:8000/admin` to visit the admin interface
+
+### Linting
+
+To see which files are different, run `npm run lint`. To have automatically correct any lint errors
+run `npm run lint:fix`.
 
 ## Deployment

@@ -6,12 +6,12 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "email"
-    label: "Email"
-    folder: "content/emails"
+  - name: 'email'
+    label: 'Email'
+    folder: 'content/emails'
     create: true
-    path: "{{title}}/index"
+    path: '{{title}}/index'
     editor:
       preview: true
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: 'Title', name: 'title', widget: 'string' }
