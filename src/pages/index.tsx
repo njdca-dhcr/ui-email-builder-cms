@@ -23,19 +23,6 @@ const linkStyle = {
   verticalAlign: '5%',
 }
 
-const docLinks = [
-  {
-    text: 'TypeScript Documentation',
-    url: 'https://www.gatsbyjs.com/docs/how-to/custom-configuration/typescript/',
-    color: '#8954A8',
-  },
-  {
-    text: 'GraphQL Typegen Documentation',
-    url: 'https://www.gatsbyjs.com/docs/how-to/local-development/graphql-typegen/',
-    color: '#8954A8',
-  },
-]
-
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <main style={pageStyles}>
