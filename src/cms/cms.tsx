@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import CMS from 'netlify-cms-app'
 import type {
+  CmsConfig,
   CmsWidgetControlProps,
   CmsWidgetPreviewProps,
   PreviewTemplateComponentProps,
@@ -51,3 +52,9 @@ const EmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> = ({ entry
 }
 
 CMS.registerPreviewTemplate('email_templates', EmailTemplatePreviewTemplate)
+
+const cmsConfig: Partial<CmsConfig> = {
+  local_backend: process.env.NODE_ENV === 'development',
+}
+
+CMS.init({ config: cmsConfig as any })

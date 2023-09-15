@@ -21,11 +21,13 @@ To work on this project on your local machine:
 
 The following is adapted from [the docs](https://decapcms.org/docs/beta-features/#working-with-a-local-git-repository).
 
-1. Make sure `static/admin/config.yml` contains `local_backend: true` before any other configuration. **Note:** do not commit this change since turns off authentication
-2. Run `npx decap-server`
-3. In a different terminal pane or window run `npm run development`
+1. Run `npx decap-server`
+2. In a different terminal pane or window run `npm run development`
 
 Now any changes you publish in Decap CMS on your local machine will appear in your local repository.
+
+**Note:** `src/cms/cms.tsx` automatically initializes the application with an override that sets
+`local_backend: true`. This takes precedence over anything in `static/admin/config.yml`.
 
 ### Linting
 
