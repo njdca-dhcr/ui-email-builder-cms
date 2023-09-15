@@ -17,7 +17,8 @@
     "lint:fix": "prettier . --write",
     "test": "jest",
     "test:watch": "jest --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate": "run-s typecheck lint test"
   },
   "overrides": {
     "react": "^18.2.0",
@@ -45,6 +46,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "npm-run-all2": "^6.0.6",
     "prettier": "3.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
