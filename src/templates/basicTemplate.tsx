@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import type { EmailTemplate } from '../appTypes'
+import type { EmailTemplate } from 'src/appTypes'
 import { EmailTemplateComponent } from './components/EmailTemplateComponent'
 
 interface Props {

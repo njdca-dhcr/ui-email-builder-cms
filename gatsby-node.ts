@@ -1,5 +1,5 @@
 import type { GatsbyNode } from 'gatsby'
-import type { EmailTemplate } from './src/appTypes'
+import type { EmailTemplate } from 'src/appTypes'
 import fs from 'node:fs'
 import path from 'node:path'
 import yaml from 'js-yaml'

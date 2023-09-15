@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import type { EmailTemplateComponentItem } from '../../appTypes'
+import type { EmailTemplateComponentItem } from 'src/appTypes'
 import { Header } from './Header'
 import { Footer } from './Footer'
 

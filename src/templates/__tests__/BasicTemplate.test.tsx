@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
-import type { EmailTemplate } from '../../appTypes'
+import type { EmailTemplate } from 'src/appTypes'
 import BasicTemplate, { TEST_IDS } from '../BasicTemplate'
 import { TEST_ID as headerTestId } from '../components/Header'
 import { TEST_ID as footerTestId } from '../components/Footer'
