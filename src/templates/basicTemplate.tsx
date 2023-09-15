@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
-import { Link } from 'gatsby'
+// import type {  } from 'gatsby'
+import type { EmailTemplate } from '../appTypes'
 
 interface Props {
   pageContext: {
-    emailTemplate: any
+    emailTemplate: EmailTemplate
   }
 }
 

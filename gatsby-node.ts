@@ -1,12 +1,8 @@
 import type { GatsbyNode } from 'gatsby'
+import type { EmailTemplate } from './src/appTypes'
 import fs from 'node:fs'
 import path from 'node:path'
 import yaml from 'js-yaml'
-
-interface EmailTemplate {
-  title: string
-  description: string
-}
 
 const EMAIL_TEMPLATES_DIR = './content/email-templates'
 
