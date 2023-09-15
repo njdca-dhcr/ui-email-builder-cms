@@ -1,57 +1,11 @@
-import React, { FC } from 'react'
 import CMS from 'netlify-cms-app'
-import type {
-  CmsConfig,
-  CmsWidgetControlProps,
-  CmsWidgetPreviewProps,
-  PreviewTemplateComponentProps,
-} from 'netlify-cms-core'
-
-const InnovationWidget: FC<CmsWidgetControlProps<string>> = ({
-  classNameWrapper,
-  field,
-  forID,
-  onChange,
-  value,
-}) => {
-  return (
-    <input
-      className={classNameWrapper}
-      id={forID}
-      type="text"
-      value={value}
-      onChange={(event) => onChange(event.target.value.toUpperCase())}
-    />
-  )
-}
-
-const InnovationWidgetPreview: FC<CmsWidgetPreviewProps> = ({
-  entry,
-  field,
-  fieldsMetaData,
-  getAsset,
-  metadata,
-  value,
-}) => {
-  debugger
-  return <div>{value}</div>
-}
+import type { CmsConfig } from 'netlify-cms-core'
+import { InnovationWidget, InnovationWidgetPreview } from './InnovationWidget'
+import { CmsEmailTemplatePreviewTemplate } from './CmsEmailTemplatePreviewTemplate'
 
 CMS.registerWidget('innovation', InnovationWidget, InnovationWidgetPreview)
 
-const EmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> = ({ entry, ...props }) => {
-  return (
-    <div>
-      Email template preview template
-      <ul>
-        <li>Title: {entry.getIn(['data', 'title'])}</li>
-        <li>Custom Widget test: {entry.getIn(['data', 'widget-test'])}</li>
-      </ul>
-    </div>
-  )
-}
-
-CMS.registerPreviewTemplate('email_templates', EmailTemplatePreviewTemplate)
+CMS.registerPreviewTemplate('email_templates', CmsEmailTemplatePreviewTemplate)
 
 const cmsConfig: Partial<CmsConfig> = {
   local_backend: process.env.NODE_ENV === 'development',
