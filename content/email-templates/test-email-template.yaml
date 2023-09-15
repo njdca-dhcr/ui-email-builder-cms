@@ -1,3 +1,9 @@
-title: Test Email Template
+name: Test Email Template
 description: Test description for the email template
 widget-test: TEST WIDGET VALUE
+components:
+  - component: Header
+    description: The main heading of the email, usually similar to the email's subject.
+  - component: Footer
+    description: 'This is usually the "fine print" of the email: Confidentiality
+      notices, do not reply information, etc.'

@@ -11,7 +11,7 @@ const loadEmailTemplateFromYaml = (filePath: string): EmailTemplate => {
   return yaml.load(contents) as any
 }
 
-const emailTemplateComponent = path.resolve('./src/templates/basicTemplate.tsx')
+const emailTemplateComponent = path.resolve('./src/templates/BasicTemplate.tsx')
 
 const createPages: GatsbyNode['createPages'] = ({ actions }) => {
   const { createPage } = actions
