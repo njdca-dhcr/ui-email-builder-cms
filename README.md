@@ -19,29 +19,32 @@ This application uses the following technologies:
 
 ## Deployment
 
-More to come. Netlify? Amplify? Something else
+More to come. [Netlify](https://www.netlify.com)? [Amplify](https://aws.amazon.com/amplify/)? Something else?
 
 ## Development
 
 ### Requirements
 
+### Installation
+
 You should have NodeJS v18.3.0 or higher installed.
+
+1. Clone the repo with `git clone git@github.com:newjersey/ui-email-builder-cms.git`
+1. Install dependencies with `npm install`
 
 ### Running the Development Server
 
 To work on this project locally:
 
-1. Clone the repo with `git clone git@github.com:newjersey/ui-email-builder-cms.git`
-2. Install dependencies with `npm install`
-3. Run the development server with `npm run develop`
-4. Visit `localhost:8000/` to visit the homepage and `localhost:8000/admin` to visit the admin interface
+1. Run the development server with `npm run develop`
+1. Visit `localhost:8000/` to visit the homepage and `localhost:8000/admin` to visit the admin interface
 
 ### Using Decap Locally
 
 The following is adapted from [the Decap docs](https://decapcms.org/docs/beta-features/#working-with-a-local-git-repository).
 
 1. Run `npx decap-server`
-2. In a different terminal pane or window run `npm run develop`
+1. In a different terminal pane or window run the development server with `npm run develop`
 
 Now any changes you publish in Decap CMS on your local machine will appear in your local repository.
 
@@ -59,8 +62,7 @@ you can run `npm run validate` which will typecheck (`npm run typecheck`), lint 
 
 #### Decap
 
-**Note:** `src/cms/cms.tsx` automatically initializes the application with an override that sets
-`local_backend: true`. This takes precedence over anything in `static/admin/config.yml`.
+The Decap CMS config is located at `static/admin/config.yml`. However, the `src/cms/cms.tsx` file initializes the application with an override that sets `local_backend: true` in development environments. This takes precedence over anything in `static/admin/config.yml`.
 
 #### Jest
 
