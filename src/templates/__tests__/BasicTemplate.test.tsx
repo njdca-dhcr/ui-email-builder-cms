@@ -8,6 +8,8 @@ import { TEST_ID as headerInputTestId } from '../components/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../components/FooterInput'
 import { TEST_ID as headerTestId } from '../components/Header'
 import { TEST_ID as footerTestId } from '../components/Footer'
+import { TEST_ID as layoutTestId } from '../../ui/Layout'
+import { useStaticQuery } from 'gatsby'
 
 describe('BasicTemplate', () => {
   let emailTemplate: EmailTemplate
@@ -21,12 +23,32 @@ describe('BasicTemplate', () => {
         { component: 'Footer', description: faker.lorem.words(3) },
       ],
     }
+    ;(useStaticQuery as any).mockImplementation((): Queries.NavigationQuery => {
+      return {
+        emailTemplates: {
+          edges: [
+            {
+              node: {
+                id: '123',
+                name: 'Email Template',
+                parent: { id: '324', name: 'email-template' },
+              },
+            },
+          ],
+        },
+      }
+    })
   })
 
-  it('display the email template name and description', () => {
+  it('displays the email template name and description', () => {
     const rendered = render(<BasicTemplate pageContext={{ emailTemplate }} />)
     expect(rendered.getByTestId(TEST_IDS.name)).toHaveTextContent(emailTemplate.name)
     expect(rendered.getByTestId(TEST_IDS.description)).toHaveTextContent(emailTemplate.description)
+  })
+
+  it('is displayed in a layout', () => {
+    const { queryByTestId } = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+    expect(queryByTestId(layoutTestId)).not.toBeNull()
   })
 
   describe('email template components', () => {

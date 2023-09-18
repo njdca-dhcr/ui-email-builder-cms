@@ -1,5 +1,6 @@
-import React from 'react'
-import type { HeadFC, PageProps } from 'gatsby'
+import React, { FC } from 'react'
+import type { HeadFC } from 'gatsby'
+import { Layout } from '../ui/Layout'
 
 const pageStyles = {
   color: '#232129',
@@ -23,17 +24,19 @@ const linkStyle = {
   verticalAlign: '5%',
 }
 
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage: FC = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Email Builder CMS</h1>
-      <p style={paragraphStyles}>This is a placeholder homepage for now.</p>
-      <p style={paragraphStyles}>
-        <a href="/admin" style={linkStyle}>
-          The admin interface can be accessed here.
-        </a>
-      </p>
-    </main>
+    <Layout>
+      <main style={pageStyles}>
+        <h1 style={headingStyles}>Email Builder CMS</h1>
+        <p style={paragraphStyles}>This is a placeholder homepage for now.</p>
+        <p style={paragraphStyles}>
+          <a href="/admin" style={linkStyle}>
+            The admin interface can be accessed here.
+          </a>
+        </p>
+      </main>
+    </Layout>
   )
 }
 

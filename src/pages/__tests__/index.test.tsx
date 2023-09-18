@@ -1,12 +1,30 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import IndexPage from '../index'
+import { TEST_ID as layoutTestId } from '../../ui/Layout'
+import { useStaticQuery } from 'gatsby'
 
-// You have to write data-testid
-const Title = () => <h1 data-testid="hero-title">Gatsby is awesome!</h1>
+describe('index - Root page', () => {
+  beforeEach(() => {
+    ;(useStaticQuery as any).mockImplementation((): Queries.NavigationQuery => {
+      return {
+        emailTemplates: {
+          edges: [
+            {
+              node: {
+                id: '123',
+                name: 'Email Template',
+                parent: { id: '324', name: 'email-template' },
+              },
+            },
+          ],
+        },
+      }
+    })
+  })
 
-it('Displays the correct title', () => {
-  const { getByTestId } = render(<Title />)
-  // Assertion
-  expect(getByTestId('hero-title')).toHaveTextContent('Gatsby is awesome!')
-  // --> Test will pass
+  it('is displayed in a layout', () => {
+    const { queryByTestId } = render(<IndexPage />)
+    expect(queryByTestId(layoutTestId)).not.toBeNull()
+  })
 })

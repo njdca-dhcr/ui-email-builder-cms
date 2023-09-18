@@ -3,6 +3,7 @@ import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './components/EmailTemplateFormComponent'
 import { EmailCopyData } from './components/EmailCopyData'
 import { EmailTemplatePreviewComponent } from './components/EmailTemplatePreviewComponent'
+import { Layout } from '../ui/Layout'
 
 interface Props {
   pageContext: {
@@ -30,33 +31,35 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
 
   return (
     <EmailCopyData>
-      <div style={styles.page}>
-        <div>
-          <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
-          <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
-        </div>
+      <Layout>
+        <div style={styles.page}>
+          <div>
+            <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
+            <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
+          </div>
 
-        <div style={styles.container}>
-          <div style={styles.pane}>
-            {emailTemplate.components.map((emailTemplateComponentItem, i) => (
-              <EmailTemplateFormComponent
-                key={i}
-                copyId={buildCopyId(emailTemplateComponentItem, i)}
-                emailTemplateComponentItem={emailTemplateComponentItem}
-              />
-            ))}
-          </div>
-          <div style={styles.pane}>
-            {emailTemplate.components.map((emailTemplateComponentItem, i) => (
-              <EmailTemplatePreviewComponent
-                key={i}
-                copyId={buildCopyId(emailTemplateComponentItem, i)}
-                emailTemplateComponentItem={emailTemplateComponentItem}
-              />
-            ))}
+          <div style={styles.container}>
+            <div style={styles.pane}>
+              {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+                <EmailTemplateFormComponent
+                  key={i}
+                  copyId={buildCopyId(emailTemplateComponentItem, i)}
+                  emailTemplateComponentItem={emailTemplateComponentItem}
+                />
+              ))}
+            </div>
+            <div style={styles.pane}>
+              {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+                <EmailTemplatePreviewComponent
+                  key={i}
+                  copyId={buildCopyId(emailTemplateComponentItem, i)}
+                  emailTemplateComponentItem={emailTemplateComponentItem}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Layout>
     </EmailCopyData>
   )
 }
