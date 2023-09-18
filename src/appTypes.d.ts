@@ -1,3 +1,5 @@
+export type ID = string | number
+
 type EmailTemplateComponentOption = 'Header' | 'Footer'
 
 export interface EmailTemplateComponentItem {

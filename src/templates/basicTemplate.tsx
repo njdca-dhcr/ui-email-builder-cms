@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
-import type { EmailTemplate } from 'src/appTypes'
-import { EmailTemplateComponent } from './components/EmailTemplateComponent'
+import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
+import { EmailTemplateFormComponent } from './components/EmailTemplateFormComponent'
+import { EmailCopyData } from './components/EmailCopyData'
+import { EmailTemplatePreviewComponent } from './components/EmailTemplatePreviewComponent'
 
 interface Props {
   pageContext: {
@@ -13,26 +15,49 @@ export const TEST_IDS = {
   description: 'description',
 }
 
+const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): string => {
+  return `${component}-${i}`
+}
+
+const styles = {
+  page: { width: '100%' },
+  container: { display: 'flex', gap: 4, width: '100%' },
+  pane: { flex: 1 },
+}
+
 const BasicTemplate: FC<Props> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
 
   return (
-    <div style={{ maxWidth: `960px`, margin: `1.45rem` }}>
-      <div>
-        <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
-        <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
-      </div>
+    <EmailCopyData>
+      <div style={styles.page}>
+        <div>
+          <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
+          <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
+        </div>
 
-      <div>
-        {emailTemplate.components.map((emailTemplateComponentItem, i) => (
-          <EmailTemplateComponent key={i} emailTemplateComponentItem={emailTemplateComponentItem} />
-        ))}
+        <div style={styles.container}>
+          <div style={styles.pane}>
+            {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+              <EmailTemplateFormComponent
+                key={i}
+                copyId={buildCopyId(emailTemplateComponentItem, i)}
+                emailTemplateComponentItem={emailTemplateComponentItem}
+              />
+            ))}
+          </div>
+          <div style={styles.pane}>
+            {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+              <EmailTemplatePreviewComponent
+                key={i}
+                copyId={buildCopyId(emailTemplateComponentItem, i)}
+                emailTemplateComponentItem={emailTemplateComponentItem}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-
-      {process.env.NODE_ENV === 'development' && (
-        <pre>{JSON.stringify(emailTemplate, null, 2)}</pre>
-      )}
-    </div>
+    </EmailCopyData>
   )
 }
 

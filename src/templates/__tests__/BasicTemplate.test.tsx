@@ -1,8 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import type { EmailTemplate } from 'src/appTypes'
 import BasicTemplate, { TEST_IDS } from '../BasicTemplate'
+import { TEST_ID as headerInputTestId } from '../components/HeaderInput'
+import { TEST_ID as footerInputTestId } from '../components/FooterInput'
 import { TEST_ID as headerTestId } from '../components/Header'
 import { TEST_ID as footerTestId } from '../components/Footer'
 
@@ -26,9 +29,49 @@ describe('BasicTemplate', () => {
     expect(rendered.getByTestId(TEST_IDS.description)).toHaveTextContent(emailTemplate.description)
   })
 
-  it('displays email template components properly', () => {
-    const rendered = render(<BasicTemplate pageContext={{ emailTemplate }} />)
-    expect(rendered.queryByTestId(headerTestId)).toBeDefined()
-    expect(rendered.queryByTestId(footerTestId)).toBeDefined()
+  describe('email template components', () => {
+    it('displays email template inputs and components properly', () => {
+      const { queryByTestId } = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+      expect(queryByTestId(headerInputTestId)).not.toBeNull()
+      expect(queryByTestId(footerInputTestId)).not.toBeNull()
+      expect(queryByTestId(headerTestId)).not.toBeNull()
+      expect(queryByTestId(footerTestId)).not.toBeNull()
+    })
+
+    it('displays inputted values as they are entered (Header)', async () => {
+      const user = userEvent.setup()
+
+      const { getByLabelText, getByTestId } = render(
+        <BasicTemplate pageContext={{ emailTemplate }} />,
+      )
+      const input: HTMLInputElement = getByLabelText('Header') as any
+      const value = faker.lorem.words(4)
+
+      expect(input.value).toEqual('')
+      expect(getByTestId(headerTestId)).not.toHaveTextContent(value)
+
+      await user.type(input, value)
+
+      expect(input.value).toEqual(value)
+      expect(getByTestId(headerTestId)).toHaveTextContent(value)
+    })
+
+    it('displays inputted values as they are entered (Footer)', async () => {
+      const user = userEvent.setup()
+
+      const { getByLabelText, getByTestId } = render(
+        <BasicTemplate pageContext={{ emailTemplate }} />,
+      )
+      const input: HTMLInputElement = getByLabelText('Footer') as any
+      const value = faker.lorem.words(4)
+
+      expect(input.value).toEqual('')
+      expect(getByTestId(footerTestId)).not.toHaveTextContent(value)
+
+      await user.type(input, value)
+
+      expect(input.value).toEqual(value)
+      expect(getByTestId(footerTestId)).toHaveTextContent(value)
+    })
   })
 })
