@@ -1,33 +1,49 @@
 # UI Email Builder CMS
 
-This repo contains the entirety of the Email Builder CMS.
+This repo contains the New Jersey Email Builder CMS. It is a static site buit with Gatsby and uses Decap CMS to update. The intent is to give the Innovation Team the ability to log in to the admin site and create email templates which they can view using the live preview. Once they publish a template, they can grant access to someone. The grantee can then upload details like their Seal and add any necessary information, while looking at a live preview of the email that will be generated. Once they are finished, they can click a button and receive the email html.
+
+### Site Admin
+
+Site admins can sign in with Github through the root admin page at `example.org/admin`. Once they're signed in they can create, update, or delete email templates. Example email templates could be "Benefits Expiring Soon" or "Reminder to Register." Making changes to the email templates will change YAML files in the `content/email-templates` folder of this repository. This causes the application to redeploy. During deployment Gatsby will see the changes in `content/email-templates` and generate new and additional HTML pages based on them.
+
+## Technologies
+
+This application uses the following technologies:
+
+- [Decap CMS](https://decapcms.org/)
+- [Gatsby](https://www.gatsbyjs.com/)
+- [React](https://react.dev/)
+- [NodeJS](https://nodejs.org/en)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/)
+
+## Deployment
+
+More to come. Netlify? Amplify? Something else
 
 ## Development
 
 ### Requirements
 
-Before beginning, make sure you have NodeJS v18 or higher installed.
+You should have NodeJS v18.3.0 or higher installed.
 
 ### Running the Development Server
 
-To work on this project on your local machine:
+To work on this project locally:
 
 1. Clone the repo with `git clone git@github.com:newjersey/ui-email-builder-cms.git`
 2. Install dependencies with `npm install`
-3. Run the development server with `npm run development`
+3. Run the development server with `npm run develop`
 4. Visit `localhost:8000/` to visit the homepage and `localhost:8000/admin` to visit the admin interface
 
 ### Using Decap Locally
 
-The following is adapted from [the docs](https://decapcms.org/docs/beta-features/#working-with-a-local-git-repository).
+The following is adapted from [the Decap docs](https://decapcms.org/docs/beta-features/#working-with-a-local-git-repository).
 
 1. Run `npx decap-server`
-2. In a different terminal pane or window run `npm run development`
+2. In a different terminal pane or window run `npm run develop`
 
 Now any changes you publish in Decap CMS on your local machine will appear in your local repository.
-
-**Note:** `src/cms/cms.tsx` automatically initializes the application with an override that sets
-`local_backend: true`. This takes precedence over anything in `static/admin/config.yml`.
 
 ### Linting
 
@@ -36,10 +52,19 @@ run `npm run lint:fix`.
 
 ### Testing
 
-The tests can be run with `npm run test` or in watch mode with `npm run test:watch`. For convenience,
+Testing is done using [Jest](https://jestjs.io/). The tests can be run with `npm run test` or in watch mode with `npm run test:watch`. For convenience,
 you can run `npm run validate` which will typecheck (`npm run typecheck`), lint (`npm run lint`), and run the tests.
 
-Testing is done using [Jest](https://jestjs.io/) and configured across several files:
+### Config
+
+#### Decap
+
+**Note:** `src/cms/cms.tsx` automatically initializes the application with an override that sets
+`local_backend: true`. This takes precedence over anything in `static/admin/config.yml`.
+
+#### Jest
+
+Testing is configured across several files:
 
 - `loadershim.ts`
 - `jest.config.ts`
@@ -48,37 +73,7 @@ Testing is done using [Jest](https://jestjs.io/) and configured across several f
 
 This setup was adapted from the [Gatsby testing docs](https://www.gatsbyjs.com/docs/how-to/testing/unit-testing/).
 
-## Technologies
-
-This application uses the following technologies:
-
-- [Decap CMS](https://decapcms.org/)
-- [Gatsby](https://www.gatsbyjs.com/)
-- [Jest](https://jestjs.io/)
-- [NodeJS](https://nodejs.org/en)
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-
-## Workflow
-
-### Site Admin
-
-Site admins can sign in with Github through the root admin page at `example.org/admin`. Once they're signed in
-they can create, update, or delete email templates. Example email templates could be "benefits expiring soon" or
-"reminder to register."
-
-Behind the scenes: Making changes to the email templates will change YAML files in the
-`content/email-templates` folder of this repository. This causes the application to redeploy. During deployment
-Gatsby will see the changes in `content/email-templates` and generate new and additional HTML pages based on them.
-
-### End User
-
-End users can visit the site and navigate to the template they're interested in. Once on an email template page
-they can fill out their desired copy for the email and see a preview of it.
-
-## Deployment
-
-### File generation
+#### File Generation
 
 At the end of the day, the deployed application is a set of static files (HTML, CSS, and JavaScript). These files
 are generated by Gatsby in one of two ways: Either React code in `src/pages` or generated from YAML files in
