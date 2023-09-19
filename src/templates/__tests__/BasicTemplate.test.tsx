@@ -26,9 +26,9 @@ describe('BasicTemplate', () => {
   })
 
   it('displays the email template name and description', () => {
-    const rendered = render(<BasicTemplate pageContext={{ emailTemplate }} />)
-    expect(rendered.getByTestId(TEST_IDS.name)).toHaveTextContent(emailTemplate.name)
-    expect(rendered.getByTestId(TEST_IDS.description)).toHaveTextContent(emailTemplate.description)
+    const { getByTestId } = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+    expect(getByTestId(TEST_IDS.name)).toHaveTextContent(emailTemplate.name)
+    expect(getByTestId(TEST_IDS.description)).toHaveTextContent(emailTemplate.description)
   })
 
   it('is displayed in a layout', () => {
