@@ -9,7 +9,7 @@ export const Navigation: FC = () => {
 
   return (
     <nav data-testid={TEST_ID}>
-      <ul>
+      <ul style={styles.list}>
         {emailTemplates.map(({ id, name, slug }) => (
           <li key={id}>
             <Link to={`/email-templates/${slug}`}>{name}</Link>
@@ -18,4 +18,12 @@ export const Navigation: FC = () => {
       </ul>
     </nav>
   )
+}
+
+const styles = {
+  list: {
+    listStyleType: 'none',
+    margin: 0,
+    padding: 0,
+  },
 }
