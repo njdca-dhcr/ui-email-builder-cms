@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from 'gatsby'
 import { useEmailTemplatesData } from '../utils/useEmailTemplatesData'
+import './Navigation.css'
 
 export const TEST_ID = 'navigation'
 
@@ -9,7 +10,7 @@ export const Navigation: FC = () => {
 
   return (
     <nav data-testid={TEST_ID}>
-      <ul style={styles.list}>
+      <ul className="list">
         {emailTemplates.map(({ id, name, slug }) => (
           <li key={id}>
             <Link to={`/email-templates/${slug}`}>{name}</Link>
@@ -18,12 +19,4 @@ export const Navigation: FC = () => {
       </ul>
     </nav>
   )
-}
-
-const styles = {
-  list: {
-    listStyleType: 'none',
-    margin: 0,
-    padding: 0,
-  },
 }

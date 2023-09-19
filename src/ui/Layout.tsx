@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { SkipNavLink, SkipNavContent } from '@reach/skip-nav'
 import '@reach/skip-nav/styles.css'
 import { Navigation } from './Navigation'
+import './Layout.css'
 
 interface Props {
   children: ReactNode
@@ -14,7 +15,7 @@ export const Layout: FC<Props> = ({ children }) => {
   return (
     <div data-testid={TEST_ID}>
       <SkipNavLink />
-      <div style={styles.header}>
+      <div className="header">
         <Link to="/">Email Builder</Link>
         <Navigation />
       </div>
@@ -22,12 +23,4 @@ export const Layout: FC<Props> = ({ children }) => {
       {children}
     </div>
   )
-}
-
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: 12,
-  },
 }

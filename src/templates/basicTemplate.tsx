@@ -8,6 +8,7 @@ import { Layout } from '../ui/Layout'
 import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
 import { HeadFC } from 'gatsby'
+import './BasicTemplate.css'
 
 interface Props {
   pageContext: {
@@ -24,12 +25,6 @@ const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): stri
   return `${component}-${i}`
 }
 
-const styles = {
-  page: { width: '100%' },
-  container: { display: 'flex', gap: 4, width: '100%' },
-  pane: { flex: 1 },
-}
-
 const BasicTemplate: FC<Props> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
   const previewRef = useRef()
@@ -38,14 +33,14 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
   return (
     <EmailCopyData>
       <Layout>
-        <div style={styles.page}>
+        <div className="page">
           <div>
             <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
             <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
           </div>
 
-          <div style={styles.container}>
-            <div style={styles.pane}>
+          <div className="container">
+            <div className="pane">
               {emailTemplate.components.map((emailTemplateComponentItem, i) => (
                 <EmailTemplateFormComponent
                   key={i}
@@ -54,7 +49,7 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
                 />
               ))}
             </div>
-            <div style={styles.pane}>
+            <div className="pane">
               <CopyToClipboardButton textToCopy={toEmailText}>
                 Copy to clipboard
               </CopyToClipboardButton>

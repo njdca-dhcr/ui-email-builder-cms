@@ -45,6 +45,7 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html, title }) => {
   )
 }
 
+// Styles in the emails must remain inline
 const styles = {
   body: {
     background: '#F5F5F5',
