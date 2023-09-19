@@ -1,12 +1,12 @@
 import React, { FC, useRef } from 'react'
 import Root from 'react-shadow'
 import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
-import { EmailTemplateFormComponent } from './components/EmailTemplateFormComponent'
-import { EmailCopyData } from './components/EmailCopyData'
-import { EmailTemplatePreviewComponent } from './components/EmailTemplatePreviewComponent'
+import { EmailTemplateFormComponent } from './emailForm/EmailTemplateFormComponent'
+import { EmailCopyData } from './emailForm/EmailCopyData'
+import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePreviewComponent'
 import { Layout } from '../ui/Layout'
-import { CopyToClipboardButton } from './components/CopyToClipboardButton'
-import { useElementsToEmailString } from './utils/useElementsToEmailString'
+import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
+import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
 
 interface Props {
   pageContext: {

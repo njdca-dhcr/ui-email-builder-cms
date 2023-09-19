@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useCallback } from 'react'
 import { renderToString } from 'react-dom/server'
-import { EmailLayout } from '../../ui/EmailLayout'
+import { EmailLayout } from './EmailLayout'
 
 export const useElementsToEmailString = (
   ref: MutableRefObject<HTMLElement | undefined>,

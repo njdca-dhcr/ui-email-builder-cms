@@ -2,8 +2,8 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { EmailTemplateFormComponent } from '../EmailTemplateFormComponent'
-import { TEST_ID as headerInputTestId } from '../HeaderInput'
-import { TEST_ID as footerInputTestId } from '../FooterInput'
+import { TEST_ID as headerInputTestId } from '../../emailPreview/HeaderInput'
+import { TEST_ID as footerInputTestId } from '../../emailPreview/FooterInput'
 
 describe('EmailTemplateFormComponent', () => {
   let description: string

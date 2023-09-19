@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { ID } from 'src/appTypes'
-import { useEmailCopyData } from './EmailCopyData'
+import { useEmailCopyData } from '../emailForm/EmailCopyData'
 
 interface Props {
   copyId: ID

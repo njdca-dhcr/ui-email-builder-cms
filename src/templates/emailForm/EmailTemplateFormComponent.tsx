@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import type { EmailTemplateComponentItem, ID } from 'src/appTypes'
-import { HeaderInput } from './HeaderInput'
-import { FooterInput } from './FooterInput'
+import { HeaderInput } from '../emailPreview/HeaderInput'
+import { FooterInput } from '../emailPreview/FooterInput'
 
 interface Props {
   copyId: ID

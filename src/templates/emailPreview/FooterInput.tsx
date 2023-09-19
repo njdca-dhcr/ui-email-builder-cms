@@ -1,23 +1,23 @@
 import React, { FC } from 'react'
-import { useEmailCopyData } from './EmailCopyData'
 import { ID } from 'src/appTypes'
+import { useEmailCopyData } from '../emailForm/EmailCopyData'
 
 interface Props {
   copyId: ID
   description: string
 }
 
-export const TEST_ID = 'header-input'
+export const TEST_ID = 'footer-input'
 
-export const HeaderInput: FC<Props> = ({ copyId, description }) => {
+export const FooterInput: FC<Props> = ({ copyId, description }) => {
   const { value, onChange } = useEmailCopyData(copyId)
   return (
     <div data-testid={TEST_ID}>
       <label>
-        Header
+        Footer
         <input
           type="text"
-          name="header"
+          name="footer"
           value={value}
           onChange={(event) => onChange(event.target.value)}
         />

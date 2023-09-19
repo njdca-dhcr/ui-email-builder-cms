@@ -2,10 +2,10 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
-import { FooterInput, TEST_ID } from '../FooterInput'
-import { EmailCopyData } from '../EmailCopyData'
+import { HeaderInput, TEST_ID } from '../HeaderInput'
+import { EmailCopyData } from '../../emailForm/EmailCopyData'
 
-describe('FooterInput', () => {
+describe('HeaderInput', () => {
   let copyId: string
   let description: string
   let value: string
@@ -19,13 +19,13 @@ describe('FooterInput', () => {
   it('has an input', () => {
     const { getByLabelText } = render(
       <EmailCopyData initialData={{ [copyId]: value }}>
-        <FooterInput copyId={copyId} description={description} />
+        <HeaderInput copyId={copyId} description={description} />
       </EmailCopyData>,
     )
-    const input: HTMLInputElement = getByLabelText('Footer') as any
+    const input: HTMLInputElement = getByLabelText('Header') as any
     expect(input.tagName).toEqual('INPUT')
     expect(input.type).toEqual('text')
-    expect(input.name).toEqual('footer')
+    expect(input.name).toEqual('header')
     expect(input.value).toEqual(value)
     expect(input.onchange).toBeDefined()
   })
@@ -36,11 +36,11 @@ describe('FooterInput', () => {
 
     const { getByLabelText } = render(
       <EmailCopyData initialData={{ [copyId]: value }}>
-        <FooterInput copyId={copyId} description={description} />
+        <HeaderInput copyId={copyId} description={description} />
       </EmailCopyData>,
     )
 
-    const input: HTMLInputElement = getByLabelText('Footer') as any
+    const input: HTMLInputElement = getByLabelText('Header') as any
     expect(input.value).toEqual(value)
     await user.type(input, newValue)
     expect(input.value).toEqual(`${value}${newValue}`)
@@ -50,7 +50,7 @@ describe('FooterInput', () => {
     const description = faker.lorem.paragraph()
     const { getByTestId } = render(
       <EmailCopyData initialData={{ [copyId]: value }}>
-        <FooterInput copyId={copyId} description={description} />
+        <HeaderInput copyId={copyId} description={description} />
       </EmailCopyData>,
     )
     expect(getByTestId(TEST_ID)).toHaveTextContent(description)

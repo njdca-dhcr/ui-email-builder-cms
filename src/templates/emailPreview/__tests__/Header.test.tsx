@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
-import { EmailCopyData } from '../EmailCopyData'
-import { Footer } from '../Footer'
+import { EmailCopyData } from '../../emailForm/EmailCopyData'
+import { Header } from '../Header'
 
-describe('Footer', () => {
+describe('Header', () => {
   let copyId: string
   let value: string
 
@@ -16,7 +16,7 @@ describe('Footer', () => {
   it('displays its copy data', () => {
     const { baseElement } = render(
       <EmailCopyData initialData={{ [copyId]: value }}>
-        <Footer copyId={copyId} />
+        <Header copyId={copyId} />
       </EmailCopyData>,
     )
     expect(baseElement).toHaveTextContent(value)
@@ -25,9 +25,9 @@ describe('Footer', () => {
   it('displays a placeholder when there is no copy data', () => {
     const { baseElement } = render(
       <EmailCopyData initialData={{ [copyId]: '' }}>
-        <Footer copyId={copyId} />
+        <Header copyId={copyId} />
       </EmailCopyData>,
     )
-    expect(baseElement).toHaveTextContent('Footer Placeholder')
+    expect(baseElement).toHaveTextContent('Header Placeholder')
   })
 })
