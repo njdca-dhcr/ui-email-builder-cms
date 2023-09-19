@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import copy from 'copy-to-clipboard'
 import type { EmailTemplate } from 'src/appTypes'
-import BasicTemplate, { TEST_IDS } from '../BasicTemplate'
+import BasicTemplate, { TEST_IDS, Head } from '../BasicTemplate'
 import { TEST_ID as headerInputTestId } from '../emailPreview/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../emailPreview/FooterInput'
 import { TEST_ID as headerTestId } from '../emailPreview/Header'
@@ -98,6 +98,13 @@ describe('BasicTemplate', () => {
 
       const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
       expect(lastArgumentToCopy).toContain(value)
+    })
+  })
+
+  describe('Head', () => {
+    it("uses the email template's name as the title", () => {
+      const { baseElement } = render(<Head pageContext={{ emailTemplate }} {...({} as any)} />)
+      expect(baseElement.querySelector('title')).toHaveTextContent(emailTemplate.name)
     })
   })
 })

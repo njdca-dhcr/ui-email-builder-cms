@@ -7,6 +7,7 @@ import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePrevi
 import { Layout } from '../ui/Layout'
 import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
+import { HeadFC } from 'gatsby'
 
 interface Props {
   pageContext: {
@@ -77,3 +78,8 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
 }
 
 export default BasicTemplate
+
+export const Head: HeadFC<object, Props['pageContext']> = ({ pageContext }) => {
+  const { name } = pageContext.emailTemplate
+  return <title>{name}</title>
+}
