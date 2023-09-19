@@ -1,10 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import Root from 'react-shadow'
 import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './components/EmailTemplateFormComponent'
 import { EmailCopyData } from './components/EmailCopyData'
 import { EmailTemplatePreviewComponent } from './components/EmailTemplatePreviewComponent'
 import { Layout } from '../ui/Layout'
+import { CopyToClipboardButton } from './components/CopyToClipboardButton'
+import { useElementsToEmailString } from './utils/useElementsToEmailString'
 
 interface Props {
   pageContext: {
@@ -29,6 +31,8 @@ const styles = {
 
 const BasicTemplate: FC<Props> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
+  const previewRef = useRef()
+  const toEmailText = useElementsToEmailString(previewRef, emailTemplate.name)
 
   return (
     <EmailCopyData>
@@ -49,15 +53,22 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
                 />
               ))}
             </div>
-            <Root.div style={styles.pane}>
-              {emailTemplate.components.map((emailTemplateComponentItem, i) => (
-                <EmailTemplatePreviewComponent
-                  key={i}
-                  copyId={buildCopyId(emailTemplateComponentItem, i)}
-                  emailTemplateComponentItem={emailTemplateComponentItem}
-                />
-              ))}
-            </Root.div>
+            <div style={styles.pane}>
+              <CopyToClipboardButton textToCopy={toEmailText}>
+                Copy to clipboard
+              </CopyToClipboardButton>
+              <Root.div>
+                <div ref={previewRef as any}>
+                  {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+                    <EmailTemplatePreviewComponent
+                      key={i}
+                      copyId={buildCopyId(emailTemplateComponentItem, i)}
+                      emailTemplateComponentItem={emailTemplateComponentItem}
+                    />
+                  ))}
+                </div>
+              </Root.div>
+            </div>
           </div>
         </div>
       </Layout>

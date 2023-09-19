@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
+import copy from 'copy-to-clipboard'
 import type { EmailTemplate } from 'src/appTypes'
 import BasicTemplate, { TEST_IDS } from '../BasicTemplate'
 import { TEST_ID as headerInputTestId } from '../components/HeaderInput'
@@ -78,6 +79,25 @@ describe('BasicTemplate', () => {
 
       expect(input.value).toEqual(value)
       expect(getByTestId(footerTestId)).toHaveTextContent(value)
+    })
+
+    it('allows users to copy the current preview into their clipboard', async () => {
+      const user = userEvent.setup()
+
+      const { getByLabelText, getByRole } = render(
+        <BasicTemplate pageContext={{ emailTemplate }} />,
+      )
+
+      const input: HTMLInputElement = getByLabelText('Header') as any
+      const value = faker.lorem.words(4)
+      await user.type(input, value)
+
+      expect(copy).not.toHaveBeenCalled()
+      await user.click(getByRole('button'))
+      expect(copy).toHaveBeenCalled()
+
+      const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
+      expect(lastArgumentToCopy).toContain(value)
     })
   })
 })

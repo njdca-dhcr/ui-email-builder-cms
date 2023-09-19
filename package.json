@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@reach/skip-nav": "^0.18.0",
+    "copy-to-clipboard": "^3.3.3",
     "decap-cms-app": "^3.0.7",
     "gatsby": "^5.12.4",
     "gatsby-plugin-netlify-cms": "^7.12.0",
