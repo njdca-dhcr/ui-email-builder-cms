@@ -9,7 +9,6 @@ import { TEST_ID as footerInputTestId } from '../components/FooterInput'
 import { TEST_ID as headerTestId } from '../components/Header'
 import { TEST_ID as footerTestId } from '../components/Footer'
 import { TEST_ID as layoutTestId } from '../../ui/Layout'
-import { useStaticQuery } from 'gatsby'
 
 describe('BasicTemplate', () => {
   let emailTemplate: EmailTemplate
@@ -23,21 +22,6 @@ describe('BasicTemplate', () => {
         { component: 'Footer', description: faker.lorem.words(3) },
       ],
     }
-    ;(useStaticQuery as any).mockImplementation((): Queries.NavigationQuery => {
-      return {
-        emailTemplates: {
-          edges: [
-            {
-              node: {
-                id: '123',
-                name: 'Email Template',
-                parent: { id: '324', name: 'email-template' },
-              },
-            },
-          ],
-        },
-      }
-    })
   })
 
   it('displays the email template name and description', () => {

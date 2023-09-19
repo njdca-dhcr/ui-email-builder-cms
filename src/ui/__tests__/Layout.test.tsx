@@ -3,27 +3,8 @@ import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { Layout } from '../Layout'
 import { TEST_ID as navigationTestId } from '../Navigation'
-import { useStaticQuery } from 'gatsby'
 
 describe('Layout', () => {
-  beforeEach(() => {
-    ;(useStaticQuery as any).mockImplementation((): Queries.NavigationQuery => {
-      return {
-        emailTemplates: {
-          edges: [
-            {
-              node: {
-                id: '123',
-                name: 'Email Template',
-                parent: { id: '324', name: 'email-template' },
-              },
-            },
-          ],
-        },
-      }
-    })
-  })
-
   it('renders its children', () => {
     const text = faker.lorem.paragraph()
     const { getByTestId } = render(
