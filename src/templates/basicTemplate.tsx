@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import Root from 'react-shadow'
 import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './components/EmailTemplateFormComponent'
 import { EmailCopyData } from './components/EmailCopyData'
@@ -48,7 +49,7 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
                 />
               ))}
             </div>
-            <div style={styles.pane}>
+            <Root.div style={styles.pane}>
               {emailTemplate.components.map((emailTemplateComponentItem, i) => (
                 <EmailTemplatePreviewComponent
                   key={i}
@@ -56,7 +57,7 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
                   emailTemplateComponentItem={emailTemplateComponentItem}
                 />
               ))}
-            </div>
+            </Root.div>
           </div>
         </div>
       </Layout>

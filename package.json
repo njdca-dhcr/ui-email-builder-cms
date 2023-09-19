@@ -34,7 +34,8 @@
     "gatsby-transformer-yaml": "^5.12.0",
     "js-yaml": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-shadow": "^20.4.0"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.22.15",
