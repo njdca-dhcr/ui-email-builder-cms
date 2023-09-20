@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { RenderResult, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import copy from 'copy-to-clipboard'
@@ -13,6 +13,7 @@ import { TEST_ID as layoutTestId } from 'src/ui/Layout'
 
 describe('BasicTemplate', () => {
   let emailTemplate: EmailTemplate
+  let rendered: RenderResult
 
   beforeEach(() => {
     emailTemplate = {
@@ -23,28 +24,23 @@ describe('BasicTemplate', () => {
         { component: 'Footer', description: faker.lorem.words(3) },
       ],
     }
+    rendered = render(<BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />)
   })
 
   it('displays the email template name and description', () => {
-    const { getByTestId } = render(
-      <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-    )
+    const { getByTestId } = rendered
     expect(getByTestId(TEST_IDS.name)).toHaveTextContent(emailTemplate.name)
     expect(getByTestId(TEST_IDS.description)).toHaveTextContent(emailTemplate.description)
   })
 
   it('is displayed in a layout', () => {
-    const { queryByTestId } = render(
-      <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-    )
+    const { queryByTestId } = rendered
     expect(queryByTestId(layoutTestId)).not.toBeNull()
   })
 
   it('has a button that toggles between mobile and desktop versions of the preview', async () => {
     const user = userEvent.setup()
-    const { getByText, queryByText, baseElement } = render(
-      <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-    )
+    const { getByText, queryByText, baseElement } = rendered
 
     expect(queryByText('Mobile Preview')).toBeNull()
     expect(queryByText('Desktop Preview')).not.toBeNull()
@@ -63,9 +59,7 @@ describe('BasicTemplate', () => {
 
   describe('email template components', () => {
     it('displays email template inputs and components properly', () => {
-      const { queryByTestId } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-      )
+      const { queryByTestId } = rendered
       expect(queryByTestId(headerInputTestId)).not.toBeNull()
       expect(queryByTestId(footerInputTestId)).not.toBeNull()
       expect(queryByTestId(headerTestId)).not.toBeNull()
@@ -75,9 +69,7 @@ describe('BasicTemplate', () => {
     it('displays inputted values as they are entered (Header)', async () => {
       const user = userEvent.setup()
 
-      const { getByLabelText, getByTestId } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-      )
+      const { getByLabelText, getByTestId } = rendered
       const input: HTMLInputElement = getByLabelText('Header') as any
       const value = faker.lorem.words(4)
 
@@ -93,9 +85,7 @@ describe('BasicTemplate', () => {
     it('displays inputted values as they are entered (Footer)', async () => {
       const user = userEvent.setup()
 
-      const { getByLabelText, getByTestId } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-      )
+      const { getByLabelText, getByTestId } = rendered
       const input: HTMLInputElement = getByLabelText('Footer') as any
       const value = faker.lorem.words(4)
 
@@ -111,9 +101,7 @@ describe('BasicTemplate', () => {
     it('allows users to copy the current preview into their clipboard', async () => {
       const user = userEvent.setup()
 
-      const { getByLabelText, getByText } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
-      )
+      const { getByLabelText, getByText } = rendered
 
       const input: HTMLInputElement = getByLabelText('Header') as any
       const value = faker.lorem.words(4)
