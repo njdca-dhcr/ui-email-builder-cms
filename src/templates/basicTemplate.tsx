@@ -33,38 +33,36 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
   return (
     <EmailCopyData>
       <Layout>
-        <div className="page">
-          <div>
-            <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
-            <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
-          </div>
+        <div>
+          <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
+          <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
+        </div>
 
-          <div className="container">
-            <div className="pane">
-              {emailTemplate.components.map((emailTemplateComponentItem, i) => (
-                <EmailTemplateFormComponent
-                  key={i}
-                  copyId={buildCopyId(emailTemplateComponentItem, i)}
-                  emailTemplateComponentItem={emailTemplateComponentItem}
-                />
-              ))}
-            </div>
-            <div className="pane">
-              <CopyToClipboardButton textToCopy={toEmailText}>
-                Copy to clipboard
-              </CopyToClipboardButton>
-              <Root.div>
-                <div ref={previewRef as any}>
-                  {emailTemplate.components.map((emailTemplateComponentItem, i) => (
-                    <EmailTemplatePreviewComponent
-                      key={i}
-                      copyId={buildCopyId(emailTemplateComponentItem, i)}
-                      emailTemplateComponentItem={emailTemplateComponentItem}
-                    />
-                  ))}
-                </div>
-              </Root.div>
-            </div>
+        <div className="container">
+          <div className="pane">
+            {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+              <EmailTemplateFormComponent
+                key={i}
+                copyId={buildCopyId(emailTemplateComponentItem, i)}
+                emailTemplateComponentItem={emailTemplateComponentItem}
+              />
+            ))}
+          </div>
+          <div className="pane">
+            <CopyToClipboardButton textToCopy={toEmailText}>
+              Copy to clipboard
+            </CopyToClipboardButton>
+            <Root.div>
+              <div ref={previewRef as any}>
+                {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+                  <EmailTemplatePreviewComponent
+                    key={i}
+                    copyId={buildCopyId(emailTemplateComponentItem, i)}
+                    emailTemplateComponentItem={emailTemplateComponentItem}
+                  />
+                ))}
+              </div>
+            </Root.div>
           </div>
         </div>
       </Layout>
