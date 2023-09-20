@@ -13,24 +13,24 @@ describe('EmailTemplateFormComponent', () => {
   })
 
   it('can display a HeaderInput', () => {
-    const rendered = render(
+    const { queryByTestId } = render(
       <EmailTemplateFormComponent
         copyId="copyId"
         emailTemplateComponentItem={{ component: 'Header', description }}
       />,
     )
-    expect(rendered.queryByTestId(headerInputTestId)).not.toBeNull()
-    expect(rendered.queryByTestId(footerInputTestId)).toBeNull()
+    expect(queryByTestId(headerInputTestId)).not.toBeNull()
+    expect(queryByTestId(footerInputTestId)).toBeNull()
   })
 
-  it('can display a Footer', () => {
-    const rendered = render(
+  it('can display a FooterInput', () => {
+    const { queryByTestId } = render(
       <EmailTemplateFormComponent
         copyId="copyId"
         emailTemplateComponentItem={{ component: 'Footer', description }}
       />,
     )
-    expect(rendered.queryByTestId(footerInputTestId)).not.toBeNull()
-    expect(rendered.queryByTestId(headerInputTestId)).toBeNull()
+    expect(queryByTestId(footerInputTestId)).not.toBeNull()
+    expect(queryByTestId(headerInputTestId)).toBeNull()
   })
 })
