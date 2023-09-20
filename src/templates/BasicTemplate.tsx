@@ -70,7 +70,7 @@ const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext, ...oth
 
 export default BasicTemplate
 
-export const Head: HeadFC<object, Props['pageContext']> = ({ pageContext }) => {
+export const Head: HeadFC<object, PageContext> = ({ pageContext }) => {
   const { name } = pageContext.emailTemplate
   return <title>{name}</title>
 }

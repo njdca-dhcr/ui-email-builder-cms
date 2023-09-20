@@ -26,19 +26,25 @@ describe('BasicTemplate', () => {
   })
 
   it('displays the email template name and description', () => {
-    const { getByTestId } = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+    const { getByTestId } = render(
+      <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
+    )
     expect(getByTestId(TEST_IDS.name)).toHaveTextContent(emailTemplate.name)
     expect(getByTestId(TEST_IDS.description)).toHaveTextContent(emailTemplate.description)
   })
 
   it('is displayed in a layout', () => {
-    const { queryByTestId } = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+    const { queryByTestId } = render(
+      <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
+    )
     expect(queryByTestId(layoutTestId)).not.toBeNull()
   })
 
   describe('email template components', () => {
     it('displays email template inputs and components properly', () => {
-      const { queryByTestId } = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+      const { queryByTestId } = render(
+        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
+      )
       expect(queryByTestId(headerInputTestId)).not.toBeNull()
       expect(queryByTestId(footerInputTestId)).not.toBeNull()
       expect(queryByTestId(headerTestId)).not.toBeNull()
@@ -49,7 +55,7 @@ describe('BasicTemplate', () => {
       const user = userEvent.setup()
 
       const { getByLabelText, getByTestId } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} />,
+        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
       )
       const input: HTMLInputElement = getByLabelText('Header') as any
       const value = faker.lorem.words(4)
@@ -67,7 +73,7 @@ describe('BasicTemplate', () => {
       const user = userEvent.setup()
 
       const { getByLabelText, getByTestId } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} />,
+        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
       )
       const input: HTMLInputElement = getByLabelText('Footer') as any
       const value = faker.lorem.words(4)
@@ -85,7 +91,7 @@ describe('BasicTemplate', () => {
       const user = userEvent.setup()
 
       const { getByLabelText, getByRole } = render(
-        <BasicTemplate pageContext={{ emailTemplate }} />,
+        <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
       )
 
       const input: HTMLInputElement = getByLabelText('Header') as any
