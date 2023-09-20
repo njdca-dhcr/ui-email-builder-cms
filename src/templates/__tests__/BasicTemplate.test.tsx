@@ -40,6 +40,27 @@ describe('BasicTemplate', () => {
     expect(queryByTestId(layoutTestId)).not.toBeNull()
   })
 
+  it('has a button that toggles between mobile and desktop versions of the preview', async () => {
+    const user = userEvent.setup()
+    const { getByText, queryByText, baseElement } = render(
+      <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
+    )
+
+    expect(queryByText('Mobile Preview')).toBeNull()
+    expect(queryByText('Desktop Preview')).not.toBeNull()
+    expect(baseElement.querySelector('.mobile')).toBeNull()
+
+    await user.click(getByText('View on mobile'))
+    expect(queryByText('Mobile Preview')).not.toBeNull()
+    expect(queryByText('Desktop Preview')).toBeNull()
+    expect(baseElement.querySelector('.mobile')).not.toBeNull()
+
+    await user.click(getByText('View on desktop'))
+    expect(queryByText('Mobile Preview')).toBeNull()
+    expect(queryByText('Desktop Preview')).not.toBeNull()
+    expect(baseElement.querySelector('.mobile')).toBeNull()
+  })
+
   describe('email template components', () => {
     it('displays email template inputs and components properly', () => {
       const { queryByTestId } = render(
@@ -90,7 +111,7 @@ describe('BasicTemplate', () => {
     it('allows users to copy the current preview into their clipboard', async () => {
       const user = userEvent.setup()
 
-      const { getByLabelText, getByRole } = render(
+      const { getByLabelText, getByText } = render(
         <BasicTemplate pageContext={{ emailTemplate }} {...({} as any)} />,
       )
 
@@ -99,7 +120,7 @@ describe('BasicTemplate', () => {
       await user.type(input, value)
 
       expect(copy).not.toHaveBeenCalled()
-      await user.click(getByRole('button'))
+      await user.click(getByText('Copy to clipboard'))
       expect(copy).toHaveBeenCalled()
 
       const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]

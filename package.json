@@ -28,6 +28,7 @@
   "dependencies": {
     "@reach/skip-nav": "^0.18.0",
     "autoprefixer": "^10.4.15",
+    "classnames": "^2.3.2",
     "copy-to-clipboard": "^3.3.3",
     "decap-cms-app": "^3.0.7",
     "gatsby": "^5.12.4",

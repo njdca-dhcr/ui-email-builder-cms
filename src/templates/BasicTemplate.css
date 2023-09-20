@@ -6,4 +6,25 @@
 
 .pane {
   flex: 1;
+  padding: 6px;
+}
+
+.preview-pane {
+  background-color: lightgray;
+  border-radius: 5px;
+  max-width: calc(50% - 2px);
+}
+
+.preview {
+  overflow: hidden;
+}
+
+.mobile {
+  width: 370px;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 4px;
+  width: 100%;
 }

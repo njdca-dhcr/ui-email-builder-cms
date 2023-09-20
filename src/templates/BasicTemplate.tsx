@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './emailForm/EmailTemplateFormComponent'
@@ -8,6 +8,7 @@ import { Layout } from 'src/ui/Layout'
 import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
 import type { HeadFC, PageProps } from 'gatsby'
+import classNames from 'classnames'
 import './BasicTemplate.css'
 
 interface PageContext {
@@ -23,8 +24,11 @@ const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): stri
   return `${component}-${i}`
 }
 
+type PreviewKind = 'desktop' | 'mobile'
+
 const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext, ...other }) => {
   const { emailTemplate } = pageContext
+  const [previewKind, setPreviewKind] = useState<PreviewKind>('desktop')
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef, emailTemplate.name)
 
@@ -46,12 +50,20 @@ const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext, ...oth
               />
             ))}
           </div>
-          <div className="pane">
-            <CopyToClipboardButton textToCopy={toEmailText}>
-              Copy to clipboard
-            </CopyToClipboardButton>
-            <Root.div>
-              <div ref={previewRef as any}>
+          <div className="pane preview-pane">
+            <h2>{previewKind === 'desktop' ? 'Desktop' : 'Mobile'} Preview</h2>
+            <div className="preview-actions">
+              <CopyToClipboardButton textToCopy={toEmailText}>
+                Copy to clipboard
+              </CopyToClipboardButton>
+              <button
+                onClick={() => setPreviewKind(previewKind === 'desktop' ? 'mobile' : 'desktop')}
+              >
+                View on {previewKind === 'desktop' ? 'mobile' : 'desktop'}
+              </button>
+            </div>
+            <Root.div className={classNames('preview', { mobile: previewKind === 'mobile' })}>
+              <div ref={previewRef as any} style={{ backgroundColor: 'white' }}>
                 {emailTemplate.components.map((emailTemplateComponentItem, i) => (
                   <EmailTemplatePreviewComponent
                     key={i}
