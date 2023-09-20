@@ -27,13 +27,17 @@
   },
   "dependencies": {
     "@reach/skip-nav": "^0.18.0",
+    "autoprefixer": "^10.4.15",
     "copy-to-clipboard": "^3.3.3",
     "decap-cms-app": "^3.0.7",
     "gatsby": "^5.12.4",
     "gatsby-plugin-netlify-cms": "^7.12.0",
+    "gatsby-plugin-postcss": "^6.12.0",
     "gatsby-source-filesystem": "^5.12.0",
     "gatsby-transformer-yaml": "^5.12.0",
     "js-yaml": "^4.1.0",
+    "postcss": "^8.4.30",
+    "postcss-preset-env": "^9.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-shadow": "^20.4.0"
@@ -62,5 +66,10 @@
   "engines": {
     "npm": ">=8.11.0",
     "node": ">=18.3.0"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 0.2%"
+  ]
 }

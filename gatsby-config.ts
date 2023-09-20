@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from 'gatsby'
+import postcssPresetEnv from 'postcss-preset-env'
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -22,6 +23,14 @@ const config: GatsbyConfig = {
       options: {
         modulePath: `${__dirname}/src/cms/cms.tsx`,
         manualInit: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [
+          postcssPresetEnv(), // includes autoprefixer
+        ],
       },
     },
   ],
