@@ -7,13 +7,11 @@ import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePrevi
 import { Layout } from 'src/ui/Layout'
 import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
-import { HeadFC } from 'gatsby'
+import type { HeadFC, PageProps } from 'gatsby'
 import './BasicTemplate.css'
 
-interface Props {
-  pageContext: {
-    emailTemplate: EmailTemplate
-  }
+interface PageContext {
+  emailTemplate: EmailTemplate
 }
 
 export const TEST_IDS = {
@@ -25,7 +23,7 @@ const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): stri
   return `${component}-${i}`
 }
 
-const BasicTemplate: FC<Props> = ({ pageContext }) => {
+const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext, ...other }) => {
   const { emailTemplate } = pageContext
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef, emailTemplate.name)
