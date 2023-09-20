@@ -1,5 +1,8 @@
 import React, { FC, useRef, useState } from 'react'
 import Root from 'react-shadow'
+import capitalize from 'lodash.capitalize'
+import classNames from 'classnames'
+import type { HeadFC, PageProps } from 'gatsby'
 import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './emailForm/EmailTemplateFormComponent'
 import { EmailCopyData } from './emailForm/EmailCopyData'
@@ -7,8 +10,6 @@ import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePrevi
 import { Layout } from 'src/ui/Layout'
 import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
-import type { HeadFC, PageProps } from 'gatsby'
-import classNames from 'classnames'
 import './BasicTemplate.css'
 
 interface PageContext {
@@ -26,9 +27,10 @@ const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): stri
 
 type PreviewKind = 'desktop' | 'mobile'
 
-const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext, ...other }) => {
+const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
   const [previewKind, setPreviewKind] = useState<PreviewKind>('desktop')
+  const otherPreviewKind: PreviewKind = previewKind === 'desktop' ? 'mobile' : 'desktop'
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef, emailTemplate.name)
 
@@ -51,15 +53,13 @@ const BasicTemplate: FC<PageProps<object, PageContext>> = ({ pageContext, ...oth
             ))}
           </div>
           <div className="pane preview-pane">
-            <h2>{previewKind === 'desktop' ? 'Desktop' : 'Mobile'} Preview</h2>
+            <h2>{capitalize(previewKind)} Preview</h2>
             <div className="preview-actions">
               <CopyToClipboardButton textToCopy={toEmailText}>
                 Copy to clipboard
               </CopyToClipboardButton>
-              <button
-                onClick={() => setPreviewKind(previewKind === 'desktop' ? 'mobile' : 'desktop')}
-              >
-                View on {previewKind === 'desktop' ? 'mobile' : 'desktop'}
+              <button onClick={() => setPreviewKind(otherPreviewKind)}>
+                View on {otherPreviewKind}
               </button>
             </div>
             <Root.div className={classNames('preview', { mobile: previewKind === 'mobile' })}>
