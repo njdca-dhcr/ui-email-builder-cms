@@ -11,6 +11,7 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    `gatsby-plugin-root-import`,
     `gatsby-transformer-yaml`,
     {
       resolve: `gatsby-source-filesystem`,

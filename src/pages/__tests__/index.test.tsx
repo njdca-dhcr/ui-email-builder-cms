@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import IndexPage from '../index'
-import { TEST_ID as layoutTestId } from '../../ui/Layout'
+import { TEST_ID as layoutTestId } from 'src/ui/Layout'
 
 describe('index - Root page', () => {
   it('is displayed in a layout', () => {

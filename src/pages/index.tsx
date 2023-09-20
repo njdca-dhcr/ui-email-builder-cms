@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import type { HeadFC } from 'gatsby'
-import { Layout } from '../ui/Layout'
+import { Layout } from 'src/ui/Layout'
 
 const IndexPage: FC = () => {
   return (

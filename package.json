@@ -33,6 +33,7 @@
     "gatsby": "^5.12.4",
     "gatsby-plugin-netlify-cms": "^7.12.0",
     "gatsby-plugin-postcss": "^6.12.0",
+    "gatsby-plugin-root-import": "^2.0.9",
     "gatsby-source-filesystem": "^5.12.0",
     "gatsby-transformer-yaml": "^5.12.0",
     "js-yaml": "^4.1.0",

@@ -9,7 +9,7 @@ import { TEST_ID as headerInputTestId } from '../emailPreview/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../emailPreview/FooterInput'
 import { TEST_ID as headerTestId } from '../emailPreview/Header'
 import { TEST_ID as footerTestId } from '../emailPreview/Footer'
-import { TEST_ID as layoutTestId } from '../../ui/Layout'
+import { TEST_ID as layoutTestId } from 'src/ui/Layout'
 
 describe('BasicTemplate', () => {
   let emailTemplate: EmailTemplate
