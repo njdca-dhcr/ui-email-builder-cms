@@ -1,8 +1,12 @@
 import React, { FC } from 'react'
 import { Link, type HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import { NewLayout, PageContent, SideBarList, SideBarListItem, Sidebar } from 'src/ui/NewLayout'
+import { List } from 'src/ui/List'
 import 'src/styles/app.css'
+import './index.css'
+import { Button } from 'src/ui/Button'
 
 const IndexPage: FC = () => {
   return (
@@ -30,13 +34,28 @@ const IndexPage: FC = () => {
       </Sidebar>
       <SkipNavContent />
       <PageContent element="main">
-        <h1 className="heading">Email Builder CMS</h1>
-        <p className="paragraph">This is a placeholder homepage for now.</p>
-        <p className="paragraph">
-          <a href="/admin" className="link">
-            The admin interface can be accessed here.
-          </a>
-        </p>
+        <div className="index-container">
+          <VisuallyHidden>
+            <h1>Email Builder (Beta)</h1>
+          </VisuallyHidden>
+          <section>
+            <h2 className="index-title">Start with a template</h2>
+            <p className="index-description">
+              You can edit and change everything—it just gives you a starting place.
+            </p>
+            <List className="index-list">
+              <li />
+              <li />
+              <li />
+            </List>
+          </section>
+          <section className="index-or">--or--</section>
+          <section>
+            <h2 className="index-title">Build your own email</h2>
+            <p className="index-description">You know what you want so make it happen.</p>
+            <Button onClick={() => {}}>Build from scratch</Button>
+          </section>
+        </div>
       </PageContent>
     </NewLayout>
   )

@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react'
 import { SkipNavLink } from '@reach/skip-nav'
 import '@reach/skip-nav/styles.css'
 import './Layout.css'
+import { List } from './List'
 
 interface NewLayoutProps {
   children: ReactNode
@@ -47,7 +48,7 @@ interface SidebarListProps {
 }
 
 export const SideBarList: FC<SidebarListProps> = ({ children }) => {
-  return <ul className="sidebar-list">{children}</ul>
+  return <List className="sidebar-list">{children}</List>
 }
 
 interface SidebarListItemProps {

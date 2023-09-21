@@ -28,9 +28,6 @@
   font-weight: var(--weight-bold);
   gap: 1.25rem;
   line-height: 2rem;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 .sidebar-list a {

@@ -1,0 +1,38 @@
+.index-container {
+  padding: 11.5rem 5.25rem;
+}
+
+.index-title {
+  font-size: 3.5rem;
+  font-weight: var(--weight-bold-extra);
+  line-height: 4rem;
+  margin: 0;
+  margin-bottom: 0.6rem;
+}
+
+.index-description {
+  font-size: 1rem;
+  font-weight: var(--weight-normal);
+  line-height: 1.5rem;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+.index-or {
+  font-size: 1.5rem;
+  font-weight: var(--weight-bold);
+  line-height: 2rem;
+  padding: 3rem 0;
+}
+
+.index-list {
+  display: flex;
+  gap: 2rem;
+}
+
+.index-list li {
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  height: 13.5rem;
+  width: 18rem;
+}
