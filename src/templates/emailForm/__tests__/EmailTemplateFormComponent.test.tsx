@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker'
 import { EmailTemplateFormComponent } from '../EmailTemplateFormComponent'
 import { TEST_ID as headerInputTestId } from '../../emailPreview/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../../emailPreview/FooterInput'
+import { TEST_ID as introInputTestId } from '../../emailPreview/IntroInput'
 
 describe('EmailTemplateFormComponent', () => {
   let description: string
@@ -31,6 +32,17 @@ describe('EmailTemplateFormComponent', () => {
       />,
     )
     expect(queryByTestId(footerInputTestId)).not.toBeNull()
+    expect(queryByTestId(headerInputTestId)).toBeNull()
+  })
+
+  it('can display an IntroInput', () => {
+    const { queryByTestId } = render(
+      <EmailTemplateFormComponent
+        copyId="copyId"
+        emailTemplateComponentItem={{ component: 'Intro', description }}
+      />,
+    )
+    expect(queryByTestId(introInputTestId)).not.toBeNull()
     expect(queryByTestId(headerInputTestId)).toBeNull()
   })
 })

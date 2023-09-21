@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import type { EmailTemplateComponentItem, ID } from 'src/appTypes'
 import { HeaderInput } from '../emailPreview/HeaderInput'
 import { FooterInput } from '../emailPreview/FooterInput'
+import { IntroInput } from '../emailPreview/IntroInput'
 
 interface Props {
   copyId: ID
@@ -16,5 +17,7 @@ export const EmailTemplateFormComponent: FC<Props> = ({ copyId, emailTemplateCom
       return <HeaderInput copyId={copyId} description={description} />
     case 'Footer':
       return <FooterInput copyId={copyId} description={description} />
+    case 'Intro':
+      return <IntroInput copyId={copyId} description={description} />
   }
 }

@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { EmailTemplateComponentItem, ID } from 'src/appTypes'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { Intro } from './Intro'
 
 interface Props {
   copyId: ID
@@ -19,5 +20,7 @@ export const EmailTemplatePreviewComponent: FC<Props> = ({
       return <Header copyId={copyId} />
     case 'Footer':
       return <Footer copyId={copyId} />
+    case 'Intro':
+      return <Intro copyId={copyId} />
   }
 }
