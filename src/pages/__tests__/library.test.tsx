@@ -13,4 +13,13 @@ describe('Library page', () => {
     const { queryByTestId } = render(<LibraryPage />)
     expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
   })
+
+  it('displays all of the templates', () => {
+    const { getByText } = render(<LibraryPage />)
+    const firstLink: HTMLAnchorElement = getByText('Email Template') as any
+    expect(firstLink.href).toEqual('http://localhost/email-templates/email-template')
+
+    const secondLink: HTMLAnchorElement = getByText('Another Email Template') as any
+    expect(secondLink.href).toEqual('http://localhost/email-templates/another-email-template')
+  })
 })

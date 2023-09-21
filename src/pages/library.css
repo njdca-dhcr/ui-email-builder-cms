@@ -1,0 +1,21 @@
+.library-item {
+  align-items: flex-start;
+  font-size: 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.library-name {
+  color: var(--black);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.library-description::before {
+  content: '– ';
+}
+
+.library-description {
+  margin: 0;
+}

@@ -1,18 +1,28 @@
 import React, { FC } from 'react'
 import { HeadFC } from 'gatsby'
-import { Heading, NewLayout, PageContent, Sidebar } from 'src/ui/NewLayout'
+import { SkipNavContent } from '@reach/skip-nav'
+import {
+  Heading,
+  NewLayout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SpacedContainer,
+} from 'src/ui/NewLayout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 
 const TipsAndTricksPage: FC = () => {
   return (
-    <NewLayout>
+    <NewLayout element="div">
       <Sidebar>
         <SidebarNavigation />
       </Sidebar>
+      <SkipNavContent />
       <PageContent element="main">
-        <div style={{ padding: '11.5rem 5.25rem' }}>
+        <SpacedContainer>
           <Heading element="h1">Tips & Tricks</Heading>
-        </div>
+          <Paragraph>Coming soon.</Paragraph>
+        </SpacedContainer>
       </PageContent>
     </NewLayout>
   )

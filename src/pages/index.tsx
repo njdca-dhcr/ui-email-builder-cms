@@ -1,8 +1,15 @@
 import React, { FC } from 'react'
-import { Link, type HeadFC } from 'gatsby'
+import { type HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { Heading, NewLayout, PageContent, Sidebar } from 'src/ui/NewLayout'
+import {
+  Heading,
+  NewLayout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SpacedContainer,
+} from 'src/ui/NewLayout'
 import { List } from 'src/ui/List'
 import 'src/styles/app.css'
 import './index.css'
@@ -17,15 +24,15 @@ const IndexPage: FC = () => {
       </Sidebar>
       <SkipNavContent />
       <PageContent element="main">
-        <div className="index-container">
+        <SpacedContainer>
           <VisuallyHidden>
             <h1>Email Builder (Beta)</h1>
           </VisuallyHidden>
           <section>
             <Heading element="h2">Start with a template</Heading>
-            <p className="index-description">
+            <Paragraph>
               You can edit and change everything—it just gives you a starting place.
-            </p>
+            </Paragraph>
             <List className="index-list">
               <li />
               <li />
@@ -35,10 +42,10 @@ const IndexPage: FC = () => {
           <section className="index-or">--or--</section>
           <section>
             <Heading element="h2">Build your own email</Heading>
-            <p className="index-description">You know what you want so make it happen.</p>
+            <Paragraph>You know what you want so make it happen.</Paragraph>
             <Button onClick={() => {}}>Build from scratch</Button>
           </section>
-        </div>
+        </SpacedContainer>
       </PageContent>
     </NewLayout>
   )

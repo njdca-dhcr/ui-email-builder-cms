@@ -5,9 +5,11 @@ import {
   Heading,
   NewLayout,
   PageContent,
+  Paragraph,
   Sidebar,
   SideBarList,
   SideBarListItem,
+  SpacedContainer,
 } from '../NewLayout'
 
 describe('NewLayout', () => {
@@ -161,5 +163,33 @@ describe('Heading', () => {
     )
     expect(baseElement.querySelector('h1')).toBeNull()
     expect(baseElement.querySelector('h2')).not.toBeNull()
+  })
+})
+
+describe('Paragraph', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Paragraph>
+        <span>{text}</span>
+      </Paragraph>,
+    )
+    const paragraph = baseElement.querySelector('p')
+    expect(paragraph).not.toBeNull()
+    expect(paragraph).toContainHTML(`<span>${text}</span>`)
+  })
+})
+
+describe('SpacedContainer', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <SpacedContainer>
+        <span>{text}</span>
+      </SpacedContainer>,
+    )
+    const paragraph = baseElement.querySelector('.spaced-container')
+    expect(paragraph).not.toBeNull()
+    expect(paragraph).toContainHTML(`<span>${text}</span>`)
   })
 })

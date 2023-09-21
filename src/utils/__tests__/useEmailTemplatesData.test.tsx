@@ -16,6 +16,7 @@ describe('useEmailTemplatesData', () => {
               node: {
                 id: '123',
                 name: 'Email Template',
+                description: 'This is the first email template',
                 parent: { id: '456', name: 'email-template' },
               },
             },
@@ -23,6 +24,7 @@ describe('useEmailTemplatesData', () => {
               node: {
                 id: '789',
                 name: 'Another Email Template',
+                description: 'This is the second email template',
                 parent: { id: '012', name: 'another-email-template' },
               },
             },
@@ -38,11 +40,13 @@ describe('useEmailTemplatesData', () => {
       {
         id: '123',
         name: 'Email Template',
+        description: 'This is the first email template',
         slug: 'email-template',
       },
       {
         id: '789',
         name: 'Another Email Template',
+        description: 'This is the second email template',
         slug: 'another-email-template',
       },
     ])

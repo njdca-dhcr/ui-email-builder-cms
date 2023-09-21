@@ -68,3 +68,19 @@ export const Heading: FC<HeadingProps> = ({ children, element }) => {
   const Element = element
   return <Element className="heading">{children}</Element>
 }
+
+interface ParagraphProps {
+  children: ReactNode
+}
+
+export const Paragraph: FC<ParagraphProps> = ({ children }) => {
+  return <p className="paragraph">{children}</p>
+}
+
+interface SpacedContainerProps {
+  children: ReactNode
+}
+
+export const SpacedContainer: FC<SpacedContainerProps> = ({ children }) => {
+  return <div className="spaced-container">{children}</div>
+}

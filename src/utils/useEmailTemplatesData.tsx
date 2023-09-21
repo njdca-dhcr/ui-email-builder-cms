@@ -7,6 +7,7 @@ const query = graphql`
         node {
           id
           name
+          description
           parent {
             id
             ... on File {
@@ -20,10 +21,20 @@ const query = graphql`
   }
 `
 
-export const useEmailTemplatesData = (): { id: string; name: string; slug: string }[] => {
+export const useEmailTemplatesData = (): {
+  id: string
+  name: string
+  slug: string
+  description: string
+}[] => {
   const { emailTemplates } = useStaticQuery<Queries.EmailTemplatesDataQuery>(query)
 
   return emailTemplates.edges.map(({ node }) => {
-    return { id: node.id, name: node.name!, slug: (node.parent as any).name }
+    return {
+      id: node.id,
+      name: node.name!,
+      description: node.description!,
+      slug: (node.parent as any).name,
+    }
   })
 }
