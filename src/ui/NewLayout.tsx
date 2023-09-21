@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react'
 import { SkipNavLink } from '@reach/skip-nav'
 import '@reach/skip-nav/styles.css'
-import './Layout.css'
 import { List } from './List'
+import './Layout.css'
 
 interface NewLayoutProps {
   children: ReactNode

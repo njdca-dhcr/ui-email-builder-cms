@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React, { FC, ReactNode } from 'react'
+import './List.css'
 
 interface Props {
   children: ReactNode

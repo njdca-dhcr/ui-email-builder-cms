@@ -1,37 +1,30 @@
 import React from 'react'
 import { Link, HeadFC, PageProps } from 'gatsby'
-import { Layout } from 'src/ui/Layout'
+import {
+  Heading,
+  NewLayout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SpacedContainer,
+} from 'src/ui/NewLayout'
+import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+import { SkipNavContent } from '@reach/skip-nav'
 
 const NotFoundPage: React.FC<PageProps> = () => {
   return (
-    <Layout>
-      <h1 className="heading">Page not found</h1>
-      <p className="paragraph">
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === 'development' ? (
-          <>
-            <br />
-            Try creating a page in{' '}
-            <code
-              style={{
-                color: '#8A6534',
-                padding: 4,
-                backgroundColor: '#FFF4DB',
-                fontSize: '1.25rem',
-                borderRadius: 4,
-              }}
-            >
-              src/pages/
-            </code>
-            .
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </Layout>
+    <NewLayout element="div">
+      <Sidebar>
+        <SidebarNavigation />
+      </Sidebar>
+      <SkipNavContent />
+      <PageContent element="main">
+        <SpacedContainer>
+          <Heading element="h1">Page not found</Heading>
+          <Paragraph>Sorry 😔, we couldn’t find what you were looking for.</Paragraph>
+        </SpacedContainer>
+      </PageContent>
+    </NewLayout>
   )
 }
 

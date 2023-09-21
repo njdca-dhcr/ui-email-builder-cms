@@ -3,7 +3,6 @@ import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import type { EmailTemplate } from 'src/appTypes'
 import BasicTemplate, { Head } from '../BasicTemplate'
-import { TEST_ID as layoutTestId } from 'src/ui/Layout'
 import { TEST_IDS } from '../BasicTemplateContents'
 
 describe('BasicTemplate', () => {
@@ -23,8 +22,8 @@ describe('BasicTemplate', () => {
   })
 
   it('is displays the layout', () => {
-    const { queryByTestId } = rendered
-    expect(queryByTestId(layoutTestId)).not.toBeNull()
+    const { baseElement } = rendered
+    expect(baseElement.querySelector('.new-layout')).not.toBeNull()
   })
 
   it('displays the BasicTemplateContents', () => {

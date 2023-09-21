@@ -1,7 +1,7 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC } from 'react'
 import type { HeadFC } from 'gatsby'
+import { NewLayout, PageContent, Sidebar } from 'src/ui/NewLayout'
 import type { EmailTemplate } from 'src/appTypes'
-import { Layout } from 'src/ui/Layout'
 import { BasicTemplateContents } from './BasicTemplateContents'
 import './BasicTemplate.css'
 
@@ -17,9 +17,12 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
 
   return (
-    <Layout>
-      <BasicTemplateContents emailTemplate={emailTemplate} />
-    </Layout>
+    <NewLayout element="main">
+      <Sidebar>placeholder</Sidebar>
+      <PageContent element="div">
+        <BasicTemplateContents emailTemplate={emailTemplate} />
+      </PageContent>
+    </NewLayout>
   )
 }
 
