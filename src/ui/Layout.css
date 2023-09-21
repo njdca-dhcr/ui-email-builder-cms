@@ -1,31 +1,46 @@
-.layout {
-  color: #232129;
-  font-family: -apple-system, Roboto, sans-serif, serif;
-}
-
-.page {
-  padding: 12px;
-}
-
-.header {
+.new-layout {
+  align-items: stretch;
   display: flex;
-  justify-content: space-between;
-  padding: 12px;
+  flex: 1;
+  min-height: 100vh;
 }
 
-.heading {
-  margin-top: 0px;
-  margin-bottom: 64px;
-  max-width: 320px;
+.sidebar {
+  background-color: var(--gray);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 3.25rem 2rem;
 }
 
-.paragraph {
-  margin-bottom: 48px;
+.sidebar-title {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: var(--weight-bold);
+  line-height: 2rem;
+  padding-bottom: 5rem;
 }
 
-.link {
-  color: rgb(137, 84, 168);
-  font-weight: bold;
-  font-size: 16px;
-  vertical-align: 5%;
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.35rem;
+  font-weight: var(--weight-bold);
+  gap: 1.25rem;
+  line-height: 2rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-list a {
+  color: var(--black);
+  text-decoration: none;
+}
+.sidebar-list a.sidebar-active-link {
+  text-decoration: underline;
+}
+
+.page-content {
+  flex: 5;
 }

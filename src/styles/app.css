@@ -1,0 +1,29 @@
+:root {
+  --black: #000000;
+  --blue-dark: #00475d;
+  --blue-gray-dark: #617275;
+  --blue-gray-light: #9eacae;
+  --blue-light: #5081a4;
+  --blue: #285f77;
+  --gray: #f1f1f1;
+  --white: #ffffff;
+
+  --weight-bold: 700;
+  --weight-normal: 400;
+
+  --default-font-color: var(--black);
+  --default-font-size: 16px;
+
+  --sans-serif: -apple-system, Roboto, sans-serif, serif;
+}
+
+html {
+  color: var(--default-font-color);
+  font-family: var(--sans-serif);
+  font-size: var(--default-font-size);
+  font-weight: var(--weight-normal);
+}
+
+body {
+  margin: 0;
+}
