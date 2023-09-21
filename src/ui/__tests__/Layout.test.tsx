@@ -82,6 +82,18 @@ describe('PageContent', () => {
     expect(pageContent).not.toBeNull()
     expect(pageContent?.tagName).toEqual('MAIN')
   })
+
+  it('accepts a class name', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <PageContent className="my-class" element="main">
+        <div>{text}</div>
+      </PageContent>,
+    )
+    const pageContent = baseElement.querySelector('.my-class')
+    expect(pageContent).not.toBeNull()
+    expect(pageContent?.tagName).toEqual('MAIN')
+  })
 })
 
 describe('Sidebar', () => {
@@ -105,6 +117,17 @@ describe('Sidebar', () => {
     const sidebarTitle = baseElement.querySelector('.sidebar-title')
     expect(sidebarTitle).not.toBeNull()
     expect(sidebarTitle).toHaveTextContent('Email Builder (Beta)')
+  })
+
+  it('accepts a class name', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Sidebar className="my-class">
+        <div>{text}</div>
+      </Sidebar>,
+    )
+    const sidebar = baseElement.querySelector('.my-class')
+    expect(sidebar).toContainHTML(`<div>${text}</div>`)
   })
 })
 

@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import type { HeadFC } from 'gatsby'
-import { Layout, PageContent, Sidebar } from 'src/ui/Layout'
+import { type HeadFC } from 'gatsby'
+import { Layout, PageContent } from 'src/ui/Layout'
 import type { EmailTemplate } from 'src/appTypes'
 import { BasicTemplateContents } from './BasicTemplateContents'
+import { EmailEditorSidebar } from './EmailEditorSidebar'
 import './BasicTemplate.css'
 
 interface PageContext {
@@ -18,8 +19,8 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
 
   return (
     <Layout element="main">
-      <Sidebar>placeholder</Sidebar>
-      <PageContent element="div">
+      <EmailEditorSidebar emailTemplate={emailTemplate} />
+      <PageContent element="div" className="email-editor-page-content">
         <BasicTemplateContents emailTemplate={emailTemplate} />
       </PageContent>
     </Layout>

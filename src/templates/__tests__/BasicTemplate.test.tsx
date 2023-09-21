@@ -31,6 +31,11 @@ describe('BasicTemplate', () => {
     expect(queryByTestId(TEST_IDS.basicTemplateContents)).not.toBeNull()
   })
 
+  it('displays the EmailEditorSidebar', () => {
+    const { queryByText } = rendered
+    expect(queryByText('Back to Home')).not.toBeNull()
+  })
+
   describe('Head', () => {
     it("uses the email template's name as the title", () => {
       const { baseElement } = render(<Head pageContext={{ emailTemplate }} {...({} as any)} />)

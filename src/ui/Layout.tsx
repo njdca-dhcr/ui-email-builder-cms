@@ -3,6 +3,7 @@ import { SkipNavLink } from '@reach/skip-nav'
 import '@reach/skip-nav/styles.css'
 import { List } from './List'
 import './Layout.css'
+import classNames from 'classnames'
 
 interface LayoutProps {
   children: ReactNode
@@ -22,21 +23,23 @@ export const Layout: FC<LayoutProps> = ({ children, element }) => {
 
 interface PageContentProps {
   children: ReactNode
+  className?: string
   element?: 'div' | 'main'
 }
 
-export const PageContent: FC<PageContentProps> = ({ children, element }) => {
+export const PageContent: FC<PageContentProps> = ({ children, className, element }) => {
   const Element = element ?? 'div'
-  return <Element className="page-content">{children}</Element>
+  return <Element className={classNames('page-content', className)}>{children}</Element>
 }
 
 interface SidebarProps {
   children: ReactNode
+  className?: string
 }
 
-export const Sidebar: FC<SidebarProps> = ({ children }) => {
+export const Sidebar: FC<SidebarProps> = ({ children, className }) => {
   return (
-    <div className="sidebar">
+    <div className={classNames('sidebar', className)}>
       <span className="sidebar-title">Email Builder (Beta)</span>
       {children}
     </div>

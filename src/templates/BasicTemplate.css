@@ -28,3 +28,19 @@
   gap: 4px;
   width: 100%;
 }
+
+.back-link {
+  align-items: center;
+  color: var(--black);
+  display: flex;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.back-link-text {
+  line-height: 2rem;
+}
+
+.email-editor-page-content {
+  flex: 3;
+}

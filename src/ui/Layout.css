@@ -13,12 +13,16 @@
   padding: 3.25rem 2rem;
 }
 
+.sidebar nav {
+  padding-top: 2.5rem;
+}
+
 .sidebar-title {
   display: block;
   font-size: 1.35rem;
   font-weight: var(--weight-bold);
   line-height: 2rem;
-  padding-bottom: 5rem;
+  padding-bottom: 2.5rem;
 }
 
 .sidebar-list {
