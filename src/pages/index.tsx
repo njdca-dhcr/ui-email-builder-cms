@@ -2,14 +2,7 @@ import React, { FC } from 'react'
 import { type HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import {
-  Heading,
-  NewLayout,
-  PageContent,
-  Paragraph,
-  Sidebar,
-  SpacedContainer,
-} from 'src/ui/NewLayout'
+import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
 import { List } from 'src/ui/List'
 import 'src/styles/app.css'
 import './index.css'
@@ -18,7 +11,7 @@ import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 
 const IndexPage: FC = () => {
   return (
-    <NewLayout element="div">
+    <Layout element="div">
       <Sidebar>
         <SidebarNavigation />
       </Sidebar>
@@ -47,7 +40,7 @@ const IndexPage: FC = () => {
           </section>
         </SpacedContainer>
       </PageContent>
-    </NewLayout>
+    </Layout>
   )
 }
 

@@ -23,7 +23,7 @@ describe('BasicTemplate', () => {
 
   it('is displays the layout', () => {
     const { baseElement } = rendered
-    expect(baseElement.querySelector('.new-layout')).not.toBeNull()
+    expect(baseElement.querySelector('.layout')).not.toBeNull()
   })
 
   it('displays the BasicTemplateContents', () => {

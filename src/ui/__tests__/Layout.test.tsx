@@ -1,28 +1,195 @@
 import React from 'react'
-import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
-import { Layout } from '../Layout'
-import { TEST_ID as navigationTestId } from '../Navigation'
+import { render } from '@testing-library/react'
+import {
+  Heading,
+  Layout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SideBarList,
+  SideBarListItem,
+  SpacedContainer,
+} from '../Layout'
 
 describe('Layout', () => {
-  it('renders its children', () => {
+  it('displays its children', () => {
     const text = faker.lorem.paragraph()
-    const { getByTestId } = render(
+    const { baseElement } = render(
       <Layout>
-        <div data-testid="test-text">{text}</div>
+        <div>{text}</div>
       </Layout>,
     )
-    expect(getByTestId('test-text')).toHaveTextContent(text)
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
   })
 
-  it('renders the navigation', () => {
+  it('renders as a div by default', () => {
     const text = faker.lorem.paragraph()
-    const { queryByTestId } = render(
+    const { baseElement } = render(
       <Layout>
-        <div data-testid="test-text">{text}</div>
+        <span>{text}</span>
       </Layout>,
     )
+    const layout = baseElement.querySelector('.layout')
+    expect(layout).not.toBeNull()
+    expect(layout?.tagName).toEqual('DIV')
+  })
 
-    expect(queryByTestId(navigationTestId)).not.toBeNull()
+  it('renders as a main tag when specified', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Layout element="main">
+        <span>{text}</span>
+      </Layout>,
+    )
+    const layout = baseElement.querySelector('.layout')
+    expect(layout).not.toBeNull()
+    expect(layout?.tagName).toEqual('MAIN')
+  })
+})
+
+describe('PageContent', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <PageContent>
+        <div>{text}</div>
+      </PageContent>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  it('renders as a div by default', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <PageContent>
+        <span>{text}</span>
+      </PageContent>,
+    )
+    const pageContent = baseElement.querySelector('.page-content')
+    expect(pageContent).not.toBeNull()
+    expect(pageContent?.tagName).toEqual('DIV')
+  })
+
+  it('renders as a main tag when specified', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <PageContent element="main">
+        <span>{text}</span>
+      </PageContent>,
+    )
+    const pageContent = baseElement.querySelector('.page-content')
+    expect(pageContent).not.toBeNull()
+    expect(pageContent?.tagName).toEqual('MAIN')
+  })
+})
+
+describe('Sidebar', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Sidebar>
+        <div>{text}</div>
+      </Sidebar>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  it('displays a title', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Sidebar>
+        <div>{text}</div>
+      </Sidebar>,
+    )
+    const sidebarTitle = baseElement.querySelector('.sidebar-title')
+    expect(sidebarTitle).not.toBeNull()
+    expect(sidebarTitle).toHaveTextContent('Email Builder (Beta)')
+  })
+})
+
+describe('SideBarList', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <SideBarList>
+        <div>{text}</div>
+      </SideBarList>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+})
+
+describe('SideBarListItem', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <SideBarListItem>
+        <div>{text}</div>
+      </SideBarListItem>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+})
+
+describe('Heading', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h1">
+        <div>{text}</div>
+      </Heading>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  it('renders as the given element (h1)', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h1">
+        <div>{text}</div>
+      </Heading>,
+    )
+    expect(baseElement.querySelector('h1')).not.toBeNull()
+    expect(baseElement.querySelector('h2')).toBeNull()
+  })
+
+  it('renders as the given element (h2)', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h2">
+        <div>{text}</div>
+      </Heading>,
+    )
+    expect(baseElement.querySelector('h1')).toBeNull()
+    expect(baseElement.querySelector('h2')).not.toBeNull()
+  })
+})
+
+describe('Paragraph', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Paragraph>
+        <span>{text}</span>
+      </Paragraph>,
+    )
+    const paragraph = baseElement.querySelector('p')
+    expect(paragraph).not.toBeNull()
+    expect(paragraph).toContainHTML(`<span>${text}</span>`)
+  })
+})
+
+describe('SpacedContainer', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <SpacedContainer>
+        <span>{text}</span>
+      </SpacedContainer>,
+    )
+    const paragraph = baseElement.querySelector('.spaced-container')
+    expect(paragraph).not.toBeNull()
+    expect(paragraph).toContainHTML(`<span>${text}</span>`)
   })
 })

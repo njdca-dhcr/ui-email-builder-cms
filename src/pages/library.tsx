@@ -1,14 +1,7 @@
 import React, { FC } from 'react'
 import { HeadFC, Link } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
-import {
-  Heading,
-  NewLayout,
-  PageContent,
-  Paragraph,
-  Sidebar,
-  SpacedContainer,
-} from 'src/ui/NewLayout'
+import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { List } from 'src/ui/List'
@@ -18,7 +11,7 @@ const LibaryPage: FC = () => {
   const emailTemplates = useEmailTemplatesData()
 
   return (
-    <NewLayout element="div">
+    <Layout element="div">
       <Sidebar>
         <SidebarNavigation />
       </Sidebar>
@@ -39,7 +32,7 @@ const LibaryPage: FC = () => {
           </List>
         </SpacedContainer>
       </PageContent>
-    </NewLayout>
+    </Layout>
   )
 }
 

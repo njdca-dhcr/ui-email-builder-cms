@@ -1,19 +1,12 @@
 import React from 'react'
 import { Link, HeadFC, PageProps } from 'gatsby'
-import {
-  Heading,
-  NewLayout,
-  PageContent,
-  Paragraph,
-  Sidebar,
-  SpacedContainer,
-} from 'src/ui/NewLayout'
+import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { SkipNavContent } from '@reach/skip-nav'
 
 const NotFoundPage: React.FC<PageProps> = () => {
   return (
-    <NewLayout element="div">
+    <Layout element="div">
       <Sidebar>
         <SidebarNavigation />
       </Sidebar>
@@ -24,7 +17,7 @@ const NotFoundPage: React.FC<PageProps> = () => {
           <Paragraph>Sorry 😔, we couldn’t find what you were looking for.</Paragraph>
         </SpacedContainer>
       </PageContent>
-    </NewLayout>
+    </Layout>
   )
 }
 

@@ -1,19 +1,12 @@
 import React, { FC } from 'react'
 import { HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
-import {
-  Heading,
-  NewLayout,
-  PageContent,
-  Paragraph,
-  Sidebar,
-  SpacedContainer,
-} from 'src/ui/NewLayout'
+import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 
 const TipsAndTricksPage: FC = () => {
   return (
-    <NewLayout element="div">
+    <Layout element="div">
       <Sidebar>
         <SidebarNavigation />
       </Sidebar>
@@ -24,7 +17,7 @@ const TipsAndTricksPage: FC = () => {
           <Paragraph>Coming soon.</Paragraph>
         </SpacedContainer>
       </PageContent>
-    </NewLayout>
+    </Layout>
   )
 }
 

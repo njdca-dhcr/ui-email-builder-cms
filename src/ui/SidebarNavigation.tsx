@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { SideBarList, SideBarListItem } from './NewLayout'
+import { SideBarList, SideBarListItem } from './Layout'
 import { Link } from 'gatsby'
 
 interface Props {}
