@@ -58,3 +58,13 @@ interface SidebarListItemProps {
 export const SideBarListItem: FC<SidebarListItemProps> = ({ children }) => {
   return <li className="sidebar-list-item">{children}</li>
 }
+
+interface HeadingProps {
+  children: ReactNode
+  element: 'h1' | 'h2'
+}
+
+export const Heading: FC<HeadingProps> = ({ children, element }) => {
+  const Element = element
+  return <Element className="heading">{children}</Element>
+}

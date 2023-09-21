@@ -34,10 +34,19 @@
   color: var(--black);
   text-decoration: none;
 }
+
 .sidebar-list a.sidebar-active-link {
   text-decoration: underline;
 }
 
 .page-content {
   flex: 5;
+}
+
+.heading {
+  font-size: 3.5rem;
+  font-weight: var(--weight-bold-extra);
+  line-height: 4rem;
+  margin: 0;
+  margin-bottom: 0.6rem;
 }

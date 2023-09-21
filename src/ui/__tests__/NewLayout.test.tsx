@@ -1,7 +1,14 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
-import { NewLayout, PageContent, Sidebar, SideBarList, SideBarListItem } from '../NewLayout'
+import {
+  Heading,
+  NewLayout,
+  PageContent,
+  Sidebar,
+  SideBarList,
+  SideBarListItem,
+} from '../NewLayout'
 
 describe('NewLayout', () => {
   it('displays its children', () => {
@@ -120,5 +127,39 @@ describe('SideBarListItem', () => {
       </SideBarListItem>,
     )
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+})
+
+describe('Heading', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h1">
+        <div>{text}</div>
+      </Heading>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  it('renders as the given element (h1)', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h1">
+        <div>{text}</div>
+      </Heading>,
+    )
+    expect(baseElement.querySelector('h1')).not.toBeNull()
+    expect(baseElement.querySelector('h2')).toBeNull()
+  })
+
+  it('renders as the given element (h2)', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h2">
+        <div>{text}</div>
+      </Heading>,
+    )
+    expect(baseElement.querySelector('h1')).toBeNull()
+    expect(baseElement.querySelector('h2')).not.toBeNull()
   })
 })

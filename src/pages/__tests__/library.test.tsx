@@ -1,16 +1,16 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import IndexPage from '../index'
+import LibraryPage from '../library'
 import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 
-describe('index - Root page', () => {
+describe('Library page', () => {
   it('is displayed in a layout', () => {
-    const { baseElement } = render(<IndexPage />)
+    const { baseElement } = render(<LibraryPage />)
     expect(baseElement.querySelector('.new-layout')).not.toBeNull()
   })
 
   it('displays the sidebar navigation', () => {
-    const { queryByTestId } = render(<IndexPage />)
+    const { queryByTestId } = render(<LibraryPage />)
     expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
   })
 })

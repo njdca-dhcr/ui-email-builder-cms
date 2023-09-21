@@ -2,14 +2,6 @@
   padding: 11.5rem 5.25rem;
 }
 
-.index-title {
-  font-size: 3.5rem;
-  font-weight: var(--weight-bold-extra);
-  line-height: 4rem;
-  margin: 0;
-  margin-bottom: 0.6rem;
-}
-
 .index-description {
   font-size: 1rem;
   font-weight: var(--weight-normal);
