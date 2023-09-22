@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { Link } from 'gatsby'
+import { SkipNavContent } from '@reach/skip-nav'
 import { EmailTemplate } from 'src/appTypes'
 import { BackArrowIcon } from 'src/ui/BackArrowIcon'
 import { Sidebar } from 'src/ui/Layout'
 import { EmailEditorHeadingAndSelect } from './EmailEditorHeadingAndSelect'
-import { List } from 'src/ui/List'
 import {
   EmailEditorToggle,
   EmailEditorToggleSection,
@@ -22,6 +22,7 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
         <BackArrowIcon />
         <span className="back-link-text">Back to Home</span>
       </Link>
+      <SkipNavContent />
       <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />
       <EmailEditorToggles>
         <EmailEditorToggleSection
