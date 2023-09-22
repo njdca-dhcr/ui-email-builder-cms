@@ -18,3 +18,5 @@ export const buildEmailTemplate = (options?: Partial<EmailTemplate>): EmailTempl
     ...options,
   }
 }
+
+export const urlFor = (path: string): string => `http://localhost${path}`

@@ -2,7 +2,7 @@ import React from 'react'
 import { EmailEditorSidebar } from '../EmailEditorSidebar'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplate } from 'src/testHelpers'
+import { buildEmailTemplate, urlFor } from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate
@@ -15,7 +15,7 @@ describe('EmailEditorSidebar', () => {
     const { baseElement } = render(<EmailEditorSidebar emailTemplate={emailTemplate} />)
     const link: HTMLAnchorElement = baseElement.querySelector('.back-link') as any
     expect(link.tagName).toEqual('A')
-    expect(link.href).toEqual('http://localhost/')
+    expect(link.href).toEqual(urlFor('/'))
   })
 
   it('displays the heading and select navigator', () => {

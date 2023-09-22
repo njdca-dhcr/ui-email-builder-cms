@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import LibraryPage from '../library'
 import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
+import { urlFor } from 'src/testHelpers'
 
 describe('Library page', () => {
   it('is displayed in a layout', () => {
@@ -17,9 +18,9 @@ describe('Library page', () => {
   it('displays all of the templates', () => {
     const { getByText } = render(<LibraryPage />)
     const firstLink: HTMLAnchorElement = getByText('Email Template') as any
-    expect(firstLink.href).toEqual('http://localhost/email-templates/email-template')
+    expect(firstLink.href).toEqual(urlFor('/email-templates/email-template'))
 
     const secondLink: HTMLAnchorElement = getByText('Another Email Template') as any
-    expect(secondLink.href).toEqual('http://localhost/email-templates/another-email-template')
+    expect(secondLink.href).toEqual(urlFor('/email-templates/another-email-template'))
   })
 })
