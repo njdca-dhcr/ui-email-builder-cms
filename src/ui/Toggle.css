@@ -1,0 +1,96 @@
+.toggle {
+  position: relative;
+}
+
+.toggle-ui {
+  --pill-background-color: var(--white);
+  --pill-border-color: var(--white);
+  --icon-color: var(--white);
+  --circle-color: var(--white);
+  --circle-translate-x: 0;
+  --toggle-transition: ease-in-out 50ms;
+
+  height: 22px;
+  position: relative;
+}
+
+.toggle-circle {
+  background-color: var(--circle-color);
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(var(--circle-translate-x));
+  transition: transform var(--toggle-transition);
+}
+
+.toggle-pill-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+}
+
+.toggle-pill {
+  .pill {
+    fill: var(--pill-background-color);
+    transition: fill var(--toggle-transition);
+  }
+
+  .pill-border {
+    stroke: var(--pill-border-color);
+    transition: stroke var(--toggle-transition);
+  }
+}
+
+.checkmark-icon path,
+.x-icon path {
+  stroke: var(--icon-color);
+}
+
+.toggled-on {
+  --pill-background-color: var(--blue-dark);
+  --pill-border-color: var(--blue-dark);
+  --icon-color: var(--blue-dark);
+  --circle-color: var(--white);
+  --circle-translate-x: 16px;
+
+  .x-icon {
+    display: none;
+  }
+}
+
+.toggled-off {
+  --pill-background-color: var(--blue-light);
+  --pill-border-color: var(--blue-light);
+  --icon-color: var(--blue-dark);
+  --circle-color: var(--white);
+  --circle-translate-x: 0;
+
+  .checkmark-icon {
+    display: none;
+  }
+}
+
+.toggle-disabled {
+  --pill-background-color: var(--gray);
+  --pill-border-color: var(--blue-gray-light);
+  --icon-color: var(--gray);
+  --circle-color: var(--blue-gray-light);
+}
+
+.toggle input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+}
