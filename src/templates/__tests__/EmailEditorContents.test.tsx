@@ -4,13 +4,13 @@ import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import copy from 'copy-to-clipboard'
 import type { EmailTemplate } from 'src/appTypes'
-import { BasicTemplateContents, TEST_IDS } from '../BasicTemplateContents'
+import { EmailEditorContents, TEST_IDS } from '../EmailEditorContents'
 import { TEST_ID as headerInputTestId } from '../emailPreview/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../emailPreview/FooterInput'
 import { TEST_ID as headerTestId } from '../emailPreview/Header'
 import { TEST_ID as footerTestId } from '../emailPreview/Footer'
 
-describe('BasicTemplateContents', () => {
+describe('EmailEditorContents', () => {
   let emailTemplate: EmailTemplate
   let rendered: RenderResult
 
@@ -23,7 +23,7 @@ describe('BasicTemplateContents', () => {
         { component: 'Footer', description: faker.lorem.words(3) },
       ],
     }
-    rendered = render(<BasicTemplateContents emailTemplate={emailTemplate} />)
+    rendered = render(<EmailEditorContents emailTemplate={emailTemplate} />)
   })
 
   it('displays the email template name and description', () => {

@@ -3,7 +3,7 @@ import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import type { EmailTemplate } from 'src/appTypes'
 import BasicTemplate, { Head } from '../BasicTemplate'
-import { TEST_IDS } from '../BasicTemplateContents'
+import { TEST_IDS } from '../EmailEditorContents'
 
 describe('BasicTemplate', () => {
   let emailTemplate: EmailTemplate

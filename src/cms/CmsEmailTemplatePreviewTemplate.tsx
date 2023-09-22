@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import type { PreviewTemplateComponentProps } from 'netlify-cms-core'
-import { BasicTemplateContents } from 'src/templates/BasicTemplateContents'
+import { EmailEditorContents } from 'src/templates/EmailEditorContents'
 import { EmailTemplate } from 'src/appTypes'
 
 type Entry = PreviewTemplateComponentProps['entry']
@@ -22,5 +22,5 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate => {
 export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> = ({ entry }) => {
   const emailTemplate = entryToEmailTemplate(entry)
 
-  return <BasicTemplateContents emailTemplate={emailTemplate} />
+  return <EmailEditorContents emailTemplate={emailTemplate} />
 }

@@ -26,7 +26,7 @@ const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): stri
 
 type PreviewKind = 'desktop' | 'mobile'
 
-export const BasicTemplateContents: FC<Props> = ({ emailTemplate }) => {
+export const EmailEditorContents: FC<Props> = ({ emailTemplate }) => {
   const [previewKind, setPreviewKind] = useState<PreviewKind>('desktop')
   const otherPreviewKind: PreviewKind = previewKind === 'desktop' ? 'mobile' : 'desktop'
   const previewRef = useRef()
