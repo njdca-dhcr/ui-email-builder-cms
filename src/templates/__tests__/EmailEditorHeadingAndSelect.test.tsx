@@ -5,19 +5,13 @@ import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 import { navigate } from 'gatsby'
 import { EmailEditorHeadingAndSelect } from '../EmailEditorHeadingAndSelect'
+import { buildEmailTemplate } from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate
 
   beforeEach(() => {
-    emailTemplate = {
-      name: 'Email Template',
-      description: faker.lorem.paragraph(),
-      components: [
-        { component: 'Header', description: faker.lorem.words(3) },
-        { component: 'Footer', description: faker.lorem.words(3) },
-      ],
-    }
+    emailTemplate = buildEmailTemplate({ name: 'Email Template' })
   })
 
   it('displays the name of the email template', () => {

@@ -2,20 +2,13 @@ import React from 'react'
 import { EmailEditorSidebar } from '../EmailEditorSidebar'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { faker } from '@faker-js/faker'
+import { buildEmailTemplate } from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate
 
   beforeEach(() => {
-    emailTemplate = {
-      name: faker.lorem.word(),
-      description: faker.lorem.paragraph(),
-      components: [
-        { component: 'Header', description: faker.lorem.words(3) },
-        { component: 'Footer', description: faker.lorem.words(3) },
-      ],
-    }
+    emailTemplate = buildEmailTemplate()
   })
 
   it('displays a link back to the home page', () => {

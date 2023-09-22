@@ -4,20 +4,14 @@ import { faker } from '@faker-js/faker'
 import type { EmailTemplate } from 'src/appTypes'
 import EmailEditorPage, { Head } from '../EmailEditorPage'
 import { TEST_IDS } from '../EmailEditorContents'
+import { buildEmailTemplate } from 'src/testHelpers'
 
 describe('EmailEditorPage', () => {
   let emailTemplate: EmailTemplate
   let rendered: RenderResult
 
   beforeEach(() => {
-    emailTemplate = {
-      name: faker.lorem.word(),
-      description: faker.lorem.paragraph(),
-      components: [
-        { component: 'Header', description: faker.lorem.words(3) },
-        { component: 'Footer', description: faker.lorem.words(3) },
-      ],
-    }
+    emailTemplate = buildEmailTemplate()
     rendered = render(<EmailEditorPage pageContext={{ emailTemplate }} />)
   })
 

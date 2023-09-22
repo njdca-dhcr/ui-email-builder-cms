@@ -9,20 +9,14 @@ import { TEST_ID as headerInputTestId } from '../emailPreview/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../emailPreview/FooterInput'
 import { TEST_ID as headerTestId } from '../emailPreview/Header'
 import { TEST_ID as footerTestId } from '../emailPreview/Footer'
+import { buildEmailTemplate } from 'src/testHelpers'
 
 describe('EmailEditorContents', () => {
   let emailTemplate: EmailTemplate
   let rendered: RenderResult
 
   beforeEach(() => {
-    emailTemplate = {
-      name: faker.lorem.word(),
-      description: faker.lorem.paragraph(),
-      components: [
-        { component: 'Header', description: faker.lorem.words(3) },
-        { component: 'Footer', description: faker.lorem.words(3) },
-      ],
-    }
+    emailTemplate = buildEmailTemplate()
     rendered = render(<EmailEditorContents emailTemplate={emailTemplate} />)
   })
 
