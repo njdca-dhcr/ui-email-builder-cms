@@ -2,10 +2,10 @@ import React from 'react'
 import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import type { EmailTemplate } from 'src/appTypes'
-import BasicTemplate, { Head } from '../BasicTemplate'
+import EmailEditorPage, { Head } from '../EmailEditorPage'
 import { TEST_IDS } from '../EmailEditorContents'
 
-describe('BasicTemplate', () => {
+describe('EmailEditorPage', () => {
   let emailTemplate: EmailTemplate
   let rendered: RenderResult
 
@@ -18,7 +18,7 @@ describe('BasicTemplate', () => {
         { component: 'Footer', description: faker.lorem.words(3) },
       ],
     }
-    rendered = render(<BasicTemplate pageContext={{ emailTemplate }} />)
+    rendered = render(<EmailEditorPage pageContext={{ emailTemplate }} />)
   })
 
   it('is displays the layout', () => {
@@ -26,9 +26,9 @@ describe('BasicTemplate', () => {
     expect(baseElement.querySelector('.layout')).not.toBeNull()
   })
 
-  it('displays the BasicTemplateContents', () => {
+  it('displays the EmailEditorContents', () => {
     const { queryByTestId } = rendered
-    expect(queryByTestId(TEST_IDS.basicTemplateContents)).not.toBeNull()
+    expect(queryByTestId(TEST_IDS.emailEditorContents)).not.toBeNull()
   })
 
   it('displays the EmailEditorSidebar', () => {

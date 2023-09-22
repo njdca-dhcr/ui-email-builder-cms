@@ -4,7 +4,7 @@ import { Layout, PageContent } from 'src/ui/Layout'
 import type { EmailTemplate } from 'src/appTypes'
 import { EmailEditorContents } from './EmailEditorContents'
 import { EmailEditorSidebar } from './EmailEditorSidebar'
-import './BasicTemplate.css'
+import './EmailEditorPage.css'
 
 interface PageContext {
   emailTemplate: EmailTemplate
@@ -14,7 +14,7 @@ interface Props {
   pageContext: PageContext
 }
 
-const BasicTemplate: FC<Props> = ({ pageContext }) => {
+const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
 
   return (
@@ -27,7 +27,7 @@ const BasicTemplate: FC<Props> = ({ pageContext }) => {
   )
 }
 
-export default BasicTemplate
+export default EmailEditorPage
 
 export const Head: HeadFC<object, PageContext> = ({ pageContext }) => {
   const { name } = pageContext.emailTemplate

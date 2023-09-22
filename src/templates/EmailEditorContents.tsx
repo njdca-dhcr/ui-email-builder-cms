@@ -8,14 +8,13 @@ import { EmailCopyData } from './emailForm/EmailCopyData'
 import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePreviewComponent'
 import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
-import './BasicTemplate.css'
 
 interface Props {
   emailTemplate: EmailTemplate
 }
 
 export const TEST_IDS = {
-  basicTemplateContents: 'basic-template-contents',
+  emailEditorContents: 'email-editor-contents',
   name: 'name',
   description: 'description',
 }
@@ -34,7 +33,7 @@ export const EmailEditorContents: FC<Props> = ({ emailTemplate }) => {
 
   return (
     <EmailCopyData>
-      <div data-testid={TEST_IDS.basicTemplateContents}>
+      <div data-testid={TEST_IDS.emailEditorContents}>
         <h1 data-testid={TEST_IDS.name}>{emailTemplate.name}</h1>
         <p data-testid={TEST_IDS.description}>{emailTemplate.description}</p>
       </div>
