@@ -27,5 +27,5 @@ collections:
           - label: 'Select component'
             name: 'component'
             widget: 'select'
-            options: ['Header', 'Footer', 'Intro']
+            options: ['Header', 'Footer', 'Intro', 'Banner']
           - { label: 'Description', name: 'description', widget: 'text' }

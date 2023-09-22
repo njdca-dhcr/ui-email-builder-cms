@@ -3,6 +3,7 @@ import { EmailTemplateComponentItem, ID } from 'src/appTypes'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { Intro } from './Intro'
+import { Banner } from './Banner'
 
 interface Props {
   copyId: ID
@@ -22,5 +23,7 @@ export const EmailTemplatePreviewComponent: FC<Props> = ({
       return <Footer copyId={copyId} />
     case 'Intro':
       return <Intro copyId={copyId} />
+    case 'Banner':
+      return <Banner copyId={copyId} />
   }
 }

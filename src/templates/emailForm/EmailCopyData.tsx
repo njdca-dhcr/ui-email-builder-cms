@@ -18,13 +18,13 @@ export const EmailCopyDataContext = createContext<EmailCopyDataContextValue>({
   update: () => {},
 })
 
-export const useEmailCopyData = (id: ID): { onChange: (value: string) => void; value: string } => {
+export const useEmailCopyData = (id: ID): { onChange: (value: any) => void; value: any } => {
   const { data, update } = useContext(EmailCopyDataContext)
   const componentId = `${id}`
   const value = data[componentId] ?? ''
 
   const onChange = useCallback(
-    (newValue: string) => {
+    (newValue: any) => {
       update({ ...data, [componentId]: newValue })
     },
     [data],

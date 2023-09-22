@@ -5,6 +5,7 @@ import { EmailTemplateFormComponent } from '../EmailTemplateFormComponent'
 import { TEST_ID as headerInputTestId } from '../../emailPreview/HeaderInput'
 import { TEST_ID as footerInputTestId } from '../../emailPreview/FooterInput'
 import { TEST_ID as introInputTestId } from '../../emailPreview/IntroInput'
+import { TEST_ID as bannerInputTestId } from '../../emailPreview/BannerInput'
 
 describe('EmailTemplateFormComponent', () => {
   let description: string
@@ -43,6 +44,17 @@ describe('EmailTemplateFormComponent', () => {
       />,
     )
     expect(queryByTestId(introInputTestId)).not.toBeNull()
+    expect(queryByTestId(headerInputTestId)).toBeNull()
+  })
+
+  it('can display an BannerInput', () => {
+    const { queryByTestId } = render(
+      <EmailTemplateFormComponent
+        copyId="copyId"
+        emailTemplateComponentItem={{ component: 'Banner', description }}
+      />,
+    )
+    expect(queryByTestId(bannerInputTestId)).not.toBeNull()
     expect(queryByTestId(headerInputTestId)).toBeNull()
   })
 })

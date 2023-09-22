@@ -1,0 +1,5 @@
+name: Second Template
+description: Second Template description
+components:
+  - component: Banner
+    description: banner
