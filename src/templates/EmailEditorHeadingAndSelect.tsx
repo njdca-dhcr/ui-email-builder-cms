@@ -29,7 +29,7 @@ export const EmailEditorHeadingAndSelect: FC<Props> = ({ emailTemplate }) => {
         onChange={(event) => {
           const value = event.currentTarget.value
           const selectedEmailTemplate = emailTemplates.find(({ name }) => name === value)
-          selectedEmailTemplate && navigate(`/email-templates/${selectedEmailTemplate.slug}`)
+          selectedEmailTemplate && navigate(selectedEmailTemplate.path)
         }}
       >
         <option />

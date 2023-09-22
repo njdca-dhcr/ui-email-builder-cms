@@ -1,14 +1,18 @@
-export const useEmailTemplatesData = (): { id: string; name: string; slug: string }[] => {
+export const useEmailTemplatesData = (): {
+  id: string
+  name: string
+  path: string
+}[] => {
   return [
     {
       id: '123',
       name: 'Email Template',
-      slug: 'email-template',
+      path: '/email-templates/email-template',
     },
     {
       id: '456',
       name: 'Another Email Template',
-      slug: 'another-email-template',
+      path: '/email-templates/another-email-template',
     },
   ]
 }

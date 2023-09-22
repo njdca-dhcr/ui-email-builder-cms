@@ -21,9 +21,9 @@ const LibaryPage: FC = () => {
           <Heading element="h1">Library</Heading>
           <Paragraph>Check out these templates.</Paragraph>
           <List>
-            {emailTemplates.map(({ id, name, description, slug }) => (
+            {emailTemplates.map(({ id, name, description, path }) => (
               <li key={id} className="library-item">
-                <Link to={`/email-templates/${slug}`} className="library-name">
+                <Link to={path} className="library-name">
                   {name}
                 </Link>
                 <p className="library-description">{description}</p>

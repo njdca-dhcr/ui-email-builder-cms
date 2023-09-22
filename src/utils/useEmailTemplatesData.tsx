@@ -24,8 +24,8 @@ const query = graphql`
 export const useEmailTemplatesData = (): {
   id: string
   name: string
-  slug: string
   description: string
+  path: string
 }[] => {
   const { emailTemplates } = useStaticQuery<Queries.EmailTemplatesDataQuery>(query)
 
@@ -34,7 +34,7 @@ export const useEmailTemplatesData = (): {
       id: node.id,
       name: node.name!,
       description: node.description!,
-      slug: (node.parent as any).name,
+      path: `/email-templates/${(node.parent as any).name}`,
     }
   })
 }

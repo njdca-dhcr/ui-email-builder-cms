@@ -1,6 +1,4 @@
-import React, { FC, ReactNode, useContext } from 'react'
-import { act, render, renderHook } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
+import { renderHook } from '@testing-library/react'
 import { useStaticQuery } from 'gatsby'
 import { useEmailTemplatesData } from '../useEmailTemplatesData'
 
@@ -41,13 +39,13 @@ describe('useEmailTemplatesData', () => {
         id: '123',
         name: 'Email Template',
         description: 'This is the first email template',
-        slug: 'email-template',
+        path: '/email-templates/email-template',
       },
       {
         id: '789',
         name: 'Another Email Template',
         description: 'This is the second email template',
-        slug: 'another-email-template',
+        path: '/email-templates/another-email-template',
       },
     ])
   })
