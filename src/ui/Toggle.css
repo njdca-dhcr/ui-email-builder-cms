@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.toggle:focus-within {
+  border-radius: 10px;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
 .toggle-ui {
   --pill-background-color: var(--white);
   --pill-border-color: var(--white);
