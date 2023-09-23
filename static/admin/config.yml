@@ -22,10 +22,26 @@ collections:
       - label: Components
         name: components
         widget: list
-        summary: '{{fields.component}} - {{fields.description}}'
+        summary: '{{fields.kind}} {{fields.description}}'
         fields:
           - label: 'Select component'
-            name: 'component'
+            name: 'kind'
             widget: 'select'
             options: ['Header', 'Footer', 'Intro', 'Banner']
+          - { label: 'Required', name: 'required', widget: 'boolean' }
           - { label: 'Description', name: 'description', widget: 'text' }
+          - label: Sub-Components
+            name: subComponents
+            widget: list
+            summary: '{{fields.kind}}'
+            fields:
+              - label: 'Select sub-component'
+                name: 'kind'
+                widget: 'select'
+                options:
+                  - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
+                  - { label: 'Footer - State Seal', value: 'StateSeal' }
+                  - { label: 'Header - Title', value: 'Title' }
+                  - { label: 'Header - Label', value: 'Label' }
+                  - { label: 'Header - Button', value: 'Button' }
+              - { label: 'Required', name: 'required', widget: 'boolean' }

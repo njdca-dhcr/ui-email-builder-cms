@@ -2,7 +2,7 @@ import React, { FC, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import capitalize from 'lodash.capitalize'
 import classNames from 'classnames'
-import type { EmailTemplate, EmailTemplateComponentItem } from 'src/appTypes'
+import type { EmailTemplate } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './emailForm/EmailTemplateFormComponent'
 import { EmailCopyData } from './emailForm/EmailCopyData'
 import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePreviewComponent'
@@ -10,7 +10,7 @@ import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
 
 interface Props {
-  emailTemplate: EmailTemplate
+  emailTemplate: EmailTemplate.Config
 }
 
 export const TEST_IDS = {
@@ -19,8 +19,8 @@ export const TEST_IDS = {
   description: 'description',
 }
 
-const buildCopyId = ({ component }: EmailTemplateComponentItem, i: number): string => {
-  return `${component}-${i}`
+const buildCopyId = ({ kind }: EmailTemplate.Component, i: number): string => {
+  return `${kind}-${i}`
 }
 
 type PreviewKind = 'desktop' | 'mobile'

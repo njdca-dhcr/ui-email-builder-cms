@@ -6,7 +6,7 @@ import yaml from 'js-yaml'
 
 const EMAIL_TEMPLATES_DIR = './content/email-templates'
 
-const loadEmailTemplateFromYaml = (filePath: string): EmailTemplate => {
+const loadEmailTemplateFromYaml = (filePath: string): EmailTemplate.Config => {
   const contents = fs.readFileSync(filePath, 'utf-8')
   return yaml.load(contents) as any
 }

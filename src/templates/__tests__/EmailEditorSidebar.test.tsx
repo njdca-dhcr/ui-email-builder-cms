@@ -2,13 +2,13 @@ import React from 'react'
 import { EmailEditorSidebar } from '../EmailEditorSidebar'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplate, urlFor } from 'src/testHelpers'
+import { buildEmailTemplateConfig, urlFor } from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
-  let emailTemplate: EmailTemplate
+  let emailTemplate: EmailTemplate.Config
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplate()
+    emailTemplate = buildEmailTemplateConfig()
   })
 
   it('displays a link back to the home page', () => {

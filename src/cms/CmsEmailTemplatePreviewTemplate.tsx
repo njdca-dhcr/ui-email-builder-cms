@@ -5,7 +5,7 @@ import { EmailTemplate } from 'src/appTypes'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
-const entryToEmailTemplate = (entry: Entry): EmailTemplate => {
+const entryToEmailTemplate = (entry: Entry): EmailTemplate.Config => {
   const data: Entry = entry.get('data')
   const componentEntries: Entry[] = data.get('components').toArray()
 
@@ -13,7 +13,7 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate => {
     name: data.get('name') ?? '',
     description: data.get('description') ?? '',
     components: componentEntries.map((componentEntry) => ({
-      component: componentEntry.get('component') ?? '',
+      kind: componentEntry.get('component') ?? '',
       description: componentEntry.get('description') ?? '',
     })),
   }

@@ -12,7 +12,7 @@ import {
 } from './EmailEditorToggles'
 
 interface Props {
-  emailTemplate: EmailTemplate
+  emailTemplate: EmailTemplate.Config
 }
 
 export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {

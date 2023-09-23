@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import type { EmailTemplateComponentItem, ID } from 'src/appTypes'
+import type { EmailTemplate, ID } from 'src/appTypes'
 import { HeaderInput } from '../emailPreview/HeaderInput'
 import { FooterInput } from '../emailPreview/FooterInput'
 import { IntroInput } from '../emailPreview/IntroInput'
@@ -7,13 +7,13 @@ import { BannerInput } from '../emailPreview/BannerInput'
 
 interface Props {
   copyId: ID
-  emailTemplateComponentItem: EmailTemplateComponentItem
+  emailTemplateComponentItem: EmailTemplate.Component
 }
 
 export const EmailTemplateFormComponent: FC<Props> = ({ copyId, emailTemplateComponentItem }) => {
-  const { component, description } = emailTemplateComponentItem
+  const { kind, description } = emailTemplateComponentItem
 
-  switch (component) {
+  switch (kind) {
     case 'Header':
       return <HeaderInput copyId={copyId} description={description} />
     case 'Footer':

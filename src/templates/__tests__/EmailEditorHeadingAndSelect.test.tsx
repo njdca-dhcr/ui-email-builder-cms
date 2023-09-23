@@ -1,17 +1,16 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 import { navigate } from 'gatsby'
 import { EmailEditorHeadingAndSelect } from '../EmailEditorHeadingAndSelect'
-import { buildEmailTemplate } from 'src/testHelpers'
+import { buildEmailTemplateConfig } from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
-  let emailTemplate: EmailTemplate
+  let emailTemplate: EmailTemplate.Config
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplate({ name: 'Email Template' })
+    emailTemplate = buildEmailTemplateConfig({ name: 'Email Template' })
   })
 
   it('displays the name of the email template', () => {

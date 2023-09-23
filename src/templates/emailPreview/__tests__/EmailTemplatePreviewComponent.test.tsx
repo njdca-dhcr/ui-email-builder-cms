@@ -18,7 +18,7 @@ describe('EmailTemplatePreviewComponent', () => {
     const { queryByTestId } = render(
       <EmailTemplatePreviewComponent
         copyId="copyId"
-        emailTemplateComponentItem={{ component: 'Header', description }}
+        emailTemplateComponentItem={{ kind: 'Header', description }}
       />,
     )
     expect(queryByTestId(headerTestId)).not.toBeNull()
@@ -29,7 +29,7 @@ describe('EmailTemplatePreviewComponent', () => {
     const { queryByTestId } = render(
       <EmailTemplatePreviewComponent
         copyId="copyId"
-        emailTemplateComponentItem={{ component: 'Footer', description }}
+        emailTemplateComponentItem={{ kind: 'Footer', description }}
       />,
     )
     expect(queryByTestId(footerTestId)).not.toBeNull()
@@ -40,7 +40,7 @@ describe('EmailTemplatePreviewComponent', () => {
     const { queryByTestId } = render(
       <EmailTemplatePreviewComponent
         copyId="copyId"
-        emailTemplateComponentItem={{ component: 'Intro', description }}
+        emailTemplateComponentItem={{ kind: 'Intro', description }}
       />,
     )
     expect(queryByTestId(introTestId)).not.toBeNull()
@@ -51,7 +51,7 @@ describe('EmailTemplatePreviewComponent', () => {
     const { queryByTestId } = render(
       <EmailTemplatePreviewComponent
         copyId="copyId"
-        emailTemplateComponentItem={{ component: 'Banner', description }}
+        emailTemplateComponentItem={{ kind: 'Banner', description }}
       />,
     )
     expect(queryByTestId(bannerTestId)).not.toBeNull()

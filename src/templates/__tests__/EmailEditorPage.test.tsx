@@ -1,17 +1,16 @@
 import React from 'react'
 import { RenderResult, render } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
 import type { EmailTemplate } from 'src/appTypes'
 import EmailEditorPage, { Head } from '../EmailEditorPage'
 import { TEST_IDS } from '../EmailEditorContents'
-import { buildEmailTemplate } from 'src/testHelpers'
+import { buildEmailTemplateConfig } from 'src/testHelpers'
 
 describe('EmailEditorPage', () => {
-  let emailTemplate: EmailTemplate
+  let emailTemplate: EmailTemplate.Config
   let rendered: RenderResult
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplate()
+    emailTemplate = buildEmailTemplateConfig()
     rendered = render(<EmailEditorPage pageContext={{ emailTemplate }} />)
   })
 

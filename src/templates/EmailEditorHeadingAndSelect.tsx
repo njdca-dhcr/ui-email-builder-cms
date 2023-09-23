@@ -8,7 +8,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { ChevronDownIcon } from 'src/ui/ChevronDownIcon'
 
 interface Props {
-  emailTemplate: EmailTemplate
+  emailTemplate: EmailTemplate.Config
 }
 
 export const EmailEditorHeadingAndSelect: FC<Props> = ({ emailTemplate }) => {

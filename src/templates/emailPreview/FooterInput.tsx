@@ -4,7 +4,7 @@ import { useEmailCopyData } from '../emailForm/EmailCopyData'
 
 interface Props {
   copyId: ID
-  description: string
+  description?: string
 }
 
 export const TEST_ID = 'footer-input'

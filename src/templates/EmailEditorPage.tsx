@@ -5,10 +5,9 @@ import type { EmailTemplate } from 'src/appTypes'
 import { EmailEditorContents } from './EmailEditorContents'
 import { EmailEditorSidebar } from './EmailEditorSidebar'
 import './EmailEditorPage.css'
-import { SkipNavContent } from '@reach/skip-nav'
 
 interface PageContext {
-  emailTemplate: EmailTemplate
+  emailTemplate: EmailTemplate.Config
 }
 
 interface Props {
