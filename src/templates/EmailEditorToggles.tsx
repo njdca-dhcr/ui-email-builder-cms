@@ -3,49 +3,49 @@ import { useId } from '@reach/auto-id'
 import { List } from 'src/ui/List'
 import { Toggle } from 'src/ui/Toggle'
 import './EmailEditorToggles.css'
+import {
+  ShouldShowEmailPart,
+  useShouldShowEmailComponent,
+  useShouldShowEmailSubComponent,
+} from './ShouldShowEmailPart'
 
 interface EmailEditorTogglesProps {
   children: ReactNode
 }
 
 export const EmailEditorToggles: FC<EmailEditorTogglesProps> = ({ children }) => {
-  return <List className="email-editor-toggles">{children}</List>
+  return (
+    <ShouldShowEmailPart>
+      <List className="email-editor-toggles">{children}</List>
+    </ShouldShowEmailPart>
+  )
 }
 
-interface BaseEmailEditorToggleSectionProps {
-  description?: string
-  label: string
-}
-
-interface EmailEditorToggleSectionCanToggleProps extends BaseEmailEditorToggleSectionProps {
-  children?: ReactNode
-  onChange: (value: boolean) => void
-  topLevelCanToggle: true
-  value: boolean
-}
-
-interface EmailEditorToggleSectionCannotToggleProps extends BaseEmailEditorToggleSectionProps {
+interface EmailEditorToggleSectionProps {
   children: ReactNode
-  topLevelCanToggle: false
+  description?: string
+  componentId: string
+  label: string
+  required?: boolean
 }
 
-type EmailEditorToggleSectionProps =
-  | EmailEditorToggleSectionCanToggleProps
-  | EmailEditorToggleSectionCannotToggleProps
-
-export const EmailEditorToggleSection: FC<EmailEditorToggleSectionProps> = (props) => {
-  const id = useId('')
-
-  const { children, description, label, topLevelCanToggle } = props
-  const Label = topLevelCanToggle ? 'label' : 'span'
+export const EmailEditorToggleSection: FC<EmailEditorToggleSectionProps> = ({
+  children,
+  componentId,
+  description,
+  label,
+  required,
+}) => {
+  const shouldShow = useShouldShowEmailComponent(componentId)
+  const id = useId(componentId)
 
   return (
     <li className="email-editor-toggle-section">
       <div className="label-and-toggle">
-        <Label htmlFor={id} className="section-label">
+        <label htmlFor={id} className="section-label">
           {label}
-        </Label>
-        {topLevelCanToggle && <Toggle id={id} onChange={props.onChange} value={props.value} />}
+        </label>
+        {!required && <Toggle id={id} onChange={shouldShow.toggle} value={shouldShow.on} />}
       </div>
       {description && <p className="description">{description}</p>}
       {children && <List className="email-editor-sub-toggles">{children}</List>}
@@ -54,24 +54,33 @@ export const EmailEditorToggleSection: FC<EmailEditorToggleSectionProps> = (prop
 }
 
 interface EmailEditorToggleProps {
+  componentId: string
   disabled?: boolean
   label: string
-  onChange: (value: boolean) => void
-  value: boolean
+  subComponentId: string
 }
 
 export const EmailEditorToggle: FC<EmailEditorToggleProps> = ({
+  componentId,
   disabled,
+  subComponentId,
   label,
-  onChange,
-  value,
 }) => {
-  const id = useId('')
+  const shouldShowComponent = useShouldShowEmailComponent(componentId)
+  const shouldShow = useShouldShowEmailSubComponent(componentId, subComponentId)
+  const id = useId([componentId, subComponentId].join('-'))
 
   return (
     <li className="email-editor-toggle">
-      <label className="toggle-label">{label}</label>
-      <Toggle id={id} onChange={onChange} value={value} disabled={disabled} />
+      <label htmlFor={id} className="toggle-label">
+        {label}
+      </label>
+      <Toggle
+        id={id}
+        onChange={shouldShow.toggle}
+        value={shouldShow.on}
+        disabled={disabled || !shouldShowComponent.on}
+      />
     </li>
   )
 }
