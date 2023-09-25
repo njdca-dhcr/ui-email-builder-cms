@@ -2,7 +2,12 @@ import React from 'react'
 import { EmailEditorSidebar } from '../EmailEditorSidebar'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateConfig, urlFor } from 'src/testHelpers'
+import {
+  buildEmailTemplateComponent,
+  buildEmailTemplateConfig,
+  buildEmailTemplateSubComponent,
+  urlFor,
+} from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate.Config
@@ -23,5 +28,29 @@ describe('EmailEditorSidebar', () => {
     const h1 = baseElement.querySelector('h1')
     expect(h1).not.toBeNull()
     expect(h1?.tagName).toEqual('H1')
+  })
+
+  it('displays email edit component and subcomponent toggles', () => {
+    emailTemplate = buildEmailTemplateConfig({
+      components: [
+        buildEmailTemplateComponent('Banner'),
+        buildEmailTemplateComponent('Header', {
+          subComponents: [buildEmailTemplateSubComponent('Header', { kind: 'Title' })],
+        }),
+        buildEmailTemplateComponent('Footer', {
+          subComponents: [
+            buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' }),
+            buildEmailTemplateSubComponent('Footer', { kind: 'StateSeal' }),
+          ],
+        }),
+      ],
+    })
+    const { queryByLabelText } = render(<EmailEditorSidebar emailTemplate={emailTemplate} />)
+    expect(queryByLabelText('Banner')).not.toBeNull()
+    expect(queryByLabelText('Header')).not.toBeNull()
+    expect(queryByLabelText('Title')).not.toBeNull()
+    expect(queryByLabelText('Footer')).not.toBeNull()
+    expect(queryByLabelText('Additional Content')).not.toBeNull()
+    expect(queryByLabelText('State Seal')).not.toBeNull()
   })
 })

@@ -39,7 +39,7 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
                   key={n}
                   componentId={`${i}`}
                   disabled={subComponent.required}
-                  label={subComponent.kind}
+                  label={labelFor(subComponent.kind)}
                   subComponentId={`${n}`}
                 />
               ))}
@@ -48,4 +48,17 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
       </EmailEditorToggles>
     </Sidebar>
   )
+}
+
+const labelFor = <T extends EmailTemplate.ComponentKind>(
+  subComponentKind: EmailTemplate.SubComponentKind<T>,
+): string => {
+  switch (subComponentKind) {
+    case 'AdditionalContent':
+      return 'Additional Content'
+    case 'StateSeal':
+      return 'State Seal'
+    default:
+      return subComponentKind
+  }
 }
