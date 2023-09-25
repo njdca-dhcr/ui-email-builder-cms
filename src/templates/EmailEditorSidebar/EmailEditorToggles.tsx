@@ -7,7 +7,7 @@ import {
   ShouldShowEmailPart,
   useShouldShowEmailComponent,
   useShouldShowEmailSubComponent,
-} from './ShouldShowEmailPart'
+} from '../ShouldShowEmailPart'
 
 interface EmailEditorTogglesProps {
   children: ReactNode

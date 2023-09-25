@@ -7,7 +7,7 @@ import {
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
-import { ShouldShowEmailPart } from '../ShouldShowEmailPart'
+import { ShouldShowEmailPart } from '../../ShouldShowEmailPart'
 
 describe('EmailEditorToggles', () => {
   it('displays its children', () => {

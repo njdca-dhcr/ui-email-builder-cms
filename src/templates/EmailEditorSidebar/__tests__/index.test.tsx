@@ -1,5 +1,4 @@
 import React from 'react'
-import { EmailEditorSidebar } from '../EmailEditorSidebar'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import {
@@ -8,6 +7,7 @@ import {
   buildEmailTemplateSubComponent,
   urlFor,
 } from 'src/testHelpers'
+import { EmailEditorSidebar } from '..'
 
 describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate.Config
