@@ -1,5 +1,6 @@
 import React, {
   FC,
+  ReactEventHandler,
   ReactNode,
   createContext,
   useCallback,
@@ -46,15 +47,19 @@ export const ClearCurrentlyActiveEmailPart: FC = () => {
 
 export const useIsCurrentlyActiveEmailComponent = (
   id: string,
-): { isActive: boolean; focus: () => void } => {
+): { isActive: boolean; focus: ReactEventHandler<HTMLElement> } => {
   const [currentlyActive, setCurrentlyActive] = useContext(CurrentlyActiveEmailPartContext)
   const key = buildComponentKey(id)
 
   const isActive = currentlyActive === key
-
-  const focus = useCallback(() => {
-    setCurrentlyActive(key)
-  }, [key, setCurrentlyActive])
+  const focus: ReactEventHandler<HTMLElement> = useCallback(
+    (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+      setCurrentlyActive(key)
+    },
+    [key, setCurrentlyActive],
+  )
 
   return { isActive, focus }
 }
@@ -62,15 +67,20 @@ export const useIsCurrentlyActiveEmailComponent = (
 export const useIsCurrentlyActiveEmailSubComponent = (
   componentId: string,
   id: string,
-): { isActive: boolean; focus: () => void } => {
+): { isActive: boolean; focus: ReactEventHandler<HTMLElement> } => {
   const [currentlyActive, setCurrentlyActive] = useContext(CurrentlyActiveEmailPartContext)
   const key = buildSubComponentKey(componentId, id)
 
   const isActive = currentlyActive === key
 
-  const focus = useCallback(() => {
-    setCurrentlyActive(key)
-  }, [key, setCurrentlyActive])
+  const focus: ReactEventHandler<HTMLElement> = useCallback(
+    (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+      setCurrentlyActive(key)
+    },
+    [key, setCurrentlyActive],
+  )
 
   return { isActive, focus }
 }

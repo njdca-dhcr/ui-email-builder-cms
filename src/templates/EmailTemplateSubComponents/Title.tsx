@@ -14,13 +14,7 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
 
   return (
     <tr>
-      <td
-        onClick={(event) => {
-          event.preventDefault()
-          event.stopPropagation()
-          focus()
-        }}
-      >
+      <td onClick={focus}>
         {isActive ? (
           <label>
             <VisuallyHidden>Title</VisuallyHidden>
