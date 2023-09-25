@@ -2,3 +2,4 @@ node_modules/
 .cache/
 public
 src/gatsby-types.d.ts
+content/email-templates/local-email-template.yaml
