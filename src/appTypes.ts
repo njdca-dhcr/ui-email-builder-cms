@@ -29,6 +29,6 @@ export namespace EmailTemplate {
   export interface Config {
     name: string
     description?: string
-    components: Component[]
+    components?: Component[]
   }
 }

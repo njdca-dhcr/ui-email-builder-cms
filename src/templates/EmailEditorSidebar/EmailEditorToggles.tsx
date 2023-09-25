@@ -3,22 +3,14 @@ import { useId } from '@reach/auto-id'
 import { List } from 'src/ui/List'
 import { Toggle } from 'src/ui/Toggle'
 import './EmailEditorToggles.css'
-import {
-  ShouldShowEmailPart,
-  useShouldShowEmailComponent,
-  useShouldShowEmailSubComponent,
-} from '../ShouldShowEmailPart'
+import { useShouldShowEmailComponent, useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
 
 interface EmailEditorTogglesProps {
   children: ReactNode
 }
 
 export const EmailEditorToggles: FC<EmailEditorTogglesProps> = ({ children }) => {
-  return (
-    <ShouldShowEmailPart>
-      <List className="email-editor-toggles">{children}</List>
-    </ShouldShowEmailPart>
-  )
+  return <List className="email-editor-toggles">{children}</List>
 }
 
 interface EmailEditorToggleSectionProps {

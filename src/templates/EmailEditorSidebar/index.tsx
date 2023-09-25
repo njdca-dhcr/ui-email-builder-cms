@@ -25,26 +25,28 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
       <SkipNavContent />
       <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />
       <EmailEditorToggles>
-        {emailTemplate.components.map(({ description, kind, required, subComponents }, i) => (
-          <EmailEditorToggleSection
-            key={i}
-            componentId={`${i}`}
-            description={description}
-            label={kind}
-            required={required}
-          >
-            {subComponents &&
-              subComponents.map((subComponent, n) => (
-                <EmailEditorToggle
-                  key={n}
-                  componentId={`${i}`}
-                  disabled={subComponent.required}
-                  label={labelFor(subComponent.kind)}
-                  subComponentId={`${n}`}
-                />
-              ))}
-          </EmailEditorToggleSection>
-        ))}
+        {(emailTemplate.components ?? []).map(
+          ({ description, kind, required, subComponents }, i) => (
+            <EmailEditorToggleSection
+              key={i}
+              componentId={`${i}`}
+              description={description}
+              label={kind}
+              required={required}
+            >
+              {subComponents &&
+                subComponents.map((subComponent, n) => (
+                  <EmailEditorToggle
+                    key={n}
+                    componentId={`${i}`}
+                    disabled={subComponent.required}
+                    label={labelFor(subComponent.kind)}
+                    subComponentId={`${n}`}
+                  />
+                ))}
+            </EmailEditorToggleSection>
+          ),
+        )}
       </EmailEditorToggles>
     </Sidebar>
   )

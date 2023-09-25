@@ -40,7 +40,7 @@ export const EmailEditorContents: FC<Props> = ({ emailTemplate }) => {
 
       <div className="container">
         <div className="pane">
-          {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+          {(emailTemplate.components ?? []).map((emailTemplateComponentItem, i) => (
             <EmailTemplateFormComponent
               key={i}
               copyId={buildCopyId(emailTemplateComponentItem, i)}
@@ -60,7 +60,7 @@ export const EmailEditorContents: FC<Props> = ({ emailTemplate }) => {
           </div>
           <Root.div className={classNames('preview', { mobile: previewKind === 'mobile' })}>
             <div ref={previewRef as any} style={{ backgroundColor: 'white' }}>
-              {emailTemplate.components.map((emailTemplateComponentItem, i) => (
+              {(emailTemplate.components ?? []).map((emailTemplateComponentItem, i) => (
                 <EmailTemplatePreviewComponent
                   key={i}
                   copyId={buildCopyId(emailTemplateComponentItem, i)}

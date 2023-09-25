@@ -1,0 +1,12 @@
+.desktop-mobile-buttons {
+  margin-top: 3rem;
+}
+
+.email-preview {
+  box-shadow: 0 0 1rem var(--gray);
+  margin: 1.5rem auto 0;
+  width: 38rem;
+}
+
+.email-preview-mobile {
+}
