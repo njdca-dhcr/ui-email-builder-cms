@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { VisuallyHidden } from '@reach/visually-hidden'
 import { useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
+import { Colors, Font } from './styles'
 
 export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { isActive, focus } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -14,7 +15,15 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
 
   return (
     <tr>
-      <td onClick={focus}>
+      <td
+        onClick={focus}
+        style={{
+          color: Colors.black,
+          fontFamily: Font.family.default,
+          fontSize: Font.size.large,
+          fontWeight: Font.weight.bold,
+        }}
+      >
         {isActive ? (
           <label>
             <VisuallyHidden>Title</VisuallyHidden>
