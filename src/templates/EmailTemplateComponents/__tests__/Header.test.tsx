@@ -2,21 +2,12 @@ import React, { ReactNode } from 'react'
 import { Header } from '../Header'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateComponent } from 'src/testHelpers'
+import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
-import userEvent from '@testing-library/user-event'
 
 describe('Header', () => {
   let id: string
   let emailComponent: EmailTemplate.Component<'Header'>
-
-  const wrapper = ({ children }: { children: ReactNode }) => {
-    return (
-      <table>
-        <tbody>{children}</tbody>
-      </table>
-    )
-  }
 
   beforeEach(() => {
     id = faker.lorem.word()
@@ -31,7 +22,7 @@ describe('Header', () => {
           <td>{text}</td>
         </tr>
       </Header>,
-      { wrapper },
+      { wrapper: emailPartWrapper },
     )
 
     expect(baseElement).toContainHTML(`<tr><td>${text}</td></tr>`)

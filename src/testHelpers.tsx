@@ -1,6 +1,10 @@
+import React, { FC, ReactNode } from 'react'
 import { faker } from '@faker-js/faker'
 import sample from 'lodash.sample'
 import { EmailTemplate, EmailTemplateComponentsMapping } from './appTypes'
+import { CurrentlyActiveEmailPart } from './templates/CurrentlyActiveEmailPart'
+import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
+import { EmailPartsContent } from './templates/EmailPartsContent'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: EmailTemplate.ComponentKind,
@@ -43,3 +47,17 @@ export const buildEmailTemplateConfig = (
 }
 
 export const urlFor = (path: string): string => `http://localhost${path}`
+
+export const emailPartWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  return (
+    <ShouldShowEmailPart>
+      <CurrentlyActiveEmailPart>
+        <EmailPartsContent>
+          <table>
+            <tbody>{children}</tbody>
+          </table>
+        </EmailPartsContent>
+      </CurrentlyActiveEmailPart>
+    </ShouldShowEmailPart>
+  )
+}

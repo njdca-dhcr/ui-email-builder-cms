@@ -7,6 +7,8 @@ import { EmailEditorContent } from './EmailEditorContent'
 import './EmailEditorPage.css'
 import { ShouldShowEmailPart } from './ShouldShowEmailPart'
 import { EmailEditorContents } from './EmailEditorContents'
+import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './CurrentlyActiveEmailPart'
+import { EmailPartsContent } from './EmailPartsContent'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Config
@@ -22,11 +24,16 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   return (
     <Layout element="main">
       <ShouldShowEmailPart>
-        <EmailEditorSidebar emailTemplate={emailTemplate} />
-        <PageContent element="div" className="email-editor-page-content">
-          {/* <EmailEditorContent emailTemplate={emailTemplate} /> */}
-          <EmailEditorContents emailTemplate={emailTemplate} />
-        </PageContent>
+        <CurrentlyActiveEmailPart>
+          <ClearCurrentlyActiveEmailPart />
+          <EmailPartsContent>
+            <EmailEditorSidebar emailTemplate={emailTemplate} />
+            <PageContent element="div" className="email-editor-page-content">
+              {/* <EmailEditorContent emailTemplate={emailTemplate} /> */}
+              <EmailEditorContents emailTemplate={emailTemplate} />
+            </PageContent>
+          </EmailPartsContent>
+        </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>
     </Layout>
   )

@@ -1,4 +1,5 @@
 import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
+import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 interface On {
   on: boolean
@@ -9,7 +10,7 @@ interface ComponentOn extends On {
 }
 
 interface ShouldShowEmailPartContextData {
-  [key: string]: ComponentOn | undefined
+  [key: string]: boolean | undefined
 }
 
 type ShouldShowEmailPartContextType = [
@@ -19,8 +20,11 @@ type ShouldShowEmailPartContextType = [
 
 const ShouldShowEmailPartContext = createContext<ShouldShowEmailPartContextType>([{}, () => {}])
 
-export const ShouldShowEmailPart: FC<{ children: ReactNode }> = ({ children }) => {
-  const value = useState<ShouldShowEmailPartContextData>({})
+export const ShouldShowEmailPart: FC<{
+  children: ReactNode
+  initialData?: ShouldShowEmailPartContextData
+}> = ({ children, initialData }) => {
+  const value = useState<ShouldShowEmailPartContextData>(initialData ?? {})
 
   return (
     <ShouldShowEmailPartContext.Provider value={value}>
@@ -31,13 +35,14 @@ export const ShouldShowEmailPart: FC<{ children: ReactNode }> = ({ children }) =
 
 export const useShouldShowEmailComponent = (id: string): { on: boolean; toggle: () => void } => {
   const [data, update] = useContext(ShouldShowEmailPartContext)
-  const componentOn: ComponentOn = data[id] ?? { on: true, subComponents: {} }
+  const key = buildComponentKey(id)
+  const isOn = data[key] ?? true
 
   const toggle = useCallback(() => {
-    update({ ...data, [id]: { ...componentOn, on: !componentOn.on } })
-  }, [data, update, componentOn])
+    update({ ...data, [key]: !isOn })
+  }, [data, update, key])
 
-  return { on: componentOn.on, toggle }
+  return { on: isOn, toggle }
 }
 
 export const useShouldShowEmailSubComponent = (
@@ -45,18 +50,12 @@ export const useShouldShowEmailSubComponent = (
   id: string,
 ): { on: boolean; toggle: () => void } => {
   const [data, update] = useContext(ShouldShowEmailPartContext)
-  const componentOn: ComponentOn = data[componentId] ?? { on: true, subComponents: {} }
-  const subComponentOn: On = componentOn.subComponents[id] ?? { on: true }
+  const key = buildSubComponentKey(componentId, id)
+  const isOn = data[key] ?? true
 
   const toggle = useCallback(() => {
-    update({
-      ...data,
-      [componentId]: {
-        ...componentOn,
-        subComponents: { ...componentOn.subComponents, [id]: { on: !subComponentOn.on } },
-      },
-    })
-  }, [data, componentOn, update, subComponentOn, componentId, id])
+    update({ ...data, [key]: !isOn })
+  }, [data, update, key])
 
-  return { on: subComponentOn.on, toggle }
+  return { on: isOn, toggle }
 }
