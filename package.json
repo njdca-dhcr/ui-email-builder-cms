@@ -34,6 +34,7 @@
     "copy-to-clipboard": "^3.3.3",
     "decap-cms-app": "^3.0.7",
     "gatsby": "^5.12.4",
+    "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-netlify-cms": "^7.12.0",
     "gatsby-plugin-postcss": "^6.12.0",
     "gatsby-plugin-root-import": "^2.0.9",
@@ -45,6 +46,7 @@
     "postcss-preset-env": "^9.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-shadow": "^20.4.0"
   },
   "devDependencies": {

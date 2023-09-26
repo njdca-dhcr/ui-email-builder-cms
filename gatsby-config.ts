@@ -34,6 +34,32 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    {
+      resolve: `gatsby-omni-font-loader`,
+      options: {
+        enableListener: true,
+        preconnect: [`https://fonts.googleapis.com`, `https://fonts.gstatic.com`],
+        web: [
+          {
+            name: 'Public Sans',
+            file: 'https://fonts.googleapis.com/css?family=Public%20Sans:700&display=swap&subset=cyrillic',
+          },
+          {
+            name: 'Public Sans',
+            file: 'https://fonts.googleapis.com/css?family=Public%20Sans:400&display=swap&subset=cyrillic',
+          },
+          {
+            name: 'Public Sans',
+            file: 'https://fonts.googleapis.com/css?family=Public%20Sans:400i&display=swap&subset=cyrillic',
+          },
+          { name: 'EB Garamond', file: 'https://fonts.googleapis.com/css?family=EB+Garamond:400' },
+          {
+            name: 'Roboto Mono',
+            file: 'https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap',
+          },
+        ],
+      },
+    },
   ],
 }
 
