@@ -29,8 +29,8 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
           <EmailPartsContent>
             <EmailEditorSidebar emailTemplate={emailTemplate} />
             <PageContent element="div" className="email-editor-page-content">
-              {/* <EmailEditorContent emailTemplate={emailTemplate} /> */}
-              <EmailEditorContents emailTemplate={emailTemplate} />
+              <EmailEditorContent emailTemplate={emailTemplate} />
+              {/* <EmailEditorContents emailTemplate={emailTemplate} /> */}
             </PageContent>
           </EmailPartsContent>
         </CurrentlyActiveEmailPart>
