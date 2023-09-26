@@ -2,7 +2,7 @@ export type ID = string | number
 
 export const EmailTemplateComponentsMapping = {
   Banner: [],
-  Footer: ['AdditionalContent', 'StateSeal'],
+  Footer: ['AdditionalContent'],
   Header: ['Title', 'Label'],
   Intro: [],
 } as const

@@ -8,7 +8,6 @@ components:
       - kind: Title
         required: true
       - kind: Label
-      - kind: Button
   - kind: Footer
     description: 'This is usually the "fine print" of the email: Confidentiality
       notices, do not reply information, etc.'

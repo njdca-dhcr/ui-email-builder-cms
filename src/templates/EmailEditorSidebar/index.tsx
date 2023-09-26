@@ -58,8 +58,6 @@ const labelFor = <T extends EmailTemplate.ComponentKind>(
   switch (subComponentKind) {
     case 'AdditionalContent':
       return 'Additional Content'
-    case 'StateSeal':
-      return 'State Seal'
     default:
       return subComponentKind
   }

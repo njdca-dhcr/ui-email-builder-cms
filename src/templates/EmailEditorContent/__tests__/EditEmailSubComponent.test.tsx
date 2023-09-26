@@ -10,7 +10,7 @@ import { faker } from '@faker-js/faker'
 describe('EditEmailSubComponent', () => {
   let componentId: string
   let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Header'>
+  let emailSubComponent: EmailTemplate.SubComponent<EmailTemplate.ComponentKind>
 
   beforeEach(() => {
     componentId = faker.lorem.words(2)
@@ -60,6 +60,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByText('Label')).not.toBeNull()
   })
-  it.todo('can render AdditionalContent')
-  it.todo('can render StateSeal')
+
+  it('can render AdditionalContent', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })
+    const { queryByText } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByText('Additional Content')).not.toBeNull()
+  })
 })

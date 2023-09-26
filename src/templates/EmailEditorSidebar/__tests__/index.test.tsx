@@ -38,10 +38,7 @@ describe('EmailEditorSidebar', () => {
           subComponents: [buildEmailTemplateSubComponent('Header', { kind: 'Title' })],
         }),
         buildEmailTemplateComponent('Footer', {
-          subComponents: [
-            buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' }),
-            buildEmailTemplateSubComponent('Footer', { kind: 'StateSeal' }),
-          ],
+          subComponents: [buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })],
         }),
       ],
     })
@@ -51,6 +48,5 @@ describe('EmailEditorSidebar', () => {
     expect(queryByLabelText('Title')).not.toBeNull()
     expect(queryByLabelText('Footer')).not.toBeNull()
     expect(queryByLabelText('Additional Content')).not.toBeNull()
-    expect(queryByLabelText('State Seal')).not.toBeNull()
   })
 })

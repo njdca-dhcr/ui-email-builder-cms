@@ -1,11 +1,66 @@
 import React from 'react'
 import { EditEmailComponent } from '../EditEmailComponent'
+import { EmailTemplate } from 'src/appTypes'
+import { faker } from '@faker-js/faker'
+import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildComponentKey } from 'src/utils/emailPartKeys'
+import { render } from '@testing-library/react'
+import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 
 describe('EditEmailComponent', () => {
-  it.todo('displays nothing when the component should not be shown')
+  let id: string
+  let emailComponent: EmailTemplate.Component
+
+  beforeEach(() => {
+    id = faker.lorem.word()
+    emailComponent = buildEmailTemplateComponent('Header')
+  })
+
+  it('displays nothing when the component should not be shown', () => {
+    const key = buildComponentKey(id)
+    const { baseElement } = render(
+      <ShouldShowEmailPart initialData={{ [key]: false }}>
+        <EditEmailComponent id={id} emailComponent={emailComponent}>
+          <tr>
+            <td>{faker.lorem.paragraph()}</td>
+          </tr>
+        </EditEmailComponent>
+      </ShouldShowEmailPart>,
+      { wrapper: emailPartWrapper },
+    )
+    const tbody = baseElement.querySelector('tbody')
+    expect(tbody).not.toBeNull()
+    expect(tbody).toBeEmptyDOMElement()
+  })
+
+  it('can render a Header', () => {
+    emailComponent = buildEmailTemplateComponent('Header')
+    const text = faker.lorem.paragraph()
+    const { queryByText } = render(
+      <EditEmailComponent id={id} emailComponent={emailComponent}>
+        <tr>
+          <td>{text}</td>
+        </tr>
+      </EditEmailComponent>,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByText(text)).not.toBeNull()
+  })
+
+  it('can render a Footer', () => {
+    emailComponent = buildEmailTemplateComponent('Footer')
+    const text = faker.lorem.paragraph()
+    const { queryByText } = render(
+      <EditEmailComponent id={id} emailComponent={emailComponent}>
+        <tr>
+          <td>{text}</td>
+        </tr>
+      </EditEmailComponent>,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByText(text)).not.toBeNull()
+  })
 
   it.todo('can render a Banner')
-  it.todo('can render a Footer')
   it.todo('can render an Intro')
-  it.todo('can render a Header')
 })

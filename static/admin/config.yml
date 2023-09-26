@@ -40,7 +40,6 @@ collections:
                 widget: 'select'
                 options:
                   - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
-                  - { label: 'Footer - State Seal', value: 'StateSeal' }
                   - { label: 'Header - Title', value: 'Title' }
                   - { label: 'Header - Label', value: 'Label' }
                   - { label: 'Header - Button', value: 'Button' }
