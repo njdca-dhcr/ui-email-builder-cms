@@ -4,14 +4,27 @@ import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateConfig } from 'src/testHelpers'
+import {
+  buildEmailTemplateComponent,
+  buildEmailTemplateConfig,
+  buildEmailTemplateSubComponent,
+} from 'src/testHelpers'
 import { EmailEditorContent } from '..'
 
 describe('EmailEditorContent', () => {
   let emailTemplate: EmailTemplate.Config
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplateConfig()
+    emailTemplate = buildEmailTemplateConfig({
+      components: [
+        buildEmailTemplateComponent('Header', {
+          subComponents: [
+            buildEmailTemplateSubComponent('Header', { kind: 'Title' }),
+            buildEmailTemplateSubComponent('Header', { kind: 'Label' }),
+          ],
+        }),
+      ],
+    })
   })
 
   it('can display the email in desktop or mobile', async () => {
@@ -33,22 +46,22 @@ describe('EmailEditorContent', () => {
     expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
   })
 
-  it.todo('can display the email')
-  it.todo('can edit components of the email')
-  it.todo('can edit sub-components of the email')
+  it('can display the email components and subcomponents', () => {
+    const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    expect(queryByText('Title')).not.toBeNull()
+    expect(queryByText('Label')).not.toBeNull()
+  })
 
-  xit('allows users to copy the current preview into their clipboard', async () => {
+  it('allows users to copy the current preview into their clipboard', async () => {
     const user = userEvent.setup()
-    const rendered = render(<EmailEditorContent emailTemplate={emailTemplate} />)
 
-    const { getByLabelText, getByText } = rendered
+    const { getByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
 
-    const input: HTMLInputElement = getByLabelText('Header') as any
     const value = faker.lorem.words(4)
-    await user.type(input, value)
+    await user.type(getByText('Title'), value)
 
     expect(copy).not.toHaveBeenCalled()
-    await user.click(getByText('Copy to clipboard'))
+    await user.click(getByText('Copy HTML'))
     expect(copy).toHaveBeenCalled()
 
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]

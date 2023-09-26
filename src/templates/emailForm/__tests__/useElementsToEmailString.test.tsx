@@ -6,11 +6,9 @@ import { faker } from '@faker-js/faker'
 describe('useElementsToEmailString', () => {
   describe('when the ref lacks a current', () => {
     it('provides a function that returns an empty string', () => {
-      const title = faker.lorem.words(2)
-
       const { result } = renderHook(() => {
         const ref = useRef<HTMLElement>()
-        return useElementsToEmailString(ref, title)
+        return useElementsToEmailString(ref)
       })
 
       expect(result.current()).toEqual('')
@@ -18,25 +16,19 @@ describe('useElementsToEmailString', () => {
   })
 
   describe('when the ref has a current', () => {
-    let title: string
     let text: string
     let div: HTMLElement
     let resultCallback: ReturnType<typeof useElementsToEmailString>
 
     beforeEach(() => {
-      title = faker.lorem.words(2)
       text = faker.lorem.paragraph()
       div = document.createElement('div')
       div.innerHTML = `<span class="foo">${text}</span>`
       const { result } = renderHook(() => {
         const ref = useRef(div)
-        return useElementsToEmailString(ref, title)
+        return useElementsToEmailString(ref)
       })
       resultCallback = result.current
-    })
-
-    it('creates email markup with a title', () => {
-      expect(resultCallback()).toContain(`<title>${title}</title>`)
     })
 
     it('creates email markup with the EmailLayout', () => {

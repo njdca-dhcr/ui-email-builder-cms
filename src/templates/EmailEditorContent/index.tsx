@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
 import { EmailTemplate } from 'src/appTypes'
@@ -6,6 +6,8 @@ import { EditEmailComponent } from './EditEmailComponent'
 import { EditEmailSubComponent } from './EditEmailSubComponent'
 import './EmailEditorContent.css'
 import { VisuallyHidden } from '@reach/visually-hidden'
+import { useElementsToEmailString } from '../emailForm/useElementsToEmailString'
+import { CopyToClipboardButton } from '../../ui/CopyToClipboardButton'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -15,10 +17,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
   const [previewType, setPreviewType] = useState<'desktop' | 'mobile'>('desktop')
   const isPreviewDesktop = previewType === 'desktop'
   const isPreviewMobile = !isPreviewDesktop
+  const previewRef = useRef()
+  const toEmailText = useElementsToEmailString(previewRef)
 
   return (
     <>
-      <div className="desktop-mobile-buttons">
+      <div className="email-preview-actions">
         <fieldset>
           <VisuallyHidden>
             <legend>Select preview type</legend>
@@ -44,6 +48,9 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             </VisuallyHidden>
           </label>
         </fieldset>
+        <CopyToClipboardButton className="copy-html-button" textToCopy={toEmailText}>
+          Copy HTML
+        </CopyToClipboardButton>
       </div>
       <Root.div
         className={classNames('email-preview', {
@@ -51,7 +58,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           'email-preview-mobile': isPreviewMobile,
         })}
       >
-        <div>
+        <div ref={previewRef as any}>
           <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
             <tbody>
               {(emailTemplate.components ?? []).map((emailComponent, i) => (

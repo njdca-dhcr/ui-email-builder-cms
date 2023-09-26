@@ -6,13 +6,10 @@ const DOCTYPE = `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 
 export const useElementsToEmailString = (
   ref: MutableRefObject<HTMLElement | undefined>,
-  title: string,
 ): (() => string) => {
   return useCallback(() => {
     if (ref.current) {
-      const rendered = renderToString(
-        <EmailLayout html={ref.current.innerHTML} title={title}></EmailLayout>,
-      )
+      const rendered = renderToString(<EmailLayout html={ref.current.innerHTML}></EmailLayout>)
       return `${DOCTYPE}${rendered}`
     } else {
       return ''

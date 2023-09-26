@@ -1,8 +1,12 @@
-.desktop-mobile-buttons {
+.email-preview-actions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
   margin-top: 3rem;
+  width: 38rem;
 }
 
-.desktop-mobile-buttons fieldset {
+.email-preview-actions fieldset {
   --border-radius: 10px;
   align-items: stretch;
   border: 1px solid var(--gray);
@@ -15,8 +19,9 @@
   width: 9.25rem;
 }
 
-.desktop-mobile-buttons label {
+.email-preview-actions label {
   align-items: center;
+  cursor: pointer;
   display: flex;
   flex: 1;
   font-size: 0.9rem;
@@ -25,21 +30,37 @@
   line-height: 1.5rem;
 }
 
-.desktop-mobile-buttons label:has(:checked) {
+.email-preview-actions label:has(:checked) {
   background-color: var(--gray);
 }
 
-.desktop-mobile-buttons label:first-of-type {
+.email-preview-actions label:first-of-type {
   border-top-left-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
 }
-.desktop-mobile-buttons label:last-of-type {
+.email-preview-actions label:last-of-type {
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
 }
 
-.desktop-mobile-buttons label:focus-within {
+.email-preview-actions label:focus-within {
   outline: 5px auto -webkit-focus-ring-color;
+}
+
+button.copy-html-button {
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  color: var(--black);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: var(--weight-normal);
+  line-height: 1.5rem;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 50ms ease-in;
+}
+
+button.copy-html-button:active {
+  background-color: var(--gray);
 }
 
 .email-preview {

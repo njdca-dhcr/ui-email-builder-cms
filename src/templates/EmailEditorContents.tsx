@@ -6,7 +6,7 @@ import type { EmailTemplate } from 'src/appTypes'
 import { EmailTemplateFormComponent } from './emailForm/EmailTemplateFormComponent'
 import { EmailCopyData } from './emailForm/EmailCopyData'
 import { EmailTemplatePreviewComponent } from './emailPreview/EmailTemplatePreviewComponent'
-import { CopyToClipboardButton } from './emailForm/CopyToClipboardButton'
+import { CopyToClipboardButton } from '../ui/CopyToClipboardButton'
 import { useElementsToEmailString } from './emailForm/useElementsToEmailString'
 
 interface Props {
@@ -29,7 +29,7 @@ export const EmailEditorContents: FC<Props> = ({ emailTemplate }) => {
   const [previewKind, setPreviewKind] = useState<PreviewKind>('desktop')
   const otherPreviewKind: PreviewKind = previewKind === 'desktop' ? 'mobile' : 'desktop'
   const previewRef = useRef()
-  const toEmailText = useElementsToEmailString(previewRef, emailTemplate.name)
+  const toEmailText = useElementsToEmailString(previewRef)
 
   return (
     <EmailCopyData>
