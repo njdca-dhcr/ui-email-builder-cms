@@ -2,11 +2,53 @@
   margin-top: 3rem;
 }
 
+.desktop-mobile-buttons fieldset {
+  --border-radius: 10px;
+  align-items: stretch;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius);
+  display: flex;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  height: 2.2rem;
+  width: 9.25rem;
+}
+
+.desktop-mobile-buttons label {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: var(--weight-normal);
+  justify-content: center;
+  line-height: 1.5rem;
+}
+
+.desktop-mobile-buttons label:has(:checked) {
+  background-color: var(--gray);
+}
+
+.desktop-mobile-buttons label:first-of-type {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+.desktop-mobile-buttons label:last-of-type {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.desktop-mobile-buttons label:focus-within {
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
 .email-preview {
   box-shadow: 0 0 1rem var(--gray);
   margin: 1.5rem auto 0;
   width: 38rem;
+  transition: width ease-in-out 100ms;
 }
 
 .email-preview-mobile {
+  width: 23rem;
 }

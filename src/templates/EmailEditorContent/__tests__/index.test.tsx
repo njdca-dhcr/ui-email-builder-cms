@@ -14,8 +14,25 @@ describe('EmailEditorContent', () => {
     emailTemplate = buildEmailTemplateConfig()
   })
 
-  it.todo('can display the email in desktop mode')
-  it.todo('can display the email in mobile mode')
+  it('can display the email in desktop or mobile', async () => {
+    const user = userEvent.setup()
+    const { baseElement, getByLabelText } = render(
+      <EmailEditorContent emailTemplate={emailTemplate} />,
+    )
+
+    expect(baseElement.querySelector('.email-preview-desktop')).not.toBeNull()
+    expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
+
+    await user.click(getByLabelText('Mobile'))
+
+    expect(baseElement.querySelector('.email-preview-desktop')).toBeNull()
+    expect(baseElement.querySelector('.email-preview-mobile')).not.toBeNull()
+
+    await user.click(getByLabelText('Desktop'))
+    expect(baseElement.querySelector('.email-preview-desktop')).not.toBeNull()
+    expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
+  })
+
   it.todo('can display the email')
   it.todo('can edit components of the email')
   it.todo('can edit sub-components of the email')
