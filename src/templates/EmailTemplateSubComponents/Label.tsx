@@ -1,23 +1,23 @@
-import React, { FC, CSSProperties } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Colors, Font } from './styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
-export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
+export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { isActive, focus } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [title, setTitle] = useEmailPartsContentForSubComponent(componentId, id, 'Title')
+  const [label, setLabel] = useEmailPartsContentForSubComponent(componentId, id, '')
 
   return (
     <tr>
       <td onClick={focus}>
         <EditableElement
-          defaultValue="Title"
+          defaultValue="Label"
           element="div"
-          onChange={setTitle}
+          onChange={setLabel}
           style={styles}
-          value={title}
+          value={label}
         />
       </td>
     </tr>
@@ -25,8 +25,14 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
 }
 
 const styles: CSSProperties = {
+  backgroundColor: '#CCBDDF',
+  borderRadius: 3,
   color: Colors.black,
   fontFamily: Font.family.default,
-  fontSize: Font.size.large,
+  fontSize: 13,
   fontWeight: Font.weight.bold,
+  lineHeight: '150%',
+  padding: '5px 10px',
+  display: 'inline-flex',
+  alignItems: 'center',
 }
