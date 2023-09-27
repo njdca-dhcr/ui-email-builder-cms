@@ -16,14 +16,16 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
       <td>
         <EmailTable>
           <tr>
-            <EditableElement
-              defaultValue={defaultValue}
-              element="td"
-              onValueChange={setValue}
-              style={styles}
-              value={value}
-              onClick={activate}
-            />
+            <td style={cellContainerStyles}>
+              <EditableElement
+                defaultValue={defaultValue}
+                element="h1"
+                onValueChange={setValue}
+                style={styles}
+                value={value}
+                onClick={activate}
+              />
+            </td>
           </tr>
         </EmailTable>
       </td>
@@ -31,10 +33,15 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   )
 }
 
-const styles: CSSProperties = {
+const cellContainerStyles: CSSProperties = {
   ...DefaultStyles,
-  fontSize: Font.size.large,
-  fontWeight: Font.weight.bold,
   paddingBottom: 20,
   paddingTop: 20,
+}
+
+const styles: CSSProperties = {
+  fontSize: Font.size.large,
+  fontWeight: Font.weight.bold,
+  margin: 0,
+  padding: 0,
 }

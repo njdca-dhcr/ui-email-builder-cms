@@ -7,7 +7,13 @@ interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
   value: string
 }
 
-export const EditableElement: FC<Props> = ({ element, defaultValue, onValueChange, ...props }) => {
+export const EditableElement: FC<Props> = ({
+  element,
+  defaultValue,
+  onValueChange,
+  value,
+  ...props
+}) => {
   const Element = element
   return (
     <Element
