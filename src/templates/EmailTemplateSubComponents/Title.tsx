@@ -7,17 +7,18 @@ import { EditableElement } from 'src/ui/EditableElement'
 
 export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [title, setTitle] = useEmailPartsContentForSubComponent(componentId, id, 'Title')
+  const defaultValue = 'Title'
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <tr>
       <td onClick={activate}>
         <EditableElement
-          defaultValue="Title"
+          defaultValue={defaultValue}
           element="div"
-          onValueChange={setTitle}
+          onValueChange={setValue}
           style={styles}
-          value={title}
+          value={value}
         />
       </td>
     </tr>

@@ -20,11 +20,13 @@ export const EmailPartsContent: FC<{ children: ReactNode }> = ({ children }) => 
   )
 }
 
+export const useEmailPartsContentData = () => useContext(EmailPartsContentContext)
+
 export const useEmailPartsContentForComponent = <T extends any>(
   id: string,
   defaultValue: T,
 ): [T, (value: T) => void] => {
-  const [data, update] = useContext(EmailPartsContentContext)
+  const [data, update] = useEmailPartsContentData()
   const key = buildComponentKey(id)
 
   const value: T = data[key] ?? defaultValue
@@ -44,7 +46,7 @@ export const useEmailPartsContentForSubComponent = <T extends any>(
   id: string,
   defaultValue: T,
 ): [T, (value: T) => void] => {
-  const [data, update] = useContext(EmailPartsContentContext)
+  const [data, update] = useEmailPartsContentData()
   const key = buildSubComponentKey(componentId, id)
 
   const value: T = data[key] ?? defaultValue

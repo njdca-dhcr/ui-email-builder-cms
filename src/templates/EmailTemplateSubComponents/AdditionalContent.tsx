@@ -6,14 +6,15 @@ import { Colors, Font } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
 export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId }) => {
+  const defaultValue = 'Additional Content'
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, '')
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <tr>
       <td onClick={activate}>
         <EditableElement
-          defaultValue="Additional Content"
+          defaultValue={defaultValue}
           element="div"
           onValueChange={setValue}
           style={styles}

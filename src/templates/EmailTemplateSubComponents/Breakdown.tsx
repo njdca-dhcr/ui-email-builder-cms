@@ -4,61 +4,80 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Colors, Font } from '../styles'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
+
+interface Value {
+  overpaymentLabel: string
+  overpaymentAmount: string
+  waivedLabel: string
+  waivedAmount: string
+  mustPayLabel: string
+  mustPayAmount: string
+}
 
 export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [overpaymentLabel, setOverpaymentLabel] = useState('')
+  const defaultValue: Value = {
+    overpaymentLabel: 'Overpayment Total',
+    overpaymentAmount: '$200',
+    waivedLabel: 'Amount waived',
+    waivedAmount: '$50',
+    mustPayLabel: 'You must pay',
+    mustPayAmount: '$150',
+  }
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+
   return (
     <EmailTable style={tableStyles}>
       <tbody onClick={activate}>
         <tr>
           <EditableElement
             element="td"
-            defaultValue="Overpayment Total"
-            value={overpaymentLabel}
-            onValueChange={setOverpaymentLabel}
+            defaultValue={defaultValue.overpaymentLabel}
+            value={value.overpaymentLabel}
+            onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
             style={overpaymentStyles}
           />
           <EditableElement
             align="right"
             element="td"
-            defaultValue="$200"
-            value={''}
-            onValueChange={() => {}}
+            defaultValue={defaultValue.overpaymentAmount}
+            value={value.overpaymentAmount}
+            onValueChange={(overpaymentAmount) => setValue({ ...value, overpaymentAmount })}
             style={overpaymentStyles}
           />
         </tr>
         <tr>
           <EditableElement
             element="td"
-            defaultValue="Amount waived"
-            value={''}
-            onValueChange={() => {}}
+            defaultValue={defaultValue.waivedLabel}
+            value={value.waivedLabel}
+            onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
             style={waivedStyles}
           />
           <EditableElement
             align="right"
             element="td"
-            defaultValue="$50"
-            value={''}
-            onValueChange={() => {}}
+            defaultValue={defaultValue.waivedAmount}
+            value={value.waivedAmount}
+            onValueChange={(waivedAmount) => setValue({ ...value, waivedAmount })}
             style={waivedStyles}
           />
         </tr>
         <tr>
           <EditableElement
             element="td"
-            defaultValue="You must pay"
-            value={''}
-            onValueChange={() => {}}
+            defaultValue={defaultValue.mustPayLabel}
+            value={value.mustPayLabel}
+            onValueChange={(mustPayLabel) => setValue({ ...value, mustPayLabel })}
             style={mustPayStyles}
           />
           <EditableElement
             align="right"
             element="td"
-            defaultValue="$150"
-            value={''}
-            onValueChange={() => {}}
+            defaultValue={defaultValue.mustPayAmount}
+            value={value.mustPayAmount}
+            onValueChange={(mustPayAmount) => setValue({ ...value, mustPayAmount })}
             style={mustPayStyles}
           />
         </tr>

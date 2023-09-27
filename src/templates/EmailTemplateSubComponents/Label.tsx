@@ -7,13 +7,14 @@ import { EditableElement } from 'src/ui/EditableElement'
 
 export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [label, setLabel] = useEmailPartsContentForSubComponent(componentId, id, '')
+  const defaultValue = 'Label'
+  const [label, setLabel] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <tr>
       <td onClick={activate}>
         <EditableElement
-          defaultValue="Label"
+          defaultValue={defaultValue}
           element="div"
           onValueChange={setLabel}
           style={styles}

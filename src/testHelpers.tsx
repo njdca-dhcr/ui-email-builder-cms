@@ -7,7 +7,15 @@ import {
   useCurrentlyActiveEmailPartData,
 } from './templates/CurrentlyActiveEmailPart'
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
-import { EmailPartsContent } from './templates/EmailPartsContent'
+import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
+import {
+  queries,
+  buildQueries,
+  queryHelpers,
+  Queries,
+  Matcher,
+  MatcherOptions,
+} from '@testing-library/react'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: EmailTemplate.ComponentKind,
@@ -60,6 +68,7 @@ export const emailPartWrapper: FC<{ children: ReactNode }> = ({ children }) => {
             <tbody>{children}</tbody>
           </table>
           <ShowActiveEmailPart />
+          <ShowEmailPartsContentKeys />
         </EmailPartsContent>
       </CurrentlyActiveEmailPart>
     </ShouldShowEmailPart>
@@ -69,4 +78,33 @@ export const emailPartWrapper: FC<{ children: ReactNode }> = ({ children }) => {
 export const ShowActiveEmailPart: FC = () => {
   const [currentlyActive] = useCurrentlyActiveEmailPartData()
   return <span id="active-email-part-key">{currentlyActive}</span>
+}
+
+export const ShowEmailPartsContentKeys: FC = () => {
+  const [data] = useEmailPartsContentData()
+  const keys = Object.keys(data)
+  return (
+    <ul id="email-parts-content-keys">
+      {keys.map((key) => (
+        <li key={key} data-testid={key}>
+          {key}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export const expectActiveEmailPartToNotBe = (key: string, element: HTMLElement) => {
+  expect(element.querySelector('#active-email-part-key')).not.toHaveTextContent(key)
+}
+
+export const expectActiveEmailPartToBe = (key: string, element: HTMLElement) => {
+  expect(element.querySelector('#active-email-part-key')).toHaveTextContent(key)
+}
+
+export const expectEmailPartContentFor = (key: string, element: HTMLElement) => {
+  const ul = element.querySelector('#email-parts-content-keys')
+  expect(ul).not.toBeNull()
+  const li = ul!.querySelector(`[data-testid="${key}"]`)
+  expect(li).not.toBeNull()
 }

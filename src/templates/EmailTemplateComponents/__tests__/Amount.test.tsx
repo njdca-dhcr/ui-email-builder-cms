@@ -2,7 +2,13 @@ import React from 'react'
 import { Amount } from '../Amount'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
+import {
+  buildEmailTemplateComponent,
+  emailPartWrapper,
+  expectActiveEmailPartToBe,
+  expectActiveEmailPartToNotBe,
+  expectEmailPartContentFor,
+} from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 import { buildComponentKey } from 'src/utils/emailPartKeys'
@@ -30,7 +36,7 @@ describe('Amount', () => {
 
   it('displays an editable total message', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByText } = render(
+    const { queryByText, getByText, baseElement } = render(
       <Amount id={id} emailComponent={emailComponent}>
         <span />
       </Amount>,
@@ -39,25 +45,27 @@ describe('Amount', () => {
       },
     )
 
+    const key = buildComponentKey(id)
     const value = faker.lorem.words(4)
     const input = getByText('You owe $200')
     await user.clear(input)
     await user.type(input, value)
 
     expect(queryByText(value)).not.toBeNull()
+    expectEmailPartContentFor(key, baseElement)
   })
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByText } = render(
+    const { queryByText, getByText, baseElement } = render(
       <Amount id={id} emailComponent={emailComponent}>
         <span />
       </Amount>,
       { wrapper: emailPartWrapper },
     )
     const key = buildComponentKey(id)
-    expect(queryByText(key)).toBeNull()
+    expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByText('You owe $200'))
-    expect(queryByText(key)).not.toBeNull()
+    expectActiveEmailPartToBe(key, baseElement)
   })
 })
