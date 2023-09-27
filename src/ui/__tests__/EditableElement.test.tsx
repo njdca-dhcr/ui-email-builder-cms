@@ -20,7 +20,7 @@ describe('EditableElement', () => {
     const { getByText, baseElement } = render(
       <EditableElement
         value={value}
-        onChange={handleChange}
+        onValueChange={handleChange}
         defaultValue={defaultValue}
         element="section"
       />,
@@ -36,7 +36,7 @@ describe('EditableElement', () => {
     const { getByText } = render(
       <EditableElement
         value={value}
-        onChange={handleChange}
+        onValueChange={handleChange}
         defaultValue={defaultValue}
         element="section"
       />,
@@ -49,7 +49,7 @@ describe('EditableElement', () => {
     const { getByText } = render(
       <EditableElement
         value={value}
-        onChange={handleChange}
+        onValueChange={handleChange}
         defaultValue={defaultValue}
         element="section"
         style={{ backgroundColor: 'red' }}
@@ -63,7 +63,7 @@ describe('EditableElement', () => {
     let rendered = render(
       <EditableElement
         value={value}
-        onChange={handleChange}
+        onValueChange={handleChange}
         defaultValue={defaultValue}
         element="span"
       />,
@@ -73,7 +73,7 @@ describe('EditableElement', () => {
     rendered = render(
       <EditableElement
         value={value}
-        onChange={handleChange}
+        onValueChange={handleChange}
         defaultValue={defaultValue}
         element="section"
       />,

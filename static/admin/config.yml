@@ -27,7 +27,7 @@ collections:
           - label: 'Select component'
             name: 'kind'
             widget: 'select'
-            options: ['Header', 'Footer', 'Intro', 'Banner']
+            options: ['Header', 'Amount', 'Footer', 'Intro', 'Banner']
           - { label: 'Required', name: 'required', widget: 'boolean' }
           - { label: 'Description', name: 'description', widget: 'text' }
           - label: Sub-Components
@@ -39,8 +39,8 @@ collections:
                 name: 'kind'
                 widget: 'select'
                 options:
-                  - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
                   - { label: 'Header - Title', value: 'Title' }
                   - { label: 'Header - Label', value: 'Label' }
-                  - { label: 'Header - Button', value: 'Button' }
+                  - { label: 'Amount - Breakdown', value: 'Breakdown' }
+                  - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
               - { label: 'Required', name: 'required', widget: 'boolean' }

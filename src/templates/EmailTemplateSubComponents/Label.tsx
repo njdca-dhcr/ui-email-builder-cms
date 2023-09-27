@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font } from './styles'
+import { Colors, Font } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
 export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
@@ -15,7 +15,7 @@ export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
         <EditableElement
           defaultValue="Label"
           element="div"
-          onChange={setLabel}
+          onValueChange={setLabel}
           style={styles}
           value={label}
         />

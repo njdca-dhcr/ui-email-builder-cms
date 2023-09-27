@@ -1,5 +1,7 @@
 export const Colors = {
   black: '#1b1b1b',
+  warningBackground: '#FAF3D1',
+  warning: '#FFBE2E',
 } as const
 
 export const Font = {

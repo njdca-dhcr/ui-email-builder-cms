@@ -73,4 +73,16 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByText('Additional Content')).not.toBeNull()
   })
+
+  it('can render Breakdown', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Amount', { kind: 'Breakdown' })
+    const { queryByText } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+    )
+    expect(queryByText('Overpayment Total')).not.toBeNull()
+  })
 })

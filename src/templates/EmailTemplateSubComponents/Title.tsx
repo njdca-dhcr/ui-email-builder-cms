@@ -2,7 +2,7 @@ import React, { FC, CSSProperties } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font } from './styles'
+import { Colors, Font } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
 export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
@@ -15,7 +15,7 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
         <EditableElement
           defaultValue="Title"
           element="div"
-          onChange={setTitle}
+          onValueChange={setTitle}
           style={styles}
           value={title}
         />
