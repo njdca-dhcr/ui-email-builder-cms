@@ -27,8 +27,10 @@ export const CurrentlyActiveEmailPart: FC<{ children: ReactNode }> = ({ children
   )
 }
 
+export const useCurrentlyActiveEmailPartData = () => useContext(CurrentlyActiveEmailPartContext)
+
 export const useClearCurrentlyActiveEmailPart = (): (() => void) => {
-  const [_currentlyActive, setCurrentlyActive] = useContext(CurrentlyActiveEmailPartContext)
+  const [_currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
   return useCallback(() => {
     setCurrentlyActive('')
   }, [setCurrentlyActive])
@@ -47,12 +49,12 @@ export const ClearCurrentlyActiveEmailPart: FC = () => {
 
 export const useIsCurrentlyActiveEmailComponent = (
   id: string,
-): { isActive: boolean; focus: ReactEventHandler<HTMLElement> } => {
-  const [currentlyActive, setCurrentlyActive] = useContext(CurrentlyActiveEmailPartContext)
+): { isActive: boolean; activate: ReactEventHandler<HTMLElement> } => {
+  const [currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
   const key = buildComponentKey(id)
 
   const isActive = currentlyActive === key
-  const focus: ReactEventHandler<HTMLElement> = useCallback(
+  const activate: ReactEventHandler<HTMLElement> = useCallback(
     (event) => {
       event.preventDefault()
       event.stopPropagation()
@@ -61,19 +63,19 @@ export const useIsCurrentlyActiveEmailComponent = (
     [key, setCurrentlyActive],
   )
 
-  return { isActive, focus }
+  return { isActive, activate }
 }
 
 export const useIsCurrentlyActiveEmailSubComponent = (
   componentId: string,
   id: string,
-): { isActive: boolean; focus: ReactEventHandler<HTMLElement> } => {
-  const [currentlyActive, setCurrentlyActive] = useContext(CurrentlyActiveEmailPartContext)
+): { isActive: boolean; activate: ReactEventHandler<HTMLElement> } => {
+  const [currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
   const key = buildSubComponentKey(componentId, id)
 
   const isActive = currentlyActive === key
 
-  const focus: ReactEventHandler<HTMLElement> = useCallback(
+  const activate: ReactEventHandler<HTMLElement> = useCallback(
     (event) => {
       event.preventDefault()
       event.stopPropagation()
@@ -82,5 +84,5 @@ export const useIsCurrentlyActiveEmailSubComponent = (
     [key, setCurrentlyActive],
   )
 
-  return { isActive, focus }
+  return { isActive, activate }
 }

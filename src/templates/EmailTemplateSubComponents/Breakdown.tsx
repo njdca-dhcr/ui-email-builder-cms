@@ -3,12 +3,14 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Colors, Font } from '../styles'
+import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 
-export const Breakdown: FC<EmailSubComponentProps> = ({}) => {
+export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
+  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [overpaymentLabel, setOverpaymentLabel] = useState('')
   return (
     <EmailTable style={tableStyles}>
-      <tbody>
+      <tbody onClick={activate}>
         <tr>
           <EditableElement
             element="td"

@@ -2,7 +2,10 @@ import React, { FC, ReactNode } from 'react'
 import { faker } from '@faker-js/faker'
 import sample from 'lodash.sample'
 import { EmailTemplate, EmailTemplateComponentsMapping } from './appTypes'
-import { CurrentlyActiveEmailPart } from './templates/CurrentlyActiveEmailPart'
+import {
+  CurrentlyActiveEmailPart,
+  useCurrentlyActiveEmailPartData,
+} from './templates/CurrentlyActiveEmailPart'
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent } from './templates/EmailPartsContent'
 
@@ -56,8 +59,14 @@ export const emailPartWrapper: FC<{ children: ReactNode }> = ({ children }) => {
           <table>
             <tbody>{children}</tbody>
           </table>
+          <ShowActiveEmailPart />
         </EmailPartsContent>
       </CurrentlyActiveEmailPart>
     </ShouldShowEmailPart>
   )
+}
+
+export const ShowActiveEmailPart: FC = () => {
+  const [currentlyActive] = useCurrentlyActiveEmailPartData()
+  return <span id="active-email-part-key">{currentlyActive}</span>
 }

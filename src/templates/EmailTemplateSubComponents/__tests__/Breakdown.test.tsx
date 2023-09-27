@@ -4,7 +4,12 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
-import { buildEmailTemplateSubComponent } from 'src/testHelpers'
+import {
+  ShowActiveEmailPart,
+  buildEmailTemplateSubComponent,
+  emailPartWrapper,
+} from 'src/testHelpers'
+import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 describe('Breakdown', () => {
   let value: string
@@ -26,7 +31,12 @@ describe('Breakdown', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Amount', { kind: 'Breakdown' })
     user = userEvent.setup()
     rendered = render(
-      <Breakdown componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <tr>
+        <td>
+          <Breakdown componentId={componentId} id={id} emailSubComponent={emailSubComponent} />
+        </td>
+      </tr>,
+      { wrapper: emailPartWrapper },
     )
     value = faker.lorem.words(4)
   })
@@ -59,5 +69,14 @@ describe('Breakdown', () => {
   it('has an editable you must pay total', async () => {
     await clearAndFillWithValue('$150')
     expect(rendered.queryByText(value)).not.toBeNull()
+  })
+
+  it('activates when clicked', async () => {
+    const user = userEvent.setup()
+    const { queryByText, getByText } = rendered
+    const key = buildSubComponentKey(componentId, id)
+    expect(queryByText(key)).toBeNull()
+    await user.click(getByText('Overpayment Total'))
+    expect(queryByText(key)).not.toBeNull()
   })
 })

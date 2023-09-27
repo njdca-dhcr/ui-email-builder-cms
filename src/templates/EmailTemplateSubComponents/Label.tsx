@@ -6,12 +6,12 @@ import { Colors, Font } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
 export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
-  const { isActive, focus } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
+  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [label, setLabel] = useEmailPartsContentForSubComponent(componentId, id, '')
 
   return (
     <tr>
-      <td onClick={focus}>
+      <td onClick={activate}>
         <EditableElement
           defaultValue="Label"
           element="div"

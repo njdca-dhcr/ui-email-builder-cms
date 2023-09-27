@@ -5,6 +5,7 @@ import { EmailTemplate } from 'src/appTypes'
 import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
+import { buildComponentKey } from 'src/utils/emailPartKeys'
 
 describe('Amount', () => {
   let id: string
@@ -44,5 +45,19 @@ describe('Amount', () => {
     await user.type(input, value)
 
     expect(queryByText(value)).not.toBeNull()
+  })
+
+  it('activates when clicked', async () => {
+    const user = userEvent.setup()
+    const { queryByText, getByText } = render(
+      <Amount id={id} emailComponent={emailComponent}>
+        <span />
+      </Amount>,
+      { wrapper: emailPartWrapper },
+    )
+    const key = buildComponentKey(id)
+    expect(queryByText(key)).toBeNull()
+    await user.click(getByText('You owe $200'))
+    expect(queryByText(key)).not.toBeNull()
   })
 })
