@@ -1,9 +1,9 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
-import { Colors, Font } from '../styles'
+import { Colors, DefaultStyles, Font } from '../styles'
 import { WarningIcon } from 'src/ui/WarningIcon'
-import { EmailTable } from 'src/ui/EmailTable'
+import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
 
@@ -13,48 +13,63 @@ export const Amount: FC<EmailComponentProps> = ({ children, id }) => {
   const [value, setValue] = useEmailPartsContentForComponent(id, defaultValue)
   return (
     <tr>
-      <td>
-        <EmailTable style={tableStyles} width={'unset'}>
-          <tbody>
+      <td style={containerCellStyles}>
+        <TableAndCell style={containerTableStyles} maxWidth={345}>
+          <EmailTable>
             <tr>
               <td style={iconStyles} align="center">
                 <WarningIcon />
               </td>
-              <td style={amountStyles} onClick={activate}>
-                <EditableElement
-                  defaultValue={defaultValue}
-                  element="div"
-                  onValueChange={setValue}
-                  value={value}
-                />
+              <td onClick={activate} style={amountStyles}>
+                <TableAndCell>
+                  <EditableElement
+                    defaultValue={defaultValue}
+                    element="div"
+                    onValueChange={setValue}
+                    value={value}
+                  />
+                </TableAndCell>
               </td>
             </tr>
             <tr>
               <td />
-              <td style={{ paddingRight: 6 }}>{children}</td>
+              <td>
+                <TableAndCell>{children}</TableAndCell>
+              </td>
             </tr>
-          </tbody>
-        </EmailTable>
+          </EmailTable>
+        </TableAndCell>
       </td>
     </tr>
   )
 }
 
-const tableStyles: CSSProperties = {
+const containerCellStyles: CSSProperties = {
+  ...DefaultStyles,
+  paddingRight: 10,
+  paddingTop: 10,
+  paddingBottom: 20,
+}
+
+const containerTableStyles: CSSProperties = {
   backgroundColor: Colors.warningBackground,
   borderLeft: `8px solid ${Colors.warning}`,
-  color: Colors.black,
-  fontFamily: Font.family.default,
   padding: 16,
-  margin: '10px 0',
+  paddingRight: 25,
+}
+
+const iconAndAmountStyles: CSSProperties = {
+  verticalAlign: 'center',
 }
 
 const iconStyles: CSSProperties = {
+  ...iconAndAmountStyles,
   paddingRight: 16,
+  width: 32,
 }
 
 const amountStyles: CSSProperties = {
+  ...iconAndAmountStyles,
   fontWeight: Font.weight.bold,
   fontSize: 22,
-  lineHeight: '26px',
 }

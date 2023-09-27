@@ -49,12 +49,12 @@ export const ClearCurrentlyActiveEmailPart: FC = () => {
 
 export const useIsCurrentlyActiveEmailComponent = (
   id: string,
-): { isActive: boolean; activate: ReactEventHandler<HTMLElement> } => {
+): { isActive: boolean; activate: ReactEventHandler<HTMLOrSVGElement> } => {
   const [currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
   const key = buildComponentKey(id)
 
   const isActive = currentlyActive === key
-  const activate: ReactEventHandler<HTMLElement> = useCallback(
+  const activate: ReactEventHandler<HTMLOrSVGElement> = useCallback(
     (event) => {
       event.preventDefault()
       event.stopPropagation()
@@ -69,13 +69,13 @@ export const useIsCurrentlyActiveEmailComponent = (
 export const useIsCurrentlyActiveEmailSubComponent = (
   componentId: string,
   id: string,
-): { isActive: boolean; activate: ReactEventHandler<HTMLElement> } => {
+): { isActive: boolean; activate: ReactEventHandler<HTMLOrSVGElement> } => {
   const [currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
   const key = buildSubComponentKey(componentId, id)
 
   const isActive = currentlyActive === key
 
-  const activate: ReactEventHandler<HTMLElement> = useCallback(
+  const activate: ReactEventHandler<HTMLOrSVGElement> = useCallback(
     (event) => {
       event.preventDefault()
       event.stopPropagation()

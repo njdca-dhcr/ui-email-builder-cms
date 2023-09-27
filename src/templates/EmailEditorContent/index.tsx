@@ -8,6 +8,8 @@ import './EmailEditorContent.css'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useElementsToEmailString } from '../emailForm/useElementsToEmailString'
 import { CopyToClipboardButton } from '../../ui/CopyToClipboardButton'
+import { EmailTable } from 'src/ui/EmailTable'
+import { Spacing } from '../styles'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -59,22 +61,20 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         })}
       >
         <div ref={previewRef as any}>
-          <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
-            <tbody>
-              {(emailTemplate.components ?? []).map((emailComponent, i) => (
-                <EditEmailComponent key={i} emailComponent={emailComponent} id={`${i}`}>
-                  {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
-                    <EditEmailSubComponent
-                      key={n}
-                      componentId={`${i}`}
-                      id={`${n}`}
-                      emailSubComponent={emailSubComponent}
-                    />
-                  ))}
-                </EditEmailComponent>
-              ))}
-            </tbody>
-          </table>
+          <EmailTable maxWidth={Spacing.layout.maxWidth}>
+            {(emailTemplate.components ?? []).map((emailComponent, i) => (
+              <EditEmailComponent key={i} emailComponent={emailComponent} id={`${i}`}>
+                {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
+                  <EditEmailSubComponent
+                    key={n}
+                    componentId={`${i}`}
+                    id={`${n}`}
+                    emailSubComponent={emailSubComponent}
+                  />
+                ))}
+              </EditEmailComponent>
+            ))}
+          </EmailTable>
         </div>
       </Root.div>
     </>

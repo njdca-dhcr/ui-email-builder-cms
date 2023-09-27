@@ -1,7 +1,7 @@
-import React, { CSSProperties, FC, useState } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
-import { EmailTable } from 'src/ui/EmailTable'
+import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { Colors, Font } from '../styles'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
@@ -28,8 +28,8 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
-    <EmailTable style={tableStyles}>
-      <tbody onClick={activate}>
+    <TableAndCell style={containerStyles}>
+      <EmailTable onClick={activate} maxWidth={273}>
         <tr>
           <EditableElement
             element="td"
@@ -81,16 +81,13 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             style={mustPayStyles}
           />
         </tr>
-      </tbody>
-    </EmailTable>
+      </EmailTable>
+    </TableAndCell>
   )
 }
 
-const tableStyles: CSSProperties = {
-  color: Colors.black,
-  fontFamily: Font.family.default,
-  paddingTop: 16,
-  width: 261,
+const containerStyles: CSSProperties = {
+  paddingTop: 20,
 }
 
 const overpaymentStyles: CSSProperties = {

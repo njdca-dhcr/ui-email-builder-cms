@@ -66,6 +66,7 @@ button.copy-html-button:active {
 .email-preview {
   box-shadow: 0 0 1rem var(--gray);
   margin: 1.5rem auto 0;
+  overflow: hidden;
   width: 38rem;
   transition: width ease-in-out 100ms;
 }
