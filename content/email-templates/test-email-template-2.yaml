@@ -1,9 +1,0 @@
-name: Test Email Template 2
-description: Test description for the second email template.
-widget-test: TEST WIDGET VALUE
-components:
-  - kind: Header
-    description: The main heading of the email, usually similar to the email's subject.
-  - kind: Footer
-    description: 'This is usually the "fine print" of the email: Confidentiality
-      notices, do not reply information, etc.'

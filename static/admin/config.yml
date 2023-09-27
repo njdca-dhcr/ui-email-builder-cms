@@ -39,6 +39,7 @@ collections:
                 name: 'kind'
                 widget: 'select'
                 options:
+                  - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
                   - { label: 'Header - Title', value: 'Title' }
                   - { label: 'Header - Label', value: 'Label' }
                   - { label: 'Amount - Breakdown', value: 'Breakdown' }
