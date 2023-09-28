@@ -73,6 +73,20 @@ describe('EditEmailComponent', () => {
     expect(queryByText(text)).not.toBeNull()
   })
 
+  it('can render a Name', () => {
+    emailComponent = buildEmailTemplateComponent('Name')
+    const text = faker.lorem.paragraph()
+    const { queryByText } = render(
+      <EditEmailComponent id={id} emailComponent={emailComponent}>
+        <tr>
+          <td>{text}</td>
+        </tr>
+      </EditEmailComponent>,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByText(text)).not.toBeNull()
+  })
+
   it.todo('can render a Banner')
   it.todo('can render an Intro')
 })

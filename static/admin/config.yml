@@ -27,7 +27,7 @@ collections:
           - label: 'Select component'
             name: 'kind'
             widget: 'select'
-            options: ['Header', 'Amount', 'Footer', 'Intro', 'Banner']
+            options: ['Header', 'Amount', 'Footer', 'Name', 'Intro', 'Banner']
           - { label: 'Required', name: 'required', widget: 'boolean' }
           - { label: 'Description', name: 'description', widget: 'text' }
           - label: Sub-Components
