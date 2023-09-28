@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
-import { Colors, DefaultStyles, Font } from '../styles'
+import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 import { WarningIcon } from 'src/ui/WarningIcon'
 import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
@@ -46,16 +46,16 @@ export const Amount: FC<EmailComponentProps> = ({ children, id }) => {
 
 const containerCellStyles: CSSProperties = {
   ...DefaultStyles,
-  paddingRight: 10,
-  paddingTop: 10,
-  paddingBottom: 20,
+  paddingRight: Spacing.size.small,
+  paddingTop: Spacing.size.small,
+  paddingBottom: Spacing.size.large,
 }
 
 const containerTableStyles: CSSProperties = {
   backgroundColor: Colors.warningBackground,
   borderLeft: `8px solid ${Colors.warning}`,
-  padding: 16,
-  paddingRight: 25,
+  padding: Spacing.size.medium,
+  paddingRight: Spacing.size.extraLarge,
 }
 
 const iconAndAmountStyles: CSSProperties = {
@@ -64,12 +64,12 @@ const iconAndAmountStyles: CSSProperties = {
 
 const iconStyles: CSSProperties = {
   ...iconAndAmountStyles,
-  paddingRight: 16,
+  paddingRight: Spacing.size.medium,
   width: 32,
 }
 
 const amountStyles: CSSProperties = {
   ...iconAndAmountStyles,
   fontWeight: Font.weight.bold,
-  fontSize: 22,
+  fontSize: Font.size.large,
 }

@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, DefaultStyles, Font } from '../styles'
+import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
 
@@ -40,8 +40,11 @@ const containerStyles: CSSProperties = {
 const styles: CSSProperties = {
   backgroundColor: '#CCBDDF',
   borderRadius: 3,
-  fontSize: 13,
+  fontSize: Font.size.small,
   fontWeight: Font.weight.bold,
   lineHeight: '150%',
-  padding: '5px 10px',
+  paddingBottom: Spacing.size.tiny,
+  paddingTop: Spacing.size.tiny,
+  paddingLeft: Spacing.size.small,
+  paddingRight: Spacing.size.small,
 }

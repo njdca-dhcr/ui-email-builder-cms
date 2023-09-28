@@ -2,7 +2,7 @@ import React, { FC, CSSProperties } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Font, DefaultStyles } from '../styles'
+import { Font, DefaultStyles, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
 
@@ -35,12 +35,12 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
 
 const cellContainerStyles: CSSProperties = {
   ...DefaultStyles,
-  paddingBottom: 20,
-  paddingTop: 20,
+  paddingBottom: Spacing.size.large,
+  paddingTop: Spacing.size.large,
 }
 
 const styles: CSSProperties = {
-  fontSize: Font.size.large,
+  fontSize: Font.size.title,
   fontWeight: Font.weight.bold,
   margin: 0,
   padding: 0,

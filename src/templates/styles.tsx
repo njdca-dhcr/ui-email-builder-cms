@@ -19,8 +19,12 @@ export const Font = {
     normal: 400,
   },
   size: {
-    large: 40,
-    normal: 16,
+    tiny: 10,
+    small: 13,
+    medium: 16,
+    large: 22,
+    extraLarge: 32,
+    title: 40,
   },
 } as const
 
@@ -32,6 +36,13 @@ export const Spacing = {
     } as CSSProperties,
     maxWidth: 690,
   },
+  size: {
+    tiny: 5,
+    small: 10,
+    medium: 16,
+    large: 20,
+    extraLarge: 25,
+  },
 } as const
 
 export const DefaultStyles: CSSProperties = {
@@ -40,5 +51,5 @@ export const DefaultStyles: CSSProperties = {
   color: Colors.black,
   fontFamily: Font.family.default,
   fontWeight: Font.weight.normal,
-  fontSize: Font.size.normal,
+  fontSize: Font.size.medium,
 }

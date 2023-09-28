@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { DefaultStyles } from '../styles'
+import { DefaultStyles, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
 export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId }) => {
@@ -27,5 +27,5 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId 
 
 const styles: CSSProperties = {
   ...DefaultStyles,
-  paddingBottom: 20,
+  paddingBottom: Spacing.size.medium,
 }

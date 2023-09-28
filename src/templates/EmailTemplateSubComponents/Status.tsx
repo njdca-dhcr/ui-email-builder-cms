@@ -4,7 +4,7 @@ import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, DefaultStyles, Font } from '../styles'
+import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 
 const defaultValue = {
   title: 'Received & Under Review',
@@ -49,20 +49,20 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
 const outerCellStyles: CSSProperties = {
   ...DefaultStyles,
-  paddingBottom: 16,
-  paddingTop: 16,
+  paddingBottom: Spacing.size.medium,
+  paddingTop: Spacing.size.medium,
 }
 
 const innerCellStyles: CSSProperties = {
   paddingLeft: 12,
   borderLeft: `8px solid ${Colors.grayDark}`,
-  paddingTop: 10,
-  paddingBottom: 10,
+  paddingTop: Spacing.size.small,
+  paddingBottom: Spacing.size.small,
 }
 
 const titleStyles: CSSProperties = {
-  fontSize: 32,
+  fontSize: Font.size.extraLarge,
   fontWeight: Font.weight.bold,
   lineHeight: '40px',
-  paddingBottom: 10,
+  paddingBottom: Spacing.size.small,
 }

@@ -3,7 +3,7 @@ import { EmailComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
-import { DefaultStyles } from '../styles'
+import { DefaultStyles, Spacing } from '../styles'
 
 export const Name: FC<EmailComponentProps> = ({ children, id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
@@ -30,5 +30,5 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
 
 const styles: CSSProperties = {
   ...DefaultStyles,
-  paddingBottom: 15,
+  paddingBottom: Spacing.size.medium,
 }

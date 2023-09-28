@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
-import { Colors, Font } from '../styles'
+import { Colors, Font, Spacing } from '../styles'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 
@@ -87,27 +87,27 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 }
 
 const containerStyles: CSSProperties = {
-  paddingTop: 20,
+  paddingTop: Spacing.size.large,
 }
 
 const overpaymentStyles: CSSProperties = {
-  fontSize: 13,
+  fontSize: Font.size.small,
   fontWeight: Font.weight.normal,
   lineHeight: '20px',
-  paddingBottom: 5,
+  paddingBottom: Spacing.size.tiny,
 }
 
 const waivedStyles: CSSProperties = {
-  fontSize: 13,
+  fontSize: Font.size.small,
   fontWeight: Font.weight.bold,
   lineHeight: '20px',
   borderBottom: `2px solid ${Colors.black}`,
-  paddingBottom: 10,
+  paddingBottom: Spacing.size.small,
 }
 
 const mustPayStyles: CSSProperties = {
-  fontSize: 16,
+  fontSize: Font.size.medium,
   fontWeight: Font.weight.bold,
   lineHeight: '24px',
-  paddingTop: 5,
+  paddingTop: Spacing.size.tiny,
 }
