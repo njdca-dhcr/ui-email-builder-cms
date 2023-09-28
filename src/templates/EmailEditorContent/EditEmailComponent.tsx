@@ -3,6 +3,7 @@ import { Header } from '../EmailTemplateComponents/Header'
 import { Footer } from '../EmailTemplateComponents/Footer'
 import { Banner } from '../EmailTemplateComponents/Banner'
 import { Name } from '../EmailTemplateComponents/Name'
+import { Body } from '../EmailTemplateComponents/Body'
 import { EmailComponentProps } from '../EmailTemplateComponents/shared'
 import { useShouldShowEmailComponent } from '../ShouldShowEmailPart'
 import { Amount } from '../EmailTemplateComponents/Amount'
@@ -23,6 +24,8 @@ export const EditEmailComponent: FC<EmailComponentProps> = (props) => {
       return <Banner {...props} />
     case 'Name':
       return <Name {...props} />
+    case 'Body':
+      return <Body {...props} />
     default:
       console.warn(`Component (${props.emailComponent.kind}) not implemented`, props)
   }
