@@ -30,5 +30,5 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
 
 const styles: CSSProperties = {
   ...DefaultStyles,
-  paddingBottom: 10,
+  paddingBottom: 15,
 }

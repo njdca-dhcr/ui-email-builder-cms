@@ -39,9 +39,9 @@ collections:
                 name: 'kind'
                 widget: 'select'
                 options:
-                  - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
                   - { label: 'Header - Title', value: 'Title' }
                   - { label: 'Header - Label', value: 'Label' }
+                  - { label: 'Body - Intro', value: 'Intro' }
                   - { label: 'Amount - Breakdown', value: 'Breakdown' }
                   - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
               - { label: 'Required', name: 'required', widget: 'boolean' }

@@ -85,4 +85,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByText('Overpayment Total')).not.toBeNull()
   })
+
+  it('can render Intro', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Intro' })
+    const { queryByText } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByText('Intro')).not.toBeNull()
+  })
 })
