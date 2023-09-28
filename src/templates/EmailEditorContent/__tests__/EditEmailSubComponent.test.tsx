@@ -98,4 +98,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByText('Intro')).not.toBeNull()
   })
+
+  it('can render Status', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Status' })
+    const { queryByTestId } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByTestId('body-status-title')).not.toBeNull()
+  })
 })

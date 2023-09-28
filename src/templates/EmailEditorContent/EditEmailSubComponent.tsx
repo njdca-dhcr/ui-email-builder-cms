@@ -5,6 +5,7 @@ import { useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
 import { Label } from '../EmailTemplateSubComponents/Label'
 import { AdditionalContent } from '../EmailTemplateSubComponents/AdditionalContent'
 import { Intro } from '../EmailTemplateSubComponents/Intro'
+import { Status } from '../EmailTemplateSubComponents/Status'
 import { Breakdown } from '../EmailTemplateSubComponents/Breakdown'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
@@ -23,6 +24,8 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
       return <Label {...props} />
     case 'Intro':
       return <Intro {...props} />
+    case 'Status':
+      return <Status {...props} />
     default:
       console.warn(`SubComponent (${props.emailSubComponent.kind}) not implemented`, props)
   }

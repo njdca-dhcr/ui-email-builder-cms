@@ -42,6 +42,7 @@ collections:
                   - { label: 'Header - Title', value: 'Title' }
                   - { label: 'Header - Label', value: 'Label' }
                   - { label: 'Body - Intro', value: 'Intro' }
+                  - { label: 'Body - Status', value: 'Status' }
                   - { label: 'Amount - Breakdown', value: 'Breakdown' }
                   - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
               - { label: 'Required', name: 'required', widget: 'boolean' }
