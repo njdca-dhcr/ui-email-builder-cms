@@ -5,13 +5,16 @@ import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { EditableElement } from 'src/ui/EditableElement'
 import { DefaultStyles } from '../styles'
 
+const defaultValue =
+  'You requested a waiver application for your Pandemic Unemployment Overpayment.'
+
 export const Intro: FC<EmailSubComponentProps> = ({ componentId, id }) => {
-  const defaultValue = 'Intro'
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
   return (
     <tr>
       <EditableElement
+        data-testid="body-intro"
         element="td"
         defaultValue={defaultValue}
         onValueChange={setValue}

@@ -88,7 +88,7 @@ describe('EditEmailSubComponent', () => {
 
   it('can render Intro', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Intro' })
-    const { queryByText } = render(
+    const { queryByTestId } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -96,7 +96,7 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByText('Intro')).not.toBeNull()
+    expect(queryByTestId('body-intro')).not.toBeNull()
   })
 
   it('can render Status', () => {
