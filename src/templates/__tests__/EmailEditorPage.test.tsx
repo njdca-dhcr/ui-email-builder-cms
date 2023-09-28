@@ -2,15 +2,24 @@ import React from 'react'
 import { RenderResult, render } from '@testing-library/react'
 import type { EmailTemplate } from 'src/appTypes'
 import EmailEditorPage, { Head } from '../EmailEditorPage'
-import { TEST_IDS } from '../EmailEditorContents'
-import { buildEmailTemplateConfig } from 'src/testHelpers'
+import {
+  buildEmailTemplateComponent,
+  buildEmailTemplateConfig,
+  buildEmailTemplateSubComponent,
+} from 'src/testHelpers'
 
 describe('EmailEditorPage', () => {
   let emailTemplate: EmailTemplate.Config
   let rendered: RenderResult
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplateConfig()
+    emailTemplate = buildEmailTemplateConfig({
+      components: [
+        buildEmailTemplateComponent('Header', {
+          subComponents: [buildEmailTemplateSubComponent('Header', { kind: 'Title' })],
+        }),
+      ],
+    })
     rendered = render(<EmailEditorPage pageContext={{ emailTemplate }} />)
   })
 
@@ -19,9 +28,11 @@ describe('EmailEditorPage', () => {
     expect(baseElement.querySelector('.layout')).not.toBeNull()
   })
 
-  xit('displays the EmailEditorContents', () => {
-    const { queryByTestId } = rendered
-    expect(queryByTestId(TEST_IDS.emailEditorContents)).not.toBeNull()
+  it('displays the EmailEditorContent', () => {
+    const { baseElement } = rendered
+    const h1 = baseElement.querySelector('h1[contenteditable="true"]')
+    expect(h1).not.toBeNull()
+    expect(h1).toHaveTextContent('Title')
   })
 
   it('displays the EmailEditorSidebar', () => {

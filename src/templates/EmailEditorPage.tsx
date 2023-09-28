@@ -4,11 +4,10 @@ import { Layout, PageContent } from 'src/ui/Layout'
 import type { EmailTemplate } from 'src/appTypes'
 import { EmailEditorSidebar } from './EmailEditorSidebar'
 import { EmailEditorContent } from './EmailEditorContent'
-import './EmailEditorPage.css'
 import { ShouldShowEmailPart } from './ShouldShowEmailPart'
-import { EmailEditorContents } from './EmailEditorContents'
 import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './CurrentlyActiveEmailPart'
 import { EmailPartsContent } from './EmailPartsContent'
+import './EmailEditorPage.css'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Config
@@ -30,7 +29,6 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
             <EmailEditorSidebar emailTemplate={emailTemplate} />
             <PageContent element="div" className="email-editor-page-content">
               <EmailEditorContent emailTemplate={emailTemplate} />
-              {/* <EmailEditorContents emailTemplate={emailTemplate} /> */}
             </PageContent>
           </EmailPartsContent>
         </CurrentlyActiveEmailPart>
