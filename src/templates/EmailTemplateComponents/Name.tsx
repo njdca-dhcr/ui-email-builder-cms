@@ -20,7 +20,7 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
           defaultValue={defaultValue}
           style={styles}
         >
-          FIRST LAST NAME:
+          {defaultValue}
         </EditableElement>
       </tr>
       {children}
