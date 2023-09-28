@@ -5,7 +5,6 @@ export const EmailTemplateComponentsMapping = {
   Banner: [],
   Footer: ['AdditionalContent'],
   Header: ['Title', 'Label'],
-  Intro: [],
   Name: [],
 } as const
 

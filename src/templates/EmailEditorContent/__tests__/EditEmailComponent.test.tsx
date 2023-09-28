@@ -88,5 +88,4 @@ describe('EditEmailComponent', () => {
   })
 
   it.todo('can render a Banner')
-  it.todo('can render an Intro')
 })
