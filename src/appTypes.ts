@@ -7,6 +7,7 @@ export const EmailTemplateComponentsMapping = {
   Footer: ['AdditionalContent'],
   Header: ['Title', 'Label'],
   Name: [],
+  Disclaimer: [],
 } as const
 
 export namespace EmailTemplate {

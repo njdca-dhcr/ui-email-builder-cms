@@ -2,7 +2,9 @@ import { CSSProperties } from 'react'
 
 export const Colors = {
   black: '#1b1b1b',
+  gray: '#71767A',
   grayDark: '#3D4551',
+  grayLight: '#F5F5F5',
   warningBackground: '#FAF3D1',
   warning: '#FFBE2E',
   white: '#FFFFFF',
