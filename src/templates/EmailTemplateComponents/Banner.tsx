@@ -1,5 +1,6 @@
-import React, { FC, CSSProperties } from 'react'
+import React, { FC } from 'react'
 import { EmailComponentProps } from './shared'
+import { Colors, Font, Spacing } from '../styles'
 
 export const Banner: FC<EmailComponentProps> = ({ children }) => {
   return (
@@ -14,39 +15,44 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
           border={0}
         >
           <tr>
-            <td className="dk-gray" style={styles}>
+            <td style={{
+              backgroundColor: Colors.black,
+              color: Colors.white,
+              width: '100vw !important',
+              padding: Spacing.layout.paddingHorizontal.paddingLeft,
+            }}>
               <table cellSpacing={0} cellPadding="0" border={0} width="100%">
                 <tr>
-                  <td>
-                    <div
-                      style={{
-                        height: '12px',
-                        lineHeight: '12px',
-                        fontSize: '12px',
-                      }}
-                    >
+                  <td style={{
+                    width: '100%',
+                    paddingLeft: '0',
+                    textAlign: 'left',
+                  }}>
+                    <div style={{
+                      height: Font.size.small,
+                      lineHeight: Font.size.small,
+                      fontSize: Font.size.small,
+                      display: 'none'
+                    }}>
                       &nbsp;
                     </div>
 
                     <table cellSpacing="0" cellPadding="0" border={0} width="100%">
                       <tr>
-                        <td style={{ paddingLeft: '20px', textAlign: 'left' }}>
-                          <div style={{ lineHeight: '127%' }}>
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href="https://www.nj.gov/labor/"
-                              style={{
-                                color: '#ffffff !important',
-                                lineHeight: '127%',
-                                fontFamily: 'Public Sans, Helvetica, Arial, sans-serif',
-                                fontSize: '12px',
-                                textAlign: 'left',
-                                fontWeight: 700,
-                                textDecoration: 'underline',
-                                whiteSpace: 'nowrap',
-                              }}
-                            >
+                        <td style={{
+                          textAlign: 'left',
+                        }}>
+                          <div style={{lineHeight: '127%'}}>
+                            <a target="_blank" rel="noopener noreferrer" href="https://www.nj.gov/labor/" style={{
+                              color: Colors.white,
+                              lineHeight: '100%',
+                              fontFamily: Font.family.default,
+                              fontSize: Font.size.small,
+                              textAlign: 'left',
+                              fontWeight: Font.weight.bold,
+                              textDecoration: 'underline',
+                              whiteSpace: 'nowrap'
+                            }}>
                               New Jersey Department of Labor and Workforce Development
                             </a>
                           </div>
@@ -54,53 +60,46 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
                       </tr>
                     </table>
                   </td>
-                  <td style={{ paddingTop: '15px' }}>
-                    <div
-                      style={{
-                        height: '10px',
-                        lineHeight: '10px',
-                        fontSize: '10px',
-                      }}
-                    >
+                  <td style={{
+                    width: '100%',
+                    paddingLeft: '0px',
+                    textAlign: 'left',
+                  }}>
+                    <div style={{
+                      height: Font.size.tiny,
+                      lineHeight: Font.size.tiny,
+                      fontSize: Font.size.tiny,
+                      display: 'none'
+                    }}>
                       &nbsp;
                     </div>
-
                     <table cellSpacing="0" cellPadding="0" border={0} width="100%">
                       <tr>
-                        <td
-                          style={{
-                            paddingRight: '20px',
-                            textAlign: 'right',
-                          }}
-                        >
-                          <div style={{ lineHeight: '150%' }}>
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href="https://myunemployment.nj.gov"
+                        <td style={{
+                          textAlign: 'right',
+                          paddingLeft: '0',
+                        }}>
+                          <div style={{lineHeight: '150%'}}>
+                            <a target="_blank" rel="noopener noreferrer" href="https://myunemployment.nj.gov"
                               style={{
-                                color: '#ffffff !important',
-                                lineHeight: '150%',
-                                fontFamily: 'Public Sans, Helvetica, Arial, sans-serif',
-                                fontSize: '12px',
-                                textAlign: 'right',
-                                textDecoration: 'underline',
-                              }}
-                            >
-                              myunemployment.nj.gov
-                            </a>
+                                  color: Colors.white,
+                                  lineHeight: "150%",
+                                  fontFamily: Font.family.default,
+                                  fontSize: Font.size.small,
+                                  textAlign: "right",
+                                  textDecoration: "underline"
+                                }}>myunemployment.nj.gov</a>
                           </div>
                         </td>
                       </tr>
                     </table>
-                    <div
-                      style={{
-                        maxWidth: '120px',
-                        height: '10px',
-                        lineHeight: '10px',
-                        fontSize: '10px',
-                      }}
-                    >
+                    <div style={{
+                      maxWidth: '120px',
+                      height: Font.size.tiny,
+                      lineHeight: Font.size.tiny,
+                      fontSize: Font.size.tiny,
+                      display: 'none'
+                    }}>
                       &nbsp;
                     </div>
                   </td>
@@ -112,9 +111,4 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
       </td>
     </tr>
   )
-}
-
-const styles: CSSProperties = {
-  backgroundColor: '#1b1b1b',
-  color: '#ffffff',
 }
