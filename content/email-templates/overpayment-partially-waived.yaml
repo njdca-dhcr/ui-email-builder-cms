@@ -11,10 +11,16 @@ components:
   - kind: Body
     subComponents:
       - kind: Intro
+        required: true
       - kind: Status
+    required: true
   - kind: Amount
     subComponents:
       - kind: Breakdown
     required: true
   - kind: Footer
+    subComponents:
+      - kind: AdditionalContent
+        required: true
   - kind: Disclaimer
+    required: true
