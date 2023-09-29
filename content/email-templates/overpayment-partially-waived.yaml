@@ -1,0 +1,20 @@
+name: Overpayment Partially Waived
+description: Perfect for when someone's overpayment has been partially waived.
+components:
+  - kind: Header
+    subComponents:
+      - kind: Title
+        required: true
+      - kind: Label
+  - kind: Name
+    description: "Adding a name is highly encouraged "
+  - kind: Body
+    subComponents:
+      - kind: Intro
+      - kind: Status
+  - kind: Amount
+    subComponents:
+      - kind: Breakdown
+    required: true
+  - kind: Footer
+  - kind: Disclaimer
