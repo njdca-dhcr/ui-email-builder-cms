@@ -14,7 +14,7 @@ describe('Banner', () => {
     emailComponent = buildEmailTemplateComponent('Banner')
   })
 
-  xit('displays its children', () => {
+  it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
       <Banner emailComponent={emailComponent} id={id}>
