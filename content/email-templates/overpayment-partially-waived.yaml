@@ -1,5 +1,5 @@
 name: Overpayment Partially Waived
-description: Perfect for when someone's overpayment has been partially waived.
+description: PUA focused but can still be applied to general overpayment campaigns
 components:
   - kind: Header
     subComponents:

@@ -19,8 +19,8 @@ const LibaryPage: FC = () => {
         <SkipNavContent />
         <SpacedContainer>
           <Heading element="h1">Library</Heading>
-          <Paragraph>Check out these templates.</Paragraph>
-          <List>
+          <Paragraph>Check out this library of templates</Paragraph>
+          <List className="library-list">
             {emailTemplates.map(({ id, name, description, path }) => (
               <li key={id} className="library-item">
                 <Link to={path} className="library-name">
