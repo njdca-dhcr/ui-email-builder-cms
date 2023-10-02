@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { type HeadFC } from 'gatsby'
+import { Link, type HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
@@ -22,7 +22,12 @@ const IndexPage: FC = () => {
             <h1>Email Builder (Beta)</h1>
           </VisuallyHidden>
           <section>
-            <Heading element="h2">Start with a template</Heading>
+            <div className="heading-and-actions">
+              <Heading element="h2">Start with a template</Heading>
+              <div>
+                <Link to="/library">See All Templates</Link>
+              </div>
+            </div>
             <Paragraph>
               You can edit and change everything—it just gives you a starting place.
             </Paragraph>

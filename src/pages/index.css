@@ -7,7 +7,7 @@
 
 .index-list {
   display: flex;
-  gap: 2rem;
+  justify-content: space-between;
 }
 
 .index-list li {
@@ -15,4 +15,17 @@
   border-radius: 5px;
   height: 13.5rem;
   width: 18rem;
+}
+
+.heading-and-actions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading-and-actions a {
+  color: var(--blue);
+  font-weight: var(--weight-bold);
+  line-height: 1.5rem;
+  text-decoration-line: underline;
 }

@@ -64,5 +64,7 @@
 }
 
 .spaced-container {
-  padding: 11.5rem 5.25rem;
+  padding-top: 11.5rem;
+  padding-left: 5.25rem;
+  padding-right: 9.75rem;
 }
