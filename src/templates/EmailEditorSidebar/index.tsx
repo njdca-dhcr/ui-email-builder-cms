@@ -10,6 +10,7 @@ import {
   EmailEditorToggleSection,
   EmailEditorToggles,
 } from './EmailEditorToggles'
+import { labelForSubComponent } from './labelForSubComponent'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -40,7 +41,7 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
                     key={n}
                     componentId={`${i}`}
                     disabled={subComponent.required}
-                    label={labelFor(subComponent.kind)}
+                    label={labelForSubComponent(subComponent.kind)}
                     subComponentId={`${n}`}
                   />
                 ))}
@@ -50,17 +51,4 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
       </EmailEditorToggles>
     </Sidebar>
   )
-}
-
-const labelFor = <T extends EmailTemplate.ComponentKind>(
-  subComponentKind: EmailTemplate.SubComponentKind<T>,
-): string => {
-  switch (subComponentKind) {
-    case 'AdditionalContent':
-      return 'Additional Content'
-    case 'ProgramName':
-      return 'Program Name'
-    default:
-      return subComponentKind
-  }
 }
