@@ -20,7 +20,7 @@ describe('EmailEditorContent', () => {
         buildEmailTemplateComponent('Header', {
           subComponents: [
             buildEmailTemplateSubComponent('Header', { kind: 'Title' }),
-            buildEmailTemplateSubComponent('Header', { kind: 'Label' }),
+            buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' }),
           ],
         }),
       ],
@@ -49,7 +49,7 @@ describe('EmailEditorContent', () => {
   it('can display the email components and subcomponents', () => {
     const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
     expect(queryByText('Title')).not.toBeNull()
-    expect(queryByText('Label')).not.toBeNull()
+    expect(queryByText('Program Name')).not.toBeNull()
   })
 
   it('allows users to copy the current preview into their clipboard', async () => {

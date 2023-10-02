@@ -5,7 +5,7 @@ components:
     subComponents:
       - kind: Title
         required: true
-      - kind: Label
+      - kind: ProgramName
   - kind: Name
     description: "Adding a name is highly encouraged "
   - kind: Body

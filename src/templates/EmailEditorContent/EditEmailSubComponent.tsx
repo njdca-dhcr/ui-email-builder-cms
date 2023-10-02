@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { EmailSubComponentProps } from '../EmailTemplateSubComponents/shared'
 import { Title } from '../EmailTemplateSubComponents/Title'
 import { useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
-import { Label } from '../EmailTemplateSubComponents/Label'
+import { ProgramName } from '../EmailTemplateSubComponents/ProgramName'
 import { AdditionalContent } from '../EmailTemplateSubComponents/AdditionalContent'
 import { Intro } from '../EmailTemplateSubComponents/Intro'
 import { Status } from '../EmailTemplateSubComponents/Status'
@@ -20,8 +20,8 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
       return <Breakdown {...props} />
     case 'Title':
       return <Title {...props} />
-    case 'Label':
-      return <Label {...props} />
+    case 'ProgramName':
+      return <ProgramName {...props} />
     case 'Intro':
       return <Intro {...props} />
     case 'Status':

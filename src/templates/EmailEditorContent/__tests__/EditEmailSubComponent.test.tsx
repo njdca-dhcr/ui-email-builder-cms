@@ -48,8 +48,8 @@ describe('EditEmailSubComponent', () => {
     expect(queryByText('Title')).not.toBeNull()
   })
 
-  it('can render Label', () => {
-    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'Label' })
+  it('can render ProgramName', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })
     const { queryByText } = render(
       <EditEmailSubComponent
         componentId={componentId}
@@ -58,7 +58,7 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByText('Label')).not.toBeNull()
+    expect(queryByText('Program Name')).not.toBeNull()
   })
 
   it('can render AdditionalContent', () => {

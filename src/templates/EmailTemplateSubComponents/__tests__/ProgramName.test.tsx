@@ -1,5 +1,5 @@
 import React from 'react'
-import { Label } from '../Label'
+import { ProgramName } from '../ProgramName'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
@@ -13,7 +13,7 @@ import {
 } from 'src/testHelpers'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 
-describe('Label', () => {
+describe('ProgramName', () => {
   let componentId: string
   let id: string
   let emailSubComponent: EmailTemplate.SubComponent<'Header'>
@@ -21,19 +21,19 @@ describe('Label', () => {
   beforeEach(() => {
     componentId = faker.lorem.words(2)
     id = faker.lorem.words(3)
-    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'Label' })
+    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })
   })
 
   it('is editable', async () => {
     const user = userEvent.setup()
     const { queryByText, getByText, baseElement } = render(
-      <Label componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <ProgramName componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
 
     const key = buildSubComponentKey(componentId, id)
     const value = faker.lorem.words(4)
-    const input = getByText('Label')
+    const input = getByText('Program Name')
     await user.clear(input)
     await user.type(input, value)
 
@@ -44,12 +44,12 @@ describe('Label', () => {
   it('activates when clicked', async () => {
     const user = userEvent.setup()
     const { getByText, baseElement } = render(
-      <Label componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <ProgramName componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
     const key = buildSubComponentKey(componentId, id)
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByText('Label'))
+    await user.click(getByText('Program Name'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })

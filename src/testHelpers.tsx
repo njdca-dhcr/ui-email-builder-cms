@@ -8,14 +8,6 @@ import {
 } from './templates/CurrentlyActiveEmailPart'
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
-import {
-  queries,
-  buildQueries,
-  queryHelpers,
-  Queries,
-  Matcher,
-  MatcherOptions,
-} from '@testing-library/react'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: EmailTemplate.ComponentKind,

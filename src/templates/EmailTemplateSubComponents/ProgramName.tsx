@@ -2,14 +2,14 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, DefaultStyles, Font, Spacing } from '../styles'
+import { DefaultStyles, Font, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
 
-export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
+export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const defaultValue = 'Label'
-  const [label, setLabel] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const defaultValue = 'Program Name'
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <tr>
@@ -19,9 +19,9 @@ export const Label: FC<EmailSubComponentProps> = ({ id, componentId }) => {
             <EditableElement
               defaultValue={defaultValue}
               element="td"
-              onValueChange={setLabel}
+              onValueChange={setValue}
               style={styles}
-              value={label}
+              value={value}
               onClick={activate}
             />
           </tr>

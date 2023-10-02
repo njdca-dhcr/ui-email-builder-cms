@@ -40,7 +40,7 @@ collections:
                 widget: 'select'
                 options:
                   - { label: 'Header - Title', value: 'Title' }
-                  - { label: 'Header - Label', value: 'Label' }
+                  - { label: 'Header - Program Name', value: 'ProgramName' }
                   - { label: 'Body - Intro', value: 'Intro' }
                   - { label: 'Body - Status', value: 'Status' }
                   - { label: 'Amount - Breakdown', value: 'Breakdown' }
