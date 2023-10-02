@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, JSX, HTMLAttributes, TableHTMLAttributes } from 'react'
+import React, { FC, JSX, TableHTMLAttributes } from 'react'
 
 interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
   defaultValue: string
