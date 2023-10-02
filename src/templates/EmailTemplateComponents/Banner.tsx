@@ -17,46 +17,59 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
           >
             <tbody>
               <tr>
-                <td style={{
-                  backgroundColor: Colors.black,
-                  color: Colors.white,
-                  width: '100vw !important',
-                  padding: Spacing.layout.paddingHorizontal.paddingLeft,
-                }}>
+                <td
+                  style={{
+                    backgroundColor: Colors.black,
+                    color: Colors.white,
+                    width: '100vw !important',
+                    padding: Spacing.layout.paddingHorizontal.paddingLeft,
+                  }}
+                >
                   <table cellSpacing={0} cellPadding="0" border={0} width="100%">
                     <tbody>
                       <tr>
-                        <td style={{
-                          width: '100%',
-                          paddingLeft: '0',
-                          textAlign: 'left',
-                        }}>
-                          <div style={{
-                            height: Font.size.small,
-                            lineHeight: Font.size.small,
-                            fontSize: Font.size.small,
-                            display: 'none'
-                          }}>
+                        <td
+                          style={{
+                            width: '100%',
+                            paddingLeft: '0',
+                            textAlign: 'left',
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: Font.size.small,
+                              lineHeight: Font.size.small,
+                              fontSize: Font.size.small,
+                              display: 'none',
+                            }}
+                          >
                             &nbsp;
                           </div>
 
                           <table cellSpacing="0" cellPadding="0" border={0} width="100%">
                             <tbody>
                               <tr>
-                                <td style={{
-                                  textAlign: 'left',
-                                }}>
-                                  <div style={{lineHeight: '127%'}}>
-                                    <a target="_blank" rel="noopener noreferrer" href="https://www.nj.gov/labor/" style={{
-                                      color: Colors.white,
-                                      lineHeight: '100%',
-                                      fontFamily: Font.family.default,
-                                      fontSize: Font.size.small,
-                                      textAlign: 'left',
-                                      fontWeight: Font.weight.bold,
-                                      textDecoration: 'underline',
-                                      whiteSpace: 'nowrap'
-                                    }}>
+                                <td
+                                  style={{
+                                    textAlign: 'left',
+                                  }}
+                                >
+                                  <div style={{ lineHeight: '127%' }}>
+                                    <a
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      href="https://www.nj.gov/labor/"
+                                      style={{
+                                        color: Colors.white,
+                                        lineHeight: '100%',
+                                        fontFamily: Font.family.default,
+                                        fontSize: Font.size.small,
+                                        textAlign: 'left',
+                                        fontWeight: Font.weight.bold,
+                                        textDecoration: 'underline',
+                                        whiteSpace: 'nowrap',
+                                      }}
+                                    >
                                       New Jersey Department of Labor and Workforce Development
                                     </a>
                                   </div>
@@ -65,48 +78,62 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
                             </tbody>
                           </table>
                         </td>
-                        <td style={{
-                          width: '100%',
-                          paddingLeft: '0px',
-                          textAlign: 'left',
-                        }}>
-                          <div style={{
-                            height: Font.size.tiny,
-                            lineHeight: Font.size.tiny,
-                            fontSize: Font.size.tiny,
-                            display: 'none'
-                          }}>
+                        <td
+                          style={{
+                            width: '100%',
+                            paddingLeft: '0px',
+                            textAlign: 'left',
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: Font.size.tiny,
+                              lineHeight: Font.size.tiny,
+                              fontSize: Font.size.tiny,
+                              display: 'none',
+                            }}
+                          >
                             &nbsp;
                           </div>
                           <table cellSpacing="0" cellPadding="0" border={0} width="100%">
                             <tbody>
                               <tr>
-                                <td style={{
-                                  textAlign: 'right',
-                                  paddingLeft: '0',
-                                }}>
-                                  <div style={{lineHeight: '150%'}}>
-                                    <a target="_blank" rel="noopener noreferrer" href="https://myunemployment.nj.gov"
+                                <td
+                                  style={{
+                                    textAlign: 'right',
+                                    paddingLeft: '0',
+                                  }}
+                                >
+                                  <div style={{ lineHeight: '150%' }}>
+                                    <a
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      href="https://myunemployment.nj.gov"
                                       style={{
-                                          color: Colors.white,
-                                          lineHeight: "150%",
-                                          fontFamily: Font.family.default,
-                                          fontSize: Font.size.small,
-                                          textAlign: "right",
-                                          textDecoration: "underline"
-                                        }}>myunemployment.nj.gov</a>
+                                        color: Colors.white,
+                                        lineHeight: '150%',
+                                        fontFamily: Font.family.default,
+                                        fontSize: Font.size.small,
+                                        textAlign: 'right',
+                                        textDecoration: 'underline',
+                                      }}
+                                    >
+                                      myunemployment.nj.gov
+                                    </a>
                                   </div>
                                 </td>
                               </tr>
                             </tbody>
                           </table>
-                          <div style={{
-                            maxWidth: '120px',
-                            height: Font.size.tiny,
-                            lineHeight: Font.size.tiny,
-                            fontSize: Font.size.tiny,
-                            display: 'none'
-                          }}>
+                          <div
+                            style={{
+                              maxWidth: '120px',
+                              height: Font.size.tiny,
+                              lineHeight: Font.size.tiny,
+                              fontSize: Font.size.tiny,
+                              display: 'none',
+                            }}
+                          >
                             &nbsp;
                           </div>
                         </td>
