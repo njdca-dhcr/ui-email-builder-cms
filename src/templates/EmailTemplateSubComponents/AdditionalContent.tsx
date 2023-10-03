@@ -2,30 +2,34 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { DefaultStyles, Spacing } from '../styles'
+import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 
+const defaultValue =
+  'The [INSERT STATE] Department of Labor and Workforce Development is an equal opportunity employer and offers equal opportunity programs. Auxiliary aids and services are available upon request to assist individuals with disabilities.'
+
 export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId }) => {
-  const defaultValue = 'Additional Content'
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
-    <tr>
-      <td onClick={activate}>
-        <EditableElement
-          defaultValue={defaultValue}
-          element="div"
-          onValueChange={setValue}
-          style={styles}
-          value={value}
-        />
-      </td>
+    <tr onClick={activate}>
+      <EditableElement
+        data-testid="footer-additional-content"
+        defaultValue={defaultValue}
+        element="td"
+        onValueChange={setValue}
+        style={styles}
+        value={value}
+      />
     </tr>
   )
 }
 
 const styles: CSSProperties = {
   ...DefaultStyles,
+  color: Colors.gray,
+  fontSize: Font.size.tiny,
+  lineHeight: '15px',
   paddingBottom: Spacing.size.medium,
 }
