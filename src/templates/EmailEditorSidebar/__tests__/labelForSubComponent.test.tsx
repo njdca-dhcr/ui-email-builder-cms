@@ -19,4 +19,10 @@ describe('labelForSubComponent', () => {
       expect(labelForSubComponent('AdditionalContent')).toEqual('Additional Content')
     })
   })
+
+  describe('when the subcomponent is SupplementalContent', () => {
+    it('is "Supplemental Content"', () => {
+      expect(labelForSubComponent('SupplementalContent')).toEqual('Supplemental Content')
+    })
+  })
 })
