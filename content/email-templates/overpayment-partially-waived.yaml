@@ -13,6 +13,9 @@ components:
       - kind: Intro
         required: true
       - kind: Status
+      - kind: SupplementalContent
+        required: true
+      - kind: SupplementalContent
     required: true
   - kind: Amount
     subComponents:

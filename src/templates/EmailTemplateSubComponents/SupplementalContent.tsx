@@ -1,42 +1,42 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
+import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { EditableElement } from 'src/ui/EditableElement'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, DefaultStyles, Font, Spacing } from '../styles'
+import { DefaultStyles, Font, Spacing } from '../styles'
 
 const defaultValue = {
-  title: 'Received & Under Review',
+  title: 'Supplemental Content Title',
   description:
-    'It may take up to 2 weeks to determine if payment can be processed for the week(s) in question',
+    'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 }
 
-export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
+export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <tr onClick={activate}>
       <td style={outerCellStyles}>
-        <TableAndCell style={innerCellStyles}>
+        <TableAndCell>
           <EmailTable>
             <tr>
               <EditableElement
-                data-testid="body-status-title"
+                data-testid="body-supplemental-content-title"
                 element="td"
-                defaultValue={defaultValue.title}
                 value={value.title}
+                defaultValue={defaultValue.title}
                 onValueChange={(title) => setValue({ ...value, title })}
                 style={titleStyles}
               />
             </tr>
             <tr>
               <EditableElement
-                data-testid="body-status-description"
+                data-testid="body-supplemental-content-description"
                 element="td"
-                defaultValue={defaultValue.description}
                 value={value.description}
+                defaultValue={defaultValue.description}
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={descriptionStyles}
               />
@@ -54,20 +54,11 @@ const outerCellStyles: CSSProperties = {
   paddingTop: Spacing.size.medium,
 }
 
-const innerCellStyles: CSSProperties = {
-  paddingLeft: 12,
-  borderLeft: `8px solid ${Colors.grayDark}`,
-  paddingTop: Spacing.size.small,
-  paddingBottom: Spacing.size.small,
-}
-
 const titleStyles: CSSProperties = {
-  fontSize: Font.size.extraLarge,
+  fontSize: Font.size.large,
   fontWeight: Font.weight.bold,
-  lineHeight: '40px',
   paddingBottom: Spacing.size.small,
 }
-
 const descriptionStyles: CSSProperties = {
-  lineHeight: '24px',
+  lineHeight: '22px',
 }

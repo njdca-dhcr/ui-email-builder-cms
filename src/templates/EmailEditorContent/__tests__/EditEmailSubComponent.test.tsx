@@ -111,4 +111,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByTestId('body-status-title')).not.toBeNull()
   })
+
+  it('can render SupplementalContent', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'SupplementalContent' })
+    const { queryByTestId } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByTestId('body-supplemental-content-title')).not.toBeNull()
+  })
 })
