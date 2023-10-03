@@ -32,6 +32,23 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html }) => {
           <meta name="viewport" content="width=device-width,initial-scale=1" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Public%20Sans:700&display=swap&subset=cyrillic"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Public%20Sans:400&display=swap&subset=cyrillic"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Public%20Sans:400i&display=swap&subset=cyrillic"
+            rel="stylesheet"
+          />
+          <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap"
+            rel="stylesheet"
+          />
         </head>
         <body
           style={styles.body}
