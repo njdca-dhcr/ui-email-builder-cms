@@ -19,6 +19,7 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId 
   return (
     <tr onClick={activate}>
       <EditableElement
+        label="Additional Content"
         data-testid="footer-additional-content"
         initialValue={initialValue}
         element="td"

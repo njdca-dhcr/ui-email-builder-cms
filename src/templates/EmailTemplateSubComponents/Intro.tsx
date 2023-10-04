@@ -19,6 +19,7 @@ export const Intro: FC<EmailSubComponentProps> = ({ componentId, id }) => {
     <tr>
       <EditableElement
         data-testid="body-intro"
+        label="Introduction"
         element="td"
         initialValue={initialValue}
         onValueChange={setValue}

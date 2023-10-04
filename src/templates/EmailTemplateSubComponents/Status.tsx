@@ -27,6 +27,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           <EmailTable>
             <tr>
               <EditableElement
+                label="Status title"
                 data-testid="body-status-title"
                 element="td"
                 initialValue={initialValue.title}
@@ -37,6 +38,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             </tr>
             <tr>
               <EditableElement
+                label="Status description"
                 data-testid="body-status-description"
                 element="td"
                 initialValue={initialValue.description}

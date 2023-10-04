@@ -15,6 +15,7 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
       <tr>
         <EditableElement
           data-testid="name"
+          label="Recipient's Name"
           onClick={activate}
           value={value}
           onValueChange={setValue}

@@ -23,6 +23,7 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
           <tr>
             <td style={cellContainerStyles}>
               <EditableElement
+                label="Title"
                 initialValue={initialValue}
                 element="h1"
                 onValueChange={setValue}

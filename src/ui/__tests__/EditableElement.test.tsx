@@ -5,11 +5,13 @@ import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 
 describe('EditableElement', () => {
+  let labelValue: string
   let value: string
   let defaultValue: string
   let handleChange: jest.Mock
 
   beforeEach(() => {
+    labelValue = faker.lorem.words(1)
     value = faker.lorem.words(2)
     defaultValue = faker.lorem.words(3)
     handleChange = jest.fn()
@@ -17,8 +19,9 @@ describe('EditableElement', () => {
 
   it('accepts and handles changes', async () => {
     const user = userEvent.setup()
-    const { getByText, baseElement } = render(
+    const { baseElement } = render(
       <EditableElement
+        label={labelValue}
         value={value}
         onValueChange={handleChange}
         initialValue={defaultValue}
@@ -35,6 +38,7 @@ describe('EditableElement', () => {
   it('displays a default value', () => {
     const { getByText } = render(
       <EditableElement
+        label={labelValue}
         value={value}
         onValueChange={handleChange}
         initialValue={defaultValue}
@@ -45,9 +49,25 @@ describe('EditableElement', () => {
     expect(section.tagName).toEqual('SECTION')
   })
 
+  it('is labelled', () => {
+    const { getByText } = render(
+      <EditableElement
+        label={labelValue}
+        value={value}
+        onValueChange={handleChange}
+        initialValue={defaultValue}
+        element="section"
+      />,
+    )
+    const section = getByText(defaultValue)
+    const attribute = section.attributes.getNamedItem('aria-label')
+    expect(attribute!.value).toEqual(labelValue)
+  })
+
   it('accepts style', () => {
     const { getByText } = render(
       <EditableElement
+        label={labelValue}
         value={value}
         onValueChange={handleChange}
         initialValue={defaultValue}
@@ -62,6 +82,7 @@ describe('EditableElement', () => {
   it('is the given element', () => {
     let rendered = render(
       <EditableElement
+        label={labelValue}
         value={value}
         onValueChange={handleChange}
         initialValue={defaultValue}
@@ -72,6 +93,7 @@ describe('EditableElement', () => {
 
     rendered = render(
       <EditableElement
+        label={labelValue}
         value={value}
         onValueChange={handleChange}
         initialValue={defaultValue}

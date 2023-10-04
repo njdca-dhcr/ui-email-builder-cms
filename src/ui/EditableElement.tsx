@@ -1,8 +1,9 @@
 import React, { FC, JSX, TableHTMLAttributes } from 'react'
 
 interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
-  initialValue: string
   element: keyof JSX.IntrinsicElements
+  initialValue: string
+  label: string
   onValueChange: (value: string) => void
   value: string
 }
@@ -10,6 +11,7 @@ interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
 export const EditableElement: FC<Props> = ({
   element,
   initialValue,
+  label,
   onValueChange,
   value,
   ...props
@@ -18,6 +20,7 @@ export const EditableElement: FC<Props> = ({
   return (
     <Element
       {...props}
+      aria-label={label}
       contentEditable
       onInput={(event) => onValueChange((event.target as any).innerHTML)}
       suppressContentEditableWarning

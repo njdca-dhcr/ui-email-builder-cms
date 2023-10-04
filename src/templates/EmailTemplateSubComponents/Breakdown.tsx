@@ -36,6 +36,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
       <EmailTable onClick={activate} maxWidth={273}>
         <tr>
           <EditableElement
+            label="Owed label"
             element="td"
             initialValue={initialValue.overpaymentLabel}
             value={value.overpaymentLabel}
@@ -43,6 +44,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             style={overpaymentStyles}
           />
           <EditableElement
+            label="Owed amount"
             align="right"
             element="td"
             initialValue={initialValue.overpaymentAmount}
@@ -53,6 +55,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         </tr>
         <tr>
           <EditableElement
+            label="Waived label"
             element="td"
             initialValue={initialValue.waivedLabel}
             value={value.waivedLabel}
@@ -60,6 +63,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             style={waivedStyles}
           />
           <EditableElement
+            label="Waived amount"
             align="right"
             element="td"
             initialValue={initialValue.waivedAmount}
@@ -71,6 +75,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         <tr>
           <EditableElement
             element="td"
+            label="Must pay label"
             initialValue={initialValue.mustPayLabel}
             value={value.mustPayLabel}
             onValueChange={(mustPayLabel) => setValue({ ...value, mustPayLabel })}
@@ -78,6 +83,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           />
           <EditableElement
             align="right"
+            label="Must pay amount"
             element="td"
             initialValue={initialValue.mustPayAmount}
             value={value.mustPayAmount}

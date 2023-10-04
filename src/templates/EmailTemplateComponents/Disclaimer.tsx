@@ -16,15 +16,14 @@ export const Disclaimer: FC<EmailComponentProps> = ({ children, id }) => {
       <tr>
         <EditableElement
           data-testid="disclaimer"
+          label="Disclaimer"
           onClick={activate}
           value={value}
           onValueChange={setValue}
           element="td"
           initialValue={initialValue}
           style={styles}
-        >
-          {defaultValue}
-        </EditableElement>
+        />
       </tr>
       {children}
     </>

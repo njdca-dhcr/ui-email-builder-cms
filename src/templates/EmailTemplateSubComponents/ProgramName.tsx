@@ -22,6 +22,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
         <EmailTable style={containerStyles} width="unset">
           <tr>
             <EditableElement
+              label="Program name"
               initialValue={initialValue}
               element="td"
               onValueChange={setValue}
