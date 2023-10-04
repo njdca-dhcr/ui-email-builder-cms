@@ -37,7 +37,7 @@ describe('EditEmailSubComponent', () => {
 
   it('can render Title', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'Title' })
-    const { queryByText } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -45,12 +45,12 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByText('Title')).not.toBeNull()
+    expect(queryByLabelText('Title')).not.toBeNull()
   })
 
   it('can render ProgramName', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })
-    const { queryByText } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -58,7 +58,7 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByText('Program Name')).not.toBeNull()
+    expect(queryByLabelText('Program name')).not.toBeNull()
   })
 
   it('can render AdditionalContent', () => {
@@ -76,19 +76,19 @@ describe('EditEmailSubComponent', () => {
 
   it('can render Breakdown', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Amount', { kind: 'Breakdown' })
-    const { queryByText } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
         emailSubComponent={emailSubComponent}
       />,
     )
-    expect(queryByText('Overpayment Total')).not.toBeNull()
+    expect(queryByLabelText('Owed label')).not.toBeNull()
   })
 
   it('can render Intro', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Intro' })
-    const { queryByTestId } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -96,12 +96,12 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByTestId('body-intro')).not.toBeNull()
+    expect(queryByLabelText('Introduction')).not.toBeNull()
   })
 
   it('can render Status', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Status' })
-    const { queryByTestId } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -109,12 +109,12 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByTestId('body-status-title')).not.toBeNull()
+    expect(queryByLabelText('Status title')).not.toBeNull()
   })
 
   it('can render SupplementalContent', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'SupplementalContent' })
-    const { queryByTestId } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -122,6 +122,6 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByTestId('body-supplemental-content-title')).not.toBeNull()
+    expect(queryByLabelText('Supplemental content title')).not.toBeNull()
   })
 })
