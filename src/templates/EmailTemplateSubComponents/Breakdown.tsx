@@ -25,7 +25,11 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
     mustPayLabel: 'You must pay',
     mustPayAmount: '$150',
   }
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
+    componentId,
+    id,
+    defaultValue,
+  )
 
   return (
     <TableAndCell style={containerStyles}>
@@ -33,7 +37,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         <tr>
           <EditableElement
             element="td"
-            defaultValue={defaultValue.overpaymentLabel}
+            initialValue={initialValue.overpaymentLabel}
             value={value.overpaymentLabel}
             onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
             style={overpaymentStyles}
@@ -41,7 +45,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           <EditableElement
             align="right"
             element="td"
-            defaultValue={defaultValue.overpaymentAmount}
+            initialValue={initialValue.overpaymentAmount}
             value={value.overpaymentAmount}
             onValueChange={(overpaymentAmount) => setValue({ ...value, overpaymentAmount })}
             style={overpaymentStyles}
@@ -50,7 +54,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         <tr>
           <EditableElement
             element="td"
-            defaultValue={defaultValue.waivedLabel}
+            initialValue={initialValue.waivedLabel}
             value={value.waivedLabel}
             onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
             style={waivedStyles}
@@ -58,7 +62,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           <EditableElement
             align="right"
             element="td"
-            defaultValue={defaultValue.waivedAmount}
+            initialValue={initialValue.waivedAmount}
             value={value.waivedAmount}
             onValueChange={(waivedAmount) => setValue({ ...value, waivedAmount })}
             style={waivedStyles}
@@ -67,7 +71,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         <tr>
           <EditableElement
             element="td"
-            defaultValue={defaultValue.mustPayLabel}
+            initialValue={initialValue.mustPayLabel}
             value={value.mustPayLabel}
             onValueChange={(mustPayLabel) => setValue({ ...value, mustPayLabel })}
             style={mustPayStyles}
@@ -75,7 +79,7 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           <EditableElement
             align="right"
             element="td"
-            defaultValue={defaultValue.mustPayAmount}
+            initialValue={initialValue.mustPayAmount}
             value={value.mustPayAmount}
             onValueChange={(mustPayAmount) => setValue({ ...value, mustPayAmount })}
             style={mustPayStyles}

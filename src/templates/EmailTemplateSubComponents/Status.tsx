@@ -14,7 +14,11 @@ const defaultValue = {
 
 export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
+    componentId,
+    id,
+    defaultValue,
+  )
 
   return (
     <tr onClick={activate}>
@@ -25,7 +29,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <EditableElement
                 data-testid="body-status-title"
                 element="td"
-                defaultValue={defaultValue.title}
+                initialValue={initialValue.title}
                 value={value.title}
                 onValueChange={(title) => setValue({ ...value, title })}
                 style={titleStyles}
@@ -35,7 +39,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <EditableElement
                 data-testid="body-status-description"
                 element="td"
-                defaultValue={defaultValue.description}
+                initialValue={initialValue.description}
                 value={value.description}
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={descriptionStyles}

@@ -5,23 +5,23 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
 import { DefaultStyles, Spacing } from '../styles'
 
+const defaultValue = 'FIRST LAST NAME:'
+
 export const Name: FC<EmailComponentProps> = ({ children, id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
-  const defaultValue = 'FIRST LAST NAME:'
-  const [value, setValue] = useEmailPartsContentForComponent(id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForComponent(id, defaultValue)
   return (
     <>
       <tr>
         <EditableElement
+          data-testid="name"
           onClick={activate}
           value={value}
           onValueChange={setValue}
           element="td"
-          defaultValue={defaultValue}
+          initialValue={initialValue}
           style={styles}
-        >
-          {defaultValue}
-        </EditableElement>
+        />
       </tr>
       {children}
     </>

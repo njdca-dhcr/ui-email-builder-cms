@@ -21,7 +21,7 @@ describe('EditableElement', () => {
       <EditableElement
         value={value}
         onValueChange={handleChange}
-        defaultValue={defaultValue}
+        initialValue={defaultValue}
         element="section"
       />,
     )
@@ -37,7 +37,7 @@ describe('EditableElement', () => {
       <EditableElement
         value={value}
         onValueChange={handleChange}
-        defaultValue={defaultValue}
+        initialValue={defaultValue}
         element="section"
       />,
     )
@@ -50,7 +50,7 @@ describe('EditableElement', () => {
       <EditableElement
         value={value}
         onValueChange={handleChange}
-        defaultValue={defaultValue}
+        initialValue={defaultValue}
         element="section"
         style={{ backgroundColor: 'red' }}
       />,
@@ -64,7 +64,7 @@ describe('EditableElement', () => {
       <EditableElement
         value={value}
         onValueChange={handleChange}
-        defaultValue={defaultValue}
+        initialValue={defaultValue}
         element="span"
       />,
     )
@@ -74,7 +74,7 @@ describe('EditableElement', () => {
       <EditableElement
         value={value}
         onValueChange={handleChange}
-        defaultValue={defaultValue}
+        initialValue={defaultValue}
         element="section"
       />,
     )

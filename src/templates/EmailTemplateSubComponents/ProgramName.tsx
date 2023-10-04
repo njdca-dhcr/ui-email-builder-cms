@@ -6,10 +6,15 @@ import { DefaultStyles, Font, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
 
+const defaultValue = 'Program Name'
+
 export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const defaultValue = 'Program Name'
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
+    componentId,
+    id,
+    defaultValue,
+  )
 
   return (
     <tr>
@@ -17,7 +22,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
         <EmailTable style={containerStyles} width="unset">
           <tr>
             <EditableElement
-              defaultValue={defaultValue}
+              initialValue={initialValue}
               element="td"
               onValueChange={setValue}
               style={styles}

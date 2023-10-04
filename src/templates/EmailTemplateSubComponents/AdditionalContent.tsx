@@ -10,13 +10,17 @@ const defaultValue =
 
 export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
+    componentId,
+    id,
+    defaultValue,
+  )
 
   return (
     <tr onClick={activate}>
       <EditableElement
         data-testid="footer-additional-content"
-        defaultValue={defaultValue}
+        initialValue={initialValue}
         element="td"
         onValueChange={setValue}
         style={styles}

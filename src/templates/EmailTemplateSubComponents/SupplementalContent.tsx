@@ -14,7 +14,11 @@ const defaultValue = {
 
 export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
+    componentId,
+    id,
+    defaultValue,
+  )
 
   return (
     <tr onClick={activate}>
@@ -26,7 +30,7 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
                 data-testid="body-supplemental-content-title"
                 element="td"
                 value={value.title}
-                defaultValue={defaultValue.title}
+                initialValue={initialValue.title}
                 onValueChange={(title) => setValue({ ...value, title })}
                 style={titleStyles}
               />
@@ -36,7 +40,7 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
                 data-testid="body-supplemental-content-description"
                 element="td"
                 value={value.description}
-                defaultValue={defaultValue.description}
+                initialValue={initialValue.description}
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={descriptionStyles}
               />

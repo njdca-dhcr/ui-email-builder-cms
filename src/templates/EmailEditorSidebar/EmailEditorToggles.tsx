@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react'
-import { useId } from '@reach/auto-id'
 import { List } from 'src/ui/List'
 import { Toggle } from 'src/ui/Toggle'
 import './EmailEditorToggles.css'
 import { useShouldShowEmailComponent, useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
+import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 interface EmailEditorTogglesProps {
   children: ReactNode
@@ -29,7 +29,7 @@ export const EmailEditorToggleSection: FC<EmailEditorToggleSectionProps> = ({
   required,
 }) => {
   const shouldShow = useShouldShowEmailComponent(componentId)
-  const id = useId(componentId)
+  const id = `toggle-${buildComponentKey(componentId)}`
 
   return (
     <li className="email-editor-toggle-section">
@@ -60,7 +60,7 @@ export const EmailEditorToggle: FC<EmailEditorToggleProps> = ({
 }) => {
   const shouldShowComponent = useShouldShowEmailComponent(componentId)
   const shouldShow = useShouldShowEmailSubComponent(componentId, subComponentId)
-  const id = useId([componentId, subComponentId].join('-'))
+  const id = `toggle-${buildSubComponentKey(componentId, subComponentId)}`
 
   return (
     <li className="email-editor-toggle">

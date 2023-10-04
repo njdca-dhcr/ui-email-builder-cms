@@ -1,4 +1,12 @@
-import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
+import React, {
+  FC,
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react'
 import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 interface EmailPartsContentData<T extends any> {
@@ -25,7 +33,7 @@ export const useEmailPartsContentData = () => useContext(EmailPartsContentContex
 export const useEmailPartsContentForComponent = <T extends any>(
   id: string,
   defaultValue: T,
-): [T, (value: T) => void] => {
+): [T, (value: T) => void, { initialValue: T }] => {
   const [data, update] = useEmailPartsContentData()
   const key = buildComponentKey(id)
 
@@ -37,15 +45,16 @@ export const useEmailPartsContentForComponent = <T extends any>(
     },
     [data, update, key],
   )
+  const initialValue = useMemo(() => value, [])
 
-  return [value, updateValue]
+  return [value, updateValue, { initialValue }]
 }
 
 export const useEmailPartsContentForSubComponent = <T extends any>(
   componentId: string,
   id: string,
   defaultValue: T,
-): [T, (value: T) => void] => {
+): [T, (value: T) => void, { initialValue: T }] => {
   const [data, update] = useEmailPartsContentData()
   const key = buildSubComponentKey(componentId, id)
 
@@ -58,5 +67,7 @@ export const useEmailPartsContentForSubComponent = <T extends any>(
     [data, update, key],
   )
 
-  return [value, updateValue]
+  const initialValue = useMemo(() => value, [])
+
+  return [value, updateValue, { initialValue }]
 }

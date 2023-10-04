@@ -7,10 +7,12 @@ import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
 
+const defaultValue = 'You owe $200'
+
 export const Amount: FC<EmailComponentProps> = ({ children, id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
-  const defaultValue = 'You owe $200'
-  const [value, setValue] = useEmailPartsContentForComponent(id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForComponent(id, defaultValue)
+
   return (
     <tr>
       <td style={containerCellStyles}>
@@ -23,7 +25,7 @@ export const Amount: FC<EmailComponentProps> = ({ children, id }) => {
               <td onClick={activate} style={amountStyles}>
                 <TableAndCell>
                   <EditableElement
-                    defaultValue={defaultValue}
+                    initialValue={initialValue}
                     element="div"
                     onValueChange={setValue}
                     value={value}

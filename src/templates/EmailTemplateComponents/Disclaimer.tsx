@@ -6,9 +6,11 @@ import { useEmailPartsContentForComponent } from '../EmailPartsContent'
 import { Colors, Font, Spacing } from '../styles'
 
 const defaultValue = `CONFIDENTIALITY NOTICE: This email message and any accompanying attachments may contain legally privileged and confidential information intended solely for the use of the intended recipient. If you are not the intended recipient, you are hereby advised that any reading, dissemination, distribution, copying, or other use of this message or its attachments is strictly prohibited. If you have received this message in error, please notify the sender immediately and delete this message.`
+
 export const Disclaimer: FC<EmailComponentProps> = ({ children, id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
-  const [value, setValue] = useEmailPartsContentForComponent(id, defaultValue)
+  const [value, setValue, { initialValue }] = useEmailPartsContentForComponent(id, defaultValue)
+
   return (
     <>
       <tr>
@@ -18,7 +20,7 @@ export const Disclaimer: FC<EmailComponentProps> = ({ children, id }) => {
           value={value}
           onValueChange={setValue}
           element="td"
-          defaultValue={defaultValue}
+          initialValue={initialValue}
           style={styles}
         >
           {defaultValue}
