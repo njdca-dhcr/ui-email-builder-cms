@@ -15,7 +15,6 @@ export const Disclaimer: FC<EmailComponentProps> = ({ children, id }) => {
     <>
       <tr>
         <EditableElement
-          data-testid="disclaimer"
           element="td"
           initialValue={initialValue}
           label="Disclaimer"

@@ -63,7 +63,7 @@ describe('EditEmailSubComponent', () => {
 
   it('can render AdditionalContent', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })
-    const { queryByTestId } = render(
+    const { queryByLabelText } = render(
       <EditEmailSubComponent
         componentId={componentId}
         id={id}
@@ -71,7 +71,7 @@ describe('EditEmailSubComponent', () => {
       />,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByTestId('footer-additional-content')).not.toBeNull()
+    expect(queryByLabelText('Additional content')).not.toBeNull()
   })
 
   it('can render Breakdown', () => {

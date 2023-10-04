@@ -27,7 +27,6 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
           <EmailTable>
             <tr>
               <EditableElement
-                data-testid="body-supplemental-content-title"
                 element="td"
                 initialValue={initialValue.title}
                 label="Supplemental content title"
@@ -38,7 +37,6 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
             </tr>
             <tr>
               <EditableElement
-                data-testid="body-supplemental-content-description"
                 element="td"
                 initialValue={initialValue.description}
                 label="Supplemental content description"

@@ -18,7 +18,6 @@ export const Intro: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   return (
     <tr>
       <EditableElement
-        data-testid="body-intro"
         element="td"
         initialValue={initialValue}
         label="Introduction"

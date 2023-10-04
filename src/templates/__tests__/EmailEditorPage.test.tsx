@@ -110,8 +110,8 @@ describe('EmailEditorPage', () => {
 
     it('preserves entered component text after toggling a component off and then on again', async () => {
       const value = faker.lorem.paragraph()
-      const { baseElement, queryByTestId } = rendered
-      const input = () => queryByTestId('name')
+      const { baseElement, queryByLabelText } = rendered
+      const input = () => queryByLabelText("Recipient's name")
       const componentToggle = () => baseElement.querySelector(`#toggle-${buildComponentKey('1')}`)!
 
       await user.clear(input()!)

@@ -14,7 +14,6 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
     <>
       <tr>
         <EditableElement
-          data-testid="name"
           element="td"
           initialValue={initialValue}
           label="Recipient's name"
