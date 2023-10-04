@@ -27,7 +27,9 @@ describe('EmailEditorSidebar', () => {
 
     expect(navigate).not.toHaveBeenCalled()
     await user.selectOptions(select, ['Another Email Template'])
-    expect(navigate).toHaveBeenCalledWith('/email-templates/another-email-template')
+    expect(navigate).toHaveBeenCalledWith('/email-templates/another-email-template', {
+      replace: true,
+    })
   })
 
   it('does not include the current email template in the list of options', () => {

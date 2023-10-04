@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
-import { Link } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
 import { EmailTemplate } from 'src/appTypes'
-import { BackArrowIcon } from 'src/ui/BackArrowIcon'
 import { Sidebar } from 'src/ui/Layout'
 import { EmailEditorHeadingAndSelect } from './EmailEditorHeadingAndSelect'
 import {
@@ -11,6 +9,7 @@ import {
   EmailEditorToggles,
 } from './EmailEditorToggles'
 import { labelForSubComponent } from './labelForSubComponent'
+import { BackLink } from './BackLink'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -19,10 +18,7 @@ interface Props {
 export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
   return (
     <Sidebar>
-      <Link to="/" className="back-link">
-        <BackArrowIcon />
-        <span className="back-link-text">Back to Home</span>
-      </Link>
+      <BackLink />
       <SkipNavContent />
       <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />
       <EmailEditorToggles>

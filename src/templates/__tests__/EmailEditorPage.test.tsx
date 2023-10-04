@@ -60,7 +60,7 @@ describe('EmailEditorPage', () => {
 
   it('displays the EmailEditorSidebar', () => {
     const { queryByText } = rendered
-    expect(queryByText('Back to Home')).not.toBeNull()
+    expect(queryByText('Back')).not.toBeNull()
   })
 
   describe('Head', () => {

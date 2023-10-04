@@ -19,8 +19,7 @@ describe('EmailEditorSidebar', () => {
   it('displays a link back to the home page', () => {
     const { baseElement } = render(<EmailEditorSidebar emailTemplate={emailTemplate} />)
     const link: HTMLAnchorElement = baseElement.querySelector('.back-link') as any
-    expect(link.tagName).toEqual('A')
-    expect(link.href).toEqual(urlFor('/'))
+    expect(link).toHaveTextContent('Back')
   })
 
   it('displays the heading and select navigator', () => {
