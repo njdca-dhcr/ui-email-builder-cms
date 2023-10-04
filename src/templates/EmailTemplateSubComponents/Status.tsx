@@ -27,24 +27,24 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           <EmailTable>
             <tr>
               <EditableElement
-                label="Status title"
                 data-testid="body-status-title"
                 element="td"
                 initialValue={initialValue.title}
-                value={value.title}
+                label="Status title"
                 onValueChange={(title) => setValue({ ...value, title })}
                 style={titleStyles}
+                value={value.title}
               />
             </tr>
             <tr>
               <EditableElement
-                label="Status description"
                 data-testid="body-status-description"
                 element="td"
                 initialValue={initialValue.description}
-                value={value.description}
+                label="Status description"
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={descriptionStyles}
+                value={value.description}
               />
             </tr>
           </EmailTable>

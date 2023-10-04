@@ -15,13 +15,13 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
       <tr>
         <EditableElement
           data-testid="name"
-          label="Recipient's Name"
-          onClick={activate}
-          value={value}
-          onValueChange={setValue}
           element="td"
           initialValue={initialValue}
+          label="Recipient's Name"
+          onClick={activate}
+          onValueChange={setValue}
           style={styles}
+          value={value}
         />
       </tr>
       {children}

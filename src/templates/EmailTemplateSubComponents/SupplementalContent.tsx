@@ -27,24 +27,24 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
           <EmailTable>
             <tr>
               <EditableElement
-                label="Supplemental content title"
                 data-testid="body-supplemental-content-title"
                 element="td"
-                value={value.title}
                 initialValue={initialValue.title}
+                label="Supplemental content title"
                 onValueChange={(title) => setValue({ ...value, title })}
                 style={titleStyles}
+                value={value.title}
               />
             </tr>
             <tr>
               <EditableElement
-                label="Supplemental content description"
                 data-testid="body-supplemental-content-description"
                 element="td"
-                value={value.description}
                 initialValue={initialValue.description}
+                label="Supplemental content description"
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={descriptionStyles}
+                value={value.description}
               />
             </tr>
           </EmailTable>

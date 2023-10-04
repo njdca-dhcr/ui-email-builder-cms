@@ -22,13 +22,13 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
         <EmailTable style={containerStyles} width="unset">
           <tr>
             <EditableElement
-              label="Program name"
-              initialValue={initialValue}
               element="td"
+              initialValue={initialValue}
+              label="Program name"
+              onClick={activate}
               onValueChange={setValue}
               style={styles}
               value={value}
-              onClick={activate}
             />
           </tr>
         </EmailTable>

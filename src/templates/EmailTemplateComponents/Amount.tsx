@@ -25,9 +25,9 @@ export const Amount: FC<EmailComponentProps> = ({ children, id }) => {
               <td onClick={activate} style={amountStyles}>
                 <TableAndCell>
                   <EditableElement
-                    label="Amount title"
-                    initialValue={initialValue}
                     element="div"
+                    initialValue={initialValue}
+                    label="Amount title"
                     onValueChange={setValue}
                     value={value}
                   />

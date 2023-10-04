@@ -36,59 +36,59 @@ export const Breakdown: FC<EmailSubComponentProps> = ({ componentId, id }) => {
       <EmailTable onClick={activate} maxWidth={273}>
         <tr>
           <EditableElement
-            label="Owed label"
             element="td"
             initialValue={initialValue.overpaymentLabel}
-            value={value.overpaymentLabel}
+            label="Owed label"
             onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
             style={overpaymentStyles}
+            value={value.overpaymentLabel}
           />
           <EditableElement
-            label="Owed amount"
             align="right"
             element="td"
             initialValue={initialValue.overpaymentAmount}
-            value={value.overpaymentAmount}
+            label="Owed amount"
             onValueChange={(overpaymentAmount) => setValue({ ...value, overpaymentAmount })}
             style={overpaymentStyles}
+            value={value.overpaymentAmount}
           />
         </tr>
         <tr>
           <EditableElement
-            label="Waived label"
             element="td"
             initialValue={initialValue.waivedLabel}
-            value={value.waivedLabel}
+            label="Waived label"
             onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
             style={waivedStyles}
+            value={value.waivedLabel}
           />
           <EditableElement
-            label="Waived amount"
             align="right"
             element="td"
             initialValue={initialValue.waivedAmount}
-            value={value.waivedAmount}
+            label="Waived amount"
             onValueChange={(waivedAmount) => setValue({ ...value, waivedAmount })}
             style={waivedStyles}
+            value={value.waivedAmount}
           />
         </tr>
         <tr>
           <EditableElement
             element="td"
-            label="Must pay label"
             initialValue={initialValue.mustPayLabel}
-            value={value.mustPayLabel}
+            label="Must pay label"
             onValueChange={(mustPayLabel) => setValue({ ...value, mustPayLabel })}
             style={mustPayStyles}
+            value={value.mustPayLabel}
           />
           <EditableElement
             align="right"
-            label="Must pay amount"
             element="td"
             initialValue={initialValue.mustPayAmount}
-            value={value.mustPayAmount}
+            label="Must pay amount"
             onValueChange={(mustPayAmount) => setValue({ ...value, mustPayAmount })}
             style={mustPayStyles}
+            value={value.mustPayAmount}
           />
         </tr>
       </EmailTable>
