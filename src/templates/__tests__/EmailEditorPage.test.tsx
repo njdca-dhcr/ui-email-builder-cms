@@ -14,8 +14,10 @@ import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys
 describe('EmailEditorPage', () => {
   let emailTemplate: EmailTemplate.Config
   let rendered: RenderResult
+  let user: UserEvent
 
   beforeEach(() => {
+    user = userEvent.setup()
     emailTemplate = buildEmailTemplateConfig({
       components: [
         buildEmailTemplateComponent('Header', {
@@ -69,12 +71,6 @@ describe('EmailEditorPage', () => {
   })
 
   describe('toggling/editing components and their subcomponents', () => {
-    let user: UserEvent
-
-    beforeEach(() => {
-      user = userEvent.setup()
-    })
-
     it('preserves entered subcomponent text after toggling a subcomponent off and then on again', async () => {
       const value = faker.lorem.paragraph()
       const { baseElement } = rendered

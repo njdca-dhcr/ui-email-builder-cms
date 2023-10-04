@@ -22,8 +22,8 @@ describe('Status', () => {
   let rendered: RenderResult
   let key: string
 
-  const clearAndFillWithValue = async (testId: string) => {
-    const element = rendered.getByTestId(testId)
+  const clearAndFillWithValue = async (label: string) => {
+    const element = rendered.getByLabelText(label)
     await user.clear(element)
     await user.type(element, value)
   }
@@ -42,22 +42,22 @@ describe('Status', () => {
   })
 
   it('has an editable title', async () => {
-    await clearAndFillWithValue('body-status-title')
+    await clearAndFillWithValue('Status title')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable description', async () => {
-    await clearAndFillWithValue('body-status-description')
+    await clearAndFillWithValue('Status description')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { getByTestId, baseElement } = rendered
+    const { getByLabelText, baseElement } = rendered
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByTestId('body-status-title'))
+    await user.click(getByLabelText('Status title'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })

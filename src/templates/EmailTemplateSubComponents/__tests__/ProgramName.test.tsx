@@ -26,14 +26,14 @@ describe('ProgramName', () => {
 
   it('is editable', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByText, baseElement } = render(
+    const { queryByText, getByLabelText, baseElement } = render(
       <ProgramName componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
 
     const key = buildSubComponentKey(componentId, id)
     const value = faker.lorem.words(4)
-    const input = getByText('Program Name')
+    const input = getByLabelText('Program name')
     await user.clear(input)
     await user.type(input, value)
 
@@ -43,13 +43,13 @@ describe('ProgramName', () => {
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { getByText, baseElement } = render(
+    const { getByLabelText, baseElement } = render(
       <ProgramName componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
     const key = buildSubComponentKey(componentId, id)
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByText('Program Name'))
+    await user.click(getByLabelText('Program name'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })

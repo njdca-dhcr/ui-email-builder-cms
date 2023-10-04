@@ -26,13 +26,13 @@ describe('AdditionalContent', () => {
 
   it('is editable', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByTestId, baseElement } = render(
+    const { queryByText, getByLabelText, baseElement } = render(
       <AdditionalContent componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
 
     const value = faker.lorem.words(4)
-    const input = getByTestId('footer-additional-content')
+    const input = getByLabelText('Additional content')
     await user.clear(input)
     await user.type(input, value)
 
@@ -42,13 +42,13 @@ describe('AdditionalContent', () => {
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { getByTestId, baseElement } = render(
+    const { getByLabelText, baseElement } = render(
       <AdditionalContent componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
     const key = buildSubComponentKey(componentId, id)
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByTestId('footer-additional-content'))
+    await user.click(getByLabelText('Additional content'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })

@@ -23,7 +23,7 @@ describe('Breakdown', () => {
   let key: string
 
   const clearAndFillWithValue = async (text: string) => {
-    const element = rendered.getByText(text)
+    const element = rendered.getByLabelText(text)
     await user.clear(element)
     await user.type(element, value)
   }
@@ -46,46 +46,46 @@ describe('Breakdown', () => {
   })
 
   it('has an editable overpayment label', async () => {
-    await clearAndFillWithValue('Overpayment Total')
+    await clearAndFillWithValue('Owed label')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable overpayment total', async () => {
-    await clearAndFillWithValue('$200')
+    await clearAndFillWithValue('Owed amount')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable amount waived label', async () => {
-    await clearAndFillWithValue('Amount waived')
+    await clearAndFillWithValue('Waived label')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable amount waived total', async () => {
-    await clearAndFillWithValue('$50')
+    await clearAndFillWithValue('Waived amount')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable you must pay label', async () => {
-    await clearAndFillWithValue('You must pay')
+    await clearAndFillWithValue('Must pay label')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable you must pay total', async () => {
-    await clearAndFillWithValue('$150')
+    await clearAndFillWithValue('Must pay amount')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { getByText, baseElement } = rendered
+    const { getByLabelText, baseElement } = rendered
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByText('Overpayment Total'))
+    await user.click(getByLabelText('Owed label'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })
