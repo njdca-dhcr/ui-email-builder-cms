@@ -17,7 +17,7 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
           data-testid="name"
           element="td"
           initialValue={initialValue}
-          label="Recipient's Name"
+          label="Recipient's name"
           onClick={activate}
           onValueChange={setValue}
           style={styles}

@@ -36,7 +36,7 @@ describe('Amount', () => {
 
   it('displays an editable total message', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByText, baseElement } = render(
+    const { queryByText, getByLabelText, baseElement } = render(
       <Amount id={id} emailComponent={emailComponent}>
         <span />
       </Amount>,
@@ -47,7 +47,7 @@ describe('Amount', () => {
 
     const key = buildComponentKey(id)
     const value = faker.lorem.words(4)
-    const input = getByText('You owe $200')
+    const input = getByLabelText('Amount title')
     await user.clear(input)
     await user.type(input, value)
 
@@ -57,7 +57,7 @@ describe('Amount', () => {
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByText, baseElement } = render(
+    const { getByLabelText, baseElement } = render(
       <Amount id={id} emailComponent={emailComponent}>
         <span />
       </Amount>,
@@ -65,7 +65,7 @@ describe('Amount', () => {
     )
     const key = buildComponentKey(id)
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByText('You owe $200'))
+    await user.click(getByLabelText('Amount title'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })

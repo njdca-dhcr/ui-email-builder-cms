@@ -38,7 +38,7 @@ describe('Name', () => {
 
   it('displays an editable name', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByText, baseElement } = render(
+    const { queryByText, getByLabelText, baseElement } = render(
       <Name id={id} emailComponent={emailComponent}>
         {null}
       </Name>,
@@ -49,7 +49,7 @@ describe('Name', () => {
 
     const key = buildComponentKey(id)
     const value = faker.lorem.words(4)
-    const input = getByText('FIRST LAST NAME:')
+    const input = getByLabelText("Recipient's name")
     await user.clear(input)
     await user.type(input, value)
 
@@ -59,7 +59,7 @@ describe('Name', () => {
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { getByText, baseElement } = render(
+    const { getByLabelText, baseElement } = render(
       <Name id={id} emailComponent={emailComponent}>
         {null}
       </Name>,
@@ -67,7 +67,7 @@ describe('Name', () => {
     )
     const key = buildComponentKey(id)
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByText('FIRST LAST NAME:'))
+    await user.click(getByLabelText("Recipient's name"))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })

@@ -38,7 +38,7 @@ describe('Disclaimer', () => {
 
   it('displays an editable Disclaimer', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByTestId, baseElement } = render(
+    const { queryByText, getByLabelText, baseElement } = render(
       <Disclaimer id={id} emailComponent={emailComponent}>
         {null}
       </Disclaimer>,
@@ -49,7 +49,7 @@ describe('Disclaimer', () => {
 
     const key = buildComponentKey(id)
     const value = faker.lorem.words(4)
-    const input = getByTestId('disclaimer')
+    const input = getByLabelText('Disclaimer')
     await user.clear(input)
     await user.type(input, value)
 
@@ -59,7 +59,7 @@ describe('Disclaimer', () => {
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
-    const { getByTestId, baseElement } = render(
+    const { getByLabelText, baseElement } = render(
       <Disclaimer id={id} emailComponent={emailComponent}>
         {null}
       </Disclaimer>,
@@ -67,7 +67,7 @@ describe('Disclaimer', () => {
     )
     const key = buildComponentKey(id)
     expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByTestId('disclaimer'))
+    await user.click(getByLabelText('Disclaimer'))
     expectActiveEmailPartToBe(key, baseElement)
   })
 })
