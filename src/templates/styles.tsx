@@ -10,12 +10,19 @@ export const Colors = {
   white: '#FFFFFF',
 } as const
 
+const sansSerif = 'Public Sans, Helvetica, Arial, sans-serif'
 export const Font = {
   family: {
-    default: 'Public Sans, Helvetica, Arial, sans-serif',
+    sansSerif,
+    default: sansSerif,
+    serifMonospace: 'Roboto Mono, monospace',
+  },
+  lineHeight: {
+    default: 1.5,
   },
   weight: {
     bold: 700,
+    boldLight: 500,
     normal: 400,
   },
   size: {
@@ -52,4 +59,5 @@ export const DefaultStyles: CSSProperties = {
   fontFamily: Font.family.default,
   fontWeight: Font.weight.normal,
   fontSize: Font.size.medium,
+  lineHeight: Font.lineHeight.default,
 }

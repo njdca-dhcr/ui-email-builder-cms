@@ -35,6 +35,5 @@ const styles: CSSProperties = {
   ...DefaultStyles,
   color: Colors.gray,
   fontSize: Font.size.tiny,
-  lineHeight: '15px',
   paddingBottom: Spacing.size.medium,
 }

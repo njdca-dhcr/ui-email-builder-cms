@@ -64,5 +64,5 @@ const titleStyles: CSSProperties = {
   paddingBottom: Spacing.size.small,
 }
 const descriptionStyles: CSSProperties = {
-  lineHeight: '22px',
+  lineHeight: Font.lineHeight.default,
 }

@@ -35,7 +35,7 @@ const styles: CSSProperties = {
   fontFamily: Font.family.default,
   fontSize: Font.size.tiny,
   fontWeight: Font.weight.normal,
-  lineHeight: '15px',
+  lineHeight: Font.lineHeight.default,
   margin: 0,
   padding: 0,
   paddingBottom: Spacing.size.large,

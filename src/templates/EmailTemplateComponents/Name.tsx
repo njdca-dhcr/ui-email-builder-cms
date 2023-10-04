@@ -3,7 +3,7 @@ import { EmailComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
-import { DefaultStyles, Spacing } from '../styles'
+import { DefaultStyles, Font, Spacing } from '../styles'
 
 const defaultValue = 'FIRST LAST NAME:'
 
@@ -31,4 +31,6 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
 const styles: CSSProperties = {
   ...DefaultStyles,
   paddingBottom: Spacing.size.medium,
+  fontFamily: Font.family.serifMonospace,
+  fontWeight: Font.weight.boldLight,
 }

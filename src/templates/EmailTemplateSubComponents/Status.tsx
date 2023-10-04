@@ -68,10 +68,10 @@ const innerCellStyles: CSSProperties = {
 const titleStyles: CSSProperties = {
   fontSize: Font.size.extraLarge,
   fontWeight: Font.weight.bold,
-  lineHeight: '40px',
+  lineHeight: Font.lineHeight.default,
   paddingBottom: Spacing.size.small,
 }
 
 const descriptionStyles: CSSProperties = {
-  lineHeight: '24px',
+  lineHeight: Font.lineHeight.default,
 }

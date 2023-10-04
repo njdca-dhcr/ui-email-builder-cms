@@ -103,14 +103,14 @@ const containerStyles: CSSProperties = {
 const overpaymentStyles: CSSProperties = {
   fontSize: Font.size.small,
   fontWeight: Font.weight.normal,
-  lineHeight: '20px',
+  lineHeight: Font.lineHeight.default,
   paddingBottom: Spacing.size.tiny,
 }
 
 const waivedStyles: CSSProperties = {
   fontSize: Font.size.small,
   fontWeight: Font.weight.bold,
-  lineHeight: '20px',
+  lineHeight: Font.lineHeight.default,
   borderBottom: `2px solid ${Colors.black}`,
   paddingBottom: Spacing.size.small,
 }
@@ -118,6 +118,6 @@ const waivedStyles: CSSProperties = {
 const mustPayStyles: CSSProperties = {
   fontSize: Font.size.medium,
   fontWeight: Font.weight.bold,
-  lineHeight: '24px',
+  lineHeight: Font.lineHeight.default,
   paddingTop: Spacing.size.tiny,
 }

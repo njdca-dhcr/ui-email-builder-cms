@@ -32,5 +32,4 @@ export const Intro: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
 const styles: CSSProperties = {
   ...DefaultStyles,
-  lineHeight: '24px',
 }

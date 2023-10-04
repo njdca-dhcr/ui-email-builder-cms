@@ -48,7 +48,7 @@ const styles: CSSProperties = {
   borderRadius: 3,
   fontSize: Font.size.small,
   fontWeight: Font.weight.bold,
-  lineHeight: '150%',
+  lineHeight: Font.lineHeight.default,
   paddingBottom: Spacing.size.tiny,
   paddingTop: Spacing.size.tiny,
   paddingLeft: Spacing.size.small,
