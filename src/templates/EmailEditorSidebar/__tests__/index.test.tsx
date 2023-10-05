@@ -8,6 +8,7 @@ import {
   urlFor,
 } from 'src/testHelpers'
 import { EmailEditorSidebar } from '..'
+import userEvent from '@testing-library/user-event'
 
 describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate.Config
@@ -48,11 +49,16 @@ describe('EmailEditorSidebar', () => {
         }),
       ],
     })
-    const { queryByLabelText } = render(<EmailEditorSidebar emailTemplate={emailTemplate} />)
-    expect(queryByLabelText('Banner')).not.toBeNull()
-    expect(queryByLabelText('Header')).not.toBeNull()
+    const { queryByLabelText, queryAllByLabelText, baseElement } = render(
+      <EmailEditorSidebar emailTemplate={emailTemplate} />,
+    )
+
+    const headerAccordionButton = queryAllByLabelText('Header')[0]
+    const footerAccordionButton = queryAllByLabelText('Footer')[0]
+
+    expect(headerAccordionButton).not.toBeNull()
+    expect(footerAccordionButton).not.toBeNull()
     expect(queryByLabelText('Title')).not.toBeNull()
-    expect(queryByLabelText('Footer')).not.toBeNull()
     expect(queryByLabelText('Additional Content')).not.toBeNull()
   })
 })

@@ -51,7 +51,9 @@ export const buildEmailTemplateConfig = (
 
 export const urlFor = (path: string): string => `http://localhost${path}`
 
-export const emailPartWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+export type WrapperComponent = FC<{ children: ReactNode }>
+
+export const emailPartWrapper: WrapperComponent = ({ children }) => {
   return (
     <ShouldShowEmailPart>
       <CurrentlyActiveEmailPart>

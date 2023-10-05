@@ -10,13 +10,10 @@ import {
 } from 'src/templates/CurrentlyActiveEmailPart'
 import { Layout, PageContent, Sidebar } from 'src/ui/Layout'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import {
-  EmailEditorToggle,
-  EmailEditorToggleSection,
-  EmailEditorToggles,
-} from 'src/templates/EmailEditorSidebar/EmailEditorToggles'
 import 'src/templates/EmailEditorPage.css'
-import { labelForSubComponent } from 'src/templates/EmailEditorSidebar/labelForSubComponent'
+import { PreviewText } from 'src/templates/PreviewText'
+import { EditPreviewText } from 'src/templates/EmailEditorSidebar/EditPreviewText'
+import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
@@ -52,37 +49,36 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
       <ShouldShowEmailPart>
         <CurrentlyActiveEmailPart>
           <ClearCurrentlyActiveEmailPart />
-          <EmailPartsContent>
-            <Sidebar>
-              <EmailEditorToggles>
-                {(emailTemplate.components ?? []).map(
-                  ({ description, kind, required, subComponents }, i) => (
-                    <EmailEditorToggleSection
-                      key={i}
-                      componentId={`${i}`}
-                      description={description}
-                      label={kind}
-                      required={required}
+          <PreviewText>
+            <EmailPartsContent>
+              <Sidebar>
+                <EditPreviewText />
+                <EmailEditorSidebarAccordion.Container>
+                  {(emailTemplate.components ?? []).map((emailComponent, componentId) => (
+                    <EmailEditorSidebarAccordion.EmailComponent
+                      key={componentId}
+                      id={`${componentId}`}
+                      emailComponent={emailComponent}
                     >
-                      {subComponents &&
-                        subComponents.map((subComponent, n) => (
-                          <EmailEditorToggle
-                            key={n}
-                            componentId={`${i}`}
-                            disabled={subComponent.required}
-                            label={labelForSubComponent(subComponent.kind)}
-                            subComponentId={`${n}`}
+                      {(emailComponent.subComponents ?? []).map(
+                        (emailSubComponent, subComponentId) => (
+                          <EmailEditorSidebarAccordion.EmailSubComponent
+                            key={subComponentId}
+                            componentId={`${componentId}`}
+                            id={`${subComponentId}`}
+                            emailSubComponent={emailSubComponent}
                           />
-                        ))}
-                    </EmailEditorToggleSection>
-                  ),
-                )}
-              </EmailEditorToggles>
-            </Sidebar>
-            <PageContent element="div" className="email-editor-page-content">
-              <EmailEditorContent emailTemplate={emailTemplate} />
-            </PageContent>
-          </EmailPartsContent>
+                        ),
+                      )}
+                    </EmailEditorSidebarAccordion.EmailComponent>
+                  ))}
+                </EmailEditorSidebarAccordion.Container>
+              </Sidebar>
+              <PageContent element="div" className="email-editor-page-content">
+                <EmailEditorContent emailTemplate={emailTemplate} />
+              </PageContent>
+            </EmailPartsContent>
+          </PreviewText>
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>
     </Layout>

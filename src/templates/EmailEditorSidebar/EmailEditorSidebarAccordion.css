@@ -1,0 +1,101 @@
+.sidebar-accordion-container .header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.sidebar-accordion-container h2 {
+  font-size: 1.5rem;
+  font-weight: var(--weight-bold);
+  margin: 0;
+}
+
+.accordion-email-component {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1.5rem 2rem;
+}
+
+.accordion-email-component:last-of-type {
+  border-bottom: 0;
+}
+
+.accordion-email-component h3 {
+  align-items: center;
+  display: flex;
+  margin: 0;
+  position: relative;
+}
+
+.accordion-email-component button {
+  border: 0;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: var(--weight-bold);
+  padding: 0;
+  padding-left: 1rem;
+}
+
+.accordion-email-component button[disabled] {
+  color: var(--black);
+  cursor: default;
+}
+
+.accordion-email-component .pointer-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: -0.5rem;
+  transition: transform 50ms ease-in-out;
+  pointer-events: none;
+}
+
+.accordion-email-component button[aria-expanded='false'] + .pointer-container {
+  transform: rotate(0);
+}
+
+.accordion-email-component button[aria-expanded='true'] + .pointer-container {
+  transform: rotate(90deg);
+}
+
+.accordion-email-component button[disabled] + .pointer-container {
+  display: none;
+}
+
+.accordion-email-component .accordion-button-and-toggle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accordion-email-component .description {
+  color: var(--gray-dark);
+  font-size: 0.875rem;
+  margin: 0;
+  padding: 0;
+  padding-left: 1rem;
+}
+
+.accordion-email-subcomponent {
+  margin: 1rem 0;
+  padding: 0 2rem;
+}
+.accordion-email-subcomponent:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.accordion-email-subcomponent .label-and-toggle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.accordion-email-subcomponent label {
+  font-weight: var(--weight-bold);
+}
+
+.accordion-email-subcomponent .description {
+  padding-left: 0;
+}
