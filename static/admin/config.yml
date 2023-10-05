@@ -47,3 +47,4 @@ collections:
                   - { label: 'Amount - Breakdown', value: 'Breakdown' }
                   - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
               - { label: 'Required', name: 'required', widget: 'boolean' }
+              - { label: 'Description', name: 'description', widget: 'text' }

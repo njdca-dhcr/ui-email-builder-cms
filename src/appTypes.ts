@@ -19,6 +19,7 @@ export namespace EmailTemplate {
 
   export interface SubComponent<T extends ComponentKind> {
     kind: SubComponentKind<T>
+    description?: string
     required?: boolean
   }
 

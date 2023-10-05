@@ -1,28 +1,27 @@
 .email-editor-toggles {
   margin-top: 1.5rem;
 }
+.email-editor-toggles .label-and-toggle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.email-editor-toggles .description {
+  color: var(--gray-dark);
+  font-size: 0.875rem;
+  font-weight: var(--weight-normal);
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
 
 .email-editor-toggle-section {
   margin-bottom: 0.75rem;
-
-  .label-and-toggle {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-  }
 
   .section-label {
     font-size: 1.5rem;
     font-weight: var(--weight-bold);
     line-height: 2rem;
-  }
-
-  .description {
-    color: var(--gray-dark);
-    font-size: 0.875rem;
-    font-weight: var(--weight-normal);
-    margin: 0;
-    padding-bottom: 0.5rem;
   }
 }
 
@@ -32,9 +31,6 @@
 }
 
 .email-editor-toggle {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
   margin: 1rem 0;
 
   .toggle-label {

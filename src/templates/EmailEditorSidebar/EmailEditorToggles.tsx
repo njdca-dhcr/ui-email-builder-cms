@@ -47,6 +47,7 @@ export const EmailEditorToggleSection: FC<EmailEditorToggleSectionProps> = ({
 
 interface EmailEditorToggleProps {
   componentId: string
+  description?: string
   disabled?: boolean
   label: string
   subComponentId: string
@@ -54,6 +55,7 @@ interface EmailEditorToggleProps {
 
 export const EmailEditorToggle: FC<EmailEditorToggleProps> = ({
   componentId,
+  description,
   disabled,
   subComponentId,
   label,
@@ -64,15 +66,18 @@ export const EmailEditorToggle: FC<EmailEditorToggleProps> = ({
 
   return (
     <li className="email-editor-toggle">
-      <label htmlFor={id} className="toggle-label">
-        {label}
-      </label>
-      <Toggle
-        id={id}
-        onChange={shouldShow.toggle}
-        value={shouldShow.on}
-        disabled={disabled || !shouldShowComponent.on}
-      />
+      <div className="label-and-toggle">
+        <label htmlFor={id} className="toggle-label">
+          {label}
+        </label>
+        <Toggle
+          id={id}
+          onChange={shouldShow.toggle}
+          value={shouldShow.on}
+          disabled={disabled || !shouldShowComponent.on}
+        />
+      </div>
+      {description && <p className="description">{description}</p>}
     </li>
   )
 }

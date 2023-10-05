@@ -36,6 +36,7 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.Config => {
         required: componentEntry.get('required') ?? false,
         subComponents: subComponentEntries.map((subComponent) => ({
           kind: subComponent.get('kind'),
+          description: subComponent.get('description'),
           required: subComponent.get('required'),
         })),
       }

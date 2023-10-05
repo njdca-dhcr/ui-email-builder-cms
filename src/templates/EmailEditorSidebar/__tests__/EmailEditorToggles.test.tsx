@@ -217,6 +217,40 @@ describe('EmailEditorToggle', () => {
     expect(checkbox.disabled).toEqual(true)
   })
 
+  it('displays a description when given', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <EmailEditorToggle
+          componentId={faker.lorem.word()}
+          subComponentId={faker.lorem.word()}
+          label={faker.lorem.words(3)}
+          disabled={true}
+          description={text}
+        />
+      </ShouldShowEmailPart>,
+    )
+    const description = baseElement.querySelector('.description')
+    expect(description).not.toBeNull()
+    expect(description).toHaveTextContent(text)
+  })
+
+  it('does not display a description when none is given', () => {
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <EmailEditorToggle
+          componentId={faker.lorem.word()}
+          subComponentId={faker.lorem.word()}
+          label={faker.lorem.words(3)}
+          disabled={true}
+          description={undefined}
+        />
+      </ShouldShowEmailPart>,
+    )
+    const description = baseElement.querySelector('.description')
+    expect(description).toBeNull()
+  })
+
   describe('when its parent component is turned off', () => {
     it('has a disabled toggle', async () => {
       const user = userEvent.setup()

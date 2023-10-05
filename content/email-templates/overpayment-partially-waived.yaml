@@ -12,6 +12,7 @@ components:
     subComponents:
       - kind: Intro
         required: true
+        description: Summary of your email in 1 sentence
       - kind: Status
       - kind: SupplementalContent
         required: true

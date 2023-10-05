@@ -45,6 +45,7 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
                     <EmailEditorToggle
                       key={n}
                       componentId={`${i}`}
+                      description={subComponent.description}
                       disabled={subComponent.required}
                       label={labelForSubComponent(subComponent.kind)}
                       subComponentId={`${n}`}
