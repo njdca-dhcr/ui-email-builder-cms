@@ -5,7 +5,7 @@
   --blue-gray-light: #9eacae;
   --blue-light: #5081a4;
   --blue: #285f77;
-  --gray: #f1f1f1;
+  --gray: #f8f8f8;
   --gray-dark: #5c5c5c;
   --white: #ffffff;
 
@@ -25,6 +25,7 @@ html {
   font-family: var(--sans-serif);
   font-size: var(--default-font-size);
   font-weight: var(--weight-normal);
+  line-height: 1.5;
 }
 
 body {

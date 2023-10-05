@@ -27,7 +27,6 @@
   font-size: 0.9rem;
   font-weight: var(--weight-normal);
   justify-content: center;
-  line-height: 1.5rem;
 }
 
 .email-preview-actions label:has(:checked) {
@@ -54,7 +53,6 @@ button.copy-html-button {
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: var(--weight-normal);
-  line-height: 1.5rem;
   padding: 0.5rem 0.75rem;
   transition: background-color 50ms ease-in;
 }

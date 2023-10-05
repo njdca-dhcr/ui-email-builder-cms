@@ -26,6 +26,5 @@
 .heading-and-actions a {
   color: var(--blue);
   font-weight: var(--weight-bold);
-  line-height: 1.5rem;
   text-decoration-line: underline;
 }

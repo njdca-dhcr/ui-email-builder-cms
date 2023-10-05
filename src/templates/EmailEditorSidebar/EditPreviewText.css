@@ -1,0 +1,56 @@
+.edit-preview-text {
+  background-color: #f2f2f2;
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.edit-preview-text h2 {
+  margin: 0;
+  padding-top: 0.75rem;
+}
+
+.edit-preview-text p {
+  margin: 0;
+}
+
+.edit-preview-text .description {
+  color: var(--gray-dark);
+  font-size: 0.875rem;
+  padding-bottom: 0.75rem;
+}
+
+.edit-preview-text .subject-and-preview {
+  background-color: var(--white);
+  border-radius: 5px;
+  margin-bottom: 0.75rem;
+  padding: 1rem 1.3rem;
+}
+
+.edit-preview-text .subject {
+  color: var(--gray-dark);
+  font-weight: var(--weight-bold);
+  padding-bottom: 0.25rem;
+}
+
+.edit-preview-text textarea {
+  border: 0;
+  color: var(--gray-dark);
+  font-family: var(--sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  resize: none;
+  padding: 0;
+  width: 100%;
+}
+
+.edit-preview-text textarea::placeholder {
+  color: #c6cace;
+}
+
+.edit-preview-text .suggestion-and-count {
+  color: var(--gray-dark);
+  display: flex;
+  font-size: 0.75rem;
+  font-style: italic;
+  justify-content: space-between;
+}

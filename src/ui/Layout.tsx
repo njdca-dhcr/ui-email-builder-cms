@@ -40,7 +40,9 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ children, className }) => {
   return (
     <div className={classNames('sidebar', className)}>
-      <span className="sidebar-title">Email Builder (Beta)</span>
+      <SpacedSidebarContainer>
+        <span className="sidebar-title">Email Builder (Beta)</span>
+      </SpacedSidebarContainer>
       {children}
     </div>
   )
@@ -86,4 +88,16 @@ interface SpacedContainerProps {
 
 export const SpacedContainer: FC<SpacedContainerProps> = ({ children }) => {
   return <div className="spaced-container">{children}</div>
+}
+
+interface SpacedSidebarContainerProps {
+  children: ReactNode
+  className?: string
+}
+
+export const SpacedSidebarContainer: FC<SpacedSidebarContainerProps> = ({
+  children,
+  className,
+}) => {
+  return <div className={classNames('spaced-sidebar-container', className)}>{children}</div>
 }

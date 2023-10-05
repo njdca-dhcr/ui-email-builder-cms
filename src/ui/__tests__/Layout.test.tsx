@@ -10,6 +10,7 @@ import {
   SideBarList,
   SideBarListItem,
   SpacedContainer,
+  SpacedSidebarContainer,
 } from '../Layout'
 
 describe('Layout', () => {
@@ -211,8 +212,32 @@ describe('SpacedContainer', () => {
         <span>{text}</span>
       </SpacedContainer>,
     )
-    const paragraph = baseElement.querySelector('.spaced-container')
-    expect(paragraph).not.toBeNull()
-    expect(paragraph).toContainHTML(`<span>${text}</span>`)
+    const container = baseElement.querySelector('.spaced-container')
+    expect(container).not.toBeNull()
+    expect(container).toContainHTML(`<span>${text}</span>`)
+  })
+})
+
+describe('SpacedSidebarContainer', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <SpacedSidebarContainer>
+        <span>{text}</span>
+      </SpacedSidebarContainer>,
+    )
+    const container = baseElement.querySelector('.spaced-sidebar-container')
+    expect(container).not.toBeNull()
+    expect(container).toContainHTML(`<span>${text}</span>`)
+  })
+
+  it('accepts a className', () => {
+    const { baseElement } = render(
+      <SpacedSidebarContainer className="my-class">
+        <span />
+      </SpacedSidebarContainer>,
+    )
+    const container = baseElement.querySelector('.spaced-sidebar-container.my-class')
+    expect(container).not.toBeNull()
   })
 })

@@ -70,6 +70,18 @@ describe('EmailEditorPage', () => {
     })
   })
 
+  describe('preview text', () => {
+    it('allows users to edit preview text in the sidebar which is added to the email markup', async () => {
+      const value = faker.lorem.paragraph()
+      const { getByLabelText, baseElement } = rendered
+      const input = getByLabelText('Preview text')
+      await user.type(input, value)
+      const previewText = baseElement.querySelector('#preview-text')
+      expect(previewText).not.toBeNull()
+      expect(previewText).toHaveTextContent(value)
+    })
+  })
+
   describe('toggling/editing components and their subcomponents', () => {
     it('preserves entered subcomponent text after toggling a subcomponent off and then on again', async () => {
       const value = faker.lorem.paragraph()

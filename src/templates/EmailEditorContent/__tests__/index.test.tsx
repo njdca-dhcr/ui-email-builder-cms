@@ -67,4 +67,9 @@ describe('EmailEditorContent', () => {
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
     expect(lastArgumentToCopy).toContain(value)
   })
+
+  it('renders the preview text', () => {
+    const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    expect(baseElement.querySelector('#preview-text')).not.toBeNull()
+  })
 })

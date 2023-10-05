@@ -10,6 +10,7 @@ import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmai
 import { CopyToClipboardButton } from '../../ui/CopyToClipboardButton'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Spacing } from '../styles'
+import { PreviewTextHtml } from './PreviewTextHtml'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -24,6 +25,9 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
 
   return (
     <>
+      <VisuallyHidden>
+        <h2>Email Preview</h2>
+      </VisuallyHidden>
       <div className="email-preview-actions">
         <fieldset>
           <VisuallyHidden>
@@ -61,6 +65,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         })}
       >
         <div ref={previewRef as any}>
+          <PreviewTextHtml />
           <EmailTable maxWidth={Spacing.layout.maxWidth}>
             {(emailTemplate.components ?? []).map((emailComponent, i) => (
               <EditEmailComponent key={i} emailComponent={emailComponent} id={`${i}`}>
