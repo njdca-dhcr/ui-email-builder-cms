@@ -71,3 +71,55 @@
   padding-left: 5.25rem;
   padding-right: 9.75rem;
 }
+
+.select {
+  border: 3px solid transparent;
+  font-size: 1rem;
+  margin: 0.25rem -3px;
+}
+
+.select[data-state='expanded'] {
+  border: 3px solid #00475d;
+}
+
+.select .select-button {
+  align-items: center;
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.select [data-reach-listbox-arrow] {
+  align-items: center;
+  border-left: 1px solid var(--blue-gray-light);
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding-left: 0.25rem;
+}
+
+.select-options-popover[data-reach-listbox-popover] {
+  border: 1px solid var(--black);
+  padding: 0;
+}
+
+.select-option[data-reach-listbox-option] {
+  border-bottom: 1px solid var(--gray);
+  padding: 0.5rem 1rem;
+}
+
+.select-option[data-reach-listbox-option]:last-of-type {
+  border-bottom: 0;
+}
+
+.select-option[data-reach-listbox-option][data-current-nav] {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.select-option[data-reach-listbox-option][data-current-selected] {
+  font-weight: var(--weight-normal);
+}

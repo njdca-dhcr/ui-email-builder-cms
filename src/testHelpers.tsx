@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactElement, ReactNode } from 'react'
 import { faker } from '@faker-js/faker'
 import sample from 'lodash.sample'
 import { EmailTemplate, EmailTemplateComponentsMapping } from './appTypes'
@@ -8,6 +8,7 @@ import {
 } from './templates/CurrentlyActiveEmailPart'
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
+import { render } from '@testing-library/react'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: EmailTemplate.ComponentKind,
@@ -51,13 +52,14 @@ export const buildEmailTemplateConfig = (
 
 export const urlFor = (path: string): string => `http://localhost${path}`
 
-export type WrapperComponent = FC<{ children: ReactNode }>
+export type WrapperComponent = FC<{ children: ReactNode; additional?: ReactNode }>
 
-export const emailPartWrapper: WrapperComponent = ({ children }) => {
+export const emailPartWrapper: WrapperComponent = ({ additional, children }) => {
   return (
     <ShouldShowEmailPart>
       <CurrentlyActiveEmailPart>
         <EmailPartsContent>
+          {additional}
           <table>
             <tbody>{children}</tbody>
           </table>
@@ -67,6 +69,11 @@ export const emailPartWrapper: WrapperComponent = ({ children }) => {
       </CurrentlyActiveEmailPart>
     </ShouldShowEmailPart>
   )
+}
+
+export const renderEmailPart = (ui: ReactElement, additional?: ReactElement) => {
+  const Component = emailPartWrapper
+  return render(<Component additional={additional}>{ui}</Component>)
 }
 
 export const ShowActiveEmailPart: FC = () => {

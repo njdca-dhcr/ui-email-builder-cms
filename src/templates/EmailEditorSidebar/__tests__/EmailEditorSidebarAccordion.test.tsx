@@ -358,4 +358,17 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     )
     expect(baseElement.querySelector('.description')).toBeNull()
   })
+
+  it('displays subcomponent controls', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Status' })
+    const { queryByText } = render(
+      <EmailEditorSidebarAccordion.EmailSubComponent
+        componentId={faker.lorem.word()}
+        id={faker.lorem.words(2)}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper },
+    )
+    expect(queryByText('Status variant')).not.toBeNull()
+  })
 })

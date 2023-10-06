@@ -10,6 +10,7 @@ import { Toggle } from 'src/ui/Toggle'
 import { useShouldShowEmailComponent, useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
 import './EmailEditorSidebarAccordion.css'
 import { RightPointer } from 'src/ui/RightPointer'
+import { EmailSubComponentControls } from './EmailSubcomponentControls'
 
 interface ContainerProps {
   children: ReactNode
@@ -114,6 +115,11 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, id, emailS
       {emailSubComponent.description && (
         <p className="description">{emailSubComponent.description}</p>
       )}
+      <EmailSubComponentControls
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />
     </div>
   )
 }

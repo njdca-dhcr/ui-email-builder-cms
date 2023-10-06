@@ -28,6 +28,7 @@
   "dependencies": {
     "@reach/accordion": "^0.18.0",
     "@reach/auto-id": "^0.18.0",
+    "@reach/listbox": "^0.18.0",
     "@reach/skip-nav": "^0.18.0",
     "@reach/visually-hidden": "^0.18.0",
     "autoprefixer": "^10.4.15",
