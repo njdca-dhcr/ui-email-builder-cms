@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
-import { Accordion, AccordionItem } from '@reach/accordion'
+import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@reach/accordion'
 import { ShouldShowEmailPart } from '../../ShouldShowEmailPart'
 import { EmailEditorSidebarAccordion } from '../EmailEditorSidebarAccordion'
 import { EmailTemplate } from 'src/appTypes'
@@ -23,14 +23,104 @@ describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
     expect(baseElement).toContainHTML(`<span>${text}</span>`)
   })
 
-  it('is an accordion', () => {
-    const { baseElement } = render(
+  it('is an accordion', async () => {
+    const user = userEvent.setup()
+    const { baseElement, getByText } = render(
       <EmailEditorSidebarAccordion.Container>
-        <span />
+        <AccordionItem>
+          <AccordionButton>A</AccordionButton>
+          <AccordionPanel>Panel A</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionButton>B</AccordionButton>
+          <AccordionPanel>Panel B</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionButton>C</AccordionButton>
+          <AccordionPanel>Panel C</AccordionPanel>
+        </AccordionItem>
       </EmailEditorSidebarAccordion.Container>,
     )
 
+    const totalItems = (state: 'open' | 'collapsed'): number =>
+      baseElement.querySelectorAll(`[data-reach-accordion-item][data-state="${state}"]`).length
+
     expect(baseElement.querySelector('[data-reach-accordion]')).not.toBeNull()
+
+    expect(totalItems('collapsed')).toEqual(3)
+    expect(totalItems('open')).toEqual(0)
+
+    await user.click(getByText('A'))
+    expect(totalItems('collapsed')).toEqual(2)
+    expect(totalItems('open')).toEqual(1)
+
+    await user.click(getByText('B'))
+    expect(totalItems('collapsed')).toEqual(1)
+    expect(totalItems('open')).toEqual(2)
+
+    await user.click(getByText('B'))
+    expect(totalItems('collapsed')).toEqual(2)
+    expect(totalItems('open')).toEqual(1)
+  })
+
+  it('can expand all accordion panels', async () => {
+    const user = userEvent.setup()
+    const { baseElement, getByText } = render(
+      <EmailEditorSidebarAccordion.Container>
+        <AccordionItem>
+          <AccordionButton>A</AccordionButton>
+          <AccordionPanel>Panel A</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionButton>B</AccordionButton>
+          <AccordionPanel>Panel B</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionButton>C</AccordionButton>
+          <AccordionPanel>Panel C</AccordionPanel>
+        </AccordionItem>
+      </EmailEditorSidebarAccordion.Container>,
+    )
+    const totalItems = (state: 'open' | 'collapsed'): number =>
+      baseElement.querySelectorAll(`[data-reach-accordion-item][data-state="${state}"]`).length
+
+    expect(totalItems('collapsed')).toEqual(3)
+    expect(totalItems('open')).toEqual(0)
+    await user.click(getByText('Expand All'))
+    expect(totalItems('collapsed')).toEqual(0)
+    expect(totalItems('open')).toEqual(3)
+  })
+
+  it('can collapse all accordion panels', async () => {
+    const user = userEvent.setup()
+    const { baseElement, getByText } = render(
+      <EmailEditorSidebarAccordion.Container>
+        <AccordionItem>
+          <AccordionButton>A</AccordionButton>
+          <AccordionPanel>Panel A</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionButton>B</AccordionButton>
+          <AccordionPanel>Panel B</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionButton>C</AccordionButton>
+          <AccordionPanel>Panel C</AccordionPanel>
+        </AccordionItem>
+      </EmailEditorSidebarAccordion.Container>,
+    )
+    const totalItems = (state: 'open' | 'collapsed'): number =>
+      baseElement.querySelectorAll(`[data-reach-accordion-item][data-state="${state}"]`).length
+
+    await user.click(getByText('A'))
+    await user.click(getByText('B'))
+    await user.click(getByText('C'))
+
+    expect(totalItems('collapsed')).toEqual(0)
+    expect(totalItems('open')).toEqual(3)
+    await user.click(getByText('Collapse All'))
+    expect(totalItems('collapsed')).toEqual(3)
+    expect(totalItems('open')).toEqual(0)
   })
 })
 

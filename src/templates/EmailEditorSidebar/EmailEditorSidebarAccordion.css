@@ -13,6 +13,29 @@
   margin: 0;
 }
 
+.sidebar-accordion-container .accordion-controls {
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sidebar-accordion-container .accordion-controls button {
+  background-color: var(--white);
+  border: 0;
+  font-family: var(--sans-serif);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 50ms ease-in-out;
+}
+
+.sidebar-accordion-container .accordion-controls button:active {
+  background-color: var(--gray);
+}
+
+.sidebar-accordion-container .accordion-controls button:last-of-type {
+  border-left: 1px solid #d9d9d9;
+}
+
 .accordion-email-component {
   border-bottom: 1px solid #e0e0e0;
   padding: 1.5rem 2rem;

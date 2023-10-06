@@ -1,6 +1,7 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, useState, Children } from 'react'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@reach/accordion'
 import '@reach/accordion/styles.css'
+import times from 'lodash.times'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { EmailTemplate } from 'src/appTypes'
 import { labelForSubComponent } from './labelForSubComponent'
@@ -15,12 +16,38 @@ interface ContainerProps {
 }
 
 const Container: FC<ContainerProps> = ({ children }) => {
+  const [openAccordionItems, setOpenAccordionItems] = useState<number[]>([])
   return (
     <div className="sidebar-accordion-container">
       <div className="header">
         <h2>Components</h2>
+        <div className="accordion-controls">
+          <button onClick={() => setOpenAccordionItems([])}>Collapse All</button>
+          <button
+            onClick={() => {
+              const totalChildren = Children.count(children)
+              const everyItemIndex = times(totalChildren, (i) => i)
+              setOpenAccordionItems(everyItemIndex)
+            }}
+          >
+            Expand All
+          </button>
+        </div>
       </div>
-      <Accordion collapsible multiple>
+      <Accordion
+        collapsible
+        multiple
+        index={openAccordionItems}
+        onChange={(toggledIndex) => {
+          if (typeof toggledIndex !== 'number') {
+            return
+          } else if (openAccordionItems.includes(toggledIndex)) {
+            setOpenAccordionItems(openAccordionItems.filter((index) => index !== toggledIndex))
+          } else {
+            setOpenAccordionItems([...openAccordionItems, toggledIndex])
+          }
+        }}
+      >
         {children}
       </Accordion>
     </div>
