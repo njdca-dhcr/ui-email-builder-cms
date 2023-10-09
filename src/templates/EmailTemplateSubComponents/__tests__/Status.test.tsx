@@ -4,7 +4,6 @@ import { RenderResult, render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
-  WrapperComponent,
   buildEmailTemplateSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
@@ -13,10 +12,7 @@ import {
   renderEmailPart,
 } from 'src/testHelpers'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
-import {
-  EmailPartsContent,
-  useEmailPartsContentForSubComponent,
-} from 'src/templates/EmailPartsContent'
+import { useEmailPartsContentForSubComponent } from 'src/templates/EmailPartsContent'
 import { Status, StatusVariant, defaultValue } from '../Status'
 
 describe('Status', () => {
@@ -94,6 +90,14 @@ describe('Status', () => {
       )
     }
 
+    const itHasAnEditable = (testName: string, label: string) => {
+      it(`has an editable ${testName}`, async () => {
+        await clearAndFillWithValue(label)
+        expect(rendered.queryByText(value)).not.toBeNull()
+        expectEmailPartContentFor(key, rendered.baseElement)
+      })
+    }
+
     describe('Overview', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
@@ -103,26 +107,15 @@ describe('Status', () => {
         await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.Overview + '')
       })
 
-      it('has an editable title', async () => {
-        await clearAndFillWithValue('Status title')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
-      })
+      itHasAnEditable('title', 'Status title')
 
-      it('has an editable description', async () => {
-        await clearAndFillWithValue('Status description')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
-      })
+      itHasAnEditable('description', 'Status description')
 
-      it('has an editable supportive information', async () => {
-        await clearAndFillWithValue('Status supportive information')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
-      })
+      itHasAnEditable('supportive information', 'Status supportive information')
 
-      it('lacks an editable connector', async () => {
-        expect(rendered.queryByLabelText('Status connector ("because", etc)')).toBeNull()
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(3)
       })
     })
 
@@ -138,28 +131,53 @@ describe('Status', () => {
         )
       })
 
-      it('has an editable title', async () => {
-        await clearAndFillWithValue('Status title')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
+      itHasAnEditable('title', 'Status title')
+
+      itHasAnEditable('description', 'Status description')
+
+      itHasAnEditable('supportive information', 'Status supportive information')
+
+      itHasAnEditable('connector', 'Status due to label')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(4)
+      })
+    })
+
+    describe('Missing Document', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          StatusVariant.MissingDocument + '',
+        )
       })
 
-      it('has an editable description', async () => {
-        await clearAndFillWithValue('Status description')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
-      })
+      itHasAnEditable('title', 'Status title')
 
-      it('has an editable supportive information', async () => {
-        await clearAndFillWithValue('Status supportive information')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
-      })
+      itHasAnEditable('documents needed label', 'Documents needed label')
 
-      it('has an editable connector', async () => {
-        await clearAndFillWithValue('Status connector ("because", etc)')
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
+      itHasAnEditable('documents needed value', 'Documents needed value')
+
+      itHasAnEditable('supportive information', 'Status supportive information')
+
+      itHasAnEditable('email to label', 'Email to label')
+
+      itHasAnEditable('email to value', 'Email to value')
+
+      itHasAnEditable('subject line label', 'Subject line label')
+
+      itHasAnEditable('subject line value', 'Subject line value')
+
+      itHasAnEditable('missing document deadline', 'Status deadline description')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(9)
       })
     })
   })

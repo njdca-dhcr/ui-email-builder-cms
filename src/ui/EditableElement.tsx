@@ -24,8 +24,7 @@ export const EditableElement: FC<Props> = ({
       contentEditable
       onInput={(event) => onValueChange((event.target as any).innerHTML)}
       suppressContentEditableWarning
-    >
-      {initialValue}
-    </Element>
+      dangerouslySetInnerHTML={{ __html: initialValue }}
+    />
   )
 }

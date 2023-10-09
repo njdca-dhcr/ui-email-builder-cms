@@ -1,7 +1,6 @@
 import React from 'react'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
-import { StatusVariant } from 'src/templates/EmailTemplateSubComponents/Status'
 import { faker } from '@faker-js/faker'
 import { StatusControls } from '../StatusControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'

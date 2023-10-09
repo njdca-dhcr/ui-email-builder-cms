@@ -52,6 +52,10 @@ const config: GatsbyConfig = {
             name: 'Public Sans',
             file: 'https://fonts.googleapis.com/css?family=Public%20Sans:400i&display=swap&subset=cyrillic',
           },
+          {
+            name: 'Public Sans',
+            file: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@1,700&display=swap',
+          },
           { name: 'EB Garamond', file: 'https://fonts.googleapis.com/css?family=EB+Garamond:400' },
           {
             name: 'Roboto Mono',
