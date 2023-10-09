@@ -88,7 +88,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                     paddingTop: '4px'
                               }}>
                                 <div style={{
-                                      lineHeight: 145%
+                                      lineHeight: '145%'
                                 }}>
                                   <span style={stepNumberLabel}><b>Step 1 Label</b>
                                   </span>
@@ -142,28 +142,28 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                   lineHeight: '10px',
                                                   fontSize: '10px'
                                                 }}>
-                                                  <!--[if mso]>
+                                                  {/* <!--[if mso]>
                                                     <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                                  <![endif]-->
+                                                  <![endif]--> */}
                                                   &nbsp;
                                                 </div>
-                                                <!--[if mso]>
+                                                {/* <!--[if mso]>
                                                   <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
-                                                <![endif]-->
+                                                <![endif]--> */}
                                                 <span>
                                                   Get Started
                                                 </span>
-                                                <!--[if mso]>
+                                                {/* <!--[if mso]>
                                                   <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
-                                                <![endif]-->
+                                                <![endif]--> */}
                                                 <div style={{
                                                   height: '10px',
                                                   lineHeight: '10px',
                                                   fontSize: '10px'
                                                 }}>
-                                                  <!--[if mso]>
+                                                  {/* <!--[if mso]>
                                                     <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                                  <![endif]-->
+                                                  <![endif]--> */}
                                                   &nbsp;
                                                 </div>
                                               </div>
