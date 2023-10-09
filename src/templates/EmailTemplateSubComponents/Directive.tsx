@@ -217,6 +217,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                 rel="noopener"
                                                 target="_blank"
                                                 href={value.linkHref}
+                                                style={getStartedButtonStyles}
                                               >
                                                 <div>
                                                   <div style={spaceStyles}>
@@ -228,17 +229,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                   {/* <!--[if mso]>
                                                   <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
                                                 <![endif]--> */}
-                                                  <EditableElement
-                                                    element="span"
-                                                    initialValue={initialValue.buttonLabel}
-                                                    label="The button label"
-                                                    onValueChange={(buttonLabel) =>
-                                                      setValue({ ...value, buttonLabel })
-                                                    }
-                                                    value={value.buttonLabel}
-                                                    style={stepDescriptionStyles}
-                                                  />
-
+                                                  <span>{value.buttonLabel}</span>
                                                   {/* <!--[if mso]>
                                                   <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
                                                 <![endif]--> */}
@@ -509,4 +500,18 @@ const stepBar23Styles: CSSProperties = {
   background: '#dcdee0',
   marginTop: '4px',
   marginBottom: '4px',
+}
+
+const getStartedButtonStyles: CSSProperties = {
+  backgroundColor: '#1b1b1b',
+  fontSize: '16px',
+  fontFamily: 'Public Sans, Helvetica, Arial, sans-serif',
+  fontWeight: 700,
+  textDecoration: 'none',
+  color: '#ffffff',
+  borderRadius: '10px',
+  display: 'inline-block',
+  width: '220px',
+  textAlign: 'center',
+  padding: '5px 0px'
 }
