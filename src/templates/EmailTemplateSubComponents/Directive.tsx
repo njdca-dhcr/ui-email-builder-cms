@@ -5,10 +5,60 @@ import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPa
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 
-const defaultValue = {
-  title: 'Received & Under Review',
-  description:
-    'It may take up to 2 weeks to determine if payment can be processed for the week(s) in question',
+export const enum DirectiveVariant {
+  OneStep,
+  ThreeStep,
+  StepTwoExpansion,
+  CostBreakdown,
+  PayOnline
+}
+
+export interface DirectiveValue {
+  variant: DirectiveVariant
+  
+  // Always Used
+  title: string
+  linkHref: string
+  buttonLabel: string
+
+  // OneStep
+  step1Label: string
+  step1Additional: string
+  oneStepSupportiveText: string
+
+  // ThreeStep uses OneStep values
+  step2Label: string
+  step2Additional: string
+  step3Label: string
+  step3Additional: string
+  
+  // StepTwoExpansion uses ThreeStep values
+  step2Tertiary: string
+  step2CaseNumber: string
+
+  // PayOnline uses OneStep values
+  alternativePaymentLabel: string
+  payOnlineSupportiveText: string
+  
+  // CostBreakdown
+}
+
+export const defaultValue: DirectiveValue = {
+  variant: DirectiveVariant.OneStep,
+  title: 'Directive Title',
+  linkHref: 'https://',
+  buttonLabel: 'Get Started',
+  step1Label: 'Step 1 Directive',
+  step1Additional: 'Additional information around Step 1',
+  oneStepSupportiveText: 'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
+  step2Label: 'Step 2 Directive',
+  step2Additional: 'Additional information around Step 2',
+  step2Tertiary: 'Tertiary information around Step 2, (usually involving an alternate way to complete the second step).',
+  step2CaseNumber: 'Case #: [000000]',
+  step3Label: 'Step 3 Directive',
+  step3Additional: 'Additional information around Step 3',
+  alternativePaymentLabel: 'Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951',
+  payOnlineSupportiveText: 'May the check or money order payable to NJ Dept. of Labor and Workforce Development. Be sure to write your name and social security number on the payment.',
 }
 
 export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
@@ -327,7 +377,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         </table>
       </td>
     </tr>
-    {children}
   </>)
 }
 
