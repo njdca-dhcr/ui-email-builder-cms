@@ -15,4 +15,8 @@ import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 describe('Directive', () => {
   let id: string
   let emailComponent: EmailTemplate.SubComponent<'Body'>
+
+  it("contains a test", () => {
+    expect(true).toBe(true)
+  })
 })

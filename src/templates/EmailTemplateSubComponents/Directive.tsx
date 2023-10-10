@@ -93,8 +93,15 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           >
             <tr>
               <td style={outerCellStyles}>
-                <table cellSpacing="0" cellPadding="0" border={0} width="100%" style={[DirectiveVariant.PayOnline].includes(value.variant) ? payOnlineBoxStyles : {}}>
-
+                <table
+                  cellSpacing="0"
+                  cellPadding="0"
+                  border={0}
+                  width="100%"
+                  style={
+                    [DirectiveVariant.PayOnline].includes(value.variant) ? payOnlineBoxStyles : {}
+                  }
+                >
                   {/* Directive Title */}
                   {value.title && (
                     <tr>
@@ -121,7 +128,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   )}
 
                   {/* One Step or Pay Online */}
-                  {[DirectiveVariant.OneStep, DirectiveVariant.PayOnline].includes(value.variant) && (
+                  {[DirectiveVariant.OneStep, DirectiveVariant.PayOnline].includes(
+                    value.variant,
+                  ) && (
                     <>
                       <tr>
                         <td>
@@ -143,12 +152,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                             {/* Button */}
                             <tr>
                               <td>
-                                <table
-                                  cellSpacing="0"
-                                  cellPadding="0"
-                                  border={0}
-                                  width="100%"
-                                >
+                                <table cellSpacing="0" cellPadding="0" border={0} width="100%">
                                   <tr>
                                     <td>
                                       <a
@@ -215,7 +219,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                 </div>
                               </td>
                             </tr>
-                          </table>  
+                          </table>
                         </td>
                       </tr>
 
@@ -225,7 +229,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                             element="td"
                             initialValue={initialValue.oneStepSupportiveText}
                             label="Supportive information for One Step Directive"
-                            onValueChange={(oneStepSupportiveText) => setValue({ ...value, oneStepSupportiveText })}
+                            onValueChange={(oneStepSupportiveText) =>
+                              setValue({ ...value, oneStepSupportiveText })
+                            }
                             value={value.oneStepSupportiveText}
                             style={supportiveInformationStyles}
                           />
@@ -239,7 +245,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                               element="td"
                               initialValue={initialValue.alternativePaymentLabel}
                               label="Alternative payment information for Pay Online Directive"
-                              onValueChange={(alternativePaymentLabel) => setValue({ ...value, alternativePaymentLabel })}
+                              onValueChange={(alternativePaymentLabel) =>
+                                setValue({ ...value, alternativePaymentLabel })
+                              }
                               value={value.alternativePaymentLabel}
                             />
                           </tr>
@@ -251,13 +259,15 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                               </div>
                             </td>
                           </tr>
-                          
+
                           <tr>
                             <EditableElement
                               element="td"
                               initialValue={initialValue.payOnlineSupportiveText}
                               label="Supportive information for Pay Online Directive"
-                              onValueChange={(payOnlineSupportiveText) => setValue({ ...value, payOnlineSupportiveText })}
+                              onValueChange={(payOnlineSupportiveText) =>
+                                setValue({ ...value, payOnlineSupportiveText })
+                              }
                               value={value.payOnlineSupportiveText}
                               style={supportiveInformationStyles}
                             />
@@ -268,7 +278,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   )}
 
                   {/* Three Step Directive and Step 2 Expansion */}
-                  {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
+                  {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(
+                    value.variant,
+                  ) && (
                     <>
                       {/* Directive Label */}
                       <tr>
@@ -304,13 +316,18 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                       {/* Steps */}
                       <tr>
                         <td>
-                          <table width="100%" align="center" cellSpacing="0" cellPadding="0" border={0}>
+                          <table
+                            width="100%"
+                            align="center"
+                            cellSpacing="0"
+                            cellPadding="0"
+                            border={0}
+                          >
                             <tr>
                               <td>
                                 <table cellSpacing="0" cellPadding="0" border={0} width="100%">
                                   {/* Step 1 */}
                                   <tr>
-                                      
                                     {/* Step 1 Circle Number */}
                                     <td>
                                       <div className="circle-number" style={circleNumberStyles}>
@@ -467,7 +484,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
                                   {/* Step 2 */}
                                   <tr>
-
                                     {/* Step 2 Circle Number */}
                                     <td>
                                       <div className="circle-number" style={circleNumberStyles}>
@@ -486,7 +502,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                         </table>
                                       </div>
                                     </td>
-                                      
+
                                     {/* Step 2 Label */}
                                     <td style={tdPaddingStyles}>
                                       <div style={{ lineHeight: '145%', paddingTop: '2px' }}>
@@ -505,16 +521,21 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                     </td>
                                   </tr>
                                   <tr>
-
                                     {/* Step 2 Bar */}
                                     <td align="center">
                                       <div
                                         className="step-bar"
                                         id="step-bar-2-3"
-                                        style={[DirectiveVariant.StepTwoExpansion].includes(value.variant) ? stepBar12Styles : stepBar23Styles}
+                                        style={
+                                          [DirectiveVariant.StepTwoExpansion].includes(
+                                            value.variant,
+                                          )
+                                            ? stepBar12Styles
+                                            : stepBar23Styles
+                                        }
                                       ></div>
                                     </td>
-                                      
+
                                     {/* Step 2 Additional Information */}
                                     <td style={tdPaddingStyles}>
                                       <div style={{ lineHeight: '16px' }}>
@@ -531,13 +552,17 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                       </div>
                                       <div style={spaceStyles}>&nbsp;</div>
 
-                                      {[DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
+                                      {[DirectiveVariant.StepTwoExpansion].includes(
+                                        value.variant,
+                                      ) && (
                                         <>
                                           <EditableElement
                                             element="div"
                                             initialValue={initialValue.step2Tertiary}
-                                            label='Tertiary information for Step 2 (usually involving an alternate way to complete the second step).'
-                                            onValueChange={(step2Tertiary) => setValue({ ...value, step2Tertiary })}
+                                            label="Tertiary information for Step 2 (usually involving an alternate way to complete the second step)."
+                                            onValueChange={(step2Tertiary) =>
+                                              setValue({ ...value, step2Tertiary })
+                                            }
                                             value={value.step2Tertiary}
                                             style={stepDescriptionStyles}
                                           />
@@ -546,8 +571,10 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           <EditableElement
                                             element="div"
                                             initialValue={initialValue.step2CaseNumber}
-                                            label='Case number information'
-                                            onValueChange={(step2CaseNumber) => setValue({ ...value, step2CaseNumber })}
+                                            label="Case number information"
+                                            onValueChange={(step2CaseNumber) =>
+                                              setValue({ ...value, step2CaseNumber })
+                                            }
                                             value={value.step2CaseNumber}
                                             style={stepDescriptionStyles}
                                           />
@@ -602,7 +629,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                       <div
                                         className="step-bar"
                                         id="step-bar-2-3"
-                                        style={{...stepBar23Styles, background: 'transparent'}}
+                                        style={{ ...stepBar23Styles, background: 'transparent' }}
                                       ></div>
                                     </td>
                                     <td style={tdPaddingStyles}>
@@ -736,7 +763,7 @@ const getStartedButtonStyles: CSSProperties = {
   display: 'inline-block',
   width: '220px',
   textAlign: 'center',
-  padding: '5px 0px'
+  padding: '5px 0px',
 }
 
 const supportiveInformationStyles: CSSProperties = {
@@ -748,5 +775,5 @@ const supportiveInformationStyles: CSSProperties = {
 const payOnlineBoxStyles: CSSProperties = {
   border: '5px solid #FAF3D1',
   borderRadius: '10px',
-  padding: '30px 40px'
+  padding: '30px 40px',
 }
