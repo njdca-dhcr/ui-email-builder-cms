@@ -34,9 +34,6 @@ describe('EmailEditorPage', () => {
             buildEmailTemplateSubComponent('Body', { kind: 'SupplementalContent' }),
           ],
         }),
-        buildEmailTemplateComponent('Amount', {
-          subComponents: [buildEmailTemplateSubComponent('Amount', { kind: 'Breakdown' })],
-        }),
         buildEmailTemplateComponent('Footer', {
           subComponents: [buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })],
         }),

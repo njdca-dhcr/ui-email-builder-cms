@@ -16,11 +16,6 @@ components:
       - kind: Status
       - kind: SupplementalContent
         required: true
-      - kind: SupplementalContent
-    required: true
-  - kind: Amount
-    subComponents:
-      - kind: Breakdown
     required: true
   - kind: Footer
     subComponents:

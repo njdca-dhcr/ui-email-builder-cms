@@ -2,7 +2,6 @@ import { labelForSubComponent } from '../labelForSubComponent'
 
 describe('labelForSubComponent', () => {
   it('is the kind attribute of the sub component', () => {
-    expect(labelForSubComponent('Breakdown')).toEqual('Breakdown')
     expect(labelForSubComponent('Intro')).toEqual('Intro')
     expect(labelForSubComponent('Status')).toEqual('Status')
     expect(labelForSubComponent('Title')).toEqual('Title')

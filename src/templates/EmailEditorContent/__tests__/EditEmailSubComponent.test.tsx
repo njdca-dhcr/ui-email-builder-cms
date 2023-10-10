@@ -74,18 +74,6 @@ describe('EditEmailSubComponent', () => {
     expect(queryByLabelText('Additional content')).not.toBeNull()
   })
 
-  it('can render Breakdown', () => {
-    emailSubComponent = buildEmailTemplateSubComponent('Amount', { kind: 'Breakdown' })
-    const { queryByLabelText } = render(
-      <EditEmailSubComponent
-        componentId={componentId}
-        id={id}
-        emailSubComponent={emailSubComponent}
-      />,
-    )
-    expect(queryByLabelText('Owed label')).not.toBeNull()
-  })
-
   it('can render Intro', () => {
     emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Intro' })
     const { queryByLabelText } = render(

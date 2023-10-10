@@ -7,7 +7,6 @@ import { Body } from '../EmailTemplateComponents/Body'
 import { Disclaimer } from '../EmailTemplateComponents/Disclaimer'
 import { EmailComponentProps } from '../EmailTemplateComponents/shared'
 import { useShouldShowEmailComponent } from '../ShouldShowEmailPart'
-import { Amount } from '../EmailTemplateComponents/Amount'
 
 export const EditEmailComponent: FC<EmailComponentProps> = (props) => {
   const shouldShow = useShouldShowEmailComponent(props.id)
@@ -15,8 +14,6 @@ export const EditEmailComponent: FC<EmailComponentProps> = (props) => {
   if (!shouldShow.on) return null
 
   switch (props.emailComponent.kind) {
-    case 'Amount':
-      return <Amount {...props} />
     case 'Header':
       return <Header {...props} />
     case 'Footer':

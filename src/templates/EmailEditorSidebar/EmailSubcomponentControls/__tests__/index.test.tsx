@@ -68,17 +68,6 @@ describe('EmailSubComponentControls', () => {
     expect(baseElement.innerHTML).toEqual('<div></div>')
   })
 
-  it('renders nothing for Breakdown', () => {
-    const { baseElement } = render(
-      <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Amount', { kind: 'Breakdown' })}
-        componentId={componentId}
-        id={id}
-      />,
-    )
-    expect(baseElement.innerHTML).toEqual('<div></div>')
-  })
-
   it('renders the StatusControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls

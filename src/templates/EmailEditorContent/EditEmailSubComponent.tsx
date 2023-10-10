@@ -6,7 +6,6 @@ import { ProgramName } from '../EmailTemplateSubComponents/ProgramName'
 import { AdditionalContent } from '../EmailTemplateSubComponents/AdditionalContent'
 import { Intro } from '../EmailTemplateSubComponents/Intro'
 import { Status } from '../EmailTemplateSubComponents/Status'
-import { Breakdown } from '../EmailTemplateSubComponents/Breakdown'
 import { SupplementalContent } from '../EmailTemplateSubComponents/SupplementalContent'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
@@ -17,8 +16,6 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
   switch (props.emailSubComponent.kind) {
     case 'AdditionalContent':
       return <AdditionalContent {...props} />
-    case 'Breakdown':
-      return <Breakdown {...props} />
     case 'Title':
       return <Title {...props} />
     case 'ProgramName':
