@@ -208,5 +208,45 @@ describe('Status', () => {
         expect(all).toHaveLength(5)
       })
     })
+
+    describe('Overview w/ Reason + Amount Breakdown', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          StatusVariant.OverviewWithReasonAndAmountBreakdown + '',
+        )
+      })
+
+      itHasAnEditable('title', 'Status title')
+
+      itHasAnEditable('description', 'Status description')
+
+      itHasAnEditable('supportive information', 'Status supportive information')
+
+      itHasAnEditable('status due to', 'Status due to label')
+
+      itHasAnEditable('amount label', 'Amount label')
+
+      itHasAnEditable('overpayment label', 'Overpayment label')
+
+      itHasAnEditable('overpayment value', 'Overpayment value')
+
+      itHasAnEditable('waived label', 'Waived label')
+
+      itHasAnEditable('waived value', 'Waived value')
+
+      itHasAnEditable('total label', 'Amount total label')
+
+      itHasAnEditable('total value', 'Amount total value')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(11)
+      })
+    })
   })
 })

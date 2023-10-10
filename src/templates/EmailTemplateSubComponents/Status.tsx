@@ -56,12 +56,12 @@ export const defaultValue: StatusValue = {
   missingDocumentDeadline:
     'If you do not submit your documents by 00/00/0000, you will be denied your claim and will be required to pay back any DUA funds released to you.',
   amountLabel: 'You owe $200',
-  overpaymentLabel: '',
-  overpaymentValue: '',
-  waivedLabel: '',
-  waivedValue: '',
-  totalLabel: '',
-  totalValue: '',
+  overpaymentLabel: 'Overpayment Total',
+  overpaymentValue: '$200',
+  waivedLabel: 'Amount waived',
+  waivedValue: '$50',
+  totalLabel: 'You must pay',
+  totalValue: '$150',
 }
 
 export const useStatusValue = (componentId: string, id: string) => {
@@ -101,6 +101,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             condition={[
               StatusVariant.OverviewWithReason,
               StatusVariant.OverviewWithReasonAndAmountDue,
+              StatusVariant.OverviewWithReasonAndAmountBreakdown,
             ].includes(value.variant)}
           >
             <EditableElement
@@ -182,23 +183,85 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           )}
         </Row>
         <Row
-          condition={[StatusVariant.OverviewWithReasonAndAmountDue].includes(value.variant)}
+          condition={[
+            StatusVariant.OverviewWithReasonAndAmountDue,
+            StatusVariant.OverviewWithReasonAndAmountBreakdown,
+          ].includes(value.variant)}
           elements={[
             { part: 'cell', style: styles.amountContainer },
             { part: 'table', maxWidth: 345, style: styles.amountTable },
-            'row',
           ]}
         >
-          <Cell align="center" style={styles.amountIcon}>
-            <WarningIcon />
-          </Cell>
-          <EditableElement
-            element="td"
-            initialValue={initialValue.amountLabel}
-            label="Amount label"
-            onValueChange={(amountLabel) => setValue({ ...value, amountLabel })}
-            style={styles.amountLabel}
-          />
+          <Row>
+            <Cell align="center" style={styles.amountIcon}>
+              <WarningIcon />
+            </Cell>
+            <EditableElement
+              element="td"
+              initialValue={initialValue.amountLabel}
+              label="Amount label"
+              onValueChange={(amountLabel) => setValue({ ...value, amountLabel })}
+              style={styles.amountLabel}
+            />
+          </Row>
+          <Row
+            condition={[StatusVariant.OverviewWithReasonAndAmountBreakdown].includes(value.variant)}
+          >
+            <Cell>{null}</Cell>
+            <Cell elements={[{ part: 'table', maxWidth: 273 }]} style={styles.breakdownContainer}>
+              <Row>
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.overpaymentLabel}
+                  label="Overpayment label"
+                  onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
+                  style={styles.overpaymentLabel}
+                />
+                <EditableElement
+                  align="right"
+                  element="td"
+                  initialValue={initialValue.overpaymentValue}
+                  label="Overpayment value"
+                  onValueChange={(overpaymentValue) => setValue({ ...value, overpaymentValue })}
+                  style={styles.overpaymentValue}
+                />
+              </Row>
+              <Row>
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.waivedLabel}
+                  label="Waived label"
+                  onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
+                  style={styles.waivedLabel}
+                />
+                <EditableElement
+                  align="right"
+                  element="td"
+                  initialValue={initialValue.waivedValue}
+                  label="Waived value"
+                  onValueChange={(waivedValue) => setValue({ ...value, waivedValue })}
+                  style={styles.waivedValue}
+                />
+              </Row>
+              <Row>
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.totalLabel}
+                  label="Amount total label"
+                  onValueChange={(totalLabel) => setValue({ ...value, totalLabel })}
+                  style={styles.totalLabel}
+                />
+                <EditableElement
+                  align="right"
+                  element="td"
+                  initialValue={initialValue.totalValue}
+                  label="Amount total value"
+                  onValueChange={(totalValue) => setValue({ ...value, totalValue })}
+                  style={styles.totalValue}
+                />
+              </Row>
+            </Cell>
+          </Row>
         </Row>
         <Row>
           <EditableElement
@@ -297,6 +360,49 @@ const styles = {
     verticalAlign: 'center',
     fontWeight: Font.weight.bold,
     fontSize: Font.size.large,
+  } as CSSProperties,
+  breakdownContainer: {
+    paddingTop: Spacing.size.medium,
+  } as CSSProperties,
+  overpaymentLabel: {
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.normal,
+    lineHeight: Font.lineHeight.default,
+    paddingBottom: Spacing.size.tiny,
+  } as CSSProperties,
+  overpaymentValue: {
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.normal,
+    lineHeight: Font.lineHeight.default,
+    paddingBottom: Spacing.size.tiny,
+  } as CSSProperties,
+  waivedLabel: {
+    fontStyle: 'italic',
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.bold,
+    lineHeight: Font.lineHeight.default,
+    borderBottom: `2px solid ${Colors.black}`,
+    paddingBottom: Spacing.size.small,
+  } as CSSProperties,
+  waivedValue: {
+    fontStyle: 'italic',
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.bold,
+    lineHeight: Font.lineHeight.default,
+    borderBottom: `2px solid ${Colors.black}`,
+    paddingBottom: Spacing.size.small,
+  } as CSSProperties,
+  totalLabel: {
+    fontSize: Font.size.medium,
+    fontWeight: Font.weight.bold,
+    lineHeight: Font.lineHeight.default,
+    paddingTop: Spacing.size.tiny,
+  } as CSSProperties,
+  totalValue: {
+    fontSize: Font.size.medium,
+    fontWeight: Font.weight.bold,
+    lineHeight: Font.lineHeight.default,
+    paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   supportiveInformation: {
     ...DefaultStyles,

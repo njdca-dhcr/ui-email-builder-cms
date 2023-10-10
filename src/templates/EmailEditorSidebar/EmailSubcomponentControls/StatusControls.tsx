@@ -24,6 +24,10 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId
             label: 'Overview w/ Reason + Amount Due',
             value: StatusVariant.OverviewWithReasonAndAmountDue + '',
           },
+          {
+            label: 'Overview w/ Reason + Amount Breakdown',
+            value: StatusVariant.OverviewWithReasonAndAmountBreakdown + '',
+          },
         ]}
         onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
         value={value.variant + ''}

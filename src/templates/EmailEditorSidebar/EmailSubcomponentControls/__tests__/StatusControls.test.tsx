@@ -22,6 +22,7 @@ describe('StatusControls', () => {
     expect(queryByRole('option', { name: 'Overview w/ Reason' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Missing Document Specifics' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Overview w/ Reason + Amount Due' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'Overview w/ Reason + Amount Breakdown' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'Overview w/ Reason' }))
 
     button = queryByRole('button')
