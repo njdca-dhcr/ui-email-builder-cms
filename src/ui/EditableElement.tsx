@@ -5,7 +5,7 @@ interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
   initialValue: string
   label: string
   onValueChange: (value: string) => void
-  value: string
+  value?: string
 }
 
 export const EditableElement: FC<Props> = ({

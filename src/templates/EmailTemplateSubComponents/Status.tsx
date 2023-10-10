@@ -20,8 +20,7 @@ export interface StatusValue {
   status: string
   description: string
   supportiveInformation: string
-  // Often
-  connector: string
+  statusDueTo: string
   // Missing Document
   documentsNeededLabel: string
   documentsNeededValue: string
@@ -43,7 +42,7 @@ export interface StatusValue {
 export const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,
   status: 'Status of Claim',
-  connector: 'because...',
+  statusDueTo: 'because...',
   description: '{Data Reference} or a sentence that colors more of the status of claim',
   supportiveInformation:
     'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
@@ -68,6 +67,8 @@ export const useStatusValue = (componentId: string, id: string) => {
   return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 }
 
+const { Table, Row } = EmailBlock
+
 export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useStatusValue(componentId, id)
@@ -75,40 +76,38 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const initialValue = useMemo(() => value, [value.variant])
 
   return (
-    <EmailBlock.Row key={value.variant} elements={['cell']} onClick={activate}>
-      <EmailBlock.Table>
-        <EmailBlock.Row
+    <Row key={value.variant} elements={['cell']} onClick={activate}>
+      <Table>
+        <Row
           elements={[
-            { part: 'cell', style: outerCellStyles },
+            { part: 'cell', style: styles.outerCell },
             'table',
             'row',
-            { part: 'cell', style: innerCellStyles },
+            { part: 'cell', style: styles.innerCell },
             'table',
           ]}
         >
-          <EmailBlock.Row>
+          <Row>
             <EditableElement
               element="td"
               initialValue={initialValue.status}
               label="Status title"
               onValueChange={(status) => setValue({ ...value, status })}
-              style={titleStyles}
-              value={value.status}
+              style={styles.title}
             />
-          </EmailBlock.Row>
-          <EmailBlock.Row condition={[StatusVariant.OverviewWithReason].includes(value.variant)}>
+          </Row>
+          <Row condition={[StatusVariant.OverviewWithReason].includes(value.variant)}>
             <EditableElement
               element="td"
-              initialValue={initialValue.connector}
+              initialValue={initialValue.statusDueTo}
               label="Status due to label"
-              onValueChange={(connector) => setValue({ ...value, connector })}
-              value={value.connector}
-              style={connectorStyles}
+              onValueChange={(statusDueTo) => setValue({ ...value, statusDueTo })}
+              style={styles.statusDueTo}
             />
-          </EmailBlock.Row>
+          </Row>
           {[StatusVariant.MissingDocument].includes(value.variant) ? (
             <>
-              <EmailBlock.Row>
+              <Row>
                 <EditableElement
                   element="td"
                   initialValue={initialValue.documentsNeededLabel}
@@ -116,10 +115,9 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   onValueChange={(documentsNeededLabel) =>
                     setValue({ ...value, documentsNeededLabel })
                   }
-                  value={value.documentsNeededLabel}
                 />
-              </EmailBlock.Row>
-              <EmailBlock.Row>
+              </Row>
+              <Row>
                 <EditableElement
                   element="td"
                   initialValue={initialValue.documentsNeededValue}
@@ -127,94 +125,66 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   onValueChange={(documentsNeededValue) =>
                     setValue({ ...value, documentsNeededValue })
                   }
-                  value={value.documentsNeededValue}
-                  style={{
-                    fontSize: Font.size.medium,
-                    fontWeight: Font.weight.bold,
-                    paddingTop: Spacing.size.tiny,
-                    paddingBottom: Spacing.size.medium,
-                  }}
+                  style={styles.documentsNeededValue}
                 />
-              </EmailBlock.Row>
-              <EmailBlock.Row elements={['cell', { part: 'table', width: 'unset' }]}>
-                <EmailBlock.Row>
+              </Row>
+              <Row elements={['cell', { part: 'table', width: 'unset' }]}>
+                <Row>
                   <EditableElement
                     element="td"
                     initialValue={initialValue.emailToLabel}
                     label="Email to label"
                     onValueChange={(emailToLabel) => setValue({ ...value, emailToLabel })}
-                    value={value.emailToLabel}
-                    style={{
-                      fontSize: Font.size.small,
-                      fontWeight: Font.weight.bold,
-                      paddingRight: Spacing.size.small,
-                      paddingBottom: Spacing.size.tiny,
-                    }}
+                    style={styles.emailToLabel}
                   />
                   <EditableElement
                     element="td"
                     initialValue={initialValue.emailToValue}
                     label="Email to value"
                     onValueChange={(emailToValue) => setValue({ ...value, emailToValue })}
-                    value={value.emailToValue}
-                    style={{
-                      fontSize: Font.size.small,
-                      fontWeight: Font.weight.normal,
-                    }}
+                    style={styles.emailToValue}
                   />
-                </EmailBlock.Row>
-                <EmailBlock.Row>
+                </Row>
+                <Row>
                   <EditableElement
                     element="td"
                     initialValue={initialValue.subjectLineLabel}
                     label="Subject line label"
                     onValueChange={(subjectLineLabel) => setValue({ ...value, subjectLineLabel })}
-                    value={value.subjectLineLabel}
-                    style={{
-                      fontSize: Font.size.small,
-                      fontWeight: Font.weight.bold,
-                      paddingRight: Spacing.size.small,
-                      verticalAlign: 'top',
-                    }}
+                    style={styles.subjectLineLabel}
                   />
                   <EditableElement
                     element="td"
                     initialValue={initialValue.subjectLineValue}
                     label="Subject line value"
                     onValueChange={(subjectLineValue) => setValue({ ...value, subjectLineValue })}
-                    value={value.subjectLineValue}
-                    style={{
-                      fontSize: Font.size.small,
-                      fontWeight: Font.weight.normal,
-                    }}
+                    style={styles.subjectLineValue}
                   />
-                </EmailBlock.Row>
-              </EmailBlock.Row>
+                </Row>
+              </Row>
             </>
           ) : (
-            <EmailBlock.Row>
+            <Row>
               <EditableElement
                 element="td"
                 initialValue={initialValue.description}
                 label="Status description"
                 onValueChange={(description) => setValue({ ...value, description })}
-                style={descriptionStyles}
-                value={value.description}
+                style={styles.description}
               />
-            </EmailBlock.Row>
+            </Row>
           )}
-        </EmailBlock.Row>
-        <EmailBlock.Row>
+        </Row>
+        <Row>
           <EditableElement
             element="td"
             initialValue={initialValue.supportiveInformation}
             label="Status supportive information"
             onValueChange={(supportiveInformation) => setValue({ ...value, supportiveInformation })}
-            value={value.supportiveInformation}
-            style={supportiveInformationStyles}
+            style={styles.supportiveInformation}
           />
-        </EmailBlock.Row>
-        <EmailBlock.Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
+        </Row>
+        <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
           <EditableElement
             element="td"
             initialValue={initialValue.missingDocumentDeadline}
@@ -222,53 +192,76 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             onValueChange={(missingDocumentDeadline) =>
               setValue({ ...value, missingDocumentDeadline })
             }
-            value={value.missingDocumentDeadline}
-            style={{
-              ...DefaultStyles,
-              fontSize: Font.size.small,
-              fontWeight: Font.weight.bold,
-              fontStyle: 'italic',
-              paddingTop: Spacing.size.medium,
-            }}
+            style={styles.missingDocumentDeadline}
           />
-        </EmailBlock.Row>
-      </EmailBlock.Table>
-    </EmailBlock.Row>
+        </Row>
+      </Table>
+    </Row>
   )
 }
 
-const outerCellStyles: CSSProperties = {
-  ...DefaultStyles,
-  paddingBottom: Spacing.size.medium,
-  paddingTop: Spacing.size.medium,
-}
-
-const innerCellStyles: CSSProperties = {
-  paddingLeft: 12,
-  borderLeft: `8px solid ${Colors.grayDark}`,
-  paddingTop: Spacing.size.small,
-  paddingBottom: Spacing.size.small,
-}
-
-const titleStyles: CSSProperties = {
-  fontSize: Font.size.extraLarge,
-  fontWeight: Font.weight.bold,
-  lineHeight: Font.lineHeight.default,
-  paddingBottom: Spacing.size.small,
-}
-
-const connectorStyles: CSSProperties = {
-  paddingBottom: Spacing.size.tiny,
-}
-
-const descriptionStyles: CSSProperties = {
-  fontWeight: Font.weight.bold,
-  lineHeight: Font.lineHeight.default,
-}
-
-const supportiveInformationStyles: CSSProperties = {
-  ...DefaultStyles,
-  color: Colors.grayDark,
-  fontSize: Font.size.small,
-  fontStyle: 'italic',
-}
+const styles = {
+  outerCell: {
+    ...DefaultStyles,
+    paddingBottom: Spacing.size.medium,
+    paddingTop: Spacing.size.medium,
+  } as CSSProperties,
+  innerCell: {
+    paddingLeft: 12,
+    borderLeft: `8px solid ${Colors.grayDark}`,
+    paddingTop: Spacing.size.small,
+    paddingBottom: Spacing.size.small,
+  } as CSSProperties,
+  title: {
+    fontSize: Font.size.extraLarge,
+    fontWeight: Font.weight.bold,
+    lineHeight: Font.lineHeight.default,
+    paddingBottom: Spacing.size.small,
+  } as CSSProperties,
+  statusDueTo: {
+    paddingBottom: Spacing.size.tiny,
+  } as CSSProperties,
+  description: {
+    fontWeight: Font.weight.bold,
+    lineHeight: Font.lineHeight.default,
+  } as CSSProperties,
+  documentsNeededValue: {
+    fontSize: Font.size.medium,
+    fontWeight: Font.weight.bold,
+    paddingTop: Spacing.size.tiny,
+    paddingBottom: Spacing.size.medium,
+  } as CSSProperties,
+  emailToLabel: {
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.bold,
+    paddingRight: Spacing.size.small,
+    paddingBottom: Spacing.size.tiny,
+  } as CSSProperties,
+  emailToValue: {
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.normal,
+  } as CSSProperties,
+  subjectLineLabel: {
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.bold,
+    paddingRight: Spacing.size.small,
+    verticalAlign: 'top',
+  } as CSSProperties,
+  subjectLineValue: {
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.normal,
+  } as CSSProperties,
+  supportiveInformation: {
+    ...DefaultStyles,
+    color: Colors.grayDark,
+    fontSize: Font.size.small,
+    fontStyle: 'italic',
+  } as CSSProperties,
+  missingDocumentDeadline: {
+    ...DefaultStyles,
+    fontSize: Font.size.small,
+    fontWeight: Font.weight.bold,
+    fontStyle: 'italic',
+    paddingTop: Spacing.size.medium,
+  } as CSSProperties,
+} as const
