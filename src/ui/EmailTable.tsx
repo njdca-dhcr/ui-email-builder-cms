@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, Fragment, MouseEventHandler, ReactNode } from 'react'
+import React, { CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
 
 interface BaseProps {
   children: ReactNode
@@ -30,21 +30,4 @@ export const EmailTable: FC<EmailTableProps> = ({ children, maxWidth, onClick, s
 const defaultStyles: CSSProperties = {
   margin: 0,
   padding: 0,
-}
-
-interface TableAndCellProps extends BaseProps {
-  onClick?: MouseEventHandler<HTMLTableCellElement>
-  style?: CSSProperties
-}
-
-export const TableAndCell: FC<TableAndCellProps> = ({ children, onClick, style, ...props }) => {
-  return (
-    <EmailTable {...props}>
-      <tr>
-        <td onClick={onClick} style={style}>
-          {children}
-        </td>
-      </tr>
-    </EmailTable>
-  )
 }
