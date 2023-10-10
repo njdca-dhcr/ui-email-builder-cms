@@ -21,6 +21,7 @@ interface RowConfig extends BaseConfig {
 }
 
 interface CellConfig extends BaseConfig {
+  align?: 'left' | 'center' | 'right' | 'justify' | 'char'
   part: 'cell'
 }
 

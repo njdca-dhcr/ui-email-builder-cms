@@ -137,7 +137,7 @@ describe('Status', () => {
 
       itHasAnEditable('supportive information', 'Status supportive information')
 
-      itHasAnEditable('connector', 'Status due to label')
+      itHasAnEditable('status due to', 'Status due to label')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -178,6 +178,34 @@ describe('Status', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(9)
+      })
+    })
+
+    describe('Overview w/ Reason + Amount Due', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          StatusVariant.OverviewWithReasonAndAmountDue + '',
+        )
+      })
+
+      itHasAnEditable('title', 'Status title')
+
+      itHasAnEditable('description', 'Status description')
+
+      itHasAnEditable('supportive information', 'Status supportive information')
+
+      itHasAnEditable('status due to', 'Status due to label')
+
+      itHasAnEditable('amount label', 'Amount label')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(5)
       })
     })
   })

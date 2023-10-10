@@ -244,7 +244,9 @@ describe(EmailBlock.Cell.displayName!, () => {
       <table>
         <tbody>
           <tr>
-            <EmailBlock.Cell style={{ marginTop: 20 }}>{null}</EmailBlock.Cell>
+            <EmailBlock.Cell align="center" style={{ marginTop: 20 }}>
+              {null}
+            </EmailBlock.Cell>
           </tr>
         </tbody>
       </table>,
@@ -252,5 +254,6 @@ describe(EmailBlock.Cell.displayName!, () => {
     const cell = baseElement.querySelector('td')
     expect(cell).not.toBeNull()
     expect(cell?.attributes.getNamedItem('style')?.value).toEqual('margin-top: 20px;')
+    expect(cell?.attributes.getNamedItem('align')?.value).toEqual('center')
   })
 })

@@ -5,6 +5,7 @@ import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPa
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
+import { WarningIcon } from 'src/ui/WarningIcon'
 
 export const enum StatusVariant {
   Overview,
@@ -54,7 +55,7 @@ export const defaultValue: StatusValue = {
   subjectLineValue: 'Eligible Pending Review Documents<br/>{Name_of_claimant}',
   missingDocumentDeadline:
     'If you do not submit your documents by 00/00/0000, you will be denied your claim and will be required to pay back any DUA funds released to you.',
-  amountLabel: '',
+  amountLabel: 'You owe $200',
   overpaymentLabel: '',
   overpaymentValue: '',
   waivedLabel: '',
@@ -67,7 +68,7 @@ export const useStatusValue = (componentId: string, id: string) => {
   return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 }
 
-const { Table, Row } = EmailBlock
+const { Table, Row, Cell } = EmailBlock
 
 export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -96,7 +97,12 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               style={styles.title}
             />
           </Row>
-          <Row condition={[StatusVariant.OverviewWithReason].includes(value.variant)}>
+          <Row
+            condition={[
+              StatusVariant.OverviewWithReason,
+              StatusVariant.OverviewWithReasonAndAmountDue,
+            ].includes(value.variant)}
+          >
             <EditableElement
               element="td"
               initialValue={initialValue.statusDueTo}
@@ -175,6 +181,25 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             </Row>
           )}
         </Row>
+        <Row
+          condition={[StatusVariant.OverviewWithReasonAndAmountDue].includes(value.variant)}
+          elements={[
+            { part: 'cell', style: styles.amountContainer },
+            { part: 'table', maxWidth: 345, style: styles.amountTable },
+            'row',
+          ]}
+        >
+          <Cell align="center" style={styles.amountIcon}>
+            <WarningIcon />
+          </Cell>
+          <EditableElement
+            element="td"
+            initialValue={initialValue.amountLabel}
+            label="Amount label"
+            onValueChange={(amountLabel) => setValue({ ...value, amountLabel })}
+            style={styles.amountLabel}
+          />
+        </Row>
         <Row>
           <EditableElement
             element="td"
@@ -250,6 +275,28 @@ const styles = {
   subjectLineValue: {
     fontSize: Font.size.small,
     fontWeight: Font.weight.normal,
+  } as CSSProperties,
+  amountContainer: {
+    ...DefaultStyles,
+    paddingRight: Spacing.size.small,
+    paddingTop: Spacing.size.small,
+    paddingBottom: Spacing.size.large,
+  } as CSSProperties,
+  amountTable: {
+    backgroundColor: Colors.warningBackground,
+    borderLeft: `8px solid ${Colors.warning}`,
+    padding: Spacing.size.medium,
+    paddingRight: Spacing.size.extraLarge,
+  } as CSSProperties,
+  amountIcon: {
+    verticalAlign: 'center',
+    paddingRight: Spacing.size.medium,
+    width: 32,
+  } as CSSProperties,
+  amountLabel: {
+    verticalAlign: 'center',
+    fontWeight: Font.weight.bold,
+    fontSize: Font.size.large,
   } as CSSProperties,
   supportiveInformation: {
     ...DefaultStyles,
