@@ -65,6 +65,10 @@ export const defaultValue: DirectiveValue = {
     'May the check or money order payable to NJ Dept. of Labor and Workforce Development. Be sure to write your name and social security number on the payment.',
 }
 
+export const useDirectiveValue = (componentId: string, id: string) => {
+  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+}
+
 export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
 
