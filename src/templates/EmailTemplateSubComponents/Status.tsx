@@ -1,10 +1,10 @@
 import React, { CSSProperties, FC, useMemo } from 'react'
 import { EmailSubComponentProps } from './shared'
-import { EmailTable, TableAndCell } from 'src/ui/EmailTable'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Colors, DefaultStyles, Font, Spacing } from '../styles'
+import { EmailBlock } from 'src/ui/EmailBlock'
 
 export const enum StatusVariant {
   Overview,
@@ -75,183 +75,165 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const initialValue = useMemo(() => value, [value.variant])
 
   return (
-    <tr key={value.variant} onClick={activate}>
-      <td>
-        <EmailTable>
-          <tr>
-            <td style={outerCellStyles}>
-              <TableAndCell style={innerCellStyles}>
-                <EmailTable>
-                  <tr>
-                    <EditableElement
-                      element="td"
-                      initialValue={initialValue.status}
-                      label="Status title"
-                      onValueChange={(status) => setValue({ ...value, status })}
-                      style={titleStyles}
-                      value={value.status}
-                    />
-                  </tr>
-                  {[StatusVariant.OverviewWithReason].includes(value.variant) && (
-                    <tr>
-                      <EditableElement
-                        element="td"
-                        initialValue={initialValue.connector}
-                        label="Status due to label"
-                        onValueChange={(connector) => setValue({ ...value, connector })}
-                        value={value.connector}
-                        style={connectorStyles}
-                      />
-                    </tr>
-                  )}
-                  {[StatusVariant.MissingDocument].includes(value.variant) ? (
-                    <>
-                      <tr>
-                        <EditableElement
-                          element="td"
-                          initialValue={initialValue.documentsNeededLabel}
-                          label="Documents needed label"
-                          onValueChange={(documentsNeededLabel) =>
-                            setValue({ ...value, documentsNeededLabel })
-                          }
-                          value={value.documentsNeededLabel}
-                        />
-                      </tr>
-                      <tr>
-                        <EditableElement
-                          element="td"
-                          initialValue={initialValue.documentsNeededValue}
-                          label="Documents needed value"
-                          onValueChange={(documentsNeededValue) =>
-                            setValue({ ...value, documentsNeededValue })
-                          }
-                          value={value.documentsNeededValue}
-                          style={{
-                            fontSize: Font.size.medium,
-                            fontWeight: Font.weight.bold,
-                            paddingTop: Spacing.size.tiny,
-                            paddingBottom: Spacing.size.medium,
-                          }}
-                        />
-                      </tr>
-                      <tr>
-                        <td>
-                          <EmailTable width="unset">
-                            <tr>
-                              <EditableElement
-                                element="td"
-                                initialValue={initialValue.emailToLabel}
-                                label="Email to label"
-                                onValueChange={(emailToLabel) =>
-                                  setValue({ ...value, emailToLabel })
-                                }
-                                value={value.emailToLabel}
-                                style={{
-                                  fontSize: Font.size.small,
-                                  fontWeight: Font.weight.bold,
-                                  paddingRight: Spacing.size.small,
-                                  paddingBottom: Spacing.size.tiny,
-                                }}
-                              />
-                              <EditableElement
-                                element="td"
-                                initialValue={initialValue.emailToValue}
-                                label="Email to value"
-                                onValueChange={(emailToValue) =>
-                                  setValue({ ...value, emailToValue })
-                                }
-                                value={value.emailToValue}
-                                style={{
-                                  fontSize: Font.size.small,
-                                  fontWeight: Font.weight.normal,
-                                }}
-                              />
-                            </tr>
-                            <tr>
-                              <EditableElement
-                                element="td"
-                                initialValue={initialValue.subjectLineLabel}
-                                label="Subject line label"
-                                onValueChange={(subjectLineLabel) =>
-                                  setValue({ ...value, subjectLineLabel })
-                                }
-                                value={value.subjectLineLabel}
-                                style={{
-                                  fontSize: Font.size.small,
-                                  fontWeight: Font.weight.bold,
-                                  paddingRight: Spacing.size.small,
-                                  verticalAlign: 'top',
-                                }}
-                              />
-                              <EditableElement
-                                element="td"
-                                initialValue={initialValue.subjectLineValue}
-                                label="Subject line value"
-                                onValueChange={(subjectLineValue) =>
-                                  setValue({ ...value, subjectLineValue })
-                                }
-                                value={value.subjectLineValue}
-                                style={{
-                                  fontSize: Font.size.small,
-                                  fontWeight: Font.weight.normal,
-                                }}
-                              />
-                            </tr>
-                          </EmailTable>
-                        </td>
-                      </tr>
-                    </>
-                  ) : (
-                    <tr>
-                      <EditableElement
-                        element="td"
-                        initialValue={initialValue.description}
-                        label="Status description"
-                        onValueChange={(description) => setValue({ ...value, description })}
-                        style={descriptionStyles}
-                        value={value.description}
-                      />
-                    </tr>
-                  )}
-                </EmailTable>
-              </TableAndCell>
-            </td>
-          </tr>
-          <tr>
+    <EmailBlock.Row key={value.variant} elements={['cell']} onClick={activate}>
+      <EmailBlock.Table>
+        <EmailBlock.Row
+          elements={[
+            { part: 'cell', style: outerCellStyles },
+            'table',
+            'row',
+            { part: 'cell', style: innerCellStyles },
+            'table',
+          ]}
+        >
+          <EmailBlock.Row>
             <EditableElement
               element="td"
-              initialValue={initialValue.supportiveInformation}
-              label="Status supportive information"
-              onValueChange={(supportiveInformation) =>
-                setValue({ ...value, supportiveInformation })
-              }
-              value={value.supportiveInformation}
-              style={supportiveInformationStyles}
+              initialValue={initialValue.status}
+              label="Status title"
+              onValueChange={(status) => setValue({ ...value, status })}
+              style={titleStyles}
+              value={value.status}
             />
-          </tr>
-          {[StatusVariant.MissingDocument].includes(value.variant) && (
-            <tr>
+          </EmailBlock.Row>
+          <EmailBlock.Row condition={[StatusVariant.OverviewWithReason].includes(value.variant)}>
+            <EditableElement
+              element="td"
+              initialValue={initialValue.connector}
+              label="Status due to label"
+              onValueChange={(connector) => setValue({ ...value, connector })}
+              value={value.connector}
+              style={connectorStyles}
+            />
+          </EmailBlock.Row>
+          {[StatusVariant.MissingDocument].includes(value.variant) ? (
+            <>
+              <EmailBlock.Row>
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.documentsNeededLabel}
+                  label="Documents needed label"
+                  onValueChange={(documentsNeededLabel) =>
+                    setValue({ ...value, documentsNeededLabel })
+                  }
+                  value={value.documentsNeededLabel}
+                />
+              </EmailBlock.Row>
+              <EmailBlock.Row>
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.documentsNeededValue}
+                  label="Documents needed value"
+                  onValueChange={(documentsNeededValue) =>
+                    setValue({ ...value, documentsNeededValue })
+                  }
+                  value={value.documentsNeededValue}
+                  style={{
+                    fontSize: Font.size.medium,
+                    fontWeight: Font.weight.bold,
+                    paddingTop: Spacing.size.tiny,
+                    paddingBottom: Spacing.size.medium,
+                  }}
+                />
+              </EmailBlock.Row>
+              <EmailBlock.Row elements={['cell', { part: 'table', width: 'unset' }]}>
+                <EmailBlock.Row>
+                  <EditableElement
+                    element="td"
+                    initialValue={initialValue.emailToLabel}
+                    label="Email to label"
+                    onValueChange={(emailToLabel) => setValue({ ...value, emailToLabel })}
+                    value={value.emailToLabel}
+                    style={{
+                      fontSize: Font.size.small,
+                      fontWeight: Font.weight.bold,
+                      paddingRight: Spacing.size.small,
+                      paddingBottom: Spacing.size.tiny,
+                    }}
+                  />
+                  <EditableElement
+                    element="td"
+                    initialValue={initialValue.emailToValue}
+                    label="Email to value"
+                    onValueChange={(emailToValue) => setValue({ ...value, emailToValue })}
+                    value={value.emailToValue}
+                    style={{
+                      fontSize: Font.size.small,
+                      fontWeight: Font.weight.normal,
+                    }}
+                  />
+                </EmailBlock.Row>
+                <EmailBlock.Row>
+                  <EditableElement
+                    element="td"
+                    initialValue={initialValue.subjectLineLabel}
+                    label="Subject line label"
+                    onValueChange={(subjectLineLabel) => setValue({ ...value, subjectLineLabel })}
+                    value={value.subjectLineLabel}
+                    style={{
+                      fontSize: Font.size.small,
+                      fontWeight: Font.weight.bold,
+                      paddingRight: Spacing.size.small,
+                      verticalAlign: 'top',
+                    }}
+                  />
+                  <EditableElement
+                    element="td"
+                    initialValue={initialValue.subjectLineValue}
+                    label="Subject line value"
+                    onValueChange={(subjectLineValue) => setValue({ ...value, subjectLineValue })}
+                    value={value.subjectLineValue}
+                    style={{
+                      fontSize: Font.size.small,
+                      fontWeight: Font.weight.normal,
+                    }}
+                  />
+                </EmailBlock.Row>
+              </EmailBlock.Row>
+            </>
+          ) : (
+            <EmailBlock.Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.missingDocumentDeadline}
-                label="Status deadline description"
-                onValueChange={(missingDocumentDeadline) =>
-                  setValue({ ...value, missingDocumentDeadline })
-                }
-                value={value.missingDocumentDeadline}
-                style={{
-                  ...DefaultStyles,
-                  fontSize: Font.size.small,
-                  fontWeight: Font.weight.bold,
-                  fontStyle: 'italic',
-                  paddingTop: Spacing.size.medium,
-                }}
+                initialValue={initialValue.description}
+                label="Status description"
+                onValueChange={(description) => setValue({ ...value, description })}
+                style={descriptionStyles}
+                value={value.description}
               />
-            </tr>
+            </EmailBlock.Row>
           )}
-        </EmailTable>
-      </td>
-    </tr>
+        </EmailBlock.Row>
+        <EmailBlock.Row>
+          <EditableElement
+            element="td"
+            initialValue={initialValue.supportiveInformation}
+            label="Status supportive information"
+            onValueChange={(supportiveInformation) => setValue({ ...value, supportiveInformation })}
+            value={value.supportiveInformation}
+            style={supportiveInformationStyles}
+          />
+        </EmailBlock.Row>
+        <EmailBlock.Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
+          <EditableElement
+            element="td"
+            initialValue={initialValue.missingDocumentDeadline}
+            label="Status deadline description"
+            onValueChange={(missingDocumentDeadline) =>
+              setValue({ ...value, missingDocumentDeadline })
+            }
+            value={value.missingDocumentDeadline}
+            style={{
+              ...DefaultStyles,
+              fontSize: Font.size.small,
+              fontWeight: Font.weight.bold,
+              fontStyle: 'italic',
+              paddingTop: Spacing.size.medium,
+            }}
+          />
+        </EmailBlock.Row>
+      </EmailBlock.Table>
+    </EmailBlock.Row>
   )
 }
 

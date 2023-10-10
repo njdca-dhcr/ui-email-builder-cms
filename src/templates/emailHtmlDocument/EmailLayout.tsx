@@ -49,6 +49,10 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html }) => {
             href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@1,700&display=swap"
+            rel="stylesheet"
+          />
         </head>
         <body
           style={styles.body}

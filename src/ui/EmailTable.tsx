@@ -8,19 +8,10 @@ interface BaseProps {
 
 interface EmailTableProps extends BaseProps {
   onClick?: MouseEventHandler<HTMLTableElement>
-  noBody?: boolean
   style?: CSSProperties
 }
 
-export const EmailTable: FC<EmailTableProps> = ({
-  children,
-  noBody,
-  maxWidth,
-  onClick,
-  style,
-  width,
-}) => {
-  const Wrapper = noBody ? Fragment : 'tbody'
+export const EmailTable: FC<EmailTableProps> = ({ children, maxWidth, onClick, style, width }) => {
   return (
     <table
       cellPadding={0}
@@ -30,7 +21,7 @@ export const EmailTable: FC<EmailTableProps> = ({
       width={width ?? '100%'}
       style={{ ...defaultStyles, ...style, maxWidth }}
     >
-      <Wrapper>{children}</Wrapper>
+      <tbody>{children}</tbody>
     </table>
   )
 }
