@@ -19,10 +19,10 @@ describe('DirectiveControls', () => {
     expect(button).toHaveTextContent('One Step')
 
     await user.click(button!)
-    await user.click(getByRole('option', { name: 'Cost Breakdown' }))
+    await user.click(getByRole('option', { name: 'Pay Online' }))
 
     button = queryByRole('button')
     expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Cost Breakdown')
+    expect(button).toHaveTextContent('Pay Online')
   })
 })
