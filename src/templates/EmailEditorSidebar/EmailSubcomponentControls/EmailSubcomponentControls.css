@@ -1,0 +1,11 @@
+.appeal-rights-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1.25rem;
+}
+
+.appeal-rights-container > label {
+  font-size: 0.875rem;
+  font-weight: var(--weight-normal);
+}

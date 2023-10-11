@@ -82,6 +82,7 @@ describe('RulesRightsRegulations', () => {
             value={value.variant}
           >
             <option>{RulesRightsRegulationsVariant.Reminder}</option>
+            <option>{RulesRightsRegulationsVariant.AppealRights}</option>
           </select>
         </label>
       )
@@ -126,6 +127,50 @@ describe('RulesRightsRegulations', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(6)
+      })
+    })
+
+    describe('Appeal Rights', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <RulesRightsRegulations
+            componentId={componentId}
+            id={id}
+            emailSubComponent={emailSubComponent}
+          />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          RulesRightsRegulationsVariant.AppealRights + '',
+        )
+      })
+
+      itHasAnEditable('title', 'Appeal Rights title')
+
+      itHasAnEditable('summary', 'Appeal Rights summary')
+
+      itHasAnEditable('instruction', 'Appeal Rights instruction')
+
+      itHasAnEditable('button', 'Appeal Rights button')
+
+      itHasAnEditable('info label', 'Appeal Rights information label')
+
+      itHasAnEditable('program code label', 'Appeal Rights program code label')
+
+      itHasAnEditable('program code value', 'Appeal Rights program code value')
+
+      itHasAnEditable('claim date label', 'Appeal Rights claim date label')
+
+      itHasAnEditable('claim date value', 'Appeal Rights claim date value')
+
+      itHasAnEditable('determination date label', 'Appeal Rights determination date label')
+
+      itHasAnEditable('determination date value', 'Appeal Rights determination date value')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(11)
       })
     })
   })

@@ -11,7 +11,7 @@ import { useShouldShowEmailComponent } from '../ShouldShowEmailPart'
 export const EditEmailComponent: FC<EmailComponentProps> = (props) => {
   const shouldShow = useShouldShowEmailComponent(props.id)
 
-  if (!shouldShow.on) return null
+  if (shouldShow.off) return null
 
   switch (props.emailComponent.kind) {
     case 'Header':

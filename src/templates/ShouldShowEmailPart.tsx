@@ -33,7 +33,9 @@ export const ShouldShowEmailPart: FC<{
   )
 }
 
-export const useShouldShowEmailComponent = (id: string): { on: boolean; toggle: () => void } => {
+export const useShouldShowEmailComponent = (
+  id: string,
+): { on: boolean; off: boolean; toggle: () => void } => {
   const [data, update] = useContext(ShouldShowEmailPartContext)
   const key = buildComponentKey(id)
   const isOn = data[key] ?? true
@@ -42,13 +44,13 @@ export const useShouldShowEmailComponent = (id: string): { on: boolean; toggle: 
     update({ ...data, [key]: !isOn })
   }, [data, update, key])
 
-  return { on: isOn, toggle }
+  return { on: isOn, off: !isOn, toggle }
 }
 
 export const useShouldShowEmailSubComponent = (
   componentId: string,
   id: string,
-): { on: boolean; toggle: () => void } => {
+): { on: boolean; off: boolean; toggle: () => void } => {
   const [data, update] = useContext(ShouldShowEmailPartContext)
   const key = buildSubComponentKey(componentId, id)
   const isOn = data[key] ?? true
@@ -57,5 +59,5 @@ export const useShouldShowEmailSubComponent = (
     update({ ...data, [key]: !isOn })
   }, [data, update, key])
 
-  return { on: isOn, toggle }
+  return { on: isOn, off: !isOn, toggle }
 }

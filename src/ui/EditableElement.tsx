@@ -2,6 +2,7 @@ import React, { FC, JSX, TableHTMLAttributes } from 'react'
 
 interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
   element: keyof JSX.IntrinsicElements
+  href?: string
   initialValue: string
   label: string
   onValueChange: (value: string) => void

@@ -13,7 +13,7 @@ import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRight
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
   const shouldShow = useShouldShowEmailSubComponent(props.componentId, props.id)
 
-  if (!shouldShow.on) return null
+  if (shouldShow.off) return null
 
   switch (props.emailSubComponent.kind) {
     case 'AdditionalContent':

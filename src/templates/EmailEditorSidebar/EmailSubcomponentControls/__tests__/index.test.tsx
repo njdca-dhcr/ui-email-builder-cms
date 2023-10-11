@@ -3,6 +3,8 @@ import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import { buildEmailTemplateSubComponent } from 'src/testHelpers'
 import { EmailSubComponentControls } from '..'
+import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 describe('EmailSubComponentControls', () => {
   let componentId: string
@@ -77,5 +79,54 @@ describe('EmailSubComponentControls', () => {
       />,
     )
     expect(queryByText('Status variant')).not.toBeNull()
+  })
+
+  it('renders the RulesRightsRegulationsControls', () => {
+    const { queryByText } = render(
+      <EmailSubComponentControls
+        emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          kind: 'RulesRightsRegulations',
+        })}
+        componentId={componentId}
+        id={id}
+      />,
+    )
+    expect(queryByText('Rules, Rights, and Regulations variant')).not.toBeNull()
+  })
+
+  describe('when the component is not being shown', () => {
+    it('renders nothing', () => {
+      const key = buildComponentKey(componentId)
+      const { baseElement } = render(
+        <ShouldShowEmailPart initialData={{ [key]: false }}>
+          <EmailSubComponentControls
+            emailSubComponent={buildEmailTemplateSubComponent('Body', {
+              kind: 'RulesRightsRegulations',
+            })}
+            componentId={componentId}
+            id={id}
+          />
+        </ShouldShowEmailPart>,
+      )
+      expect(baseElement.innerHTML).toEqual('<div></div>')
+    })
+  })
+
+  describe('when the subcomponent is not being shown', () => {
+    it('renders nothing', () => {
+      const key = buildSubComponentKey(componentId, id)
+      const { baseElement } = render(
+        <ShouldShowEmailPart initialData={{ [key]: false }}>
+          <EmailSubComponentControls
+            emailSubComponent={buildEmailTemplateSubComponent('Body', {
+              kind: 'RulesRightsRegulations',
+            })}
+            componentId={componentId}
+            id={id}
+          />
+        </ShouldShowEmailPart>,
+      )
+      expect(baseElement.innerHTML).toEqual('<div></div>')
+    })
   })
 })

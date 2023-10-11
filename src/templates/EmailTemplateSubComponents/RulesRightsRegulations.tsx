@@ -9,6 +9,7 @@ import { Colors, DefaultStyles, Font, Spacing } from '../styles'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
+  AppealRights,
 }
 
 interface RulesRightsRegulationsValue {
@@ -20,6 +21,19 @@ interface RulesRightsRegulationsValue {
   eligibilityCondition2: string
   reminderIsFor: string
   footnote: string
+  // Appeal Rights
+  appealRightsTitle: string
+  appealRightsSummary: string
+  appealRightsInstruction: string
+  appealRightsButton: string
+  appealRightsHref: string
+  appealRightsInfoLabel: string
+  appealRightsProgramCodeLabel: string
+  appealRightsProgramCodeValue: string
+  appealRightsClaimDateLabel: string
+  appealRightsClaimDateValue: string
+  appealRightsDeterminationDateLabel: string
+  appealRightsDeterminationDateValue: string
 }
 
 const defaultValue: RulesRightsRegulationsValue = {
@@ -32,6 +46,19 @@ const defaultValue: RulesRightsRegulationsValue = {
     'This waiver is for Pandemic Unemployment Assistance (PUA), Federal Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment Compensation (MEUC), and Pandemic Extended Unemployment Compensation (PEUC).',
   footnote:
     '*State and federal laws, rules, and guidance will be used to make these determinations.',
+  appealRightsTitle: 'Appeal Rights',
+  appealRightsSummary:
+    'If you disagree with this determination, you have the right to file an appeal. Your appeal must be received within seven (7) days after the date you received this email.',
+  appealRightsInstruction: 'To begin an appeal online, get started below:',
+  appealRightsButton: 'Get Started',
+  appealRightsHref: '',
+  appealRightsInfoLabel: 'For your appeal:',
+  appealRightsProgramCodeLabel: 'Program Code:',
+  appealRightsProgramCodeValue: '###',
+  appealRightsClaimDateLabel: 'Date of Claim:',
+  appealRightsClaimDateValue: '00/00/0000',
+  appealRightsDeterminationDateLabel: 'Date of Determination:',
+  appealRightsDeterminationDateValue: '00/00/0000',
 }
 
 export const useRulesRightsRegulationsValue = (componentId: string, id: string) => {
@@ -43,6 +70,8 @@ const { Table, Row, Cell } = EmailBlock
 export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useRulesRightsRegulationsValue(componentId, id)
+  const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
+  const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
 
   const initialValue = useMemo(() => value, [value.variant])
 
@@ -62,17 +91,28 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
         <Cell style={styles.iconContainer}>
           <FlagIcon />
         </Cell>
-        <EditableElement
-          element="td"
-          initialValue={initialValue.reminderTitle}
-          label="Reminder title"
-          onValueChange={(reminderTitle) => setValue({ ...value, reminderTitle })}
-          style={styles.reminderTitle}
-        />
+        {isReminder && (
+          <EditableElement
+            element="td"
+            initialValue={initialValue.reminderTitle}
+            label="Reminder title"
+            onValueChange={(reminderTitle) => setValue({ ...value, reminderTitle })}
+            style={styles.title}
+          />
+        )}
+        {isAppealRights && (
+          <EditableElement
+            element="td"
+            initialValue={initialValue.appealRightsTitle}
+            label="Appeal Rights title"
+            onValueChange={(appealRightsTitle) => setValue({ ...value, appealRightsTitle })}
+            style={styles.title}
+          />
+        )}
       </Row>
       <Row>
         <Cell>{null}</Cell>
-        <Cell elements={['table']}>
+        <Cell elements={['table']} condition={isReminder}>
           <Row>
             <EditableElement
               element="td"
@@ -123,6 +163,145 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             />
           </Row>
         </Cell>
+        <Cell elements={['table']} condition={isAppealRights}>
+          <Row>
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsSummary}
+              label="Appeal Rights summary"
+              onValueChange={(appealRightsSummary) => setValue({ ...value, appealRightsSummary })}
+              style={styles.appealSummary}
+            />
+          </Row>
+          <Row>
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsInstruction}
+              label="Appeal Rights instruction"
+              onValueChange={(appealRightsInstruction) =>
+                setValue({ ...value, appealRightsInstruction })
+              }
+              style={styles.appealInstruction}
+            />
+          </Row>
+          <Row
+            elements={[
+              'cell',
+              { part: 'table', width: 'unset' },
+              'row',
+              { part: 'cell', style: styles.appealButton },
+            ]}
+          >
+            <EditableElement
+              element="a"
+              href={value.appealRightsHref}
+              initialValue={initialValue.appealRightsButton}
+              label="Appeal Rights button"
+              onValueChange={(appealRightsButton) => setValue({ ...value, appealRightsButton })}
+              style={styles.appealButtonText}
+            />
+          </Row>
+          <Row
+            elements={[
+              'cell',
+              { part: 'table', maxWidth: 297 },
+              'row',
+              { part: 'cell', style: styles.appealHref },
+            ]}
+          >
+            {value.appealRightsHref ||
+              'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+          </Row>
+          <Row>
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsInfoLabel}
+              label="Appeal Rights information label"
+              onValueChange={(appealRightsInfoLabel) =>
+                setValue({ ...value, appealRightsInfoLabel })
+              }
+              style={styles.appealInfoLabel}
+            />
+          </Row>
+          <Row
+            elements={[
+              { part: 'cell', style: styles.appealLabelAndValue },
+              { part: 'table', width: 'unset' },
+              'row',
+            ]}
+          >
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsProgramCodeLabel}
+              label="Appeal Rights program code label"
+              onValueChange={(appealRightsProgramCodeLabel) =>
+                setValue({ ...value, appealRightsProgramCodeLabel })
+              }
+              style={styles.appealLabel}
+            />
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsProgramCodeValue}
+              label="Appeal Rights program code value"
+              onValueChange={(appealRightsProgramCodeValue) =>
+                setValue({ ...value, appealRightsProgramCodeValue })
+              }
+              style={styles.appealText}
+            />
+          </Row>
+          <Row
+            elements={[
+              { part: 'cell', style: styles.appealLabelAndValue },
+              { part: 'table', width: 'unset' },
+              'row',
+            ]}
+          >
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsClaimDateLabel}
+              label="Appeal Rights claim date label"
+              onValueChange={(appealRightsClaimDateLabel) =>
+                setValue({ ...value, appealRightsClaimDateLabel })
+              }
+              style={styles.appealLabel}
+            />
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsClaimDateValue}
+              label="Appeal Rights claim date value"
+              onValueChange={(appealRightsClaimDateValue) =>
+                setValue({ ...value, appealRightsClaimDateValue })
+              }
+              style={styles.appealText}
+            />
+          </Row>
+          <Row
+            elements={[
+              { part: 'cell', style: styles.appealLabelAndValue },
+              { part: 'table', width: 'unset' },
+              'row',
+            ]}
+          >
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsDeterminationDateLabel}
+              label="Appeal Rights determination date label"
+              onValueChange={(appealRightsDeterminationDateLabel) =>
+                setValue({ ...value, appealRightsDeterminationDateLabel })
+              }
+              style={styles.appealLabel}
+            />
+            <EditableElement
+              element="td"
+              initialValue={initialValue.appealRightsDeterminationDateValue}
+              label="Appeal Rights determination date value"
+              onValueChange={(appealRightsDeterminationDateValue) =>
+                setValue({ ...value, appealRightsDeterminationDateValue })
+              }
+              style={styles.appealText}
+            />
+          </Row>
+        </Cell>
       </Row>
     </Row>
   )
@@ -136,15 +315,16 @@ const styles = {
   innerContainer: {
     backgroundColor: Colors.grayLight,
     borderLeft: `8px solid ${Colors.grayDark}`,
-    padding: Spacing.size.large,
+    paddingLeft: Spacing.size.large,
     paddingRight: Spacing.size.extraLarge,
     paddingBottom: Spacing.size.extraLarge,
+    paddingTop: 0,
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
-  reminderTitle: {
+  title: {
     fontSize: Font.size.large,
     fontWeight: Font.weight.bold,
     paddingTop: Spacing.size.medium,
@@ -170,5 +350,49 @@ const styles = {
     fontWeight: Font.weight.bold,
     fontSize: Font.size.small,
     fontStyle: 'italic',
+  } as CSSProperties,
+  appealSummary: {
+    fontSize: Font.size.small,
+    paddingBottom: Spacing.size.large,
+    paddingTop: Spacing.size.small,
+  } as CSSProperties,
+  appealInstruction: {
+    fontSize: Font.size.small,
+    paddingBottom: Spacing.size.medium,
+  } as CSSProperties,
+  appealText: {
+    fontSize: Font.size.small,
+  } as CSSProperties,
+  appealButton: {
+    backgroundColor: Colors.black,
+    borderRadius: 10,
+    paddingTop: Spacing.size.small,
+    paddingBottom: Spacing.size.small,
+    paddingLeft: 44,
+    paddingRight: 44,
+  } as CSSProperties,
+  appealButtonText: {
+    color: Colors.white,
+    fontWeight: Font.weight.bold,
+    textDecoration: 'none',
+  } as CSSProperties,
+  appealHref: {
+    color: Colors.gray,
+    fontSize: Font.size.tiny,
+    paddingBottom: Spacing.size.extraLarge,
+    paddingTop: Spacing.size.medium,
+    textDecoration: 'underline',
+  } as CSSProperties,
+  appealLabelAndValue: {
+    paddingTop: Spacing.size.tiny,
+  } as CSSProperties,
+  appealLabel: {
+    fontWeight: Font.weight.bold,
+    fontSize: Font.size.small,
+    paddingRight: Spacing.size.small,
+  } as CSSProperties,
+  appealInfoLabel: {
+    fontWeight: Font.weight.bold,
+    paddingBottom: Font.size.tiny,
   } as CSSProperties,
 } as const
