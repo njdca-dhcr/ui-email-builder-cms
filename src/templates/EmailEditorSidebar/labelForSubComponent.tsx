@@ -10,6 +10,8 @@ export const labelForSubComponent = (
       return 'Supplemental Content'
     case 'ProgramName':
       return 'Program Name'
+    case 'RulesRightsRegulations':
+      return 'Rules, Rights, and Regulations'
     default:
       return subComponentKind
   }

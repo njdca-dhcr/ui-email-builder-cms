@@ -12,8 +12,7 @@ import {
   renderEmailPart,
 } from 'src/testHelpers'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
-import { useEmailPartsContentForSubComponent } from 'src/templates/EmailPartsContent'
-import { Status, StatusVariant, defaultValue } from '../Status'
+import { Status, StatusVariant, useStatusValue } from '../Status'
 
 describe('Status', () => {
   let value: string
@@ -72,7 +71,7 @@ describe('Status', () => {
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+      const [value, setValue] = useStatusValue(componentId, id)
       return (
         <label>
           Variant

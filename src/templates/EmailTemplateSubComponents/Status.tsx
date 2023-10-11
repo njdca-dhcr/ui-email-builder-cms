@@ -15,7 +15,7 @@ export const enum StatusVariant {
   OverviewWithReasonAndAmountBreakdown,
 }
 
-export interface StatusValue {
+interface StatusValue {
   variant: StatusVariant
   // Always used
   status: string
@@ -40,7 +40,7 @@ export interface StatusValue {
   totalValue: string
 }
 
-export const defaultValue: StatusValue = {
+const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,
   status: 'Status of Claim',
   statusDueTo: 'because...',

@@ -112,4 +112,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByLabelText('Supplemental content title')).not.toBeNull()
   })
+
+  it('can render RulesRightsRegulations', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'RulesRightsRegulations' })
+    const { queryByLabelText } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByLabelText('Reminder title')).not.toBeNull()
+  })
 })
