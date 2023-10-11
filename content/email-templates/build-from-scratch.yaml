@@ -1,0 +1,20 @@
+name: Build from Scratch
+description: You know what you want so make it happen.
+components:
+  - kind: Header
+    subComponents:
+      - kind: Title
+      - kind: ProgramName
+  - kind: Name
+  - kind: Body
+    subComponents:
+      - kind: Intro
+      - kind: Status
+      - kind: Directive
+      - kind: RulesRightsRegulations
+      - kind: SupplementalContent
+    required: true
+  - kind: Footer
+    subComponents:
+      - kind: AdditionalContent
+  - kind: Disclaimer

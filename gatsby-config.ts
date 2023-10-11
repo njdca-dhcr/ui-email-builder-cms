@@ -11,6 +11,9 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-root-import`,
     `gatsby-transformer-yaml`,
     {
@@ -55,6 +58,10 @@ const config: GatsbyConfig = {
           {
             name: 'Public Sans',
             file: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@1,700&display=swap',
+          },
+          {
+            name: 'Public Sans',
+            file: 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,600;1,700&display=swap',
           },
           { name: 'EB Garamond', file: 'https://fonts.googleapis.com/css?family=EB+Garamond:400' },
           {

@@ -1,0 +1,22 @@
+name: Status Update
+description: Confirmations, updates, determinations, and any other status related messaging.
+components:
+  - kind: Header
+    subComponents:
+      - kind: Title
+        required: true
+      - kind: ProgramName
+  - kind: Name
+    description: Adding a name is highly encouraged
+  - kind: Body
+    subComponents:
+      - kind: Intro
+      - kind: Status
+        required: true
+      - kind: SupplementalContent
+    required: true
+  - kind: Footer
+    subComponents:
+      - kind: AdditionalContent
+  - kind: Disclaimer
+    required: true
