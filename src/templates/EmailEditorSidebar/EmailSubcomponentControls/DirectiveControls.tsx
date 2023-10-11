@@ -26,7 +26,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
             label: 'Three Steps w/ Step 2 Expansion',
             value: DirectiveVariant.StepTwoExpansion + '',
           },
-          { label: 'Cost Breakdown', value: DirectiveVariant.CostBreakdown + '' },
+          // { label: 'Cost Breakdown', value: DirectiveVariant.CostBreakdown + '' },
           { label: 'Pay Online', value: DirectiveVariant.PayOnline + '' },
         ]}
         onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}

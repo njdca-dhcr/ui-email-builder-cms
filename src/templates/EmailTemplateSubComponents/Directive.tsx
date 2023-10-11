@@ -9,7 +9,7 @@ export const enum DirectiveVariant {
   OneStep,
   ThreeStep,
   StepTwoExpansion,
-  CostBreakdown,
+  // CostBreakdown,
   PayOnline,
 }
 
@@ -111,13 +111,18 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                             <td style={{ textAlign: 'left' }}>
                               <div style={{ lineHeight: '150%' }}>
                                 <span style={stepNumberLabel}>
-                                  <EditableElement
-                                    element="b"
-                                    initialValue={initialValue.title}
-                                    label="Title for the Directive"
-                                    onValueChange={(title) => setValue({ ...value, title })}
-                                    value={value.title}
-                                  />
+
+                                  {[DirectiveVariant.PayOnline].includes(value.variant) ? (
+                                    <><b>Pay Online</b> today</>
+                                  ) : (
+                                    <EditableElement
+                                      element="b"
+                                      initialValue={initialValue.title}
+                                      label="Title for the Directive"
+                                      onValueChange={(title) => setValue({ ...value, title })}
+                                      value={value.title}
+                                    />
+                                  )}
                                 </span>
                               </div>
                             </td>
@@ -249,6 +254,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                 setValue({ ...value, alternativePaymentLabel })
                               }
                               value={value.alternativePaymentLabel}
+                              style={alternativePaymentStyles}
                             />
                           </tr>
 
@@ -564,7 +570,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                               setValue({ ...value, step2Tertiary })
                                             }
                                             value={value.step2Tertiary}
-                                            style={stepDescriptionStyles}
+                                            style={supportiveInformationStyles}
                                           />
                                           <div style={spaceStyles}>&nbsp;</div>
 
@@ -576,7 +582,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                               setValue({ ...value, step2CaseNumber })
                                             }
                                             value={value.step2CaseNumber}
-                                            style={stepDescriptionStyles}
+                                            style={expansionCaseNumberStyles}
                                           />
                                           <div style={spaceStyles}>&nbsp;</div>
                                         </>
@@ -734,6 +740,7 @@ const spaceStyles: CSSProperties = {
 const tdPaddingStyles: CSSProperties = {
   paddingLeft: '18px',
   paddingTop: '5px',
+  width: '100%',
 }
 
 const stepBar12Styles: CSSProperties = {
@@ -776,4 +783,14 @@ const payOnlineBoxStyles: CSSProperties = {
   border: '5px solid #FAF3D1',
   borderRadius: '10px',
   padding: '30px 40px',
+}
+
+const alternativePaymentStyles: CSSProperties = {
+  fontSize: Font.size.small,
+  fontWeight: Font.weight.bold,
+  lineHeight: Font.lineHeight.default
+}
+
+const expansionCaseNumberStyles: CSSProperties = {
+  fontSize: Font.size.small,
 }
