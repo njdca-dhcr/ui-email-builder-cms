@@ -103,7 +103,10 @@ describe('Directive', () => {
           <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.ThreeStep + '')
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          DirectiveVariant.ThreeStep + '',
+        )
       })
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
@@ -130,7 +133,10 @@ describe('Directive', () => {
           <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.StepTwoExpansion + '')
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          DirectiveVariant.StepTwoExpansion + '',
+        )
       })
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
@@ -156,11 +162,14 @@ describe('Directive', () => {
           <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.PayOnline + '')
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          DirectiveVariant.PayOnline + '',
+        )
       })
 
       itHasAnEditable('alternative payment information', 'Alternative payment information')
-      
+
       itHasAnEditable('supportive information', 'Alternative payment information')
     })
   })
