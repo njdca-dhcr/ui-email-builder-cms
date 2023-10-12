@@ -4,11 +4,7 @@ import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { RulesRightsRegulationsControls } from '../RulesRightsRegulationsControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import {
-  RulesRightsRegulationsVariant,
-  useRulesRightsRegulationsValue,
-} from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
+import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 
 describe('RulesRightsRegulationsControls', () => {
   let componentId: string

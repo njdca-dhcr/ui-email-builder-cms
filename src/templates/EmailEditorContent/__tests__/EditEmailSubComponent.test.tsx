@@ -125,4 +125,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByLabelText('Reminder title')).not.toBeNull()
   })
+
+  it('can render LoginDetails', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'LoginDetails' })
+    const { queryByLabelText } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByLabelText('Login details title')).not.toBeNull()
+  })
 })

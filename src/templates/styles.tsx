@@ -8,6 +8,8 @@ export const Colors = {
   warningBackground: '#FAF3D1',
   warning: '#FFBE2E',
   white: '#FFFFFF',
+  blue: '#009EC1',
+  blueLight: '#E7F6F8',
 } as const
 
 const sansSerif = 'Public Sans, Helvetica, Arial, sans-serif'

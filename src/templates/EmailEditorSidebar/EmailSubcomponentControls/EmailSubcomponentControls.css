@@ -1,3 +1,4 @@
+.login-details-container,
 .appeal-rights-container {
   display: flex;
   flex-direction: column;
@@ -5,6 +6,7 @@
   padding-top: 1.25rem;
 }
 
+.login-details-container > label,
 .appeal-rights-container > label {
   font-size: 0.875rem;
   font-weight: var(--weight-normal);

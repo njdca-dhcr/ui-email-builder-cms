@@ -94,6 +94,19 @@ describe('EmailSubComponentControls', () => {
     expect(queryByText('Rules, Rights, and Regulations variant')).not.toBeNull()
   })
 
+  it('renders the LoginDetailsControls', () => {
+    const { queryByText } = render(
+      <EmailSubComponentControls
+        emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          kind: 'LoginDetails',
+        })}
+        componentId={componentId}
+        id={id}
+      />,
+    )
+    expect(queryByText('Button Link')).not.toBeNull()
+  })
+
   describe('when the component is not being shown', () => {
     it('renders nothing', () => {
       const key = buildComponentKey(componentId)
