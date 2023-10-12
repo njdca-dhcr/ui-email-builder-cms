@@ -1,12 +1,13 @@
 import { renderHook } from '@testing-library/react'
 import { useStaticQuery } from 'gatsby'
 import { useEmailTemplatesData } from '../useEmailTemplatesData'
+import { asMock } from 'src/testHelpers'
 
 jest.unmock('../useEmailTemplatesData')
 
 describe('useEmailTemplatesData', () => {
   beforeEach(() => {
-    ;(useStaticQuery as any).mockImplementation((): Queries.EmailTemplatesDataQuery => {
+    asMock(useStaticQuery).mockImplementation((): Queries.EmailTemplatesDataQuery => {
       return {
         emailTemplates: {
           edges: [

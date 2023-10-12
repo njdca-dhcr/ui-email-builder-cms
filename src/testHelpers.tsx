@@ -109,3 +109,7 @@ export const expectEmailPartContentFor = (key: string, element: HTMLElement) => 
   const li = ul!.querySelector(`[data-testid="${key}"]`)
   expect(li).not.toBeNull()
 }
+
+export const asMock = <T extends (...args: any) => any>(func: T): jest.Mock<ReturnType<T>> => {
+  return func as any
+}

@@ -58,10 +58,19 @@ export const SideBarList: FC<SidebarListProps> = ({ children }) => {
 
 interface SidebarListItemProps {
   children: ReactNode
+  className?: string
 }
 
-export const SideBarListItem: FC<SidebarListItemProps> = ({ children }) => {
-  return <li className="sidebar-list-item">{children}</li>
+export const SideBarListItem: FC<SidebarListItemProps> = ({ children, className }) => {
+  return <li className={classNames('sidebar-list-item', className)}>{children}</li>
+}
+
+interface SideBarListItemBottomProps {
+  children: ReactNode
+}
+
+export const SideBarListItemBottom: FC<SideBarListItemBottomProps> = ({ children }) => {
+  return <SideBarListItem className="sidebar-list-item-bottom">{children}</SideBarListItem>
 }
 
 interface HeadingProps {

@@ -10,7 +10,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 3.25rem 0;
+  padding-top: 3.25rem;
 }
 
 .spaced-sidebar-container {
@@ -18,6 +18,8 @@
 }
 
 .sidebar nav {
+  display: flex;
+  flex: 1;
   padding-top: 2.5rem;
 }
 
@@ -35,7 +37,12 @@
   font-size: 1.35rem;
   font-weight: var(--weight-bold);
   gap: 1.25rem;
+  flex: 1;
   line-height: 2rem;
+}
+
+.sidebar-spacer {
+  flex: 1;
 }
 
 .sidebar-list a {
@@ -45,6 +52,21 @@
 
 .sidebar-list a.sidebar-active-link {
   text-decoration: underline;
+}
+
+.sidebar-list-item-bottom {
+  background-color: #d9d9d9;
+  padding: 1.5rem 0;
+}
+
+.sidebar-list-item-bottom:has(a.sidebar-active-link) {
+  background-color: var(--blue);
+}
+
+.sidebar-list-item-bottom a.sidebar-active-link {
+  border-bottom: 2px solid var(--white);
+  color: var(--white);
+  text-decoration: none;
 }
 
 .page-content {

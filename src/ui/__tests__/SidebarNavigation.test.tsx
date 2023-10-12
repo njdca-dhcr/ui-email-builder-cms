@@ -1,7 +1,16 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { SidebarNavigation } from '../SidebarNavigation'
-import { urlFor } from 'src/testHelpers'
+import { asMock, urlFor } from 'src/testHelpers'
+import { availableFeatures, Features } from 'src/features'
+
+jest.mock('src/features', () => {
+  return {
+    availableFeatures: {
+      settings: jest.fn().mockReturnValue(true),
+    } as Features,
+  }
+})
 
 describe('SidebarNavigation', () => {
   it('displays a home link', () => {
@@ -23,5 +32,29 @@ describe('SidebarNavigation', () => {
     const link: HTMLAnchorElement = getByText('Tips & Tricks') as any
     expect(link.tagName).toEqual('A')
     expect(link.href).toEqual(urlFor('/tips-and-tricks'))
+  })
+
+  describe('settings is available', () => {
+    beforeEach(() => {
+      asMock(availableFeatures.settings).mockReturnValue(true)
+    })
+
+    it('displays a settings link', () => {
+      const { getByText } = render(<SidebarNavigation />)
+      const link: HTMLAnchorElement = getByText('Settings') as any
+      expect(link.tagName).toEqual('A')
+      expect(link.href).toEqual(urlFor('/settings'))
+    })
+  })
+
+  describe('settings is not available', () => {
+    beforeEach(() => {
+      asMock(availableFeatures.settings).mockReturnValue(false)
+    })
+
+    it('does not display a settings link', () => {
+      const { queryByText } = render(<SidebarNavigation />)
+      expect(queryByText('Settings')).toBeNull()
+    })
   })
 })

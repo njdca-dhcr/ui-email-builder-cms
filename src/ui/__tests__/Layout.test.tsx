@@ -9,6 +9,7 @@ import {
   Sidebar,
   SideBarList,
   SideBarListItem,
+  SideBarListItemBottom,
   SpacedContainer,
   SpacedSidebarContainer,
 } from '../Layout'
@@ -151,6 +152,27 @@ describe('SideBarListItem', () => {
       <SideBarListItem>
         <div>{text}</div>
       </SideBarListItem>,
+    )
+    expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  it('accepts a className', () => {
+    const { baseElement } = render(
+      <SideBarListItem className="my-class">
+        <div />
+      </SideBarListItem>,
+    )
+    expect(baseElement).toContainHTML('<li class="sidebar-list-item my-class"><div></div></li>')
+  })
+})
+
+describe('SideBarListItemBottom', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <SideBarListItemBottom>
+        <div>{text}</div>
+      </SideBarListItemBottom>,
     )
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
   })
