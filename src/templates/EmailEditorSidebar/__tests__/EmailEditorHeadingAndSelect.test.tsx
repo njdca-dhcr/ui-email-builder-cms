@@ -22,21 +22,24 @@ describe('EmailEditorSidebar', () => {
 
   it('can navigate to any other template through a select', async () => {
     const user = userEvent.setup()
-    const { getByLabelText } = render(<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />)
-    const select = getByLabelText('Go to')
+    const { getByRole } = render(<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />)
 
     expect(navigate).not.toHaveBeenCalled()
-    await user.selectOptions(select, ['Another Email Template'])
+    await user.click(getByRole('button'))
+    await user.click(getByRole('option', { name: 'Another Email Template' }))
     expect(navigate).toHaveBeenCalledWith('/email-templates/another-email-template', {
       replace: true,
     })
   })
 
-  it('does not include the current email template in the list of options', () => {
-    const { getByLabelText } = render(<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />)
-    const select = getByLabelText('Go to')
+  it('does not include the current email template in the list of options', async () => {
+    const user = userEvent.setup()
+    const { queryAllByRole, getByRole } = render(
+      <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />,
+    )
 
-    const options = select.querySelectorAll('option')
-    expect(options.length).toEqual(2)
+    await user.click(getByRole('button'))
+
+    expect(queryAllByRole('option').length).toEqual(1)
   })
 })

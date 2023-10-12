@@ -6,13 +6,14 @@ import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import './EmailEditorHeadingAndSelect.css'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { ChevronDownIcon } from 'src/ui/ChevronDownIcon'
+import { Select } from 'src/ui'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
 }
 
 export const EmailEditorHeadingAndSelect: FC<Props> = ({ emailTemplate }) => {
-  const selectId = useId('template-select')
+  const selectLabelId = useId('template-select')
   const emailTemplates = useEmailTemplatesData().filter(({ name }) => {
     return name !== emailTemplate.name
   })
@@ -22,21 +23,17 @@ export const EmailEditorHeadingAndSelect: FC<Props> = ({ emailTemplate }) => {
       <h1>{emailTemplate.name}</h1>
       <ChevronDownIcon />
       <VisuallyHidden>
-        <label htmlFor={selectId}>Go to</label>
+        <label id={selectLabelId}>Go to</label>
       </VisuallyHidden>
-      <select
-        id={selectId}
-        onChange={(event) => {
-          const value = event.currentTarget.value
-          const selectedEmailTemplate = emailTemplates.find(({ name }) => name === value)
-          selectedEmailTemplate && navigate(selectedEmailTemplate.path, { replace: true })
-        }}
-      >
-        <option />
-        {emailTemplates.map((emailTemplate, i) => (
-          <option key={i}>{emailTemplate.name}</option>
-        ))}
-      </select>
+      <Select
+        labelId={selectLabelId}
+        onChange={(value) => value && navigate(value, { replace: true })}
+        options={emailTemplates.map((emailTemplate) => ({
+          label: emailTemplate.name,
+          value: emailTemplate.path,
+        }))}
+        value=""
+      />
     </div>
   )
 }
