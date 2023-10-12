@@ -49,7 +49,7 @@ describe('Directive', () => {
   //   expectActiveEmailPartToBe(key, baseElement)
   // })
 
-  describe('Default - DirectiveVariant.OneStep', () => {
+  describe('default - One Step', () => {
     it('has an editable title', async () => {
       rendered = render(
         <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
@@ -68,6 +68,100 @@ describe('Directive', () => {
       await clearAndFillWithValue('Supportive information')
       expect(rendered.queryByText(value)).not.toBeNull()
       expectEmailPartContentFor(key, rendered.baseElement)
+    })
+  })
+  describe('variants', () => {
+    const VariantSelect: FC = () => {
+      const [value, setValue] = useDirectiveValue(componentId, id)
+      return (
+        <label>
+          Variant
+          <select
+            onChange={(event) => setValue({ ...value, variant: parseInt(event.target.value) })}
+            value={value.variant}
+          >
+            <option>{DirectiveVariant.OneStep}</option>
+            <option>{DirectiveVariant.ThreeStep}</option>
+            <option>{DirectiveVariant.StepTwoExpansion}</option>
+            <option>{DirectiveVariant.PayOnline}</option>
+          </select>
+        </label>
+      )
+    }
+
+    const itHasAnEditable = (testName: string, label: string) => {
+      it(`has an editable ${testName}`, async () => {
+        await clearAndFillWithValue(label)
+        expect(rendered.queryByText(value)).not.toBeNull()
+        expectEmailPartContentFor(key, rendered.baseElement)
+      })
+    }
+
+    describe('Three Steps', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.ThreeStep + '')
+      })
+
+      itHasAnEditable('step 1 label', 'Label for Step 1')
+
+      itHasAnEditable('step 1 additional information', 'Additional information for Step 1')
+
+      itHasAnEditable('step 2 label', 'Label for Step 2')
+
+      itHasAnEditable('step 2 additional information', 'Additional information for Step 2')
+
+      itHasAnEditable('step 3 label', 'Label for Step 3')
+
+      itHasAnEditable('step 3 additional information', 'Additional information for Step 3')
+
+      // it('only has the correct fields', () => {
+      //   const all = rendered.baseElement.querySelectorAll('[aria-label]')
+      //   expect(all).toHaveLength(8)
+      // })
+    })
+
+    describe('Three Steps w/ Step 2 Expansion', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.StepTwoExpansion + '')
+      })
+
+      itHasAnEditable('step 1 label', 'Label for Step 1')
+
+      itHasAnEditable('step 1 additional information', 'Additional information for Step 1')
+
+      itHasAnEditable('step 2 label', 'Label for Step 2')
+
+      itHasAnEditable('step 2 additional information', 'Additional information for Step 2')
+
+      itHasAnEditable('Step 2 tertiary content', 'Tertiary information for Step 2')
+
+      itHasAnEditable('Step 2 case number information', 'Case number information')
+
+      itHasAnEditable('step 3 label', 'Label for Step 3')
+
+      itHasAnEditable('step 3 additional information', 'Additional information for Step 3')
+    })
+
+    describe('Pay Online', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.PayOnline + '')
+      })
+
+      itHasAnEditable('alternative payment information', 'Alternative payment information')
+      
+      itHasAnEditable('supportive information', 'Alternative payment information')
     })
   })
 })

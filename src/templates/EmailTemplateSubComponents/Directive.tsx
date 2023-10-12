@@ -284,7 +284,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                 <EditableElement
                                   element="td"
                                   initialValue={initialValue.payOnlineSupportiveText}
-                                  label="Supportive information for Pay Online Directive"
+                                  label="Supportive information"
                                   onValueChange={(payOnlineSupportiveText) =>
                                     setValue({ ...value, payOnlineSupportiveText })
                                   }
@@ -593,7 +593,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                 <EditableElement
                                                   element="div"
                                                   initialValue={initialValue.step2Tertiary}
-                                                  label="Tertiary information for Step 2 (usually involving an alternate way to complete the second step)."
+                                                  label="Tertiary information for Step 2"
                                                   onValueChange={(step2Tertiary) =>
                                                     setValue({ ...value, step2Tertiary })
                                                   }
