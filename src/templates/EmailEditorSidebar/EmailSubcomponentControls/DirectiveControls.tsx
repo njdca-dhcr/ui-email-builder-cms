@@ -6,7 +6,7 @@ import {
   DirectiveVariant,
   useDirectiveValue,
 } from 'src/templates/EmailTemplateSubComponents/Directive'
-import { Select } from 'src/ui/Select'
+import { Input, Select } from 'src/ui/'
 
 export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
   const htmlId = `select-${buildSubComponentKey(componentId, id)}`
@@ -32,6 +32,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
         onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
         value={value.variant + ''}
       />
+      <Input className='directive-link-input' onTextChange={(newText) => setValue({ ...value, linkHref: newText})} value={value.linkHref} />
     </>
   )
 }
