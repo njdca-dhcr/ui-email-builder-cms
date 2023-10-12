@@ -23,7 +23,7 @@ describe('useElementsToEmailString', () => {
     beforeEach(() => {
       text = faker.lorem.paragraph()
       div = document.createElement('div')
-      div.innerHTML = `<span class="foo">${text}</span>`
+      div.innerHTML = `<span class="foo" contenteditable="true" aria-label="Reminder title">${text}</span>`
       const { result } = renderHook(() => {
         const ref = useRef(div)
         return useElementsToEmailString(ref)
@@ -38,13 +38,20 @@ describe('useElementsToEmailString', () => {
 
     it('creates email markup with the content of the ref', () => {
       expect(resultCallback()).toContain(text)
-      expect(resultCallback()).toContain('<span class="foo"')
+      expect(resultCallback()).toContain('<span class="foo"  >')
     })
 
     it('creates email markup with a doctype', () => {
       expect(resultCallback()).toContain(
         `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`,
       )
+    })
+
+    it('removes any content editable attributes', () => {
+      expect(resultCallback()).not.toContain('contenteditable="true"')
+      expect(resultCallback()).not.toContain('aria-label="Reminder title"')
+      expect(resultCallback()).not.toContain('contenteditable')
+      expect(resultCallback()).not.toContain('aria-label')
     })
   })
 })

@@ -9,10 +9,15 @@ export const useElementsToEmailString = (
 ): (() => string) => {
   return useCallback(() => {
     if (ref.current) {
-      const rendered = renderToString(<EmailLayout html={ref.current.innerHTML}></EmailLayout>)
+      const html = removeContentEditableAttributes(ref.current.innerHTML)
+      const rendered = renderToString(<EmailLayout html={html}></EmailLayout>)
       return `${DOCTYPE}${rendered}`
     } else {
       return ''
     }
   }, [ref])
+}
+
+const removeContentEditableAttributes = (value: string): string => {
+  return value.replaceAll(/contenteditable=".+?"/g, '').replaceAll(/aria-label=".+?"/g, '')
 }
