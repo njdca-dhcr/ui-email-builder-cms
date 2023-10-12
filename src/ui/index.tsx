@@ -7,7 +7,17 @@ import { EmailBlock } from './EmailBlock'
 import { EmailTable } from './EmailTable'
 import { FlagIcon } from './FlagIcon'
 import { Input } from './Input'
-import { Layout, PageContent, Sidebar, SideBarList, SideBarListItem, Heading, Paragraph, SpacedContainer, SpacedSidebarContainer } from './Layout'
+import {
+  Layout,
+  PageContent,
+  Sidebar,
+  SideBarList,
+  SideBarListItem,
+  Heading,
+  Paragraph,
+  SpacedContainer,
+  SpacedSidebarContainer,
+} from './Layout'
 import { List } from './List'
 import { LockIcon } from './LockIcon'
 import { RightPointer } from './RightPointer'

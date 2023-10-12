@@ -32,7 +32,11 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
         onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
         value={value.variant + ''}
       />
-      <Input className='directive-link-input' onTextChange={(newText) => setValue({ ...value, linkHref: newText})} value={value.linkHref} />
+      <Input
+        className="directive-link-input"
+        onTextChange={(newText) => setValue({ ...value, linkHref: newText })}
+        value={value.linkHref}
+      />
     </>
   )
 }
