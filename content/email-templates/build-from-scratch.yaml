@@ -13,6 +13,7 @@ components:
       - kind: Directive
       - kind: RulesRightsRegulations
       - kind: SupplementalContent
+      - kind: LoginDetails
     required: true
   - kind: Footer
     subComponents:
