@@ -49,6 +49,7 @@
 button.copy-html-button {
   background-color: var(--white);
   border: 1px solid var(--black);
+  border-radius: 3px;
   color: var(--black);
   cursor: pointer;
   font-size: 0.9rem;

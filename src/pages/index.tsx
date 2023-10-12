@@ -7,7 +7,6 @@ import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } fro
 import { List } from 'src/ui/List'
 import 'src/styles/app.css'
 import './index.css'
-import { Button } from 'src/ui/Button'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 
 const IndexPage: FC = () => {

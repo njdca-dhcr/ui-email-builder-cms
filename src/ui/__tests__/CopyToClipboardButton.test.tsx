@@ -24,7 +24,7 @@ describe('CopyToClipboardButton', () => {
     )
     const button = queryByRole('button')
     expect(button).not.toBeNull()
-    expect(button?.className).toEqual('button my-class')
+    expect(button?.className).toEqual('my-class')
   })
 
   it('copies the given text to the clipboard when clicked', async () => {

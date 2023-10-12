@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react'
 import copy from 'copy-to-clipboard'
-import { Button } from './Button'
 
 interface Props {
   children: ReactNode
@@ -10,8 +9,8 @@ interface Props {
 
 export const CopyToClipboardButton: FC<Props> = ({ children, className, textToCopy }) => {
   return (
-    <Button className={className} onClick={() => copy(textToCopy())}>
+    <button className={className} onClick={() => copy(textToCopy())}>
       {children}
-    </Button>
+    </button>
   )
 }
