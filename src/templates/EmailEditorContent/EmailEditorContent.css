@@ -24,7 +24,7 @@
   cursor: pointer;
   display: flex;
   flex: 1;
-  font-size: 0.9rem;
+  font-size: var(--font-small);
   font-weight: var(--weight-normal);
   justify-content: center;
 }
@@ -52,7 +52,7 @@ button.copy-html-button {
   border-radius: 3px;
   color: var(--black);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--font-small);
   font-weight: var(--weight-normal);
   padding: 0.5rem 0.75rem;
   transition: background-color 50ms ease-in;

@@ -8,7 +8,7 @@
 }
 
 .sidebar-accordion-container h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-large);
   font-weight: var(--weight-bold);
   margin: 0;
 }
@@ -23,7 +23,7 @@
   background-color: var(--white);
   border: 0;
   font-family: var(--sans-serif);
-  font-size: 0.875rem;
+  font-size: var(--font-small);
   padding: 0.5rem 1rem;
   transition: background-color 50ms ease-in-out;
 }
@@ -55,7 +55,7 @@
 .accordion-email-component button {
   border: 0;
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: var(--font-large);
   font-weight: var(--weight-bold);
   padding: 0;
   padding-left: 1rem;
@@ -96,7 +96,7 @@
 
 .accordion-email-component .description {
   color: var(--gray-dark);
-  font-size: 0.875rem;
+  font-size: var(--font-small);
   margin: 0;
   padding: 0;
   padding-left: 1rem;

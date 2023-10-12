@@ -15,7 +15,7 @@
 
 .edit-preview-text .description {
   color: var(--gray-dark);
-  font-size: 0.875rem;
+  font-size: var(--font-small);
   padding-bottom: 0.75rem;
 }
 
@@ -36,7 +36,7 @@
   border: 0;
   color: var(--gray-dark);
   font-family: var(--sans-serif);
-  font-size: 0.875rem;
+  font-size: var(--font-small);
   line-height: 1.5;
   resize: none;
   padding: 0;
@@ -50,7 +50,7 @@
 .edit-preview-text .suggestion-and-count {
   color: var(--gray-dark);
   display: flex;
-  font-size: 0.75rem;
+  font-size: var(--font-tiny);
   font-style: italic;
   justify-content: space-between;
 }

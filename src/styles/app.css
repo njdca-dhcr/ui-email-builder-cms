@@ -14,6 +14,11 @@
   --weight-bold-light: 600;
   --weight-normal: 400;
 
+  --font-large: 1.5rem;
+  --font-medium: 1rem;
+  --font-small: 0.875rem;
+  --font-tiny: 0.75rem;
+
   --default-font-color: var(--black);
   --default-font-size: 16px;
 

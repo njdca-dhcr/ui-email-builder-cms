@@ -60,7 +60,7 @@
 }
 
 .paragraph {
-  font-size: 1rem;
+  font-size: var(--font-medium);
   font-weight: var(--weight-normal);
   margin: 0;
   margin-bottom: 1.5rem;
@@ -74,7 +74,7 @@
 
 .select {
   border: 3px solid transparent;
-  font-size: 1rem;
+  font-size: var(--font-medium);
   margin: 0.25rem -3px;
 }
 
@@ -94,7 +94,7 @@
 .select [data-reach-listbox-arrow] {
   align-items: center;
   border-left: 1px solid var(--blue-gray-light);
-  font-size: 1rem;
+  font-size: var(--font-medium);
   display: flex;
   justify-content: center;
   margin: 0;
@@ -126,7 +126,7 @@
 
 .input {
   border: 1px solid var(--black);
-  font-size: 1rem;
+  font-size: var(--font-medium);
   line-height: 1.5;
   padding: 0.5rem;
 }
@@ -136,7 +136,7 @@
   border: 0;
   border-radius: 3px;
   color: var(--white);
-  font-size: 0.875rem;
+  font-size: var(--font-small);
   font-weight: var(--weight-bold-light);
   padding: 0.75rem 1rem;
   text-decoration: none;
