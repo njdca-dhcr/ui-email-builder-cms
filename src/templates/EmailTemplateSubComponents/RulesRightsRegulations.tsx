@@ -311,6 +311,7 @@ const styles = {
   outerContainer: {
     ...DefaultStyles,
     paddingBottom: Spacing.size.extraLarge,
+    paddingTop: Spacing.size.medium,
   } as CSSProperties,
   innerContainer: {
     backgroundColor: Colors.grayLight,
