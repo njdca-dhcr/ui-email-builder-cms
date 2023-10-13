@@ -7,6 +7,23 @@ import { DirectiveControls } from '../DirectiveControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('DirectiveControls', () => {
+  it('provides a toggle for showing the title', async () => {
+    const user = userEvent.setup()
+    const { getByRole, queryByRole } = render(
+      <EmailPartsContent>
+        <DirectiveControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+      </EmailPartsContent>,
+    )
+    let toggle = queryByRole('checkbox')
+    expect(toggle).not.toBeNull()
+    expect(toggle).toBeChecked()
+
+    await user.click(toggle!)
+    toggle = queryByRole('checkbox')
+    expect(toggle).not.toBeNull()
+    expect(toggle).not.toBeChecked()
+  })
+
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
     const { getByRole, queryByRole } = render(

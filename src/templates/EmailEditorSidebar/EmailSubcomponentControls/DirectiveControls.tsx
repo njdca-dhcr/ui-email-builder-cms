@@ -7,6 +7,7 @@ import {
   useDirectiveValue,
 } from 'src/templates/EmailTemplateSubComponents/Directive'
 import { Input, Select } from 'src/ui/'
+import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
   const htmlId = `select-${buildSubComponentKey(componentId, id)}`
@@ -14,6 +15,12 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
 
   return (
     <>
+      <SubComponentControlToggle
+        subComponentId={id}
+        label="+ Title"
+        onChange={(showTitle) => setValue({ ...value, showTitle })}
+        value={value.showTitle}
+      />
       <VisuallyHidden>
         <span id={htmlId}>Directive variant</span>
       </VisuallyHidden>
@@ -34,7 +41,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
       />
       <Input
         className="directive-link-input"
-        onTextChange={(newText) => setValue({ ...value, linkHref: newText })}
+        onTextChange={(linkHref) => setValue({ ...value, linkHref })}
         value={value.linkHref}
       />
     </>

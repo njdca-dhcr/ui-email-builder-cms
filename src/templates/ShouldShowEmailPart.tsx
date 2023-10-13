@@ -1,5 +1,9 @@
 import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
-import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
+import {
+  buildComponentKey,
+  buildSubComponentKey,
+  buildSubComponentPartKey,
+} from 'src/utils/emailPartKeys'
 
 interface On {
   on: boolean
@@ -53,6 +57,21 @@ export const useShouldShowEmailSubComponent = (
 ): { on: boolean; off: boolean; toggle: () => void } => {
   const [data, update] = useContext(ShouldShowEmailPartContext)
   const key = buildSubComponentKey(componentId, id)
+  const isOn = data[key] ?? true
+
+  const toggle = useCallback(() => {
+    update({ ...data, [key]: !isOn })
+  }, [data, update, key])
+
+  return { on: isOn, off: !isOn, toggle }
+}
+
+export const useShouldShowEmailSubComponentPart = (
+  subComponentId: string,
+  id: string,
+): { on: boolean; off: boolean; toggle: () => void } => {
+  const [data, update] = useContext(ShouldShowEmailPartContext)
+  const key = buildSubComponentPartKey(subComponentId, id)
   const isOn = data[key] ?? true
 
   const toggle = useCallback(() => {

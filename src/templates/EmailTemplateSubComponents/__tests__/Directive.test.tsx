@@ -70,6 +70,7 @@ describe('Directive', () => {
       expectEmailPartContentFor(key, rendered.baseElement)
     })
   })
+
   describe('variants', () => {
     const VariantSelect: FC = () => {
       const [value, setValue] = useDirectiveValue(componentId, id)

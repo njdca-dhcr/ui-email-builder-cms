@@ -117,8 +117,13 @@
 }
 .accordion-email-subcomponent label {
   font-weight: var(--weight-bold);
+  cursor: pointer;
 }
 
 .accordion-email-subcomponent .description {
   padding-left: 0;
+}
+
+.accordion-email-component .subcomponent-control-wrapper {
+  padding: 0 1rem;
 }
