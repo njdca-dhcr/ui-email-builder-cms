@@ -48,6 +48,17 @@ describe('Layout', () => {
     expect(layout).not.toBeNull()
     expect(layout?.tagName).toEqual('MAIN')
   })
+
+  it('can render in single scroll mode', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Layout singleScroll>
+        <span>{text}</span>
+      </Layout>,
+    )
+    const layout = baseElement.querySelector('.layout.single-scroll')
+    expect(layout).not.toBeNull()
+  })
 })
 
 describe('PageContent', () => {

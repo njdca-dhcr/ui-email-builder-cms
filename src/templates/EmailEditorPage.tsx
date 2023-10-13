@@ -22,7 +22,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   const { emailTemplate } = pageContext
 
   return (
-    <Layout element="main">
+    <Layout element="main" singleScroll>
       <ShouldShowEmailPart>
         <CurrentlyActiveEmailPart>
           <ClearCurrentlyActiveEmailPart />

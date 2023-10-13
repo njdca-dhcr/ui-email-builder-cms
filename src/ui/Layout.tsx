@@ -8,13 +8,14 @@ import classNames from 'classnames'
 interface LayoutProps {
   children: ReactNode
   element?: 'div' | 'main'
+  singleScroll?: boolean
 }
 
-export const Layout: FC<LayoutProps> = ({ children, element }) => {
+export const Layout: FC<LayoutProps> = ({ children, element, singleScroll }) => {
   const Element = element ?? 'div'
 
   return (
-    <Element className="layout">
+    <Element className={classNames('layout', { 'single-scroll': singleScroll })}>
       <SkipNavLink />
       {children}
     </Element>

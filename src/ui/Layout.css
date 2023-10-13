@@ -5,12 +5,22 @@
   min-height: 100vh;
 }
 
+.layout:not(.single-scroll) {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .sidebar {
   background-color: var(--gray);
   display: flex;
   flex: 1;
   flex-direction: column;
   padding-top: 3.25rem;
+}
+
+.layout:not(.single-scroll) {
+  height: calc(100vh - 3.25rem);
+  overflow: hidden;
 }
 
 .spaced-sidebar-container {
@@ -71,6 +81,8 @@
 
 .page-content {
   flex: 4;
+  height: 100%;
+  overflow: auto;
 }
 
 .heading {

@@ -3,5 +3,5 @@ export interface Features {
 }
 
 export const availableFeatures: Features = {
-  settings: () => false,
+  settings: () => true,
 }
