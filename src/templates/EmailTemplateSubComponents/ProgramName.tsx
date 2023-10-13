@@ -5,8 +5,11 @@ import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { DefaultStyles, Font, Spacing } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailTable } from 'src/ui/EmailTable'
+import { EmailBlock } from 'src/ui'
 
 const defaultValue = 'Program Name'
+
+const { Table, Row, Cell } = EmailBlock
 
 export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -17,28 +20,23 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
   )
 
   return (
-    <tr>
-      <td>
-        <EmailTable style={containerStyles} width="unset">
-          <tr>
-            <EditableElement
-              element="td"
-              initialValue={initialValue}
-              label="Program name"
-              onClick={activate}
-              onValueChange={setValue}
-              style={styles}
-              value={value}
-            />
-          </tr>
-        </EmailTable>
-      </td>
-    </tr>
+    <Row elements={[{ part: 'cell', style: DefaultStyles }]}>
+      <Table style={containerStyles} width="unset" elements={['row']}>
+        <EditableElement
+          element="td"
+          initialValue={initialValue}
+          label="Program name"
+          onClick={activate}
+          onValueChange={setValue}
+          style={styles}
+          value={value}
+        />
+      </Table>
+    </Row>
   )
 }
 
 const containerStyles: CSSProperties = {
-  ...DefaultStyles,
   marginTop: 10,
   marginBottom: 20,
 }
