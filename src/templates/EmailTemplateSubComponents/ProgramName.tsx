@@ -9,7 +9,7 @@ import { EmailBlock } from 'src/ui'
 
 const defaultValue = 'Program Name'
 
-const { Table, Row, Cell } = EmailBlock
+const { Table, Row } = EmailBlock
 
 export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
