@@ -93,6 +93,11 @@
   margin-bottom: 0.6rem;
 }
 
+.subheading {
+  font-size: var(--font-large);
+  line-height: 1.5;
+}
+
 .paragraph {
   font-size: var(--font-medium);
   font-weight: var(--weight-normal);

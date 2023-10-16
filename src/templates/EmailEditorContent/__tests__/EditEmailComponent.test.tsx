@@ -92,11 +92,10 @@ describe('EditEmailComponent', () => {
   it('can render a Disclaimer', () => {
     emailComponent = buildEmailTemplateComponent('Disclaimer')
     const text = faker.lorem.paragraph()
+    localStorage.setItem('disclaimer', JSON.stringify(text))
     const { queryByText } = render(
       <EditEmailComponent id={id} emailComponent={emailComponent}>
-        <tr>
-          <td>{text}</td>
-        </tr>
+        {null}
       </EditEmailComponent>,
       { wrapper: emailPartWrapper },
     )

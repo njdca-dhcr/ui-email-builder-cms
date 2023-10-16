@@ -2,16 +2,8 @@ import React from 'react'
 import { Disclaimer } from '../Disclaimer'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import {
-  buildEmailTemplateComponent,
-  emailPartWrapper,
-  expectActiveEmailPartToBe,
-  expectActiveEmailPartToNotBe,
-  expectEmailPartContentFor,
-} from 'src/testHelpers'
+import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
-import userEvent from '@testing-library/user-event'
-import { buildComponentKey } from 'src/utils/emailPartKeys'
 
 describe('Disclaimer', () => {
   let id: string
@@ -22,52 +14,15 @@ describe('Disclaimer', () => {
     emailComponent = buildEmailTemplateComponent('Disclaimer')
   })
 
-  it('displays its children', () => {
-    const text = faker.lorem.paragraph()
+  it('displays the disclaimer that was configured in settings', () => {
+    const disclaimerText = faker.lorem.paragraph()
+    localStorage.setItem('disclaimer', JSON.stringify(disclaimerText))
     const { baseElement } = render(
-      <Disclaimer emailComponent={emailComponent} id={id}>
-        <tr>
-          <td>{text}</td>
-        </tr>
-      </Disclaimer>,
-      { wrapper: emailPartWrapper },
-    )
-
-    expect(baseElement).toContainHTML(`<tr><td>${text}</td></tr>`)
-  })
-
-  it('displays an editable Disclaimer', async () => {
-    const user = userEvent.setup()
-    const { queryByText, getByLabelText, baseElement } = render(
-      <Disclaimer id={id} emailComponent={emailComponent}>
-        {null}
-      </Disclaimer>,
-      {
-        wrapper: emailPartWrapper,
-      },
-    )
-
-    const key = buildComponentKey(id)
-    const value = faker.lorem.words(4)
-    const input = getByLabelText('Disclaimer')
-    await user.clear(input)
-    await user.type(input, value)
-
-    expect(queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, baseElement)
-  })
-
-  it('activates when clicked', async () => {
-    const user = userEvent.setup()
-    const { getByLabelText, baseElement } = render(
       <Disclaimer id={id} emailComponent={emailComponent}>
         {null}
       </Disclaimer>,
       { wrapper: emailPartWrapper },
     )
-    const key = buildComponentKey(id)
-    expectActiveEmailPartToNotBe(key, baseElement)
-    await user.click(getByLabelText('Disclaimer'))
-    expectActiveEmailPartToBe(key, baseElement)
+    expect(baseElement.querySelector('td')).toHaveTextContent(disclaimerText)
   })
 })

@@ -77,11 +77,12 @@ export const SideBarListItemBottom: FC<SideBarListItemBottomProps> = ({ children
 interface HeadingProps {
   children: ReactNode
   element: 'h1' | 'h2'
+  subheading?: boolean
 }
 
-export const Heading: FC<HeadingProps> = ({ children, element }) => {
+export const Heading: FC<HeadingProps> = ({ children, element, subheading }) => {
   const Element = element
-  return <Element className="heading">{children}</Element>
+  return <Element className={classNames('heading', { subheading })}>{children}</Element>
 }
 
 interface ParagraphProps {

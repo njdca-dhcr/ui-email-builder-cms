@@ -221,6 +221,16 @@ describe('Heading', () => {
     expect(baseElement.querySelector('h1')).toBeNull()
     expect(baseElement.querySelector('h2')).not.toBeNull()
   })
+
+  it('accepts a subheading prop', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Heading element="h1" subheading>
+        <div>{text}</div>
+      </Heading>,
+    )
+    const heading = baseElement.querySelector('h1.subheading')
+  })
 })
 
 describe('Paragraph', () => {
