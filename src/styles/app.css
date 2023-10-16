@@ -25,6 +25,12 @@
   --sans-serif: Public Sans, Helvetica, Arial, sans-serif;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 html {
   color: var(--default-font-color);
   font-family: var(--sans-serif);

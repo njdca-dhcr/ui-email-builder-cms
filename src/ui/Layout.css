@@ -1,13 +1,7 @@
 .layout {
   align-items: stretch;
   display: flex;
-  flex: 1;
-  min-height: 100vh;
-}
-
-.layout:not(.single-scroll) {
   height: 100vh;
-  overflow: hidden;
 }
 
 .sidebar {
@@ -15,12 +9,9 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: calc(100% - 3.25rem);
+  overflow: auto;
   padding-top: 3.25rem;
-}
-
-.layout:not(.single-scroll) {
-  height: calc(100vh - 3.25rem);
-  overflow: hidden;
 }
 
 .spaced-sidebar-container {
