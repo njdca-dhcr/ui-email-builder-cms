@@ -99,7 +99,9 @@ const EmailTemplateListItem: FC<EmailTemplateListItemProps> = ({
 }) => {
   return (
     <li className="index-list-item">
-      <h3>{title}</h3>
+      <h3>
+        <Link to={linkTo}>{title}</Link>
+      </h3>
       <p>{description}</p>
       <div className="preview">
         <div className="image-container">{image}</div>

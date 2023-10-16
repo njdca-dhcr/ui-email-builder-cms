@@ -36,12 +36,32 @@
     margin: 0;
   }
 
-  h3 {
+  h3,
+  h3 a {
+    align-self: flex-start;
     color: var(--blue-dark);
     font-size: calc(var(--font-large) - 0.05rem);
     font-weight: var(--weight-bold);
     padding-bottom: 0.5rem;
     letter-spacing: -1px;
+    position: relative;
+    text-decoration: none;
+  }
+
+  h3::after {
+    background-color: var(--blue-dark);
+    bottom: 0.5rem;
+    content: ' ';
+    height: 2px;
+    left: 0;
+    position: absolute;
+    transition: width 150ms ease-in-out;
+    width: 0;
+  }
+
+  h3:hover::after,
+  h3:focus-within::after {
+    width: 100%;
   }
 
   p {
