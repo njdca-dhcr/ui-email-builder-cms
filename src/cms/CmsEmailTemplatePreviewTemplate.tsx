@@ -45,7 +45,7 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
   const emailTemplate = entryToEmailTemplate(entry)
 
   return (
-    <Layout element="main" singleScroll>
+    <Layout element="main">
       <ShouldShowEmailPart>
         <CurrentlyActiveEmailPart>
           <ClearCurrentlyActiveEmailPart />
