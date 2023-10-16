@@ -1,14 +1,26 @@
 import { useCallback, useMemo, useState } from 'react'
 
+const getLocalStorage = () => {
+  return typeof window !== 'undefined' ? window.localStorage : null
+}
+
+const safeLocalStorageGetItem = (key: string, defaultValue: string): string => {
+  return getLocalStorage()?.getItem(key) ?? defaultValue
+}
+
+const safeLocalStorageSetItem = (key: string, value: string) => {
+  getLocalStorage()?.setItem(key, value)
+}
+
 export const useLocalStorage = (
   key: string,
   defaultValue: string,
 ): [string, (value: string) => void] => {
-  const [value, setValue] = useState(() => localStorage.getItem(key) ?? defaultValue)
+  const [value, setValue] = useState(() => safeLocalStorageGetItem(key, defaultValue))
 
   const update = useCallback(
     (newValue: string) => {
-      localStorage.setItem(key, newValue)
+      safeLocalStorageSetItem(key, newValue)
       setValue(newValue)
     },
     [key, setValue],
