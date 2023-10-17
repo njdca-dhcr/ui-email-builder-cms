@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, Spacing } from '../styles'
+import { Colors, Font } from '../styles'
 
 export const Banner: FC<EmailComponentProps> = ({ children }) => {
   return (
@@ -21,8 +21,8 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
                   style={{
                     backgroundColor: Colors.black,
                     color: Colors.white,
-                    width: '100vw !important',
-                    padding: Spacing.layout.paddingHorizontal.paddingLeft,
+                    width: '100% !important',
+                    padding: 20,
                   }}
                 >
                   <table cellSpacing={0} cellPadding="0" border={0} width="100%">

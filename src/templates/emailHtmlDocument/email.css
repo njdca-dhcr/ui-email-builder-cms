@@ -1,0 +1,67 @@
+.ReadMsgBody {
+  width: 100%;
+}
+.ExternalClass {
+  width: 100%;
+} /* Force Hotmail/Outlook.com to display emails at full width. */
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+  line-height: 100%;
+} /* Force Hotmail/Outlook.com to display line heights normally. */
+
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+* {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+td {
+  vertical-align: top;
+  mso-table-lspace: 0pt !important;
+  mso-table-rspace: 0pt !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  -ms-interpolation-mode: bicubic;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+  u ~ div .email-container {
+    min-width: 320px !important;
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+  u ~ div .email-container {
+    min-width: 375px !important;
+  }
+}
+
+@media only screen and (min-device-width: 414px) {
+  u ~ div .email-container {
+    min-width: 414px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  table,
+  td,
+  div,
+  tr,
+  tbody {
+    width: auto !important;
+    max-width: 100vw !important;
+  }
+}

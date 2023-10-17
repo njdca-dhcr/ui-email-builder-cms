@@ -22,20 +22,6 @@ describe('Name', () => {
     emailComponent = buildEmailTemplateComponent('Name')
   })
 
-  it('displays its children', () => {
-    const text = faker.lorem.paragraph()
-    const { baseElement } = render(
-      <Name emailComponent={emailComponent} id={id}>
-        <tr>
-          <td>{text}</td>
-        </tr>
-      </Name>,
-      { wrapper: emailPartWrapper },
-    )
-
-    expect(baseElement).toContainHTML(`<tr><td>${text}</td></tr>`)
-  })
-
   it('displays an editable name', async () => {
     const user = userEvent.setup()
     const { queryByText, getByLabelText, baseElement } = render(

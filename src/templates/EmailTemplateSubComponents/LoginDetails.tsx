@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { LockIcon } from 'src/ui/LockIcon'
-import { Colors, DefaultStyles, Font, Spacing } from '../styles'
+import { Colors, Font, Spacing, StyleDefaults } from '../styles'
 
 const { Table, Row, Cell } = EmailBlock
 
@@ -44,7 +44,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
   return (
     <Row
       elements={[
-        { part: 'cell', style: styles.outerContainer },
+        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
         { part: 'table', onClick: activate },
         'row',
         { part: 'cell', style: styles.innerContainer },
@@ -138,7 +138,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
 
 const styles = {
   outerContainer: {
-    ...DefaultStyles,
+    ...StyleDefaults.inline.fontAndColors,
     paddingTop: Spacing.size.small,
     paddingBottom: Spacing.size.small,
   } as CSSProperties,

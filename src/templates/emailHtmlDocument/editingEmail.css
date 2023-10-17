@@ -1,0 +1,19 @@
+.mobile td.narrow {
+  padding-left: 20px;
+  padding-right: 40px;
+}
+
+.mobile td.wide {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.desktop td.narrow {
+  padding-left: 50px;
+  padding-right: 100px;
+}
+
+.desktop td.wide {
+  padding-left: 50px;
+  padding-right: 50px;
+}

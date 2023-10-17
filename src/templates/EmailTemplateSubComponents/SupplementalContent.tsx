@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { DefaultStyles, Font, Spacing } from '../styles'
+import { Font, Spacing, StyleDefaults } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 
 const defaultValue = {
@@ -23,7 +23,13 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
   )
 
   return (
-    <Row onClick={activate} elements={[{ part: 'cell', style: outerCellStyles }, 'table']}>
+    <Row
+      onClick={activate}
+      elements={[
+        { part: 'cell', style: outerCellStyles, className: StyleDefaults.layout.narrow },
+        'table',
+      ]}
+    >
       <Row>
         <EditableElement
           element="td"
@@ -49,7 +55,7 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
 }
 
 const outerCellStyles: CSSProperties = {
-  ...DefaultStyles,
+  ...StyleDefaults.inline.fontAndColors,
   paddingBottom: Spacing.size.medium,
   paddingTop: Spacing.size.medium,
 }

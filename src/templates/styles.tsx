@@ -1,4 +1,5 @@
-import { CSSProperties } from 'react'
+import React, { CSSProperties, FC } from 'react'
+import { EmailBlock } from 'src/ui'
 
 export const Colors = {
   black: '#1b1b1b',
@@ -39,11 +40,19 @@ export const Font = {
 
 export const Spacing = {
   layout: {
+    maxWidth: 690,
     paddingHorizontal: {
       paddingLeft: 20,
       paddingRight: 20,
     } as CSSProperties,
-    maxWidth: 690,
+    narrow: {
+      paddingLeft: 20,
+      paddingRight: 40,
+    } as CSSProperties,
+    wide: {
+      paddingLeft: 20,
+      paddingRight: 20,
+    } as CSSProperties,
   },
   size: {
     tiny: 5,
@@ -62,4 +71,49 @@ export const DefaultStyles: CSSProperties = {
   fontWeight: Font.weight.normal,
   fontSize: Font.size.medium,
   lineHeight: Font.lineHeight.default,
+}
+
+const defaultFontAndColors: CSSProperties = {
+  backgroundColor: Colors.white,
+  color: Colors.black,
+  fontFamily: Font.family.default,
+  fontWeight: Font.weight.normal,
+  fontSize: Font.size.medium,
+  lineHeight: Font.lineHeight.default,
+  letterSpacing: '-2%',
+}
+
+export const StyleDefaults = {
+  layout: { narrow: 'narrow', wide: 'wide' },
+  inline: {
+    fontAndColors: defaultFontAndColors,
+  },
+  inlineLayout: {
+    narrow: {
+      ...Spacing.layout.narrow,
+      ...defaultFontAndColors,
+    } as CSSProperties,
+    wide: {
+      ...Spacing.layout.wide,
+      ...defaultFontAndColors,
+    } as CSSProperties,
+  },
+} as const
+
+const spacingCellSizes = {
+  small: 10,
+  medium: 15,
+  large: 50,
+}
+
+interface SpacingCellProps {
+  size: keyof typeof spacingCellSizes
+}
+export const SpacingCell: FC<SpacingCellProps> = ({ size }) => {
+  const sizeInPixels = spacingCellSizes[size]
+  return (
+    <EmailBlock.Cell style={{ ...StyleDefaults.inline.fontAndColors, height: sizeInPixels }}>
+      &nbsp;
+    </EmailBlock.Cell>
+  )
 }

@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, DefaultStyles, Font, Spacing } from '../styles'
+import { Colors, Font, Spacing, StyleDefaults } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { WarningIcon } from 'src/ui/WarningIcon'
 
@@ -81,7 +81,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
       <Table>
         <Row
           elements={[
-            { part: 'cell', style: styles.outerCell },
+            { part: 'cell', style: styles.outerCell, className: StyleDefaults.layout.narrow },
             'table',
             'row',
             { part: 'cell', style: styles.innerCell },
@@ -188,7 +188,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             StatusVariant.OverviewWithReasonAndAmountBreakdown,
           ].includes(value.variant)}
           elements={[
-            { part: 'cell', style: styles.amountContainer },
+            { part: 'cell', style: styles.amountContainer, className: StyleDefaults.layout.narrow },
             { part: 'table', maxWidth: 345, style: styles.amountTable },
           ]}
         >
@@ -266,6 +266,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         <Row>
           <EditableElement
             element="td"
+            className={StyleDefaults.layout.narrow}
             initialValue={initialValue.supportiveInformation}
             label="Status supportive information"
             onValueChange={(supportiveInformation) => setValue({ ...value, supportiveInformation })}
@@ -275,6 +276,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
           <EditableElement
             element="td"
+            className={StyleDefaults.layout.narrow}
             initialValue={initialValue.missingDocumentDeadline}
             label="Status deadline description"
             onValueChange={(missingDocumentDeadline) =>
@@ -290,7 +292,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
 const styles = {
   outerCell: {
-    ...DefaultStyles,
+    ...StyleDefaults.inline.fontAndColors,
     paddingBottom: Spacing.size.medium,
     paddingTop: Spacing.size.medium,
   } as CSSProperties,
@@ -340,7 +342,7 @@ const styles = {
     fontWeight: Font.weight.normal,
   } as CSSProperties,
   amountContainer: {
-    ...DefaultStyles,
+    ...StyleDefaults.inline.fontAndColors,
     paddingRight: Spacing.size.small,
     paddingTop: Spacing.size.small,
     paddingBottom: Spacing.size.large,
@@ -405,13 +407,13 @@ const styles = {
     paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   supportiveInformation: {
-    ...DefaultStyles,
+    ...StyleDefaults.inline.fontAndColors,
     color: Colors.grayDark,
     fontSize: Font.size.small,
     fontStyle: 'italic',
   } as CSSProperties,
   missingDocumentDeadline: {
-    ...DefaultStyles,
+    ...StyleDefaults.inline.fontAndColors,
     fontSize: Font.size.small,
     fontWeight: Font.weight.bold,
     fontStyle: 'italic',

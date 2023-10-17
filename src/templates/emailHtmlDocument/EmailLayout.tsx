@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react'
+import { CompleteEmailCSS } from './EmailCSS'
 
 interface HtmlProps {
   children: ReactNode
@@ -53,6 +54,7 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html }) => {
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@1,700&display=swap"
             rel="stylesheet"
           />
+          <CompleteEmailCSS />
         </head>
         <body
           style={styles.body}

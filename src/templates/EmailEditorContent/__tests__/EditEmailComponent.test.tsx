@@ -63,16 +63,13 @@ describe('EditEmailComponent', () => {
 
   it('can render a Name', () => {
     emailComponent = buildEmailTemplateComponent('Name')
-    const text = faker.lorem.paragraph()
-    const { queryByText } = render(
+    const { queryByLabelText } = render(
       <EditEmailComponent id={id} emailComponent={emailComponent}>
-        <tr>
-          <td>{text}</td>
-        </tr>
+        <tr />
       </EditEmailComponent>,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByText(text)).not.toBeNull()
+    expect(queryByLabelText("Recipient's name")).not.toBeNull()
   })
 
   it('can render a Body', () => {

@@ -2,11 +2,13 @@ import React, { FC, CSSProperties } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Font, DefaultStyles, Spacing } from '../styles'
+import { Font, Spacing, StyleDefaults } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
-import { EmailTable } from 'src/ui/EmailTable'
+import { EmailBlock } from 'src/ui'
 
 const defaultValue = 'Title'
+
+const { Row } = EmailBlock
 
 export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -17,30 +19,29 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   )
 
   return (
-    <tr>
-      <td>
-        <EmailTable>
-          <tr>
-            <td style={cellContainerStyles}>
-              <EditableElement
-                element="h1"
-                initialValue={initialValue}
-                label="Title"
-                onClick={activate}
-                onValueChange={setValue}
-                style={styles}
-                value={value}
-              />
-            </td>
-          </tr>
-        </EmailTable>
-      </td>
-    </tr>
+    <Row
+      elements={[
+        'cell',
+        'table',
+        'row',
+        { part: 'cell', style: cellContainerStyles, className: StyleDefaults.layout.narrow },
+      ]}
+    >
+      <EditableElement
+        element="h1"
+        initialValue={initialValue}
+        label="Title"
+        onClick={activate}
+        onValueChange={setValue}
+        style={styles}
+        value={value}
+      />
+    </Row>
   )
 }
 
 const cellContainerStyles: CSSProperties = {
-  ...DefaultStyles,
+  ...StyleDefaults.inline.fontAndColors,
   paddingBottom: Spacing.size.large,
   paddingTop: Spacing.size.large,
 }

@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { FlagIcon } from 'src/ui/FlagIcon'
-import { Colors, DefaultStyles, Font, Spacing } from '../styles'
+import { Colors, Font, Spacing, StyleDefaults } from '../styles'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
@@ -65,7 +65,7 @@ export const useRulesRightsRegulationsValue = (componentId: string, id: string) 
   return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 }
 
-const { Table, Row, Cell } = EmailBlock
+const { Row, Cell } = EmailBlock
 
 export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -79,7 +79,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
     <Row
       key={value.variant}
       elements={[
-        { part: 'cell', style: styles.outerContainer },
+        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
         'table',
         'row',
         { part: 'cell', style: styles.innerContainer },
@@ -309,7 +309,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
 
 const styles = {
   outerContainer: {
-    ...DefaultStyles,
+    ...StyleDefaults.inline.fontAndColors,
     paddingBottom: Spacing.size.extraLarge,
     paddingTop: Spacing.size.medium,
   } as CSSProperties,

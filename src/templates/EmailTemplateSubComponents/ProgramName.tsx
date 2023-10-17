@@ -2,9 +2,8 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { DefaultStyles, Font, Spacing } from '../styles'
+import { Font, Spacing, StyleDefaults } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
-import { EmailTable } from 'src/ui/EmailTable'
 import { EmailBlock } from 'src/ui'
 
 const defaultValue = 'Program Name'
@@ -20,7 +19,15 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
   )
 
   return (
-    <Row elements={[{ part: 'cell', style: DefaultStyles }]}>
+    <Row
+      elements={[
+        {
+          part: 'cell',
+          style: StyleDefaults.inline.fontAndColors,
+          className: StyleDefaults.layout.narrow,
+        },
+      ]}
+    >
       <Table style={containerStyles} width="unset" elements={['row']}>
         <EditableElement
           element="td"

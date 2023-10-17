@@ -3,18 +3,22 @@ import { EmailComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
-import { DefaultStyles, Font, Spacing } from '../styles'
+import { Font, SpacingCell, StyleDefaults } from '../styles'
+import { EmailBlock } from 'src/ui'
 
 const defaultValue = 'FIRST LAST NAME:'
 
-export const Name: FC<EmailComponentProps> = ({ children, id }) => {
+const { Row } = EmailBlock
+
+export const Name: FC<EmailComponentProps> = ({ id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
   const [value, setValue, { initialValue }] = useEmailPartsContentForComponent(id, defaultValue)
   return (
     <>
-      <tr>
+      <Row>
         <EditableElement
           element="td"
+          className={StyleDefaults.layout.narrow}
           initialValue={initialValue}
           label="Recipient's name"
           onClick={activate}
@@ -22,15 +26,16 @@ export const Name: FC<EmailComponentProps> = ({ children, id }) => {
           style={styles}
           value={value}
         />
-      </tr>
-      {children}
+      </Row>
+      <Row>
+        <SpacingCell size="medium" />
+      </Row>
     </>
   )
 }
 
 const styles: CSSProperties = {
-  ...DefaultStyles,
-  paddingBottom: Spacing.size.medium,
+  ...StyleDefaults.inline.fontAndColors,
   fontFamily: Font.family.serifMonospace,
   fontWeight: Font.weight.boldLight,
 }

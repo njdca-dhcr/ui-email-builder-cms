@@ -42,7 +42,9 @@ describe(EmailBlock.Base.displayName!, () => {
 
   it('passes config through to the table', () => {
     const { baseElement } = render(
-      <EmailBlock.Base elements={[{ part: 'table', width: 40, maxWidth: '100%' }]}>
+      <EmailBlock.Base
+        elements={[{ part: 'table', width: 40, maxWidth: '100%', className: 'my-class' }]}
+      >
         <tr />
       </EmailBlock.Base>,
     )
@@ -50,9 +52,8 @@ describe(EmailBlock.Base.displayName!, () => {
     const table = baseElement.querySelector('table')
     expect(table).not.toBeNull()
     expect(table?.attributes.getNamedItem('width')?.value).toEqual('40')
-    expect(table?.attributes.getNamedItem('style')?.value).toEqual(
-      'margin: 0px; padding: 0px; max-width: 100%;',
-    )
+    expect(table?.attributes.getNamedItem('style')?.value).toEqual('max-width: 100%;')
+    expect(table?.className).toEqual('my-class')
   })
 
   it('passes config through to the row', () => {
@@ -150,7 +151,7 @@ describe(EmailBlock.Table.displayName!, () => {
     const table = baseElement.querySelector('table')
     expect(table).not.toBeNull()
     expect(table?.attributes.getNamedItem('style')?.value).toEqual(
-      'margin: 20px 0px 0px 0px; padding: 0px; max-width: 100%;',
+      'margin-top: 20px; max-width: 100%;',
     )
     expect(table?.attributes.getNamedItem('width')?.value).toEqual('unset')
   })

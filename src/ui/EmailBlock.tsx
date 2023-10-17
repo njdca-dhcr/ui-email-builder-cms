@@ -1,9 +1,11 @@
 import React, { CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
 import { EmailTable } from './EmailTable'
+import classNames from 'classnames'
 
 type ElementShorthand = 'table' | 'row' | 'cell'
 
 interface BaseConfig {
+  className?: string
   condition?: boolean
   elements?: Array<NonNullable<TableConfig | RowConfig | CellConfig | ElementShorthand>>
   onClick?: MouseEventHandler<HTMLElement>

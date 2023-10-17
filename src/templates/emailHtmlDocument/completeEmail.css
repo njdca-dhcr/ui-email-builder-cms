@@ -1,0 +1,21 @@
+td.narrow {
+  padding-left: 20px;
+  padding-right: 40px;
+}
+
+td.wide {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (min-width: 414px) {
+  td.narrow {
+    padding-left: 50px;
+    padding-right: 100px;
+  }
+
+  td.wide {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

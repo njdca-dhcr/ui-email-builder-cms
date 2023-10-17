@@ -11,6 +11,7 @@ import { CopyToClipboardButton } from '../../ui/CopyToClipboardButton'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Spacing } from '../styles'
 import { PreviewTextHtml } from './PreviewTextHtml'
+import { EditingEmailCSS, EmailCSS } from '../emailHtmlDocument/EmailCSS'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -64,7 +65,14 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           'email-preview-mobile': isPreviewMobile,
         })}
       >
-        <div ref={previewRef as any}>
+        <EditingEmailCSS />
+        <div
+          ref={previewRef as any}
+          className={classNames({
+            desktop: isPreviewDesktop,
+            mobile: isPreviewMobile,
+          })}
+        >
           <PreviewTextHtml />
           <EmailTable maxWidth={Spacing.layout.maxWidth}>
             {(emailTemplate.components ?? []).map((emailComponent, i) => (
