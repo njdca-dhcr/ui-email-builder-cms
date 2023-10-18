@@ -63,39 +63,17 @@ export const Spacing = {
   },
 } as const
 
-export const DefaultStyles: CSSProperties = {
-  ...Spacing.layout.paddingHorizontal,
-  backgroundColor: Colors.white,
-  color: Colors.black,
-  fontFamily: Font.family.default,
-  fontWeight: Font.weight.normal,
-  fontSize: Font.size.medium,
-  lineHeight: Font.lineHeight.default,
-}
-
-const defaultFontAndColors: CSSProperties = {
-  backgroundColor: Colors.white,
-  color: Colors.black,
-  fontFamily: Font.family.default,
-  fontWeight: Font.weight.normal,
-  fontSize: Font.size.medium,
-  lineHeight: Font.lineHeight.default,
-  letterSpacing: '-2%',
-}
-
 export const StyleDefaults = {
   layout: { narrow: 'narrow', wide: 'wide' },
   inline: {
-    fontAndColors: defaultFontAndColors,
-  },
-  inlineLayout: {
-    narrow: {
-      ...Spacing.layout.narrow,
-      ...defaultFontAndColors,
-    } as CSSProperties,
-    wide: {
-      ...Spacing.layout.wide,
-      ...defaultFontAndColors,
+    fontAndColors: {
+      backgroundColor: Colors.white,
+      color: Colors.black,
+      fontFamily: Font.family.default,
+      fontWeight: Font.weight.normal,
+      fontSize: Font.size.medium,
+      lineHeight: Font.lineHeight.default,
+      letterSpacing: '-0.44px',
     } as CSSProperties,
   },
 } as const
