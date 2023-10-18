@@ -1,155 +1,93 @@
-import React, { FC } from 'react'
+import React, { CSSProperties, FC, ReactElement } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, SpacingCell } from '../styles'
+import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { EmailBlock } from 'src/ui'
+import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 
-export const Banner: FC<EmailComponentProps> = ({ children }) => {
+export interface BannerValue {
+  primaryText: string
+  primaryLink: string
+  secondaryLink: string
+  [key: string]: null | string
+}
+
+interface BannerMarkupProps {
+  disableLinks?: boolean
+  primaryText: string | ReactElement
+  primaryLink: string
+  secondaryLink: string
+}
+
+const { Row, Cell, Link } = EmailBlock
+
+export const BannerMarkup: FC<BannerMarkupProps> = ({
+  disableLinks,
+  primaryLink,
+  primaryText,
+  secondaryLink,
+}) => {
+  const Comp = disableLinks ? 'span' : Link
+
+  return (
+    <Row elements={[{ part: 'cell', style: outerCellStyles }, 'table', 'row']}>
+      <Cell className="banner-link-container">
+        <Comp to={primaryLink} style={primaryLinkStyles}>
+          {primaryText}
+        </Comp>
+      </Cell>
+      <Cell className="banner-link-container" style={secondaryLinkContainerStyles}>
+        <Comp to={secondaryLink} style={secondaryLinkStyles}>
+          {getHostName(secondaryLink)}
+        </Comp>
+      </Cell>
+    </Row>
+  )
+}
+
+const outerCellStyles: CSSProperties = {
+  ...StyleDefaults.inline.fontAndColors,
+  backgroundColor: Colors.black,
+  fontSize: Font.size.small,
+  padding: Spacing.size.large,
+}
+
+const primaryLinkStyles: CSSProperties = {
+  color: Colors.white,
+  fontWeight: Font.weight.bold,
+  textDecoration: 'underline',
+}
+
+const secondaryLinkStyles: CSSProperties = {
+  color: Colors.white,
+}
+
+const secondaryLinkContainerStyles: CSSProperties = {
+  textAlign: 'right',
+}
+
+const getHostName = (url: string): string => {
+  return url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+}
+
+const defaultValue: BannerValue = {
+  primaryText: 'New Jersey Department of Labor and Workforce Development',
+  primaryLink: 'https://www.nj.gov/labor/',
+  secondaryLink: 'https://myunemployment.nj.gov/',
+}
+
+export const useBannerValue = () => {
+  return useLocalStorageJSON<BannerValue>('banner', defaultValue)
+}
+
+export const Banner: FC<EmailComponentProps> = ({}) => {
+  const [value] = useBannerValue()
+
   return (
     <>
-      <tr id="header-row">
-        <td>
-          <table
-            width="100%"
-            align="center"
-            className="el-center"
-            cellSpacing="0"
-            cellPadding="0"
-            border={0}
-          >
-            <tbody>
-              <tr>
-                <td
-                  style={{
-                    backgroundColor: Colors.black,
-                    color: Colors.white,
-                    width: '100% !important',
-                    padding: 20,
-                  }}
-                >
-                  <table cellSpacing={0} cellPadding="0" border={0} width="100%">
-                    <tbody>
-                      <tr>
-                        <td
-                          style={{
-                            width: '100%',
-                            paddingLeft: '0',
-                            textAlign: 'left',
-                          }}
-                        >
-                          <div
-                            style={{
-                              height: Font.size.small,
-                              lineHeight: Font.size.small,
-                              fontSize: Font.size.small,
-                              display: 'none',
-                            }}
-                          >
-                            &nbsp;
-                          </div>
-
-                          <table cellSpacing="0" cellPadding="0" border={0} width="100%">
-                            <tbody>
-                              <tr>
-                                <td
-                                  style={{
-                                    textAlign: 'left',
-                                  }}
-                                >
-                                  <div style={{ lineHeight: '127%' }}>
-                                    <a
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      href="https://www.nj.gov/labor/"
-                                      style={{
-                                        color: Colors.white,
-                                        lineHeight: '100%',
-                                        fontFamily: Font.family.default,
-                                        fontSize: Font.size.small,
-                                        textAlign: 'left',
-                                        fontWeight: Font.weight.bold,
-                                        textDecoration: 'underline',
-                                        whiteSpace: 'nowrap',
-                                      }}
-                                    >
-                                      New Jersey Department of Labor and Workforce Development
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                        <td
-                          style={{
-                            width: '100%',
-                            paddingLeft: '0px',
-                            textAlign: 'left',
-                          }}
-                        >
-                          <div
-                            style={{
-                              height: Font.size.tiny,
-                              lineHeight: Font.size.tiny,
-                              fontSize: Font.size.tiny,
-                              display: 'none',
-                            }}
-                          >
-                            &nbsp;
-                          </div>
-                          <table cellSpacing="0" cellPadding="0" border={0} width="100%">
-                            <tbody>
-                              <tr>
-                                <td
-                                  style={{
-                                    textAlign: 'right',
-                                    paddingLeft: '0',
-                                  }}
-                                >
-                                  <div style={{ lineHeight: '150%' }}>
-                                    <a
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      href="https://myunemployment.nj.gov"
-                                      style={{
-                                        color: Colors.white,
-                                        lineHeight: '150%',
-                                        fontFamily: Font.family.default,
-                                        fontSize: Font.size.small,
-                                        textAlign: 'right',
-                                        textDecoration: 'underline',
-                                      }}
-                                    >
-                                      myunemployment.nj.gov
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <div
-                            style={{
-                              maxWidth: '120px',
-                              height: Font.size.tiny,
-                              lineHeight: Font.size.tiny,
-                              fontSize: Font.size.tiny,
-                              display: 'none',
-                            }}
-                          >
-                            &nbsp;
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-      {children}
-      <tr>
+      <BannerMarkup {...value} />
+      <Row>
         <SpacingCell size="large" />
-      </tr>
+      </Row>
     </>
   )
 }

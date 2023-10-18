@@ -1,6 +1,5 @@
 import React, { CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
 import { EmailTable } from './EmailTable'
-import classNames from 'classnames'
 
 type ElementShorthand = 'table' | 'row' | 'cell'
 
@@ -91,4 +90,19 @@ const Cell: FC<CellProps> = ({ children, condition, elements, ...props }) => {
 }
 Cell.displayName = 'EmailBlock.Cell'
 
-export const EmailBlock = { Base, Table, Row, Cell }
+interface LinkProps {
+  children: ReactNode
+  style?: CSSProperties
+  to: string
+}
+
+const Link: FC<LinkProps> = ({ children, style, to }) => {
+  return (
+    <a href={to} rel="noopener noreferrer" target="_blank" style={style}>
+      {children}
+    </a>
+  )
+}
+Link.displayName = 'EmailBlock.Link'
+
+export const EmailBlock = { Base, Table, Row, Cell, Link }

@@ -1,0 +1,25 @@
+.section-container {
+  margin-bottom: 6rem;
+}
+
+.banner-fields {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+.banner-field {
+  flex: 1;
+}
+
+.banner-field label {
+  display: block;
+  padding-bottom: 0.5rem;
+}
+
+.banner-field input {
+  border-radius: 5px;
+  width: calc(100% - 1rem);
+}

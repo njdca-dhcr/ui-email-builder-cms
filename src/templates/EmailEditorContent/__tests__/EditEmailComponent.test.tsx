@@ -102,7 +102,7 @@ describe('EditEmailComponent', () => {
   it('can render a Banner', () => {
     emailComponent = buildEmailTemplateComponent('Banner')
     const text = faker.lorem.paragraph()
-    const { queryByText } = render(
+    const { baseElement } = render(
       <EditEmailComponent id={id} emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
@@ -110,6 +110,6 @@ describe('EditEmailComponent', () => {
       </EditEmailComponent>,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByText(text)).not.toBeNull()
+    expect(baseElement.querySelectorAll('.banner-link-container')).not.toHaveLength(0)
   })
 })

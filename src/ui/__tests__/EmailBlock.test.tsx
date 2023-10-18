@@ -258,3 +258,42 @@ describe(EmailBlock.Cell.displayName!, () => {
     expect(cell?.attributes.getNamedItem('align')?.value).toEqual('center')
   })
 })
+
+describe(EmailBlock.Link.displayName!, () => {
+  it('displays its children', () => {
+    const value = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <EmailBlock.Link to={faker.internet.url()}>
+        <span>{value}</span>
+      </EmailBlock.Link>,
+    )
+    expect(baseElement).toContainHTML(`<span>${value}</span>`)
+  })
+
+  it('is an anchor tag', () => {
+    const url = faker.internet.url()
+    const { queryByRole } = render(
+      <EmailBlock.Link to={url}>
+        <span />
+      </EmailBlock.Link>,
+    )
+    const link: HTMLAnchorElement | null = queryByRole('link') as any
+    expect(link).not.toBeNull()
+    expect(link?.tagName).toEqual('A')
+    expect(link?.href).toContain(url)
+    expect(link?.rel).toEqual('noopener noreferrer')
+    expect(link?.target).toEqual('_blank')
+  })
+
+  it('accepts style', () => {
+    const url = faker.internet.url()
+    const { queryByRole } = render(
+      <EmailBlock.Link to={url} style={{ margin: 25 }}>
+        <span />
+      </EmailBlock.Link>,
+    )
+    const link: HTMLAnchorElement | null = queryByRole('link') as any
+    expect(link).not.toBeNull()
+    expect(link?.attributes.getNamedItem('style')?.value).toEqual('margin: 25px;')
+  })
+})

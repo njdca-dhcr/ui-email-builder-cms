@@ -8,6 +8,10 @@
   padding-right: 20px;
 }
 
+.mobile .banner-link-container {
+  display: inline-block;
+}
+
 .desktop td.narrow {
   padding-left: 50px;
   padding-right: 100px;
