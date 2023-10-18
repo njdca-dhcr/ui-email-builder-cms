@@ -54,14 +54,3 @@ img {
     min-width: 414px !important;
   }
 }
-
-@media screen and (max-width: 600px) {
-  table,
-  td,
-  div,
-  tr,
-  tbody {
-    width: auto !important;
-    max-width: 100vw !important;
-  }
-}

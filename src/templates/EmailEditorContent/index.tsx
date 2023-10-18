@@ -74,7 +74,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           })}
         >
           <PreviewTextHtml />
-          <EmailTable maxWidth={Spacing.layout.maxWidth}>
+          <EmailTable maxWidth={Spacing.layout.maxWidth} style={{ margin: '0 auto' }}>
             {(emailTemplate.components ?? []).map((emailComponent, i) => (
               <EditEmailComponent key={i} emailComponent={emailComponent} id={`${i}`}>
                 {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
