@@ -13,6 +13,7 @@ import {
 } from 'src/testHelpers'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { Status, StatusVariant, useStatusValue } from '../Status'
+import { Toggle } from 'src/ui'
 
 describe('Status', () => {
   let value: string
@@ -27,6 +28,22 @@ describe('Status', () => {
     const element = rendered.getByLabelText(label)
     await user.clear(element)
     await user.type(element, value)
+  }
+
+  const ToggleSupportiveInformation: FC = () => {
+    const [value, setValue] = useStatusValue(componentId, id)
+    return (
+      <label>
+        toggle
+        <Toggle
+          id=""
+          onChange={(showSupportiveInformation) =>
+            setValue({ ...value, showSupportiveInformation })
+          }
+          value={value.showSupportiveInformation}
+        />
+      </label>
+    )
   }
 
   beforeEach(() => {
@@ -56,6 +73,18 @@ describe('Status', () => {
     await clearAndFillWithValue('Status description')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
+  })
+
+  it('only displays supportive information when it is toggled on', async () => {
+    const { getByLabelText, queryByLabelText } = renderEmailPart(
+      <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <ToggleSupportiveInformation />,
+    )
+    expect(queryByLabelText('Status supportive information')).not.toBeNull()
+    await user.click(getByLabelText('toggle'))
+    expect(queryByLabelText('Status supportive information')).toBeNull()
+    await user.click(getByLabelText('toggle'))
+    expect(queryByLabelText('Status supportive information')).not.toBeNull()
   })
 
   it('activates when clicked', async () => {

@@ -115,6 +115,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .accordion-email-subcomponent label {
   font-weight: var(--weight-bold);
   cursor: pointer;

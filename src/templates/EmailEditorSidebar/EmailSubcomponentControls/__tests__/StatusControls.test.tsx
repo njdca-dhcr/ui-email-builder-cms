@@ -29,4 +29,22 @@ describe('StatusControls', () => {
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Overview w/ Reason')
   })
+
+  it('provides a toggle for supportive information', async () => {
+    const user = userEvent.setup()
+    const { queryByLabelText } = render(
+      <EmailPartsContent>
+        <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+      </EmailPartsContent>,
+    )
+    const toggle = queryByLabelText('Supportive Information')
+    expect(toggle).not.toBeNull()
+    expect(toggle).toBeChecked()
+
+    await user.click(toggle!)
+    expect(toggle).not.toBeChecked()
+
+    await user.click(toggle!)
+    expect(toggle).toBeChecked()
+  })
 })

@@ -22,6 +22,7 @@ interface StatusValue {
   description: string
   supportiveInformation: string
   statusDueTo: string
+  showSupportiveInformation: boolean
   // Missing Document
   documentsNeededLabel: string
   documentsNeededValue: string
@@ -44,6 +45,7 @@ const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,
   status: 'Status of Claim',
   statusDueTo: 'because...',
+  showSupportiveInformation: true,
   description: '{Data Reference} or a sentence that colors more of the status of claim',
   supportiveInformation:
     'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
@@ -263,19 +265,25 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             </Cell>
           </Row>
         </Row>
-        <Row>
-          <SpacingCell size="medium" />
-        </Row>
-        <Row>
-          <EditableElement
-            element="td"
-            className={StyleDefaults.layout.narrow}
-            initialValue={initialValue.supportiveInformation}
-            label="Status supportive information"
-            onValueChange={(supportiveInformation) => setValue({ ...value, supportiveInformation })}
-            style={styles.supportiveInformation}
-          />
-        </Row>
+        {value.showSupportiveInformation && (
+          <>
+            <Row>
+              <SpacingCell size="medium" />
+            </Row>
+            <Row>
+              <EditableElement
+                element="td"
+                className={StyleDefaults.layout.narrow}
+                initialValue={initialValue.supportiveInformation}
+                label="Status supportive information"
+                onValueChange={(supportiveInformation) =>
+                  setValue({ ...value, supportiveInformation })
+                }
+                style={styles.supportiveInformation}
+              />
+            </Row>
+          </>
+        )}
         {[StatusVariant.MissingDocument].includes(value.variant) && (
           <>
             <Row>
