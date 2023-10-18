@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, Spacing } from '../styles'
+import { Colors, Font, Spacing, SpacingCell } from '../styles'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 
@@ -12,7 +12,7 @@ The State of New Jersey is committed to preventing fraudulent emails. Emails fro
 If you'd like to get in contact with the New Jersey's Division of Unemployment Insurance, you can call (732) 761-2020. Phone lines are open from 8am-3pm Monday through Friday; the best time to call is at 8am.
 <br /><br />
 This email is a new beta design created by New Jersey's Division of Unemployment Insurance and New Jersey's Office of Innovation.
-<br /><br />
+<br /><br /><br />
 CONFIDENTIALITY NOTICE: This email message and all attachments transmitted with it may contain State of New Jersey legally privileged and confidential information intended solely for the use of the addressee only. If the reader of this message is not the intended recipient, you are hereby notified that any reading, dissemination, distribution, copying, or other use of this message or its attachment is prohibited. If you have received this message in error, please notify the sender immediately and delete this message.
 `
 
@@ -20,13 +20,17 @@ export const useDisclaimerValue = () => {
   return useLocalStorageJSON<string>('disclaimer', defaultValue)
 }
 
+const { Row } = EmailBlock
+
 export const Disclaimer: FC<EmailComponentProps> = ({}) => {
   const [value] = useDisclaimerValue()
 
   return (
-    <EmailBlock.Row>
-      <td style={styles} dangerouslySetInnerHTML={{ __html: value }} />
-    </EmailBlock.Row>
+    <>
+      <Row>
+        <td style={styles} dangerouslySetInnerHTML={{ __html: value }} />
+      </Row>
+    </>
   )
 }
 
@@ -40,6 +44,6 @@ export const styles: CSSProperties = {
   margin: 0,
   padding: 0,
   paddingBottom: Spacing.size.large,
-  paddingTop: Spacing.size.large,
+  paddingTop: 30,
   width: '100%',
 }

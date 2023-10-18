@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { LockIcon } from 'src/ui/LockIcon'
-import { Colors, Font, Spacing, StyleDefaults } from '../styles'
+import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
 const { Table, Row, Cell } = EmailBlock
 
@@ -42,105 +42,112 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
     defaultValue,
   )
   return (
-    <Row
-      elements={[
-        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
-        { part: 'table', onClick: activate },
-        'row',
-        { part: 'cell', style: styles.innerContainer },
-        'table',
-      ]}
-    >
-      <Row>
-        <Cell style={styles.iconContainer}>
-          <LockIcon />
-        </Cell>
-        <EditableElement
-          element="td"
-          onValueChange={(title) => setValue({ ...value, title })}
-          initialValue={initialValue.title}
-          label="Login details title"
-          style={styles.title}
-        />
+    <>
+      <Row
+        elements={[
+          { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
+          { part: 'table', onClick: activate },
+          'row',
+          { part: 'cell', style: styles.innerContainer },
+          'table',
+        ]}
+      >
+        <Row>
+          <Cell style={styles.iconContainer}>
+            <LockIcon />
+          </Cell>
+          <EditableElement
+            element="td"
+            onValueChange={(title) => setValue({ ...value, title })}
+            initialValue={initialValue.title}
+            label="Login details title"
+            style={styles.title}
+          />
+        </Row>
+        <Row>
+          <Cell>{null}</Cell>
+          <Cell elements={['table']}>
+            <Row>
+              <EditableElement
+                element="td"
+                onValueChange={(usernameLabel) => setValue({ ...value, usernameLabel })}
+                initialValue={initialValue.usernameLabel}
+                label="Username label"
+                style={styles.usernameLabel}
+              />
+            </Row>
+            <Row>
+              <EditableElement
+                element="td"
+                onValueChange={(usernameValue) => setValue({ ...value, usernameValue })}
+                initialValue={initialValue.usernameValue}
+                label="Username value"
+                style={styles.usernameValue}
+              />
+            </Row>
+            <Row>
+              <EditableElement
+                element="td"
+                onValueChange={(resetPasswordMessage) =>
+                  setValue({ ...value, resetPasswordMessage })
+                }
+                initialValue={initialValue.resetPasswordMessage}
+                label="Reset password message"
+                style={styles.resetPasswordMessage}
+              />
+            </Row>
+            <Row
+              elements={[
+                'cell',
+                { part: 'table', width: 'unset' },
+                'row',
+                { part: 'cell', style: styles.button },
+              ]}
+            >
+              <EditableElement
+                element="a"
+                href={value.buttonHref}
+                onValueChange={(button) => setValue({ ...value, button })}
+                initialValue={initialValue.button}
+                label="Reset password button"
+                style={styles.buttonText}
+              />
+            </Row>
+            <Row
+              elements={[
+                'cell',
+                { part: 'table', maxWidth: 297 },
+                'row',
+                { part: 'cell', style: styles.buttonHref },
+              ]}
+            >
+              {value.buttonHref ||
+                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+            </Row>
+            <Row>
+              <EditableElement
+                element="td"
+                onValueChange={(resetPasswordDetails) =>
+                  setValue({ ...value, resetPasswordDetails })
+                }
+                initialValue={initialValue.resetPasswordDetails}
+                label="Reset password details"
+                style={styles.resetPasswordDetails}
+              />
+            </Row>
+          </Cell>
+        </Row>
       </Row>
       <Row>
-        <Cell>{null}</Cell>
-        <Cell elements={['table']}>
-          <Row>
-            <EditableElement
-              element="td"
-              onValueChange={(usernameLabel) => setValue({ ...value, usernameLabel })}
-              initialValue={initialValue.usernameLabel}
-              label="Username label"
-              style={styles.usernameLabel}
-            />
-          </Row>
-          <Row>
-            <EditableElement
-              element="td"
-              onValueChange={(usernameValue) => setValue({ ...value, usernameValue })}
-              initialValue={initialValue.usernameValue}
-              label="Username value"
-              style={styles.usernameValue}
-            />
-          </Row>
-          <Row>
-            <EditableElement
-              element="td"
-              onValueChange={(resetPasswordMessage) => setValue({ ...value, resetPasswordMessage })}
-              initialValue={initialValue.resetPasswordMessage}
-              label="Reset password message"
-              style={styles.resetPasswordMessage}
-            />
-          </Row>
-          <Row
-            elements={[
-              'cell',
-              { part: 'table', width: 'unset' },
-              'row',
-              { part: 'cell', style: styles.button },
-            ]}
-          >
-            <EditableElement
-              element="a"
-              href={value.buttonHref}
-              onValueChange={(button) => setValue({ ...value, button })}
-              initialValue={initialValue.button}
-              label="Reset password button"
-              style={styles.buttonText}
-            />
-          </Row>
-          <Row
-            elements={[
-              'cell',
-              { part: 'table', maxWidth: 297 },
-              'row',
-              { part: 'cell', style: styles.buttonHref },
-            ]}
-          >
-            {value.buttonHref ||
-              'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
-          </Row>
-          <Row>
-            <EditableElement
-              element="td"
-              onValueChange={(resetPasswordDetails) => setValue({ ...value, resetPasswordDetails })}
-              initialValue={initialValue.resetPasswordDetails}
-              label="Reset password details"
-              style={styles.resetPasswordDetails}
-            />
-          </Row>
-        </Cell>
+        <SpacingCell size="large" />
       </Row>
-    </Row>
+    </>
   )
 }
 
 const styles = {
   outerContainer: {
     ...StyleDefaults.inline.fontAndColors,
-    paddingTop: Spacing.size.small,
-    paddingBottom: Spacing.size.small,
   } as CSSProperties,
   innerContainer: {
     backgroundColor: Colors.blueLight,

@@ -1,6 +1,8 @@
 name: Build from Scratch
 description: You know what you want so make it happen.
 components:
+  - kind: Banner
+    required: false
   - kind: Header
     subComponents:
       - kind: Title
@@ -19,3 +21,4 @@ components:
     subComponents:
       - kind: AdditionalContent
   - kind: Disclaimer
+    required: false

@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font, Spacing, StyleDefaults } from '../styles'
+import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { WarningIcon } from 'src/ui/WarningIcon'
 
@@ -264,6 +264,9 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           </Row>
         </Row>
         <Row>
+          <SpacingCell size="medium" />
+        </Row>
+        <Row>
           <EditableElement
             element="td"
             className={StyleDefaults.layout.narrow}
@@ -273,17 +276,27 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             style={styles.supportiveInformation}
           />
         </Row>
-        <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
-          <EditableElement
-            element="td"
-            className={StyleDefaults.layout.narrow}
-            initialValue={initialValue.missingDocumentDeadline}
-            label="Status deadline description"
-            onValueChange={(missingDocumentDeadline) =>
-              setValue({ ...value, missingDocumentDeadline })
-            }
-            style={styles.missingDocumentDeadline}
-          />
+        {[StatusVariant.MissingDocument].includes(value.variant) && (
+          <>
+            <Row>
+              <SpacingCell size="medium" />
+            </Row>
+            <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
+              <EditableElement
+                element="td"
+                className={StyleDefaults.layout.narrow}
+                initialValue={initialValue.missingDocumentDeadline}
+                label="Status deadline description"
+                onValueChange={(missingDocumentDeadline) =>
+                  setValue({ ...value, missingDocumentDeadline })
+                }
+                style={styles.missingDocumentDeadline}
+              />
+            </Row>
+          </>
+        )}
+        <Row>
+          <SpacingCell size="large" />
         </Row>
       </Table>
     </Row>
@@ -293,8 +306,6 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 const styles = {
   outerCell: {
     ...StyleDefaults.inline.fontAndColors,
-    paddingBottom: Spacing.size.medium,
-    paddingTop: Spacing.size.medium,
   } as CSSProperties,
   innerCell: {
     paddingLeft: 12,
@@ -417,6 +428,5 @@ const styles = {
     fontSize: Font.size.small,
     fontWeight: Font.weight.bold,
     fontStyle: 'italic',
-    paddingTop: Spacing.size.medium,
   } as CSSProperties,
 } as const

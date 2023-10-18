@@ -43,10 +43,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
   )
 }
 
-const containerStyles: CSSProperties = {
-  marginTop: 10,
-  marginBottom: 20,
-}
+const containerStyles: CSSProperties = {}
 
 const styles: CSSProperties = {
   backgroundColor: '#CCBDDF',

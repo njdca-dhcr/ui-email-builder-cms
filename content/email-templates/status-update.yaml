@@ -1,6 +1,8 @@
 name: Status Update
 description: Confirmations, updates, determinations, and any other status related messaging.
 components:
+  - kind: Banner
+    required: true
   - kind: Header
     subComponents:
       - kind: Title
@@ -18,5 +20,6 @@ components:
   - kind: Footer
     subComponents:
       - kind: AdditionalContent
+    required: false
   - kind: Disclaimer
     required: true

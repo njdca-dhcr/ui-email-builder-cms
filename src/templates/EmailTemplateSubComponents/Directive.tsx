@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font, Spacing, StyleDefaults } from '../styles'
+import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
 export const enum DirectiveVariant {
   OneStep,
@@ -723,14 +723,15 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           </table>
         </td>
       </tr>
+      <tr>
+        <SpacingCell size="large" />
+      </tr>
     </>
   )
 }
 
 const outerCellStyles: CSSProperties = {
   ...StyleDefaults.inline.fontAndColors,
-  paddingBottom: Spacing.size.medium,
-  paddingTop: Spacing.size.medium,
 }
 
 const directiveLabelStyles: CSSProperties = {

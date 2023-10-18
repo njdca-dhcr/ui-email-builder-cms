@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font } from '../styles'
+import { Colors, Font, SpacingCell } from '../styles'
 
 export const Banner: FC<EmailComponentProps> = ({ children }) => {
   return (
@@ -147,6 +147,9 @@ export const Banner: FC<EmailComponentProps> = ({ children }) => {
         </td>
       </tr>
       {children}
+      <tr>
+        <SpacingCell size="large" />
+      </tr>
     </>
   )
 }
