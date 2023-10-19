@@ -8,6 +8,7 @@ import { List } from 'src/ui/List'
 import 'src/styles/app.css'
 import './index.css'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 
 const IndexPage: FC = () => {
   return (
@@ -114,4 +115,4 @@ const EmailTemplateListItem: FC<EmailTemplateListItemProps> = ({
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>Email Builder (Beta)</title>
+export const Head: HeadFC = () => <title>{formatPageTitle('Home')}</title>

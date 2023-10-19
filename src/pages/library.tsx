@@ -6,6 +6,7 @@ import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { List } from 'src/ui/List'
 import './library.css'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 
 const LibaryPage: FC = () => {
   const emailTemplates = useEmailTemplatesData()
@@ -38,4 +39,4 @@ const LibaryPage: FC = () => {
 
 export default LibaryPage
 
-export const Head: HeadFC = () => <title>Libary</title>
+export const Head: HeadFC = () => <title>{formatPageTitle('Libary')}</title>

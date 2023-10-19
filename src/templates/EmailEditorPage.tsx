@@ -9,6 +9,7 @@ import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './Curre
 import { EmailPartsContent } from './EmailPartsContent'
 import { PreviewText } from './PreviewText'
 import './EmailEditorPage.css'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Config
@@ -44,5 +45,5 @@ export default EmailEditorPage
 
 export const Head: HeadFC<object, PageContext> = ({ pageContext }) => {
   const { name } = pageContext.emailTemplate
-  return <title>{name}</title>
+  return <title>{formatPageTitle(name)}</title>
 }

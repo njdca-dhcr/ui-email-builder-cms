@@ -3,6 +3,7 @@ import { HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
 import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 
 const TipsAndTricksPage: FC = () => {
   return (
@@ -23,4 +24,4 @@ const TipsAndTricksPage: FC = () => {
 
 export default TipsAndTricksPage
 
-export const Head: HeadFC = () => <title>Tips & Tricks</title>
+export const Head: HeadFC = () => <title>{formatPageTitle('Tips & Tricks')}</title>

@@ -6,6 +6,7 @@ import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { EditDisclaimer } from 'src/ui/Settings/EditDisclaimer'
 import { EditBanner } from 'src/ui/Settings/EditBanner'
 import './settings.css'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 
 const SettingsPage: FC = () => {
   return (
@@ -32,4 +33,4 @@ const SettingsPage: FC = () => {
 
 export default SettingsPage
 
-export const Head: HeadFC = () => <title>Settings</title>
+export const Head: HeadFC = () => <title>{formatPageTitle('Settings')}</title>
