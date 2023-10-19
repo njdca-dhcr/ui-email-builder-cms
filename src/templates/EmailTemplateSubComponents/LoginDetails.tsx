@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { LockIcon } from 'src/ui/LockIcon'
-import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 
 const { Row, Cell, Link } = EmailBlock
 
@@ -148,7 +148,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
 
 const styles = {
   outerContainer: {
-    ...StyleDefaults.inline.fontAndColors,
+    ...StyleDefaults.inline.colors,
   } as CSSProperties,
   innerContainer: {
     backgroundColor: Colors.alert.info.light,
@@ -162,20 +162,18 @@ const styles = {
     paddingRight: Spacing.size.medium,
   } as CSSProperties,
   title: {
-    fontSize: Font.size.large,
-    fontWeight: Font.weight.bold,
+    ...Text.header.h3.bold,
     paddingBottom: Spacing.size.tiny,
   } as CSSProperties,
   usernameLabel: {
-    fontSize: Font.size.small,
+    ...Text.body.secondary.regular,
   } as CSSProperties,
   usernameValue: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.bold,
+    ...Text.body.secondary.bold,
     paddingBottom: Spacing.size.large,
   } as CSSProperties,
   resetPasswordMessage: {
-    fontSize: Font.size.small,
+    ...Text.body.secondary.regular,
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   button: {
@@ -187,19 +185,17 @@ const styles = {
     paddingRight: Spacing.size.extraLarge,
   } as CSSProperties,
   buttonText: {
+    ...Text.body.main.bold,
     color: Colors.white,
-    fontWeight: Font.weight.bold,
     textDecoration: 'none',
   } as CSSProperties,
   buttonHref: {
+    ...Text.caption.small.regular,
     color: Colors.gray,
-    fontSize: Font.size.tiny,
-    textDecoration: 'underline',
     paddingBottom: Spacing.size.extraLarge,
     paddingTop: Spacing.size.small,
   } as CSSProperties,
   resetPasswordDetails: {
-    fontSize: Font.size.small,
-    fontStyle: 'italic',
+    ...Text.body.secondary.italic,
   } as CSSProperties,
 } as const

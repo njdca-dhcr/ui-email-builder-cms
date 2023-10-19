@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font, Spacing, StyleDefaults } from '../styles'
+import { Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 
@@ -36,7 +36,7 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId 
 }
 
 const styles: CSSProperties = {
-  ...StyleDefaults.inline.fontAndColors,
+  ...StyleDefaults.inline.colors,
+  ...Text.caption.small.regular,
   color: Colors.gray,
-  fontSize: Font.size.tiny,
 }

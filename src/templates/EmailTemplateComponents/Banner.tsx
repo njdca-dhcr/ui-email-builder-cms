@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, ReactElement } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Colors, Font, Spacing, SpacingCell, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 
@@ -45,19 +45,18 @@ export const BannerMarkup: FC<BannerMarkupProps> = ({
 }
 
 const outerCellStyles: CSSProperties = {
-  ...StyleDefaults.inline.fontAndColors,
   backgroundColor: Colors.black,
   fontSize: Font.size.small,
   padding: Spacing.size.large,
 }
 
 const primaryLinkStyles: CSSProperties = {
+  ...Text.link.large.bold,
   color: Colors.white,
-  fontWeight: Font.weight.bold,
-  textDecoration: 'underline',
 }
 
 const secondaryLinkStyles: CSSProperties = {
+  ...Text.link.large.regular,
   color: Colors.white,
 }
 

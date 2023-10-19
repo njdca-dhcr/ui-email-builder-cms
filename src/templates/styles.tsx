@@ -8,7 +8,7 @@ export const Colors = {
       light: '#f4e3db',
     },
     info: {
-      dark: '#00bde3',
+      dark: '#009ec1',
       light: '#e7f6f8',
     },
     success: {
@@ -32,6 +32,15 @@ export const Colors = {
 } as const
 
 const sansSerif = 'Public Sans, Helvetica, Arial, sans-serif'
+
+const FontWeight = {
+  bold: 700,
+  semibold: 600,
+  boldExtra: 800,
+  boldLight: 500,
+  regular: 400,
+}
+
 export const Font = {
   family: {
     sansSerif,
@@ -41,11 +50,10 @@ export const Font = {
   lineHeight: {
     default: 1.5,
   },
-  weight: {
-    bold: 700,
-    boldLight: 500,
-    normal: 400,
+  letterSpacing: {
+    default: '-0.44px',
   },
+  weight: FontWeight,
   size: {
     tiny: 10,
     small: 13,
@@ -56,21 +64,235 @@ export const Font = {
   },
 } as const
 
+const defaultTextStyle = (css: CSSProperties): CSSProperties => {
+  return {
+    fontFamily: sansSerif,
+    letterSpacing: Font.letterSpacing.default,
+    lineHeight: Font.lineHeight.default,
+    ...css,
+  }
+}
+export const Text = {
+  display: defaultTextStyle({
+    fontSize: 56,
+    fontWeight: FontWeight.boldExtra,
+  }),
+  header: {
+    h1: {
+      bold: defaultTextStyle({
+        fontSize: 40,
+        fontWeight: FontWeight.bold,
+      }),
+      regular: defaultTextStyle({
+        fontSize: 40,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+    h2: {
+      bold: defaultTextStyle({
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+      }),
+      regular: defaultTextStyle({
+        fontSize: 32,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+    h3: {
+      bold: defaultTextStyle({
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+      }),
+      regular: defaultTextStyle({
+        fontSize: 22,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+    h4: {
+      bold: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      }),
+      regular: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+    h5: {
+      bold: defaultTextStyle({
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      }),
+      regular: defaultTextStyle({
+        fontSize: 15,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+    h6: {
+      bold: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+      }),
+      regular: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+  },
+  body: {
+    main: {
+      regular: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'normal',
+      }),
+      semibold: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.semibold,
+        fontStyle: 'normal',
+      }),
+      bold: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        fontStyle: 'normal',
+      }),
+      italic: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'italic',
+      }),
+      semiboldItalic: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.semibold,
+        fontStyle: 'italic',
+      }),
+      boldItalic: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        fontStyle: 'italic',
+      }),
+    },
+    secondary: {
+      regular: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'normal',
+      }),
+      semibold: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.semibold,
+        fontStyle: 'normal',
+      }),
+      bold: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        fontStyle: 'normal',
+      }),
+      italic: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'italic',
+      }),
+      semiboldItalic: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.semibold,
+        fontStyle: 'italic',
+      }),
+      boldItalic: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        fontStyle: 'italic',
+      }),
+    },
+    tertiary: {
+      regular: defaultTextStyle({
+        fontSize: 12,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'normal',
+      }),
+      italic: defaultTextStyle({
+        fontSize: 12,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'italic',
+      }),
+    },
+    list: {
+      regular: defaultTextStyle({
+        fontSize: 16,
+        fontWeight: FontWeight.regular,
+      }),
+      small: defaultTextStyle({
+        fontSize: 14,
+        fontWeight: FontWeight.regular,
+      }),
+    },
+  },
+  caption: {
+    large: {
+      regular: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'normal',
+      }),
+      semibold: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.semibold,
+        fontStyle: 'normal',
+      }),
+      bold: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+        fontStyle: 'normal',
+      }),
+      boldItalic: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.bold,
+        fontStyle: 'italic',
+      }),
+      italic: defaultTextStyle({
+        fontSize: 13,
+        fontWeight: FontWeight.regular,
+        fontStyle: 'italic',
+      }),
+    },
+    small: {
+      regular: defaultTextStyle({
+        fontSize: 10,
+        fontWeight: FontWeight.regular,
+      }),
+      semibold: defaultTextStyle({
+        fontSize: 10,
+        fontWeight: FontWeight.semibold,
+      }),
+      bold: defaultTextStyle({
+        fontSize: 10,
+        fontWeight: FontWeight.bold,
+      }),
+    },
+  },
+  link: {
+    large: {
+      regular: defaultTextStyle({
+        fontSize: 12,
+        fontWeight: FontWeight.regular,
+        textDecoration: 'underline',
+      }),
+      bold: defaultTextStyle({
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        textDecoration: 'underline',
+      }),
+    },
+    small: defaultTextStyle({
+      fontSize: 10,
+      textDecoration: 'underline',
+    }),
+  },
+} as const
+
 export const Spacing = {
   layout: {
     maxWidth: 690,
-    paddingHorizontal: {
-      paddingLeft: 20,
-      paddingRight: 20,
-    } as CSSProperties,
-    narrow: {
-      paddingLeft: 20,
-      paddingRight: 40,
-    } as CSSProperties,
-    wide: {
-      paddingLeft: 20,
-      paddingRight: 20,
-    } as CSSProperties,
   },
   size: {
     tiny: 5,
@@ -82,20 +304,19 @@ export const Spacing = {
 } as const
 
 export const Borders = {
+  medium: (color: string) => `5px solid ${color}`,
   large: (color: string) => `8px solid ${color}`,
 }
 
 export const StyleDefaults = {
-  layout: { narrow: 'narrow', wide: 'wide' },
+  layout: {
+    narrow: 'narrow',
+    wide: 'wide',
+  },
   inline: {
-    fontAndColors: {
+    colors: {
       backgroundColor: Colors.white,
       color: Colors.black,
-      fontFamily: Font.family.default,
-      fontWeight: Font.weight.normal,
-      fontSize: Font.size.medium,
-      lineHeight: Font.lineHeight.default,
-      letterSpacing: '-0.44px',
     } as CSSProperties,
   },
 } as const
@@ -112,7 +333,14 @@ interface SpacingCellProps {
 export const SpacingCell: FC<SpacingCellProps> = ({ size }) => {
   const sizeInPixels = spacingCellSizes[size]
   return (
-    <EmailBlock.Cell style={{ ...StyleDefaults.inline.fontAndColors, height: sizeInPixels }}>
+    <EmailBlock.Cell
+      style={{
+        ...StyleDefaults.inline.colors,
+        lineHeight: 1,
+        fontSize: 10,
+        height: sizeInPixels,
+      }}
+    >
       &nbsp;
     </EmailBlock.Cell>
   )

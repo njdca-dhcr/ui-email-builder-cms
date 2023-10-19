@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { FlagIcon } from 'src/ui/FlagIcon'
-import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
@@ -315,7 +315,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
 
 const styles = {
   outerContainer: {
-    ...StyleDefaults.inline.fontAndColors,
+    ...StyleDefaults.inline.colors,
   } as CSSProperties,
   innerContainer: {
     backgroundColor: Colors.alert.neutral.light,
@@ -330,12 +330,11 @@ const styles = {
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   title: {
-    fontSize: Font.size.large,
-    fontWeight: Font.weight.bold,
-    paddingTop: Spacing.size.medium,
+    ...Text.header.h3.bold,
+    paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   eligibilityLabel: {
-    fontWeight: 600,
+    ...Text.body.main.semibold,
     paddingBottom: Spacing.size.extraLarge,
   } as CSSProperties,
   eligibilityConditions: {
@@ -344,29 +343,27 @@ const styles = {
     paddingLeft: Spacing.size.large,
   } as CSSProperties,
   eligibilityCondition: {
-    fontWeight: 600,
+    ...Text.body.main.semibold,
   } as CSSProperties,
   reminderIsFor: {
-    fontStyle: 'italic',
+    ...Text.body.secondary.italic,
     paddingBottom: Spacing.size.extraLarge,
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   footnote: {
-    fontWeight: Font.weight.bold,
-    fontSize: Font.size.small,
-    fontStyle: 'italic',
+    ...Text.body.secondary.boldItalic,
   } as CSSProperties,
   appealSummary: {
-    fontSize: Font.size.small,
+    ...Text.body.secondary.regular,
     paddingBottom: Spacing.size.large,
     paddingTop: Spacing.size.small,
   } as CSSProperties,
   appealInstruction: {
-    fontSize: Font.size.small,
+    ...Text.body.secondary.regular,
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   appealText: {
-    fontSize: Font.size.small,
+    ...Text.body.secondary.regular,
   } as CSSProperties,
   appealButton: {
     backgroundColor: Colors.black,
@@ -377,13 +374,13 @@ const styles = {
     paddingRight: 44,
   } as CSSProperties,
   appealButtonText: {
+    ...Text.body.main.bold,
     color: Colors.white,
-    fontWeight: Font.weight.bold,
     textDecoration: 'none',
   } as CSSProperties,
   appealHref: {
+    ...Text.caption.small.regular,
     color: Colors.gray,
-    fontSize: Font.size.tiny,
     paddingBottom: Spacing.size.extraLarge,
     paddingTop: Spacing.size.medium,
     textDecoration: 'underline',
@@ -392,12 +389,11 @@ const styles = {
     paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   appealLabel: {
-    fontWeight: Font.weight.bold,
-    fontSize: Font.size.small,
+    ...Text.body.secondary.semibold,
     paddingRight: Spacing.size.small,
   } as CSSProperties,
   appealInfoLabel: {
-    fontWeight: Font.weight.bold,
+    ...Text.header.h4.bold,
     paddingBottom: Font.size.tiny,
   } as CSSProperties,
 } as const

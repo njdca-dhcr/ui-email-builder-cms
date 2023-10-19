@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { WarningIcon } from 'src/ui/WarningIcon'
 
@@ -313,7 +313,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
 const styles = {
   outerCell: {
-    ...StyleDefaults.inline.fontAndColors,
+    ...StyleDefaults.inline.colors,
   } as CSSProperties,
   innerCell: {
     paddingLeft: 12,
@@ -322,49 +322,41 @@ const styles = {
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   title: {
-    fontSize: Font.size.extraLarge,
-    fontWeight: Font.weight.bold,
-    lineHeight: Font.lineHeight.default,
+    ...Text.header.h2.bold,
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   statusDueTo: {
+    ...Text.body.main.regular,
     paddingBottom: Spacing.size.tiny,
   } as CSSProperties,
   description: {
-    fontWeight: Font.weight.bold,
-    lineHeight: Font.lineHeight.default,
+    ...Text.body.main.bold,
   } as CSSProperties,
   documentsNeededValue: {
-    fontSize: Font.size.medium,
-    fontWeight: Font.weight.bold,
+    ...Text.body.main.bold,
     paddingTop: Spacing.size.tiny,
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   emailToLabel: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.bold,
+    ...Text.body.secondary.bold,
     paddingRight: Spacing.size.small,
     paddingBottom: Spacing.size.tiny,
   } as CSSProperties,
   emailToValue: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.normal,
+    ...Text.body.secondary.regular,
   } as CSSProperties,
   subjectLineLabel: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.bold,
+    ...Text.body.secondary.bold,
     paddingRight: Spacing.size.small,
     verticalAlign: 'top',
   } as CSSProperties,
   subjectLineValue: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.normal,
+    ...Text.body.secondary.regular,
   } as CSSProperties,
   amountContainer: {
-    ...StyleDefaults.inline.fontAndColors,
+    ...StyleDefaults.inline.colors,
     paddingRight: Spacing.size.small,
     paddingTop: Spacing.size.small,
-    paddingBottom: Spacing.size.large,
   } as CSSProperties,
   amountTable: {
     backgroundColor: Colors.alert.warning.light,
@@ -378,63 +370,45 @@ const styles = {
     width: 32,
   } as CSSProperties,
   amountLabel: {
+    ...Text.header.h3.bold,
     verticalAlign: 'center',
-    fontWeight: Font.weight.bold,
-    fontSize: Font.size.large,
   } as CSSProperties,
   breakdownContainer: {
     paddingTop: Spacing.size.medium,
   } as CSSProperties,
   overpaymentLabel: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.normal,
-    lineHeight: Font.lineHeight.default,
+    ...Text.caption.large.regular,
     paddingBottom: Spacing.size.tiny,
   } as CSSProperties,
   overpaymentValue: {
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.normal,
-    lineHeight: Font.lineHeight.default,
+    ...Text.caption.large.regular,
     paddingBottom: Spacing.size.tiny,
   } as CSSProperties,
   waivedLabel: {
-    fontStyle: 'italic',
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.bold,
-    lineHeight: Font.lineHeight.default,
+    ...Text.caption.large.boldItalic,
     borderBottom: `2px solid ${Colors.black}`,
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   waivedValue: {
-    fontStyle: 'italic',
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.bold,
-    lineHeight: Font.lineHeight.default,
+    ...Text.caption.large.boldItalic,
     borderBottom: `2px solid ${Colors.black}`,
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   totalLabel: {
-    fontSize: Font.size.medium,
-    fontWeight: Font.weight.bold,
-    lineHeight: Font.lineHeight.default,
+    ...Text.body.main.bold,
     paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   totalValue: {
-    fontSize: Font.size.medium,
-    fontWeight: Font.weight.bold,
-    lineHeight: Font.lineHeight.default,
+    ...Text.body.main.bold,
     paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   supportiveInformation: {
-    ...StyleDefaults.inline.fontAndColors,
+    ...StyleDefaults.inline.colors,
+    ...Text.caption.large.italic,
     color: Colors.grayDark,
-    fontSize: Font.size.small,
-    fontStyle: 'italic',
   } as CSSProperties,
   missingDocumentDeadline: {
-    ...StyleDefaults.inline.fontAndColors,
-    fontSize: Font.size.small,
-    fontWeight: Font.weight.bold,
-    fontStyle: 'italic',
+    ...StyleDefaults.inline.colors,
+    ...Text.caption.large.boldItalic,
   } as CSSProperties,
 } as const

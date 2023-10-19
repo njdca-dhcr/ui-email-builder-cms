@@ -3,7 +3,7 @@ import { EmailComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForComponent } from '../EmailPartsContent'
-import { Font, SpacingCell, StyleDefaults } from '../styles'
+import { Font, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 
 const defaultValue = 'FIRST LAST NAME:'
@@ -35,7 +35,8 @@ export const Name: FC<EmailComponentProps> = ({ id }) => {
 }
 
 const styles: CSSProperties = {
-  ...StyleDefaults.inline.fontAndColors,
+  ...StyleDefaults.inline.colors,
+  ...Text.body.main.regular,
   fontFamily: Font.family.serifMonospace,
   fontWeight: Font.weight.boldLight,
 }

@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { EditableElement } from 'src/ui/EditableElement'
-import { SpacingCell, StyleDefaults } from '../styles'
+import { SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 
 const defaultValue =
@@ -40,5 +40,6 @@ export const Intro: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 }
 
 const styles: CSSProperties = {
-  ...StyleDefaults.inline.fontAndColors,
+  ...StyleDefaults.inline.colors,
+  ...Text.body.main.regular,
 }

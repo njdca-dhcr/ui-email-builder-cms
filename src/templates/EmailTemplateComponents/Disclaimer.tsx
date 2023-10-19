@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 
@@ -35,13 +35,9 @@ export const Disclaimer: FC<EmailComponentProps> = ({}) => {
 }
 
 export const styles: CSSProperties = {
+  ...Text.caption.small.regular,
   backgroundColor: Colors.grayLight,
   color: Colors.gray,
-  fontFamily: Font.family.default,
-  fontSize: Font.size.tiny,
-  fontWeight: Font.weight.normal,
-  lineHeight: Font.lineHeight.default,
-  letterSpacing: StyleDefaults.inline.fontAndColors.letterSpacing,
   margin: 0,
   padding: 0,
   paddingBottom: Spacing.size.large,

@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Font, Spacing, StyleDefaults } from '../styles'
+import { Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 
@@ -23,7 +23,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
       elements={[
         {
           part: 'cell',
-          style: StyleDefaults.inline.fontAndColors,
+          style: StyleDefaults.inline.colors,
           className: StyleDefaults.layout.narrow,
         },
       ]}
@@ -46,11 +46,9 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
 const containerStyles: CSSProperties = {}
 
 const styles: CSSProperties = {
+  ...Text.header.h6.bold,
   backgroundColor: '#CCBDDF',
   borderRadius: 3,
-  fontSize: Font.size.small,
-  fontWeight: Font.weight.bold,
-  lineHeight: Font.lineHeight.default,
   paddingBottom: Spacing.size.tiny,
   paddingTop: Spacing.size.tiny,
   paddingLeft: Spacing.size.small,

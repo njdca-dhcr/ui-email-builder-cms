@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 
 export const enum DirectiveVariant {
@@ -721,21 +721,20 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 }
 
 const outerCellStyles: CSSProperties = {
-  ...StyleDefaults.inline.fontAndColors,
+  ...StyleDefaults.inline.colors,
+  ...Text.body.main.regular,
 }
 
 const directiveLabelStyles: CSSProperties = {
-  color: '#1b1b1b',
-  lineHeight: '150%',
-  fontFamily: Font.family.sansSerif,
-  fontSize: '16px',
+  ...Text.body.main.regular,
+  color: Colors.black,
   textAlign: 'left',
 }
 
 const circleNumberStyles: CSSProperties = {
   borderWidth: '4px',
   borderStyle: 'solid',
-  borderColor: '#1b1b1b',
+  borderColor: Colors.black,
   borderRadius: '50%',
   textAlign: 'center',
   width: '38px',
@@ -744,36 +743,27 @@ const circleNumberStyles: CSSProperties = {
 }
 
 const circleNumberTableStyles: CSSProperties = {
-  fontFamily: Font.family.sansSerif,
-  fontWeight: 700,
-  fontSize: '22px',
-  color: '#1b1b1b',
+  ...Text.header.h3.bold,
+  color: Colors.black,
   lineHeight: '26px',
   marginTop: '5px',
 }
 
 const stepNumberLabel: CSSProperties = {
-  color: '#1b1b1b',
-  lineHeight: '145%',
-  fontFamily: Font.family.sansSerif,
-  fontSize: '22px',
+  ...Text.header.h3.regular,
+  color: Colors.black,
   textAlign: 'left',
 }
 
 const stepDescriptionStyles: CSSProperties = {
-  color: '#1b1b1b',
-  lineHeight: '150%',
-  fontFamily: Font.family.sansSerif,
-  fontSize: '16px',
+  ...Text.body.main.regular,
+  color: Colors.black,
   textAlign: 'left',
 }
 
 const hrefTextStyles: CSSProperties = {
-  color: '#3d4551',
-  lineHeight: '150%',
-  fontFamily: Font.family.sansSerif,
-  fontSize: '12px',
-  textDecoration: 'underline',
+  ...Text.link.small,
+  color: Colors.alert.neutral.dark,
   textAlign: 'left',
 }
 
@@ -806,12 +796,10 @@ const stepBar23Styles: CSSProperties = {
 }
 
 const getStartedButtonStyles: CSSProperties = {
-  backgroundColor: '#1b1b1b',
-  fontSize: '16px',
-  fontFamily: Font.family.sansSerif,
-  fontWeight: 700,
+  ...Text.body.main.bold,
+  backgroundColor: Colors.black,
   textDecoration: 'none',
-  color: '#ffffff',
+  color: Colors.white,
   borderRadius: '10px',
   display: 'inline-block',
   width: '220px',
@@ -820,23 +808,21 @@ const getStartedButtonStyles: CSSProperties = {
 }
 
 const supportiveInformationStyles: CSSProperties = {
+  ...StyleDefaults.inline.colors,
+  ...Text.body.tertiary.italic,
   color: Colors.grayDark,
-  fontSize: Font.size.small,
-  fontStyle: 'italic',
 }
 
 const payOnlineBoxStyles: CSSProperties = {
-  border: `5px solid ${Colors.alert.warning.light}`,
+  border: Borders.medium(Colors.alert.warning.light),
   borderRadius: '10px',
   padding: '30px 40px',
 }
 
 const alternativePaymentStyles: CSSProperties = {
-  fontSize: Font.size.small,
-  fontWeight: Font.weight.bold,
-  lineHeight: Font.lineHeight.default,
+  ...Text.body.secondary.bold,
 }
 
 const expansionCaseNumberStyles: CSSProperties = {
-  fontSize: Font.size.small,
+  ...Text.body.secondary.regular,
 }
