@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { WarningIcon } from 'src/ui/WarningIcon'
 
@@ -317,7 +317,7 @@ const styles = {
   } as CSSProperties,
   innerCell: {
     paddingLeft: 12,
-    borderLeft: `8px solid ${Colors.grayDark}`,
+    borderLeft: Borders.large(Colors.alert.neutral.dark),
     paddingTop: Spacing.size.small,
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
@@ -367,8 +367,8 @@ const styles = {
     paddingBottom: Spacing.size.large,
   } as CSSProperties,
   amountTable: {
-    backgroundColor: Colors.warningBackground,
-    borderLeft: `8px solid ${Colors.warning}`,
+    backgroundColor: Colors.alert.warning.light,
+    borderLeft: Borders.large(Colors.alert.warning.dark),
     padding: Spacing.size.medium,
     paddingRight: Spacing.size.extraLarge,
   } as CSSProperties,

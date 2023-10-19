@@ -2,15 +2,33 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailBlock } from 'src/ui'
 
 export const Colors = {
+  alert: {
+    error: {
+      dark: '#d54309',
+      light: '#f4e3db',
+    },
+    info: {
+      dark: '#00bde3',
+      light: '#e7f6f8',
+    },
+    success: {
+      dark: '#00a91c',
+      light: '#ecf3ec',
+    },
+    warning: {
+      dark: '#ffbe2e',
+      light: '#faf3d1',
+    },
+    neutral: {
+      dark: '#3d4551',
+      light: '#f0f0f0',
+    },
+  },
   black: '#1b1b1b',
-  gray: '#71767A',
-  grayDark: '#3D4551',
-  grayLight: '#F5F5F5',
-  warningBackground: '#FAF3D1',
-  warning: '#FFBE2E',
-  white: '#FFFFFF',
-  blue: '#009EC1',
-  blueLight: '#E7F6F8',
+  gray: '#71767a',
+  grayDark: '#3d4551',
+  grayLight: '#f5f5f5',
+  white: '#ffffff',
 } as const
 
 const sansSerif = 'Public Sans, Helvetica, Arial, sans-serif'
@@ -62,6 +80,10 @@ export const Spacing = {
     extraLarge: 25,
   },
 } as const
+
+export const Borders = {
+  large: (color: string) => `8px solid ${color}`,
+}
 
 export const StyleDefaults = {
   layout: { narrow: 'narrow', wide: 'wide' },

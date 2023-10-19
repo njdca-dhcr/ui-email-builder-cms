@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { FlagIcon } from 'src/ui/FlagIcon'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
@@ -318,8 +318,8 @@ const styles = {
     ...StyleDefaults.inline.fontAndColors,
   } as CSSProperties,
   innerContainer: {
-    backgroundColor: Colors.grayLight,
-    borderLeft: `8px solid ${Colors.grayDark}`,
+    backgroundColor: Colors.alert.neutral.light,
+    borderLeft: Borders.large(Colors.alert.neutral.dark),
     paddingLeft: Spacing.size.large,
     paddingRight: Spacing.size.extraLarge,
     paddingBottom: Spacing.size.extraLarge,

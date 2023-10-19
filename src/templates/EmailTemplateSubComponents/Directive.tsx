@@ -826,7 +826,7 @@ const supportiveInformationStyles: CSSProperties = {
 }
 
 const payOnlineBoxStyles: CSSProperties = {
-  border: '5px solid #FAF3D1',
+  border: `5px solid ${Colors.alert.warning.light}`,
   borderRadius: '10px',
   padding: '30px 40px',
 }

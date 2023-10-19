@@ -5,7 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { LockIcon } from 'src/ui/LockIcon'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
 const { Row, Cell, Link } = EmailBlock
 
@@ -151,8 +151,8 @@ const styles = {
     ...StyleDefaults.inline.fontAndColors,
   } as CSSProperties,
   innerContainer: {
-    backgroundColor: Colors.blueLight,
-    borderLeft: `8px solid ${Colors.blue}`,
+    backgroundColor: Colors.alert.info.light,
+    borderLeft: Borders.large(Colors.alert.info.dark),
     paddingTop: Spacing.size.extraLarge,
     paddingBottom: Spacing.size.extraLarge,
     paddingLeft: Spacing.size.large,
@@ -179,7 +179,7 @@ const styles = {
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   button: {
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.alert.info.dark,
     borderRadius: 10,
     paddingTop: Spacing.size.small,
     paddingBottom: Spacing.size.small,
