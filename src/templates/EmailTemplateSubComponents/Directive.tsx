@@ -4,6 +4,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
+import { EmailBlock } from 'src/ui'
 
 export const enum DirectiveVariant {
   OneStep,
@@ -72,6 +73,8 @@ export const defaultValue: DirectiveValue = {
 export const useDirectiveValue = (componentId: string, id: string) => {
   return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 }
+
+const { Link } = EmailBlock
 
 export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -174,11 +177,8 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                         <tbody>
                                           <tr>
                                             <td>
-                                              <a
-                                                className="get-started-btn"
-                                                rel="noopener"
-                                                target="_blank"
-                                                href={value.linkHref}
+                                              <Link
+                                                to={value.linkHref}
                                                 style={getStartedButtonStyles}
                                               >
                                                 <div>
@@ -202,7 +202,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                     &nbsp;
                                                   </div>
                                                 </div>
-                                              </a>
+                                              </Link>
                                             </td>
                                           </tr>
                                         </tbody>
@@ -228,14 +228,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           paddingBottom: '16px',
                                         }}
                                       >
-                                        <a
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          href={value.linkHref}
-                                          style={hrefTextStyles}
-                                        >
+                                        <Link to={value.linkHref} style={hrefTextStyles}>
                                           {value.linkHref}
-                                        </a>
+                                        </Link>
                                       </div>
                                     </td>
                                   </tr>
@@ -454,11 +449,8 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                         <tbody>
                                                           <tr>
                                                             <td>
-                                                              <a
-                                                                className="get-started-btn"
-                                                                rel="noopener"
-                                                                target="_blank"
-                                                                href={value.linkHref}
+                                                              <Link
+                                                                to={value.linkHref}
                                                                 style={getStartedButtonStyles}
                                                               >
                                                                 <div>
@@ -482,7 +474,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                                     &nbsp;
                                                                   </div>
                                                                 </div>
-                                                              </a>
+                                                              </Link>
                                                             </td>
                                                           </tr>
                                                         </tbody>
@@ -508,14 +500,12 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                           paddingBottom: '16px',
                                                         }}
                                                       >
-                                                        <a
-                                                          target="_blank"
-                                                          rel="noopener noreferrer"
-                                                          href={value.linkHref}
+                                                        <Link
+                                                          to={value.linkHref}
                                                           style={hrefTextStyles}
                                                         >
                                                           {value.linkHref}
-                                                        </a>
+                                                        </Link>
                                                       </div>
                                                     </td>
                                                   </tr>

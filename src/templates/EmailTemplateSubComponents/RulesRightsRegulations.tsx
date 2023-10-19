@@ -65,7 +65,7 @@ export const useRulesRightsRegulationsValue = (componentId: string, id: string) 
   return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 }
 
-const { Row, Cell } = EmailBlock
+const { Row, Cell, Link } = EmailBlock
 
 export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -193,14 +193,15 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
                 { part: 'cell', style: styles.appealButton },
               ]}
             >
-              <EditableElement
-                element="a"
-                href={value.appealRightsHref}
-                initialValue={initialValue.appealRightsButton}
-                label="Appeal Rights button"
-                onValueChange={(appealRightsButton) => setValue({ ...value, appealRightsButton })}
-                style={styles.appealButtonText}
-              />
+              <Link to={value.appealRightsHref}>
+                <EditableElement
+                  element="span"
+                  initialValue={initialValue.appealRightsButton}
+                  label="Appeal Rights button"
+                  onValueChange={(appealRightsButton) => setValue({ ...value, appealRightsButton })}
+                  style={styles.appealButtonText}
+                />
+              </Link>
             </Row>
             <Row
               elements={[

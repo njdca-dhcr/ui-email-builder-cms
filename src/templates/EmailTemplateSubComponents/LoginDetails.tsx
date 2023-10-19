@@ -7,7 +7,7 @@ import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { LockIcon } from 'src/ui/LockIcon'
 import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
-const { Table, Row, Cell } = EmailBlock
+const { Row, Cell, Link } = EmailBlock
 
 interface LoginDetailsValue {
   title: string
@@ -104,14 +104,15 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
                 { part: 'cell', style: styles.button },
               ]}
             >
-              <EditableElement
-                element="a"
-                href={value.buttonHref}
-                onValueChange={(button) => setValue({ ...value, button })}
-                initialValue={initialValue.button}
-                label="Reset password button"
-                style={styles.buttonText}
-              />
+              <Link to={value.buttonHref}>
+                <EditableElement
+                  element="span"
+                  onValueChange={(button) => setValue({ ...value, button })}
+                  initialValue={initialValue.button}
+                  label="Reset password button"
+                  style={styles.buttonText}
+                />
+              </Link>
             </Row>
             <Row
               elements={[
