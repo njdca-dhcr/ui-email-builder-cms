@@ -779,10 +779,12 @@ const tdPaddingStyles: CSSProperties = {
   width: '100%',
 }
 
+const grayBar = '#dcdee0'
+
 const stepBar12Styles: CSSProperties = {
   width: '8px',
   height: '180px',
-  background: '#dcdee0',
+  background: grayBar,
   marginTop: '4px',
   marginBottom: '4px',
 }
@@ -790,7 +792,7 @@ const stepBar12Styles: CSSProperties = {
 const stepBar23Styles: CSSProperties = {
   width: '8px',
   height: '50px',
-  background: '#dcdee0',
+  background: grayBar,
   marginTop: '4px',
   marginBottom: '4px',
 }
