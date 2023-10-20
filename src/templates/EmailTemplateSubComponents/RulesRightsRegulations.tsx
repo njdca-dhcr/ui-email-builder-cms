@@ -6,7 +6,7 @@ import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
-import { UswdsIconVariants } from 'src/ui/UswdsIcon'
+import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
@@ -15,7 +15,7 @@ export const enum RulesRightsRegulationsVariant {
 
 interface RulesRightsRegulationsValue {
   variant: RulesRightsRegulationsVariant
-  icon: keyof typeof UswdsIconVariants
+  icon: UswdsIconVariantKey
   // Reminder
   reminderTitle: string
   eligibilityLabel: string

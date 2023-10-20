@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
 
+export type UswdsIconVariantKey = keyof typeof UswdsIconVariants
+
 interface UswdsIconProps {
-  icon: keyof typeof UswdsIconVariants
+  icon: UswdsIconVariantKey
 }
 
 export const UswdsIcon: FC<UswdsIconProps> = ({ icon }) => {

@@ -6,7 +6,7 @@ import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPa
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
-import { UswdsIconVariants } from 'src/ui/UswdsIcon'
+import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 
 const { Row, Cell, Link } = EmailBlock
 
@@ -18,7 +18,7 @@ interface LoginDetailsValue {
   button: string
   buttonHref: string
   resetPasswordDetails: string
-  icon: keyof typeof UswdsIconVariants
+  icon: UswdsIconVariantKey
 }
 
 const defaultValue: LoginDetailsValue = {

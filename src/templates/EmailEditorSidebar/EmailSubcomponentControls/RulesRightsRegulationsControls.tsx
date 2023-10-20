@@ -7,7 +7,6 @@ import {
   useRulesRightsRegulationsValue,
 } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { Input, Select, UswdsIconSelect } from 'src/ui'
-import { UswdsIconVariants } from 'src/ui/UswdsIcon'
 
 export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({
   componentId,
@@ -21,7 +20,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
     <>
       <UswdsIconSelect
         labelId="uswds-icon-rrr"
-        onChange={(icon) => setValue({ ...value, icon: icon as keyof typeof UswdsIconVariants })}
+        onChange={(icon) => setValue({ ...value, icon })}
         value={value.icon}
       />
 
