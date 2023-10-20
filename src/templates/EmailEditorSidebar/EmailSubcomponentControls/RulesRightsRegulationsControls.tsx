@@ -18,6 +18,9 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 
   return (
     <>
+      <VisuallyHidden>
+        <span id="uswds-icon-rrr">Icon</span>
+      </VisuallyHidden>
       <UswdsIconSelect
         labelId="uswds-icon-rrr"
         onChange={(icon) => setValue({ ...value, icon })}
