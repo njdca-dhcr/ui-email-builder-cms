@@ -18,7 +18,9 @@ td.wide {
     padding-left: 50px;
     padding-right: 50px;
   }
+}
 
+@media screen and (max-width: 414px) {
   .banner-link-container {
     display: inline-block;
   }
