@@ -4,7 +4,8 @@ import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
-import { FlagIcon } from 'src/ui/FlagIcon'
+import { UswdsIcon } from 'src/ui/'
+import { UswdsIconVariants } from 'src/ui/UswdsIcon'
 import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
 export const enum RulesRightsRegulationsVariant {
@@ -14,6 +15,7 @@ export const enum RulesRightsRegulationsVariant {
 
 interface RulesRightsRegulationsValue {
   variant: RulesRightsRegulationsVariant
+  icon: keyof typeof UswdsIconVariants
   // Reminder
   reminderTitle: string
   eligibilityLabel: string
@@ -38,6 +40,7 @@ interface RulesRightsRegulationsValue {
 
 const defaultValue: RulesRightsRegulationsValue = {
   variant: RulesRightsRegulationsVariant.Reminder,
+  icon: 'Flag',
   reminderTitle: 'Reminder',
   eligibilityLabel: 'You may only be eligible for this waiver if...',
   eligibilityCondition1: 'Overpayment was due to no fault of your own*',
@@ -90,7 +93,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
       >
         <Row>
           <Cell style={styles.iconContainer}>
-            <FlagIcon />
+            <UswdsIcon icon={value.icon} />
           </Cell>
           {isReminder && (
             <EditableElement
@@ -327,7 +330,7 @@ const styles = {
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
-    paddingTop: Spacing.size.extraLarge,
+    paddingTop: Spacing.size.large,
   } as CSSProperties,
   title: {
     fontSize: Font.size.large,

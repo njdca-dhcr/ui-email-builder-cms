@@ -4,7 +4,8 @@ import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { LockIcon } from 'src/ui/LockIcon'
+import { UswdsIcon } from 'src/ui'
+import { UswdsIconVariants } from 'src/ui/UswdsIcon'
 import { Colors, Font, Spacing, SpacingCell, StyleDefaults } from '../styles'
 
 const { Row, Cell, Link } = EmailBlock
@@ -17,6 +18,7 @@ interface LoginDetailsValue {
   button: string
   buttonHref: string
   resetPasswordDetails: string
+  icon: keyof typeof UswdsIconVariants
 }
 
 const defaultValue: LoginDetailsValue = {
@@ -29,6 +31,7 @@ const defaultValue: LoginDetailsValue = {
   buttonHref: '',
   resetPasswordDetails:
     'Your request may take up to 7-10 business days. An email will be sent to you when your password has been reset.',
+  icon: 'Lock',
 }
 
 export const useLoginDetailsValue = (componentId: string, id: string) =>
@@ -54,7 +57,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
       >
         <Row>
           <Cell style={styles.iconContainer}>
-            <LockIcon />
+            <UswdsIcon icon={value.icon} />
           </Cell>
           <EditableElement
             element="td"
@@ -160,6 +163,7 @@ const styles = {
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
+    paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   title: {
     fontSize: Font.size.large,

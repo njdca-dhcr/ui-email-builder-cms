@@ -134,6 +134,8 @@
 .select-options-popover[data-reach-listbox-popover] {
   border: 1px solid var(--black);
   padding: 0;
+  max-height: 25vh;
+  overflow: auto;
 }
 
 .select-option[data-reach-listbox-option] {

@@ -30,6 +30,23 @@ describe('LoginDetailsControls', () => {
     )
   })
 
+  it('displays a dropdown for selecting an icon', async () => {
+    const { getByRole, queryByRole } = rendered
+    let button = queryByRole('button')
+    expect(button).not.toBeNull()
+    expect(button).toHaveTextContent('Lock')
+
+    await user.click(button!)
+    expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'DeviceThermostat' })).not.toBeNull()
+    await user.click(getByRole('option', { name: 'DeviceThermostat' }))
+
+    button = queryByRole('button')
+    expect(button).not.toBeNull()
+    expect(button).toHaveTextContent('DeviceThermostat')
+
+  })
+
   it('displays an input for the button link', async () => {
     const { queryByLabelText, getByTestId } = rendered
     const input: HTMLInputElement | null = queryByLabelText('Button Link') as any
