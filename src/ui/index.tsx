@@ -5,7 +5,6 @@ import { CopyToClipboardButton } from './CopyToClipboardButton'
 import { EditableElement } from './EditableElement'
 import { EmailBlock } from './EmailBlock'
 import { EmailTable } from './EmailTable'
-import { FlagIcon } from './FlagIcon'
 import { Input } from './Input'
 import {
   Layout,
@@ -19,7 +18,6 @@ import {
   SpacedSidebarContainer,
 } from './Layout'
 import { List } from './List'
-import { LockIcon } from './LockIcon'
 import { RightPointer } from './RightPointer'
 import { Select } from './Select'
 import { SidebarNavigation } from './SidebarNavigation'
@@ -27,6 +25,8 @@ import { Toggle } from './Toggle'
 import { TogglePillIcon } from './TogglePillIcon'
 import { WarningIcon } from './WarningIcon'
 import { XIcon } from './XIcon'
+import { UswdsIcon } from './UswdsIcon'
+import { UswdsIconSelect } from './UswdsIconSelect'
 
 export {
   BackArrowIcon,
@@ -36,7 +36,6 @@ export {
   EditableElement,
   EmailBlock,
   EmailTable,
-  FlagIcon,
   Input,
   Layout,
   PageContent,
@@ -48,7 +47,6 @@ export {
   SpacedContainer,
   SpacedSidebarContainer,
   List,
-  LockIcon,
   RightPointer,
   Select,
   SidebarNavigation,
@@ -56,4 +54,6 @@ export {
   TogglePillIcon,
   WarningIcon,
   XIcon,
+  UswdsIcon,
+  UswdsIconSelect
 }

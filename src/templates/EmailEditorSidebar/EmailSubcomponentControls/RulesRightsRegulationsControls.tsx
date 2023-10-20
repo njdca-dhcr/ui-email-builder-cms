@@ -6,8 +6,8 @@ import {
   RulesRightsRegulationsVariant,
   useRulesRightsRegulationsValue,
 } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
-import { Select } from 'src/ui/Select'
-import { Input } from 'src/ui/Input'
+import { Input, Select, UswdsIconSelect } from 'src/ui'
+import { UswdsIconVariants } from 'src/ui/UswdsIcon'
 
 export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({
   componentId,
@@ -19,6 +19,12 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 
   return (
     <>
+      <UswdsIconSelect
+        labelId='uswds-icon-rrr'
+        onChange={(icon) => setValue({ ...value, icon: icon as keyof typeof UswdsIconVariants})}
+        value={value.icon}
+      />
+
       <VisuallyHidden>
         <span id={htmlId}>Rules, Rights, and Regulations variant</span>
       </VisuallyHidden>
