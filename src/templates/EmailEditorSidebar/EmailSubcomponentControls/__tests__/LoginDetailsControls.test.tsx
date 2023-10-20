@@ -44,7 +44,6 @@ describe('LoginDetailsControls', () => {
     button = queryByRole('button')
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('DeviceThermostat')
-
   })
 
   it('displays an input for the button link', async () => {

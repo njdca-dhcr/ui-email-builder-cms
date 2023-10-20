@@ -10,8 +10,8 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ compo
   return (
     <div className="login-details-container">
       <UswdsIconSelect
-        labelId='uswds-icon-login-details'
-        onChange={(icon) => setValue({ ...value, icon: icon as keyof typeof UswdsIconVariants})}
+        labelId="uswds-icon-login-details"
+        onChange={(icon) => setValue({ ...value, icon: icon as keyof typeof UswdsIconVariants })}
         value={value.icon}
       />
 

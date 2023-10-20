@@ -12,11 +12,11 @@ describe('RulesRightsRegulationsControls', () => {
   let rendered: RenderResult
   let user: UserEvent
 
-    const AppealRightsHref: FC = () => {
-      const [value] = useRulesRightsRegulationsValue(componentId, id)
+  const AppealRightsHref: FC = () => {
+    const [value] = useRulesRightsRegulationsValue(componentId, id)
 
-      return <div data-testid="appeal-rights-href">{value.appealRightsHref}</div>
-    }
+    return <div data-testid="appeal-rights-href">{value.appealRightsHref}</div>
+  }
 
   beforeEach(() => {
     componentId = faker.lorem.word()
@@ -32,7 +32,7 @@ describe('RulesRightsRegulationsControls', () => {
 
   it('provides a dropdown for selecting an icon', async () => {
     const { getByRole, queryByRole, queryByText } = rendered
-    let button = queryByText('Flag', {selector: 'span'})
+    let button = queryByText('Flag', { selector: 'span' })
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Flag')
 
@@ -41,16 +41,15 @@ describe('RulesRightsRegulationsControls', () => {
     expect(queryByRole('option', { name: 'DeviceThermostat' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'DeviceThermostat' }))
 
-    button = queryByText('DeviceThermostat', {selector: 'span'})
+    button = queryByText('DeviceThermostat', { selector: 'span' })
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('DeviceThermostat')
-
   })
 
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
     const { getByRole, queryByRole, queryByText } = rendered
-    let button = queryByText('Reminder', {selector: 'span'})
+    let button = queryByText('Reminder', { selector: 'span' })
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Reminder')
 
@@ -59,7 +58,7 @@ describe('RulesRightsRegulationsControls', () => {
     expect(queryByRole('option', { name: 'Appeal Rights' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'Appeal Rights' }))
 
-    button = queryByText('Appeal Rights', {selector: 'span'})
+    button = queryByText('Appeal Rights', { selector: 'span' })
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Appeal Rights')
   })
@@ -67,7 +66,7 @@ describe('RulesRightsRegulationsControls', () => {
   describe('variants', () => {
     describe('Reminder', () => {
       beforeEach(async () => {
-        await user.click(rendered.getByText('Reminder', {selector: 'span'}))
+        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Reminder' }))
       })
 
@@ -78,7 +77,7 @@ describe('RulesRightsRegulationsControls', () => {
 
     describe('Appeal Rights', () => {
       beforeEach(async () => {
-        await user.click(rendered.getByText('Reminder', {selector: 'span'}))
+        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))
       })
 

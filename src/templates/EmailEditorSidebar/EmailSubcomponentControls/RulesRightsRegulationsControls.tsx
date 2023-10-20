@@ -20,8 +20,8 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
   return (
     <>
       <UswdsIconSelect
-        labelId='uswds-icon-rrr'
-        onChange={(icon) => setValue({ ...value, icon: icon as keyof typeof UswdsIconVariants})}
+        labelId="uswds-icon-rrr"
+        onChange={(icon) => setValue({ ...value, icon: icon as keyof typeof UswdsIconVariants })}
         value={value.icon}
       />
 

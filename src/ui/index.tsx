@@ -55,5 +55,5 @@ export {
   WarningIcon,
   XIcon,
   UswdsIcon,
-  UswdsIconSelect
+  UswdsIconSelect,
 }
