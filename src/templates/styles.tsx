@@ -160,16 +160,19 @@ export const Text = {
         fontSize: 16,
         fontWeight: FontWeight.regular,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
       semiboldItalic: defaultTextStyle({
         fontSize: 16,
         fontWeight: FontWeight.semibold,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
       boldItalic: defaultTextStyle({
         fontSize: 16,
         fontWeight: FontWeight.bold,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
     },
     secondary: {
@@ -192,16 +195,19 @@ export const Text = {
         fontSize: 14,
         fontWeight: FontWeight.regular,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
       semiboldItalic: defaultTextStyle({
         fontSize: 14,
         fontWeight: FontWeight.semibold,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
       boldItalic: defaultTextStyle({
         fontSize: 14,
         fontWeight: FontWeight.bold,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
     },
     tertiary: {
@@ -214,6 +220,7 @@ export const Text = {
         fontSize: 12,
         fontWeight: FontWeight.regular,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
     },
     list: {
@@ -248,11 +255,13 @@ export const Text = {
         fontSize: 13,
         fontWeight: FontWeight.bold,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
       italic: defaultTextStyle({
         fontSize: 13,
         fontWeight: FontWeight.regular,
         fontStyle: 'italic',
+        letterSpacing: 0,
       }),
     },
     small: {
