@@ -21,25 +21,30 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 
   return (
     <Control.Group>
-      <label htmlFor="uswds-icon-rrr">Icon</label>
-      <UswdsIconSelect
-        labelId="uswds-icon-rrr"
-        onChange={(icon) => setValue({ ...value, icon })}
-        value={value.icon}
-      />
-      
-      <VisuallyHidden>
-        <span id={variantHtmlId}>Rules, Rights, and Regulations variant</span>
-      </VisuallyHidden>
-      <Select
-        labelId={variantHtmlId}
-        options={[
-          { label: 'Reminder', value: RulesRightsRegulationsVariant.Reminder + '' },
-          { label: 'Appeal Rights', value: RulesRightsRegulationsVariant.AppealRights + '' },
-        ]}
-        onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-        value={value.variant + ''}
-      />
+      <Control.Container>
+        <Control.Label htmlFor="uswds-icon-rrr">Icon</Control.Label>
+        <UswdsIconSelect
+          labelId="uswds-icon-rrr"
+          onChange={(icon) => setValue({ ...value, icon })}
+          value={value.icon}
+        />
+      </Control.Container>
+
+      <Control.Container>
+        <VisuallyHidden>
+          <span id={variantHtmlId}>Rules, Rights, and Regulations variant</span>
+        </VisuallyHidden>
+        <Select
+          labelId={variantHtmlId}
+          options={[
+            { label: 'Reminder', value: RulesRightsRegulationsVariant.Reminder + '' },
+            { label: 'Appeal Rights', value: RulesRightsRegulationsVariant.AppealRights + '' },
+          ]}
+          onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
+          value={value.variant + ''}
+        />
+      </Control.Container>
+
       <Control.Container>
         <Control.Label htmlFor={iconHtmlId}>Icon</Control.Label>
         <UswdsIconSelect
@@ -48,6 +53,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
           value={value.icon}
         />
       </Control.Container>
+
       {isAppealRights && (
         <Control.Container>
           <Control.Label htmlFor={buttonLinkHtmlId}>Button Link</Control.Label>

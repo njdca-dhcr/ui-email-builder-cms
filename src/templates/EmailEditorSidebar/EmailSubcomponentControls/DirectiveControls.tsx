@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import {
@@ -14,36 +14,41 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
   const [value, setValue] = useDirectiveValue(componentId, id)
 
   return (
-    <>
-      <SubComponentControlToggle
-        className="directive-title-toggle"
-        subComponentId={id}
-        label="+ Title"
-        onChange={(showTitle) => setValue({ ...value, showTitle })}
-        value={value.showTitle}
-      />
-      <VisuallyHidden>
-        <span id={htmlId}>Directive variant</span>
-      </VisuallyHidden>
+    <Control.Group>
+      <Control.Container>
+        <SubComponentControlToggle
+          className="directive-title-toggle"
+          subComponentId={id}
+          label="+ Title"
+          onChange={(showTitle) => setValue({ ...value, showTitle })}
+          value={value.showTitle}
+        />
+      </Control.Container>
 
-      <Select
-        labelId={htmlId}
-        options={[
-          { label: 'One Step', value: DirectiveVariant.OneStep + '' },
-          { label: 'Three Steps', value: DirectiveVariant.ThreeStep + '' },
-          {
-            label: 'Three Steps w/ Step 2 Expansion',
-            value: DirectiveVariant.StepTwoExpansion + '',
-          },
-          // { label: 'Cost Breakdown', value: DirectiveVariant.CostBreakdown + '' },
-          { label: 'Pay Online', value: DirectiveVariant.PayOnline + '' },
-        ]}
-        onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-        value={value.variant + ''}
-      />
+      <Control.Container>
+        <VisuallyHidden>
+          <span id={htmlId}>Directive variant</span>
+        </VisuallyHidden>
+
+        <Select
+          labelId={htmlId}
+          options={[
+            { label: 'One Step', value: DirectiveVariant.OneStep + '' },
+            { label: 'Three Steps', value: DirectiveVariant.ThreeStep + '' },
+            {
+              label: 'Three Steps w/ Step 2 Expansion',
+              value: DirectiveVariant.StepTwoExpansion + '',
+            },
+            // { label: 'Cost Breakdown', value: DirectiveVariant.CostBreakdown + '' },
+            { label: 'Pay Online', value: DirectiveVariant.PayOnline + '' },
+          ]}
+          onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
+          value={value.variant + ''}
+        />
+      </Control.Container>
 
       {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
-        <>
+        <Control.Container>
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
             subComponentId={id}
@@ -65,15 +70,17 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
             onChange={(showStep3AdditionalContent) => setValue({ ...value, showStep3AdditionalContent })}
             value={value.showStep3AdditionalContent}
           />
-        </>
+        </Control.Container>
       )}
 
-      <label htmlFor="directive-link-input">Link</label>
-      <Input
-        className="directive-link-input"
-        onTextChange={(linkHref) => setValue({ ...value, linkHref })}
-        value={value.linkHref}
-      />
-    </>
+      <Control.Container>
+        <Control.Label htmlFor="directive-link-input">Link</Control.Label>
+        <Input
+          className="directive-link-input"
+          onTextChange={(linkHref) => setValue({ ...value, linkHref })}
+          value={value.linkHref}
+        />
+      </Control.Container>
+    </Control.Group>
   )
 }
