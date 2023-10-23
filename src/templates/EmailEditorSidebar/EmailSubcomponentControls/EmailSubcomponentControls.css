@@ -1,18 +1,28 @@
-.login-details-container,
-.appeal-rights-container {
+.control-group {
+  margin-top: 0.5rem;
+}
+
+.control-container {
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-top: 1.25rem;
 }
 
-.login-details-container > label,
-.appeal-rights-container > label {
+.control-group > .control-container:first-of-type {
+  margin-top: 0;
+}
+
+label.control-label {
+  display: block;
   font-size: var(--font-small);
   font-weight: var(--weight-normal);
 }
 
-.directive-title-toggle,
-.status-supportive-information-toggle {
+.directive-title-toggle {
   padding-top: 5px;
+}
+
+.status-supportive-information-toggle {
+  padding-top: 0.75rem;
 }

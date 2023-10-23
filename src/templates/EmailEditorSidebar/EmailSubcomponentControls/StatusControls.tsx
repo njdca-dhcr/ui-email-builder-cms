@@ -4,7 +4,6 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'
-import { Input } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {

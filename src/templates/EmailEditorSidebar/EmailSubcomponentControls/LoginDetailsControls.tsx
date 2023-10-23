@@ -1,30 +1,35 @@
 import React, { FC } from 'react'
-import { EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps } from './shared'
 import { Input, UswdsIconSelect } from 'src/ui'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
+  const key = buildSubComponentKey(componentId, id)
+  const iconHtmlId = `icon-${key}`
+  const buttonLinkHtmlId = `buttonLink-${key}`
   const [value, setValue] = useLoginDetailsValue(componentId, id)
 
   return (
-    <div className="login-details-container">
-      <VisuallyHidden>
-        <span id="uswds-icon-rrr">Icon</span>
-      </VisuallyHidden>
-      <UswdsIconSelect
-        labelId="uswds-icon-login-details"
-        onChange={(icon) => setValue({ ...value, icon })}
-        value={value.icon}
-      />
+    <Control.Group>
+      <Control.Container>
+        <Control.Label htmlFor={iconHtmlId}>Icon</Control.Label>
+        <UswdsIconSelect
+          labelId={iconHtmlId}
+          onChange={(icon) => setValue({ ...value, icon })}
+          value={value.icon}
+        />
+      </Control.Container>
 
-      <label htmlFor="login-details-button-link">Button Link</label>
-      <Input
-        id="login-details-button-link"
-        type="url"
-        value={value.buttonHref}
-        onTextChange={(buttonHref) => setValue({ ...value, buttonHref })}
-      />
-    </div>
+      <Control.Container>
+        <Control.Label htmlFor={buttonLinkHtmlId}>Button Link</Control.Label>
+        <Input
+          id={buttonLinkHtmlId}
+          type="url"
+          value={value.buttonHref}
+          onTextChange={(buttonHref) => setValue({ ...value, buttonHref })}
+        />
+      </Control.Container>
+    </Control.Group>
   )
 }

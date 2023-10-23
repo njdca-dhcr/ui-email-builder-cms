@@ -105,7 +105,7 @@
 .select {
   border: 3px solid transparent;
   font-size: var(--font-medium);
-  margin: 0.25rem -3px;
+  margin: -3px;
 }
 
 .select[data-state='expanded'] {
