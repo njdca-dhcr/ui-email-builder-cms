@@ -10,6 +10,13 @@ import {
   buildEmailTemplateSubComponent,
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
+import { download } from 'src/utils/download'
+
+jest.mock('src/utils/download', () => {
+  return {
+    download: jest.fn(),
+  }
+})
 
 describe('EmailEditorContent', () => {
   let emailTemplate: EmailTemplate.Config
@@ -66,6 +73,24 @@ describe('EmailEditorContent', () => {
 
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
     expect(lastArgumentToCopy).toContain(value)
+  })
+
+  it('allows users to download the current preview', async () => {
+    const user = userEvent.setup()
+
+    const { getByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+
+    const value = faker.lorem.words(4)
+    await user.type(getByText('Title'), value)
+
+    expect(download).not.toHaveBeenCalled()
+    await user.click(getByText('Download HTML'))
+    expect(download).toHaveBeenCalled()
+
+    const [givenHtml, givenFileName, givenType] = (download as jest.Mock).mock.calls[0]
+    expect(givenHtml).toContain(value)
+    expect(givenFileName).toEqual(`${emailTemplate.name}.html`)
+    expect(givenType).toEqual('text/html')
   })
 
   it('renders the preview text', () => {

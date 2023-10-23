@@ -18,13 +18,12 @@ describe('CopyToClipboardButton', () => {
 
   it('is a button', () => {
     const { queryByRole } = render(
-      <CopyToClipboardButton textToCopy={() => faker.lorem.paragraph()} className="my-class">
+      <CopyToClipboardButton textToCopy={() => faker.lorem.paragraph()}>
         {faker.lorem.word()}
       </CopyToClipboardButton>,
     )
     const button = queryByRole('button')
     expect(button).not.toBeNull()
-    expect(button?.className).toEqual('my-class')
   })
 
   it('copies the given text to the clipboard when clicked', async () => {

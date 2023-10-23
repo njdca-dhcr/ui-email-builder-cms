@@ -3,14 +3,9 @@ import copy from 'copy-to-clipboard'
 
 interface Props {
   children: ReactNode
-  className?: string
   textToCopy: () => string
 }
 
-export const CopyToClipboardButton: FC<Props> = ({ children, className, textToCopy }) => {
-  return (
-    <button className={className} onClick={() => copy(textToCopy())}>
-      {children}
-    </button>
-  )
+export const CopyToClipboardButton: FC<Props> = ({ children, textToCopy }) => {
+  return <button onClick={() => copy(textToCopy())}>{children}</button>
 }

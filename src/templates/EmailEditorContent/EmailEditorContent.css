@@ -46,7 +46,12 @@
   outline: var(--default-browser-outline);
 }
 
-button.copy-html-button {
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button-group > button {
   background-color: var(--white);
   border: 1px solid var(--black);
   border-radius: 3px;
@@ -58,7 +63,7 @@ button.copy-html-button {
   transition: background-color 50ms ease-in;
 }
 
-button.copy-html-button:active {
+.button-group > button:active {
   background-color: var(--gray);
 }
 

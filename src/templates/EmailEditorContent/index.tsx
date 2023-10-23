@@ -11,7 +11,8 @@ import { CopyToClipboardButton } from '../../ui/CopyToClipboardButton'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Spacing } from '../styles'
 import { PreviewTextHtml } from './PreviewTextHtml'
-import { EditingEmailCSS, EmailCSS } from '../emailHtmlDocument/EmailCSS'
+import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
+import { DownloadButton } from 'src/ui/DownloadButton'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -55,9 +56,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             </VisuallyHidden>
           </label>
         </fieldset>
-        <CopyToClipboardButton className="copy-html-button" textToCopy={toEmailText}>
-          Copy HTML
-        </CopyToClipboardButton>
+        <div className="button-group">
+          <CopyToClipboardButton textToCopy={toEmailText}>Copy HTML</CopyToClipboardButton>
+          <DownloadButton textToDownload={toEmailText} fileName={`${emailTemplate.name}.html`}>
+            Download HTML
+          </DownloadButton>
+        </div>
       </div>
       <Root.div
         className={classNames('email-preview', {
