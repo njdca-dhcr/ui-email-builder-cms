@@ -330,11 +330,11 @@ const styles = {
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
-    paddingTop: Spacing.size.large,
+    paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   title: {
     ...Text.header.h3.bold,
-    paddingTop: Spacing.size.extraLarge,
+    paddingTop: Spacing.size.large,
   } as CSSProperties,
   eligibilityLabel: {
     ...Text.body.main.semibold,
