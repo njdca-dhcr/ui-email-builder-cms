@@ -38,12 +38,12 @@ describe('LoginDetailsControls', () => {
 
     await user.click(button!)
     expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'DeviceThermostat' })).not.toBeNull()
-    await user.click(getByRole('option', { name: 'DeviceThermostat' }))
+    expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+    await user.click(getByRole('option', { name: 'Device Thermostat' }))
 
     button = queryByRole('button')
     expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('DeviceThermostat')
+    expect(button).toHaveTextContent('Device Thermostat')
   })
 
   it('displays an input for the button link', async () => {

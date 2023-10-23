@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import startCase from 'lodash.startcase'
 import { Select } from 'src/ui'
 import { UswdsIconVariantKey, UswdsIconVariants } from 'src/ui/UswdsIcon'
 
@@ -9,7 +10,7 @@ interface UswdsIconSelectProps {
 }
 
 const iconOptions = Object.keys(UswdsIconVariants).map((key) => ({
-  label: key,
+  label: startCase(key),
   value: key,
 }))
 

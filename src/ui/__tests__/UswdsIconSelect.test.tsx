@@ -16,16 +16,16 @@ describe('UswdsIconSelect', () => {
       />,
     )
     const button = getByRole('button')
-    expect(button).toHaveTextContent('AccessibilityNew')
+    expect(button).toHaveTextContent('Accessibility New')
 
     await user.click(button)
 
-    expect(queryByRole('option', { name: 'AccessibilityNew' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'CalendarToday' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'ZoomOut' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'Accessibility New' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'Calendar Today' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'Zoom Out' })).not.toBeNull()
 
     expect(handleChange).not.toHaveBeenCalled()
-    await user.click(getByRole('option', { name: 'AttachFile' }))
+    await user.click(getByRole('option', { name: 'Attach File' }))
     expect(handleChange).toHaveBeenCalledWith('AttachFile')
   })
 })

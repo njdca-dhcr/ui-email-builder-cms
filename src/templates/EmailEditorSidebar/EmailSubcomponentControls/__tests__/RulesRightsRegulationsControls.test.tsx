@@ -38,12 +38,12 @@ describe('RulesRightsRegulationsControls', () => {
 
     await user.click(button!)
     expect(queryByRole('option', { name: 'Flag' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'DeviceThermostat' })).not.toBeNull()
-    await user.click(getByRole('option', { name: 'DeviceThermostat' }))
+    expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+    await user.click(getByRole('option', { name: 'Device Thermostat' }))
 
-    button = queryByText('DeviceThermostat', { selector: 'span' })
+    button = queryByText('Device Thermostat', { selector: 'span' })
     expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('DeviceThermostat')
+    expect(button).toHaveTextContent('Device Thermostat')
   })
 
   it('provides a dropdown for selecting a variant', async () => {
