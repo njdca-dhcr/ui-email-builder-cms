@@ -21,7 +21,7 @@ export const SubComponentControlToggle: FC<SubComponentControlsToggleProps> = ({
   const toggleId = `toggle-${buildSubComponentPartKey(subComponentId, label)}`
 
   return (
-    <div className={classNames('label-and-toggle', className)}>
+    <div className={classNames('label-and-toggle', 'subcomponent-part', className)}>
       <label htmlFor={toggleId}>{label}</label>
       <Toggle id={toggleId} onChange={onChange} value={value} />
     </div>

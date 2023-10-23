@@ -21,6 +21,13 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 
   return (
     <Control.Group>
+      <label htmlFor="uswds-icon-rrr">Icon</label>
+      <UswdsIconSelect
+        labelId="uswds-icon-rrr"
+        onChange={(icon) => setValue({ ...value, icon })}
+        value={value.icon}
+      />
+      
       <VisuallyHidden>
         <span id={variantHtmlId}>Rules, Rights, and Regulations variant</span>
       </VisuallyHidden>

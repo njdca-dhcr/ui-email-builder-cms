@@ -128,3 +128,7 @@
 .accordion-email-component .subcomponent-control-wrapper {
   padding: 0 1rem;
 }
+
+.accordion-email-subcomponent .subcomponent-part label {
+  font-weight: var(--weight-normal);
+}

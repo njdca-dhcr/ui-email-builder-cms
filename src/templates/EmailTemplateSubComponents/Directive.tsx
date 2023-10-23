@@ -31,8 +31,11 @@ export interface DirectiveValue {
 
   // ThreeStep uses OneStep values
   step2Label: string
+  showStep1AdditionalContent: boolean
+  showStep2AdditionalContent: boolean
   step2Additional: string
   step3Label: string
+  showStep3AdditionalContent: boolean
   step3Additional: string
 
   // StepTwoExpansion uses ThreeStep values
@@ -54,15 +57,18 @@ export const defaultValue: DirectiveValue = {
   linkHref: 'https://',
   buttonLabel: 'Get Started',
   step1Label: 'Step 1 Directive',
+  showStep1AdditionalContent: true,
   step1Additional: 'Additional information around Step 1',
   oneStepSupportiveText:
     'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
   step2Label: 'Step 2 Directive',
+  showStep2AdditionalContent: true,
   step2Additional: 'Additional information around Step 2',
   step2Tertiary:
     'Tertiary information around Step 2, (usually involving an alternate way to complete the second step).',
   step2CaseNumber: 'Case #: [000000]',
   step3Label: 'Step 3 Directive',
+  showStep3AdditionalContent: true,
   step3Additional: 'Additional information around Step 3',
   alternativePaymentLabel:
     'Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951',
@@ -399,120 +405,122 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           </tr>
 
                                           {/* Step 1 Additional Information */}
-                                          <tr>
-                                            <td align="center">
-                                              <div
-                                                id="step-bar-1-2"
-                                                className="step-bar"
-                                                style={stepBar12Styles}
-                                              ></div>
-                                            </td>
-                                            <td style={tdPaddingStyles}>
-                                              <div style={{ lineHeight: '16px' }}>
-                                                <EditableElement
-                                                  element="span"
-                                                  initialValue={initialValue.step1Additional}
-                                                  label="Additional information for Step 1"
-                                                  onValueChange={(step1Additional) =>
-                                                    setValue({ ...value, step1Additional })
-                                                  }
-                                                  value={value.step1Additional}
-                                                  style={stepDescriptionStyles}
-                                                />
-                                              </div>
+                                          
+                                            <tr>
+                                              <td align="center">
+                                                <div
+                                                  id="step-bar-1-2"
+                                                  className="step-bar"
+                                                  style={stepBar12Styles}
+                                                ></div>
+                                              </td>
+                                              <td style={tdPaddingStyles}>
+                                                { value.showStep1AdditionalContent && (
+                                                <div style={{ lineHeight: '16px' }}>
+                                                  <EditableElement
+                                                    element="span"
+                                                    initialValue={initialValue.step1Additional}
+                                                    label="Additional information for Step 1"
+                                                    onValueChange={(step1Additional) =>
+                                                      setValue({ ...value, step1Additional })
+                                                    }
+                                                    value={value.step1Additional}
+                                                    style={stepDescriptionStyles}
+                                                  />
+                                                </div>
+                                                )}
+                                                {/* Button Table */}
+                                                <table
+                                                  align="left"
+                                                  cellSpacing="0"
+                                                  cellPadding="0"
+                                                  border={0}
+                                                  width="100%"
+                                                >
+                                                  <tbody>
+                                                    {/* Space Above Button */}
+                                                    <tr>
+                                                      <td>
+                                                        <div style={spaceStyles}>&nbsp;</div>
+                                                      </td>
+                                                    </tr>
 
-                                              {/* Button Table */}
-                                              <table
-                                                align="left"
-                                                cellSpacing="0"
-                                                cellPadding="0"
-                                                border={0}
-                                                width="100%"
-                                              >
-                                                <tbody>
-                                                  {/* Space Above Button */}
-                                                  <tr>
-                                                    <td>
-                                                      <div style={spaceStyles}>&nbsp;</div>
-                                                    </td>
-                                                  </tr>
-
-                                                  {/* Button */}
-                                                  <tr>
-                                                    <td>
-                                                      <table
-                                                        cellSpacing="0"
-                                                        cellPadding="0"
-                                                        border={0}
-                                                        width="100%"
-                                                      >
-                                                        <tbody>
-                                                          <tr>
-                                                            <td>
-                                                              <Link
-                                                                to={value.linkHref}
-                                                                style={getStartedButtonStyles}
-                                                              >
-                                                                <div>
-                                                                  <div style={spaceStyles}>
-                                                                    {/* <!--[if mso]>
-                                                        <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                                      <![endif]--> */}
-                                                                    &nbsp;
-                                                                  </div>
-                                                                  {/* <!--[if mso]>
-                                                      <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
-                                                    <![endif]--> */}
-                                                                  <span>{value.buttonLabel}</span>
-                                                                  {/* <!--[if mso]>
-                                                      <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
-                                                    <![endif]--> */}
-                                                                  <div style={spaceStyles}>
-                                                                    {/* <!--[if mso]>
-                                                        <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                                      <![endif]--> */}
-                                                                    &nbsp;
-                                                                  </div>
-                                                                </div>
-                                                              </Link>
-                                                            </td>
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </td>
-                                                  </tr>
-
-                                                  {/* Space After Button */}
-                                                  <tr>
-                                                    <td>
-                                                      <div style={spaceStyles}>&nbsp;</div>
-                                                    </td>
-                                                  </tr>
-
-                                                  {/* Same Link As Button */}
-                                                  <tr>
-                                                    <td>
-                                                      <div
-                                                        className="link-div"
-                                                        style={{
-                                                          lineHeight: '150%',
-                                                          wordBreak: 'break-all',
-                                                          paddingBottom: '16px',
-                                                        }}
-                                                      >
-                                                        <Link
-                                                          to={value.linkHref}
-                                                          style={hrefTextStyles}
+                                                    {/* Button */}
+                                                    <tr>
+                                                      <td>
+                                                        <table
+                                                          cellSpacing="0"
+                                                          cellPadding="0"
+                                                          border={0}
+                                                          width="100%"
                                                         >
-                                                          {value.linkHref}
-                                                        </Link>
-                                                      </div>
-                                                    </td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </td>
-                                          </tr>
+                                                          <tbody>
+                                                            <tr>
+                                                              <td>
+                                                                <Link
+                                                                  to={value.linkHref}
+                                                                  style={getStartedButtonStyles}
+                                                                >
+                                                                  <div>
+                                                                    <div style={spaceStyles}>
+                                                                      {/* <!--[if mso]>
+                                                          <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
+                                                        <![endif]--> */}
+                                                                      &nbsp;
+                                                                    </div>
+                                                                    {/* <!--[if mso]>
+                                                        <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
+                                                      <![endif]--> */}
+                                                                    <span>{value.buttonLabel}</span>
+                                                                    {/* <!--[if mso]>
+                                                        <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
+                                                      <![endif]--> */}
+                                                                    <div style={spaceStyles}>
+                                                                      {/* <!--[if mso]>
+                                                          <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
+                                                        <![endif]--> */}
+                                                                      &nbsp;
+                                                                    </div>
+                                                                  </div>
+                                                                </Link>
+                                                              </td>
+                                                            </tr>
+                                                          </tbody>
+                                                        </table>
+                                                      </td>
+                                                    </tr>
+
+                                                    {/* Space After Button */}
+                                                    <tr>
+                                                      <td>
+                                                        <div style={spaceStyles}>&nbsp;</div>
+                                                      </td>
+                                                    </tr>
+
+                                                    {/* Same Link As Button */}
+                                                    <tr>
+                                                      <td>
+                                                        <div
+                                                          className="link-div"
+                                                          style={{
+                                                            lineHeight: '150%',
+                                                            wordBreak: 'break-all',
+                                                            paddingBottom: '16px',
+                                                          }}
+                                                        >
+                                                          <Link
+                                                            to={value.linkHref}
+                                                            style={hrefTextStyles}
+                                                          >
+                                                            {value.linkHref}
+                                                          </Link>
+                                                        </div>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </td>
+                                            </tr>
 
                                           {/* Step 2 */}
                                           <tr>
@@ -576,51 +584,53 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                             </td>
 
                                             {/* Step 2 Additional Information */}
-                                            <td style={tdPaddingStyles}>
-                                              <div style={{ lineHeight: '16px' }}>
-                                                <EditableElement
-                                                  element="span"
-                                                  initialValue={initialValue.step2Additional}
-                                                  label="Additional information for Step 2"
-                                                  onValueChange={(step2Additional) =>
-                                                    setValue({ ...value, step2Additional })
-                                                  }
-                                                  value={value.step2Additional}
-                                                  style={stepDescriptionStyles}
-                                                />
-                                              </div>
-                                              <div style={spaceStyles}>&nbsp;</div>
-
-                                              {[DirectiveVariant.StepTwoExpansion].includes(
-                                                value.variant,
-                                              ) && (
-                                                <>
+                                            { value.showStep2AdditionalContent && (
+                                              <td style={tdPaddingStyles}>
+                                                <div style={{ lineHeight: '16px' }}>
                                                   <EditableElement
-                                                    element="div"
-                                                    initialValue={initialValue.step2Tertiary}
-                                                    label="Tertiary information for Step 2"
-                                                    onValueChange={(step2Tertiary) =>
-                                                      setValue({ ...value, step2Tertiary })
+                                                    element="span"
+                                                    initialValue={initialValue.step2Additional}
+                                                    label="Additional information for Step 2"
+                                                    onValueChange={(step2Additional) =>
+                                                      setValue({ ...value, step2Additional })
                                                     }
-                                                    value={value.step2Tertiary}
-                                                    style={supportiveInformationStyles}
+                                                    value={value.step2Additional}
+                                                    style={stepDescriptionStyles}
                                                   />
-                                                  <div style={spaceStyles}>&nbsp;</div>
+                                                </div>
+                                                <div style={spaceStyles}>&nbsp;</div>
 
-                                                  <EditableElement
-                                                    element="div"
-                                                    initialValue={initialValue.step2CaseNumber}
-                                                    label="Case number information"
-                                                    onValueChange={(step2CaseNumber) =>
-                                                      setValue({ ...value, step2CaseNumber })
-                                                    }
-                                                    value={value.step2CaseNumber}
-                                                    style={expansionCaseNumberStyles}
-                                                  />
-                                                  <div style={spaceStyles}>&nbsp;</div>
-                                                </>
-                                              )}
-                                            </td>
+                                                {[DirectiveVariant.StepTwoExpansion].includes(
+                                                  value.variant,
+                                                ) && (
+                                                  <>
+                                                    <EditableElement
+                                                      element="div"
+                                                      initialValue={initialValue.step2Tertiary}
+                                                      label="Tertiary information for Step 2"
+                                                      onValueChange={(step2Tertiary) =>
+                                                        setValue({ ...value, step2Tertiary })
+                                                      }
+                                                      value={value.step2Tertiary}
+                                                      style={supportiveInformationStyles}
+                                                    />
+                                                    <div style={spaceStyles}>&nbsp;</div>
+
+                                                    <EditableElement
+                                                      element="div"
+                                                      initialValue={initialValue.step2CaseNumber}
+                                                      label="Case number information"
+                                                      onValueChange={(step2CaseNumber) =>
+                                                        setValue({ ...value, step2CaseNumber })
+                                                      }
+                                                      value={value.step2CaseNumber}
+                                                      style={expansionCaseNumberStyles}
+                                                    />
+                                                    <div style={spaceStyles}>&nbsp;</div>
+                                                  </>
+                                                )}
+                                              </td>
+                                            )}
                                           </tr>
 
                                           {/* Step 3 */}
@@ -668,33 +678,35 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           </tr>
 
                                           {/* Step 3 Additional Information */}
-                                          <tr>
-                                            <td align="center">
-                                              <div
-                                                className="step-bar"
-                                                id="step-bar-2-3"
-                                                style={{
-                                                  ...stepBar23Styles,
-                                                  background: 'transparent',
-                                                }}
-                                              ></div>
-                                            </td>
-                                            <td style={tdPaddingStyles}>
-                                              <div style={{ lineHeight: '16px' }}>
-                                                <EditableElement
-                                                  element="span"
-                                                  initialValue={initialValue.step3Additional}
-                                                  label="Additional information for Step 3"
-                                                  onValueChange={(step3Additional) =>
-                                                    setValue({ ...value, step3Additional })
-                                                  }
-                                                  value={value.step3Additional}
-                                                  style={stepDescriptionStyles}
-                                                />
-                                              </div>
-                                              <div style={spaceStyles}>&nbsp;</div>
-                                            </td>
-                                          </tr>
+                                          { value.showStep3AdditionalContent && (
+                                            <tr>
+                                              <td align="center">
+                                                <div
+                                                  className="step-bar"
+                                                  id="step-bar-2-3"
+                                                  style={{
+                                                    ...stepBar23Styles,
+                                                    background: 'transparent',
+                                                  }}
+                                                ></div>
+                                              </td>
+                                              <td style={tdPaddingStyles}>
+                                                <div style={{ lineHeight: '16px' }}>
+                                                  <EditableElement
+                                                    element="span"
+                                                    initialValue={initialValue.step3Additional}
+                                                    label="Additional information for Step 3"
+                                                    onValueChange={(step3Additional) =>
+                                                      setValue({ ...value, step3Additional })
+                                                    }
+                                                    value={value.step3Additional}
+                                                    style={stepDescriptionStyles}
+                                                  />
+                                                </div>
+                                                <div style={spaceStyles}>&nbsp;</div>
+                                              </td>
+                                            </tr>
+                                          )}
                                         </tbody>
                                       </table>
                                     </td>
