@@ -1,5 +1,42 @@
+.library-filter-form {
+  align-items: stretch;
+  display: flex;
+  max-width: 28rem;
+  width: 100%;
+}
+
+.library-filter-form:focus-within {
+  outline: var(--default-browser-outline);
+}
+
+.library-filter-input {
+  flex: 1;
+  border-right-width: 0;
+  outline: none;
+}
+
+.library-filter-form input[type='search']::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+.library-filter-form input[type='search']::-webkit-search-cancel-button {
+  display: none !important;
+}
+
+.library-filter-label {
+  color: var(--white);
+  background-color: var(--blue);
+  font-weight: var(--weight-semibold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 0.5rem 1rem;
+}
+
 .library-list {
-  margin-top: 7.5rem;
+  margin-top: 6rem;
   margin-bottom: 6rem;
 }
 
@@ -24,4 +61,8 @@
 
 .library-description {
   margin: 0;
+}
+
+.library-empty-message {
+  padding-top: 7.5rem;
 }

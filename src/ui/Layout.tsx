@@ -86,10 +86,11 @@ export const Heading: FC<HeadingProps> = ({ children, element, subheading }) => 
 
 interface ParagraphProps {
   children: ReactNode
+  className?: string
 }
 
-export const Paragraph: FC<ParagraphProps> = ({ children }) => {
-  return <p className="paragraph">{children}</p>
+export const Paragraph: FC<ParagraphProps> = ({ children, className }) => {
+  return <p className={classNames('paragraph', className)}>{children}</p>
 }
 
 interface SpacedContainerProps {

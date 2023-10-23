@@ -43,7 +43,7 @@
 }
 
 .email-preview-actions label:focus-within {
-  outline: 5px auto -webkit-focus-ring-color;
+  outline: var(--default-browser-outline);
 }
 
 button.copy-html-button {

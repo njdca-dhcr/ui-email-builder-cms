@@ -234,6 +234,18 @@ describe('Paragraph', () => {
     expect(paragraph).not.toBeNull()
     expect(paragraph).toContainHTML(`<span>${text}</span>`)
   })
+
+  it('accepts a className', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Paragraph className="my-class">
+        <span>{text}</span>
+      </Paragraph>,
+    )
+    const paragraph = baseElement.querySelector('p')
+    expect(paragraph).not.toBeNull()
+    expect(paragraph?.className).toEqual('paragraph my-class')
+  })
 })
 
 describe('SpacedContainer', () => {
