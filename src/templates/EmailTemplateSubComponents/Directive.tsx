@@ -405,17 +405,17 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           </tr>
 
                                           {/* Step 1 Additional Information */}
-                                          
-                                            <tr>
-                                              <td align="center">
-                                                <div
-                                                  id="step-bar-1-2"
-                                                  className="step-bar"
-                                                  style={stepBar12Styles}
-                                                ></div>
-                                              </td>
-                                              <td style={tdPaddingStyles}>
-                                                { value.showStep1AdditionalContent && (
+
+                                          <tr>
+                                            <td align="center">
+                                              <div
+                                                id="step-bar-1-2"
+                                                className="step-bar"
+                                                style={stepBar12Styles}
+                                              ></div>
+                                            </td>
+                                            <td style={tdPaddingStyles}>
+                                              {value.showStep1AdditionalContent && (
                                                 <div style={{ lineHeight: '16px' }}>
                                                   <EditableElement
                                                     element="span"
@@ -428,99 +428,99 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                     style={stepDescriptionStyles}
                                                   />
                                                 </div>
-                                                )}
-                                                {/* Button Table */}
-                                                <table
-                                                  align="left"
-                                                  cellSpacing="0"
-                                                  cellPadding="0"
-                                                  border={0}
-                                                  width="100%"
-                                                >
-                                                  <tbody>
-                                                    {/* Space Above Button */}
-                                                    <tr>
-                                                      <td>
-                                                        <div style={spaceStyles}>&nbsp;</div>
-                                                      </td>
-                                                    </tr>
+                                              )}
+                                              {/* Button Table */}
+                                              <table
+                                                align="left"
+                                                cellSpacing="0"
+                                                cellPadding="0"
+                                                border={0}
+                                                width="100%"
+                                              >
+                                                <tbody>
+                                                  {/* Space Above Button */}
+                                                  <tr>
+                                                    <td>
+                                                      <div style={spaceStyles}>&nbsp;</div>
+                                                    </td>
+                                                  </tr>
 
-                                                    {/* Button */}
-                                                    <tr>
-                                                      <td>
-                                                        <table
-                                                          cellSpacing="0"
-                                                          cellPadding="0"
-                                                          border={0}
-                                                          width="100%"
-                                                        >
-                                                          <tbody>
-                                                            <tr>
-                                                              <td>
-                                                                <Link
-                                                                  to={value.linkHref}
-                                                                  style={getStartedButtonStyles}
-                                                                >
-                                                                  <div>
-                                                                    <div style={spaceStyles}>
-                                                                      {/* <!--[if mso]>
+                                                  {/* Button */}
+                                                  <tr>
+                                                    <td>
+                                                      <table
+                                                        cellSpacing="0"
+                                                        cellPadding="0"
+                                                        border={0}
+                                                        width="100%"
+                                                      >
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>
+                                                              <Link
+                                                                to={value.linkHref}
+                                                                style={getStartedButtonStyles}
+                                                              >
+                                                                <div>
+                                                                  <div style={spaceStyles}>
+                                                                    {/* <!--[if mso]>
                                                           <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
                                                         <![endif]--> */}
-                                                                      &nbsp;
-                                                                    </div>
-                                                                    {/* <!--[if mso]>
+                                                                    &nbsp;
+                                                                  </div>
+                                                                  {/* <!--[if mso]>
                                                         <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
                                                       <![endif]--> */}
-                                                                    <span>{value.buttonLabel}</span>
-                                                                    {/* <!--[if mso]>
+                                                                  <span>{value.buttonLabel}</span>
+                                                                  {/* <!--[if mso]>
                                                         <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
                                                       <![endif]--> */}
-                                                                    <div style={spaceStyles}>
-                                                                      {/* <!--[if mso]>
+                                                                  <div style={spaceStyles}>
+                                                                    {/* <!--[if mso]>
                                                           <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
                                                         <![endif]--> */}
-                                                                      &nbsp;
-                                                                    </div>
+                                                                    &nbsp;
                                                                   </div>
-                                                                </Link>
-                                                              </td>
-                                                            </tr>
-                                                          </tbody>
-                                                        </table>
-                                                      </td>
-                                                    </tr>
+                                                                </div>
+                                                              </Link>
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
 
-                                                    {/* Space After Button */}
-                                                    <tr>
-                                                      <td>
-                                                        <div style={spaceStyles}>&nbsp;</div>
-                                                      </td>
-                                                    </tr>
+                                                  {/* Space After Button */}
+                                                  <tr>
+                                                    <td>
+                                                      <div style={spaceStyles}>&nbsp;</div>
+                                                    </td>
+                                                  </tr>
 
-                                                    {/* Same Link As Button */}
-                                                    <tr>
-                                                      <td>
-                                                        <div
-                                                          className="link-div"
-                                                          style={{
-                                                            lineHeight: '150%',
-                                                            wordBreak: 'break-all',
-                                                            paddingBottom: '16px',
-                                                          }}
+                                                  {/* Same Link As Button */}
+                                                  <tr>
+                                                    <td>
+                                                      <div
+                                                        className="link-div"
+                                                        style={{
+                                                          lineHeight: '150%',
+                                                          wordBreak: 'break-all',
+                                                          paddingBottom: '16px',
+                                                        }}
+                                                      >
+                                                        <Link
+                                                          to={value.linkHref}
+                                                          style={hrefTextStyles}
                                                         >
-                                                          <Link
-                                                            to={value.linkHref}
-                                                            style={hrefTextStyles}
-                                                          >
-                                                            {value.linkHref}
-                                                          </Link>
-                                                        </div>
-                                                      </td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                              </td>
-                                            </tr>
+                                                          {value.linkHref}
+                                                        </Link>
+                                                      </div>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </td>
+                                          </tr>
 
                                           {/* Step 2 */}
                                           <tr>
@@ -584,7 +584,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                             </td>
 
                                             {/* Step 2 Additional Information */}
-                                            { value.showStep2AdditionalContent && (
+                                            {value.showStep2AdditionalContent && (
                                               <td style={tdPaddingStyles}>
                                                 <div style={{ lineHeight: '16px' }}>
                                                   <EditableElement
@@ -678,7 +678,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           </tr>
 
                                           {/* Step 3 Additional Information */}
-                                          { value.showStep3AdditionalContent && (
+                                          {value.showStep3AdditionalContent && (
                                             <tr>
                                               <td align="center">
                                                 <div

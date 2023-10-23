@@ -53,21 +53,27 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
             className="directive-addl-content-toggle"
             subComponentId={id}
             label="Step 1 Additional Content"
-            onChange={(showStep1AdditionalContent) => setValue({ ...value, showStep1AdditionalContent })}
+            onChange={(showStep1AdditionalContent) =>
+              setValue({ ...value, showStep1AdditionalContent })
+            }
             value={value.showStep1AdditionalContent}
           />
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
             subComponentId={id}
             label="Step 2 Additional Content"
-            onChange={(showStep2AdditionalContent) => setValue({ ...value, showStep2AdditionalContent })}
+            onChange={(showStep2AdditionalContent) =>
+              setValue({ ...value, showStep2AdditionalContent })
+            }
             value={value.showStep2AdditionalContent}
           />
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
             subComponentId={id}
             label="Step 3 Additional Content"
-            onChange={(showStep3AdditionalContent) => setValue({ ...value, showStep3AdditionalContent })}
+            onChange={(showStep3AdditionalContent) =>
+              setValue({ ...value, showStep3AdditionalContent })
+            }
             value={value.showStep3AdditionalContent}
           />
         </Control.Container>
