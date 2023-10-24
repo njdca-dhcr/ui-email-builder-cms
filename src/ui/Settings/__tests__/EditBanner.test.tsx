@@ -37,4 +37,10 @@ describe('EditBanner', () => {
     await user.type(getByLabelText('Secondary Link'), value)
     expect(localStorageData().secondaryLink).toEqual(value)
   })
+
+  it('has an editable background color', () => {
+    const { queryByText, baseElement } = render(<EditBanner />)
+    expect(queryByText('Background Color')).not.toBeNull()
+    expect(baseElement.querySelector('input[type="color"]')).not.toBeNull()
+  })
 })

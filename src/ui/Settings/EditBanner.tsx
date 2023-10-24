@@ -3,13 +3,14 @@ import { Heading, Paragraph } from 'src/ui/Layout'
 import { EditableElement, EmailBlock, Input } from 'src/ui'
 import { BannerMarkup, useBannerValue } from 'src/templates/EmailTemplateComponents/Banner'
 import { Spacing } from 'src/templates/styles'
+import { ColorPicker } from '../ColorPicker'
 
 export const EditBanner: FC = () => {
   const [banner, setBanner] = useBannerValue()
   const initialBanner = useMemo(() => banner, [])
 
   return (
-    <>
+    <form>
       <Heading element="h2" subheading>
         Banner
       </Heading>
@@ -17,6 +18,7 @@ export const EditBanner: FC = () => {
       <EmailBlock.Table maxWidth={Spacing.layout.maxWidth}>
         <BannerMarkup
           disableLinks
+          backgroundColor={banner.backgroundColor}
           primaryLink={banner.primaryLink}
           secondaryLink={banner.secondaryLink}
           primaryText={
@@ -49,6 +51,19 @@ export const EditBanner: FC = () => {
           />
         </div>
       </div>
-    </>
+      <div className="banner-fields" style={{ maxWidth: Spacing.layout.maxWidth }}>
+        <div className="banner-field banner-field-color">
+          <label htmlFor="background-color">
+            <span className="custom-label">Background Color</span>
+            <ColorPicker
+              id="background-color"
+              value={banner.backgroundColor}
+              onChange={(backgroundColor) => setBanner({ ...banner, backgroundColor })}
+            />
+          </label>
+        </div>
+        <div className="banner-field" />
+      </div>
+    </form>
   )
 }

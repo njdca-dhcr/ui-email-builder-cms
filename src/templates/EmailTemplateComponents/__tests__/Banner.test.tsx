@@ -13,6 +13,7 @@ describe('BannerMarkup', () => {
         primaryLink={faker.internet.url()}
         primaryText={value}
         secondaryLink={faker.internet.url()}
+        backgroundColor={faker.color.rgb()}
       />,
       { wrapper: emailPartWrapper },
     )
@@ -26,6 +27,7 @@ describe('BannerMarkup', () => {
         primaryLink={faker.internet.url()}
         primaryText={<span>{value}</span>}
         secondaryLink={faker.internet.url()}
+        backgroundColor={faker.color.rgb()}
       />,
       { wrapper: emailPartWrapper },
     )
@@ -39,6 +41,7 @@ describe('BannerMarkup', () => {
         primaryLink={value}
         primaryText={faker.lorem.paragraph()}
         secondaryLink={faker.internet.url()}
+        backgroundColor={faker.color.rgb()}
       />,
       { wrapper: emailPartWrapper },
     )
@@ -53,6 +56,7 @@ describe('BannerMarkup', () => {
         primaryLink={faker.internet.url()}
         primaryText={faker.lorem.paragraph()}
         secondaryLink={value}
+        backgroundColor={faker.color.rgb()}
       />,
       { wrapper: emailPartWrapper },
     )
@@ -66,10 +70,29 @@ describe('BannerMarkup', () => {
         primaryLink={faker.internet.url()}
         primaryText={faker.lorem.paragraph()}
         secondaryLink={value}
+        backgroundColor={faker.color.rgb()}
       />,
       { wrapper: emailPartWrapper },
     )
     expect(baseElement.querySelector(`[href="${value}"]`)).not.toBeNull()
+  })
+
+  it('is displayed in the given color', () => {
+    const backgroundColor = '#e2fcae'
+    const { baseElement } = render(
+      <BannerMarkup
+        primaryLink={faker.internet.url()}
+        primaryText={faker.lorem.paragraph()}
+        secondaryLink={faker.internet.url()}
+        backgroundColor={backgroundColor}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    const cell = baseElement.querySelectorAll('td')[0]
+    expect(cell).not.toBeNull()
+    expect(cell?.attributes.getNamedItem('style')?.value).toContain(
+      `background-color: rgb(226, 252, 174);`,
+    )
   })
 
   describe('when links are disabled', () => {
@@ -80,6 +103,7 @@ describe('BannerMarkup', () => {
           primaryLink={faker.internet.url()}
           primaryText={faker.lorem.paragraph()}
           secondaryLink={faker.internet.url()}
+          backgroundColor={faker.color.rgb()}
         />,
         { wrapper: emailPartWrapper },
       )
@@ -101,6 +125,7 @@ describe('Banner', () => {
     emailComponent = buildEmailTemplateComponent('Banner')
     secondaryLinkHost = 'www.example.org'
     bannerValue = {
+      backgroundColor: '#e2fcae',
       primaryText: faker.lorem.paragraph(),
       primaryLink: `https://www.${faker.internet.domainName()}/`,
       secondaryLink: `https://${secondaryLinkHost}/`,
@@ -130,6 +155,20 @@ describe('Banner', () => {
     const link: HTMLAnchorElement | null = queryByText(secondaryLinkHost) as any
     expect(link).not.toBeNull()
     expect(link?.href).toEqual(bannerValue.secondaryLink)
+  })
+
+  it('displays the background color', () => {
+    const { baseElement } = render(
+      <Banner emailComponent={emailComponent} id={id}>
+        {null}
+      </Banner>,
+      { wrapper: emailPartWrapper },
+    )
+    const cell = baseElement.querySelectorAll('td')[0]
+    expect(cell).not.toBeNull()
+    expect(cell?.attributes.getNamedItem('style')?.value).toContain(
+      `background-color: rgb(226, 252, 174);`,
+    )
   })
 
   it('when there is no banner value saved it renders without issue', () => {

@@ -5,6 +5,7 @@ import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 
 export interface BannerValue {
+  backgroundColor: string
   primaryText: string
   primaryLink: string
   secondaryLink: string
@@ -12,6 +13,7 @@ export interface BannerValue {
 }
 
 interface BannerMarkupProps {
+  backgroundColor: string
   disableLinks?: boolean
   primaryText: string | ReactElement
   primaryLink: string
@@ -21,6 +23,7 @@ interface BannerMarkupProps {
 const { Row, Cell, Link } = EmailBlock
 
 export const BannerMarkup: FC<BannerMarkupProps> = ({
+  backgroundColor,
   disableLinks,
   primaryLink,
   primaryText,
@@ -29,7 +32,9 @@ export const BannerMarkup: FC<BannerMarkupProps> = ({
   const Comp = disableLinks ? 'span' : Link
 
   return (
-    <Row elements={[{ part: 'cell', style: outerCellStyles }, 'table', 'row']}>
+    <Row
+      elements={[{ part: 'cell', style: { ...outerCellStyles, backgroundColor } }, 'table', 'row']}
+    >
       <Cell className="banner-link-container">
         <Comp to={primaryLink} style={primaryLinkStyles}>
           {primaryText}
@@ -69,6 +74,7 @@ const getHostName = (url: string): string => {
 }
 
 const defaultValue: BannerValue = {
+  backgroundColor: Colors.black,
   primaryText: 'New Jersey Department of Labor and Workforce Development',
   primaryLink: 'https://www.nj.gov/labor/',
   secondaryLink: 'https://myunemployment.nj.gov/',

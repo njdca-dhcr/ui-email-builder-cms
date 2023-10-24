@@ -7,16 +7,21 @@
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  padding-top: 1rem;
+  padding-top: 2rem;
 }
 
 .banner-field {
   flex: 1;
 }
 
-.banner-field label {
+.banner-field label,
+.banner-field .custom-label {
   display: block;
   padding-bottom: 0.5rem;
+}
+
+.banner-field-color label {
+  padding-bottom: 0;
 }
 
 .banner-field input {
