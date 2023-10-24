@@ -10,6 +10,7 @@ import { SupplementalContent } from '../EmailTemplateSubComponents/SupplementalC
 import { Directive } from '../EmailTemplateSubComponents/Directive'
 import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRightsRegulations'
 import { LoginDetails } from '../EmailTemplateSubComponents/LoginDetails'
+import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
   const shouldShow = useShouldShowEmailSubComponent(props.componentId, props.id)
@@ -35,6 +36,8 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
       return <Directive {...props} />
     case 'LoginDetails':
       return <LoginDetails {...props} />
+    case 'DepartmentSeal':
+      return <DepartmentSeal {...props} />
     default:
       console.warn(`SubComponent (${props.emailSubComponent.kind}) not implemented`, props)
   }

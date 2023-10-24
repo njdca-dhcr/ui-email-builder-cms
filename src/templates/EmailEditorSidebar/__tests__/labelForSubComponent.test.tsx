@@ -32,4 +32,10 @@ describe('labelForSubComponent', () => {
       )
     })
   })
+
+  describe('when the subcomponent is DepartmentSeal', () => {
+    it('is "Supplemental Content"', () => {
+      expect(labelForSubComponent('DepartmentSeal')).toEqual('Department Seal')
+    })
+  })
 })

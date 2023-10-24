@@ -138,4 +138,17 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByLabelText('Login details title')).not.toBeNull()
   })
+
+  it('can render DepartmentSeal', () => {
+    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'DepartmentSeal' })
+    const { queryByTestId } = render(
+      <EditEmailSubComponent
+        componentId={componentId}
+        id={id}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByTestId('department-seal')).not.toBeNull()
+  })
 })

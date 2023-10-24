@@ -7,6 +7,7 @@ import { EditDisclaimer } from 'src/ui/Settings/EditDisclaimer'
 import { EditBanner } from 'src/ui/Settings/EditBanner'
 import './settings.css'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { EditDepartmentSeal } from 'src/ui/Settings/EditDepartmentSeal'
 
 const SettingsPage: FC = () => {
   return (
@@ -24,6 +25,9 @@ const SettingsPage: FC = () => {
             <Paragraph>Select your state.</Paragraph>
           </div>
 
+          <div className="section-container">
+            <EditDepartmentSeal />
+          </div>
           <div className="section-container">
             <EditBanner />
           </div>

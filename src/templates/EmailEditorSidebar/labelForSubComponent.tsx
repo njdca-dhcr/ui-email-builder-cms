@@ -6,6 +6,8 @@ export const labelForSubComponent = (
   switch (subComponentKind) {
     case 'AdditionalContent':
       return 'Additional Content'
+    case 'DepartmentSeal':
+      return 'Department Seal'
     case 'SupplementalContent':
       return 'Supplemental Content'
     case 'ProgramName':

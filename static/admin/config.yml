@@ -39,6 +39,7 @@ collections:
                 name: 'kind'
                 widget: 'select'
                 options:
+                  - { label: 'Header - Department Seal', value: 'DepartmentSeal' }
                   - { label: 'Header - Title', value: 'Title' }
                   - { label: 'Header - Program Name', value: 'ProgramName' }
                   - { label: 'Body - Intro', value: 'Intro' }

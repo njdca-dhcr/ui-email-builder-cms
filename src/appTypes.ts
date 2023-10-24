@@ -11,7 +11,7 @@ export const EmailTemplateComponentsMapping = {
     'LoginDetails',
   ],
   Footer: ['AdditionalContent'],
-  Header: ['Title', 'ProgramName'],
+  Header: ['Title', 'ProgramName', 'DepartmentSeal'],
   Name: [],
   Disclaimer: [],
 } as const
