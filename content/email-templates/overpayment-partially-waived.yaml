@@ -3,6 +3,8 @@ description: PUA focused but can still be applied to general overpayment campaig
 components:
   - kind: Banner
     required: true
+  - kind: StateSeal
+    required: true
   - kind: Header
     subComponents:
       - kind: Title

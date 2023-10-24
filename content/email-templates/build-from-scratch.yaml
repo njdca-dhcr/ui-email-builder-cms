@@ -3,6 +3,8 @@ description: You know what you want so make it happen.
 components:
   - kind: Banner
     required: false
+  - kind: StateSeal
+    required: true
   - kind: Header
     subComponents:
       - kind: DepartmentSeal

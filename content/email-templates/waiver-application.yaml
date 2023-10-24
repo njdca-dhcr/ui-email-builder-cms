@@ -3,6 +3,8 @@ description: Often used for campaigns, or general registration announcements.
 components:
   - kind: Banner
     required: true
+  - kind: StateSeal
+    required: true
   - kind: Header
     subComponents:
       - kind: Title

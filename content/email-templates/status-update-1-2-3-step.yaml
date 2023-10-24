@@ -3,6 +3,8 @@ description: Confirmations, updates, determinations, and any other status relate
 components:
   - kind: Banner
     required: true
+  - kind: StateSeal
+    required: true
   - kind: Header
     subComponents:
       - kind: Title
