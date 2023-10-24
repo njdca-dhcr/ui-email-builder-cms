@@ -4,3 +4,4 @@ public
 src/gatsby-types.d.ts
 content/email-templates/local-email-template.yaml
 .env
+.DS_Store
