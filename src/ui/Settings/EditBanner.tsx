@@ -57,6 +57,7 @@ export const EditBanner: FC = () => {
             <span className="custom-label">Background Color</span>
             <ColorPicker
               id="background-color"
+              className="banner-color-picker"
               value={banner.backgroundColor}
               onChange={(backgroundColor) => setBanner({ ...banner, backgroundColor })}
             />

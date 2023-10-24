@@ -6,17 +6,25 @@ import { Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 
-const defaultValue = 'Program Name'
+interface ProgramNameValue {
+  name: string
+  backgroundColor: string
+}
+
+const defaultValue: ProgramNameValue = {
+  name: 'Program Name',
+  backgroundColor: '#CCBDDF',
+}
 
 const { Table, Row } = EmailBlock
 
+export const useProgramNameValue = (componentId: string, id: string) => {
+  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+}
+
 export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
-    componentId,
-    id,
-    defaultValue,
-  )
+  const [value, setValue, { initialValue }] = useProgramNameValue(componentId, id)
 
   return (
     <Row
@@ -28,27 +36,24 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
         },
       ]}
     >
-      <Table style={containerStyles} width="unset" elements={['row']}>
+      <Table width="unset" elements={['row']}>
         <EditableElement
           element="td"
-          initialValue={initialValue}
+          initialValue={initialValue.name}
           label="Program name"
           onClick={activate}
-          onValueChange={setValue}
-          style={styles}
-          value={value}
+          onValueChange={(name) => setValue({ ...value, name })}
+          style={{ ...styles, backgroundColor: value.backgroundColor }}
+          value={value.name}
         />
       </Table>
     </Row>
   )
 }
 
-const containerStyles: CSSProperties = {}
-
 const styles: CSSProperties = {
   ...Text.header.h6.bold,
-  backgroundColor: '#CCBDDF',
-  borderRadius: 3,
+  borderRadius: '3px',
   paddingBottom: Spacing.size.tiny,
   paddingTop: Spacing.size.tiny,
   paddingLeft: Spacing.size.small,

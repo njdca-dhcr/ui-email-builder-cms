@@ -10,6 +10,7 @@ import {
   useShouldShowEmailSubComponent,
 } from 'src/templates/ShouldShowEmailPart'
 import { LoginDetailsControls } from './LoginDetailsControls'
+import { ProgramNameControls } from './ProgramNameControls'
 
 interface Props extends EmailSubComponentControlsProps {
   emailSubComponent: EmailTemplate.SubComponent<EmailTemplate.ComponentKind>
@@ -53,6 +54,12 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
       return (
         <ControlWrapper>
           <LoginDetailsControls {...props} />
+        </ControlWrapper>
+      )
+    case 'ProgramName':
+      return (
+        <ControlWrapper>
+          <ProgramNameControls {...props} />
         </ControlWrapper>
       )
     default:

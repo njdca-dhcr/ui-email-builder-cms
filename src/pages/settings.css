@@ -28,3 +28,33 @@
   border-radius: 5px;
   width: calc(100% - 1rem);
 }
+
+.banner-color-picker {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.banner-color-picker span {
+  border-radius: 5px;
+  display: block;
+  border: 1px solid var(--black);
+  min-width: 10rem;
+  padding: 0.5rem 1rem;
+}
+
+.banner-color-picker input[type='color'] {
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  height: 2.6rem;
+  padding: 0;
+  width: 5.25rem;
+  overflow: hidden;
+}
+
+.banner-color-picker input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.banner-color-picker input[type='color']::-webkit-color-swatch {
+  border: 0;
+}

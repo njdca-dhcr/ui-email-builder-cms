@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { Heading, Paragraph } from 'src/ui/Layout'
 import { Select } from '../Select'
 
-
 export const SelectState: FC = () => {
   return (
     <>
@@ -11,7 +10,9 @@ export const SelectState: FC = () => {
       </Heading>
       <Select
         labelId="string"
-        onChange={()=> {console.log('onChange')}}
+        onChange={() => {
+          console.log('onChange')
+        }}
         options={[]}
         value="string"
       />

@@ -23,7 +23,7 @@ const SettingsPage: FC = () => {
           <div className="section-container">
             <Paragraph>Select your state.</Paragraph>
           </div>
-           
+
           <div className="section-container">
             <EditBanner />
           </div>

@@ -26,15 +26,15 @@ describe('EmailSubComponentControls', () => {
     expect(baseElement.innerHTML).toEqual('<div></div>')
   })
 
-  it('renders nothing for ProgramName', () => {
-    const { baseElement } = render(
+  it('renders the ProgramNameControls', () => {
+    const { queryByText } = render(
       <EmailSubComponentControls
         emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })}
         componentId={componentId}
         id={id}
       />,
     )
-    expect(baseElement.innerHTML).toEqual('<div></div>')
+    expect(queryByText('Background Color')).not.toBeNull()
   })
 
   it('renders nothing for AdditionalContent', () => {
