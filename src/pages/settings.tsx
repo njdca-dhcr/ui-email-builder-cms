@@ -19,10 +19,8 @@ const SettingsPage: FC = () => {
       <PageContent element="main">
         <SpacedContainer>
           <Heading element="h1">Settings</Heading>
-          <Paragraph>Setup your state's disclaimer here. More coming soon.</Paragraph>
 
-          <div className="section-container">
-            <Paragraph>Select your state.</Paragraph>
+          <div className="section-container">            
             <StateSealSelect />
           </div>
 

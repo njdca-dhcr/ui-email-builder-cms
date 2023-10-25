@@ -59,6 +59,7 @@
   border: 0;
 }
 
+.edit-state-seal-field-group,
 .edit-department-seal-field-group {
   max-width: 50%;
   padding-top: 1.5rem;
@@ -71,4 +72,8 @@
 
 .department-seal-preview-container {
   padding: 2rem 0;
+}
+
+.edit-state-seal-field-group {
+  padding-top: 0;
 }
