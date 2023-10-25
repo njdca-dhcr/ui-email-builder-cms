@@ -42,7 +42,7 @@ const tdStyles: CSSProperties = {
 }
 
 const styles: CSSProperties = {
-  width: '100px',
-  height: '100px',
+  width: '60px',
+  height: '60px',
   display: 'block',
 }
