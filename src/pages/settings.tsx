@@ -21,14 +21,14 @@ const SettingsPage: FC = () => {
           <Heading element="h1">Settings</Heading>
 
           <div className="section-container">
-            <StateSealSelect />
+            <EditBanner />
           </div>
 
           <div className="section-container">
             <EditDepartmentSeal />
           </div>
           <div className="section-container">
-            <EditBanner />
+            <StateSealSelect />
           </div>
           <div className="section-container">
             <EditDisclaimer />
