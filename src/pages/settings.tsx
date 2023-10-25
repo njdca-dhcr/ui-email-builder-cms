@@ -20,7 +20,7 @@ const SettingsPage: FC = () => {
         <SpacedContainer>
           <Heading element="h1">Settings</Heading>
 
-          <div className="section-container">            
+          <div className="section-container">
             <StateSealSelect />
           </div>
 

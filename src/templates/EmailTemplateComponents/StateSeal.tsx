@@ -3,17 +3,14 @@ import { EmailComponentProps } from './shared'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import startCase from 'lodash.startcase'
-import { StateSeals } from 'src/ui/StateSeal'
+import { StateSealKey, StateSeals } from 'src/ui/StateSeal'
 import { StyleDefaults, Spacing } from '../styles'
 import Config from '../../../gatsby-config'
 
-
-const defaultValue = `
-  <img src="/state-seals/US.png" alt="State Seal" style="width: 60px; height: 60px; margin: 0; display: block;" />
-`
+const defaultValue: StateSealKey = 'US'
 
 export const useStateSealValue = () => {
-  return useLocalStorageJSON<string>('stateSeal', defaultValue)
+  return useLocalStorageJSON<StateSealKey>('stateSeal', defaultValue)
 }
 
 const { Row, Cell } = EmailBlock

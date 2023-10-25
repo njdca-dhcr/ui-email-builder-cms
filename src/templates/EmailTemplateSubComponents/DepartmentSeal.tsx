@@ -4,6 +4,7 @@ import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { DepartmentSealKey, DepartmentSealsMapping } from 'src/utils/departmentSeals'
 import { SpacingCell, StyleDefaults } from '../styles'
+import Config from '../../../gatsby-config'
 
 const { Row } = EmailBlock
 
@@ -20,7 +21,11 @@ export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> 
     <Row
       data-testid="department-seal"
       elements={[
-        { part: 'cell', className: StyleDefaults.layout.narrow },
+        {
+          part: 'cell',
+          style: StyleDefaults.inline.colors,
+          className: StyleDefaults.layout.narrow,
+        },
         { part: 'table', style: tableStyles, maxWidth: '60%', width: 'unset' },
         'row',
         'cell',
@@ -28,7 +33,7 @@ export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> 
     >
       <img
         alt=""
-        src={`/department-seals/${DepartmentSealsMapping[departmentSealKey].imageName}`}
+        src={`${Config.siteMetadata?.siteUrl}/department-seals/${DepartmentSealsMapping[departmentSealKey].imageName}`}
         style={imageStyles}
       />
     </Row>

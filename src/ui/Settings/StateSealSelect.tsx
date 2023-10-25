@@ -20,7 +20,7 @@ export const StateSealSelect: FC = () => {
         Select State
       </Heading>
       <Paragraph>Your state seal will show at the top of all emails.</Paragraph>
-      
+
       <div className="edit-state-seal-field-group">
         <VisuallyHidden as="label" id="state-seal-select">
           Select your state

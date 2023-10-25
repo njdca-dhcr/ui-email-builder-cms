@@ -9,6 +9,7 @@ import {
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
 import { render } from '@testing-library/react'
+import Config from '../gatsby-config'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: EmailTemplate.ComponentKind,
@@ -51,6 +52,8 @@ export const buildEmailTemplateConfig = (
 }
 
 export const urlFor = (path: string): string => `http://localhost${path}`
+export const absoluteUrlFor = (path: string): string =>
+  [Config.siteMetadata?.siteUrl, path].join('')
 
 export type WrapperComponent = FC<{ children: ReactNode; additional?: ReactNode }>
 

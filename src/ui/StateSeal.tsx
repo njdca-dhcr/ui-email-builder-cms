@@ -8,15 +8,16 @@ interface StateSealProps {
   state: StateSealKey
 }
 
-interface StateSealsType {
-  readonly [key: string]: string
-}
-
 export const StateSeal: FC<StateSealProps> = ({ state }) => {
-  return <img src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[state]}.png`} alt={startCase(state.toString())} />
+  return (
+    <img
+      src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[state]}.png`}
+      alt={startCase(state.toString())}
+    />
+  )
 }
 
-export const StateSeals: StateSealsType = {
+export const StateSeals = {
   Alabama: 'Alabama',
   Alaska: 'Alaska',
   Arizona: 'Arizona',

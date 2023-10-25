@@ -1,5 +1,5 @@
 import React from 'react'
-import { buildEmailTemplateSubComponent, emailPartWrapper, urlFor } from 'src/testHelpers'
+import { absoluteUrlFor, buildEmailTemplateSubComponent, emailPartWrapper } from 'src/testHelpers'
 import { DepartmentSeal, DepartmentSealMarkup } from '../DepartmentSeal'
 import { faker } from '@faker-js/faker'
 import { EmailTemplate } from 'src/appTypes'
@@ -15,7 +15,7 @@ describe('DepartmentSealMarkup', () => {
     expect(departmentSeal).not.toBeNull()
     const img = departmentSeal?.querySelector('img')
     expect(img).not.toBeNull()
-    expect(img?.src).toEqual(urlFor('/department-seals/New-York.png'))
+    expect(img?.src).toEqual(absoluteUrlFor('/department-seals/New-York.png'))
   })
 })
 
@@ -46,7 +46,7 @@ describe('DepartmentSeal', () => {
     expect(departmentSeal).not.toBeNull()
     let img = departmentSeal?.querySelector('img')
     expect(img).not.toBeNull()
-    expect(img?.src).toEqual(urlFor('/department-seals/California.png'))
+    expect(img?.src).toEqual(absoluteUrlFor('/department-seals/California.png'))
 
     localStorage.setItem('department-seal', JSON.stringify('New-York'))
     rerender(
@@ -62,6 +62,6 @@ describe('DepartmentSeal', () => {
     expect(departmentSeal).not.toBeNull()
     img = departmentSeal?.querySelector('img')
     expect(img).not.toBeNull()
-    expect(img?.src).toEqual(urlFor('/department-seals/New-York.png'))
+    expect(img?.src).toEqual(absoluteUrlFor('/department-seals/New-York.png'))
   })
 })
