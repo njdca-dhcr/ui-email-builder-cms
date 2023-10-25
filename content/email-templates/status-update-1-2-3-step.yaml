@@ -3,10 +3,10 @@ description: Confirmations, updates, determinations, and any other status relate
 components:
   - kind: Banner
     required: true
-  - kind: StateSeal
-    required: true
   - kind: Header
     subComponents:
+      - kind: DepartmentSeal
+        required: true
       - kind: Title
         required: true
       - kind: ProgramName
@@ -23,5 +23,7 @@ components:
     subComponents:
       - kind: AdditionalContent
     required: false
+  - kind: StateSeal
+    required: true
   - kind: Disclaimer
     required: true

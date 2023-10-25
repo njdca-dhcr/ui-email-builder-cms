@@ -3,13 +3,14 @@ description: PUA focused but can still be applied to general overpayment campaig
 components:
   - kind: Banner
     required: true
-  - kind: StateSeal
-    required: true
   - kind: Header
     subComponents:
+      - kind: DepartmentSeal
+        required: true
       - kind: Title
         required: true
       - kind: ProgramName
+        required: false
   - kind: Name
     description: "Adding a name is highly encouraged "
   - kind: Body
@@ -27,5 +28,7 @@ components:
       - kind: AdditionalContent
         required: true
     required: false
+  - kind: StateSeal
+    required: true
   - kind: Disclaimer
     required: true
