@@ -5,9 +5,11 @@ import { EmailBlock } from 'src/ui'
 import startCase from 'lodash.startcase'
 import { StateSeals } from 'src/ui/StateSeal'
 import { StyleDefaults, Spacing } from '../styles'
+import Config from '../../../gatsby-config'
+
 
 const defaultValue = `
-<img src="/state-seals/US.png" alt="State Seal" style="width: 60px; height: 60px; margin: 0; display: block;" />
+  <img src="/state-seals/US.png" alt="State Seal" style="width: 60px; height: 60px; margin: 0; display: block;" />
 `
 
 export const useStateSealValue = () => {
@@ -24,7 +26,7 @@ export const StateSeal: FC<EmailComponentProps> = ({}) => {
       <Row>
         <td className={StyleDefaults.layout.narrow} style={tdStyles}>
           <img
-            src={`/state-seals/${StateSeals[value]}.png`}
+            src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[value]}.png`}
             alt={startCase(value)}
             style={styles}
           />
@@ -47,6 +49,7 @@ export const StateSeal: FC<EmailComponentProps> = ({}) => {
 }
 
 const tdStyles: CSSProperties = {
+  ...StyleDefaults.inline.colors,
   display: 'block',
 }
 

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import startCase from 'lodash.startcase'
+import Config from '../../gatsby-config'
 
 export type StateSealKey = keyof typeof StateSeals
 
@@ -12,7 +13,7 @@ interface StateSealsType {
 }
 
 export const StateSeal: FC<StateSealProps> = ({ state }) => {
-  return <img src={`/state-seals/${StateSeals[state]}.png`} alt={startCase(state.toString())} />
+  return <img src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[state]}.png`} alt={startCase(state.toString())} />
 }
 
 export const StateSeals: StateSealsType = {

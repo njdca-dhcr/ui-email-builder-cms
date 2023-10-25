@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import Config from '../../gatsby-config'
 
 export type UswdsIconVariantKey = keyof typeof UswdsIconVariants
 
@@ -7,7 +8,7 @@ interface UswdsIconProps {
 }
 
 export const UswdsIcon: FC<UswdsIconProps> = ({ icon }) => {
-  return <img src={`/icons/${UswdsIconVariants[icon]}.png`} alt="" />
+  return <img src={`${Config.siteMetadata?.siteUrl}/icons/${UswdsIconVariants[icon]}.png`} alt="" />
 }
 
 export const UswdsIconVariants = {

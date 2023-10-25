@@ -4,7 +4,7 @@ import postcssPresetEnv from 'postcss-preset-env'
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Email Builder`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : 'https://email-builder-beta.netlify.app',
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
