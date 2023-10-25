@@ -14,7 +14,7 @@ export const EmailTemplateComponentsMapping = {
   Header: ['Title', 'ProgramName', 'DepartmentSeal'],
   Name: [],
   Disclaimer: [],
-  StateSeal: []
+  StateSeal: [],
 } as const
 
 export namespace EmailTemplate {

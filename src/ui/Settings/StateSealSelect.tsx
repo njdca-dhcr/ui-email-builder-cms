@@ -5,7 +5,6 @@ import { Select } from 'src/ui/Select'
 import { StateSeals, StateSealKey } from 'src/ui/StateSeal'
 import { useStateSealValue } from 'src/templates/EmailTemplateComponents/StateSeal'
 
-
 const stateSealOptions = Object.keys(StateSeals).map((key) => ({
   label: startCase(key),
   value: key,

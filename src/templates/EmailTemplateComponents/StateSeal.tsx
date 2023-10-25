@@ -4,10 +4,10 @@ import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import startCase from 'lodash.startcase'
 import { StateSeals } from 'src/ui/StateSeal'
-
+import { StyleDefaults, SpacingCell } from '../styles'
 
 const defaultValue = `
-<img src="/state-seals/US.png" alt="State Seal" style="width: 100px; height: 100px; margin: 0 auto; display: block;" />
+<img src="/state-seals/US.png" alt="State Seal" style="width: 60px; height: 60px; margin: 0; display: block;" />
 `
 
 export const useStateSealValue = () => {
@@ -22,17 +22,27 @@ export const StateSeal: FC<EmailComponentProps> = ({}) => {
   return (
     <>
       <Row>
-        <td style={styles}>
-          <img src={`/state-seals/${StateSeals[value]}.png`} alt={startCase(value)} style={styles} />
+        <td className={StyleDefaults.layout.narrow} style={tdStyles}>
+          <img
+            src={`/state-seals/${StateSeals[value]}.png`}
+            alt={startCase(value)}
+            style={styles}
+          />
         </td>
+      </Row>
+      <Row>
+        <SpacingCell size="large" />
       </Row>
     </>
   )
 }
 
-export const styles: CSSProperties = {
+const tdStyles: CSSProperties = {
+  display: 'block',
+}
+
+const styles: CSSProperties = {
   width: '100px',
   height: '100px',
-  margin: '0 auto',
   display: 'block',
 }
