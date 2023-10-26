@@ -23,7 +23,7 @@ export const StateSeal: FC<EmailComponentProps> = ({}) => {
       <Row>
         <td className={StyleDefaults.layout.narrow} style={tdStyles}>
           <img
-            src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[value]}.png`}
+            src={`${Config.siteMetadata?.siteUrl}/state-seal-designation/${StateSeals[value]}.png`}
             alt={startCase(value)}
             style={styles}
           />
@@ -51,7 +51,6 @@ const tdStyles: CSSProperties = {
 }
 
 const styles: CSSProperties = {
-  width: '60px',
-  height: '60px',
+  height: '30px',
   display: 'block',
 }

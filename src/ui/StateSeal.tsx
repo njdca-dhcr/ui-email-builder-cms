@@ -11,7 +11,7 @@ interface StateSealProps {
 export const StateSeal: FC<StateSealProps> = ({ state }) => {
   return (
     <img
-      src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[state]}.png`}
+      src={`${Config.siteMetadata?.siteUrl}/state-seal-designation/${StateSeals[state]}.png`}
       alt={startCase(state.toString())}
     />
   )

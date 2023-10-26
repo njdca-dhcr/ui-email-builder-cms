@@ -7,7 +7,7 @@ export const Footer: FC<EmailComponentProps> = ({ children }) => {
     <>
       {children}
       <tr>
-        <SpacingCell size="large" />
+        <SpacingCell size="medium" />
       </tr>
     </>
   )
