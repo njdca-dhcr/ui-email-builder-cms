@@ -37,7 +37,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
       </Control.Container>
 
       <Control.Container>
-        <Control.Label htmlFor={iconHtmlId}>Icon</Control.Label>
+        <Control.Label id={iconHtmlId}>Icon</Control.Label>
         <UswdsIconSelect
           labelId={iconHtmlId}
           onChange={(icon) => setValue({ ...value, icon })}

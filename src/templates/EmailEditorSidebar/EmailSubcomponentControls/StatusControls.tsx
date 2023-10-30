@@ -6,11 +6,13 @@ import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubCom
 import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { BoxColor, SelectBoxColor } from 'src/ui/SelectBoxColor'
+import { UswdsIconSelect } from 'src/ui'
 
 export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
   const key = buildSubComponentKey(componentId, id)
   const variantHtmlId = `select-variant-${key}`
   const boxColorHtmlId = `select-box-color-${key}`
+  const iconHtmlId = `select-icon-${key}`
   const [value, setValue] = useStatusValue(componentId, id)
 
   return (
@@ -40,14 +42,24 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId
         StatusVariant.OverviewWithReasonAndAmountDue,
         StatusVariant.OverviewWithReasonAndAmountBreakdown,
       ].includes(value.variant) && (
-        <Control.Container>
-          <Control.Label htmlFor={boxColorHtmlId}>Box Color</Control.Label>
-          <SelectBoxColor
-            labelId={boxColorHtmlId}
-            value={value.boxColor}
-            onChange={(boxColor) => setValue({ ...value, boxColor })}
-          />
-        </Control.Container>
+        <>
+          <Control.Container>
+            <Control.Label id={boxColorHtmlId}>Box Color</Control.Label>
+            <SelectBoxColor
+              labelId={boxColorHtmlId}
+              value={value.boxColor}
+              onChange={(boxColor) => setValue({ ...value, boxColor })}
+            />
+          </Control.Container>
+          <Control.Container>
+            <Control.Label id={iconHtmlId}>Icon</Control.Label>
+            <UswdsIconSelect
+              labelId={iconHtmlId}
+              onChange={(icon) => setValue({ ...value, icon })}
+              value={value.icon}
+            />
+          </Control.Container>
+        </>
       )}
       <SubComponentControlToggle
         className="status-supportive-information-toggle"

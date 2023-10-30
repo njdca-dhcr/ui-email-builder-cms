@@ -27,12 +27,13 @@ Group.displayName = 'Control.Group'
 interface LabelProps {
   children: ReactNode
   className?: string
-  htmlFor: string
+  htmlFor?: string
+  id?: string
 }
 
-const Label: FC<LabelProps> = ({ children, className, htmlFor }) => {
+const Label: FC<LabelProps> = ({ children, className, htmlFor, id }) => {
   return (
-    <label className={classNames('control-label', className)} htmlFor={htmlFor}>
+    <label id={id} className={classNames('control-label', className)} htmlFor={htmlFor}>
       {children}
     </label>
   )

@@ -13,7 +13,7 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ compo
   return (
     <Control.Group>
       <Control.Container>
-        <Control.Label htmlFor={iconHtmlId}>Icon</Control.Label>
+        <Control.Label id={iconHtmlId}>Icon</Control.Label>
         <UswdsIconSelect
           labelId={iconHtmlId}
           onChange={(icon) => setValue({ ...value, icon })}

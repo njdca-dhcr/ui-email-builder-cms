@@ -82,6 +82,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ componen
       <Control.Container>
         <Control.Label htmlFor="directive-link-input">Link</Control.Label>
         <Input
+          id="directive-link-input"
           className="directive-link-input"
           onTextChange={(linkHref) => setValue({ ...value, linkHref })}
           value={value.linkHref}

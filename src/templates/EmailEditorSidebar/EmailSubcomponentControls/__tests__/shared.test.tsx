@@ -61,4 +61,16 @@ describe(Control.Label.displayName!, () => {
     expect(label).not.toBeNull()
     expect(label?.className).toEqual('control-label my-class')
   })
+
+  it('accepts id', () => {
+    const id = faker.lorem.word()
+    const { baseElement } = render(
+      <Control.Label id={id} className="my-class">
+        <span />
+      </Control.Label>,
+    )
+    const label: HTMLLabelElement | null = baseElement.querySelector('label') as any
+    expect(label).not.toBeNull()
+    expect(label?.id).toEqual(id)
+  })
 })

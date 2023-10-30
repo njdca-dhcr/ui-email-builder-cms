@@ -7,6 +7,7 @@ import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../s
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { WarningIcon } from 'src/ui/WarningIcon'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
+import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 
 export const enum StatusVariant {
   Overview,
@@ -18,6 +19,7 @@ export const enum StatusVariant {
 
 interface StatusValue {
   variant: StatusVariant
+  icon: UswdsIconVariantKey
   // Always used
   status: string
   description: string
@@ -45,6 +47,7 @@ interface StatusValue {
 
 const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,
+  icon: 'Warning',
   status: 'Status of Claim',
   statusDueTo: 'because...',
   showSupportiveInformation: true,
@@ -209,7 +212,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         >
           <Row>
             <Cell align="center" style={styles.amountIcon}>
-              <WarningIcon />
+              <UswdsIcon icon={value.icon} />
             </Cell>
             <EditableElement
               element="td"

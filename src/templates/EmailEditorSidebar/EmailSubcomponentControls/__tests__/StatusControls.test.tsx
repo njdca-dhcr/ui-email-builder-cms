@@ -68,6 +68,12 @@ describe('StatusControls', () => {
       it('does not have a box color select', () => {
         expect(rendered.queryAllByRole('button')).toHaveLength(1)
       })
+
+      it('does not provide a dropdown for selecting an icon', async () => {
+        const { queryByText } = rendered
+        let button = queryByText('Warning', { selector: 'span' })
+        expect(button).toBeNull()
+      })
     })
 
     describe('Overview w/ Reason', () => {
@@ -83,6 +89,12 @@ describe('StatusControls', () => {
 
       it('does not have a box color select', () => {
         expect(rendered.queryAllByRole('button')).toHaveLength(1)
+      })
+
+      it('does not provide a dropdown for selecting an icon', async () => {
+        const { queryByText } = rendered
+        let button = queryByText('Warning', { selector: 'span' })
+        expect(button).toBeNull()
       })
     })
 
@@ -100,6 +112,12 @@ describe('StatusControls', () => {
       it('does not have a box color select', () => {
         expect(rendered.queryAllByRole('button')).toHaveLength(1)
       })
+
+      it('does not provide a dropdown for selecting an icon', async () => {
+        const { queryByText } = rendered
+        let button = queryByText('Warning', { selector: 'span' })
+        expect(button).toBeNull()
+      })
     })
 
     describe('Overview w/ Reason + Amount Due', () => {
@@ -114,11 +132,27 @@ describe('StatusControls', () => {
       })
 
       it('has a box color select', async () => {
-        const button = rendered.queryByRole('button', { name: 'Yielding Yellow' })
+        const button = rendered.queryByRole('button', { name: 'Box Color Yielding Yellow' })
         expect(button).not.toBeNull()
         await user.click(button!)
         await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
-        expect(rendered.queryByRole('button', { name: 'Benefit Blue' })).not.toBeNull()
+        expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
+      })
+
+      it('provides a dropdown for selecting an icon', async () => {
+        const { getByRole, queryByRole, queryByText } = rendered
+        let button = queryByText('Warning', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Warning')
+
+        await user.click(button!)
+        expect(queryByRole('option', { name: 'Warning' })).not.toBeNull()
+        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+        await user.click(getByRole('option', { name: 'Device Thermostat' }))
+
+        button = queryByText('Device Thermostat', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Device Thermostat')
       })
     })
 
@@ -136,11 +170,27 @@ describe('StatusControls', () => {
       })
 
       it('has a box color select', async () => {
-        const button = rendered.queryByRole('button', { name: 'Yielding Yellow' })
+        const button = rendered.queryByRole('button', { name: 'Box Color Yielding Yellow' })
         expect(button).not.toBeNull()
         await user.click(button!)
         await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
-        expect(rendered.queryByRole('button', { name: 'Benefit Blue' })).not.toBeNull()
+        expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
+      })
+
+      it('provides a dropdown for selecting an icon', async () => {
+        const { getByRole, queryByRole, queryByText } = rendered
+        let button = queryByText('Warning', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Warning')
+
+        await user.click(button!)
+        expect(queryByRole('option', { name: 'Warning' })).not.toBeNull()
+        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+        await user.click(getByRole('option', { name: 'Device Thermostat' }))
+
+        button = queryByText('Device Thermostat', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Device Thermostat')
       })
     })
   })
