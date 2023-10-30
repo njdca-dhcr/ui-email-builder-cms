@@ -1,6 +1,6 @@
 import React from 'react'
-import userEvent from '@testing-library/user-event'
-import { render } from '@testing-library/react'
+import userEvent, { UserEvent } from '@testing-library/user-event'
+import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { StatusControls } from '../StatusControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
@@ -46,5 +46,102 @@ describe('StatusControls', () => {
 
     await user.click(toggle!)
     expect(toggle).toBeChecked()
+  })
+
+  describe('variants', () => {
+    let rendered: RenderResult
+    let user: UserEvent
+
+    beforeEach(() => {
+      user = userEvent.setup()
+    })
+
+    describe('Overview', () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+          </EmailPartsContent>,
+        )
+      })
+
+      it('does not have a box color select', () => {
+        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+      })
+    })
+
+    describe('Overview w/ Reason', () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+          </EmailPartsContent>,
+        )
+        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByRole('option', { name: 'Overview w/ Reason' }))
+      })
+
+      it('does not have a box color select', () => {
+        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+      })
+    })
+
+    describe('Missing Document', () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+          </EmailPartsContent>,
+        )
+        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByRole('option', { name: 'Missing Document Specifics' }))
+      })
+
+      it('does not have a box color select', () => {
+        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+      })
+    })
+
+    describe('Overview w/ Reason + Amount Due', () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+          </EmailPartsContent>,
+        )
+        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByRole('option', { name: 'Overview w/ Reason + Amount Due' }))
+      })
+
+      it('has a box color select', async () => {
+        const button = rendered.queryByRole('button', { name: 'Yielding Yellow' })
+        expect(button).not.toBeNull()
+        await user.click(button!)
+        await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
+        expect(rendered.queryByRole('button', { name: 'Benefit Blue' })).not.toBeNull()
+      })
+    })
+
+    describe('Overview w/ Reason + Amount Breakdown', () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+          </EmailPartsContent>,
+        )
+        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(
+          rendered.getByRole('option', { name: 'Overview w/ Reason + Amount Breakdown' }),
+        )
+      })
+
+      it('has a box color select', async () => {
+        const button = rendered.queryByRole('button', { name: 'Yielding Yellow' })
+        expect(button).not.toBeNull()
+        await user.click(button!)
+        await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
+        expect(rendered.queryByRole('button', { name: 'Benefit Blue' })).not.toBeNull()
+      })
+    })
   })
 })

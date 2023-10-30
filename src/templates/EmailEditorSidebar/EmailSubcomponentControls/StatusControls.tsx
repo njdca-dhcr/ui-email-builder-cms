@@ -1,17 +1,20 @@
 import React, { FC } from 'react'
-import { EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
+import { BoxColor, SelectBoxColor } from 'src/ui/SelectBoxColor'
 
 export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
-  const variantHtmlId = `select-${buildSubComponentKey(componentId, id)}`
+  const key = buildSubComponentKey(componentId, id)
+  const variantHtmlId = `select-variant-${key}`
+  const boxColorHtmlId = `select-box-color-${key}`
   const [value, setValue] = useStatusValue(componentId, id)
 
   return (
-    <>
+    <Control.Group>
       <VisuallyHidden>
         <span id={variantHtmlId}>Status variant</span>
       </VisuallyHidden>
@@ -33,6 +36,19 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId
         onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
         value={value.variant + ''}
       />
+      {[
+        StatusVariant.OverviewWithReasonAndAmountDue,
+        StatusVariant.OverviewWithReasonAndAmountBreakdown,
+      ].includes(value.variant) && (
+        <Control.Container>
+          <Control.Label htmlFor={boxColorHtmlId}>Box Color</Control.Label>
+          <SelectBoxColor
+            labelId={boxColorHtmlId}
+            value={value.boxColor}
+            onChange={(boxColor) => setValue({ ...value, boxColor })}
+          />
+        </Control.Container>
+      )}
       <SubComponentControlToggle
         className="status-supportive-information-toggle"
         subComponentId={id}
@@ -40,6 +56,6 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId
         onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
         value={value.showSupportiveInformation}
       />
-    </>
+    </Control.Group>
   )
 }

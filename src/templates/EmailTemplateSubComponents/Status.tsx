@@ -6,6 +6,7 @@ import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { WarningIcon } from 'src/ui/WarningIcon'
+import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 
 export const enum StatusVariant {
   Overview,
@@ -32,6 +33,7 @@ interface StatusValue {
   subjectLineValue: string
   missingDocumentDeadline: string
   // Amount/Breakdown
+  boxColor: BoxColor
   amountLabel: string
   overpaymentLabel: string
   overpaymentValue: string
@@ -57,6 +59,7 @@ const defaultValue: StatusValue = {
   subjectLineValue: 'Eligible Pending Review Documents<br/>{Name_of_claimant}',
   missingDocumentDeadline:
     'If you do not submit your documents by 00/00/0000, you will be denied your claim and will be required to pay back any DUA funds released to you.',
+  boxColor: BoxColor.YieldingYellow,
   amountLabel: 'You owe $200',
   overpaymentLabel: 'Overpayment Total',
   overpaymentValue: '$200',
@@ -77,6 +80,8 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const [value, setValue] = useStatusValue(componentId, id)
 
   const initialValue = useMemo(() => value, [value.variant])
+
+  const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
     <Row key={value.variant} elements={['cell']} onClick={activate}>
@@ -191,7 +196,15 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           ].includes(value.variant)}
           elements={[
             { part: 'cell', style: styles.amountContainer, className: StyleDefaults.layout.narrow },
-            { part: 'table', maxWidth: 345, style: styles.amountTable },
+            {
+              part: 'table',
+              maxWidth: 345,
+              style: {
+                ...styles.amountTable,
+                backgroundColor: boxColorConfig.backgroundColor,
+                borderLeft: Borders.large(boxColorConfig.accentColor),
+              },
+            },
           ]}
         >
           <Row>
@@ -359,8 +372,6 @@ const styles = {
     paddingTop: Spacing.size.small,
   } as CSSProperties,
   amountTable: {
-    backgroundColor: Colors.alert.warning.light,
-    borderLeft: Borders.large(Colors.alert.warning.dark),
     padding: Spacing.size.medium,
     paddingRight: Spacing.size.extraLarge,
   } as CSSProperties,
