@@ -11,6 +11,7 @@ import { useShouldShowEmailComponent, useShouldShowEmailSubComponent } from '../
 import './EmailEditorSidebarAccordion.css'
 import { RightPointer } from 'src/ui/RightPointer'
 import { EmailSubComponentControls } from './EmailSubcomponentControls'
+import { labelForComponent } from './labelForComponent'
 
 interface ContainerProps {
   children: ReactNode
@@ -71,7 +72,7 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent, id 
     <AccordionItem disabled={lacksSubComponents} className="accordion-email-component">
       <div className="accordion-button-and-toggle">
         <h3>
-          <AccordionButton>{emailComponent.kind}</AccordionButton>
+          <AccordionButton>{labelForComponent(emailComponent.kind)}</AccordionButton>
           <div className="pointer-container">
             <RightPointer />
           </div>
