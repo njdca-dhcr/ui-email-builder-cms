@@ -3,6 +3,7 @@ import { EmailComponentProps } from './shared'
 import { Colors, Font, Spacing, SpacingCell, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
+import { textColorForBackground } from 'src/utils/textColorForBackground'
 
 export interface BannerValue {
   backgroundColor: string
@@ -31,17 +32,22 @@ export const BannerMarkup: FC<BannerMarkupProps> = ({
 }) => {
   const Comp = disableLinks ? 'span' : Link
 
+  const color = textColorForBackground(backgroundColor, {
+    dark: Colors.black,
+    light: Colors.white,
+  })
+
   return (
     <Row
       elements={[{ part: 'cell', style: { ...outerCellStyles, backgroundColor } }, 'table', 'row']}
     >
       <Cell className="banner-link-container">
-        <Comp to={primaryLink} style={primaryLinkStyles}>
+        <Comp to={primaryLink} style={{ ...primaryLinkStyles, color }}>
           {primaryText}
         </Comp>
       </Cell>
       <Cell className="banner-link-container" style={secondaryLinkContainerStyles}>
-        <Comp to={secondaryLink} style={secondaryLinkStyles}>
+        <Comp to={secondaryLink} style={{ ...secondaryLinkStyles, color }}>
           {getHostName(secondaryLink)}
         </Comp>
       </Cell>

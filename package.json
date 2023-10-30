@@ -26,6 +26,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^4.0.2",
     "@reach/accordion": "^0.18.0",
     "@reach/auto-id": "^0.18.0",
     "@reach/listbox": "^0.18.0",

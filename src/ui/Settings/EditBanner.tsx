@@ -4,6 +4,7 @@ import { EditableElement, EmailBlock, Input } from 'src/ui'
 import { BannerMarkup, useBannerValue } from 'src/templates/EmailTemplateComponents/Banner'
 import { Spacing } from 'src/templates/styles'
 import { ColorPicker } from '../ColorPicker'
+import { TinyColor } from '@ctrl/tinycolor'
 
 export const EditBanner: FC = () => {
   const [banner, setBanner] = useBannerValue()
