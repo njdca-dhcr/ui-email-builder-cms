@@ -2,9 +2,10 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Font, Spacing, StyleDefaults, Text } from '../styles'
+import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
+import { textColorForBackground } from 'src/utils/textColorForBackground'
 
 interface ProgramNameValue {
   name: string
@@ -26,6 +27,11 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue, { initialValue }] = useProgramNameValue(componentId, id)
 
+  const color = textColorForBackground(value.backgroundColor, {
+    dark: Colors.black,
+    light: Colors.white,
+  })
+
   return (
     <Row
       elements={[
@@ -43,7 +49,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
           label="Program name"
           onClick={activate}
           onValueChange={(name) => setValue({ ...value, name })}
-          style={{ ...styles, backgroundColor: value.backgroundColor }}
+          style={{ ...styles, color, backgroundColor: value.backgroundColor }}
           value={value.name}
         />
       </Table>
