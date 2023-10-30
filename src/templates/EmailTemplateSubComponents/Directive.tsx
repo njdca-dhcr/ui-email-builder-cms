@@ -572,7 +572,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                             <td align="center">
                                               <div
                                                 className="step-bar"
-                                                id="step-bar-2-3"
+                                                id="step-bar-1-2-or-2-3"
                                                 style={
                                                   [DirectiveVariant.StepTwoExpansion].includes(
                                                     value.variant,
