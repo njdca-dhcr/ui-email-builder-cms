@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps } from './shared'
 import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/ProgramName'
 import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { ColorPicker } from 'src/ui/ColorPicker'
@@ -10,14 +10,16 @@ export const ProgramNameControls: FC<EmailSubComponentControlsProps> = ({ compon
   const [value, setValue] = useProgramNameValue(componentId, id)
 
   return (
-    <label htmlFor={htmlId} className="program-name-inline-color-picker">
-      <span>Background Color</span>
-      <ColorPicker
-        id={htmlId}
-        className="color-picker-inline"
-        value={value.backgroundColor}
-        onChange={(backgroundColor) => setValue({ ...value, backgroundColor })}
-      />
-    </label>
+    <Control.Group>
+      <Control.Label htmlFor={htmlId} className="program-name-inline-color-picker">
+        <span>Background Color</span>
+        <ColorPicker
+          id={htmlId}
+          className="color-picker-inline"
+          value={value.backgroundColor}
+          onChange={(backgroundColor) => setValue({ ...value, backgroundColor })}
+        />
+      </Control.Label>
+    </Control.Group>
   )
 }

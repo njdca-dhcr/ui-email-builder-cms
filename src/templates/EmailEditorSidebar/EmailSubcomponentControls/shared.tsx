@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { FC, ReactNode } from 'react'
 
 export interface EmailSubComponentControlsProps {
@@ -25,12 +26,13 @@ Group.displayName = 'Control.Group'
 
 interface LabelProps {
   children: ReactNode
+  className?: string
   htmlFor: string
 }
 
-const Label: FC<LabelProps> = ({ children, htmlFor }) => {
+const Label: FC<LabelProps> = ({ children, className, htmlFor }) => {
   return (
-    <label className="control-label" htmlFor={htmlFor}>
+    <label className={classNames('control-label', className)} htmlFor={htmlFor}>
       {children}
     </label>
   )
