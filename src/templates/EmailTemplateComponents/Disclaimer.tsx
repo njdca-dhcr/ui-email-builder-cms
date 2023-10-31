@@ -26,11 +26,9 @@ export const Disclaimer: FC<EmailComponentProps> = ({}) => {
   const [value] = useDisclaimerValue()
 
   return (
-    <>
-      <Row>
-        <td style={styles} dangerouslySetInnerHTML={{ __html: value }} />
-      </Row>
-    </>
+    <Row role="contentinfo">
+      <td style={styles} dangerouslySetInnerHTML={{ __html: value }} />
+    </Row>
   )
 }
 

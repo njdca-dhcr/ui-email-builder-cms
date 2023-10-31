@@ -32,6 +32,7 @@ export const Toggle: FC<Props> = ({ disabled, id, onChange, value }) => {
       </div>
       <input
         id={id}
+        role="switch"
         disabled={disabled}
         type="checkbox"
         checked={value}

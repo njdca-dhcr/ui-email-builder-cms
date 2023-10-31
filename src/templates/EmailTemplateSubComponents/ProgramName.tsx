@@ -44,11 +44,13 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
     >
       <Table width="unset" elements={['row']}>
         <EditableElement
+          aria-level={2}
           element="td"
           initialValue={initialValue.name}
           label="Program name"
           onClick={activate}
           onValueChange={(name) => setValue({ ...value, name })}
+          role="heading"
           style={{ ...styles, color, backgroundColor: value.backgroundColor }}
           value={value.name}
         />

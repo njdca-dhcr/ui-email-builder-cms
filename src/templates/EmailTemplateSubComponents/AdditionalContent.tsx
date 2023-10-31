@@ -22,7 +22,6 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId 
   return (
     <Row onClick={activate}>
       <EditableElement
-        data-testid="footer-additional-content"
         element="td"
         className={StyleDefaults.layout.narrow}
         initialValue={initialValue}

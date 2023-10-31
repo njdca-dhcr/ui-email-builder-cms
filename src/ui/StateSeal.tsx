@@ -12,7 +12,7 @@ export const StateSeal: FC<StateSealProps> = ({ state }) => {
   return (
     <img
       src={`${Config.siteMetadata?.siteUrl}/state-seal-designation/${StateSeals[state]}.png`}
-      alt={startCase(state.toString())}
+      alt={`Seal of ${startCase(state)}`}
     />
   )
 }

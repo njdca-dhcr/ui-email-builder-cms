@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
+import { Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 
 const defaultValue = {
@@ -32,10 +32,12 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
     >
       <Row>
         <EditableElement
+          aria-level={3}
           element="td"
           initialValue={initialValue.title}
           label="Supplemental content title"
           onValueChange={(title) => setValue({ ...value, title })}
+          role="heading"
           style={titleStyles}
           value={value.title}
         />

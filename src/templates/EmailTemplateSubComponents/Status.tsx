@@ -100,10 +100,12 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
         >
           <Row>
             <EditableElement
+              aria-level={2}
               element="td"
               initialValue={initialValue.status}
               label="Status title"
               onValueChange={(status) => setValue({ ...value, status })}
+              role="heading"
               style={styles.title}
             />
           </Row>
@@ -145,13 +147,14 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   style={styles.documentsNeededValue}
                 />
               </Row>
-              <Row elements={['cell', { part: 'table', width: 'unset' }]}>
-                <Row>
+              <Row elements={['cell', { part: 'table', role: 'table', width: 'unset' }]}>
+                <Row role="row">
                   <EditableElement
                     element="td"
                     initialValue={initialValue.emailToLabel}
                     label="Email to label"
                     onValueChange={(emailToLabel) => setValue({ ...value, emailToLabel })}
+                    role="rowheader"
                     style={styles.emailToLabel}
                   />
                   <EditableElement
@@ -159,15 +162,17 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     initialValue={initialValue.emailToValue}
                     label="Email to value"
                     onValueChange={(emailToValue) => setValue({ ...value, emailToValue })}
+                    role="cell"
                     style={styles.emailToValue}
                   />
                 </Row>
-                <Row>
+                <Row role="row">
                   <EditableElement
                     element="td"
                     initialValue={initialValue.subjectLineLabel}
                     label="Subject line label"
                     onValueChange={(subjectLineLabel) => setValue({ ...value, subjectLineLabel })}
+                    role="rowheader"
                     style={styles.subjectLineLabel}
                   />
                   <EditableElement
@@ -175,6 +180,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     initialValue={initialValue.subjectLineValue}
                     label="Subject line value"
                     onValueChange={(subjectLineValue) => setValue({ ...value, subjectLineValue })}
+                    role="cell"
                     style={styles.subjectLineValue}
                   />
                 </Row>
@@ -215,10 +221,12 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <UswdsIcon icon={value.icon} />
             </Cell>
             <EditableElement
+              aria-level={3}
               element="td"
               initialValue={initialValue.amountLabel}
               label="Amount label"
               onValueChange={(amountLabel) => setValue({ ...value, amountLabel })}
+              role="heading"
               style={styles.amountLabel}
             />
           </Row>
@@ -226,13 +234,17 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             condition={[StatusVariant.OverviewWithReasonAndAmountBreakdown].includes(value.variant)}
           >
             <Cell>{null}</Cell>
-            <Cell elements={[{ part: 'table', maxWidth: 273 }]} style={styles.breakdownContainer}>
-              <Row>
+            <Cell
+              elements={[{ part: 'table', role: 'table', maxWidth: 273 }]}
+              style={styles.breakdownContainer}
+            >
+              <Row role="row">
                 <EditableElement
                   element="td"
                   initialValue={initialValue.overpaymentLabel}
                   label="Overpayment label"
                   onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
+                  role="rowheader"
                   style={styles.overpaymentLabel}
                 />
                 <EditableElement
@@ -241,15 +253,17 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   initialValue={initialValue.overpaymentValue}
                   label="Overpayment value"
                   onValueChange={(overpaymentValue) => setValue({ ...value, overpaymentValue })}
+                  role="cell"
                   style={styles.overpaymentValue}
                 />
               </Row>
-              <Row>
+              <Row role="row">
                 <EditableElement
                   element="td"
                   initialValue={initialValue.waivedLabel}
                   label="Waived label"
                   onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
+                  role="rowheader"
                   style={styles.waivedLabel}
                 />
                 <EditableElement
@@ -258,15 +272,17 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   initialValue={initialValue.waivedValue}
                   label="Waived value"
                   onValueChange={(waivedValue) => setValue({ ...value, waivedValue })}
+                  role="cell"
                   style={styles.waivedValue}
                 />
               </Row>
-              <Row>
+              <Row role="row">
                 <EditableElement
                   element="td"
                   initialValue={initialValue.totalLabel}
                   label="Amount total label"
                   onValueChange={(totalLabel) => setValue({ ...value, totalLabel })}
+                  role="rowheader"
                   style={styles.totalLabel}
                 />
                 <EditableElement
@@ -275,6 +291,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   initialValue={initialValue.totalValue}
                   label="Amount total value"
                   onValueChange={(totalValue) => setValue({ ...value, totalValue })}
+                  role="cell"
                   style={styles.totalValue}
                 />
               </Row>

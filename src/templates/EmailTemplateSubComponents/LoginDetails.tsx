@@ -60,10 +60,12 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
             <UswdsIcon icon={value.icon} />
           </Cell>
           <EditableElement
+            aria-level={2}
             element="td"
             onValueChange={(title) => setValue({ ...value, title })}
             initialValue={initialValue.title}
             label="Login details title"
+            role="heading"
             style={styles.title}
           />
         </Row>

@@ -17,6 +17,7 @@ export const useDepartmentSealValue = () => {
 export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> = ({
   departmentSealKey,
 }) => {
+  const departmentSeal = DepartmentSealsMapping[departmentSealKey]
   return (
     <Row
       data-testid="department-seal"
@@ -32,8 +33,8 @@ export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> 
       ]}
     >
       <img
-        alt=""
-        src={`${Config.siteMetadata?.siteUrl}/department-seals/${DepartmentSealsMapping[departmentSealKey].imageName}`}
+        alt={departmentSeal.label}
+        src={`${Config.siteMetadata?.siteUrl}/department-seals/${departmentSeal.imageName}`}
         style={imageStyles}
       />
     </Row>

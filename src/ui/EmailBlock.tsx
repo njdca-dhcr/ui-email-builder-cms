@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
+import React, { AriaRole, CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
 import { EmailTable } from './EmailTable'
 
 type ElementShorthand = 'table' | 'row' | 'cell'
@@ -7,7 +7,9 @@ interface BaseConfig {
   className?: string
   condition?: boolean
   elements?: Array<NonNullable<TableConfig | RowConfig | CellConfig | ElementShorthand>>
+  labelledBy?: string
   onClick?: MouseEventHandler<HTMLElement>
+  role?: AriaRole
   style?: CSSProperties
 }
 
@@ -37,15 +39,28 @@ const Base: FC<EmailPartProps> = ({ children, condition: givenCondition, element
   if (!condition) return null
 
   return elements.reverse().reduce((previous, current) => {
-    const safeCurrent = typeof current === 'string' ? { part: current } : current
-    const { part, ...rest } = safeCurrent
+    const safeCurrent =
+      typeof current === 'string' ? { part: current, labelledBy: undefined } : current
+    const { part, labelledBy, ...rest } = safeCurrent
     switch (safeCurrent.part) {
       case 'table':
-        return <EmailTable {...rest}>{previous}</EmailTable>
+        return (
+          <EmailTable role="presentation" labelledBy={labelledBy} {...rest}>
+            {previous}
+          </EmailTable>
+        )
       case 'row':
-        return <tr {...rest}>{previous}</tr>
+        return (
+          <tr role="presentation" aria-labelledby={labelledBy} {...rest}>
+            {previous}
+          </tr>
+        )
       case 'cell':
-        return <td {...rest}>{previous}</td>
+        return (
+          <td role="presentation" aria-labelledby={labelledBy} {...rest}>
+            {previous}
+          </td>
+        )
     }
   }, children)
 }
@@ -92,13 +107,20 @@ Cell.displayName = 'EmailBlock.Cell'
 
 interface LinkProps {
   children: ReactNode
+  labelledBy?: string
   style?: CSSProperties
   to: string
 }
 
-const Link: FC<LinkProps> = ({ children, style, to }) => {
+const Link: FC<LinkProps> = ({ children, labelledBy, style, to }) => {
   return (
-    <a href={to} rel="noopener noreferrer" target="_blank" style={style}>
+    <a
+      aria-labelledby={labelledBy}
+      href={to}
+      rel="noopener noreferrer"
+      style={style}
+      target="_blank"
+    >
       {children}
     </a>
   )

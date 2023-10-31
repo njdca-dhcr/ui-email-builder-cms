@@ -97,19 +97,23 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
           </Cell>
           {isReminder && (
             <EditableElement
+              aria-level={2}
               element="td"
               initialValue={initialValue.reminderTitle}
               label="Reminder title"
               onValueChange={(reminderTitle) => setValue({ ...value, reminderTitle })}
+              role="heading"
               style={styles.title}
             />
           )}
           {isAppealRights && (
             <EditableElement
+              aria-level={2}
               element="td"
               initialValue={initialValue.appealRightsTitle}
               label="Appeal Rights title"
               onValueChange={(appealRightsTitle) => setValue({ ...value, appealRightsTitle })}
+              role="heading"
               style={styles.title}
             />
           )}
@@ -220,6 +224,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             <Row>
               <EditableElement
                 element="td"
+                id="appeal-rights-label"
                 initialValue={initialValue.appealRightsInfoLabel}
                 label="Appeal Rights information label"
                 onValueChange={(appealRightsInfoLabel) =>
@@ -230,81 +235,97 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             </Row>
             <Row
               elements={[
-                { part: 'cell', style: styles.appealLabelAndValue },
-                { part: 'table', width: 'unset' },
-                'row',
+                'cell',
+                { part: 'table', role: 'table', labelledBy: 'appeal-rights-label' },
               ]}
             >
-              <EditableElement
-                element="td"
-                initialValue={initialValue.appealRightsProgramCodeLabel}
-                label="Appeal Rights program code label"
-                onValueChange={(appealRightsProgramCodeLabel) =>
-                  setValue({ ...value, appealRightsProgramCodeLabel })
-                }
-                style={styles.appealLabel}
-              />
-              <EditableElement
-                element="td"
-                initialValue={initialValue.appealRightsProgramCodeValue}
-                label="Appeal Rights program code value"
-                onValueChange={(appealRightsProgramCodeValue) =>
-                  setValue({ ...value, appealRightsProgramCodeValue })
-                }
-                style={styles.appealText}
-              />
-            </Row>
-            <Row
-              elements={[
-                { part: 'cell', style: styles.appealLabelAndValue },
-                { part: 'table', width: 'unset' },
-                'row',
-              ]}
-            >
-              <EditableElement
-                element="td"
-                initialValue={initialValue.appealRightsClaimDateLabel}
-                label="Appeal Rights claim date label"
-                onValueChange={(appealRightsClaimDateLabel) =>
-                  setValue({ ...value, appealRightsClaimDateLabel })
-                }
-                style={styles.appealLabel}
-              />
-              <EditableElement
-                element="td"
-                initialValue={initialValue.appealRightsClaimDateValue}
-                label="Appeal Rights claim date value"
-                onValueChange={(appealRightsClaimDateValue) =>
-                  setValue({ ...value, appealRightsClaimDateValue })
-                }
-                style={styles.appealText}
-              />
-            </Row>
-            <Row
-              elements={[
-                { part: 'cell', style: styles.appealLabelAndValue },
-                { part: 'table', width: 'unset' },
-                'row',
-              ]}
-            >
-              <EditableElement
-                element="td"
-                initialValue={initialValue.appealRightsDeterminationDateLabel}
-                label="Appeal Rights determination date label"
-                onValueChange={(appealRightsDeterminationDateLabel) =>
-                  setValue({ ...value, appealRightsDeterminationDateLabel })
-                }
-                style={styles.appealLabel}
-              />
-              <EditableElement
-                element="td"
-                initialValue={initialValue.appealRightsDeterminationDateValue}
-                label="Appeal Rights determination date value"
-                onValueChange={(appealRightsDeterminationDateValue) =>
-                  setValue({ ...value, appealRightsDeterminationDateValue })
-                }
-                style={styles.appealText}
-              />
+              <Row
+                elements={[
+                  { part: 'cell', style: styles.appealLabelAndValue },
+                  { part: 'table', width: 'unset' },
+                  'row',
+                ]}
+                role="row"
+              >
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.appealRightsProgramCodeLabel}
+                  label="Appeal Rights program code label"
+                  onValueChange={(appealRightsProgramCodeLabel) =>
+                    setValue({ ...value, appealRightsProgramCodeLabel })
+                  }
+                  role="rowheader"
+                  style={styles.appealLabel}
+                />
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.appealRightsProgramCodeValue}
+                  label="Appeal Rights program code value"
+                  onValueChange={(appealRightsProgramCodeValue) =>
+                    setValue({ ...value, appealRightsProgramCodeValue })
+                  }
+                  role="cell"
+                  style={styles.appealText}
+                />
+              </Row>
+              <Row
+                elements={[
+                  { part: 'cell', style: styles.appealLabelAndValue },
+                  { part: 'table', width: 'unset' },
+                  'row',
+                ]}
+                role="row"
+              >
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.appealRightsClaimDateLabel}
+                  label="Appeal Rights claim date label"
+                  onValueChange={(appealRightsClaimDateLabel) =>
+                    setValue({ ...value, appealRightsClaimDateLabel })
+                  }
+                  role="rowheader"
+                  style={styles.appealLabel}
+                />
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.appealRightsClaimDateValue}
+                  label="Appeal Rights claim date value"
+                  onValueChange={(appealRightsClaimDateValue) =>
+                    setValue({ ...value, appealRightsClaimDateValue })
+                  }
+                  role="cell"
+                  style={styles.appealText}
+                />
+              </Row>
+              <Row
+                elements={[
+                  { part: 'cell', style: styles.appealLabelAndValue },
+                  { part: 'table', width: 'unset' },
+                  'row',
+                ]}
+                role="row"
+              >
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.appealRightsDeterminationDateLabel}
+                  label="Appeal Rights determination date label"
+                  onValueChange={(appealRightsDeterminationDateLabel) =>
+                    setValue({ ...value, appealRightsDeterminationDateLabel })
+                  }
+                  role="rowheader"
+                  style={styles.appealLabel}
+                />
+                <EditableElement
+                  element="td"
+                  initialValue={initialValue.appealRightsDeterminationDateValue}
+                  label="Appeal Rights determination date value"
+                  onValueChange={(appealRightsDeterminationDateValue) =>
+                    setValue({ ...value, appealRightsDeterminationDateValue })
+                  }
+                  role="cell"
+                  style={styles.appealText}
+                />
+              </Row>
             </Row>
           </Cell>
         </Row>

@@ -14,12 +14,12 @@ describe('DirectiveControls', () => {
         <DirectiveControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
       </EmailPartsContent>,
     )
-    let toggle = queryByRole('checkbox')
+    let toggle = queryByRole('switch')
     expect(toggle).not.toBeNull()
     expect(toggle).toBeChecked()
 
     await user.click(toggle!)
-    toggle = queryByRole('checkbox')
+    toggle = queryByRole('switch')
     expect(toggle).not.toBeNull()
     expect(toggle).not.toBeChecked()
   })
@@ -45,7 +45,7 @@ describe('DirectiveControls', () => {
 
   it('provides an input for the link href', async () => {
     const user = userEvent.setup()
-    const { getByRole, queryByRole } = render(
+    const { queryByRole } = render(
       <EmailPartsContent>
         <DirectiveControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
       </EmailPartsContent>,
