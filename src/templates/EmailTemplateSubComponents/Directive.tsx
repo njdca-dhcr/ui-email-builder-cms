@@ -178,36 +178,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                         cellSpacing="0"
                                         cellPadding="0"
                                         border={0}
-                                        width="100%"
+                                        width="unset"
                                       >
                                         <tbody>
                                           <tr>
-                                            <td>
-                                              <Link
-                                                to={value.linkHref}
-                                                style={getStartedButtonStyles}
-                                              >
-                                                <div>
-                                                  <div style={spaceStyles}>
-                                                    {/* <!--[if mso]>
-                                            <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                          <![endif]--> */}
-                                                    &nbsp;
-                                                  </div>
-                                                  {/* <!--[if mso]>
-                                          <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
-                                        <![endif]--> */}
-                                                  <span>{value.buttonLabel}</span>
-                                                  {/* <!--[if mso]>
-                                          <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
-                                        <![endif]--> */}
-                                                  <div style={spaceStyles}>
-                                                    {/* <!--[if mso]>
-                                            <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                          <![endif]--> */}
-                                                    &nbsp;
-                                                  </div>
-                                                </div>
+                                            <td style={getStartedButtonStyles}>
+                                              <Link to={value.linkHref}>
+                                                <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
                                               </Link>
                                             </td>
                                           </tr>
@@ -452,36 +429,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                         cellSpacing="0"
                                                         cellPadding="0"
                                                         border={0}
-                                                        width="100%"
+                                                        width="unset"
                                                       >
                                                         <tbody>
                                                           <tr>
-                                                            <td>
-                                                              <Link
-                                                                to={value.linkHref}
-                                                                style={getStartedButtonStyles}
-                                                              >
-                                                                <div>
-                                                                  <div style={spaceStyles}>
-                                                                    {/* <!--[if mso]>
-                                                          <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                                        <![endif]--> */}
-                                                                    &nbsp;
-                                                                  </div>
-                                                                  {/* <!--[if mso]>
-                                                        <i style={{letterSpacing: 43px; mso-font-width: -100%;">&nbsp;</i>
-                                                      <![endif]--> */}
-                                                                  <span>{value.buttonLabel}</span>
-                                                                  {/* <!--[if mso]>
-                                                        <i style={{letterSpacing: 40px; mso-font-width: -100%;">&nbsp;</i>
-                                                      <![endif]--> */}
-                                                                  <div style={spaceStyles}>
-                                                                    {/* <!--[if mso]>
-                                                          <i style={{letterSpacing: 161px; mso-font-width: -100%;">&nbsp;</i>
-                                                        <![endif]--> */}
-                                                                    &nbsp;
-                                                                  </div>
-                                                                </div>
+                                                            <td style={getStartedButtonStyles}>
+                                                              <Link to={value.linkHref}>
+                                                                <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
                                                               </Link>
                                                             </td>
                                                           </tr>
@@ -810,15 +764,17 @@ const stepBar23Styles: CSSProperties = {
 }
 
 const getStartedButtonStyles: CSSProperties = {
-  ...Text.body.main.bold,
   backgroundColor: Colors.black,
-  textDecoration: 'none',
+  borderRadius: 10,
+  paddingTop: Spacing.size.medium,
+  paddingBottom: Spacing.size.medium,
+  paddingLeft: 65,
+  paddingRight: 65
+}
+
+const getStartedButtonTextStyles: CSSProperties = {
   color: Colors.white,
-  borderRadius: '10px',
-  display: 'inline-block',
-  width: '220px',
-  textAlign: 'center',
-  padding: '5px 0px',
+  fontWeight: Font.weight.bold,
 }
 
 const supportiveInformationStyles: CSSProperties = {
