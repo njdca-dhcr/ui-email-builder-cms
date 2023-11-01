@@ -11,7 +11,7 @@ const stateSealOptions = Object.keys(StateSeals).map((key) => ({
   value: key,
 }))
 
-export const StateSealSelect: FC = () => {
+export const EditStateSeal: FC = () => {
   const [stateSeal, setStateSeal] = useStateSealValue()
 
   return (

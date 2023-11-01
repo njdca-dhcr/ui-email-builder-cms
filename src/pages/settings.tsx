@@ -3,11 +3,10 @@ import { HeadFC } from 'gatsby'
 import { SkipNavContent } from '@reach/skip-nav'
 import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
-import { EditDisclaimer, EditBanner, StateSealSelect } from 'src/ui/Settings'
+import { EditDisclaimer, EditBanner, EditStateSeal, EditDepartmentSeal } from 'src/ui/Settings'
 
 import './settings.css'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { EditDepartmentSeal } from 'src/ui/Settings/EditDepartmentSeal'
 
 const SettingsPage: FC = () => {
   return (
@@ -28,7 +27,7 @@ const SettingsPage: FC = () => {
             <EditDepartmentSeal />
           </div>
           <div className="section-container">
-            <StateSealSelect />
+            <EditStateSeal />
           </div>
           <div className="section-container">
             <EditDisclaimer />
