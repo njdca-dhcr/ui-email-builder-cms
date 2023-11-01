@@ -184,7 +184,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                           <tr>
                                             <td style={getStartedButtonStyles}>
                                               <Link to={value.linkHref}>
-                                                <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
+                                                <span style={getStartedButtonTextStyles}>
+                                                  {value.buttonLabel}
+                                                </span>
                                               </Link>
                                             </td>
                                           </tr>
@@ -435,7 +437,11 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                                                           <tr>
                                                             <td style={getStartedButtonStyles}>
                                                               <Link to={value.linkHref}>
-                                                                <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
+                                                                <span
+                                                                  style={getStartedButtonTextStyles}
+                                                                >
+                                                                  {value.buttonLabel}
+                                                                </span>
                                                               </Link>
                                                             </td>
                                                           </tr>
@@ -769,7 +775,7 @@ const getStartedButtonStyles: CSSProperties = {
   paddingTop: Spacing.size.medium,
   paddingBottom: Spacing.size.medium,
   paddingLeft: 65,
-  paddingRight: 65
+  paddingRight: 65,
 }
 
 const getStartedButtonTextStyles: CSSProperties = {
