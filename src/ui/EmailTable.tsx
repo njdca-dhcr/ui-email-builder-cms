@@ -9,7 +9,7 @@ export interface EmailTableProps {
   role?: AriaRole
   style?: CSSProperties
   width?: 'unset' | string | number
-  align?: 'left' | 'center' | 'right'
+  align?: 'left' | 'center' | 'right' | 'justify' | 'char'
 }
 
 export const EmailTable: FC<EmailTableProps> = ({

@@ -479,8 +479,8 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
               {/* Step 3 Additional Information */}
               {value.showStep3AdditionalContent && (
-                <tr>
-                  <td align="center">
+                <Row>
+                  <Cell align="center">
                     <div
                       className="step-bar"
                       id="step-bar-2-3"
@@ -489,8 +489,8 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                         background: 'transparent',
                       }}
                     ></div>
-                  </td>
-                  <td style={tdPaddingStyles}>
+                  </Cell>
+                  <Cell style={tdPaddingStyles}>
                     <div style={{ lineHeight: '16px' }}>
                       <EditableElement
                         element="span"
@@ -502,8 +502,8 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                       />
                     </div>
                     <div style={spaceStyles}>&nbsp;</div>
-                  </td>
-                </tr>
+                  </Cell>
+                </Row>
               )}
             </Row>
           </>

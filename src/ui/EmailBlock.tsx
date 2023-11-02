@@ -17,7 +17,7 @@ interface TableConfig extends BaseConfig {
   part: 'table'
   width?: 'unset' | string | number
   maxWidth?: string | number
-  align?: 'left' | 'center' | 'right'
+  align?: 'left' | 'center' | 'right' | 'justify' | 'char'
 }
 
 interface RowConfig extends BaseConfig {
