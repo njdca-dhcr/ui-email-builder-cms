@@ -36,6 +36,6 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ id, componentId 
 
 const styles: CSSProperties = {
   ...StyleDefaults.inline.colors,
-  ...Text.caption.small.regular,
-  color: Colors.gray,
+  ...Text.caption.large.regular,
+  color: Colors.black,
 }
