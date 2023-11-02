@@ -18,6 +18,7 @@ components:
       - kind: Status
         required: true
       - kind: SupplementalContent
+      - kind: SupplementalContent
     required: true
   - kind: Footer
     subComponents:

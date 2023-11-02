@@ -19,9 +19,11 @@ components:
         required: true
         description: Summary of your email in 1 sentence
       - kind: Status
-      - kind: RulesRightsRegulations
       - kind: SupplementalContent
         required: true
+      - kind: SupplementalContent
+      - kind: RulesRightsRegulations
+        required: false
     required: true
   - kind: Footer
     subComponents:

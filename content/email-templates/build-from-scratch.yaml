@@ -14,8 +14,9 @@ components:
       - kind: Intro
       - kind: Status
       - kind: Directive
-      - kind: RulesRightsRegulations
       - kind: SupplementalContent
+      - kind: SupplementalContent
+      - kind: RulesRightsRegulations
       - kind: LoginDetails
     required: true
   - kind: Footer

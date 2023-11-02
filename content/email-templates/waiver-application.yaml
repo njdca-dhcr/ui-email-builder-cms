@@ -18,6 +18,7 @@ components:
       - kind: Intro
       - kind: Directive
       - kind: SupplementalContent
+      - kind: SupplementalContent
   - kind: Footer
     subComponents:
       - kind: AdditionalContent
