@@ -21,7 +21,7 @@ export const EmailTable: FC<EmailTableProps> = ({
   role,
   style,
   width,
-  align
+  align,
 }) => {
   return (
     <table

@@ -94,61 +94,49 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
     <>
       <Row
         elements={[
-          {part: 'cell', className: 'section-wrapper'},
-          {part: 'table', className: 'el-center', align: 'center'},
+          { part: 'cell', className: 'section-wrapper' },
+          { part: 'table', className: 'el-center', align: 'center' },
           'row',
-          {part: 'cell', className: StyleDefaults.layout.narrow, style: outerCellStyles},
-          {part: 'table', style: [DirectiveVariant.PayOnline].includes(value.variant) ? payOnlineBoxStyles : {}}
+          { part: 'cell', className: StyleDefaults.layout.narrow, style: outerCellStyles },
+          {
+            part: 'table',
+            style: [DirectiveVariant.PayOnline].includes(value.variant) ? payOnlineBoxStyles : {},
+          },
         ]}
       >
         {/* Directive Title */}
-        {value.showTitle && (<>
-          <Row
-          elements={[
-            'cell',
-            'table',
-            'row',
-            {part: 'cell', style: { textAlign: 'left' }}
-          ]}>
-            <div style={{ lineHeight: '150%' }}>
-              <span style={stepNumberLabel}>
-                {[DirectiveVariant.PayOnline].includes(value.variant) ? (
-                  <>
-                    <b>Pay Online</b> today
-                  </>
-                ) : (
-                  <EditableElement
-                    element="b"
-                    initialValue={initialValue.title}
-                    label="Directive Title"
-                    onValueChange={(title) => setValue({ ...value, title })}
-                    value={value.title}
-                  />
-                )}
-              </span>
-            </div>
-          </Row>
-      
-            
-        </>)}
-
-        {/* One Step or Pay Online */}
-        {[DirectiveVariant.OneStep, DirectiveVariant.PayOnline].includes(
-          value.variant,
-        ) && (
+        {value.showTitle && (
           <>
             <Row
-              elements={[
-                'cell',
-                {part: 'table', align: 'left'}
-              ]}
+              elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}
             >
+              <div style={{ lineHeight: '150%' }}>
+                <span style={stepNumberLabel}>
+                  {[DirectiveVariant.PayOnline].includes(value.variant) ? (
+                    <>
+                      <b>Pay Online</b> today
+                    </>
+                  ) : (
+                    <EditableElement
+                      element="b"
+                      initialValue={initialValue.title}
+                      label="Directive Title"
+                      onValueChange={(title) => setValue({ ...value, title })}
+                      value={value.title}
+                    />
+                  )}
+                </span>
+              </div>
+            </Row>
+          </>
+        )}
+
+        {/* One Step or Pay Online */}
+        {[DirectiveVariant.OneStep, DirectiveVariant.PayOnline].includes(value.variant) && (
+          <>
+            <Row elements={['cell', { part: 'table', align: 'left' }]}>
               {/* Space Above Button */}
-              <Row
-                elements={[
-                  'cell'
-                ]}
-              >
+              <Row elements={['cell']}>
                 <div style={spaceStyles}>&nbsp;</div>
               </Row>
 
@@ -156,45 +144,35 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row
                 elements={[
                   'cell',
-                  {part: 'table', width: 'unset'},
+                  { part: 'table', width: 'unset' },
                   'row',
-                  {part: 'cell', style: getStartedButtonStyles}
+                  { part: 'cell', style: getStartedButtonStyles },
                 ]}
               >
                 <Link to={value.linkHref}>
-                  <span style={getStartedButtonTextStyles}>
-                    {value.buttonLabel}
-                  </span>
+                  <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
                 </Link>
               </Row>
 
               {/* Space After Button */}
-              <Row
-                elements={[
-                  'cell'
-                ]}
-              >
+              <Row elements={['cell']}>
                 <div style={spaceStyles}>&nbsp;</div>
               </Row>
 
               {/* Same Link As Button */}
-              <Row
-                elements={[
-                  'cell',
-                ]}
-              >
-                  <div
-                    className="link-div"
-                    style={{
-                      lineHeight: '150%',
-                      wordBreak: 'break-all',
-                      paddingBottom: '16px',
-                    }}
-                  >
-                    <Link to={value.linkHref} style={hrefTextStyles}>
-                      {value.linkHref}
-                    </Link>
-                  </div>
+              <Row elements={['cell']}>
+                <div
+                  className="link-div"
+                  style={{
+                    lineHeight: '150%',
+                    wordBreak: 'break-all',
+                    paddingBottom: '16px',
+                  }}
+                >
+                  <Link to={value.linkHref} style={hrefTextStyles}>
+                    {value.linkHref}
+                  </Link>
+                </div>
               </Row>
             </Row>
 
@@ -230,9 +208,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
                 <tr>
                   <td>
-                    <div
-                      style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}
-                    >
+                    <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>
                       &nbsp;
                     </div>
                   </td>
@@ -262,12 +238,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           <>
             {/* Directive Label */}
             <Row
-              elements={[
-                'cell',
-                'table',
-                'row',
-                {part: 'cell', style: { textAlign: 'left' }}
-              ]}
+              elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}
             >
               <div style={{ lineHeight: '150%' }}>
                 <EditableElement
@@ -282,42 +253,22 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             </Row>
 
             {/* Space Above Steps */}
-            <Row
-              elements={[
-                'cell'
-              ]}
-            >
-              <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>
-                &nbsp;
-              </div>
+            <Row elements={['cell']}>
+              <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>&nbsp;</div>
             </Row>
 
             {/* Steps */}
-            <Row
-              elements={[
-                'cell',
-                {part: 'table', align: 'center'},
-                'row',
-                'cell',
-                'table',
-              ]}
-            >
+            <Row elements={['cell', { part: 'table', align: 'center' }, 'row', 'cell', 'table']}>
               {/* Step 1 */}
               <Row>
                 {/* Step 1 Circle Number */}
                 <Cell>
-                  <div
-                    className="circle-number"
-                    style={circleNumberStyles}
-                  >
+                  <div className="circle-number" style={circleNumberStyles}>
                     <Table
                       className="circle-number-table el-center"
                       align="center"
                       style={circleNumberTableStyles}
-                      elements={[
-                        'row',
-                        'cell',
-                      ]}
+                      elements={['row', 'cell']}
                     >
                       1
                     </Table>
@@ -332,9 +283,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                         element="b"
                         initialValue={initialValue.step1Label}
                         label="Label for Step 1"
-                        onValueChange={(step1Label) =>
-                          setValue({ ...value, step1Label })
-                        }
+                        onValueChange={(step1Label) => setValue({ ...value, step1Label })}
                         value={value.step1Label}
                       />
                     </span>
@@ -346,11 +295,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
               <Row>
                 <Cell align="center">
-                  <div
-                    id="step-bar-1-2"
-                    className="step-bar"
-                    style={stepBar12Styles}
-                  ></div>
+                  <div id="step-bar-1-2" className="step-bar" style={stepBar12Styles}></div>
                 </Cell>
                 <Cell style={tdPaddingStyles}>
                   {value.showStep1AdditionalContent && (
@@ -359,9 +304,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                         element="span"
                         initialValue={initialValue.step1Additional}
                         label="Additional information for Step 1"
-                        onValueChange={(step1Additional) =>
-                          setValue({ ...value, step1Additional })
-                        }
+                        onValueChange={(step1Additional) => setValue({ ...value, step1Additional })}
                         value={value.step1Additional}
                         style={stepDescriptionStyles}
                       />
@@ -378,17 +321,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <Row
                       elements={[
                         'cell',
-                        {part: 'table', width: 'unset'},
+                        { part: 'table', width: 'unset' },
                         'row',
-                        {part: 'cell', style: getStartedButtonStyles}
+                        { part: 'cell', style: getStartedButtonStyles },
                       ]}
                     >
                       <Link to={value.linkHref}>
-                        <span
-                          style={getStartedButtonTextStyles}
-                        >
-                          {value.buttonLabel}
-                        </span>
+                        <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
                       </Link>
                     </Row>
 
@@ -407,10 +346,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                           paddingBottom: '16px',
                         }}
                       >
-                        <Link
-                          to={value.linkHref}
-                          style={hrefTextStyles}
-                        >
+                        <Link to={value.linkHref} style={hrefTextStyles}>
                           {value.linkHref}
                         </Link>
                       </div>
@@ -423,10 +359,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row>
                 {/* Step 2 Circle Number */}
                 <Cell>
-                  <div
-                    className="circle-number"
-                    style={circleNumberStyles}
-                  >
+                  <div className="circle-number" style={circleNumberStyles}>
                     <Table
                       className="circle-number-table el-center"
                       align="center"
@@ -440,17 +373,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
                 {/* Step 2 Label */}
                 <Cell style={tdPaddingStyles}>
-                  <div
-                    style={{ lineHeight: '145%', paddingTop: '2px' }}
-                  >
+                  <div style={{ lineHeight: '145%', paddingTop: '2px' }}>
                     <span style={stepNumberLabel}>
                       <EditableElement
                         element="b"
                         initialValue={initialValue.step2Label}
                         label="Label for Step 2"
-                        onValueChange={(step2Label) =>
-                          setValue({ ...value, step2Label })
-                        }
+                        onValueChange={(step2Label) => setValue({ ...value, step2Label })}
                         value={value.step2Label}
                       />
                     </span>
@@ -465,9 +394,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     className="step-bar"
                     id="step-bar-1-2-or-2-3"
                     style={
-                      [DirectiveVariant.StepTwoExpansion].includes(
-                        value.variant,
-                      )
+                      [DirectiveVariant.StepTwoExpansion].includes(value.variant)
                         ? stepBar12Styles
                         : stepBar23Styles
                     }
@@ -482,26 +409,20 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                         element="span"
                         initialValue={initialValue.step2Additional}
                         label="Additional information for Step 2"
-                        onValueChange={(step2Additional) =>
-                          setValue({ ...value, step2Additional })
-                        }
+                        onValueChange={(step2Additional) => setValue({ ...value, step2Additional })}
                         value={value.step2Additional}
                         style={stepDescriptionStyles}
                       />
                     </div>
                     <div style={spaceStyles}>&nbsp;</div>
 
-                    {[DirectiveVariant.StepTwoExpansion].includes(
-                      value.variant,
-                    ) && (
+                    {[DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
                       <>
                         <EditableElement
                           element="div"
                           initialValue={initialValue.step2Tertiary}
                           label="Tertiary information for Step 2"
-                          onValueChange={(step2Tertiary) =>
-                            setValue({ ...value, step2Tertiary })
-                          }
+                          onValueChange={(step2Tertiary) => setValue({ ...value, step2Tertiary })}
                           value={value.step2Tertiary}
                           style={supportiveInformationStyles}
                         />
@@ -528,10 +449,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row>
                 {/* Step 3 Circle Number */}
                 <Cell>
-                  <div
-                    className="circle-number"
-                    style={circleNumberStyles}
-                  >
+                  <div className="circle-number" style={circleNumberStyles}>
                     <Table
                       className="circle-number-table el-center"
                       style={circleNumberTableStyles}
@@ -551,9 +469,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                         element="b"
                         initialValue={initialValue.step3Label}
                         label="Label for Step 3"
-                        onValueChange={(step3Label) =>
-                          setValue({ ...value, step3Label })
-                        }
+                        onValueChange={(step3Label) => setValue({ ...value, step3Label })}
                         value={value.step3Label}
                       />
                     </span>
@@ -580,9 +496,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                         element="span"
                         initialValue={initialValue.step3Additional}
                         label="Additional information for Step 3"
-                        onValueChange={(step3Additional) =>
-                          setValue({ ...value, step3Additional })
-                        }
+                        onValueChange={(step3Additional) => setValue({ ...value, step3Additional })}
                         value={value.step3Additional}
                         style={stepDescriptionStyles}
                       />
