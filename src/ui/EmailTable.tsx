@@ -1,6 +1,6 @@
 import React, { AriaRole, CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
 
-interface EmailTableProps {
+export interface EmailTableProps {
   children: ReactNode
   className?: string
   labelledBy?: string
@@ -9,6 +9,7 @@ interface EmailTableProps {
   role?: AriaRole
   style?: CSSProperties
   width?: 'unset' | string | number
+  align?: 'left' | 'center' | 'right'
 }
 
 export const EmailTable: FC<EmailTableProps> = ({
@@ -20,6 +21,7 @@ export const EmailTable: FC<EmailTableProps> = ({
   role,
   style,
   width,
+  align
 }) => {
   return (
     <table
@@ -32,6 +34,7 @@ export const EmailTable: FC<EmailTableProps> = ({
       role={role}
       style={{ ...style, maxWidth }}
       width={width ?? '100%'}
+      align={align ?? 'left'}
     >
       <tbody role="presentation">{children}</tbody>
     </table>

@@ -17,6 +17,7 @@ interface TableConfig extends BaseConfig {
   part: 'table'
   width?: 'unset' | string | number
   maxWidth?: string | number
+  align?: 'left' | 'center' | 'right'
 }
 
 interface RowConfig extends BaseConfig {
@@ -24,8 +25,8 @@ interface RowConfig extends BaseConfig {
 }
 
 interface CellConfig extends BaseConfig {
-  align?: 'left' | 'center' | 'right' | 'justify' | 'char'
   part: 'cell'
+  align?: 'left' | 'center' | 'right' | 'justify' | 'char'
 }
 
 interface EmailPartProps {
