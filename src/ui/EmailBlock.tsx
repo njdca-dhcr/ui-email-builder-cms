@@ -17,7 +17,7 @@ interface TableConfig extends BaseConfig {
   part: 'table'
   width?: 'unset' | string | number
   maxWidth?: string | number
-  align?: 'left' | 'center' | 'right' | 'justify' | 'char'
+  align?: 'left' | 'center' | 'right'
 }
 
 interface RowConfig extends BaseConfig {
@@ -46,7 +46,11 @@ const Base: FC<EmailPartProps> = ({ children, condition: givenCondition, element
     switch (safeCurrent.part) {
       case 'table':
         return (
-          <EmailTable role="presentation" labelledBy={labelledBy} {...rest}>
+          <EmailTable
+            role="presentation"
+            labelledBy={labelledBy}
+            {...(rest as Partial<TableConfig>)}
+          >
             {previous}
           </EmailTable>
         )
