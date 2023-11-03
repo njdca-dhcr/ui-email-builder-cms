@@ -107,7 +107,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}
             >
               <div style={{ lineHeight: '150%' }}>
-                <span style={stepNumberLabel}>
+                <h2 style={stepNumberLabel}>
                   {[DirectiveVariant.PayOnline].includes(value.variant) ? (
                     <>
                       <b>Pay Online</b> today
@@ -120,7 +120,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                       value={value.title}
                     />
                   )}
-                </span>
+                </h2>
               </div>
             </Row>
           </>
@@ -532,6 +532,7 @@ const stepNumberLabel: CSSProperties = {
   ...Text.header.h3.regular,
   color: Colors.black,
   textAlign: 'left',
+  margin: 0,
 }
 
 const stepDescriptionStyles: CSSProperties = {
