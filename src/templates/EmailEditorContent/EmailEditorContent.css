@@ -9,7 +9,7 @@
 .email-preview-actions fieldset {
   --border-radius: 10px;
   align-items: stretch;
-  border: 1px solid var(--gray);
+  border: 1px solid var(--gray-medium);
   border-radius: var(--border-radius);
   display: flex;
   margin: 0;
@@ -30,7 +30,7 @@
 }
 
 .email-preview-actions label:has(:checked) {
-  background-color: var(--gray);
+  background-color: var(--gray-medium);
 }
 
 .email-preview-actions label:first-of-type {
@@ -64,7 +64,7 @@
 }
 
 .button-group > button:active {
-  background-color: var(--gray);
+  background-color: var(--gray-light);
 }
 
 .email-preview {

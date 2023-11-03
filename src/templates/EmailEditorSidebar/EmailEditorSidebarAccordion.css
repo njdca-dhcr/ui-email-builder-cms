@@ -14,7 +14,7 @@
 }
 
 .sidebar-accordion-container .accordion-controls {
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--gray-medium);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -29,11 +29,11 @@
 }
 
 .sidebar-accordion-container .accordion-controls button:active {
-  background-color: var(--gray);
+  background-color: var(--gray-light);
 }
 
 .sidebar-accordion-container .accordion-controls button:last-of-type {
-  border-left: 1px solid #d9d9d9;
+  border-left: 1px solid var(--gray-medium);
 }
 
 .accordion-email-component {

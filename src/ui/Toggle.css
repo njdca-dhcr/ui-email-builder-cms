@@ -85,9 +85,9 @@
 }
 
 .toggle-disabled {
-  --pill-background-color: var(--gray);
+  --pill-background-color: var(--gray-light);
   --pill-border-color: var(--blue-gray-light);
-  --icon-color: var(--gray);
+  --icon-color: var(--gray-light);
   --circle-color: var(--blue-gray-light);
 }
 
