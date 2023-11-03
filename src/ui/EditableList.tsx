@@ -35,6 +35,7 @@ const useEditableListContext = () => useContext(EditableListContext)
 interface EditableListProps {
   children: ReactNode
   collection: string[]
+  element: 'ol' | 'ul'
   setCollection: (collection: string[]) => void
   style?: CSSProperties
 }
@@ -52,6 +53,7 @@ const focusAndPlaceCursorAtEnd = (element: HTMLElement) => {
 export const EditableList: FC<EditableListProps> = ({
   children,
   collection,
+  element,
   setCollection,
   style,
 }) => {
@@ -92,9 +94,11 @@ export const EditableList: FC<EditableListProps> = ({
     [collection, setCollection, valueKey, toggleValueKey],
   )
 
+  const Element = element
+
   return (
     <EditableListContext.Provider value={contextValue}>
-      <ol style={style}>{children}</ol>
+      <Element style={style}>{children}</Element>
     </EditableListContext.Provider>
   )
 }

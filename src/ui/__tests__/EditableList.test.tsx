@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event'
 describe('EditableList', () => {
   it('is an ordered list', () => {
     const { queryAllByRole } = render(
-      <EditableList collection={[faker.lorem.word()]} setCollection={jest.fn()}>
+      <EditableList element="ol" collection={[faker.lorem.word()]} setCollection={jest.fn()}>
         <li />
       </EditableList>,
     )
@@ -17,7 +17,7 @@ describe('EditableList', () => {
   it('displays its children', () => {
     const value = faker.lorem.paragraph()
     const { baseElement } = render(
-      <EditableList collection={[faker.lorem.word()]} setCollection={jest.fn()}>
+      <EditableList element="ol" collection={[faker.lorem.word()]} setCollection={jest.fn()}>
         <li>
           <span>{value}</span>
         </li>
@@ -31,7 +31,7 @@ describe('EditableList', () => {
       const user = userEvent.setup()
       const handleChange = jest.fn()
       const { getByLabelText } = render(
-        <EditableList collection={['a', 'b', 'c']} setCollection={handleChange}>
+        <EditableList element="ol" collection={['a', 'b', 'c']} setCollection={handleChange}>
           <EditableListItem index={0} value="a" label="Item 1" />
           <EditableListItem index={1} value="b" label="Item 2" />
           <EditableListItem index={2} value="c" label="Item 3" />
@@ -55,7 +55,7 @@ describe('EditableList', () => {
       const [collection, setCollection] = useState(['a', 'b', 'c'])
 
       return (
-        <EditableList collection={collection} setCollection={setCollection}>
+        <EditableList element="ol" collection={collection} setCollection={setCollection}>
           {collection.map((item, index) => (
             <EditableListItem key={index} index={index} value={item} label={`Item ${index + 1}`} />
           ))}
@@ -89,7 +89,7 @@ describe('EditableList', () => {
       const [collection, setCollection] = useState(initial)
 
       return (
-        <EditableList collection={collection} setCollection={setCollection}>
+        <EditableList element="ol" collection={collection} setCollection={setCollection}>
           {collection.map((item, index) => (
             <EditableListItem key={index} index={index} value={item} label={`Item ${index + 1}`} />
           ))}

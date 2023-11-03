@@ -361,6 +361,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
           <Cell condition={isYourRights} style={styles.yourRightsListContainer}>
             <EditableList
               collection={value.yourRightsList}
+              element="ol"
               setCollection={setYourRightsList}
               style={styles.yourRightsList}
             >

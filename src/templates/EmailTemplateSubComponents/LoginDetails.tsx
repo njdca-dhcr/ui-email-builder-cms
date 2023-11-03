@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react'
+import React, { CSSProperties, FC, useCallback } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
@@ -7,22 +7,35 @@ import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { EditableList, EditableListItem } from 'src/ui/EditableList'
+
+export const enum LoginDetailsVariant {
+  Details,
+  Information,
+}
 
 const { Row, Cell, Link } = EmailBlock
 
 interface LoginDetailsValue {
-  title: string
+  variant: LoginDetailsVariant
+  loginDetailsTitle: string
   usernameLabel: string
   usernameValue: string
   resetPasswordMessage: string
   button: string
   buttonHref: string
   resetPasswordDetails: string
-  icon: UswdsIconVariantKey
+  loginDetailsIcon: UswdsIconVariantKey
+  loginInformationTitle: string
+  loginInformationDescription: string
+  loginInformationList: string[]
+  loginInformationIcon: UswdsIconVariantKey
 }
 
 const defaultValue: LoginDetailsValue = {
-  title: 'Login Details',
+  variant: LoginDetailsVariant.Details,
+  // Details
+  loginDetailsTitle: 'Login Details',
   usernameLabel: 'Your username is:',
   usernameValue: 'CAPTAIN AMERICA',
   resetPasswordMessage:
@@ -31,7 +44,16 @@ const defaultValue: LoginDetailsValue = {
   buttonHref: '',
   resetPasswordDetails:
     'Your request may take up to 7-10 business days. An email will be sent to you when your password has been reset.',
-  icon: 'Lock',
+  loginDetailsIcon: 'Lock',
+  // Information
+  loginInformationTitle: 'Important Login Information',
+  loginInformationDescription:
+    'Login using the same Login ID and Password you used to file your claim.',
+  loginInformationList: [
+    `<b>If you do not have an account,</b> create one here. After creating your account, return to this email and get started.`,
+    `<b>Forget your username and password?</b> Follow the links on the login page to help access your account.`,
+  ],
+  loginInformationIcon: 'LockOpen',
 }
 
 export const useLoginDetailsValue = (componentId: string, id: string) =>
@@ -40,6 +62,13 @@ export const useLoginDetailsValue = (componentId: string, id: string) =>
 export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const isDetails = value.variant === LoginDetailsVariant.Details
+  const isInformation = value.variant === LoginDetailsVariant.Information
+  const setLoginInformationList = useCallback(
+    (loginInformationList: string[]) => setValue({ ...value, loginInformationList }),
+    [value, setValue],
+  )
+
   return (
     <>
       <Row
@@ -53,19 +82,35 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
       >
         <Row>
           <Cell style={styles.iconContainer}>
-            <UswdsIcon icon={value.icon} />
+            {isDetails && <UswdsIcon icon={value.loginDetailsIcon} />}
+            {isInformation && <UswdsIcon icon={value.loginInformationIcon} />}
           </Cell>
-          <EditableElement
-            aria-level={2}
-            element="td"
-            onValueChange={(title) => setValue({ ...value, title })}
-            label="Login details title"
-            role="heading"
-            style={styles.title}
-            value={value.title}
-          />
+          {isDetails && (
+            <EditableElement
+              aria-level={2}
+              element="td"
+              onValueChange={(loginDetailsTitle) => setValue({ ...value, loginDetailsTitle })}
+              label="Login details title"
+              role="heading"
+              style={styles.title}
+              value={value.loginDetailsTitle}
+            />
+          )}
+          {isInformation && (
+            <EditableElement
+              aria-level={2}
+              element="td"
+              onValueChange={(loginInformationTitle) =>
+                setValue({ ...value, loginInformationTitle })
+              }
+              label="Login information title"
+              role="heading"
+              style={styles.title}
+              value={value.loginInformationTitle}
+            />
+          )}
         </Row>
-        <Row>
+        <Row condition={isDetails}>
           <Cell>{null}</Cell>
           <Cell elements={['table']}>
             <Row>
@@ -139,6 +184,40 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
             </Row>
           </Cell>
         </Row>
+        <Row condition={isInformation}>
+          <Cell>{null}</Cell>
+          <Cell elements={['table']}>
+            <Row>
+              <EditableElement
+                element="td"
+                label="Login information description"
+                value={value.loginInformationDescription}
+                onValueChange={(loginInformationDescription) =>
+                  setValue({ ...value, loginInformationDescription })
+                }
+                style={styles.loginInformationDescription}
+              />
+            </Row>
+            <Row elements={[{ part: 'cell', style: styles.loginInformationListContainer }]}>
+              <EditableList
+                collection={value.loginInformationList}
+                element="ul"
+                setCollection={setLoginInformationList}
+                style={styles.loginInformationList}
+              >
+                {value.loginInformationList.map((info, index) => (
+                  <EditableListItem
+                    key={index}
+                    index={index}
+                    value={info}
+                    label={`Login information bullet ${index + 1}`}
+                    style={styles.loginInformationListItem}
+                  />
+                ))}
+              </EditableList>
+            </Row>
+          </Cell>
+        </Row>
       </Row>
       <Row>
         <SpacingCell size="large" />
@@ -198,6 +277,20 @@ const styles = {
     paddingTop: Spacing.size.small,
   } as CSSProperties,
   resetPasswordDetails: {
+    ...Text.body.secondary.italic,
+  } as CSSProperties,
+  loginInformationDescription: {
+    ...Text.body.main.semibold,
+  } as CSSProperties,
+  loginInformationListContainer: {
+    paddingLeft: Spacing.size.large,
+    paddingTop: Spacing.size.extraLarge,
+  } as CSSProperties,
+  loginInformationList: {
+    margin: 0,
+    padding: 0,
+  } as CSSProperties,
+  loginInformationListItem: {
     ...Text.body.secondary.italic,
   } as CSSProperties,
 } as const

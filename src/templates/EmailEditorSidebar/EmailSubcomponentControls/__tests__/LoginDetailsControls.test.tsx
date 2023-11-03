@@ -30,28 +30,80 @@ describe('LoginDetailsControls', () => {
     )
   })
 
-  it('displays a dropdown for selecting an icon', async () => {
-    const { getByRole, queryByRole } = rendered
-    let button = queryByRole('button')
+  it('provides a dropdown for selecting a variant', async () => {
+    const { getByRole, queryByRole, queryByText } = rendered
+    let button = queryByText('Details', { selector: 'span' })
     expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Lock')
 
     await user.click(button!)
-    expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-    await user.click(getByRole('option', { name: 'Device Thermostat' }))
+    expect(queryByRole('option', { name: 'Details' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'Information' })).not.toBeNull()
+    await user.click(getByRole('option', { name: 'Information' }))
 
-    button = queryByRole('button')
+    button = queryByText('Information', { selector: 'span' })
     expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Device Thermostat')
   })
 
-  it('displays an input for the button link', async () => {
-    const { queryByLabelText, getByTestId } = rendered
-    const input: HTMLInputElement | null = queryByLabelText('Button Link') as any
-    expect(input).not.toBeNull()
-    const value = `https://${faker.lorem.word()}.gov/appeal`
-    await user.type(input!, value)
-    expect(getByTestId('appeal-rights-href')).toHaveTextContent(value)
+  describe('variants', () => {
+    describe('Login Details', () => {
+      beforeEach(async () => {
+        await user.click(rendered.getAllByRole('button')[0])
+        await user.click(rendered.getByRole('option', { name: 'Details' }))
+      })
+
+      it('displays a dropdown for selecting an icon', async () => {
+        const { getByRole, queryByRole, queryAllByRole } = rendered
+        let button: HTMLElement | null = queryAllByRole('button')[1]
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Lock')
+
+        await user.click(button!)
+        expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
+        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+        await user.click(getByRole('option', { name: 'Device Thermostat' }))
+
+        button = queryAllByRole('button')[1]
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Device Thermostat')
+      })
+
+      it('displays an input for the button link', async () => {
+        const { queryByLabelText, getByTestId } = rendered
+        const input: HTMLInputElement | null = queryByLabelText('Button Link') as any
+        expect(input).not.toBeNull()
+        const value = `https://${faker.lorem.word()}.gov/appeal`
+        await user.type(input!, value)
+        expect(getByTestId('appeal-rights-href')).toHaveTextContent(value)
+      })
+    })
+
+    describe('Login Information', () => {
+      beforeEach(async () => {
+        await user.click(rendered.getAllByRole('button')[0])
+        await user.click(rendered.getByRole('option', { name: 'Information' }))
+      })
+
+      it('displays a dropdown for selecting an icon', async () => {
+        const { getByRole, queryByRole, queryAllByRole } = rendered
+        let button: HTMLElement | null = queryAllByRole('button')[1]
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Lock')
+
+        await user.click(button!)
+        expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
+        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+        await user.click(getByRole('option', { name: 'Device Thermostat' }))
+
+        button = queryAllByRole('button')[1]
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Device Thermostat')
+      })
+
+      it('does not display an input for the button link', async () => {
+        const { queryByLabelText, getByTestId } = rendered
+        const input: HTMLInputElement | null = queryByLabelText('Button Link') as any
+        expect(input).toBeNull()
+      })
+    })
   })
 })
