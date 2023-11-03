@@ -54,7 +54,7 @@ export const defaultValue: DirectiveValue = {
   title: 'Directive Title',
   showTitle: true,
   label: 'To help resolve this issue, complete the following steps:',
-  linkHref: 'https://',
+  linkHref: '',
   buttonLabel: 'Get Started',
   step1Label: 'Step 1 Directive',
   showStep1AdditionalContent: true,
@@ -164,9 +164,10 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     paddingBottom: '16px',
                   }}
                 >
-                  <Link to={value.linkHref} style={hrefTextStyles}>
-                    {value.linkHref}
-                  </Link>
+                  <span style={hrefTextStyles}>
+                    {value.linkHref ||
+                      'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                  </span>
                 </div>
               </Row>
             </Row>
