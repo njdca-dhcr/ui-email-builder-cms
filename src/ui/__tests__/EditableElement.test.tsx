@@ -7,13 +7,11 @@ import userEvent from '@testing-library/user-event'
 describe('EditableElement', () => {
   let labelValue: string
   let value: string
-  let initialValue: string
   let handleChange: jest.Mock
 
   beforeEach(() => {
     labelValue = faker.lorem.words(1)
     value = faker.lorem.words(2)
-    initialValue = faker.lorem.words(3)
     handleChange = jest.fn()
   })
 
@@ -24,7 +22,6 @@ describe('EditableElement', () => {
         label={labelValue}
         value={value}
         onValueChange={handleChange}
-        initialValue={initialValue}
         element="section"
       />,
     )
@@ -32,24 +29,23 @@ describe('EditableElement', () => {
     expect(editableElement).not.toBeNull()
     expect(handleChange).not.toHaveBeenCalled()
     await user.type(editableElement, 'H')
-    expect(handleChange).toHaveBeenCalledWith(`${initialValue}H`)
+    expect(handleChange).toHaveBeenCalledWith(`${value}H`)
   })
 
   it('displays an initial html value', () => {
-    const initialValuePart1 = faker.lorem.words(3)
-    const initialValuePart2 = faker.lorem.words(2)
-    initialValue = [initialValuePart1, '<br />', initialValuePart2].join('')
+    const valuePart1 = faker.lorem.words(3)
+    const valuePart2 = faker.lorem.words(2)
+    value = [valuePart1, '<br />', valuePart2].join('')
     const { getByLabelText } = render(
       <EditableElement
         label={labelValue}
         value={value}
         onValueChange={handleChange}
-        initialValue={initialValue}
         element="section"
       />,
     )
     const section = getByLabelText(labelValue)
-    expect(section).toContainHTML(initialValue)
+    expect(section).toContainHTML(value)
   })
 
   it('is labelled', () => {
@@ -58,11 +54,10 @@ describe('EditableElement', () => {
         label={labelValue}
         value={value}
         onValueChange={handleChange}
-        initialValue={initialValue}
         element="section"
       />,
     )
-    const section = getByText(initialValue)
+    const section = getByText(value)
     const attribute = section.attributes.getNamedItem('aria-label')
     expect(attribute!.value).toEqual(labelValue)
   })
@@ -73,12 +68,11 @@ describe('EditableElement', () => {
         label={labelValue}
         value={value}
         onValueChange={handleChange}
-        initialValue={initialValue}
         element="section"
         style={{ backgroundColor: 'red' }}
       />,
     )
-    const section = getByText(initialValue)
+    const section = getByText(value)
     expect(section.style.backgroundColor).toEqual('red')
   })
 
@@ -88,7 +82,6 @@ describe('EditableElement', () => {
         label={labelValue}
         value={value}
         onValueChange={handleChange}
-        initialValue={initialValue}
         element="span"
       />,
     )
@@ -99,7 +92,6 @@ describe('EditableElement', () => {
         label={labelValue}
         value={value}
         onValueChange={handleChange}
-        initialValue={initialValue}
         element="section"
       />,
     )

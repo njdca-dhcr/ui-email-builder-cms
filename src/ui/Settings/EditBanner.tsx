@@ -1,14 +1,13 @@
 import React, { FC, useMemo } from 'react'
 import { Heading, Paragraph } from 'src/ui/Layout'
-import { EditableElement, EmailBlock, Input } from 'src/ui'
+import { EmailBlock, Input } from 'src/ui'
 import { BannerMarkup, useBannerValue } from 'src/templates/EmailTemplateComponents/Banner'
 import { Spacing } from 'src/templates/styles'
 import { ColorPicker } from '../ColorPicker'
-import { TinyColor } from '@ctrl/tinycolor'
+import { EditableElement } from '../EditableElement'
 
 export const EditBanner: FC = () => {
   const [banner, setBanner] = useBannerValue()
-  const initialBanner = useMemo(() => banner, [])
 
   return (
     <form>
@@ -26,7 +25,7 @@ export const EditBanner: FC = () => {
             <EditableElement
               element="span"
               label="Primary Text"
-              initialValue={initialBanner.primaryText}
+              value={banner.primaryText}
               onValueChange={(primaryText) => setBanner({ ...banner, primaryText })}
             />
           }

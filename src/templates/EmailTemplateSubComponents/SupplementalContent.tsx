@@ -16,11 +16,7 @@ const { Row } = EmailBlock
 
 export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
-    componentId,
-    id,
-    defaultValue,
-  )
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <Row
@@ -34,7 +30,6 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
         <EditableElement
           aria-level={3}
           element="td"
-          initialValue={initialValue.title}
           label="Supplemental content title"
           onValueChange={(title) => setValue({ ...value, title })}
           role="heading"
@@ -45,7 +40,6 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ componentId, i
       <Row>
         <EditableElement
           element="td"
-          initialValue={initialValue.description}
           label="Supplemental content description"
           onValueChange={(description) => setValue({ ...value, description })}
           style={descriptionStyles}

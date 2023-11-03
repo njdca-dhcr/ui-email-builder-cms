@@ -39,11 +39,7 @@ export const useLoginDetailsValue = (componentId: string, id: string) =>
 
 export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
-    componentId,
-    id,
-    defaultValue,
-  )
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
   return (
     <>
       <Row
@@ -63,10 +59,10 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
             aria-level={2}
             element="td"
             onValueChange={(title) => setValue({ ...value, title })}
-            initialValue={initialValue.title}
             label="Login details title"
             role="heading"
             style={styles.title}
+            value={value.title}
           />
         </Row>
         <Row>
@@ -76,18 +72,18 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
               <EditableElement
                 element="td"
                 onValueChange={(usernameLabel) => setValue({ ...value, usernameLabel })}
-                initialValue={initialValue.usernameLabel}
                 label="Username label"
                 style={styles.usernameLabel}
+                value={value.usernameLabel}
               />
             </Row>
             <Row>
               <EditableElement
                 element="td"
                 onValueChange={(usernameValue) => setValue({ ...value, usernameValue })}
-                initialValue={initialValue.usernameValue}
                 label="Username value"
                 style={styles.usernameValue}
+                value={value.usernameValue}
               />
             </Row>
             <Row>
@@ -96,9 +92,9 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
                 onValueChange={(resetPasswordMessage) =>
                   setValue({ ...value, resetPasswordMessage })
                 }
-                initialValue={initialValue.resetPasswordMessage}
                 label="Reset password message"
                 style={styles.resetPasswordMessage}
+                value={value.resetPasswordMessage}
               />
             </Row>
             <Row
@@ -113,9 +109,9 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
                 <EditableElement
                   element="span"
                   onValueChange={(button) => setValue({ ...value, button })}
-                  initialValue={initialValue.button}
                   label="Reset password button"
                   style={styles.buttonText}
+                  value={value.button}
                 />
               </Link>
             </Row>
@@ -136,9 +132,9 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
                 onValueChange={(resetPasswordDetails) =>
                   setValue({ ...value, resetPasswordDetails })
                 }
-                initialValue={initialValue.resetPasswordDetails}
                 label="Reset password details"
                 style={styles.resetPasswordDetails}
+                value={value.resetPasswordDetails}
               />
             </Row>
           </Cell>

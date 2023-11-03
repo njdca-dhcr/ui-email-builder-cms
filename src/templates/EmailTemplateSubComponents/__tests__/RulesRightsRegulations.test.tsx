@@ -83,6 +83,7 @@ describe('RulesRightsRegulations', () => {
           >
             <option>{RulesRightsRegulationsVariant.Reminder}</option>
             <option>{RulesRightsRegulationsVariant.AppealRights}</option>
+            <option>{RulesRightsRegulationsVariant.YourRights}</option>
           </select>
         </label>
       )
@@ -110,6 +111,11 @@ describe('RulesRightsRegulations', () => {
           rendered.getByLabelText('Variant'),
           RulesRightsRegulationsVariant.Reminder + '',
         )
+      })
+
+      it('has an icon', () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('img')).not.toBeNull()
       })
 
       itHasAnEditable('title', 'Reminder title')
@@ -146,6 +152,11 @@ describe('RulesRightsRegulations', () => {
         )
       })
 
+      it('has an icon', () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('img')).not.toBeNull()
+      })
+
       itHasAnEditable('title', 'Appeal Rights title')
 
       itHasAnEditable('summary', 'Appeal Rights summary')
@@ -172,6 +183,42 @@ describe('RulesRightsRegulations', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(11)
       })
+    })
+
+    describe('Your Rights', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <RulesRightsRegulations
+            componentId={componentId}
+            id={id}
+            emailSubComponent={emailSubComponent}
+          />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          RulesRightsRegulationsVariant.YourRights + '',
+        )
+      })
+
+      it('lacks an icon', () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('img')).toBeNull()
+      })
+
+      itHasAnEditable('title', 'Your Rights title')
+
+      itHasAnEditable('right 1', 'Your Rights 1')
+
+      itHasAnEditable('right 2', 'Your Rights 2')
+
+      itHasAnEditable('right 3', 'Your Rights 3')
+
+      itHasAnEditable('right 4', 'Your Rights 4')
+
+      itHasAnEditable('right 5', 'Your Rights 5')
+
+      itHasAnEditable('right 6', 'Your Rights 6')
     })
   })
 })

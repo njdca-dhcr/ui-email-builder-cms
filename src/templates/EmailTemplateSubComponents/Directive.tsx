@@ -85,11 +85,7 @@ const { Table, Row, Cell, Link } = EmailBlock
 export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
 
-  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
-    componentId,
-    id,
-    defaultValue,
-  )
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
   return (
     <>
       <Row
@@ -119,7 +115,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   ) : (
                     <EditableElement
                       element="b"
-                      initialValue={initialValue.title}
                       label="Directive Title"
                       onValueChange={(title) => setValue({ ...value, title })}
                       value={value.title}
@@ -180,7 +175,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <tr>
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.oneStepSupportiveText}
                   label="Supportive information"
                   onValueChange={(oneStepSupportiveText) =>
                     setValue({ ...value, oneStepSupportiveText })
@@ -196,7 +190,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <tr>
                   <EditableElement
                     element="td"
-                    initialValue={initialValue.alternativePaymentLabel}
                     label="Alternative payment information"
                     onValueChange={(alternativePaymentLabel) =>
                       setValue({ ...value, alternativePaymentLabel })
@@ -217,7 +210,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <tr>
                   <EditableElement
                     element="td"
-                    initialValue={initialValue.payOnlineSupportiveText}
                     label="Supportive information"
                     onValueChange={(payOnlineSupportiveText) =>
                       setValue({ ...value, payOnlineSupportiveText })
@@ -243,7 +235,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <div style={{ lineHeight: '150%' }}>
                 <EditableElement
                   element="span"
-                  initialValue={initialValue.label}
                   label="Label for the Directive"
                   onValueChange={(label) => setValue({ ...value, label })}
                   value={value.label}
@@ -281,7 +272,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <span style={stepNumberLabel}>
                       <EditableElement
                         element="b"
-                        initialValue={initialValue.step1Label}
                         label="Label for Step 1"
                         onValueChange={(step1Label) => setValue({ ...value, step1Label })}
                         value={value.step1Label}
@@ -302,7 +292,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <div style={{ lineHeight: '16px' }}>
                       <EditableElement
                         element="span"
-                        initialValue={initialValue.step1Additional}
                         label="Additional information for Step 1"
                         onValueChange={(step1Additional) => setValue({ ...value, step1Additional })}
                         value={value.step1Additional}
@@ -377,7 +366,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <span style={stepNumberLabel}>
                       <EditableElement
                         element="b"
-                        initialValue={initialValue.step2Label}
                         label="Label for Step 2"
                         onValueChange={(step2Label) => setValue({ ...value, step2Label })}
                         value={value.step2Label}
@@ -407,7 +395,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <div style={{ lineHeight: '16px' }}>
                       <EditableElement
                         element="span"
-                        initialValue={initialValue.step2Additional}
                         label="Additional information for Step 2"
                         onValueChange={(step2Additional) => setValue({ ...value, step2Additional })}
                         value={value.step2Additional}
@@ -420,7 +407,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                       <>
                         <EditableElement
                           element="div"
-                          initialValue={initialValue.step2Tertiary}
                           label="Tertiary information for Step 2"
                           onValueChange={(step2Tertiary) => setValue({ ...value, step2Tertiary })}
                           value={value.step2Tertiary}
@@ -430,7 +416,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
                         <EditableElement
                           element="div"
-                          initialValue={initialValue.step2CaseNumber}
                           label="Case number information"
                           onValueChange={(step2CaseNumber) =>
                             setValue({ ...value, step2CaseNumber })
@@ -467,7 +452,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <span style={stepNumberLabel}>
                       <EditableElement
                         element="b"
-                        initialValue={initialValue.step3Label}
                         label="Label for Step 3"
                         onValueChange={(step3Label) => setValue({ ...value, step3Label })}
                         value={value.step3Label}
@@ -494,7 +478,6 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     <div style={{ lineHeight: '16px' }}>
                       <EditableElement
                         element="span"
-                        initialValue={initialValue.step3Additional}
                         label="Additional information for Step 3"
                         onValueChange={(step3Additional) => setValue({ ...value, step3Additional })}
                         value={value.step3Additional}

@@ -1,14 +1,14 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { Heading, Paragraph } from 'src/ui/Layout'
-import { EditableElement, EmailBlock } from 'src/ui'
+import { EmailBlock } from 'src/ui'
 import {
   useDisclaimerValue,
   styles as disclaimerStyles,
 } from 'src/templates/EmailTemplateComponents/Disclaimer'
+import { EditableElement } from '../EditableElement'
 
 export const EditDisclaimer: FC = () => {
   const [disclaimer, setDisclaimer] = useDisclaimerValue()
-  const initialDisclaimer = useMemo(() => disclaimer, [])
 
   return (
     <>
@@ -25,7 +25,6 @@ export const EditDisclaimer: FC = () => {
           element="td"
           value={disclaimer}
           onValueChange={setDisclaimer}
-          initialValue={initialDisclaimer}
           style={disclaimerStyles}
         />
       </EmailBlock.Table>

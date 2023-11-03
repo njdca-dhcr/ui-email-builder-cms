@@ -25,7 +25,7 @@ export const useProgramNameValue = (componentId: string, id: string) => {
 
 export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue, { initialValue }] = useProgramNameValue(componentId, id)
+  const [value, setValue] = useProgramNameValue(componentId, id)
 
   const color = textColorForBackground(value.backgroundColor, {
     dark: Colors.black,
@@ -46,7 +46,6 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => 
         <EditableElement
           aria-level={2}
           element="td"
-          initialValue={initialValue.name}
           label="Program name"
           onClick={activate}
           onValueChange={(name) => setValue({ ...value, name })}

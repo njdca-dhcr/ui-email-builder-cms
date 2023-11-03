@@ -30,22 +30,6 @@ describe('RulesRightsRegulationsControls', () => {
     )
   })
 
-  it('provides a dropdown for selecting an icon', async () => {
-    const { getByRole, queryByRole, queryByText } = rendered
-    let button = queryByText('Flag', { selector: 'span' })
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Flag')
-
-    await user.click(button!)
-    expect(queryByRole('option', { name: 'Flag' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-    await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-    button = queryByText('Device Thermostat', { selector: 'span' })
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Device Thermostat')
-  })
-
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
     const { getByRole, queryByRole, queryByText } = rendered
@@ -56,6 +40,7 @@ describe('RulesRightsRegulationsControls', () => {
     await user.click(button!)
     expect(queryByRole('option', { name: 'Reminder' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Appeal Rights' })).not.toBeNull()
+    expect(queryByRole('option', { name: 'Your Rights' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'Appeal Rights' }))
 
     button = queryByText('Appeal Rights', { selector: 'span' })
@@ -73,6 +58,22 @@ describe('RulesRightsRegulationsControls', () => {
       it('does not render any inputs', () => {
         expect(rendered.baseElement.querySelectorAll('input')).toHaveLength(0)
       })
+
+      it('provides a dropdown for selecting an icon', async () => {
+        const { getByRole, queryByRole, queryByText } = rendered
+        let button = queryByText('Flag', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Flag')
+
+        await user.click(button!)
+        expect(queryByRole('option', { name: 'Flag' })).not.toBeNull()
+        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+        await user.click(getByRole('option', { name: 'Device Thermostat' }))
+
+        button = queryByText('Device Thermostat', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Device Thermostat')
+      })
     })
 
     describe('Appeal Rights', () => {
@@ -88,6 +89,39 @@ describe('RulesRightsRegulationsControls', () => {
         const value = `https://${faker.lorem.word()}.gov/appeal`
         await user.type(input!, value)
         expect(getByTestId('appeal-rights-href')).toHaveTextContent(value)
+      })
+
+      it('provides a dropdown for selecting an icon', async () => {
+        const { getByRole, queryByRole, queryByText } = rendered
+        let button = queryByText('Flag', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Flag')
+
+        await user.click(button!)
+        expect(queryByRole('option', { name: 'Flag' })).not.toBeNull()
+        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
+        await user.click(getByRole('option', { name: 'Device Thermostat' }))
+
+        button = queryByText('Device Thermostat', { selector: 'span' })
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent('Device Thermostat')
+      })
+    })
+
+    describe('Your Rights', () => {
+      beforeEach(async () => {
+        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByRole('option', { name: 'Your Rights' }))
+      })
+
+      it('does not render any inputs', () => {
+        expect(rendered.baseElement.querySelectorAll('input')).toHaveLength(0)
+      })
+
+      it('does not render a dropdown for selecting an icon', () => {
+        const { queryByText } = rendered
+        const button = queryByText('Flag', { selector: 'span' })
+        expect(button).toBeNull()
       })
     })
   })

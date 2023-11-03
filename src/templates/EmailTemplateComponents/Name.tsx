@@ -12,14 +12,13 @@ const { Row } = EmailBlock
 
 export const Name: FC<EmailComponentProps> = ({ id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
-  const [value, setValue, { initialValue }] = useEmailPartsContentForComponent(id, defaultValue)
+  const [value, setValue] = useEmailPartsContentForComponent(id, defaultValue)
   return (
     <>
       <Row>
         <EditableElement
           element="td"
           className={StyleDefaults.layout.narrow}
-          initialValue={initialValue}
           label="Recipient's name"
           onClick={activate}
           onValueChange={setValue}

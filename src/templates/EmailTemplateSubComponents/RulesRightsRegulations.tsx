@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useMemo } from 'react'
+import React, { CSSProperties, FC, useCallback, useMemo } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
@@ -7,10 +7,12 @@ import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPa
 import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { EditableList, EditableListItem } from 'src/ui/EditableList'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
   AppealRights,
+  YourRights,
 }
 
 interface RulesRightsRegulationsValue {
@@ -36,6 +38,9 @@ interface RulesRightsRegulationsValue {
   appealRightsClaimDateValue: string
   appealRightsDeterminationDateLabel: string
   appealRightsDeterminationDateValue: string
+  // Your Rights
+  yourRightsTitle: string
+  yourRightsList: string[]
 }
 
 const defaultValue: RulesRightsRegulationsValue = {
@@ -62,6 +67,15 @@ const defaultValue: RulesRightsRegulationsValue = {
   appealRightsClaimDateValue: '00/00/0000',
   appealRightsDeterminationDateLabel: 'Date of Determination:',
   appealRightsDeterminationDateValue: '00/00/0000',
+  yourRightsTitle: 'Your Rights:',
+  yourRightsList: [
+    `You may represent yourself or you may be represented at your own expense by an attorney or non-attorney`,
+    `You may request a postponement, if you require additional time to prepare your response to this questionnaire`,
+    `You may request that your employer produce any documents which relate to your eligibility for benefits`,
+    `You may request that statements be taken from your witnesses who have firsthand knowledge of the case`,
+    `You or your representative will have the opportunity to provide witness statements, present documents and provide a closing statement or summary `,
+    `If the reason for the questionnaire is related to your employment, any questions that you may have for your former employer may be included on the form and the reviewing claims examiner may, at his/her discretion, pose the question(s) to your former employer.`,
+  ],
 }
 
 export const useRulesRightsRegulationsValue = (componentId: string, id: string) => {
@@ -75,8 +89,11 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
   const [value, setValue] = useRulesRightsRegulationsValue(componentId, id)
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
-
-  const initialValue = useMemo(() => value, [value.variant])
+  const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
+  const setYourRightsList = useCallback(
+    (yourRightsList: string[]) => setValue({ ...value, yourRightsList }),
+    [value, setValue],
+  )
 
   return (
     <>
@@ -92,14 +109,16 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
         onClick={activate}
       >
         <Row>
-          <Cell style={styles.iconContainer}>
-            <UswdsIcon icon={value.icon} />
-          </Cell>
+          {(isReminder || isAppealRights) && (
+            <Cell style={styles.iconContainer}>
+              <UswdsIcon icon={value.icon} />
+            </Cell>
+          )}
           {isReminder && (
             <EditableElement
               aria-level={2}
               element="td"
-              initialValue={initialValue.reminderTitle}
+              value={value.reminderTitle}
               label="Reminder title"
               onValueChange={(reminderTitle) => setValue({ ...value, reminderTitle })}
               role="heading"
@@ -110,21 +129,32 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             <EditableElement
               aria-level={2}
               element="td"
-              initialValue={initialValue.appealRightsTitle}
+              value={value.appealRightsTitle}
               label="Appeal Rights title"
               onValueChange={(appealRightsTitle) => setValue({ ...value, appealRightsTitle })}
               role="heading"
               style={styles.title}
             />
           )}
+          {isYourRights && (
+            <EditableElement
+              aria-level={2}
+              element="td"
+              value={value.yourRightsTitle}
+              label="Your Rights title"
+              onValueChange={(yourRightsTitle) => setValue({ ...value, yourRightsTitle })}
+              role="heading"
+              style={styles.title}
+            />
+          )}
         </Row>
         <Row>
-          <Cell>{null}</Cell>
+          {(isReminder || isAppealRights) && <Cell>{null}</Cell>}
           <Cell elements={['table']} condition={isReminder}>
             <Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.eligibilityLabel}
+                value={value.eligibilityLabel}
                 label="Eligibility label"
                 onValueChange={(eligibilityLabel) => setValue({ ...value, eligibilityLabel })}
                 style={styles.eligibilityLabel}
@@ -134,7 +164,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               <ol style={styles.eligibilityConditions}>
                 <EditableElement
                   element="li"
-                  initialValue={initialValue.eligibilityCondition1}
+                  value={value.eligibilityCondition1}
                   label="Eligibility condition 1"
                   onValueChange={(eligibilityCondition1) =>
                     setValue({ ...value, eligibilityCondition1 })
@@ -143,7 +173,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
                 />
                 <EditableElement
                   element="li"
-                  initialValue={initialValue.eligibilityCondition2}
+                  value={value.eligibilityCondition2}
                   label="Eligibility condition 2"
                   onValueChange={(eligibilityCondition2) =>
                     setValue({ ...value, eligibilityCondition2 })
@@ -155,7 +185,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             <Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.reminderIsFor}
+                value={value.reminderIsFor}
                 label="Reminder is for"
                 onValueChange={(reminderIsFor) => setValue({ ...value, reminderIsFor })}
                 style={styles.reminderIsFor}
@@ -164,7 +194,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             <Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.footnote}
+                value={value.footnote}
                 label="Reminder footnote"
                 onValueChange={(footnote) => setValue({ ...value, footnote })}
                 style={styles.footnote}
@@ -175,7 +205,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             <Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.appealRightsSummary}
+                value={value.appealRightsSummary}
                 label="Appeal Rights summary"
                 onValueChange={(appealRightsSummary) => setValue({ ...value, appealRightsSummary })}
                 style={styles.appealSummary}
@@ -184,7 +214,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
             <Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.appealRightsInstruction}
+                value={value.appealRightsInstruction}
                 label="Appeal Rights instruction"
                 onValueChange={(appealRightsInstruction) =>
                   setValue({ ...value, appealRightsInstruction })
@@ -203,7 +233,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               <Link to={value.appealRightsHref}>
                 <EditableElement
                   element="span"
-                  initialValue={initialValue.appealRightsButton}
+                  value={value.appealRightsButton}
                   label="Appeal Rights button"
                   onValueChange={(appealRightsButton) => setValue({ ...value, appealRightsButton })}
                   style={styles.appealButtonText}
@@ -225,7 +255,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               <EditableElement
                 element="td"
                 id="appeal-rights-label"
-                initialValue={initialValue.appealRightsInfoLabel}
+                value={value.appealRightsInfoLabel}
                 label="Appeal Rights information label"
                 onValueChange={(appealRightsInfoLabel) =>
                   setValue({ ...value, appealRightsInfoLabel })
@@ -249,7 +279,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               >
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.appealRightsProgramCodeLabel}
+                  value={value.appealRightsProgramCodeLabel}
                   label="Appeal Rights program code label"
                   onValueChange={(appealRightsProgramCodeLabel) =>
                     setValue({ ...value, appealRightsProgramCodeLabel })
@@ -259,7 +289,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
                 />
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.appealRightsProgramCodeValue}
+                  value={value.appealRightsProgramCodeValue}
                   label="Appeal Rights program code value"
                   onValueChange={(appealRightsProgramCodeValue) =>
                     setValue({ ...value, appealRightsProgramCodeValue })
@@ -278,7 +308,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               >
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.appealRightsClaimDateLabel}
+                  value={value.appealRightsClaimDateLabel}
                   label="Appeal Rights claim date label"
                   onValueChange={(appealRightsClaimDateLabel) =>
                     setValue({ ...value, appealRightsClaimDateLabel })
@@ -288,7 +318,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
                 />
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.appealRightsClaimDateValue}
+                  value={value.appealRightsClaimDateValue}
                   label="Appeal Rights claim date value"
                   onValueChange={(appealRightsClaimDateValue) =>
                     setValue({ ...value, appealRightsClaimDateValue })
@@ -307,7 +337,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               >
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.appealRightsDeterminationDateLabel}
+                  value={value.appealRightsDeterminationDateLabel}
                   label="Appeal Rights determination date label"
                   onValueChange={(appealRightsDeterminationDateLabel) =>
                     setValue({ ...value, appealRightsDeterminationDateLabel })
@@ -317,7 +347,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
                 />
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.appealRightsDeterminationDateValue}
+                  value={value.appealRightsDeterminationDateValue}
                   label="Appeal Rights determination date value"
                   onValueChange={(appealRightsDeterminationDateValue) =>
                     setValue({ ...value, appealRightsDeterminationDateValue })
@@ -327,6 +357,23 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
                 />
               </Row>
             </Row>
+          </Cell>
+          <Cell condition={isYourRights} style={styles.yourRightsListContainer}>
+            <EditableList
+              collection={value.yourRightsList}
+              setCollection={setYourRightsList}
+              style={styles.yourRightsList}
+            >
+              {value.yourRightsList.map((right, index) => (
+                <EditableListItem
+                  key={index}
+                  label={`Your Rights ${index + 1}`}
+                  index={index}
+                  value={right}
+                  style={styles.yourRightsListItem}
+                />
+              ))}
+            </EditableList>
           </Cell>
         </Row>
       </Row>
@@ -419,5 +466,17 @@ const styles = {
   appealInfoLabel: {
     ...Text.header.h4.bold,
     paddingBottom: Font.size.tiny,
+  } as CSSProperties,
+  yourRightsListContainer: {
+    paddingLeft: Spacing.size.medium,
+    paddingTop: Spacing.size.large,
+  } as CSSProperties,
+  yourRightsList: {
+    margin: 0,
+    padding: 0,
+  } as CSSProperties,
+  yourRightsListItem: {
+    ...Text.body.list.small,
+    marginBottom: Font.size.small,
   } as CSSProperties,
 } as const

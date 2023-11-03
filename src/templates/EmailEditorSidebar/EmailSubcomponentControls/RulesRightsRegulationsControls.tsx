@@ -18,6 +18,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
   const buttonLinkHtmlId = `buttonLink-${key}`
   const [value, setValue] = useRulesRightsRegulationsValue(componentId, id)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
+  const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
 
   return (
     <Control.Group>
@@ -30,20 +31,23 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
           options={[
             { label: 'Reminder', value: RulesRightsRegulationsVariant.Reminder + '' },
             { label: 'Appeal Rights', value: RulesRightsRegulationsVariant.AppealRights + '' },
+            { label: 'Your Rights', value: RulesRightsRegulationsVariant.YourRights + '' },
           ]}
           onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
           value={value.variant + ''}
         />
       </Control.Container>
 
-      <Control.Container>
-        <Control.Label id={iconHtmlId}>Icon</Control.Label>
-        <UswdsIconSelect
-          labelId={iconHtmlId}
-          onChange={(icon) => setValue({ ...value, icon })}
-          value={value.icon}
-        />
-      </Control.Container>
+      {(isReminder || isAppealRights) && (
+        <Control.Container>
+          <Control.Label id={iconHtmlId}>Icon</Control.Label>
+          <UswdsIconSelect
+            labelId={iconHtmlId}
+            onChange={(icon) => setValue({ ...value, icon })}
+            value={value.icon}
+          />
+        </Control.Container>
+      )}
 
       {isAppealRights && (
         <Control.Container>

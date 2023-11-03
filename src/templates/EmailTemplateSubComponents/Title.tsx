@@ -12,11 +12,7 @@ const { Row } = EmailBlock
 
 export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue, { initialValue }] = useEmailPartsContentForSubComponent(
-    componentId,
-    id,
-    defaultValue,
-  )
+  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
     <>
@@ -30,7 +26,6 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
       >
         <EditableElement
           element="h1"
-          initialValue={initialValue}
           label="Title"
           onClick={activate}
           onValueChange={setValue}

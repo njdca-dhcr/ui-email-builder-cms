@@ -1,11 +1,10 @@
-import React, { CSSProperties, FC, useMemo } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
-import { WarningIcon } from 'src/ui/WarningIcon'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 
@@ -84,8 +83,6 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
   const [value, setValue] = useStatusValue(componentId, id)
 
-  const initialValue = useMemo(() => value, [value.variant])
-
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
@@ -104,7 +101,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             <EditableElement
               aria-level={2}
               element="td"
-              initialValue={initialValue.status}
+              value={value.status}
               label="Status title"
               onValueChange={(status) => setValue({ ...value, status })}
               role="heading"
@@ -120,7 +117,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           >
             <EditableElement
               element="td"
-              initialValue={initialValue.statusDueTo}
+              value={value.statusDueTo}
               label="Status due to label"
               onValueChange={(statusDueTo) => setValue({ ...value, statusDueTo })}
               style={styles.statusDueTo}
@@ -131,7 +128,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row>
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.documentsNeededLabel}
+                  value={value.documentsNeededLabel}
                   label="Documents needed label"
                   onValueChange={(documentsNeededLabel) =>
                     setValue({ ...value, documentsNeededLabel })
@@ -141,7 +138,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row>
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.documentsNeededValue}
+                  value={value.documentsNeededValue}
                   label="Documents needed value"
                   onValueChange={(documentsNeededValue) =>
                     setValue({ ...value, documentsNeededValue })
@@ -153,7 +150,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <Row role="row">
                   <EditableElement
                     element="td"
-                    initialValue={initialValue.emailToLabel}
+                    value={value.emailToLabel}
                     label="Email to label"
                     onValueChange={(emailToLabel) => setValue({ ...value, emailToLabel })}
                     role="rowheader"
@@ -161,7 +158,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   />
                   <EditableElement
                     element="td"
-                    initialValue={initialValue.emailToValue}
+                    value={value.emailToValue}
                     label="Email to value"
                     onValueChange={(emailToValue) => setValue({ ...value, emailToValue })}
                     role="cell"
@@ -171,7 +168,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <Row role="row">
                   <EditableElement
                     element="td"
-                    initialValue={initialValue.subjectLineLabel}
+                    value={value.subjectLineLabel}
                     label="Subject line label"
                     onValueChange={(subjectLineLabel) => setValue({ ...value, subjectLineLabel })}
                     role="rowheader"
@@ -179,7 +176,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                   />
                   <EditableElement
                     element="td"
-                    initialValue={initialValue.subjectLineValue}
+                    value={value.subjectLineValue}
                     label="Subject line value"
                     onValueChange={(subjectLineValue) => setValue({ ...value, subjectLineValue })}
                     role="cell"
@@ -192,7 +189,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             <Row>
               <EditableElement
                 element="td"
-                initialValue={initialValue.description}
+                value={value.description}
                 label="Status description"
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={styles.description}
@@ -225,7 +222,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
             <EditableElement
               aria-level={3}
               element="td"
-              initialValue={initialValue.amountLabel}
+              value={value.amountLabel}
               label="Amount label"
               onValueChange={(amountLabel) => setValue({ ...value, amountLabel })}
               role="heading"
@@ -243,7 +240,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row role="row">
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.overpaymentLabel}
+                  value={value.overpaymentLabel}
                   label="Overpayment label"
                   onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
                   role="rowheader"
@@ -252,7 +249,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <EditableElement
                   align="right"
                   element="td"
-                  initialValue={initialValue.overpaymentValue}
+                  value={value.overpaymentValue}
                   label="Overpayment value"
                   onValueChange={(overpaymentValue) => setValue({ ...value, overpaymentValue })}
                   role="cell"
@@ -262,7 +259,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row role="row">
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.waivedLabel}
+                  value={value.waivedLabel}
                   label="Waived label"
                   onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
                   role="rowheader"
@@ -271,7 +268,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <EditableElement
                   align="right"
                   element="td"
-                  initialValue={initialValue.waivedValue}
+                  value={value.waivedValue}
                   label="Waived value"
                   onValueChange={(waivedValue) => setValue({ ...value, waivedValue })}
                   role="cell"
@@ -281,7 +278,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <Row role="row">
                 <EditableElement
                   element="td"
-                  initialValue={initialValue.totalLabel}
+                  value={value.totalLabel}
                   label="Amount total label"
                   onValueChange={(totalLabel) => setValue({ ...value, totalLabel })}
                   role="rowheader"
@@ -290,7 +287,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                 <EditableElement
                   align="right"
                   element="td"
-                  initialValue={initialValue.totalValue}
+                  value={value.totalValue}
                   label="Amount total value"
                   onValueChange={(totalValue) => setValue({ ...value, totalValue })}
                   role="cell"
@@ -309,7 +306,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <EditableElement
                 element="td"
                 className={StyleDefaults.layout.narrow}
-                initialValue={initialValue.supportiveInformation}
+                value={value.supportiveInformation}
                 label="Status supportive information"
                 onValueChange={(supportiveInformation) =>
                   setValue({ ...value, supportiveInformation })
@@ -328,7 +325,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
               <EditableElement
                 element="td"
                 className={StyleDefaults.layout.narrow}
-                initialValue={initialValue.missingDocumentDeadline}
+                value={value.missingDocumentDeadline}
                 label="Status deadline description"
                 onValueChange={(missingDocumentDeadline) =>
                   setValue({ ...value, missingDocumentDeadline })
