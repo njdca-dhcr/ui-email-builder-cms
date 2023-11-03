@@ -20,6 +20,18 @@ const config: GatsbyConfig = {
     `gatsby-plugin-root-import`,
     `gatsby-transformer-yaml`,
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Email Builder (Beta)`,
+        short_name: `Email Builder (Beta)`,
+        start_url: `/`,
+        background_color: `#FFFFFF`,
+        theme_color: `#285f77`,
+        display: `standalone`,
+        icon: `src/images/favicon.png`,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/email-templates/`,
