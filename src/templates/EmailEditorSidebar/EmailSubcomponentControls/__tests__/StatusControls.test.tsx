@@ -48,6 +48,24 @@ describe('StatusControls', () => {
     expect(toggle).toBeChecked()
   })
 
+  it('provides a toggle for changing the spacing after the component', async () => {
+    const user = userEvent.setup()
+    const { queryByLabelText } = render(
+      <EmailPartsContent>
+        <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+      </EmailPartsContent>,
+    )
+    const toggle = queryByLabelText('Spacing After')
+    expect(toggle).not.toBeNull()
+    expect(toggle).toBeChecked()
+
+    await user.click(toggle!)
+    expect(toggle).not.toBeChecked()
+
+    await user.click(toggle!)
+    expect(toggle).toBeChecked()
+  })
+
   describe('variants', () => {
     let rendered: RenderResult
     let user: UserEvent

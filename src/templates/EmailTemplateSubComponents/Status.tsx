@@ -26,6 +26,7 @@ interface StatusValue {
   supportiveInformation: string
   statusDueTo: string
   showSupportiveInformation: boolean
+  spaceAfter: boolean
   // Missing Document
   documentsNeededLabel: string
   documentsNeededValue: string
@@ -51,6 +52,7 @@ const defaultValue: StatusValue = {
   status: 'Status of Claim',
   statusDueTo: 'because...',
   showSupportiveInformation: true,
+  spaceAfter: true,
   description: '{Data Reference} or a sentence that colors more of the status of claim',
   supportiveInformation:
     'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
@@ -337,7 +339,7 @@ export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
           </>
         )}
         <Row>
-          <SpacingCell size="large" />
+          <SpacingCell size={value.spaceAfter ? 'large' : 'medium'} />
         </Row>
       </Table>
     </Row>

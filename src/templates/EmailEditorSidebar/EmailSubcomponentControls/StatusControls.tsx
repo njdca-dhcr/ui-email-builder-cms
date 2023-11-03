@@ -61,13 +61,24 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId
           </Control.Container>
         </>
       )}
-      <SubComponentControlToggle
-        className="status-supportive-information-toggle"
-        subComponentId={id}
-        label="Supportive Information"
-        onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
-        value={value.showSupportiveInformation}
-      />
+      <Control.Container>
+        <SubComponentControlToggle
+          className="status-supportive-information-toggle"
+          subComponentId={id}
+          label="Supportive Information"
+          onChange={(showSupportiveInformation) =>
+            setValue({ ...value, showSupportiveInformation })
+          }
+          value={value.showSupportiveInformation}
+        />
+        <SubComponentControlToggle
+          className="status-space-after-toggle"
+          subComponentId={id}
+          label="Spacing After"
+          onChange={(spaceAfter) => setValue({ ...value, spaceAfter })}
+          value={value.spaceAfter}
+        />
+      </Control.Container>
     </Control.Group>
   )
 }
