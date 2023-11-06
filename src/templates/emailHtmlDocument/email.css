@@ -55,6 +55,13 @@ img {
   }
 }
 
+.directive a,
+.rules-rights-regulations a,
+.login-details a {
+  color: #71767a;
+  text-decoration: underline;
+}
+
 .disclaimer a {
   color: #71767a;
   text-decoration: none;

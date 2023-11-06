@@ -99,6 +99,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
     <>
       <Row
         key={value.variant}
+        className="rules-rights-regulations"
         elements={[
           { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
           'table',

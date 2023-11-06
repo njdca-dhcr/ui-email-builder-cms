@@ -89,6 +89,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   return (
     <>
       <Row
+        className="directive"
         elements={[
           { part: 'cell', className: 'section-wrapper' },
           { part: 'table', className: 'el-center', align: 'center' },
