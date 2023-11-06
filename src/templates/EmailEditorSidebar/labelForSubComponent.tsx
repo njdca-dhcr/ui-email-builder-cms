@@ -14,6 +14,8 @@ export const labelForSubComponent = (
       return 'Program Name'
     case 'RulesRightsRegulations':
       return 'Rules, Rights, and Regulations'
+    case 'BenefitAmount':
+      return 'Benefit Amount'
     default:
       return subComponentKind
   }
