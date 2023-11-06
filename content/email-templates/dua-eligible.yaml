@@ -1,5 +1,5 @@
-name: Build from Scratch
-description: You know what you want so make it happen.
+name: Disaster Unemployment Assistance - Eligible
+description: You are going to get some money from us.
 components:
   - kind: Banner
     required: false
@@ -14,11 +14,7 @@ components:
       - kind: Intro
       - kind: Status
       - kind: BenefitAmount
-      - kind: Directive
       - kind: SupplementalContent
-      - kind: SupplementalContent
-      - kind: RulesRightsRegulations
-      - kind: LoginDetails
     required: true
   - kind: Footer
     subComponents:
