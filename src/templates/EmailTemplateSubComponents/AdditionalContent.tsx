@@ -7,7 +7,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 
 const defaultValue =
-  'The [INSERT STATE] Department of Labor and Workforce Development is an equal opportunity employer and offers equal opportunity programs. Auxiliary aids and services are available upon request to assist individuals with disabilities.'
+  'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.'
 
 const { Row } = EmailBlock
 
