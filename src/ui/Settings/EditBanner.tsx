@@ -10,7 +10,7 @@ export const EditBanner: FC = () => {
   const [banner, setBanner] = useBannerValue()
 
   return (
-    <form>
+    <form className="edit-banner-form">
       <Heading element="h2" subheading>
         Banner
       </Heading>
