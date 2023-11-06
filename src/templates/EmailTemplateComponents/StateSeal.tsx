@@ -19,29 +19,15 @@ export const StateSeal: FC<EmailComponentProps> = ({}) => {
   const [value] = useStateSealValue()
 
   return (
-    <>
-      <Row>
-        <td className={StyleDefaults.layout.narrow} style={tdStyles}>
-          <img
-            src={`${Config.siteMetadata?.siteUrl}/state-seal-designation/${StateSeals[value]}.png`}
-            alt={startCase(value)}
-            style={styles}
-          />
-        </td>
-      </Row>
-      <Row>
-        <Cell
-          style={{
-            ...StyleDefaults.inline.colors,
-            lineHeight: 1,
-            fontSize: 10,
-            height: Spacing.size.extraLarge,
-          }}
-        >
-          &nbsp;
-        </Cell>
-      </Row>
-    </>
+    <Row>
+      <td className={StyleDefaults.layout.narrow} style={tdStyles}>
+        <img
+          src={`${Config.siteMetadata?.siteUrl}/state-seal-designation/${StateSeals[value]}.png`}
+          alt={startCase(value)}
+          style={styles}
+        />
+      </td>
+    </Row>
   )
 }
 

@@ -14,22 +14,17 @@ export const Name: FC<EmailComponentProps> = ({ id }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(id)
   const [value, setValue] = useEmailPartsContentForComponent(id, defaultValue)
   return (
-    <>
-      <Row>
-        <EditableElement
-          element="td"
-          className={StyleDefaults.layout.narrow}
-          label="Recipient's name"
-          onClick={activate}
-          onValueChange={setValue}
-          style={styles}
-          value={value}
-        />
-      </Row>
-      <Row>
-        <SpacingCell size="medium" />
-      </Row>
-    </>
+    <Row>
+      <EditableElement
+        element="td"
+        className={StyleDefaults.layout.narrow}
+        label="Recipient's name"
+        onClick={activate}
+        onValueChange={setValue}
+        style={styles}
+        value={value}
+      />
+    </Row>
   )
 }
 

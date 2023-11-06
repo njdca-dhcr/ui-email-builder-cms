@@ -330,7 +330,7 @@ export const StyleDefaults = {
   },
 } as const
 
-const spacingCellSizes = {
+export const spacingCellSizes = {
   small: 10,
   medium: 15,
   large: 50,

@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
+import { Colors, Spacing, Text } from '../styles'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 

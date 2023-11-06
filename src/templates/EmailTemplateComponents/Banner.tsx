@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, ReactElement } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Font, Spacing, SpacingCell, Text } from '../styles'
+import { Colors, Font, Spacing, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
@@ -94,12 +94,5 @@ export const useBannerValue = () => {
 export const Banner: FC<EmailComponentProps> = ({}) => {
   const [value] = useBannerValue()
 
-  return (
-    <>
-      <BannerMarkup {...value} />
-      <Row>
-        <SpacingCell size="large" />
-      </Row>
-    </>
-  )
+  return <BannerMarkup {...value} />
 }

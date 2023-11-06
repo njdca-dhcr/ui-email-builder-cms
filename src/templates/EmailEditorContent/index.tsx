@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, Fragment, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
 import { EmailTemplate } from 'src/appTypes'
@@ -13,6 +13,7 @@ import { Spacing } from '../styles'
 import { PreviewTextHtml } from './PreviewTextHtml'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { DownloadButton } from 'src/ui/DownloadButton'
+import { EmailComponentSpacer } from './EmailComponentSpacer'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -24,6 +25,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
+  const emailComponents = emailTemplate.components ?? []
 
   return (
     <>
@@ -83,17 +85,23 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             maxWidth={Spacing.layout.maxWidth}
             style={{ margin: '0 auto' }}
           >
-            {(emailTemplate.components ?? []).map((emailComponent, i) => (
-              <EditEmailComponent key={i} emailComponent={emailComponent} id={`${i}`}>
-                {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
-                  <EditEmailSubComponent
-                    key={n}
-                    componentId={`${i}`}
-                    id={`${n}`}
-                    emailSubComponent={emailSubComponent}
-                  />
-                ))}
-              </EditEmailComponent>
+            {emailComponents.map((emailComponent, i) => (
+              <Fragment key={i}>
+                <EditEmailComponent emailComponent={emailComponent} id={`${i}`}>
+                  {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
+                    <EditEmailSubComponent
+                      key={n}
+                      componentId={`${i}`}
+                      id={`${n}`}
+                      emailSubComponent={emailSubComponent}
+                    />
+                  ))}
+                </EditEmailComponent>
+                <EmailComponentSpacer
+                  currentComponent={emailComponent}
+                  nextComponent={emailComponents[i + 1]}
+                />
+              </Fragment>
             ))}
           </EmailTable>
         </div>
