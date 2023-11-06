@@ -166,7 +166,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                     paddingBottom: '16px',
                   }}
                 >
-                  <span style={hrefTextStyles}>
+                  <span style={hrefTextStyles} className="displayed-href">
                     {value.linkHref ||
                       'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
                   </span>
@@ -338,9 +338,10 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
                           paddingBottom: '16px',
                         }}
                       >
-                        <Link to={value.linkHref} style={hrefTextStyles}>
-                          {value.linkHref}
-                        </Link>
+                        <span className="displayed-href" style={hrefTextStyles}>
+                          {value.linkHref ||
+                            'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                        </span>
                       </div>
                     </Row>
                   </Table>

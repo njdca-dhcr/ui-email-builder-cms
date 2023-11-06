@@ -162,6 +162,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) =>
               </Link>
             </Row>
             <Row
+              className="displayed-href"
               elements={[
                 'cell',
                 { part: 'table', maxWidth: 297 },

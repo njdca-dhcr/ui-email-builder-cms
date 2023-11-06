@@ -242,6 +242,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId
               </Link>
             </Row>
             <Row
+              className="displayed-href"
               elements={[
                 'cell',
                 { part: 'table', maxWidth: 297 },

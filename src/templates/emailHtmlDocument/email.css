@@ -55,9 +55,9 @@ img {
   }
 }
 
-.directive a,
-.rules-rights-regulations a,
-.login-details a {
+.directive .displayed-href a,
+.rules-rights-regulations .displayed-href a,
+.login-details .displayed-href a {
   color: #71767a;
   text-decoration: underline;
 }
