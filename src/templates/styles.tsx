@@ -333,7 +333,8 @@ export const StyleDefaults = {
 export const spacingCellSizes = {
   small: 10,
   medium: 15,
-  large: 50,
+  large: 30,
+  extraLarge: 50,
 }
 
 interface SpacingCellProps {

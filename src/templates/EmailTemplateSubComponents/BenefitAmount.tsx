@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Borders, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
+import { Borders, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
@@ -45,7 +45,7 @@ export const useBenefitAmountValue = (componentId: string, id: string) => {
   return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 }
 
-const { Table, Row, Cell } = EmailBlock
+const { Row, Cell } = EmailBlock
 
 export const BenefitAmount: FC<EmailSubComponentProps> = ({ componentId, id }) => {
   const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
@@ -54,177 +54,172 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ componentId, id }) =
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
-    <>
-      <Row elements={['cell', 'table']} onClick={activate}>
+    <Row elements={['cell', 'table']} onClick={activate}>
+      <Row
+        elements={[
+          { part: 'cell', style: styles.outerCell, className: StyleDefaults.layout.wide },
+          'table',
+        ]}
+      >
+        <Row>
+          <EditableElement
+            aria-level={2}
+            element="td"
+            value={value.title}
+            label="Benefit Amount title"
+            onValueChange={(title) => setValue({ ...value, title })}
+            role="heading"
+            style={styles.title}
+          />
+        </Row>
+
+        <Row>
+          <EditableElement
+            aria-level={3}
+            element="td"
+            value={value.description}
+            label="Benefit Amount description"
+            onValueChange={(description) => setValue({ ...value, description })}
+            role="text"
+            style={styles.description}
+          />
+        </Row>
+
         <Row
           elements={[
-            { part: 'cell', style: styles.outerCell, className: StyleDefaults.layout.wide },
+            {
+              part: 'cell',
+              style: {
+                ...styles.innerCell,
+                backgroundColor: boxColorConfig.backgroundColor,
+                borderLeft: Borders.large(boxColorConfig.accentColor),
+              },
+            },
             'table',
           ]}
         >
           <Row>
-            <EditableElement
-              aria-level={2}
-              element="td"
-              value={value.title}
-              label="Benefit Amount title"
-              onValueChange={(title) => setValue({ ...value, title })}
-              role="heading"
-              style={styles.title}
-            />
+            <Cell style={styles.iconContainer} align="left">
+              <UswdsIcon icon={value.icon} />
+            </Cell>
+            <Cell align="left">
+              <EditableElement
+                avia-level={4}
+                element="div"
+                value={value.boxTitle}
+                label="Benefit Amount box title"
+                onValueChange={(boxTitle) => setValue({ ...value, boxTitle })}
+                role="heading"
+                style={styles.boxTitle}
+              />
+            </Cell>
           </Row>
-
           <Row>
-            <EditableElement
-              aria-level={3}
-              element="td"
-              value={value.description}
-              label="Benefit Amount description"
-              onValueChange={(description) => setValue({ ...value, description })}
-              role="text"
-              style={styles.description}
-            />
-          </Row>
-
-          <Row
-            elements={[
-              {
-                part: 'cell',
-                style: {
-                  ...styles.innerCell,
-                  backgroundColor: boxColorConfig.backgroundColor,
-                  borderLeft: Borders.large(boxColorConfig.accentColor),
-                },
-              },
-              'table',
-            ]}
-          >
-            <Row>
-              <Cell style={styles.iconContainer} align="left">
-                <UswdsIcon icon={value.icon} />
-              </Cell>
-              <Cell align="left">
-                <EditableElement
-                  avia-level={4}
-                  element="div"
-                  value={value.boxTitle}
-                  label="Benefit Amount box title"
-                  onValueChange={(boxTitle) => setValue({ ...value, boxTitle })}
-                  role="heading"
-                  style={styles.boxTitle}
-                />
-              </Cell>
-            </Row>
-            <Row>
-              <Cell>{null}</Cell>
-              <Cell align="left" elements={['table']}>
-                <Row>
-                  <Cell>
-                    <EditableElement
-                      aria-level={5}
-                      element="span"
-                      value={value.weeklyRateLabel}
-                      label="Benefit Amount box title"
-                      onValueChange={(weeklyRateLabel) => setValue({ ...value, weeklyRateLabel })}
-                      role="heading"
-                      style={{ fontWeight: 'bold' }}
-                    />
-                    &nbsp;&nbsp;&nbsp;
-                    <EditableElement
-                      aria-level={5}
-                      element="span"
-                      value={value.weeklyRateValue}
-                      label="Benefit Amount box title"
-                      onValueChange={(weeklyRateValue) => setValue({ ...value, weeklyRateValue })}
-                      role="heading"
-                      style={{ fontWeight: 'bold' }}
-                    />
-                  </Cell>
-                </Row>
-                <Row>
-                  <Cell style={{ fontWeight: 'bold', paddingBottom: Spacing.size.medium }}>
-                    <EditableElement
-                      aria-level={5}
-                      element="span"
-                      value={value.partialWeeklyRateLabel}
-                      label="Benefit Amount box title"
-                      onValueChange={(partialWeeklyRateLabel) =>
-                        setValue({ ...value, partialWeeklyRateLabel })
-                      }
-                      role="heading"
-                      style={{ fontWeight: 'bold' }}
-                    />
-                    &nbsp;&nbsp;&nbsp;
-                    <EditableElement
-                      aria-level={5}
-                      element="span"
-                      value={value.partialWeeklyRateValue}
-                      label="Benefit Amount box title"
-                      onValueChange={(partialWeeklyRateValue) =>
-                        setValue({ ...value, partialWeeklyRateValue })
-                      }
-                      role="heading"
-                      style={{ fontWeight: 'bold' }}
-                    />
-                  </Cell>
-                </Row>
-                <Row>
-                  <Cell
-                    style={{
-                      fontWeight: 'bold',
-                      fontStyle: 'italic',
-                      paddingBottom: Spacing.size.medium,
-                    }}
-                  >
-                    <EditableElement
-                      aria-level={5}
-                      element="span"
-                      value={value.rateExplanation}
-                      label="Benefit Amount box title"
-                      onValueChange={(rateExplanation) => setValue({ ...value, rateExplanation })}
-                      role="heading"
-                      style={{ fontWeight: 'bold' }}
-                    />
-                  </Cell>
-                </Row>
-                <Row>
-                  <Cell style={{ fontStyle: 'italic' }}>
-                    <EditableElement
-                      aria-level={5}
-                      element="span"
-                      value={value.rateSupportiveInformation}
-                      label="Benefit Amount box title"
-                      onValueChange={(rateSupportiveInformation) =>
-                        setValue({ ...value, rateSupportiveInformation })
-                      }
-                      role="heading"
-                      style={{ fontWeight: 'bold' }}
-                    />
-                  </Cell>
-                </Row>
-              </Cell>
-            </Row>
-          </Row>
-
-          <Row>
-            <EditableElement
-              aria-level={3}
-              element="td"
-              value={value.benefitSupportiveInformation}
-              label="Benefit Amount supportive information"
-              onValueChange={(benefitSupportiveInformation) =>
-                setValue({ ...value, benefitSupportiveInformation })
-              }
-              role="text"
-              style={{ paddingTop: Spacing.size.medium, fontStyle: 'italic' }}
-            />
+            <Cell>{null}</Cell>
+            <Cell align="left" elements={['table']}>
+              <Row>
+                <Cell>
+                  <EditableElement
+                    aria-level={5}
+                    element="span"
+                    value={value.weeklyRateLabel}
+                    label="Benefit Amount box title"
+                    onValueChange={(weeklyRateLabel) => setValue({ ...value, weeklyRateLabel })}
+                    role="heading"
+                    style={{ fontWeight: 'bold' }}
+                  />
+                  &nbsp;&nbsp;&nbsp;
+                  <EditableElement
+                    aria-level={5}
+                    element="span"
+                    value={value.weeklyRateValue}
+                    label="Benefit Amount box title"
+                    onValueChange={(weeklyRateValue) => setValue({ ...value, weeklyRateValue })}
+                    role="heading"
+                    style={{ fontWeight: 'bold' }}
+                  />
+                </Cell>
+              </Row>
+              <Row>
+                <Cell style={{ fontWeight: 'bold', paddingBottom: Spacing.size.medium }}>
+                  <EditableElement
+                    aria-level={5}
+                    element="span"
+                    value={value.partialWeeklyRateLabel}
+                    label="Benefit Amount box title"
+                    onValueChange={(partialWeeklyRateLabel) =>
+                      setValue({ ...value, partialWeeklyRateLabel })
+                    }
+                    role="heading"
+                    style={{ fontWeight: 'bold' }}
+                  />
+                  &nbsp;&nbsp;&nbsp;
+                  <EditableElement
+                    aria-level={5}
+                    element="span"
+                    value={value.partialWeeklyRateValue}
+                    label="Benefit Amount box title"
+                    onValueChange={(partialWeeklyRateValue) =>
+                      setValue({ ...value, partialWeeklyRateValue })
+                    }
+                    role="heading"
+                    style={{ fontWeight: 'bold' }}
+                  />
+                </Cell>
+              </Row>
+              <Row>
+                <Cell
+                  style={{
+                    fontWeight: 'bold',
+                    fontStyle: 'italic',
+                    paddingBottom: Spacing.size.medium,
+                  }}
+                >
+                  <EditableElement
+                    aria-level={5}
+                    element="span"
+                    value={value.rateExplanation}
+                    label="Benefit Amount box title"
+                    onValueChange={(rateExplanation) => setValue({ ...value, rateExplanation })}
+                    role="heading"
+                    style={{ fontWeight: 'bold' }}
+                  />
+                </Cell>
+              </Row>
+              <Row>
+                <Cell style={{ fontStyle: 'italic' }}>
+                  <EditableElement
+                    aria-level={5}
+                    element="span"
+                    value={value.rateSupportiveInformation}
+                    label="Benefit Amount box title"
+                    onValueChange={(rateSupportiveInformation) =>
+                      setValue({ ...value, rateSupportiveInformation })
+                    }
+                    role="heading"
+                    style={{ fontWeight: 'bold' }}
+                  />
+                </Cell>
+              </Row>
+            </Cell>
           </Row>
         </Row>
+
+        <Row>
+          <EditableElement
+            aria-level={3}
+            element="td"
+            value={value.benefitSupportiveInformation}
+            label="Benefit Amount supportive information"
+            onValueChange={(benefitSupportiveInformation) =>
+              setValue({ ...value, benefitSupportiveInformation })
+            }
+            role="text"
+            style={{ paddingTop: Spacing.size.medium, fontStyle: 'italic' }}
+          />
+        </Row>
       </Row>
-      <Row>
-        <SpacingCell size="large" />
-      </Row>
-    </>
+    </Row>
   )
 }
 

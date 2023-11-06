@@ -22,10 +22,10 @@ export namespace EmailTemplate {
   type EmailTemplateComponentsMappingType = typeof EmailTemplateComponentsMapping
 
   export type ComponentKind = keyof EmailTemplateComponentsMappingType
-  export type SubComponentKind<T extends ComponentKind> =
+  export type SubComponentKind<T extends ComponentKind = ComponentKind> =
     EmailTemplateComponentsMappingType[T][number]
 
-  export interface SubComponent<T extends ComponentKind> {
+  export interface SubComponent<T extends ComponentKind = ComponentKind> {
     kind: SubComponentKind<T>
     description?: string
     required?: boolean

@@ -2,7 +2,7 @@ import React, { FC, CSSProperties } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { SpacingCell, StyleDefaults, Text } from '../styles'
+import { StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 
@@ -15,28 +15,23 @@ export const Title: FC<EmailSubComponentProps> = ({ id, componentId }) => {
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
 
   return (
-    <>
-      <Row
-        elements={[
-          'cell',
-          'table',
-          'row',
-          { part: 'cell', style: cellContainerStyles, className: StyleDefaults.layout.narrow },
-        ]}
-      >
-        <EditableElement
-          element="h1"
-          label="Title"
-          onClick={activate}
-          onValueChange={setValue}
-          style={styles}
-          value={value}
-        />
-      </Row>
-      <Row>
-        <SpacingCell size="medium" />
-      </Row>
-    </>
+    <Row
+      elements={[
+        'cell',
+        'table',
+        'row',
+        { part: 'cell', style: cellContainerStyles, className: StyleDefaults.layout.narrow },
+      ]}
+    >
+      <EditableElement
+        element="h1"
+        label="Title"
+        onClick={activate}
+        onValueChange={setValue}
+        style={styles}
+        value={value}
+      />
+    </Row>
   )
 }
 

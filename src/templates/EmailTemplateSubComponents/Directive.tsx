@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
+import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 
 export const enum DirectiveVariant {
@@ -87,419 +87,404 @@ export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
 
   const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
   return (
-    <>
-      <Row
-        className="directive"
-        elements={[
-          { part: 'cell', className: 'section-wrapper' },
-          { part: 'table', className: 'el-center', align: 'center' },
-          'row',
-          { part: 'cell', className: StyleDefaults.layout.narrow, style: outerCellStyles },
-          {
-            part: 'table',
-            style: [DirectiveVariant.PayOnline].includes(value.variant) ? payOnlineBoxStyles : {},
-          },
-        ]}
-        onClick={activate}
-      >
-        {/* Directive Title */}
-        {value.showTitle && (
-          <>
+    <Row
+      className="directive"
+      elements={[
+        { part: 'cell', className: 'section-wrapper' },
+        { part: 'table', className: 'el-center', align: 'center' },
+        'row',
+        { part: 'cell', className: StyleDefaults.layout.narrow, style: outerCellStyles },
+        {
+          part: 'table',
+          style: [DirectiveVariant.PayOnline].includes(value.variant) ? payOnlineBoxStyles : {},
+        },
+      ]}
+      onClick={activate}
+    >
+      {/* Directive Title */}
+      {value.showTitle && (
+        <>
+          <Row elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}>
+            <div style={{ lineHeight: '150%' }}>
+              <h2 style={stepNumberLabel}>
+                {[DirectiveVariant.PayOnline].includes(value.variant) ? (
+                  <>
+                    <b>Pay Online</b> today
+                  </>
+                ) : (
+                  <EditableElement
+                    element="b"
+                    label="Directive Title"
+                    onValueChange={(title) => setValue({ ...value, title })}
+                    value={value.title}
+                  />
+                )}
+              </h2>
+            </div>
+          </Row>
+        </>
+      )}
+
+      {/* One Step or Pay Online */}
+      {[DirectiveVariant.OneStep, DirectiveVariant.PayOnline].includes(value.variant) && (
+        <>
+          <Row elements={['cell', { part: 'table', align: 'left' }]}>
+            {/* Space Above Button */}
+            <Row elements={['cell']}>
+              <div style={spaceStyles}>&nbsp;</div>
+            </Row>
+
+            {/* Button */}
             <Row
-              elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}
+              elements={[
+                'cell',
+                { part: 'table', width: 'unset' },
+                'row',
+                { part: 'cell', style: getStartedButtonStyles },
+              ]}
             >
-              <div style={{ lineHeight: '150%' }}>
-                <h2 style={stepNumberLabel}>
-                  {[DirectiveVariant.PayOnline].includes(value.variant) ? (
-                    <>
-                      <b>Pay Online</b> today
-                    </>
-                  ) : (
-                    <EditableElement
-                      element="b"
-                      label="Directive Title"
-                      onValueChange={(title) => setValue({ ...value, title })}
-                      value={value.title}
-                    />
-                  )}
-                </h2>
+              <Link to={value.linkHref}>
+                <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
+              </Link>
+            </Row>
+
+            {/* Space After Button */}
+            <Row elements={['cell']}>
+              <div style={spaceStyles}>&nbsp;</div>
+            </Row>
+
+            {/* Same Link As Button */}
+            <Row elements={['cell']}>
+              <div
+                className="link-div"
+                style={{
+                  lineHeight: '150%',
+                  wordBreak: 'break-all',
+                  paddingBottom: '16px',
+                }}
+              >
+                <span style={hrefTextStyles} className="displayed-href">
+                  {value.linkHref ||
+                    'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                </span>
               </div>
             </Row>
-          </>
-        )}
+          </Row>
 
-        {/* One Step or Pay Online */}
-        {[DirectiveVariant.OneStep, DirectiveVariant.PayOnline].includes(value.variant) && (
-          <>
-            <Row elements={['cell', { part: 'table', align: 'left' }]}>
-              {/* Space Above Button */}
-              <Row elements={['cell']}>
-                <div style={spaceStyles}>&nbsp;</div>
-              </Row>
+          {[DirectiveVariant.OneStep].includes(value.variant) && (
+            <tr>
+              <EditableElement
+                element="td"
+                label="Supportive information"
+                onValueChange={(oneStepSupportiveText) =>
+                  setValue({ ...value, oneStepSupportiveText })
+                }
+                value={value.oneStepSupportiveText}
+                style={supportiveInformationStyles}
+              />
+            </tr>
+          )}
 
-              {/* Button */}
-              <Row
-                elements={[
-                  'cell',
-                  { part: 'table', width: 'unset' },
-                  'row',
-                  { part: 'cell', style: getStartedButtonStyles },
-                ]}
-              >
-                <Link to={value.linkHref}>
-                  <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
-                </Link>
-              </Row>
+          {[DirectiveVariant.PayOnline].includes(value.variant) && (
+            <>
+              <tr>
+                <EditableElement
+                  element="td"
+                  label="Alternative payment information"
+                  onValueChange={(alternativePaymentLabel) =>
+                    setValue({ ...value, alternativePaymentLabel })
+                  }
+                  value={value.alternativePaymentLabel}
+                  style={alternativePaymentStyles}
+                />
+              </tr>
 
-              {/* Space After Button */}
-              <Row elements={['cell']}>
-                <div style={spaceStyles}>&nbsp;</div>
-              </Row>
+              <tr>
+                <td>
+                  <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>&nbsp;</div>
+                </td>
+              </tr>
 
-              {/* Same Link As Button */}
-              <Row elements={['cell']}>
-                <div
-                  className="link-div"
-                  style={{
-                    lineHeight: '150%',
-                    wordBreak: 'break-all',
-                    paddingBottom: '16px',
-                  }}
-                >
-                  <span style={hrefTextStyles} className="displayed-href">
-                    {value.linkHref ||
-                      'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
-                  </span>
-                </div>
-              </Row>
-            </Row>
-
-            {[DirectiveVariant.OneStep].includes(value.variant) && (
               <tr>
                 <EditableElement
                   element="td"
                   label="Supportive information"
-                  onValueChange={(oneStepSupportiveText) =>
-                    setValue({ ...value, oneStepSupportiveText })
+                  onValueChange={(payOnlineSupportiveText) =>
+                    setValue({ ...value, payOnlineSupportiveText })
                   }
-                  value={value.oneStepSupportiveText}
+                  value={value.payOnlineSupportiveText}
                   style={supportiveInformationStyles}
                 />
               </tr>
-            )}
+            </>
+          )}
+        </>
+      )}
 
-            {[DirectiveVariant.PayOnline].includes(value.variant) && (
-              <>
-                <tr>
-                  <EditableElement
-                    element="td"
-                    label="Alternative payment information"
-                    onValueChange={(alternativePaymentLabel) =>
-                      setValue({ ...value, alternativePaymentLabel })
-                    }
-                    value={value.alternativePaymentLabel}
-                    style={alternativePaymentStyles}
-                  />
-                </tr>
+      {/* Three Step Directive and Step 2 Expansion */}
+      {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
+        <>
+          {/* Directive Label */}
+          <Row elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}>
+            <div style={{ lineHeight: '150%' }}>
+              <EditableElement
+                element="span"
+                label="Label for the Directive"
+                onValueChange={(label) => setValue({ ...value, label })}
+                value={value.label}
+                style={directiveLabelStyles}
+              />
+            </div>
+          </Row>
 
-                <tr>
-                  <td>
-                    <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>
-                      &nbsp;
-                    </div>
-                  </td>
-                </tr>
+          {/* Space Above Steps */}
+          <Row elements={['cell']}>
+            <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>&nbsp;</div>
+          </Row>
 
-                <tr>
-                  <EditableElement
-                    element="td"
-                    label="Supportive information"
-                    onValueChange={(payOnlineSupportiveText) =>
-                      setValue({ ...value, payOnlineSupportiveText })
-                    }
-                    value={value.payOnlineSupportiveText}
-                    style={supportiveInformationStyles}
-                  />
-                </tr>
-              </>
-            )}
-          </>
-        )}
-
-        {/* Three Step Directive and Step 2 Expansion */}
-        {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(
-          value.variant,
-        ) && (
-          <>
-            {/* Directive Label */}
-            <Row
-              elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}
-            >
-              <div style={{ lineHeight: '150%' }}>
-                <EditableElement
-                  element="span"
-                  label="Label for the Directive"
-                  onValueChange={(label) => setValue({ ...value, label })}
-                  value={value.label}
-                  style={directiveLabelStyles}
-                />
-              </div>
-            </Row>
-
-            {/* Space Above Steps */}
-            <Row elements={['cell']}>
-              <div style={{ height: '15px', lineHeight: '15px', fontSize: '15px' }}>&nbsp;</div>
-            </Row>
-
-            {/* Steps */}
-            <Row elements={['cell', { part: 'table', align: 'center' }, 'row', 'cell', 'table']}>
-              {/* Step 1 */}
-              <Row>
-                {/* Step 1 Circle Number */}
-                <Cell>
-                  <div className="circle-number" style={circleNumberStyles}>
-                    <Table
-                      className="circle-number-table el-center"
-                      align="center"
-                      style={circleNumberTableStyles}
-                      elements={['row', 'cell']}
-                    >
-                      1
-                    </Table>
-                  </div>
-                </Cell>
-
-                {/* Step 1 Label */}
-                <Cell style={{ paddingLeft: '18px', paddingTop: '4px' }}>
-                  <div style={{ lineHeight: '145%' }}>
-                    <span style={stepNumberLabel}>
-                      <EditableElement
-                        element="b"
-                        label="Label for Step 1"
-                        onValueChange={(step1Label) => setValue({ ...value, step1Label })}
-                        value={value.step1Label}
-                      />
-                    </span>
-                  </div>
-                </Cell>
-              </Row>
-
-              {/* Step 1 Additional Information */}
-
-              <Row>
-                <Cell align="center">
-                  <div id="step-bar-1-2" className="step-bar" style={stepBar12Styles}></div>
-                </Cell>
-                <Cell style={tdPaddingStyles}>
-                  {value.showStep1AdditionalContent && (
-                    <div style={{ lineHeight: '16px' }}>
-                      <EditableElement
-                        element="span"
-                        label="Additional information for Step 1"
-                        onValueChange={(step1Additional) => setValue({ ...value, step1Additional })}
-                        value={value.step1Additional}
-                        style={stepDescriptionStyles}
-                      />
-                    </div>
-                  )}
-                  {/* Button Table */}
-                  <Table align="left">
-                    {/* Space Above Button */}
-                    <Row elements={['cell']}>
-                      <div style={spaceStyles}>&nbsp;</div>
-                    </Row>
-
-                    {/* Button */}
-                    <Row
-                      elements={[
-                        'cell',
-                        { part: 'table', width: 'unset' },
-                        'row',
-                        { part: 'cell', style: getStartedButtonStyles },
-                      ]}
-                    >
-                      <Link to={value.linkHref}>
-                        <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
-                      </Link>
-                    </Row>
-
-                    {/* Space After Button */}
-                    <Row elements={['cell']}>
-                      <div style={spaceStyles}>&nbsp;</div>
-                    </Row>
-
-                    {/* Same Link As Button */}
-                    <Row elements={['cell']}>
-                      <div
-                        className="link-div"
-                        style={{
-                          lineHeight: '150%',
-                          wordBreak: 'break-all',
-                          paddingBottom: '16px',
-                        }}
-                      >
-                        <span className="displayed-href" style={hrefTextStyles}>
-                          {value.linkHref ||
-                            'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
-                        </span>
-                      </div>
-                    </Row>
+          {/* Steps */}
+          <Row elements={['cell', { part: 'table', align: 'center' }, 'row', 'cell', 'table']}>
+            {/* Step 1 */}
+            <Row>
+              {/* Step 1 Circle Number */}
+              <Cell>
+                <div className="circle-number" style={circleNumberStyles}>
+                  <Table
+                    className="circle-number-table el-center"
+                    align="center"
+                    style={circleNumberTableStyles}
+                    elements={['row', 'cell']}
+                  >
+                    1
                   </Table>
-                </Cell>
-              </Row>
+                </div>
+              </Cell>
 
-              {/* Step 2 */}
-              <Row>
-                {/* Step 2 Circle Number */}
-                <Cell>
-                  <div className="circle-number" style={circleNumberStyles}>
-                    <Table
-                      className="circle-number-table el-center"
-                      align="center"
-                      style={circleNumberTableStyles}
-                      elements={['row', 'cell']}
+              {/* Step 1 Label */}
+              <Cell style={{ paddingLeft: '18px', paddingTop: '4px' }}>
+                <div style={{ lineHeight: '145%' }}>
+                  <span style={stepNumberLabel}>
+                    <EditableElement
+                      element="b"
+                      label="Label for Step 1"
+                      onValueChange={(step1Label) => setValue({ ...value, step1Label })}
+                      value={value.step1Label}
+                    />
+                  </span>
+                </div>
+              </Cell>
+            </Row>
+
+            {/* Step 1 Additional Information */}
+
+            <Row>
+              <Cell align="center">
+                <div id="step-bar-1-2" className="step-bar" style={stepBar12Styles}></div>
+              </Cell>
+              <Cell style={tdPaddingStyles}>
+                {value.showStep1AdditionalContent && (
+                  <div style={{ lineHeight: '16px' }}>
+                    <EditableElement
+                      element="span"
+                      label="Additional information for Step 1"
+                      onValueChange={(step1Additional) => setValue({ ...value, step1Additional })}
+                      value={value.step1Additional}
+                      style={stepDescriptionStyles}
+                    />
+                  </div>
+                )}
+                {/* Button Table */}
+                <Table align="left">
+                  {/* Space Above Button */}
+                  <Row elements={['cell']}>
+                    <div style={spaceStyles}>&nbsp;</div>
+                  </Row>
+
+                  {/* Button */}
+                  <Row
+                    elements={[
+                      'cell',
+                      { part: 'table', width: 'unset' },
+                      'row',
+                      { part: 'cell', style: getStartedButtonStyles },
+                    ]}
+                  >
+                    <Link to={value.linkHref}>
+                      <span style={getStartedButtonTextStyles}>{value.buttonLabel}</span>
+                    </Link>
+                  </Row>
+
+                  {/* Space After Button */}
+                  <Row elements={['cell']}>
+                    <div style={spaceStyles}>&nbsp;</div>
+                  </Row>
+
+                  {/* Same Link As Button */}
+                  <Row elements={['cell']}>
+                    <div
+                      className="link-div"
+                      style={{
+                        lineHeight: '150%',
+                        wordBreak: 'break-all',
+                        paddingBottom: '16px',
+                      }}
                     >
-                      2
-                    </Table>
-                  </div>
-                </Cell>
+                      <span className="displayed-href" style={hrefTextStyles}>
+                        {value.linkHref ||
+                          'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                      </span>
+                    </div>
+                  </Row>
+                </Table>
+              </Cell>
+            </Row>
 
-                {/* Step 2 Label */}
+            {/* Step 2 */}
+            <Row>
+              {/* Step 2 Circle Number */}
+              <Cell>
+                <div className="circle-number" style={circleNumberStyles}>
+                  <Table
+                    className="circle-number-table el-center"
+                    align="center"
+                    style={circleNumberTableStyles}
+                    elements={['row', 'cell']}
+                  >
+                    2
+                  </Table>
+                </div>
+              </Cell>
+
+              {/* Step 2 Label */}
+              <Cell style={tdPaddingStyles}>
+                <div style={{ lineHeight: '145%', paddingTop: '2px' }}>
+                  <span style={stepNumberLabel}>
+                    <EditableElement
+                      element="b"
+                      label="Label for Step 2"
+                      onValueChange={(step2Label) => setValue({ ...value, step2Label })}
+                      value={value.step2Label}
+                    />
+                  </span>
+                </div>
+              </Cell>
+            </Row>
+
+            <Row>
+              {/* Step 2 Bar */}
+              <Cell align="center">
+                <div
+                  className="step-bar"
+                  id="step-bar-1-2-or-2-3"
+                  style={
+                    [DirectiveVariant.StepTwoExpansion].includes(value.variant)
+                      ? stepBar12Styles
+                      : stepBar23Styles
+                  }
+                ></div>
+              </Cell>
+
+              {/* Step 2 Additional Information */}
+              {value.showStep2AdditionalContent && (
                 <Cell style={tdPaddingStyles}>
-                  <div style={{ lineHeight: '145%', paddingTop: '2px' }}>
-                    <span style={stepNumberLabel}>
-                      <EditableElement
-                        element="b"
-                        label="Label for Step 2"
-                        onValueChange={(step2Label) => setValue({ ...value, step2Label })}
-                        value={value.step2Label}
-                      />
-                    </span>
+                  <div style={{ lineHeight: '16px' }}>
+                    <EditableElement
+                      element="span"
+                      label="Additional information for Step 2"
+                      onValueChange={(step2Additional) => setValue({ ...value, step2Additional })}
+                      value={value.step2Additional}
+                      style={stepDescriptionStyles}
+                    />
                   </div>
-                </Cell>
-              </Row>
+                  <div style={spaceStyles}>&nbsp;</div>
 
+                  {[DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
+                    <>
+                      <EditableElement
+                        element="div"
+                        label="Tertiary information for Step 2"
+                        onValueChange={(step2Tertiary) => setValue({ ...value, step2Tertiary })}
+                        value={value.step2Tertiary}
+                        style={supportiveInformationStyles}
+                      />
+                      <div style={spaceStyles}>&nbsp;</div>
+
+                      <EditableElement
+                        element="div"
+                        label="Case number information"
+                        onValueChange={(step2CaseNumber) => setValue({ ...value, step2CaseNumber })}
+                        value={value.step2CaseNumber}
+                        style={expansionCaseNumberStyles}
+                      />
+                      <div style={spaceStyles}>&nbsp;</div>
+                    </>
+                  )}
+                </Cell>
+              )}
+            </Row>
+
+            {/* Step 3 */}
+            <Row>
+              {/* Step 3 Circle Number */}
+              <Cell>
+                <div className="circle-number" style={circleNumberStyles}>
+                  <Table
+                    className="circle-number-table el-center"
+                    style={circleNumberTableStyles}
+                    align="center"
+                    elements={['row', 'cell']}
+                  >
+                    3
+                  </Table>
+                </div>
+              </Cell>
+
+              {/* Step 3 Label */}
+              <Cell style={tdPaddingStyles}>
+                <div style={{ lineHeight: '175%' }}>
+                  <span style={stepNumberLabel}>
+                    <EditableElement
+                      element="b"
+                      label="Label for Step 3"
+                      onValueChange={(step3Label) => setValue({ ...value, step3Label })}
+                      value={value.step3Label}
+                    />
+                  </span>
+                </div>
+              </Cell>
+            </Row>
+
+            {/* Step 3 Additional Information */}
+            {value.showStep3AdditionalContent && (
               <Row>
-                {/* Step 2 Bar */}
                 <Cell align="center">
                   <div
                     className="step-bar"
-                    id="step-bar-1-2-or-2-3"
-                    style={
-                      [DirectiveVariant.StepTwoExpansion].includes(value.variant)
-                        ? stepBar12Styles
-                        : stepBar23Styles
-                    }
+                    id="step-bar-2-3"
+                    style={{
+                      ...stepBar23Styles,
+                      background: 'transparent',
+                    }}
                   ></div>
                 </Cell>
-
-                {/* Step 2 Additional Information */}
-                {value.showStep2AdditionalContent && (
-                  <Cell style={tdPaddingStyles}>
-                    <div style={{ lineHeight: '16px' }}>
-                      <EditableElement
-                        element="span"
-                        label="Additional information for Step 2"
-                        onValueChange={(step2Additional) => setValue({ ...value, step2Additional })}
-                        value={value.step2Additional}
-                        style={stepDescriptionStyles}
-                      />
-                    </div>
-                    <div style={spaceStyles}>&nbsp;</div>
-
-                    {[DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
-                      <>
-                        <EditableElement
-                          element="div"
-                          label="Tertiary information for Step 2"
-                          onValueChange={(step2Tertiary) => setValue({ ...value, step2Tertiary })}
-                          value={value.step2Tertiary}
-                          style={supportiveInformationStyles}
-                        />
-                        <div style={spaceStyles}>&nbsp;</div>
-
-                        <EditableElement
-                          element="div"
-                          label="Case number information"
-                          onValueChange={(step2CaseNumber) =>
-                            setValue({ ...value, step2CaseNumber })
-                          }
-                          value={value.step2CaseNumber}
-                          style={expansionCaseNumberStyles}
-                        />
-                        <div style={spaceStyles}>&nbsp;</div>
-                      </>
-                    )}
-                  </Cell>
-                )}
-              </Row>
-
-              {/* Step 3 */}
-              <Row>
-                {/* Step 3 Circle Number */}
-                <Cell>
-                  <div className="circle-number" style={circleNumberStyles}>
-                    <Table
-                      className="circle-number-table el-center"
-                      style={circleNumberTableStyles}
-                      align="center"
-                      elements={['row', 'cell']}
-                    >
-                      3
-                    </Table>
-                  </div>
-                </Cell>
-
-                {/* Step 3 Label */}
                 <Cell style={tdPaddingStyles}>
-                  <div style={{ lineHeight: '175%' }}>
-                    <span style={stepNumberLabel}>
-                      <EditableElement
-                        element="b"
-                        label="Label for Step 3"
-                        onValueChange={(step3Label) => setValue({ ...value, step3Label })}
-                        value={value.step3Label}
-                      />
-                    </span>
+                  <div style={{ lineHeight: '16px' }}>
+                    <EditableElement
+                      element="span"
+                      label="Additional information for Step 3"
+                      onValueChange={(step3Additional) => setValue({ ...value, step3Additional })}
+                      value={value.step3Additional}
+                      style={stepDescriptionStyles}
+                    />
                   </div>
+                  <div style={spaceStyles}>&nbsp;</div>
                 </Cell>
               </Row>
-
-              {/* Step 3 Additional Information */}
-              {value.showStep3AdditionalContent && (
-                <Row>
-                  <Cell align="center">
-                    <div
-                      className="step-bar"
-                      id="step-bar-2-3"
-                      style={{
-                        ...stepBar23Styles,
-                        background: 'transparent',
-                      }}
-                    ></div>
-                  </Cell>
-                  <Cell style={tdPaddingStyles}>
-                    <div style={{ lineHeight: '16px' }}>
-                      <EditableElement
-                        element="span"
-                        label="Additional information for Step 3"
-                        onValueChange={(step3Additional) => setValue({ ...value, step3Additional })}
-                        value={value.step3Additional}
-                        style={stepDescriptionStyles}
-                      />
-                    </div>
-                    <div style={spaceStyles}>&nbsp;</div>
-                  </Cell>
-                </Row>
-              )}
-            </Row>
-          </>
-        )}
-      </Row>
-      <Row>
-        <SpacingCell size="large" />
-      </Row>
-    </>
+            )}
+          </Row>
+        </>
+      )}
+    </Row>
   )
 }
 

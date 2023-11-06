@@ -2,13 +2,19 @@ import React, { FC } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailBlock } from 'src/ui'
 import { SpacingCell } from '../styles'
+import { useShouldShowEmailComponent } from '../ShouldShowEmailPart'
 
 interface Props {
   currentComponent: EmailTemplate.Component
+  id: string
   nextComponent: EmailTemplate.Component | undefined
 }
 
-export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
+export const EmailComponentSpacer: FC<Props> = ({ currentComponent, id }) => {
+  const shouldShow = useShouldShowEmailComponent(id)
+
+  if (shouldShow.off) return null
+
   const size = sizeForComponent(currentComponent.kind)
 
   if (!size) return null
@@ -22,12 +28,12 @@ export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
 
 const sizeForComponent = (
   componentKind: EmailTemplate.ComponentKind,
-): 'medium' | 'large' | undefined => {
+): 'medium' | 'extraLarge' | undefined => {
   switch (componentKind) {
     case 'Banner':
     case 'Header':
     case 'StateSeal':
-      return 'large'
+      return 'extraLarge'
     case 'Name':
     case 'Footer':
       return 'medium'

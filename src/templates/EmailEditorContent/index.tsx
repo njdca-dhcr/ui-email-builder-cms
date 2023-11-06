@@ -14,6 +14,7 @@ import { PreviewTextHtml } from './PreviewTextHtml'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { DownloadButton } from 'src/ui/DownloadButton'
 import { EmailComponentSpacer } from './EmailComponentSpacer'
+import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 
 interface Props {
   emailTemplate: EmailTemplate.Config
@@ -89,15 +90,24 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
               <Fragment key={i}>
                 <EditEmailComponent emailComponent={emailComponent} id={`${i}`}>
                   {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
-                    <EditEmailSubComponent
-                      key={n}
-                      componentId={`${i}`}
-                      id={`${n}`}
-                      emailSubComponent={emailSubComponent}
-                    />
+                    <Fragment key={n}>
+                      <EditEmailSubComponent
+                        componentId={`${i}`}
+                        id={`${n}`}
+                        emailSubComponent={emailSubComponent}
+                      />
+                      <EmailSubComponentSpacer
+                        componentId={`${i}`}
+                        id={`${n}`}
+                        nextId={`${n + 1}`}
+                        currentSubComponent={emailSubComponent}
+                        nextSubComponent={(emailComponent.subComponents ?? [])[n + 1]}
+                      />
+                    </Fragment>
                   ))}
                 </EditEmailComponent>
                 <EmailComponentSpacer
+                  id={`${i}`}
                   currentComponent={emailComponent}
                   nextComponent={emailComponents[i + 1]}
                 />

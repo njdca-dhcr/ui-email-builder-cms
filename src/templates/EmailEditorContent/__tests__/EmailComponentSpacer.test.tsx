@@ -4,42 +4,79 @@ import { EmailComponentSpacer } from '../EmailComponentSpacer'
 import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailTemplate } from 'src/appTypes'
+import { faker } from '@faker-js/faker'
+import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { buildComponentKey } from 'src/utils/emailPartKeys'
 
 describe('EmailComponentSpacer', () => {
-  const renderWithComponents = (props: {
-    currentComponent: EmailTemplate.Component
-    nextComponent: EmailTemplate.Component | undefined
+  let id: string
+  let key: string
+
+  beforeEach(() => {
+    id = faker.lorem.word()
+    key = buildComponentKey(id)
+  })
+
+  const renderWithComponents = ({
+    currentComponent,
+    nextComponent,
+  }: {
+    currentComponent: EmailTemplate.ComponentKind
+    nextComponent: EmailTemplate.ComponentKind | undefined
   }) => {
-    const { baseElement } = render(<EmailComponentSpacer {...props} />, {
-      wrapper: emailPartWrapper,
-    })
+    const { baseElement } = render(
+      <EmailComponentSpacer
+        id={id}
+        currentComponent={buildEmailTemplateComponent(currentComponent)}
+        nextComponent={nextComponent && buildEmailTemplateComponent(nextComponent)}
+      />,
+      {
+        wrapper: emailPartWrapper,
+      },
+    )
 
     const spacer = baseElement.querySelector('td')
     return spacer?.style.height
   }
 
-  it(`is large when the current component is Banner`, () => {
-    const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('Banner'),
-      nextComponent: buildEmailTemplateComponent('Header'),
-    })
-
-    expect(size).toEqual(`${spacingCellSizes.large}px`)
+  it('is nothing when the component should not be shown', () => {
+    const { baseElement } = render(
+      <ShouldShowEmailPart initialData={{ [key]: false }}>
+        <EmailComponentSpacer
+          id={id}
+          currentComponent={buildEmailTemplateComponent('Banner')}
+          nextComponent={buildEmailTemplateComponent('Header')}
+        />
+      </ShouldShowEmailPart>,
+      {
+        wrapper: emailPartWrapper,
+      },
+    )
+    expect(baseElement.querySelector('td')).toBeNull()
   })
 
-  it(`is large when the current component is Header`, () => {
+  it(`is extraLarge when the current component is Banner`, () => {
     const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('Header'),
-      nextComponent: buildEmailTemplateComponent('Name'),
+      currentComponent: 'Banner',
+      nextComponent: 'Header',
     })
 
-    expect(size).toEqual(`${spacingCellSizes.large}px`)
+    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
+  })
+
+  it(`is extraLarge when the current component is Header`, () => {
+    const size = renderWithComponents({
+      currentComponent: 'Header',
+      nextComponent: 'Name',
+    })
+
+    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
 
   it(`is medium when the current component is Name`, () => {
     const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('Name'),
-      nextComponent: buildEmailTemplateComponent('Body'),
+      currentComponent: 'Name',
+      nextComponent: 'Body',
     })
 
     expect(size).toEqual(`${spacingCellSizes.medium}px`)
@@ -47,26 +84,26 @@ describe('EmailComponentSpacer', () => {
 
   it('is nothing when the current component is Body', () => {
     const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('Body'),
-      nextComponent: buildEmailTemplateComponent('Body'),
+      currentComponent: 'Body',
+      nextComponent: 'Body',
     })
 
     expect(size).toBeUndefined()
   })
 
-  it(`is large when the current component is StateSeal`, () => {
+  it(`is extraLarge when the current component is StateSeal`, () => {
     const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('StateSeal'),
-      nextComponent: buildEmailTemplateComponent('Disclaimer'),
+      currentComponent: 'StateSeal',
+      nextComponent: 'Disclaimer',
     })
 
-    expect(size).toEqual(`${spacingCellSizes.large}px`)
+    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
 
   it(`is medium when the current component is Footer`, () => {
     const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('Footer'),
-      nextComponent: buildEmailTemplateComponent('Disclaimer'),
+      currentComponent: 'Footer',
+      nextComponent: 'Disclaimer',
     })
 
     expect(size).toEqual(`${spacingCellSizes.medium}px`)
@@ -74,7 +111,7 @@ describe('EmailComponentSpacer', () => {
 
   it('is nothing when the current component is Disclaimer', () => {
     const size = renderWithComponents({
-      currentComponent: buildEmailTemplateComponent('Disclaimer'),
+      currentComponent: 'Disclaimer',
       nextComponent: undefined,
     })
 
