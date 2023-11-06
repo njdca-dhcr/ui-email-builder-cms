@@ -54,3 +54,8 @@ img {
     min-width: 414px !important;
   }
 }
+
+.disclaimer a {
+  color: #71767a;
+  text-decoration: none;
+}

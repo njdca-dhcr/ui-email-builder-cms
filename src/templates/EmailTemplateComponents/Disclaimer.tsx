@@ -27,7 +27,7 @@ export const Disclaimer: FC<EmailComponentProps> = ({}) => {
 
   return (
     <Row role="contentinfo">
-      <td style={styles} dangerouslySetInnerHTML={{ __html: value }} />
+      <td className="disclaimer" style={styles} dangerouslySetInnerHTML={{ __html: value }} />
     </Row>
   )
 }
