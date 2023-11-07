@@ -1,28 +1,12 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { buildEmailTemplateSubComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildUniqueEmailSubComponent, emailPartWrapper } from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailSubComponentSpacer } from '../EmailSubComponentSpacer'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
-import { faker } from '@faker-js/faker'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 describe('EmailSubComponentSpacer', () => {
-  let id: string
-  let nextId: string
-  let componentId: string
-  let key: string
-  let nextKey: string
-
-  beforeEach(() => {
-    id = faker.lorem.word()
-    nextId = faker.lorem.word()
-    componentId = faker.lorem.word()
-    key = buildSubComponentKey(componentId, id)
-    nextKey = buildSubComponentKey(componentId, nextId)
-  })
-
   const renderWithSubComponents = ({
     currentSubComponent,
     nextSubComponent,
@@ -32,12 +16,9 @@ describe('EmailSubComponentSpacer', () => {
   }) => {
     const { baseElement } = render(
       <EmailSubComponentSpacer
-        id={id}
-        nextId={nextId}
-        componentId={componentId}
-        currentSubComponent={buildEmailTemplateSubComponent('Body', { kind: currentSubComponent })}
+        currentSubComponent={buildUniqueEmailSubComponent('Body', { kind: currentSubComponent })}
         nextSubComponent={
-          nextSubComponent && buildEmailTemplateSubComponent('Body', { kind: nextSubComponent })
+          nextSubComponent && buildUniqueEmailSubComponent('Body', { kind: nextSubComponent })
         }
       />,
       {
@@ -50,14 +31,12 @@ describe('EmailSubComponentSpacer', () => {
   }
 
   it('is nothing when the component should not be shown', () => {
+    const currentSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Intro' })
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [key]: false }}>
+      <ShouldShowEmailPart initialData={{ [currentSubComponent.id]: false }}>
         <EmailSubComponentSpacer
-          id={id}
-          nextId={nextId}
-          componentId={componentId}
-          currentSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Intro' })}
-          nextSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Status' })}
+          currentSubComponent={currentSubComponent}
+          nextSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         />
       </ShouldShowEmailPart>,
       {
@@ -133,18 +112,16 @@ describe('EmailSubComponentSpacer', () => {
     })
 
     it('is extraLarge when followed by supplemental content that will not be shown', () => {
+      const nextSubComponent = buildUniqueEmailSubComponent('Body', {
+        kind: 'SupplementalContent',
+      })
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [nextKey]: false }}>
+        <ShouldShowEmailPart initialData={{ [nextSubComponent.id]: false }}>
           <EmailSubComponentSpacer
-            id={id}
-            nextId={nextId}
-            componentId={componentId}
-            currentSubComponent={buildEmailTemplateSubComponent('Body', {
+            currentSubComponent={buildUniqueEmailSubComponent('Body', {
               kind: 'SupplementalContent',
             })}
-            nextSubComponent={buildEmailTemplateSubComponent('Body', {
-              kind: 'SupplementalContent',
-            })}
+            nextSubComponent={nextSubComponent}
           />
         </ShouldShowEmailPart>,
         {

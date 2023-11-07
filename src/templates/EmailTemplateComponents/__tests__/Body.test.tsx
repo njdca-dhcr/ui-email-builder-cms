@@ -2,22 +2,20 @@ import React from 'react'
 import { Body } from '../Body'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 
 describe('Body', () => {
-  let id: string
-  let emailComponent: EmailTemplate.Component<'Body'>
+  let emailComponent: EmailTemplate.UniqueComponent
 
   beforeEach(() => {
-    id = faker.lorem.word()
-    emailComponent = buildEmailTemplateComponent('Body')
+    emailComponent = buildUniqueEmailComponent('Body')
   })
 
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <Body emailComponent={emailComponent} id={id}>
+      <Body emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
         </tr>

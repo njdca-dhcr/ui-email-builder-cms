@@ -8,7 +8,6 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react'
-import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 type CurrentlyActiveEmailPartContextType = [string, (value: string) => void]
 
@@ -47,41 +46,19 @@ export const ClearCurrentlyActiveEmailPart: FC = () => {
   return null
 }
 
-export const useIsCurrentlyActiveEmailComponent = (
+export const useIsCurrentlyActiveEmailPart = (
   id: string,
 ): { isActive: boolean; activate: ReactEventHandler<HTMLOrSVGElement> } => {
   const [currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
-  const key = buildComponentKey(id)
 
-  const isActive = currentlyActive === key
+  const isActive = currentlyActive === id
   const activate: ReactEventHandler<HTMLOrSVGElement> = useCallback(
     (event) => {
       event.preventDefault()
       event.stopPropagation()
-      setCurrentlyActive(key)
+      setCurrentlyActive(id)
     },
-    [key, setCurrentlyActive],
-  )
-
-  return { isActive, activate }
-}
-
-export const useIsCurrentlyActiveEmailSubComponent = (
-  componentId: string,
-  id: string,
-): { isActive: boolean; activate: ReactEventHandler<HTMLOrSVGElement> } => {
-  const [currentlyActive, setCurrentlyActive] = useCurrentlyActiveEmailPartData()
-  const key = buildSubComponentKey(componentId, id)
-
-  const isActive = currentlyActive === key
-
-  const activate: ReactEventHandler<HTMLOrSVGElement> = useCallback(
-    (event) => {
-      event.preventDefault()
-      event.stopPropagation()
-      setCurrentlyActive(key)
-    },
-    [key, setCurrentlyActive],
+    [id, setCurrentlyActive],
   )
 
   return { isActive, activate }

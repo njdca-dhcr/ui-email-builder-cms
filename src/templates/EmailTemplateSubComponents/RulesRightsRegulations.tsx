@@ -2,8 +2,8 @@ import React, { CSSProperties, FC, useCallback, useMemo } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
-import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentFor } from '../EmailPartsContent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
@@ -78,15 +78,15 @@ const defaultValue: RulesRightsRegulationsValue = {
   ],
 }
 
-export const useRulesRightsRegulationsValue = (componentId: string, id: string) => {
-  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const useRulesRightsRegulationsValue = (id: string) => {
+  return useEmailPartsContentFor(id, defaultValue)
 }
 
 const { Row, Cell, Link } = EmailBlock
 
-export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ componentId, id }) => {
-  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useRulesRightsRegulationsValue(componentId, id)
+export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+  const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+  const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent.id)
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights

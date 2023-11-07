@@ -38,9 +38,24 @@ export namespace EmailTemplate {
     subComponents?: SubComponentKind<T> extends any ? SubComponent<T>[] : never
   }
 
+  export interface UniqueSubComponent extends SubComponent {
+    id: string
+  }
+
+  export interface UniqueComponent extends Omit<Component, 'subComponents'> {
+    id: string
+    subComponents?: SubComponentKind extends any ? UniqueSubComponent[] : never
+  }
+
   export interface Config {
     name: string
     description?: string
     components?: Component[]
+  }
+
+  export interface UniqueConfig {
+    name: string
+    description?: string
+    components?: UniqueComponent[]
   }
 }

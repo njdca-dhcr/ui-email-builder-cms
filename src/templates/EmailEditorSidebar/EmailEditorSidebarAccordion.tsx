@@ -5,9 +5,8 @@ import times from 'lodash.times'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { EmailTemplate } from 'src/appTypes'
 import { labelForSubComponent } from './labelForSubComponent'
-import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { Toggle } from 'src/ui/Toggle'
-import { useShouldShowEmailComponent, useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
+import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import './EmailEditorSidebarAccordion.css'
 import { RightPointer } from 'src/ui/RightPointer'
 import { EmailSubComponentControls } from './EmailSubcomponentControls'
@@ -59,13 +58,12 @@ Container.displayName = 'EmailEditorSidebarAccordion.Container'
 
 interface EmailComponentProps {
   children: ReactNode
-  emailComponent: EmailTemplate.Component
-  id: string
+  emailComponent: EmailTemplate.UniqueComponent
 }
 
-const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent, id }) => {
-  const shouldShow = useShouldShowEmailComponent(id)
-  const toggleId = `toggle-${buildComponentKey(id)}`
+const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) => {
+  const shouldShow = useShouldShowEmailPart(emailComponent.id)
+  const toggleId = `toggle-${emailComponent.id}`
   const lacksSubComponents = (emailComponent.subComponents ?? []).length === 0
 
   return (
@@ -93,13 +91,12 @@ EmailComponent.displayName = 'EmailEditorSidebarAccordion.EmailComponent'
 
 interface EmailSubComponentProps {
   componentId: string
-  id: string
-  emailSubComponent: EmailTemplate.SubComponent<EmailTemplate.ComponentKind>
+  emailSubComponent: EmailTemplate.UniqueSubComponent
 }
 
-const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, id, emailSubComponent }) => {
-  const toggleId = `toggle-${buildSubComponentKey(componentId, id)}`
-  const shouldShow = useShouldShowEmailSubComponent(componentId, id)
+const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubComponent }) => {
+  const toggleId = `toggle-${emailSubComponent.id}`
+  const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
   return (
     <div className="accordion-email-subcomponent">
       <div className="label-and-toggle">
@@ -116,7 +113,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, id, emailS
       )}
       <EmailSubComponentControls
         componentId={componentId}
-        id={id}
+        id={emailSubComponent.id}
         emailSubComponent={emailSubComponent}
       />
     </div>

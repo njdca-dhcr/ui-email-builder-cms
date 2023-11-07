@@ -2,8 +2,8 @@ import React, { CSSProperties, FC, useCallback } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
-import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
@@ -56,12 +56,11 @@ const defaultValue: LoginDetailsValue = {
   loginInformationIcon: 'LockOpen',
 }
 
-export const useLoginDetailsValue = (componentId: string, id: string) =>
-  useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const useLoginDetailsValue = (id: string) => useEmailPartsContentFor(id, defaultValue)
 
-export const LoginDetails: FC<EmailSubComponentProps> = ({ componentId, id }) => {
-  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+  const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information
   const setLoginInformationList = useCallback(

@@ -13,7 +13,7 @@ describe('LoginDetailsControls', () => {
   let user: UserEvent
 
   const ButtonHref: FC = () => {
-    const [value] = useLoginDetailsValue(componentId, id)
+    const [value] = useLoginDetailsValue(id)
 
     return <div data-testid="appeal-rights-href">{value.buttonHref}</div>
   }

@@ -5,33 +5,28 @@ import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
 } from 'src/testHelpers'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 describe('ProgramName', () => {
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Header'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
-    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })
+    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
   })
 
   it('is editable', async () => {
     const user = userEvent.setup()
     const { queryByText, getByLabelText, baseElement } = render(
-      <ProgramName componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <ProgramName emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
 
-    const key = buildSubComponentKey(componentId, id)
+    const key = emailSubComponent.id
     const value = faker.lorem.words(4)
     const input = getByLabelText('Program name')
     await user.clear(input)
@@ -44,10 +39,10 @@ describe('ProgramName', () => {
   it('activates when clicked', async () => {
     const user = userEvent.setup()
     const { getByLabelText, baseElement } = render(
-      <ProgramName componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <ProgramName emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
-    const key = buildSubComponentKey(componentId, id)
+    const key = emailSubComponent.id
     expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByLabelText('Program name'))
     expectActiveEmailPartToBe(key, baseElement)

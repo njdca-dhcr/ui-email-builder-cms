@@ -1,8 +1,8 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
-import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
@@ -73,15 +73,15 @@ const defaultValue: StatusValue = {
   totalValue: '$150',
 }
 
-export const useStatusValue = (componentId: string, id: string) => {
-  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const useStatusValue = (id: string) => {
+  return useEmailPartsContentFor(id, defaultValue)
 }
 
 const { Table, Row, Cell } = EmailBlock
 
-export const Status: FC<EmailSubComponentProps> = ({ componentId, id }) => {
-  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useStatusValue(componentId, id)
+export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+  const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+  const [value, setValue] = useStatusValue(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 

@@ -7,10 +7,10 @@ import { Body } from '../EmailTemplateComponents/Body'
 import { Disclaimer } from '../EmailTemplateComponents/Disclaimer'
 import { StateSeal } from '../EmailTemplateComponents/StateSeal'
 import { EmailComponentProps } from '../EmailTemplateComponents/shared'
-import { useShouldShowEmailComponent } from '../ShouldShowEmailPart'
+import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 
 export const EditEmailComponent: FC<EmailComponentProps> = (props) => {
-  const shouldShow = useShouldShowEmailComponent(props.id)
+  const shouldShow = useShouldShowEmailPart(props.emailComponent.id)
 
   if (shouldShow.off) return null
 

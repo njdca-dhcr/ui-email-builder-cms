@@ -17,7 +17,7 @@ import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 
 interface Props {
-  emailTemplate: EmailTemplate.Config
+  emailTemplate: EmailTemplate.UniqueConfig
 }
 
 export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
@@ -88,18 +88,11 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           >
             {emailComponents.map((emailComponent, i) => (
               <Fragment key={i}>
-                <EditEmailComponent emailComponent={emailComponent} id={`${i}`}>
+                <EditEmailComponent emailComponent={emailComponent}>
                   {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
                     <Fragment key={n}>
-                      <EditEmailSubComponent
-                        componentId={`${i}`}
-                        id={`${n}`}
-                        emailSubComponent={emailSubComponent}
-                      />
+                      <EditEmailSubComponent emailSubComponent={emailSubComponent} />
                       <EmailSubComponentSpacer
-                        componentId={`${i}`}
-                        id={`${n}`}
-                        nextId={`${n + 1}`}
                         currentSubComponent={emailSubComponent}
                         nextSubComponent={(emailComponent.subComponents ?? [])[n + 1]}
                       />
@@ -107,7 +100,6 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
                   ))}
                 </EditEmailComponent>
                 <EmailComponentSpacer
-                  id={`${i}`}
                   currentComponent={emailComponent}
                   nextComponent={emailComponents[i + 1]}
                 />

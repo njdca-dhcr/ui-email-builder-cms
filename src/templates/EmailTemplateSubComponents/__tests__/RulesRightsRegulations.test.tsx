@@ -4,14 +4,13 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import React, { FC } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 import {
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import {
   RulesRightsRegulations,
   RulesRightsRegulationsVariant,
@@ -20,9 +19,7 @@ import {
 
 describe('RulesRightsRegulations', () => {
   let value: string
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Body'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
   let user: UserEvent
   let rendered: RenderResult
   let key: string
@@ -34,37 +31,25 @@ describe('RulesRightsRegulations', () => {
   }
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
-    key = buildSubComponentKey(componentId, id)
-    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'RulesRightsRegulations' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'RulesRightsRegulations' })
+    key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)
   })
 
   it('has an editable title', async () => {
-    rendered = render(
-      <RulesRightsRegulations
-        componentId={componentId}
-        id={id}
-        emailSubComponent={emailSubComponent}
-      />,
-      { wrapper: emailPartWrapper },
-    )
+    rendered = render(<RulesRightsRegulations emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     await clearAndFillWithValue('Reminder title')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('activates when clicked', async () => {
-    rendered = render(
-      <RulesRightsRegulations
-        componentId={componentId}
-        id={id}
-        emailSubComponent={emailSubComponent}
-      />,
-      { wrapper: emailPartWrapper },
-    )
+    rendered = render(<RulesRightsRegulations emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     const { getByLabelText, baseElement } = rendered
     expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByLabelText('Reminder title'))
@@ -73,7 +58,7 @@ describe('RulesRightsRegulations', () => {
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useRulesRightsRegulationsValue(componentId, id)
+      const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent.id)
       return (
         <label>
           Variant
@@ -100,11 +85,7 @@ describe('RulesRightsRegulations', () => {
     describe('Reminder', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <RulesRightsRegulations
-            componentId={componentId}
-            id={id}
-            emailSubComponent={emailSubComponent}
-          />,
+          <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -139,11 +120,7 @@ describe('RulesRightsRegulations', () => {
     describe('Appeal Rights', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <RulesRightsRegulations
-            componentId={componentId}
-            id={id}
-            emailSubComponent={emailSubComponent}
-          />,
+          <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -188,11 +165,7 @@ describe('RulesRightsRegulations', () => {
     describe('Your Rights', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <RulesRightsRegulations
-            componentId={componentId}
-            id={id}
-            emailSubComponent={emailSubComponent}
-          />,
+          <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(

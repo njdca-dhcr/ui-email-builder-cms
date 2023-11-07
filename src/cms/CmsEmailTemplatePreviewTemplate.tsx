@@ -14,10 +14,11 @@ import 'src/templates/EmailEditorPage.css'
 import { PreviewText } from 'src/templates/PreviewText'
 import { EditPreviewText } from 'src/templates/EmailEditorSidebar/EditPreviewText'
 import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
+import uniqueId from 'lodash.uniqueid'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
-const entryToEmailTemplate = (entry: Entry): EmailTemplate.Config => {
+const entryToEmailTemplate = (entry: Entry): EmailTemplate.UniqueConfig => {
   const data: Entry = entry.get('data')
   const componentEntries: Entry[] = data.get('components').toArray()
 
@@ -28,10 +29,12 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.Config => {
       const subComponents = componentEntry.get('subComponents')
       const subComponentEntries: Entry[] = subComponents ? subComponents.toArray() : []
       return {
+        id: uniqueId(),
         kind: componentEntry.get('kind') ?? '',
         description: componentEntry.get('description') ?? '',
         required: componentEntry.get('required') ?? false,
         subComponents: subComponentEntries.map((subComponent) => ({
+          id: uniqueId(),
           kind: subComponent.get('kind'),
           description: subComponent.get('description'),
           required: subComponent.get('required'),
@@ -54,22 +57,18 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
               <Sidebar>
                 <EditPreviewText />
                 <EmailEditorSidebarAccordion.Container>
-                  {(emailTemplate.components ?? []).map((emailComponent, componentId) => (
+                  {(emailTemplate.components ?? []).map((emailComponent) => (
                     <EmailEditorSidebarAccordion.EmailComponent
-                      key={componentId}
-                      id={`${componentId}`}
+                      key={emailComponent.id}
                       emailComponent={emailComponent}
                     >
-                      {(emailComponent.subComponents ?? []).map(
-                        (emailSubComponent, subComponentId) => (
-                          <EmailEditorSidebarAccordion.EmailSubComponent
-                            key={subComponentId}
-                            componentId={`${componentId}`}
-                            id={`${subComponentId}`}
-                            emailSubComponent={emailSubComponent}
-                          />
-                        ),
-                      )}
+                      {(emailComponent.subComponents ?? []).map((emailSubComponent) => (
+                        <EmailEditorSidebarAccordion.EmailSubComponent
+                          key={emailSubComponent.id}
+                          componentId={emailComponent.id}
+                          emailSubComponent={emailSubComponent}
+                        />
+                      ))}
                     </EmailEditorSidebarAccordion.EmailComponent>
                   ))}
                 </EmailEditorSidebarAccordion.Container>

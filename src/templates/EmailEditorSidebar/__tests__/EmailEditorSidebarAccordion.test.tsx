@@ -8,8 +8,9 @@ import { EmailEditorSidebarAccordion } from '../EmailEditorSidebarAccordion'
 import { EmailTemplate } from 'src/appTypes'
 import {
   WrapperComponent,
-  buildEmailTemplateComponent,
   buildEmailTemplateSubComponent,
+  buildUniqueEmailComponent,
+  buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
 
 describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
@@ -125,10 +126,10 @@ describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
 })
 
 describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
-  let emailComponent: EmailTemplate.Component
+  let emailComponent: EmailTemplate.UniqueComponent
 
   beforeEach(() => {
-    emailComponent = buildEmailTemplateComponent('Header')
+    emailComponent = buildUniqueEmailComponent('Header')
   })
 
   const wrapper: WrapperComponent = ({ children }) => {
@@ -144,10 +145,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   it('displays its children in an accordion panel', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span>{text}</span>
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -160,10 +158,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 
   it('displays an accordion item header/button', () => {
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -177,10 +172,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   it('displays a description when available', () => {
     emailComponent.description = faker.lorem.paragraph()
     const { queryByText } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -191,10 +183,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   it('does not display a description when unavailable', () => {
     emailComponent.description = undefined
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -206,10 +195,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
     const user = userEvent.setup()
     emailComponent.required = false
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -226,10 +212,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   it('does not display a toggle when the email component is required', () => {
     emailComponent.required = true
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -239,12 +222,9 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   })
 
   it('has an enabled accordion item when the email component has subcomponents', () => {
-    emailComponent.subComponents = [buildEmailTemplateSubComponent('Header', { kind: 'Title' })]
+    emailComponent.subComponents = [buildUniqueEmailSubComponent('Header', { kind: 'Title' })]
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -258,10 +238,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   it('has a disabled accordion item when the email component lacks subcomponents', () => {
     emailComponent.subComponents = []
     const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent
-        emailComponent={emailComponent}
-        id={faker.lorem.word()}
-      >
+      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
         <span />
       </EmailEditorSidebarAccordion.EmailComponent>,
       { wrapper },
@@ -274,21 +251,20 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 })
 
 describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
-  let emailSubComponent: EmailTemplate.SubComponent<EmailTemplate.ComponentKind>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
 
   const wrapper: WrapperComponent = ({ children }) => {
     return <ShouldShowEmailPart>{children}</ShouldShowEmailPart>
   }
 
   beforeEach(() => {
-    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })
+    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
   })
 
   it('displays a label', () => {
     const { queryByText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
-        id={faker.lorem.words(2)}
         emailSubComponent={emailSubComponent}
       />,
       { wrapper },
@@ -303,7 +279,6 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     const { queryByLabelText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
-        id={faker.lorem.words(2)}
         emailSubComponent={emailSubComponent}
       />,
       { wrapper },
@@ -322,7 +297,6 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     const { queryByLabelText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
-        id={faker.lorem.words(2)}
         emailSubComponent={emailSubComponent}
       />,
       { wrapper },
@@ -338,7 +312,6 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     const { queryByText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
-        id={faker.lorem.words(2)}
         emailSubComponent={emailSubComponent}
       />,
       { wrapper },
@@ -351,7 +324,6 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     const { baseElement } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
-        id={faker.lorem.words(2)}
         emailSubComponent={emailSubComponent}
       />,
       { wrapper },
@@ -360,11 +332,10 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
   })
 
   it('displays subcomponent controls', () => {
-    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
     const { queryByText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
-        id={faker.lorem.words(2)}
         emailSubComponent={emailSubComponent}
       />,
       { wrapper },

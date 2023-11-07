@@ -5,19 +5,16 @@ import { RenderResult, render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
 } from 'src/testHelpers'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 describe('SupplementalContent', () => {
   let value: string
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Body'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
   let user: UserEvent
   let rendered: RenderResult
   let key: string
@@ -29,19 +26,12 @@ describe('SupplementalContent', () => {
   }
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
-    key = buildSubComponentKey(componentId, id)
-    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'SupplementalContent' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })
+    key = emailSubComponent.id
     user = userEvent.setup()
-    rendered = render(
-      <SupplementalContent
-        componentId={componentId}
-        id={id}
-        emailSubComponent={emailSubComponent}
-      />,
-      { wrapper: emailPartWrapper },
-    )
+    rendered = render(<SupplementalContent emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     value = faker.lorem.words(4)
   })
 

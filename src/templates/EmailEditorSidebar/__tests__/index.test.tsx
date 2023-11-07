@@ -2,19 +2,17 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import {
-  buildEmailTemplateComponent,
-  buildEmailTemplateConfig,
-  buildEmailTemplateSubComponent,
-  urlFor,
+  buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
+  buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
 import { EmailEditorSidebar } from '..'
-import userEvent from '@testing-library/user-event'
 
 describe('EmailEditorSidebar', () => {
-  let emailTemplate: EmailTemplate.Config
+  let emailTemplate: EmailTemplate.UniqueConfig
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplateConfig()
+    emailTemplate = buildUniqueEmailConfig()
   })
 
   it('displays a link back to the home page', () => {
@@ -38,14 +36,14 @@ describe('EmailEditorSidebar', () => {
   })
 
   it('displays email edit component and subcomponent toggles', () => {
-    emailTemplate = buildEmailTemplateConfig({
+    emailTemplate = buildUniqueEmailConfig({
       components: [
-        buildEmailTemplateComponent('Banner'),
-        buildEmailTemplateComponent('Header', {
-          subComponents: [buildEmailTemplateSubComponent('Header', { kind: 'Title' })],
+        buildUniqueEmailComponent('Banner'),
+        buildUniqueEmailComponent('Header', {
+          subComponents: [buildUniqueEmailSubComponent('Header', { kind: 'Title' })],
         }),
-        buildEmailTemplateComponent('Footer', {
-          subComponents: [buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })],
+        buildUniqueEmailComponent('Footer', {
+          subComponents: [buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })],
         }),
       ],
     })

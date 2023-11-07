@@ -5,15 +5,12 @@ import { StatusControls } from './StatusControls'
 import { DirectiveControls } from './DirectiveControls'
 import { RulesRightsRegulationsControls } from './RulesRightsRegulationsControls'
 import './EmailSubcomponentControls.css'
-import {
-  useShouldShowEmailComponent,
-  useShouldShowEmailSubComponent,
-} from 'src/templates/ShouldShowEmailPart'
+import { useShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { LoginDetailsControls } from './LoginDetailsControls'
 import { ProgramNameControls } from './ProgramNameControls'
 
 interface Props extends EmailSubComponentControlsProps {
-  emailSubComponent: EmailTemplate.SubComponent<EmailTemplate.ComponentKind>
+  emailSubComponent: EmailTemplate.UniqueSubComponent
 }
 
 interface WrapperProps {
@@ -26,8 +23,8 @@ const ControlWrapper: FC<WrapperProps> = ({ children }) => (
 
 export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...props }) => {
   const { componentId, id } = props
-  const shouldShowComponent = useShouldShowEmailComponent(componentId)
-  const shouldShowSubComponent = useShouldShowEmailSubComponent(componentId, id)
+  const shouldShowComponent = useShouldShowEmailPart(componentId)
+  const shouldShowSubComponent = useShouldShowEmailPart(id)
 
   if (shouldShowComponent.off || shouldShowSubComponent.off) return null
 

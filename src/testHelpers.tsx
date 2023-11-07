@@ -10,6 +10,7 @@ import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
 import { render } from '@testing-library/react'
 import Config from '../gatsby-config'
+import uniqueId from 'lodash.uniqueid'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: EmailTemplate.ComponentKind,
@@ -28,6 +29,17 @@ export const buildEmailTemplateSubComponent = <T extends EmailTemplate.Component
   }
 }
 
+export const buildUniqueEmailSubComponent = (
+  component: EmailTemplate.ComponentKind,
+  options?: Partial<EmailTemplate.UniqueSubComponent>,
+): EmailTemplate.UniqueSubComponent => {
+  return {
+    ...buildEmailTemplateSubComponent(component, options),
+    id: uniqueId(),
+    ...options,
+  }
+}
+
 export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKind>(
   kind: T,
   options?: Partial<EmailTemplate.Component<T>>,
@@ -40,6 +52,18 @@ export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKin
   }
 }
 
+export const buildUniqueEmailComponent = (
+  kind: EmailTemplate.ComponentKind,
+  options?: Partial<EmailTemplate.UniqueComponent>,
+): EmailTemplate.UniqueComponent => {
+  const { subComponents, ...emailComponent } = buildEmailTemplateComponent(kind, options)
+  return {
+    ...emailComponent,
+    id: uniqueId(),
+    ...options,
+  }
+}
+
 export const buildEmailTemplateConfig = (
   options?: Partial<EmailTemplate.Config>,
 ): EmailTemplate.Config => {
@@ -47,6 +71,17 @@ export const buildEmailTemplateConfig = (
     name: faker.lorem.word(),
     description: faker.lorem.paragraph(),
     components: [buildEmailTemplateComponent('Header'), buildEmailTemplateComponent('Footer')],
+    ...options,
+  }
+}
+
+export const buildUniqueEmailConfig = (
+  options?: Partial<EmailTemplate.UniqueConfig>,
+): EmailTemplate.UniqueConfig => {
+  return {
+    name: faker.lorem.word(),
+    description: faker.lorem.paragraph(),
+    components: [buildUniqueEmailComponent('Header'), buildUniqueEmailComponent('Footer')],
     ...options,
   }
 }

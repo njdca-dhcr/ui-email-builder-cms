@@ -3,7 +3,7 @@ import { Name } from '../Name'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import {
-  buildEmailTemplateComponent,
+  buildUniqueEmailComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
@@ -11,49 +11,42 @@ import {
 } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
-import { buildComponentKey } from 'src/utils/emailPartKeys'
 
 describe('Name', () => {
   let id: string
-  let emailComponent: EmailTemplate.Component<'Name'>
+  let emailComponent: EmailTemplate.UniqueComponent
 
   beforeEach(() => {
     id = faker.lorem.word()
-    emailComponent = buildEmailTemplateComponent('Name')
+    emailComponent = buildUniqueEmailComponent('Name')
   })
 
   it('displays an editable name', async () => {
     const user = userEvent.setup()
     const { queryByText, getByLabelText, baseElement } = render(
-      <Name id={id} emailComponent={emailComponent}>
-        {null}
-      </Name>,
+      <Name emailComponent={emailComponent}>{null}</Name>,
       {
         wrapper: emailPartWrapper,
       },
     )
 
-    const key = buildComponentKey(id)
     const value = faker.lorem.words(4)
     const input = getByLabelText("Recipient's name")
     await user.clear(input)
     await user.type(input, value)
 
     expect(queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, baseElement)
+    expectEmailPartContentFor(emailComponent.id, baseElement)
   })
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
     const { getByLabelText, baseElement } = render(
-      <Name id={id} emailComponent={emailComponent}>
-        {null}
-      </Name>,
+      <Name emailComponent={emailComponent}>{null}</Name>,
       { wrapper: emailPartWrapper },
     )
-    const key = buildComponentKey(id)
-    expectActiveEmailPartToNotBe(key, baseElement)
+    expectActiveEmailPartToNotBe(emailComponent.id, baseElement)
     await user.click(getByLabelText("Recipient's name"))
-    expectActiveEmailPartToBe(key, baseElement)
+    expectActiveEmailPartToBe(emailComponent.id, baseElement)
   })
 })

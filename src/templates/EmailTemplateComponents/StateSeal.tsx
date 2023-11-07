@@ -13,7 +13,7 @@ export const useStateSealValue = () => {
   return useLocalStorageJSON<StateSealKey>('stateSeal', defaultValue)
 }
 
-const { Row, Cell } = EmailBlock
+const { Row } = EmailBlock
 
 export const StateSeal: FC<EmailComponentProps> = ({}) => {
   const [value] = useStateSealValue()

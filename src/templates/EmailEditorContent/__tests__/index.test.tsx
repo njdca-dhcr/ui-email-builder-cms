@@ -5,9 +5,9 @@ import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { EmailTemplate } from 'src/appTypes'
 import {
-  buildEmailTemplateComponent,
-  buildEmailTemplateConfig,
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
+  buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
@@ -19,15 +19,15 @@ jest.mock('src/utils/download', () => {
 })
 
 describe('EmailEditorContent', () => {
-  let emailTemplate: EmailTemplate.Config
+  let emailTemplate: EmailTemplate.UniqueConfig
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplateConfig({
+    emailTemplate = buildUniqueEmailConfig({
       components: [
-        buildEmailTemplateComponent('Header', {
+        buildUniqueEmailComponent('Header', {
           subComponents: [
-            buildEmailTemplateSubComponent('Header', { kind: 'Title' }),
-            buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' }),
+            buildUniqueEmailSubComponent('Header', { kind: 'Title' }),
+            buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' }),
           ],
         }),
       ],

@@ -1,19 +1,17 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { BoxColor, SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconSelect } from 'src/ui'
 
-export const StatusControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
-  const key = buildSubComponentKey(componentId, id)
-  const variantHtmlId = `select-variant-${key}`
-  const boxColorHtmlId = `select-box-color-${key}`
-  const iconHtmlId = `select-icon-${key}`
-  const [value, setValue] = useStatusValue(componentId, id)
+export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+  const variantHtmlId = `select-variant-${id}`
+  const boxColorHtmlId = `select-box-color-${id}`
+  const iconHtmlId = `select-icon-${id}`
+  const [value, setValue] = useStatusValue(id)
 
   return (
     <Control.Group>

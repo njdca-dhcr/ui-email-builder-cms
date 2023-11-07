@@ -1,5 +1,4 @@
 import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
-import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 interface EmailPartsContentData<T extends any> {
   [key: string]: undefined | T
@@ -22,40 +21,19 @@ export const EmailPartsContent: FC<{ children: ReactNode }> = ({ children }) => 
 
 export const useEmailPartsContentData = () => useContext(EmailPartsContentContext)
 
-export const useEmailPartsContentForComponent = <T extends any>(
+export const useEmailPartsContentFor = <T extends any>(
   id: string,
   defaultValue: T,
 ): [T, (value: T) => void] => {
   const [data, update] = useEmailPartsContentData()
-  const key = buildComponentKey(id)
 
-  const value: T = data[key] ?? defaultValue
-
-  const updateValue = useCallback(
-    (newValue: T) => {
-      update({ ...data, [key]: newValue })
-    },
-    [data, update, key],
-  )
-
-  return [value, updateValue]
-}
-
-export const useEmailPartsContentForSubComponent = <T extends any>(
-  componentId: string,
-  id: string,
-  defaultValue: T,
-): [T, (value: T) => void] => {
-  const [data, update] = useEmailPartsContentData()
-  const key = buildSubComponentKey(componentId, id)
-
-  const value: T = data[key] ?? defaultValue
+  const value: T = data[id] ?? defaultValue
 
   const updateValue = useCallback(
     (newValue: T) => {
-      update({ ...data, [key]: newValue })
+      update({ ...data, [id]: newValue })
     },
-    [data, update, key],
+    [data, update, id],
   )
 
   return [value, updateValue]

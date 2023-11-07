@@ -1,13 +1,11 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/ProgramName'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { ColorPicker } from 'src/ui/ColorPicker'
 
-export const ProgramNameControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
-  const key = buildSubComponentKey(componentId, id)
-  const htmlId = `program-name-background-color-${key}`
-  const [value, setValue] = useProgramNameValue(componentId, id)
+export const ProgramNameControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+  const htmlId = `program-name-background-color-${id}`
+  const [value, setValue] = useProgramNameValue(id)
 
   return (
     <Control.Group>

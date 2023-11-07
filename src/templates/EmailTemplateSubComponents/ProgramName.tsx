@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
-import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
@@ -19,13 +19,13 @@ const defaultValue: ProgramNameValue = {
 
 const { Table, Row } = EmailBlock
 
-export const useProgramNameValue = (componentId: string, id: string) => {
-  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const useProgramNameValue = (id: string) => {
+  return useEmailPartsContentFor(id, defaultValue)
 }
 
-export const ProgramName: FC<EmailSubComponentProps> = ({ id, componentId }) => {
-  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useProgramNameValue(componentId, id)
+export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+  const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+  const [value, setValue] = useProgramNameValue(emailSubComponent.id)
 
   const color = textColorForBackground(value.backgroundColor, {
     dark: Colors.black,

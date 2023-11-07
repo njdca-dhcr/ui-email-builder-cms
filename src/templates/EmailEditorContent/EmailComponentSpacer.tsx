@@ -2,16 +2,15 @@ import React, { FC } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailBlock } from 'src/ui'
 import { SpacingCell } from '../styles'
-import { useShouldShowEmailComponent } from '../ShouldShowEmailPart'
+import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 
 interface Props {
-  currentComponent: EmailTemplate.Component
-  id: string
-  nextComponent: EmailTemplate.Component | undefined
+  currentComponent: EmailTemplate.UniqueComponent
+  nextComponent: EmailTemplate.UniqueComponent | undefined
 }
 
-export const EmailComponentSpacer: FC<Props> = ({ currentComponent, id }) => {
-  const shouldShow = useShouldShowEmailComponent(id)
+export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
+  const shouldShow = useShouldShowEmailPart(currentComponent.id)
 
   if (shouldShow.off) return null
 

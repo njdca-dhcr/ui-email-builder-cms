@@ -2,7 +2,7 @@ import React from 'react'
 import { Banner, BannerMarkup, BannerValue } from '../Banner'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 
 describe('BannerMarkup', () => {
@@ -115,14 +115,12 @@ describe('BannerMarkup', () => {
 })
 
 describe('Banner', () => {
-  let id: string
-  let emailComponent: EmailTemplate.Component<'Banner'>
+  let emailComponent: EmailTemplate.UniqueComponent
   let bannerValue: BannerValue
   let secondaryLinkHost: string
 
   beforeEach(() => {
-    id = faker.lorem.word()
-    emailComponent = buildEmailTemplateComponent('Banner')
+    emailComponent = buildUniqueEmailComponent('Banner')
     secondaryLinkHost = 'www.example.org'
     bannerValue = {
       backgroundColor: '#e2fcae',
@@ -134,36 +132,27 @@ describe('Banner', () => {
   })
 
   it('displays the primary text and link', () => {
-    const { queryByText } = render(
-      <Banner emailComponent={emailComponent} id={id}>
-        {null}
-      </Banner>,
-      { wrapper: emailPartWrapper },
-    )
+    const { queryByText } = render(<Banner emailComponent={emailComponent}>{null}</Banner>, {
+      wrapper: emailPartWrapper,
+    })
     const link: HTMLAnchorElement | null = queryByText(bannerValue.primaryText) as any
     expect(link).not.toBeNull()
     expect(link?.href).toEqual(bannerValue.primaryLink)
   })
 
   it('displays the secondary link', () => {
-    const { queryByText } = render(
-      <Banner emailComponent={emailComponent} id={id}>
-        {null}
-      </Banner>,
-      { wrapper: emailPartWrapper },
-    )
+    const { queryByText } = render(<Banner emailComponent={emailComponent}>{null}</Banner>, {
+      wrapper: emailPartWrapper,
+    })
     const link: HTMLAnchorElement | null = queryByText(secondaryLinkHost) as any
     expect(link).not.toBeNull()
     expect(link?.href).toEqual(bannerValue.secondaryLink)
   })
 
   it('displays the background color', () => {
-    const { baseElement } = render(
-      <Banner emailComponent={emailComponent} id={id}>
-        {null}
-      </Banner>,
-      { wrapper: emailPartWrapper },
-    )
+    const { baseElement } = render(<Banner emailComponent={emailComponent}>{null}</Banner>, {
+      wrapper: emailPartWrapper,
+    })
     const cell = baseElement.querySelectorAll('td')[0]
     expect(cell).not.toBeNull()
     expect(cell?.attributes.getNamedItem('style')?.value).toContain(
@@ -172,12 +161,9 @@ describe('Banner', () => {
   })
 
   it('when there is no banner value saved it renders without issue', () => {
-    const { queryAllByRole } = render(
-      <Banner emailComponent={emailComponent} id={id}>
-        {null}
-      </Banner>,
-      { wrapper: emailPartWrapper },
-    )
+    const { queryAllByRole } = render(<Banner emailComponent={emailComponent}>{null}</Banner>, {
+      wrapper: emailPartWrapper,
+    })
     expect(queryAllByRole('link')).toHaveLength(2)
   })
 })

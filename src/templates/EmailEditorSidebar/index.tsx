@@ -8,7 +8,7 @@ import { EditPreviewText } from './EditPreviewText'
 import { EmailEditorSidebarAccordion } from './EmailEditorSidebarAccordion'
 
 interface Props {
-  emailTemplate: EmailTemplate.Config
+  emailTemplate: EmailTemplate.UniqueConfig
 }
 
 export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
@@ -21,17 +21,15 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
       </SpacedSidebarContainer>
       <EditPreviewText />
       <EmailEditorSidebarAccordion.Container>
-        {(emailTemplate.components ?? []).map((emailComponent, componentId) => (
+        {(emailTemplate.components ?? []).map((emailComponent) => (
           <EmailEditorSidebarAccordion.EmailComponent
-            key={componentId}
-            id={`${componentId}`}
+            key={emailComponent.id}
             emailComponent={emailComponent}
           >
-            {(emailComponent.subComponents ?? []).map((emailSubComponent, subComponentId) => (
+            {(emailComponent.subComponents ?? []).map((emailSubComponent) => (
               <EmailEditorSidebarAccordion.EmailSubComponent
-                key={subComponentId}
-                componentId={`${componentId}`}
-                id={`${subComponentId}`}
+                key={emailSubComponent.id}
+                componentId={emailComponent.id}
                 emailSubComponent={emailSubComponent}
               />
             ))}

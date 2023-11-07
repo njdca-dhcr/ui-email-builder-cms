@@ -1,7 +1,6 @@
 import React from 'react'
-import { absoluteUrlFor, buildEmailTemplateSubComponent, emailPartWrapper } from 'src/testHelpers'
+import { absoluteUrlFor, buildUniqueEmailSubComponent, emailPartWrapper } from 'src/testHelpers'
 import { DepartmentSeal, DepartmentSealMarkup } from '../DepartmentSeal'
-import { faker } from '@faker-js/faker'
 import { EmailTemplate } from 'src/appTypes'
 import { render } from '@testing-library/react'
 
@@ -20,25 +19,16 @@ describe('DepartmentSealMarkup', () => {
 })
 
 describe('DepartmentSeal', () => {
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Header'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
 
   beforeEach(() => {
-    componentId = faker.lorem.word()
-    id = faker.lorem.word()
-    emailSubComponent = buildEmailTemplateSubComponent('Header', { kind: 'DepartmentSeal' })
+    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DepartmentSeal' })
   })
 
   it('displays the selected seal', () => {
     localStorage.setItem('department-seal', JSON.stringify('California'))
     const { queryByTestId, rerender } = render(
-      <DepartmentSeal
-        key="1"
-        componentId={componentId}
-        id={id}
-        emailSubComponent={emailSubComponent}
-      />,
+      <DepartmentSeal key="1" emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
 
@@ -49,14 +39,7 @@ describe('DepartmentSeal', () => {
     expect(img?.src).toEqual(absoluteUrlFor('/department-seals/California.png'))
 
     localStorage.setItem('department-seal', JSON.stringify('New-York'))
-    rerender(
-      <DepartmentSeal
-        key="2"
-        componentId={componentId}
-        id={id}
-        emailSubComponent={emailSubComponent}
-      />,
-    )
+    rerender(<DepartmentSeal key="2" emailSubComponent={emailSubComponent} />)
 
     departmentSeal = queryByTestId('department-seal')
     expect(departmentSeal).not.toBeNull()

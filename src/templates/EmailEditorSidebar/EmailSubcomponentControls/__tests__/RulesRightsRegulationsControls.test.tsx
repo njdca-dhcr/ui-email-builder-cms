@@ -13,7 +13,7 @@ describe('RulesRightsRegulationsControls', () => {
   let user: UserEvent
 
   const AppealRightsHref: FC = () => {
-    const [value] = useRulesRightsRegulationsValue(componentId, id)
+    const [value] = useRulesRightsRegulationsValue(id)
 
     return <div data-testid="appeal-rights-href">{value.appealRightsHref}</div>
   }

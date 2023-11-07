@@ -1,7 +1,6 @@
 import React from 'react'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
-import { DirectiveVariant } from 'src/templates/EmailTemplateSubComponents/Directive'
 import { faker } from '@faker-js/faker'
 import { DirectiveControls } from '../DirectiveControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'

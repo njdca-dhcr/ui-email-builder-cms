@@ -2,25 +2,21 @@ import React from 'react'
 import { EditEmailComponent } from '../EditEmailComponent'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
-import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
-import { buildComponentKey } from 'src/utils/emailPartKeys'
+import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { render } from '@testing-library/react'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 
 describe('EditEmailComponent', () => {
-  let id: string
-  let emailComponent: EmailTemplate.Component
+  let emailComponent: EmailTemplate.UniqueComponent
 
   beforeEach(() => {
-    id = faker.lorem.word()
-    emailComponent = buildEmailTemplateComponent('Header')
+    emailComponent = buildUniqueEmailComponent('Header')
   })
 
   it('displays nothing when the component should not be shown', () => {
-    const key = buildComponentKey(id)
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [key]: false }}>
-        <EditEmailComponent id={id} emailComponent={emailComponent}>
+      <ShouldShowEmailPart initialData={{ [emailComponent.id]: false }}>
+        <EditEmailComponent emailComponent={emailComponent}>
           <tr>
             <td>{faker.lorem.paragraph()}</td>
           </tr>
@@ -34,10 +30,10 @@ describe('EditEmailComponent', () => {
   })
 
   it('can render a Header', () => {
-    emailComponent = buildEmailTemplateComponent('Header')
+    emailComponent = buildUniqueEmailComponent('Header')
     const text = faker.lorem.paragraph()
     const { queryByText } = render(
-      <EditEmailComponent id={id} emailComponent={emailComponent}>
+      <EditEmailComponent emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
         </tr>
@@ -48,10 +44,10 @@ describe('EditEmailComponent', () => {
   })
 
   it('can render a Footer', () => {
-    emailComponent = buildEmailTemplateComponent('Footer')
+    emailComponent = buildUniqueEmailComponent('Footer')
     const text = faker.lorem.paragraph()
     const { queryByText } = render(
-      <EditEmailComponent id={id} emailComponent={emailComponent}>
+      <EditEmailComponent emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
         </tr>
@@ -62,9 +58,9 @@ describe('EditEmailComponent', () => {
   })
 
   it('can render a Name', () => {
-    emailComponent = buildEmailTemplateComponent('Name')
+    emailComponent = buildUniqueEmailComponent('Name')
     const { queryByLabelText } = render(
-      <EditEmailComponent id={id} emailComponent={emailComponent}>
+      <EditEmailComponent emailComponent={emailComponent}>
         <tr />
       </EditEmailComponent>,
       { wrapper: emailPartWrapper },
@@ -73,10 +69,10 @@ describe('EditEmailComponent', () => {
   })
 
   it('can render a Body', () => {
-    emailComponent = buildEmailTemplateComponent('Body')
+    emailComponent = buildUniqueEmailComponent('Body')
     const text = faker.lorem.paragraph()
     const { queryByText } = render(
-      <EditEmailComponent id={id} emailComponent={emailComponent}>
+      <EditEmailComponent emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
         </tr>
@@ -87,23 +83,21 @@ describe('EditEmailComponent', () => {
   })
 
   it('can render a Disclaimer', () => {
-    emailComponent = buildEmailTemplateComponent('Disclaimer')
+    emailComponent = buildUniqueEmailComponent('Disclaimer')
     const text = faker.lorem.paragraph()
     localStorage.setItem('disclaimer', JSON.stringify(text))
     const { queryByText } = render(
-      <EditEmailComponent id={id} emailComponent={emailComponent}>
-        {null}
-      </EditEmailComponent>,
+      <EditEmailComponent emailComponent={emailComponent}>{null}</EditEmailComponent>,
       { wrapper: emailPartWrapper },
     )
     expect(queryByText(text)).not.toBeNull()
   })
 
   it('can render a Banner', () => {
-    emailComponent = buildEmailTemplateComponent('Banner')
+    emailComponent = buildUniqueEmailComponent('Banner')
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <EditEmailComponent id={id} emailComponent={emailComponent}>
+      <EditEmailComponent emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
         </tr>

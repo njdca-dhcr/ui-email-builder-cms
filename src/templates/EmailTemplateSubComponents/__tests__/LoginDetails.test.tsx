@@ -4,34 +4,29 @@ import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailTemplate } from 'src/appTypes'
 import {
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { LoginDetails, LoginDetailsVariant, useLoginDetailsValue } from '../LoginDetails'
 
 describe('LoginDetails', () => {
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Body'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
-    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'LoginDetails' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
   })
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
     const { getByLabelText, baseElement } = render(
-      <LoginDetails componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <LoginDetails emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
-    const key = buildSubComponentKey(componentId, id)
+    const key = emailSubComponent.id
     expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByLabelText('Login details title'))
     expectActiveEmailPartToBe(key, baseElement)
@@ -41,10 +36,9 @@ describe('LoginDetails', () => {
     let user: UserEvent
     let rendered: RenderResult
     let value: string
-    let key: string
 
     const VariantSelect: FC = () => {
-      const [value, setValue] = useLoginDetailsValue(componentId, id)
+      const [value, setValue] = useLoginDetailsValue(emailSubComponent.id)
       return (
         <label>
           Variant
@@ -62,9 +56,8 @@ describe('LoginDetails', () => {
     beforeEach(() => {
       user = userEvent.setup()
       value = faker.lorem.words(4)
-      key = buildSubComponentKey(componentId, id)
       rendered = renderEmailPart(
-        <LoginDetails componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+        <LoginDetails emailSubComponent={emailSubComponent} />,
         <VariantSelect />,
       )
     })
@@ -75,7 +68,7 @@ describe('LoginDetails', () => {
         await user.clear(element)
         await user.type(element, value)
         expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
+        expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
       })
     }
 

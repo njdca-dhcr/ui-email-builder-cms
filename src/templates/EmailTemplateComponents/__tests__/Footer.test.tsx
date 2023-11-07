@@ -2,22 +2,20 @@ import React from 'react'
 import { Footer } from '../Footer'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 
 describe('Footer', () => {
-  let id: string
-  let emailComponent: EmailTemplate.Component<'Footer'>
+  let emailComponent: EmailTemplate.UniqueComponent
 
   beforeEach(() => {
-    id = faker.lorem.word()
-    emailComponent = buildEmailTemplateComponent('Footer')
+    emailComponent = buildUniqueEmailComponent('Footer')
   })
 
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <Footer emailComponent={emailComponent} id={id}>
+      <Footer emailComponent={emailComponent}>
         <tr>
           <td>{text}</td>
         </tr>

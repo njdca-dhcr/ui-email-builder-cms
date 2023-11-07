@@ -1,8 +1,8 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
-import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 
@@ -76,16 +76,16 @@ export const defaultValue: DirectiveValue = {
     'Make the check or money order payable to NJ Dept. of Labor and Workforce Development. Be sure to write your name and social security number on the payment.',
 }
 
-export const useDirectiveValue = (componentId: string, id: string) => {
-  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const useDirectiveValue = (id: string) => {
+  return useEmailPartsContentFor(id, defaultValue)
 }
 
 const { Table, Row, Cell, Link } = EmailBlock
 
-export const Directive: FC<EmailSubComponentProps> = ({ componentId, id }) => {
-  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
+export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+  const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
 
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
   return (
     <Row
       className="directive"

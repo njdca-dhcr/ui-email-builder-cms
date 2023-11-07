@@ -5,15 +5,13 @@ import {
   LoginDetailsVariant,
   useLoginDetailsValue,
 } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { VisuallyHidden } from '@reach/visually-hidden'
 
-export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ componentId, id }) => {
-  const key = buildSubComponentKey(componentId, id)
-  const variantHtmlId = `variant-${key}`
-  const iconHtmlId = `icon-${key}`
-  const buttonLinkHtmlId = `buttonLink-${key}`
-  const [value, setValue] = useLoginDetailsValue(componentId, id)
+export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+  const variantHtmlId = `variant-${id}`
+  const iconHtmlId = `icon-${id}`
+  const buttonLinkHtmlId = `buttonLink-${id}`
+  const [value, setValue] = useLoginDetailsValue(id)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information
 

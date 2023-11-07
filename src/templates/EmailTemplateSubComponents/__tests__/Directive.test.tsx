@@ -4,24 +4,20 @@ import { RenderResult, render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { Directive, DirectiveVariant, useDirectiveValue } from '../Directive'
 
 describe('Directive', () => {
   let value: string
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Body'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
   let user: UserEvent
   let rendered: RenderResult
-  let key: string
 
   const clearAndFillWithValue = async (label: string) => {
     const element = rendered.getByLabelText(label)
@@ -30,17 +26,14 @@ describe('Directive', () => {
   }
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
-    key = buildSubComponentKey(componentId, id)
-    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
     user = userEvent.setup()
     value = faker.lorem.words(4)
   })
 
   // it('activates when clicked', async () => {
   //   rendered = render(
-  //     <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+  //     <Directive  id={id} emailSubComponent={emailSubComponent} />,
   //     { wrapper: emailPartWrapper },
   //   )
   //   const { getByLabelText, baseElement } = rendered
@@ -51,29 +44,27 @@ describe('Directive', () => {
 
   describe('default - One Step', () => {
     it('has an editable title', async () => {
-      rendered = render(
-        <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
-        { wrapper: emailPartWrapper },
-      )
+      rendered = render(<Directive emailSubComponent={emailSubComponent} />, {
+        wrapper: emailPartWrapper,
+      })
       await clearAndFillWithValue('Directive Title')
       expect(rendered.queryByText(value)).not.toBeNull()
-      expectEmailPartContentFor(key, rendered.baseElement)
+      expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
     })
 
     it('has an editable supportive information', async () => {
-      rendered = render(
-        <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
-        { wrapper: emailPartWrapper },
-      )
+      rendered = render(<Directive emailSubComponent={emailSubComponent} />, {
+        wrapper: emailPartWrapper,
+      })
       await clearAndFillWithValue('Supportive information')
       expect(rendered.queryByText(value)).not.toBeNull()
-      expectEmailPartContentFor(key, rendered.baseElement)
+      expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
     })
   })
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useDirectiveValue(componentId, id)
+      const [value, setValue] = useDirectiveValue(emailSubComponent.id)
       return (
         <label>
           Variant
@@ -94,14 +85,14 @@ describe('Directive', () => {
       it(`has an editable ${testName}`, async () => {
         await clearAndFillWithValue(label)
         expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
+        expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
       })
     }
 
     describe('Three Steps', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Directive emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -131,7 +122,7 @@ describe('Directive', () => {
     describe('Three Steps w/ Step 2 Expansion', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Directive emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -160,7 +151,7 @@ describe('Directive', () => {
     describe('Pay Online', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Directive componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Directive emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(

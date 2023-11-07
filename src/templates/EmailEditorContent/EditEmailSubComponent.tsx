@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { EmailSubComponentProps } from '../EmailTemplateSubComponents/shared'
 import { Title } from '../EmailTemplateSubComponents/Title'
-import { useShouldShowEmailSubComponent } from '../ShouldShowEmailPart'
+import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { ProgramName } from '../EmailTemplateSubComponents/ProgramName'
 import { AdditionalContent } from '../EmailTemplateSubComponents/AdditionalContent'
 import { Intro } from '../EmailTemplateSubComponents/Intro'
@@ -14,7 +14,7 @@ import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
 import { BenefitAmount } from '../EmailTemplateSubComponents/BenefitAmount'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
-  const shouldShow = useShouldShowEmailSubComponent(props.componentId, props.id)
+  const shouldShow = useShouldShowEmailPart(props.emailSubComponent.id)
 
   if (shouldShow.off) return null
 

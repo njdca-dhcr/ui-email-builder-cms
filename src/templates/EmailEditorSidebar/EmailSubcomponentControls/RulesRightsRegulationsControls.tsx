@@ -1,22 +1,17 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import {
   RulesRightsRegulationsVariant,
   useRulesRightsRegulationsValue,
 } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { Input, Select, UswdsIconSelect } from 'src/ui'
 
-export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({
-  componentId,
-  id,
-}) => {
-  const key = buildSubComponentKey(componentId, id)
-  const variantHtmlId = `variant-${key}`
-  const iconHtmlId = `icon-${key}`
-  const buttonLinkHtmlId = `buttonLink-${key}`
-  const [value, setValue] = useRulesRightsRegulationsValue(componentId, id)
+export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+  const variantHtmlId = `variant-${id}`
+  const iconHtmlId = `icon-${id}`
+  const buttonLinkHtmlId = `buttonLink-${id}`
+  const [value, setValue] = useRulesRightsRegulationsValue(id)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
 

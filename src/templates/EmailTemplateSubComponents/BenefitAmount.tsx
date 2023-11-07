@@ -1,8 +1,8 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
-import { useIsCurrentlyActiveEmailSubComponent } from '../CurrentlyActiveEmailPart'
-import { useEmailPartsContentForSubComponent } from '../EmailPartsContent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
@@ -41,15 +41,15 @@ const defaultValue: BenefitAmountValue = {
     'If you&rsquo;re working part-time, a partial weekly rate (which is 20% higher than your weekly rate) will be used to calculate your benefit amount.',
 }
 
-export const useBenefitAmountValue = (componentId: string, id: string) => {
-  return useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const useBenefitAmountValue = (id: string) => {
+  return useEmailPartsContentFor(id, defaultValue)
 }
 
 const { Row, Cell } = EmailBlock
 
-export const BenefitAmount: FC<EmailSubComponentProps> = ({ componentId, id }) => {
-  const { activate } = useIsCurrentlyActiveEmailSubComponent(componentId, id)
-  const [value, setValue] = useEmailPartsContentForSubComponent(componentId, id, defaultValue)
+export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+  const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+  const [value, setValue] = useBenefitAmountValue(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 

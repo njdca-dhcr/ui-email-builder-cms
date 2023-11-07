@@ -1,10 +1,9 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
-import { buildEmailTemplateSubComponent } from 'src/testHelpers'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { EmailSubComponentControls } from '..'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
-import { buildComponentKey, buildSubComponentKey } from 'src/utils/emailPartKeys'
 
 describe('EmailSubComponentControls', () => {
   let componentId: string
@@ -18,7 +17,7 @@ describe('EmailSubComponentControls', () => {
   it('renders nothing for Title', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'Title' })}
+        emailSubComponent={buildUniqueEmailSubComponent('Header', { kind: 'Title' })}
         componentId={componentId}
         id={id}
       />,
@@ -29,7 +28,7 @@ describe('EmailSubComponentControls', () => {
   it('renders the ProgramNameControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })}
+        emailSubComponent={buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })}
         componentId={componentId}
         id={id}
       />,
@@ -40,7 +39,7 @@ describe('EmailSubComponentControls', () => {
   it('renders nothing for AdditionalContent', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })}
+        emailSubComponent={buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })}
         componentId={componentId}
         id={id}
       />,
@@ -51,7 +50,7 @@ describe('EmailSubComponentControls', () => {
   it('renders nothing for Intro', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Intro' })}
+        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Intro' })}
         componentId={componentId}
         id={id}
       />,
@@ -62,7 +61,7 @@ describe('EmailSubComponentControls', () => {
   it('renders nothing for SupplementalContent', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'SupplementalContent' })}
+        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })}
         componentId={componentId}
         id={id}
       />,
@@ -73,7 +72,7 @@ describe('EmailSubComponentControls', () => {
   it('renders the StatusControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Status' })}
+        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         componentId={componentId}
         id={id}
       />,
@@ -84,7 +83,7 @@ describe('EmailSubComponentControls', () => {
   it('renders the RulesRightsRegulationsControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Body', {
+        emailSubComponent={buildUniqueEmailSubComponent('Body', {
           kind: 'RulesRightsRegulations',
         })}
         componentId={componentId}
@@ -97,7 +96,7 @@ describe('EmailSubComponentControls', () => {
   it('renders the LoginDetailsControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildEmailTemplateSubComponent('Body', {
+        emailSubComponent={buildUniqueEmailSubComponent('Body', {
           kind: 'LoginDetails',
         })}
         componentId={componentId}
@@ -109,11 +108,10 @@ describe('EmailSubComponentControls', () => {
 
   describe('when the component is not being shown', () => {
     it('renders nothing', () => {
-      const key = buildComponentKey(componentId)
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [key]: false }}>
+        <ShouldShowEmailPart initialData={{ [componentId]: false }}>
           <EmailSubComponentControls
-            emailSubComponent={buildEmailTemplateSubComponent('Body', {
+            emailSubComponent={buildUniqueEmailSubComponent('Body', {
               kind: 'RulesRightsRegulations',
             })}
             componentId={componentId}
@@ -127,11 +125,10 @@ describe('EmailSubComponentControls', () => {
 
   describe('when the subcomponent is not being shown', () => {
     it('renders nothing', () => {
-      const key = buildSubComponentKey(componentId, id)
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [key]: false }}>
+        <ShouldShowEmailPart initialData={{ [id]: false }}>
           <EmailSubComponentControls
-            emailSubComponent={buildEmailTemplateSubComponent('Body', {
+            emailSubComponent={buildUniqueEmailSubComponent('Body', {
               kind: 'RulesRightsRegulations',
             })}
             componentId={componentId}

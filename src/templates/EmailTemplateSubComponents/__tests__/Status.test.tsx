@@ -4,22 +4,19 @@ import { RenderResult, render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
-  buildEmailTemplateSubComponent,
+  buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import { buildSubComponentKey } from 'src/utils/emailPartKeys'
 import { Status, StatusVariant, useStatusValue } from '../Status'
 import { Toggle } from 'src/ui'
 
 describe('Status', () => {
   let value: string
-  let componentId: string
-  let id: string
-  let emailSubComponent: EmailTemplate.SubComponent<'Body'>
+  let emailSubComponent: EmailTemplate.UniqueSubComponent
   let user: UserEvent
   let rendered: RenderResult
   let key: string
@@ -31,7 +28,7 @@ describe('Status', () => {
   }
 
   const ToggleSupportiveInformation: FC = () => {
-    const [value, setValue] = useStatusValue(componentId, id)
+    const [value, setValue] = useStatusValue(emailSubComponent.id)
     return (
       <label>
         toggle
@@ -47,29 +44,25 @@ describe('Status', () => {
   }
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
-    key = buildSubComponentKey(componentId, id)
-    emailSubComponent = buildEmailTemplateSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)
   })
 
   it('has an editable title', async () => {
-    rendered = render(
-      <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
-      { wrapper: emailPartWrapper },
-    )
+    rendered = render(<Status emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     await clearAndFillWithValue('Status title')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('has an editable description', async () => {
-    rendered = render(
-      <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
-      { wrapper: emailPartWrapper },
-    )
+    rendered = render(<Status emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     await clearAndFillWithValue('Status description')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
@@ -77,7 +70,7 @@ describe('Status', () => {
 
   it('only displays supportive information when it is toggled on', async () => {
     const { getByLabelText, queryByLabelText } = renderEmailPart(
-      <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+      <Status emailSubComponent={emailSubComponent} />,
       <ToggleSupportiveInformation />,
     )
     expect(queryByLabelText('Status supportive information')).not.toBeNull()
@@ -88,10 +81,9 @@ describe('Status', () => {
   })
 
   it('activates when clicked', async () => {
-    rendered = render(
-      <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
-      { wrapper: emailPartWrapper },
-    )
+    rendered = render(<Status emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     const { getByLabelText, baseElement } = rendered
     expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByLabelText('Status title'))
@@ -100,7 +92,7 @@ describe('Status', () => {
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useStatusValue(componentId, id)
+      const [value, setValue] = useStatusValue(emailSubComponent.id)
       return (
         <label>
           Variant
@@ -129,7 +121,7 @@ describe('Status', () => {
     describe('Overview', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.Overview + '')
@@ -150,7 +142,7 @@ describe('Status', () => {
     describe('Overview w/ Reason', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -176,7 +168,7 @@ describe('Status', () => {
     describe('Missing Document', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -212,7 +204,7 @@ describe('Status', () => {
     describe('Overview w/ Reason + Amount Due', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(
@@ -240,7 +232,7 @@ describe('Status', () => {
     describe('Overview w/ Reason + Amount Breakdown', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
-          <Status componentId={componentId} id={id} emailSubComponent={emailSubComponent} />,
+          <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
         await user.selectOptions(

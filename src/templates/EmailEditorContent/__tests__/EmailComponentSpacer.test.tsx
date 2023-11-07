@@ -1,22 +1,12 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { EmailComponentSpacer } from '../EmailComponentSpacer'
-import { buildEmailTemplateComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailTemplate } from 'src/appTypes'
-import { faker } from '@faker-js/faker'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
-import { buildComponentKey } from 'src/utils/emailPartKeys'
 
 describe('EmailComponentSpacer', () => {
-  let id: string
-  let key: string
-
-  beforeEach(() => {
-    id = faker.lorem.word()
-    key = buildComponentKey(id)
-  })
-
   const renderWithComponents = ({
     currentComponent,
     nextComponent,
@@ -26,9 +16,8 @@ describe('EmailComponentSpacer', () => {
   }) => {
     const { baseElement } = render(
       <EmailComponentSpacer
-        id={id}
-        currentComponent={buildEmailTemplateComponent(currentComponent)}
-        nextComponent={nextComponent && buildEmailTemplateComponent(nextComponent)}
+        currentComponent={buildUniqueEmailComponent(currentComponent)}
+        nextComponent={nextComponent && buildUniqueEmailComponent(nextComponent)}
       />,
       {
         wrapper: emailPartWrapper,
@@ -40,12 +29,12 @@ describe('EmailComponentSpacer', () => {
   }
 
   it('is nothing when the component should not be shown', () => {
+    const currentComponent = buildUniqueEmailComponent('Banner')
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [key]: false }}>
+      <ShouldShowEmailPart initialData={{ [currentComponent.id]: false }}>
         <EmailComponentSpacer
-          id={id}
-          currentComponent={buildEmailTemplateComponent('Banner')}
-          nextComponent={buildEmailTemplateComponent('Header')}
+          currentComponent={currentComponent}
+          nextComponent={buildUniqueEmailComponent('Header')}
         />
       </ShouldShowEmailPart>,
       {
