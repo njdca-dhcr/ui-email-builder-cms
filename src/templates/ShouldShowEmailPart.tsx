@@ -32,7 +32,7 @@ export const useShouldShowEmailPart = (
 
   const toggle = useCallback(() => {
     update({ ...data, [id]: !isOn })
-  }, [data, update, id])
+  }, [data, update, id, isOn])
 
   return { on: isOn, off: !isOn, toggle }
 }
