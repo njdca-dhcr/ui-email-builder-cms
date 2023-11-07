@@ -4,7 +4,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
-import { BoxColor, SelectBoxColor } from 'src/ui/SelectBoxColor'
+import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconSelect } from 'src/ui'
 
 export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id }) => {

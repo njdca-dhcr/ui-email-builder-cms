@@ -1,13 +1,5 @@
 import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
 
-interface On {
-  on: boolean
-}
-
-interface ComponentOn extends On {
-  subComponents: { [key: string]: On | undefined }
-}
-
 interface ShouldShowEmailPartContextData {
   [key: string]: boolean | undefined
 }
