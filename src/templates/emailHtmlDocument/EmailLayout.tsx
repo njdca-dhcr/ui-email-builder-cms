@@ -15,9 +15,10 @@ const Html: FC<HtmlProps> = ({ children, ...props }) => {
 
 interface EmailLayoutProps {
   html: string
+  title: string
 }
 
-export const EmailLayout: FC<EmailLayoutProps> = ({ html }) => {
+export const EmailLayout: FC<EmailLayoutProps> = ({ html, title }) => {
   return (
     <>
       <Html
@@ -33,6 +34,7 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html }) => {
           <meta name="viewport" content="width=device-width,initial-scale=1" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no" />
+          <title>{title}</title>
           <link
             href="https://fonts.googleapis.com/css?family=Public%20Sans:700&display=swap&subset=cyrillic"
             rel="stylesheet"

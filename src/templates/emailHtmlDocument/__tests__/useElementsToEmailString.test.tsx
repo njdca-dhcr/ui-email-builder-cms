@@ -11,17 +11,19 @@ describe('useElementsToEmailString', () => {
         return useElementsToEmailString(ref)
       })
 
-      expect(result.current()).toEqual('')
+      expect(result.current(faker.lorem.word())).toEqual('')
     })
   })
 
   describe('when the ref has a current', () => {
     let text: string
+    let title: string
     let div: HTMLElement
     let resultCallback: ReturnType<typeof useElementsToEmailString>
 
     beforeEach(() => {
       text = faker.lorem.paragraph()
+      title = faker.lorem.word()
       div = document.createElement('div')
       div.innerHTML = `<span class="foo" contenteditable="true" aria-label="Reminder title">${text}</span>`
       const { result } = renderHook(() => {
@@ -32,26 +34,27 @@ describe('useElementsToEmailString', () => {
     })
 
     it('creates email markup with the EmailLayout', () => {
-      expect(resultCallback()).toContain('xmlns:v=')
-      expect(resultCallback()).toContain('xmlns:o=')
+      expect(resultCallback(title)).toContain('xmlns:v=')
+      expect(resultCallback(title)).toContain('xmlns:o=')
+      expect(resultCallback(title)).toContain(title)
     })
 
     it('creates email markup with the content of the ref', () => {
-      expect(resultCallback()).toContain(text)
-      expect(resultCallback()).toContain('<span class="foo"  >')
+      expect(resultCallback(title)).toContain(text)
+      expect(resultCallback(title)).toContain('<span class="foo"  >')
     })
 
     it('creates email markup with a doctype', () => {
-      expect(resultCallback()).toContain(
+      expect(resultCallback(title)).toContain(
         `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`,
       )
     })
 
     it('removes any content editable attributes', () => {
-      expect(resultCallback()).not.toContain('contenteditable="true"')
-      expect(resultCallback()).not.toContain('aria-label="Reminder title"')
-      expect(resultCallback()).not.toContain('contenteditable')
-      expect(resultCallback()).not.toContain('aria-label')
+      expect(resultCallback(title)).not.toContain('contenteditable="true"')
+      expect(resultCallback(title)).not.toContain('aria-label="Reminder title"')
+      expect(resultCallback(title)).not.toContain('contenteditable')
+      expect(resultCallback(title)).not.toContain('aria-label')
     })
   })
 })

@@ -15,6 +15,7 @@ import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { DownloadButton } from 'src/ui/DownloadButton'
 import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
+import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -26,6 +27,8 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
+  const [titleValue] = useTitleValue(getTitleSubComponent(emailTemplate)?.id ?? '')
+
   const emailComponents = emailTemplate.components ?? []
 
   return (
@@ -60,8 +63,13 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           </label>
         </fieldset>
         <div className="button-group">
-          <CopyToClipboardButton textToCopy={toEmailText}>Copy HTML</CopyToClipboardButton>
-          <DownloadButton textToDownload={toEmailText} fileName={`${emailTemplate.name}.html`}>
+          <CopyToClipboardButton textToCopy={() => toEmailText(titleValue)}>
+            Copy HTML
+          </CopyToClipboardButton>
+          <DownloadButton
+            textToDownload={() => toEmailText(titleValue)}
+            fileName={`${emailTemplate.name}.html`}
+          >
             Download HTML
           </DownloadButton>
         </div>
@@ -110,4 +118,13 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
       </Root.div>
     </>
   )
+}
+
+const getTitleSubComponent = (
+  emailTemplate: EmailTemplate.UniqueConfig,
+): EmailTemplate.UniqueSubComponent | null => {
+  const subComponents = (emailTemplate.components ?? []).flatMap(
+    ({ subComponents }) => subComponents ?? [],
+  )
+  return subComponents.find(({ kind }) => kind === 'Title') ?? null
 }

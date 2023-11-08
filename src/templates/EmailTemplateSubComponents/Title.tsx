@@ -10,9 +10,13 @@ const defaultValue = 'Title'
 
 const { Row } = EmailBlock
 
+export const useTitleValue = (id: string) => {
+  return useEmailPartsContentFor(id, defaultValue)
+}
+
 export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const [value, setValue] = useTitleValue(emailSubComponent.id)
 
   return (
     <Row

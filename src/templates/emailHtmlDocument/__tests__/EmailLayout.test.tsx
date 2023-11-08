@@ -17,7 +17,13 @@ describe('EmailLayout', () => {
 
   it('displays the given html string', () => {
     const html = `<div><section>${faker.lorem.paragraph()}</section></div>`
-    const { baseElement } = render(<EmailLayout html={html} />)
+    const { baseElement } = render(<EmailLayout html={html} title={faker.lorem.word()} />)
     expect(baseElement.querySelector('body')).toContainHTML(html)
+  })
+
+  it('accepts a title', () => {
+    const title = faker.lorem.word()
+    const { baseElement } = render(<EmailLayout html={'<div></div>'} title={title} />)
+    expect(baseElement.querySelector('title')).toHaveTextContent(title)
   })
 })

@@ -11,6 +11,7 @@ import {
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 jest.mock('src/utils/download', () => {
   return {
@@ -62,7 +63,11 @@ describe('EmailEditorContent', () => {
   it('allows users to copy the current preview into their clipboard', async () => {
     const user = userEvent.setup()
 
-    const { getByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    const { getByText } = render(
+      <EmailPartsContent>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+      </EmailPartsContent>,
+    )
 
     const value = faker.lorem.words(4)
     await user.type(getByText('Title'), value)
@@ -72,13 +77,18 @@ describe('EmailEditorContent', () => {
     expect(copy).toHaveBeenCalled()
 
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
-    expect(lastArgumentToCopy).toContain(value)
+    expect(lastArgumentToCopy).toContain(`${value}</h1>`)
+    expect(lastArgumentToCopy).toContain(`${value}</title>`)
   })
 
   it('allows users to download the current preview', async () => {
     const user = userEvent.setup()
 
-    const { getByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    const { getByText } = render(
+      <EmailPartsContent>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+      </EmailPartsContent>,
+    )
 
     const value = faker.lorem.words(4)
     await user.type(getByText('Title'), value)
@@ -88,7 +98,8 @@ describe('EmailEditorContent', () => {
     expect(download).toHaveBeenCalled()
 
     const [givenHtml, givenFileName, givenType] = (download as jest.Mock).mock.calls[0]
-    expect(givenHtml).toContain(value)
+    expect(givenHtml).toContain(`${value}</h1>`)
+    expect(givenHtml).toContain(`${value}</title>`)
     expect(givenFileName).toEqual(`${emailTemplate.name}.html`)
     expect(givenType).toEqual('text/html')
   })

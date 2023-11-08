@@ -6,16 +6,19 @@ const DOCTYPE = `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
 
 export const useElementsToEmailString = (
   ref: MutableRefObject<HTMLElement | undefined>,
-): (() => string) => {
-  return useCallback(() => {
-    if (ref.current) {
-      const html = removeContentEditableAttributes(ref.current.innerHTML)
-      const rendered = renderToString(<EmailLayout html={html}></EmailLayout>)
-      return `${DOCTYPE}${rendered}`
-    } else {
-      return ''
-    }
-  }, [ref])
+): ((title: string) => string) => {
+  return useCallback(
+    (title) => {
+      if (ref.current) {
+        const html = removeContentEditableAttributes(ref.current.innerHTML)
+        const rendered = renderToString(<EmailLayout html={html} title={title} />)
+        return `${DOCTYPE}${rendered}`
+      } else {
+        return ''
+      }
+    },
+    [ref],
+  )
 }
 
 const removeContentEditableAttributes = (value: string): string => {
