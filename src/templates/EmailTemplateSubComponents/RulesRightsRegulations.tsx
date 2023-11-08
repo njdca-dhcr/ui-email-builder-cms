@@ -21,8 +21,7 @@ interface RulesRightsRegulationsValue {
   // Reminder
   reminderTitle: string
   eligibilityLabel: string
-  eligibilityCondition1: string
-  eligibilityCondition2: string
+  eligibilityConditionsList: string[]
   reminderIsFor: string
   footnote: string
   // Appeal Rights
@@ -48,8 +47,10 @@ const defaultValue: RulesRightsRegulationsValue = {
   icon: 'Flag',
   reminderTitle: 'Reminder',
   eligibilityLabel: 'You may only be eligible for this waiver if...',
-  eligibilityCondition1: 'Overpayment was due to no fault of your own*',
-  eligibilityCondition2: 'Repayment would be unfair and unreasonable given the context',
+  eligibilityConditionsList: [
+    'Overpayment was due to no fault of your own*',
+    'Repayment would be unfair and unreasonable given the context',
+  ],
   reminderIsFor:
     'This waiver is for Pandemic Unemployment Assistance (PUA), Federal Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment Compensation (MEUC), and Pandemic Extended Unemployment Compensation (PEUC).',
   footnote:
@@ -90,6 +91,10 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
+  const setEligibilityConditionsList = useCallback(
+    (eligibilityConditionsList: string[]) => setValue({ ...value, eligibilityConditionsList }),
+    [value, setValue],
+  )
   const setYourRightsList = useCallback(
     (yourRightsList: string[]) => setValue({ ...value, yourRightsList }),
     [value, setValue],
@@ -161,26 +166,22 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             />
           </Row>
           <Row elements={['cell']}>
-            <ol style={styles.eligibilityConditions}>
-              <EditableElement
-                element="li"
-                value={value.eligibilityCondition1}
-                label="Eligibility condition 1"
-                onValueChange={(eligibilityCondition1) =>
-                  setValue({ ...value, eligibilityCondition1 })
-                }
-                style={styles.eligibilityCondition}
-              />
-              <EditableElement
-                element="li"
-                value={value.eligibilityCondition2}
-                label="Eligibility condition 2"
-                onValueChange={(eligibilityCondition2) =>
-                  setValue({ ...value, eligibilityCondition2 })
-                }
-                style={styles.eligibilityCondition}
-              />
-            </ol>
+            <EditableList
+              collection={value.eligibilityConditionsList}
+              element="ol"
+              setCollection={setEligibilityConditionsList}
+              style={styles.eligibilityConditions}
+            >
+              {value.eligibilityConditionsList.map((eligibilityCondition, index) => (
+                <EditableListItem
+                  key={index}
+                  label={`Eligibility condition ${index + 1}`}
+                  index={index}
+                  value={eligibilityCondition}
+                  style={styles.eligibilityCondition}
+                />
+              ))}
+            </EditableList>
           </Row>
           <Row>
             <EditableElement
