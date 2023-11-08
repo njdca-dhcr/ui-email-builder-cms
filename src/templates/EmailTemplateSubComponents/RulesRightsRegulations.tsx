@@ -22,7 +22,9 @@ interface RulesRightsRegulationsValue {
   reminderTitle: string
   eligibilityLabel: string
   eligibilityConditionsList: string[]
+  showReminderIsFor: boolean
   reminderIsFor: string
+  showFootnote: boolean
   footnote: string
   // Appeal Rights
   appealRightsTitle: string
@@ -51,8 +53,10 @@ const defaultValue: RulesRightsRegulationsValue = {
     'Overpayment was due to no fault of your own*',
     'Repayment would be unfair and unreasonable given the context',
   ],
+  showReminderIsFor: true,
   reminderIsFor:
     'This waiver is for Pandemic Unemployment Assistance (PUA), Federal Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment Compensation (MEUC), and Pandemic Extended Unemployment Compensation (PEUC).',
+  showFootnote: true,
   footnote:
     '*State and federal laws, rules, and guidance will be used to make these determinations.',
   appealRightsTitle: 'Appeal Rights',
@@ -183,24 +187,28 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
               ))}
             </EditableList>
           </Row>
-          <Row>
-            <EditableElement
-              element="td"
-              value={value.reminderIsFor}
-              label="Reminder is for"
-              onValueChange={(reminderIsFor) => setValue({ ...value, reminderIsFor })}
-              style={styles.reminderIsFor}
-            />
-          </Row>
-          <Row>
-            <EditableElement
-              element="td"
-              value={value.footnote}
-              label="Reminder footnote"
-              onValueChange={(footnote) => setValue({ ...value, footnote })}
-              style={styles.footnote}
-            />
-          </Row>
+          {value.showReminderIsFor && (
+            <Row>
+              <EditableElement
+                element="td"
+                value={value.reminderIsFor}
+                label="Reminder is for"
+                onValueChange={(reminderIsFor) => setValue({ ...value, reminderIsFor })}
+                style={styles.reminderIsFor}
+              />
+            </Row>
+          )}
+          {value.showFootnote && (
+            <Row>
+              <EditableElement
+                element="td"
+                value={value.footnote}
+                label="Reminder footnote"
+                onValueChange={(footnote) => setValue({ ...value, footnote })}
+                style={styles.footnote}
+              />
+            </Row>
+          )}
         </Cell>
         <Cell elements={['table']} condition={isAppealRights}>
           <Row>
@@ -414,11 +422,12 @@ const styles = {
   } as CSSProperties,
   reminderIsFor: {
     ...Text.body.secondary.italic,
-    paddingBottom: Spacing.size.extraLarge,
+
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   footnote: {
     ...Text.body.secondary.boldItalic,
+    paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   appealSummary: {
     ...Text.body.secondary.regular,

@@ -55,10 +55,6 @@ describe('RulesRightsRegulationsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Reminder' }))
       })
 
-      it('does not render any inputs', () => {
-        expect(rendered.baseElement.querySelectorAll('input')).toHaveLength(0)
-      })
-
       it('provides a dropdown for selecting an icon', async () => {
         const { getByRole, queryByRole, queryByText } = rendered
         let button = queryByText('Flag', { selector: 'span' })
@@ -73,6 +69,29 @@ describe('RulesRightsRegulationsControls', () => {
         button = queryByText('Device Thermostat', { selector: 'span' })
         expect(button).not.toBeNull()
         expect(button).toHaveTextContent('Device Thermostat')
+      })
+
+      it('can have reminder is for toggled on and off', async () => {
+        const { getByRole } = rendered
+        const getSwitch = (): HTMLInputElement =>
+          getByRole('switch', { name: 'Reminder Is For' }) as any
+
+        expect(getSwitch()).toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).not.toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).toBeChecked()
+      })
+
+      it('can have the footnote toggled on and off', async () => {
+        const { getByRole } = rendered
+        const getSwitch = (): HTMLInputElement => getByRole('switch', { name: 'Footnote' }) as any
+
+        expect(getSwitch()).toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).not.toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).toBeChecked()
       })
     })
 
@@ -106,6 +125,16 @@ describe('RulesRightsRegulationsControls', () => {
         expect(button).not.toBeNull()
         expect(button).toHaveTextContent('Device Thermostat')
       })
+
+      it('lacks a reminder is for toggle', async () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('switch', { name: 'Reminder Is For' })).toBeNull()
+      })
+
+      it('lacks a footnote toggle', async () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('switch', { name: 'Footnote' })).toBeNull()
+      })
     })
 
     describe('Your Rights', () => {
@@ -122,6 +151,16 @@ describe('RulesRightsRegulationsControls', () => {
         const { queryByText } = rendered
         const button = queryByText('Flag', { selector: 'span' })
         expect(button).toBeNull()
+      })
+
+      it('lacks a reminder is for toggle', async () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('switch', { name: 'Reminder Is For' })).toBeNull()
+      })
+
+      it('lacks a footnote toggle', async () => {
+        const { queryByRole } = rendered
+        expect(queryByRole('switch', { name: 'Footnote' })).toBeNull()
       })
     })
   })

@@ -16,6 +16,7 @@ import {
   RulesRightsRegulationsVariant,
   useRulesRightsRegulationsValue,
 } from '../RulesRightsRegulations'
+import { RulesRightsRegulationsControls } from 'src/templates/EmailEditorSidebar/EmailSubcomponentControls/RulesRightsRegulationsControls'
 
 describe('RulesRightsRegulations', () => {
   let value: string
@@ -86,12 +87,13 @@ describe('RulesRightsRegulations', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
           <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
-          <VariantSelect />,
+          <RulesRightsRegulationsControls
+            componentId={faker.lorem.word()}
+            id={emailSubComponent.id}
+          />,
         )
-        await user.selectOptions(
-          rendered.getByLabelText('Variant'),
-          RulesRightsRegulationsVariant.Reminder + '',
-        )
+        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByRole('option', { name: 'Reminder' }))
       })
 
       it('has an icon', () => {
@@ -114,6 +116,26 @@ describe('RulesRightsRegulations', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(6)
+      })
+
+      it('can have reminder is for toggled on and off', async () => {
+        const { getByRole, queryByLabelText } = rendered
+
+        expect(queryByLabelText('Reminder is for')).not.toBeNull()
+        await user.click(getByRole('switch', { name: 'Reminder Is For' }))
+        expect(queryByLabelText('Reminder is for')).toBeNull()
+        await user.click(getByRole('switch', { name: 'Reminder Is For' }))
+        expect(queryByLabelText('Reminder is for')).not.toBeNull()
+      })
+
+      it('can have the footnote toggled on and off', async () => {
+        const { getByRole, queryByLabelText } = rendered
+
+        expect(queryByLabelText('Reminder footnote')).not.toBeNull()
+        await user.click(getByRole('switch', { name: 'Footnote' }))
+        expect(queryByLabelText('Reminder footnote')).toBeNull()
+        await user.click(getByRole('switch', { name: 'Footnote' }))
+        expect(queryByLabelText('Reminder footnote')).not.toBeNull()
       })
     })
 

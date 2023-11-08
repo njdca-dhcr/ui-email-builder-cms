@@ -6,6 +6,7 @@ import {
   useRulesRightsRegulationsValue,
 } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { Input, Select, UswdsIconSelect } from 'src/ui'
+import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
   const variantHtmlId = `variant-${id}`
@@ -42,6 +43,25 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
             value={value.icon}
           />
         </Control.Container>
+      )}
+
+      {isReminder && (
+        <>
+          <Control.Container>
+            <SubComponentControlToggle
+              subComponentId={id}
+              label="Reminder Is For"
+              onChange={(showReminderIsFor) => setValue({ ...value, showReminderIsFor })}
+              value={value.showReminderIsFor}
+            />
+            <SubComponentControlToggle
+              subComponentId={id}
+              label="Footnote"
+              onChange={(showFootnote) => setValue({ ...value, showFootnote })}
+              value={value.showFootnote}
+            />
+          </Control.Container>
+        </>
       )}
 
       {isAppealRights && (
