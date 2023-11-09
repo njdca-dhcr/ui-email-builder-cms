@@ -8,6 +8,7 @@ import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
+import { EditableTerms, TableTerm } from 'src/ui/EditableTermsTable'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
@@ -33,12 +34,7 @@ interface RulesRightsRegulationsValue {
   appealRightsButton: string
   appealRightsHref: string
   appealRightsInfoLabel: string
-  appealRightsProgramCodeLabel: string
-  appealRightsProgramCodeValue: string
-  appealRightsClaimDateLabel: string
-  appealRightsClaimDateValue: string
-  appealRightsDeterminationDateLabel: string
-  appealRightsDeterminationDateValue: string
+  appealRightsTerms: TableTerm[]
   // Your Rights
   yourRightsTitle: string
   yourRightsList: string[]
@@ -66,12 +62,11 @@ const defaultValue: RulesRightsRegulationsValue = {
   appealRightsButton: 'Get Started',
   appealRightsHref: '',
   appealRightsInfoLabel: 'For your appeal:',
-  appealRightsProgramCodeLabel: 'Program Code:',
-  appealRightsProgramCodeValue: '###',
-  appealRightsClaimDateLabel: 'Date of Claim:',
-  appealRightsClaimDateValue: '00/00/0000',
-  appealRightsDeterminationDateLabel: 'Date of Determination:',
-  appealRightsDeterminationDateValue: '00/00/0000',
+  appealRightsTerms: [
+    { label: 'Program Code:', value: '###' },
+    { label: 'Date of Claim:', value: '00/00/0000' },
+    { label: 'Date of Determination:', value: '00/00/0000' },
+  ],
   yourRightsTitle: 'Your Rights:',
   yourRightsList: [
     `You may represent yourself or you may be represented at your own expense by an attorney or non-attorney`,
@@ -97,6 +92,10 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
   const setEligibilityConditionsList = useCallback(
     (eligibilityConditionsList: string[]) => setValue({ ...value, eligibilityConditionsList }),
+    [value, setValue],
+  )
+  const setAppealRightsTerms = useCallback(
+    (appealRightsTerms: TableTerm[]) => setValue({ ...value, appealRightsTerms }),
     [value, setValue],
   )
   const setYourRightsList = useCallback(
@@ -273,96 +272,33 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
               style={styles.appealInfoLabel}
             />
           </Row>
-          <Row
-            elements={['cell', { part: 'table', role: 'table', labelledBy: 'appeal-rights-label' }]}
-          >
-            <Row
-              elements={[
-                { part: 'cell', style: styles.appealLabelAndValue },
-                { part: 'table', width: 'unset' },
-                'row',
-              ]}
-              role="row"
+          <Row elements={['cell']}>
+            <EditableTerms.Table
+              collection={value.appealRightsTerms}
+              setCollection={setAppealRightsTerms}
+              style={styles.appealLabelAndValue}
             >
-              <EditableElement
-                element="td"
-                value={value.appealRightsProgramCodeLabel}
-                label="Appeal Rights program code label"
-                onValueChange={(appealRightsProgramCodeLabel) =>
-                  setValue({ ...value, appealRightsProgramCodeLabel })
-                }
-                role="rowheader"
-                style={styles.appealLabel}
-              />
-              <EditableElement
-                element="td"
-                value={value.appealRightsProgramCodeValue}
-                label="Appeal Rights program code value"
-                onValueChange={(appealRightsProgramCodeValue) =>
-                  setValue({ ...value, appealRightsProgramCodeValue })
-                }
-                role="cell"
-                style={styles.appealText}
-              />
-            </Row>
-            <Row
-              elements={[
-                { part: 'cell', style: styles.appealLabelAndValue },
-                { part: 'table', width: 'unset' },
-                'row',
-              ]}
-              role="row"
-            >
-              <EditableElement
-                element="td"
-                value={value.appealRightsClaimDateLabel}
-                label="Appeal Rights claim date label"
-                onValueChange={(appealRightsClaimDateLabel) =>
-                  setValue({ ...value, appealRightsClaimDateLabel })
-                }
-                role="rowheader"
-                style={styles.appealLabel}
-              />
-              <EditableElement
-                element="td"
-                value={value.appealRightsClaimDateValue}
-                label="Appeal Rights claim date value"
-                onValueChange={(appealRightsClaimDateValue) =>
-                  setValue({ ...value, appealRightsClaimDateValue })
-                }
-                role="cell"
-                style={styles.appealText}
-              />
-            </Row>
-            <Row
-              elements={[
-                { part: 'cell', style: styles.appealLabelAndValue },
-                { part: 'table', width: 'unset' },
-                'row',
-              ]}
-              role="row"
-            >
-              <EditableElement
-                element="td"
-                value={value.appealRightsDeterminationDateLabel}
-                label="Appeal Rights determination date label"
-                onValueChange={(appealRightsDeterminationDateLabel) =>
-                  setValue({ ...value, appealRightsDeterminationDateLabel })
-                }
-                role="rowheader"
-                style={styles.appealLabel}
-              />
-              <EditableElement
-                element="td"
-                value={value.appealRightsDeterminationDateValue}
-                label="Appeal Rights determination date value"
-                onValueChange={(appealRightsDeterminationDateValue) =>
-                  setValue({ ...value, appealRightsDeterminationDateValue })
-                }
-                role="cell"
-                style={styles.appealText}
-              />
-            </Row>
+              {value.appealRightsTerms.map((_item, index) => (
+                <EditableTerms.Row
+                  key={index}
+                  index={index}
+                  label={(props) => (
+                    <EditableElement
+                      {...props}
+                      label={`Appeal Rights row label ${index + 1}`}
+                      style={styles.appealLabel}
+                    />
+                  )}
+                  value={(props) => (
+                    <EditableElement
+                      {...props}
+                      label={`Appeal Rights row value ${index + 1}`}
+                      style={styles.appealText}
+                    />
+                  )}
+                />
+              ))}
+            </EditableTerms.Table>
           </Row>
         </Cell>
         <Cell condition={isYourRights} style={styles.yourRightsListContainer}>

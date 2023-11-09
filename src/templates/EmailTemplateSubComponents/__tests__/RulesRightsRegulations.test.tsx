@@ -166,17 +166,17 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('info label', 'Appeal Rights information label')
 
-      itHasAnEditable('program code label', 'Appeal Rights program code label')
+      itHasAnEditable('table label 1', 'Appeal Rights row label 1')
 
-      itHasAnEditable('program code value', 'Appeal Rights program code value')
+      itHasAnEditable('table value 1', 'Appeal Rights row value 1')
 
-      itHasAnEditable('claim date label', 'Appeal Rights claim date label')
+      itHasAnEditable('table label 2', 'Appeal Rights row label 2')
 
-      itHasAnEditable('claim date value', 'Appeal Rights claim date value')
+      itHasAnEditable('table value 2', 'Appeal Rights row value 2')
 
-      itHasAnEditable('determination date label', 'Appeal Rights determination date label')
+      itHasAnEditable('table label 3', 'Appeal Rights row label 3')
 
-      itHasAnEditable('determination date value', 'Appeal Rights determination date value')
+      itHasAnEditable('table value 3', 'Appeal Rights row value 3')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')

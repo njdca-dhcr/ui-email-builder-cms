@@ -11,6 +11,7 @@ import React, {
   useState,
 } from 'react'
 import { EditableElement } from './EditableElement'
+import { focusAndPlaceCursorAtEnd } from 'src/utils/focus'
 
 interface EditableListContextValue {
   addNewItemAfter: (index: number) => void
@@ -38,16 +39,6 @@ interface EditableListProps {
   element: 'ol' | 'ul'
   setCollection: (collection: string[]) => void
   style?: CSSProperties
-}
-
-const focusAndPlaceCursorAtEnd = (element: HTMLElement) => {
-  const selection = window.getSelection()!
-  const range = document.createRange()
-  selection.removeAllRanges()
-  range.selectNodeContents(element)
-  range.collapse(false)
-  selection.addRange(range)
-  element.focus()
 }
 
 export const EditableList: FC<EditableListProps> = ({
