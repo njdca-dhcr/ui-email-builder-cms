@@ -93,6 +93,11 @@ describe('RulesRightsRegulationsControls', () => {
         await user.click(getSwitch())
         expect(getSwitch()).toBeChecked()
       })
+
+      it('only has the correct switches', () => {
+        const all = rendered.queryAllByRole('switch')
+        expect(all).toHaveLength(2)
+      })
     })
 
     describe('Appeal Rights', () => {
@@ -126,14 +131,45 @@ describe('RulesRightsRegulationsControls', () => {
         expect(button).toHaveTextContent('Device Thermostat')
       })
 
-      it('lacks a reminder is for toggle', async () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('switch', { name: 'Reminder Is For' })).toBeNull()
+      it('only has the correct switches', () => {
+        const all = rendered.queryAllByRole('switch')
+        expect(all).toHaveLength(3)
       })
 
-      it('lacks a footnote toggle', async () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('switch', { name: 'Footnote' })).toBeNull()
+      it('can have the instruction toggled on and off', async () => {
+        const { getByRole } = rendered
+        const getSwitch = (): HTMLInputElement =>
+          getByRole('switch', { name: 'Instruction' }) as any
+
+        expect(getSwitch()).toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).not.toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).toBeChecked()
+      })
+
+      it('can have the information label toggled on and off', async () => {
+        const { getByRole } = rendered
+        const getSwitch = (): HTMLInputElement =>
+          getByRole('switch', { name: 'Information Label' }) as any
+
+        expect(getSwitch()).toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).not.toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).toBeChecked()
+      })
+
+      it('can have the information toggled on and off', async () => {
+        const { getByRole } = rendered
+        const getSwitch = (): HTMLInputElement =>
+          getByRole('switch', { name: 'Information' }) as any
+
+        expect(getSwitch()).toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).not.toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).toBeChecked()
       })
     })
 
@@ -153,14 +189,9 @@ describe('RulesRightsRegulationsControls', () => {
         expect(button).toBeNull()
       })
 
-      it('lacks a reminder is for toggle', async () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('switch', { name: 'Reminder Is For' })).toBeNull()
-      })
-
-      it('lacks a footnote toggle', async () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('switch', { name: 'Footnote' })).toBeNull()
+      it('only has the correct switches', () => {
+        const all = rendered.queryAllByRole('switch')
+        expect(all).toHaveLength(0)
       })
     })
   })

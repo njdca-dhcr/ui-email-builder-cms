@@ -143,12 +143,13 @@ describe('RulesRightsRegulations', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
           <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
-          <VariantSelect />,
+          <RulesRightsRegulationsControls
+            componentId={faker.lorem.word()}
+            id={emailSubComponent.id}
+          />,
         )
-        await user.selectOptions(
-          rendered.getByLabelText('Variant'),
-          RulesRightsRegulationsVariant.AppealRights + '',
-        )
+        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))
       })
 
       it('has an icon', () => {
@@ -181,6 +182,36 @@ describe('RulesRightsRegulations', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(11)
+      })
+
+      it('can have the appealRightsInstruction toggled on and off', async () => {
+        const { getByRole, queryByLabelText } = rendered
+
+        expect(queryByLabelText('Appeal Rights instruction')).not.toBeNull()
+        await user.click(getByRole('switch', { name: 'Instruction' }))
+        expect(queryByLabelText('Appeal Rights instruction')).toBeNull()
+        await user.click(getByRole('switch', { name: 'Instruction' }))
+        expect(queryByLabelText('Appeal Rights instruction')).not.toBeNull()
+      })
+
+      it('can have the appealRightsInfoLabel toggled on and off', async () => {
+        const { getByRole, queryByLabelText } = rendered
+
+        expect(queryByLabelText('Appeal Rights information label')).not.toBeNull()
+        await user.click(getByRole('switch', { name: 'Information Label' }))
+        expect(queryByLabelText('Appeal Rights information label')).toBeNull()
+        await user.click(getByRole('switch', { name: 'Information Label' }))
+        expect(queryByLabelText('Appeal Rights information label')).not.toBeNull()
+      })
+
+      it('can have the appealRightsInfoLabel toggled on and off', async () => {
+        const { getByRole, queryByLabelText } = rendered
+
+        expect(queryByLabelText('Appeal Rights row label 1')).not.toBeNull()
+        await user.click(getByRole('switch', { name: 'Information' }))
+        expect(queryByLabelText('Appeal Rights row label 1')).toBeNull()
+        await user.click(getByRole('switch', { name: 'Information' }))
+        expect(queryByLabelText('Appeal Rights row label 1')).not.toBeNull()
       })
     })
 

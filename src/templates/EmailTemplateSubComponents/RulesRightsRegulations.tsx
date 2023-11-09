@@ -30,10 +30,13 @@ interface RulesRightsRegulationsValue {
   // Appeal Rights
   appealRightsTitle: string
   appealRightsSummary: string
+  appealRightsShowInstruction: boolean
   appealRightsInstruction: string
   appealRightsButton: string
   appealRightsHref: string
+  appealRightsShowInfoLabel: boolean
   appealRightsInfoLabel: string
+  appealRightsShowTerms: boolean
   appealRightsTerms: TableTerm[]
   // Your Rights
   yourRightsTitle: string
@@ -58,10 +61,13 @@ const defaultValue: RulesRightsRegulationsValue = {
   appealRightsTitle: 'Appeal Rights',
   appealRightsSummary:
     'If you disagree with this determination, you have the right to file an appeal. Your appeal must be received within seven (7) days after the date you received this email.',
+  appealRightsShowInstruction: true,
   appealRightsInstruction: 'To begin an appeal online, get started below:',
   appealRightsButton: 'Get Started',
   appealRightsHref: '',
+  appealRightsShowInfoLabel: true,
   appealRightsInfoLabel: 'For your appeal:',
+  appealRightsShowTerms: true,
   appealRightsTerms: [
     { label: 'Program Code:', value: '###' },
     { label: 'Date of Claim:', value: '00/00/0000' },
@@ -186,28 +192,24 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
               ))}
             </EditableList>
           </Row>
-          {value.showReminderIsFor && (
-            <Row>
-              <EditableElement
-                element="td"
-                value={value.reminderIsFor}
-                label="Reminder is for"
-                onValueChange={(reminderIsFor) => setValue({ ...value, reminderIsFor })}
-                style={styles.reminderIsFor}
-              />
-            </Row>
-          )}
-          {value.showFootnote && (
-            <Row>
-              <EditableElement
-                element="td"
-                value={value.footnote}
-                label="Reminder footnote"
-                onValueChange={(footnote) => setValue({ ...value, footnote })}
-                style={styles.footnote}
-              />
-            </Row>
-          )}
+          <Row condition={value.showReminderIsFor}>
+            <EditableElement
+              element="td"
+              value={value.reminderIsFor}
+              label="Reminder is for"
+              onValueChange={(reminderIsFor) => setValue({ ...value, reminderIsFor })}
+              style={styles.reminderIsFor}
+            />
+          </Row>
+          <Row condition={value.showFootnote}>
+            <EditableElement
+              element="td"
+              value={value.footnote}
+              label="Reminder footnote"
+              onValueChange={(footnote) => setValue({ ...value, footnote })}
+              style={styles.footnote}
+            />
+          </Row>
         </Cell>
         <Cell elements={['table']} condition={isAppealRights}>
           <Row>
@@ -219,7 +221,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
               style={styles.appealSummary}
             />
           </Row>
-          <Row>
+          <Row condition={value.appealRightsShowInstruction}>
             <EditableElement
               element="td"
               value={value.appealRightsInstruction}
@@ -260,7 +262,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             {value.appealRightsHref ||
               'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
           </Row>
-          <Row>
+          <Row condition={value.appealRightsShowInfoLabel}>
             <EditableElement
               element="td"
               id="appeal-rights-label"
@@ -272,7 +274,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
               style={styles.appealInfoLabel}
             />
           </Row>
-          <Row elements={['cell']}>
+          <Row elements={['cell']} condition={value.appealRightsShowTerms}>
             <EditableTerms.Table
               collection={value.appealRightsTerms}
               setCollection={setAppealRightsTerms}
@@ -358,7 +360,6 @@ const styles = {
   } as CSSProperties,
   reminderIsFor: {
     ...Text.body.secondary.italic,
-
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   footnote: {
@@ -393,12 +394,11 @@ const styles = {
   appealHref: {
     ...Text.caption.small.regular,
     color: Colors.gray,
-    paddingBottom: Spacing.size.extraLarge,
     paddingTop: Spacing.size.medium,
     textDecoration: 'underline',
   } as CSSProperties,
   appealLabelAndValue: {
-    paddingTop: Spacing.size.tiny,
+    paddingTop: Spacing.size.small,
   } as CSSProperties,
   appealLabel: {
     ...Text.body.secondary.semibold,
@@ -406,7 +406,7 @@ const styles = {
   } as CSSProperties,
   appealInfoLabel: {
     ...Text.header.h4.bold,
-    paddingBottom: Font.size.tiny,
+    paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   yourRightsListContainer: {
     paddingLeft: Spacing.size.medium,

@@ -65,15 +65,41 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
       )}
 
       {isAppealRights && (
-        <Control.Container>
-          <Control.Label htmlFor={buttonLinkHtmlId}>Button Link</Control.Label>
-          <Input
-            id={buttonLinkHtmlId}
-            type="url"
-            value={value.appealRightsHref}
-            onTextChange={(appealRightsHref) => setValue({ ...value, appealRightsHref })}
-          />
-        </Control.Container>
+        <>
+          <Control.Container>
+            <Control.Label htmlFor={buttonLinkHtmlId}>Button Link</Control.Label>
+            <Input
+              id={buttonLinkHtmlId}
+              type="url"
+              value={value.appealRightsHref}
+              onTextChange={(appealRightsHref) => setValue({ ...value, appealRightsHref })}
+            />
+          </Control.Container>
+          <Control.Container>
+            <SubComponentControlToggle
+              subComponentId={id}
+              label="Instruction"
+              onChange={(appealRightsShowInstruction) =>
+                setValue({ ...value, appealRightsShowInstruction })
+              }
+              value={value.appealRightsShowInstruction}
+            />
+            <SubComponentControlToggle
+              subComponentId={id}
+              label="Information Label"
+              onChange={(appealRightsShowInfoLabel) =>
+                setValue({ ...value, appealRightsShowInfoLabel })
+              }
+              value={value.appealRightsShowInfoLabel}
+            />
+            <SubComponentControlToggle
+              subComponentId={id}
+              label="Information"
+              onChange={(appealRightsShowTerms) => setValue({ ...value, appealRightsShowTerms })}
+              value={value.appealRightsShowTerms}
+            />
+          </Control.Container>
+        </>
       )}
     </Control.Group>
   )
