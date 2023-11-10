@@ -4,7 +4,7 @@ import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import startCase from 'lodash.startcase'
 import { StateSealKey, StateSeals } from 'src/ui/StateSeal'
-import { StyleDefaults, Spacing } from '../styles'
+import { StyleDefaults } from '../styles'
 import Config from '../../../gatsby-config'
 
 const defaultValue: StateSealKey = 'US'

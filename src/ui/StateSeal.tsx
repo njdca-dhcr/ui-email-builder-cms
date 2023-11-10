@@ -64,7 +64,7 @@ export const StateSeals = {
   SouthDakota: 'South-Dakota',
   Tennessee: 'Tennessee',
   Texas: 'Texas',
-  US: 'US-Seal',
+  US: 'United-States-Seal',
   USVirginIslands: 'US-Virgin-Islands',
   Utah: 'Utah',
   Vermont: 'Vermont',
