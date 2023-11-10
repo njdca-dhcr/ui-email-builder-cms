@@ -17,7 +17,13 @@ const SettingsPage: FC = () => {
       <SkipNavContent />
       <PageContent element="main">
         <SpacedContainer>
-          <Heading element="h1">Settings</Heading>
+          <div className="heading-container">
+            <Heading element="h1">Settings</Heading>
+            <Paragraph>
+              Set up your state's logos and seal. Your selections here will appear in the emails you
+              create.
+            </Paragraph>
+          </div>
 
           <div className="section-container">
             <EditBanner />

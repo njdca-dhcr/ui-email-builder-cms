@@ -1,3 +1,7 @@
+.heading-container {
+  margin-bottom: 6rem;
+}
+
 .section-container {
   margin-bottom: 6rem;
 }
@@ -85,4 +89,9 @@
 
 .edit-state-seal-preview {
   margin-top: 2rem;
+}
+
+.edit-disclaimer {
+  display: flex;
+  flex-direction: column;
 }

@@ -11,7 +11,7 @@ export const EditDisclaimer: FC = () => {
   const [disclaimer, setDisclaimer] = useDisclaimerValue()
 
   return (
-    <>
+    <form className="edit-disclaimer">
       <Heading element="h2" subheading>
         Disclaimer
       </Heading>
@@ -28,6 +28,6 @@ export const EditDisclaimer: FC = () => {
           style={disclaimerStyles}
         />
       </EmailBlock.Table>
-    </>
+    </form>
   )
 }
