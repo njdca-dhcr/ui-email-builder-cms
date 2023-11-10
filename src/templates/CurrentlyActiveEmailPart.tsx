@@ -8,10 +8,11 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react'
+import { EmailTemplate } from 'src/appTypes'
 
 type CurrentlyActiveEmailPartContextType = [string, (value: string) => void]
 
-const CurrentlyActiveEmailPartContext = createContext<CurrentlyActiveEmailPartContextType>([
+export const CurrentlyActiveEmailPartContext = createContext<CurrentlyActiveEmailPartContextType>([
   '',
   () => {},
 ])
@@ -62,4 +63,25 @@ export const useIsCurrentlyActiveEmailPart = (
   )
 
   return { isActive, activate }
+}
+
+export const useIsCurrentlyActiveEmailComponent = (
+  emailComponent: EmailTemplate.UniqueComponent,
+): {
+  isActive: boolean
+  isComponentActive: boolean
+  isSubComponentActive: boolean
+  activate: ReactEventHandler<HTMLOrSVGElement>
+} => {
+  const { isActive: isComponentActive, activate } = useIsCurrentlyActiveEmailPart(emailComponent.id)
+  const [activeId] = useCurrentlyActiveEmailPartData()
+  const subComponentIds = (emailComponent.subComponents ?? []).map(({ id }) => id)
+  const isSubComponentActive = subComponentIds.includes(activeId)
+
+  return {
+    activate,
+    isComponentActive,
+    isSubComponentActive,
+    isActive: isComponentActive || isSubComponentActive,
+  }
 }

@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Font, StyleDefaults, Text } from '../styles'
@@ -11,7 +11,7 @@ const defaultValue = 'FIRST LAST NAME:'
 const { Row } = EmailBlock
 
 export const Name: FC<EmailComponentProps> = ({ emailComponent }) => {
-  const { activate } = useIsCurrentlyActiveEmailPart(emailComponent.id)
+  const { activate } = useIsCurrentlyActiveEmailComponent(emailComponent)
   const [value, setValue] = useEmailPartsContentFor(emailComponent.id, defaultValue)
   return (
     <Row>
