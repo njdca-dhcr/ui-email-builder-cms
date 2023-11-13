@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { CSSProperties, FC, ReactNode } from 'react'
 import { CompleteEmailCSS } from './EmailCSS'
 
 interface HtmlProps {
@@ -58,11 +58,9 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html, title }) => {
           />
           <CompleteEmailCSS />
         </head>
-        <body
-          style={styles.body}
-          {...{ width: '100%' }}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <body style={styles.body} {...{ width: '100%' }}>
+          <div style={styles.container} dangerouslySetInnerHTML={{ __html: html }} />
+        </body>
       </Html>
     </>
   )
@@ -76,5 +74,10 @@ const styles = {
     padding: '0 !important',
     msoLineHeightRule: 'exactly',
     letterSpacing: '-0.0125em',
-  },
+  } as CSSProperties,
+  container: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: 'fit-content',
+  } as CSSProperties,
 }
