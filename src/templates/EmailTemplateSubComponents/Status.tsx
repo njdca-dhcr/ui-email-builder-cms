@@ -336,7 +336,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
           </>
         )}
         <Row>
-          <SpacingCell size={value.spaceAfter ? 'large' : 'medium'} />
+          <SpacingCell size={value.spaceAfter ? 'extraLarge' : 'medium'} />
         </Row>
       </Table>
     </Row>
