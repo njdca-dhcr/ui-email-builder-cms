@@ -289,7 +289,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                     <Cell style={styles.additionalInfo} elements={['table']}>
                       <Row>
                         {value.showStep1AdditionalContent && (
-                          <div style={{ lineHeight: '16px' }}>
+                          <Cell style={{ lineHeight: '16px' }}>
                             <EditableElement
                               element="span"
                               label="Additional information for Step 1"
@@ -299,7 +299,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                               value={value.step1Additional}
                               style={styles.stepDescription}
                             />
-                          </div>
+                          </Cell>
                         )}
                       </Row>
 
