@@ -1,5 +1,6 @@
 import React, { CSSProperties, FC, ReactNode } from 'react'
 import { CompleteEmailCSS } from './EmailCSS'
+import { Colors } from '../styles'
 
 interface HtmlProps {
   children: ReactNode
@@ -69,7 +70,7 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html, title }) => {
 // Styles in the emails must remain inline
 const styles = {
   body: {
-    background: '#F5F5F5',
+    background: Colors.grayLight,
     margin: 0,
     padding: '0 !important',
     msoLineHeightRule: 'exactly',
