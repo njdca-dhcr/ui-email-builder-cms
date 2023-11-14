@@ -267,14 +267,17 @@ export const Text = {
     small: {
       regular: defaultTextStyle({
         fontSize: 10,
+        lineHeight: 1.25,
         fontWeight: FontWeight.regular,
       }),
       semibold: defaultTextStyle({
         fontSize: 10,
+        lineHeight: 1.25,
         fontWeight: FontWeight.semibold,
       }),
       bold: defaultTextStyle({
         fontSize: 10,
+        lineHeight: 1.25,
         fontWeight: FontWeight.bold,
       }),
     },
@@ -284,16 +287,19 @@ export const Text = {
       regular: defaultTextStyle({
         fontSize: 12,
         fontWeight: FontWeight.regular,
+        lineHeight: 1.25,
         textDecoration: 'underline',
       }),
       bold: defaultTextStyle({
         fontSize: 12,
         fontWeight: FontWeight.bold,
+        lineHeight: 1.25,
         textDecoration: 'underline',
       }),
     },
     small: defaultTextStyle({
       fontSize: 10,
+      lineHeight: 1.25,
       textDecoration: 'underline',
     }),
   },

@@ -154,20 +154,9 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
             </Row>
 
             {/* Same Link As Button */}
-            <Row elements={['cell']}>
-              <div
-                className="link-div"
-                style={{
-                  lineHeight: '150%',
-                  wordBreak: 'break-all',
-                  paddingBottom: '16px',
-                }}
-              >
-                <span style={styles.linkText} className="displayed-href">
-                  {value.linkHref ||
-                    'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
-                </span>
-              </div>
+            <Row elements={[{ part: 'cell', style: styles.linkText, className: 'displayed-href' }]}>
+              {value.linkHref ||
+                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
             </Row>
           </Row>
 
@@ -330,20 +319,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                         </Row>
 
                         {/* Same Link As Button */}
-                        <Row elements={['cell']}>
-                          <div
-                            className="link-div"
-                            style={{
-                              lineHeight: '150%',
-                              wordBreak: 'break-all',
-                              paddingBottom: '16px',
-                            }}
-                          >
-                            <span className="displayed-href" style={styles.linkText}>
-                              {value.linkHref ||
-                                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
-                            </span>
-                          </div>
+                        <Row
+                          elements={[
+                            { part: 'cell', style: styles.linkText, className: 'displayed-href' },
+                          ]}
+                        >
+                          {value.linkHref ||
+                            'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
                         </Row>
                       </Row>
                     </Cell>
@@ -588,6 +570,8 @@ const styles = {
     ...Text.link.small,
     color: Colors.alert.neutral.dark,
     textAlign: 'left',
+    wordBreak: 'break-all',
+    paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   step3AdditionalInfo: {
     paddingLeft: '46px',
