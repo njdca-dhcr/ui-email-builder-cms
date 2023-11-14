@@ -161,6 +161,7 @@ describe('Banner', () => {
   })
 
   it('when there is no banner value saved it renders without issue', () => {
+    localStorage.removeItem('banner')
     const { queryAllByRole } = render(<Banner emailComponent={emailComponent}>{null}</Banner>, {
       wrapper: emailPartWrapper,
     })

@@ -1,3 +1,8 @@
+.settings-header-and-forms {
+  display: flex;
+  flex-direction: column;
+}
+
 .heading-container {
   margin-bottom: 6rem;
 }

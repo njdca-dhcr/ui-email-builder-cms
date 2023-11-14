@@ -3,8 +3,11 @@ import startCase from 'lodash.startcase'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Heading, Paragraph } from 'src/ui/Layout'
 import { Select } from 'src/ui/Select'
-import { StateSeal, StateSeals, StateSealKey } from 'src/ui/StateSeal'
-import { useStateSealValue } from 'src/templates/EmailTemplateComponents/StateSeal'
+import { StateSeals, StateSealKey } from 'src/ui/StateSeal'
+import { StateSealMarkup, useStateSealValue } from 'src/templates/EmailTemplateComponents/StateSeal'
+import { EmailBlock } from '../EmailBlock'
+import { EditableElement } from '../EditableElement'
+import { Spacing } from 'src/templates/styles'
 
 const stateSealOptions = Object.keys(StateSeals).map((key) => ({
   label: startCase(key),
@@ -12,7 +15,7 @@ const stateSealOptions = Object.keys(StateSeals).map((key) => ({
 }))
 
 export const EditStateSeal: FC = () => {
-  const [stateSeal, setStateSeal] = useStateSealValue()
+  const [value, setValue] = useStateSealValue()
 
   return (
     <>
@@ -28,14 +31,28 @@ export const EditStateSeal: FC = () => {
           </VisuallyHidden>
           <Select
             labelId="state-seal-select"
-            onChange={(value) => setStateSeal(value as StateSealKey)}
+            onChange={((stateSealKey: StateSealKey) => setValue({ ...value, stateSealKey })) as any}
             options={stateSealOptions}
-            value={stateSeal}
+            value={value.stateSealKey}
           />
         </div>
       </form>
       <div className="edit-state-seal-preview">
-        <StateSeal state={stateSeal} />
+        <EmailBlock.Table className="desktop" maxWidth={Spacing.layout.maxWidth}>
+          <StateSealMarkup
+            stateSealKey={value.stateSealKey}
+            additionalDisclaimer={
+              <EditableElement
+                element="span"
+                label="Additional Disclaimer"
+                value={value.additionalDisclaimer}
+                onValueChange={(additionalDisclaimer) =>
+                  setValue({ ...value, additionalDisclaimer })
+                }
+              />
+            }
+          />
+        </EmailBlock.Table>
       </div>
     </>
   )

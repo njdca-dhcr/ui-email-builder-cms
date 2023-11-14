@@ -15,7 +15,7 @@ export const EditBanner: FC = () => {
         Banner
       </Heading>
       <Paragraph>At the very top of every email, it will show this:</Paragraph>
-      <EmailBlock.Table maxWidth={Spacing.layout.maxWidth}>
+      <EmailBlock.Table maxWidth={Spacing.layout.maxWidth} className="desktop">
         <BannerMarkup
           disableLinks
           backgroundColor={banner.backgroundColor}

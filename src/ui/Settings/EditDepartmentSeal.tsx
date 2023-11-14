@@ -37,7 +37,7 @@ export const EditDepartmentSeal: FC = () => {
         />
       </div>
       <div className="department-seal-preview-container">
-        <EmailBlock.Table maxWidth={Spacing.layout.maxWidth}>
+        <EmailBlock.Table maxWidth={Spacing.layout.maxWidth} className="desktop">
           <DepartmentSealMarkup departmentSealKey={value} />
         </EmailBlock.Table>
       </div>
