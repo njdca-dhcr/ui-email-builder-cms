@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
-import { Borders, Spacing, StyleDefaults, Text } from '../styles'
+import { Borders, Spacing, StyleDefaults, Text, Font } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
@@ -116,7 +116,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
           </Row>
           <Row>
             <Cell>{null}</Cell>
-            <Cell align="left" elements={['table']}>
+            <Cell align="left" elements={['table']} style={{ fontFamily: Font.family.default }}>
               <Row>
                 <Cell>
                   <EditableElement
@@ -126,7 +126,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                     label="Benefit Amount weekly rate label"
                     onValueChange={(weeklyRateLabel) => setValue({ ...value, weeklyRateLabel })}
                     role="heading"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                   &nbsp;&nbsp;&nbsp;
                   <EditableElement
@@ -136,7 +136,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                     label="Benefit Amount weekly rate value"
                     onValueChange={(weeklyRateValue) => setValue({ ...value, weeklyRateValue })}
                     role="heading"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                 </Cell>
               </Row>
@@ -151,7 +151,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                       setValue({ ...value, partialWeeklyRateLabel })
                     }
                     role="heading"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                   &nbsp;&nbsp;&nbsp;
                   <EditableElement
@@ -163,7 +163,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                       setValue({ ...value, partialWeeklyRateValue })
                     }
                     role="heading"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                 </Cell>
               </Row>
@@ -182,7 +182,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                     label="Benefit Amount rate explanation"
                     onValueChange={(rateExplanation) => setValue({ ...value, rateExplanation })}
                     role="heading"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                 </Cell>
               </Row>
@@ -197,7 +197,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                       setValue({ ...value, rateSupportiveInformation })
                     }
                     role="heading"
-                    style={{ fontWeight: 'bold' }}
+                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                 </Cell>
               </Row>
@@ -215,7 +215,11 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
               setValue({ ...value, benefitSupportiveInformation })
             }
             role="text"
-            style={{ paddingTop: Spacing.size.medium, fontStyle: 'italic' }}
+            style={{
+              paddingTop: Spacing.size.medium,
+              fontFamily: Font.family.default,
+              fontStyle: 'italic',
+            }}
           />
         </Row>
       </Row>
