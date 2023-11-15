@@ -252,6 +252,7 @@ const styles = {
   boxTitle: {
     ...Text.header.h3.bold,
     paddingTop: Spacing.size.medium,
+    paddingBottom: Spacing.size.medium,
     lineHeight: '1',
   } as CSSProperties,
 }
