@@ -57,20 +57,39 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
           'row',
         ]}
       >
-        <Cell>
+        <Cell style={styles.iconContainer} align="left">
           <UswdsIcon icon={value.icon} />
         </Cell>
-        <Cell elements={['table']}>
+        <Cell style={{ width: '100%' }} elements={['table']}>
           <Row>
-            <Cell>value.title</Cell>
+            <Cell>
+              <EditableElement
+                avia-level={4}
+                element="div"
+                value={value.title}
+                label="Benefit Amount box title"
+                onValueChange={(title) => setValue({ ...value, title })}
+                role="heading"
+                style={styles.title}
+              />
+            </Cell>
           </Row>
           <Row>
-            <Cell>value.description</Cell>
+            <Cell>
+              <EditableElement
+                aria-level={5}
+                element="span"
+                value={value.description}
+                label="Benefit Amount weekly rate label"
+                onValueChange={(description) => setValue({ ...value, description })}
+                style={{ fontFamily: Font.family.default }}
+              />
+            </Cell>
           </Row>
         </Cell>
       </Row>
       <Row>
-        <SpacingCell size='extraLarge'/>
+        <SpacingCell size="extraLarge" />
       </Row>
     </>
   )
@@ -79,9 +98,20 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
 const styles = {
   outerCell: {
     ...StyleDefaults.inline.colors,
+    fontFamily: Font.family.default,
   } as CSSProperties,
   innerCell: {
     paddingTop: Spacing.size.medium,
+    paddingRight: Spacing.size.medium,
     paddingBottom: Spacing.size.medium,
+    paddingLeft: Spacing.size.medium,
+  } as CSSProperties,
+  iconContainer: {
+    paddingRight: Spacing.size.medium,
+  } as CSSProperties,
+  title: {
+    ...Text.header.h3.bold,
+    paddingBottom: Spacing.size.medium,
+    lineHeight: '1',
   } as CSSProperties,
 }

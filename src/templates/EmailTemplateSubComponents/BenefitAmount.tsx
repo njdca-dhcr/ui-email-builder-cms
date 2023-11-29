@@ -104,7 +104,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
             </Cell>
             <Cell align="left">
               <EditableElement
-                avia-level={4}
+                aria-level={4}
                 element="div"
                 value={value.boxTitle}
                 label="Benefit Amount box title"
