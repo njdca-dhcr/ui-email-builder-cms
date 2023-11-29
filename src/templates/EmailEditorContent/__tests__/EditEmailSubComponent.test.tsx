@@ -104,4 +104,13 @@ describe('EditEmailSubComponent', () => {
     )
     expect(queryByTestId('department-seal')).not.toBeNull()
   })
+
+  it('can render InformationalBox', () => {
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })
+    const { queryByLabelText } = render(
+      <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByLabelText('Informational box title')).not.toBeNull()
+  })
 })

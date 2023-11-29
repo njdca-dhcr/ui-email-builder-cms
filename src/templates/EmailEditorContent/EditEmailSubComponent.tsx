@@ -12,6 +12,7 @@ import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRight
 import { LoginDetails } from '../EmailTemplateSubComponents/LoginDetails'
 import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
 import { BenefitAmount } from '../EmailTemplateSubComponents/BenefitAmount'
+import { InformationalBox } from '../EmailTemplateSubComponents/InformationalBox'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
   const shouldShow = useShouldShowEmailPart(props.emailSubComponent.id)
@@ -41,6 +42,8 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
       return <LoginDetails {...props} />
     case 'DepartmentSeal':
       return <DepartmentSeal {...props} />
+    case 'InformationalBox':
+      return <InformationalBox {...props} />
     default:
       console.warn(`SubComponent (${props.emailSubComponent.kind}) not implemented`, props)
   }
