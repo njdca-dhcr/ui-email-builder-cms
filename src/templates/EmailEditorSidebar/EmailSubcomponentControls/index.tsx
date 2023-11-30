@@ -8,6 +8,7 @@ import './EmailSubcomponentControls.css'
 import { useShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { LoginDetailsControls } from './LoginDetailsControls'
 import { ProgramNameControls } from './ProgramNameControls'
+import { InformationalBoxControls } from './InformationalBoxControls' 
 
 interface Props extends EmailSubComponentControlsProps {
   emailSubComponent: EmailTemplate.UniqueSubComponent
@@ -57,6 +58,12 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
       return (
         <ControlWrapper>
           <ProgramNameControls {...props} />
+        </ControlWrapper>
+      )
+    case 'InformationalBox':
+      return (
+        <ControlWrapper>
+          <InformationalBoxControls {...props} />
         </ControlWrapper>
       )
     default:
