@@ -79,43 +79,43 @@ describe('EmailSubComponentControls', () => {
     )
     expect(queryByText('Status variant')).not.toBeNull()
   })
-  
+
   it('renders the RulesRightsRegulationsControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-      emailSubComponent={buildUniqueEmailSubComponent('Body', {
-        kind: 'RulesRightsRegulations',
-      })}
-      componentId={componentId}
-      id={id}
+        emailSubComponent={buildUniqueEmailSubComponent('Body', {
+          kind: 'RulesRightsRegulations',
+        })}
+        componentId={componentId}
+        id={id}
       />,
-      )
-      expect(queryByText('Rules, Rights, and Regulations variant')).not.toBeNull()
-    })
-    
-    it('renders the LoginDetailsControls', () => {
-      const { queryByText } = render(
-        <EmailSubComponentControls
+    )
+    expect(queryByText('Rules, Rights, and Regulations variant')).not.toBeNull()
+  })
+
+  it('renders the LoginDetailsControls', () => {
+    const { queryByText } = render(
+      <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Body', {
           kind: 'LoginDetails',
         })}
         componentId={componentId}
         id={id}
-        />,
-      )
-      expect(queryByText('Button Link')).not.toBeNull()
-    })
-      
-    it('renders the InformationalBoxControls', () => {
-      const { queryByText } = render(
-        <EmailSubComponentControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
-          componentId={componentId}
-          id={id}
-        />,
-      )
-      expect(queryByText('Box Color')).not.toBeNull()
-    })
+      />,
+    )
+    expect(queryByText('Button Link')).not.toBeNull()
+  })
+
+  it('renders the InformationalBoxControls', () => {
+    const { queryByText } = render(
+      <EmailSubComponentControls
+        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
+        componentId={componentId}
+        id={id}
+      />,
+    )
+    expect(queryByText('Box Color')).not.toBeNull()
+  })
 
   describe('when the component is not being shown', () => {
     it('renders nothing', () => {

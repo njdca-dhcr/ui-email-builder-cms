@@ -6,8 +6,6 @@ import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
-  expectActiveEmailPartToBe,
-  expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'

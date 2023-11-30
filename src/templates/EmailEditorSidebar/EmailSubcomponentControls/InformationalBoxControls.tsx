@@ -1,11 +1,8 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { Input, Select, UswdsIconSelect } from 'src/ui'
-import {
-  useInformationalBoxValue,
-} from 'src/templates/EmailTemplateSubComponents/InformationalBox'
+import { useInformationalBoxValue } from 'src/templates/EmailTemplateSubComponents/InformationalBox'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
-
 
 export const InformationalBoxControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
   const iconHtmlId = `icon-${id}`

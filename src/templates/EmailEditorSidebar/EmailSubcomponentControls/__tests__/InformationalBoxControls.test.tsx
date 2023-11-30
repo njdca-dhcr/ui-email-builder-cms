@@ -7,7 +7,7 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useInformationalBoxValue } from 'src/templates/EmailTemplateSubComponents/InformationalBox'
 import { before } from 'node:test'
 
-describe ('InformationalBoxControls', () => {
+describe('InformationalBoxControls', () => {
   let componentId: string
   let id: string
   let rendered: RenderResult
