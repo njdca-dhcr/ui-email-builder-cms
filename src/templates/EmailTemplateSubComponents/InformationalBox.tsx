@@ -67,7 +67,7 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
                 avia-level={4}
                 element="div"
                 value={value.title}
-                label="Benefit Amount box title"
+                label="Informational box title"
                 onValueChange={(title) => setValue({ ...value, title })}
                 role="heading"
                 style={styles.title}
@@ -80,7 +80,7 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
                 aria-level={5}
                 element="span"
                 value={value.description}
-                label="Benefit Amount weekly rate label"
+                label="Informational box content"
                 onValueChange={(description) => setValue({ ...value, description })}
                 style={{ fontFamily: Font.family.default }}
               />
