@@ -100,6 +100,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
         },
       ]}
       onClick={activate}
+      onFocus={activate}
     >
       {/* Directive Title */}
       {value.showTitle && (

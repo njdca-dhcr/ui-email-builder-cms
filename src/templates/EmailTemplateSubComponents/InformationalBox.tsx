@@ -38,6 +38,7 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
     <>
       <Row
         onClick={activate}
+        onFocus={activate}
         elements={[
           'cell',
           'table',

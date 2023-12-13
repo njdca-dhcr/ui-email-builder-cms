@@ -48,6 +48,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) =
           element="td"
           label="Program name"
           onClick={activate}
+          onFocus={activate}
           onValueChange={(name) => setValue({ ...value, name })}
           role="heading"
           style={{ ...styles, color, backgroundColor: value.backgroundColor }}

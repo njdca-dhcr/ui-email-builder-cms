@@ -121,6 +121,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
         'table',
       ]}
       onClick={activate}
+      onFocus={activate}
     >
       <Row>
         {(isReminder || isAppealRights) && (

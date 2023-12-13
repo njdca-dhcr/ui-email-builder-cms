@@ -54,7 +54,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
-    <Row elements={['cell', 'table']} onClick={activate}>
+    <Row elements={['cell', 'table']} onClick={activate} onFocus={activate}>
       <Row
         elements={[
           { part: 'cell', style: styles.outerCell, className: StyleDefaults.layout.wide },

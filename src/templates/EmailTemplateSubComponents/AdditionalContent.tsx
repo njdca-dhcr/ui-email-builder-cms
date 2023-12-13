@@ -16,7 +16,7 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ emailSubComponen
   const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
 
   return (
-    <Row onClick={activate}>
+    <Row onClick={activate} onFocus={activate}>
       <EditableElement
         element="td"
         className={StyleDefaults.layout.narrow}

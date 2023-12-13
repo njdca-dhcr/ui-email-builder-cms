@@ -21,6 +21,7 @@ export const Intro: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
         className={StyleDefaults.layout.narrow}
         label="Introduction"
         onClick={activate}
+        onFocus={activate}
         onValueChange={setValue}
         style={styles}
         value={value}

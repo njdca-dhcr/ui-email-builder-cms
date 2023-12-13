@@ -31,6 +31,7 @@ export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
         element="h1"
         label="Title"
         onClick={activate}
+        onFocus={activate}
         onValueChange={setValue}
         style={styles}
         value={value}

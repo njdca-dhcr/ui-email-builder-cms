@@ -1,4 +1,11 @@
-import React, { AriaRole, CSSProperties, FC, MouseEventHandler, ReactNode } from 'react'
+import React, {
+  AriaRole,
+  CSSProperties,
+  FC,
+  FocusEventHandler,
+  MouseEventHandler,
+  ReactNode,
+} from 'react'
 import { EmailTable } from './EmailTable'
 
 type ElementShorthand = 'table' | 'row' | 'cell'
@@ -9,6 +16,7 @@ interface BaseConfig {
   elements?: Array<NonNullable<TableConfig | RowConfig | CellConfig | ElementShorthand>>
   labelledBy?: string
   onClick?: MouseEventHandler<HTMLElement>
+  onFocus?: FocusEventHandler<HTMLElement>
   role?: AriaRole
   style?: CSSProperties
 }

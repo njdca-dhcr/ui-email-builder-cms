@@ -20,6 +20,7 @@ export const Name: FC<EmailComponentProps> = ({ emailComponent }) => {
         className={StyleDefaults.layout.narrow}
         label="Recipient's name"
         onClick={activate}
+        onFocus={activate}
         onValueChange={setValue}
         style={styles}
         value={value}

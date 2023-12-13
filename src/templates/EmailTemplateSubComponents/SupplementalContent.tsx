@@ -21,6 +21,7 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ emailSubCompon
   return (
     <Row
       onClick={activate}
+      onFocus={activate}
       elements={[
         { part: 'cell', style: outerCellStyles, className: StyleDefaults.layout.narrow },
         'table',

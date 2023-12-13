@@ -86,7 +86,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
-    <Row key={value.variant} elements={['cell']} onClick={activate}>
+    <Row key={value.variant} elements={['cell']} onClick={activate} onFocus={activate}>
       <Table>
         <Row
           elements={[
