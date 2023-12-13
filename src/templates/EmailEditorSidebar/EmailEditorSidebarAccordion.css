@@ -92,6 +92,17 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px;
+  transition: background-color ease-in-out 150ms;
+}
+
+.accordion-email-component .accordion-button-and-toggle.optional {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.accordion-email-component .accordion-button-and-toggle.active {
+  background-color: var(--gray-medium);
 }
 
 .accordion-email-component .description {

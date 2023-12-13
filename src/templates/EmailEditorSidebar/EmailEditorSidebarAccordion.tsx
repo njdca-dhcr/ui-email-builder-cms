@@ -11,7 +11,10 @@ import './EmailEditorSidebarAccordion.css'
 import { RightPointer } from 'src/ui/RightPointer'
 import { EmailSubComponentControls } from './EmailSubcomponentControls'
 import { labelForComponent } from './labelForComponent'
-import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import {
+  useIsCurrentlyActiveEmailComponent,
+  useIsCurrentlyActiveEmailPart,
+} from '../CurrentlyActiveEmailPart'
 import classNames from 'classnames'
 
 interface ContainerProps {
@@ -67,10 +70,17 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
   const shouldShow = useShouldShowEmailPart(emailComponent.id)
   const toggleId = `toggle-${emailComponent.id}`
   const lacksSubComponents = (emailComponent.subComponents ?? []).length === 0
+  const { isActive } = useIsCurrentlyActiveEmailComponent(emailComponent)
 
   return (
     <AccordionItem disabled={lacksSubComponents} className="accordion-email-component">
-      <div className="accordion-button-and-toggle">
+      <div
+        className={classNames('accordion-button-and-toggle', {
+          active: isActive,
+          required: emailComponent.required,
+          optional: !emailComponent.required,
+        })}
+      >
         <h3>
           <AccordionButton>{labelForComponent(emailComponent.kind)}</AccordionButton>
           <div className="pointer-container">

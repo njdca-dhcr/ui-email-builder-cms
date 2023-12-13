@@ -248,6 +248,60 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
     const attribute = item?.attributes.getNamedItem('data-disabled')
     expect(attribute).not.toBeNull()
   })
+
+  it('is highlighted when the component is active', () => {
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailComponent.id}>
+          <Accordion>
+            <AccordionItem>
+              <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+                <span />
+              </EmailEditorSidebarAccordion.EmailComponent>
+            </AccordionItem>
+          </Accordion>
+        </CurrentlyActiveEmailPart>
+      </ShouldShowEmailPart>,
+    )
+    expect(baseElement.querySelector('.active')).not.toBeNull()
+  })
+
+  it('is highlighted when any of its subcomponents are active', () => {
+    const emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    emailComponent.subComponents = [emailSubComponent]
+
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailSubComponent.id}>
+          <Accordion>
+            <AccordionItem>
+              <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+                <span />
+              </EmailEditorSidebarAccordion.EmailComponent>
+            </AccordionItem>
+          </Accordion>
+        </CurrentlyActiveEmailPart>
+      </ShouldShowEmailPart>,
+    )
+    expect(baseElement.querySelector('.active')).not.toBeNull()
+  })
+
+  it('is not hightlighted when the component is inactive', () => {
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={faker.lorem.words(3)}>
+          <Accordion>
+            <AccordionItem>
+              <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+                <span />
+              </EmailEditorSidebarAccordion.EmailComponent>
+            </AccordionItem>
+          </Accordion>
+        </CurrentlyActiveEmailPart>
+      </ShouldShowEmailPart>,
+    )
+    expect(baseElement.querySelector('.active')).toBeNull()
+  })
 })
 
 describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
