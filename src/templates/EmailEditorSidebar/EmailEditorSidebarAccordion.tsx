@@ -89,7 +89,7 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
         </h3>
         {!emailComponent.required && (
           <label htmlFor={toggleId} className="label-and-toggle">
-            <VisuallyHidden>{emailComponent.kind}</VisuallyHidden>
+            <VisuallyHidden>{labelForComponent(emailComponent.kind)}</VisuallyHidden>
             <Toggle id={toggleId} onChange={shouldShow.toggle} value={shouldShow.on} />
           </label>
         )}
