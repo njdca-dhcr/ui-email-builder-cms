@@ -106,6 +106,7 @@
   margin: 1rem 0;
   padding: 0 2rem;
 }
+
 .accordion-email-subcomponent:first-of-type {
   margin-top: 1.5rem;
 }
@@ -114,6 +115,14 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition: background-color ease-in-out 150ms;
+}
+
+.accordion-email-subcomponent .label-and-toggle.active {
+  background-color: var(--gray-medium);
 }
 
 .accordion-email-subcomponent label {

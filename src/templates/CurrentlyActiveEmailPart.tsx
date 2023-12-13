@@ -17,8 +17,16 @@ export const CurrentlyActiveEmailPartContext = createContext<CurrentlyActiveEmai
   () => {},
 ])
 
-export const CurrentlyActiveEmailPart: FC<{ children: ReactNode }> = ({ children }) => {
-  const value = useState('')
+interface CurrentlyActiveEmailPartProps {
+  children: ReactNode
+  initiallyActiveEmailPartId?: string
+}
+
+export const CurrentlyActiveEmailPart: FC<CurrentlyActiveEmailPartProps> = ({
+  children,
+  initiallyActiveEmailPartId,
+}) => {
+  const value = useState(initiallyActiveEmailPartId ?? '')
 
   return (
     <CurrentlyActiveEmailPartContext.Provider value={value}>

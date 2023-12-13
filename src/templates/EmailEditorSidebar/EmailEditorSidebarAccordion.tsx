@@ -11,6 +11,8 @@ import './EmailEditorSidebarAccordion.css'
 import { RightPointer } from 'src/ui/RightPointer'
 import { EmailSubComponentControls } from './EmailSubcomponentControls'
 import { labelForComponent } from './labelForComponent'
+import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
+import classNames from 'classnames'
 
 interface ContainerProps {
   children: ReactNode
@@ -97,9 +99,11 @@ interface EmailSubComponentProps {
 const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubComponent }) => {
   const toggleId = `toggle-${emailSubComponent.id}`
   const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
+  const { isActive } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+
   return (
     <div className="accordion-email-subcomponent">
-      <div className="label-and-toggle">
+      <div className={classNames('label-and-toggle', { active: isActive })}>
         <label htmlFor={toggleId}>{labelForSubComponent(emailSubComponent.kind)}</label>
         <Toggle
           id={toggleId}

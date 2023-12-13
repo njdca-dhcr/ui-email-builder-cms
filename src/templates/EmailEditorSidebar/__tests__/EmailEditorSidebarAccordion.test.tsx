@@ -8,10 +8,10 @@ import { EmailEditorSidebarAccordion } from '../EmailEditorSidebarAccordion'
 import { EmailTemplate } from 'src/appTypes'
 import {
   WrapperComponent,
-  buildEmailTemplateSubComponent,
   buildUniqueEmailComponent,
   buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
+import { CurrentlyActiveEmailPart } from 'src/templates/CurrentlyActiveEmailPart'
 
 describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
   it('displays its children', () => {
@@ -341,5 +341,33 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       { wrapper },
     )
     expect(queryByText('Status variant')).not.toBeNull()
+  })
+
+  it('is highlighted when the subcomponent is active', () => {
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailSubComponent.id}>
+          <EmailEditorSidebarAccordion.EmailSubComponent
+            componentId={faker.lorem.word()}
+            emailSubComponent={emailSubComponent}
+          />
+        </CurrentlyActiveEmailPart>
+      </ShouldShowEmailPart>,
+    )
+    expect(baseElement.querySelector('.active')).not.toBeNull()
+  })
+
+  it('is not hightlighted when the subcomponent is inactive', () => {
+    const { baseElement } = render(
+      <ShouldShowEmailPart>
+        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={faker.lorem.words(3)}>
+          <EmailEditorSidebarAccordion.EmailSubComponent
+            componentId={faker.lorem.word()}
+            emailSubComponent={emailSubComponent}
+          />
+        </CurrentlyActiveEmailPart>
+      </ShouldShowEmailPart>,
+    )
+    expect(baseElement.querySelector('.active')).toBeNull()
   })
 })
