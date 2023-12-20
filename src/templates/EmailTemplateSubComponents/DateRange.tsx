@@ -4,6 +4,7 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { StyleDefaults, Text, Spacing } from '../styles'
 import { EmailBlock } from 'src/ui'
+import { EmailSubComponentProps } from './shared'
 
 const defaultValue = '[00/00/0000] - [00/00/0000]'
 
