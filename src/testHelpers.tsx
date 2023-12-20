@@ -151,3 +151,28 @@ export const expectEmailPartContentFor = (key: string, element: HTMLElement) => 
 export const asMock = <T extends (...args: any) => any>(func: T): jest.Mock<ReturnType<T>> => {
   return func as any
 }
+
+export const mockDataTransfer = ({
+  plain,
+  html,
+}: {
+  plain?: string
+  html?: string
+}): DataTransfer => {
+  const data: { 'text/plain'?: string; 'text/html'?: string } = {
+    'text/html': html,
+    'text/plain': plain,
+  }
+
+  return {
+    dropEffect: 'none',
+    setData: (kind: 'text/html' | 'text/plain', value: string) => (data[kind] = value),
+    getData: (kind: 'text/html' | 'text/plain') => data[kind] ?? '',
+    effectAllowed: 'all',
+    files: [] as any,
+    types: [...(plain ? ['text/plain'] : []), ...(html ? ['text/html'] : [])],
+    items: [] as any,
+    clearData: () => null,
+    setDragImage: () => null,
+  }
+}

@@ -24,6 +24,10 @@ export const EditableElement = forwardRef<HTMLElement, Props>(
         }}
         suppressContentEditableWarning
         dangerouslySetInnerHTML={{ __html: initialValue }}
+        onPasteCapture={(event) => {
+          event.preventDefault()
+          document.execCommand('insertText', false, event.clipboardData.getData('text/plain'))
+        }}
         {...({ ref } as any)}
       />
     )

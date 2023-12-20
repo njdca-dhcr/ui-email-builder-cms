@@ -3,6 +3,7 @@ import React from 'react'
 import { EditableElement } from '../EditableElement'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
+import { mockDataTransfer } from 'src/testHelpers'
 
 describe('EditableElement', () => {
   let labelValue: string
@@ -96,5 +97,25 @@ describe('EditableElement', () => {
       />,
     )
     expect(rendered.baseElement.querySelector('section')).not.toBeNull()
+  })
+
+  it('pastes plain text', async () => {
+    const user = userEvent.setup()
+    const { baseElement } = render(
+      <EditableElement
+        label={labelValue}
+        value={value}
+        onValueChange={handleChange}
+        element="section"
+      />,
+    )
+    document.execCommand = jest.fn()
+    const editableElement = baseElement.querySelector('section[contenteditable]')!
+    await user.clear(editableElement)
+    await user.click(editableElement)
+    const text = faker.lorem.paragraph()
+    const dataTransfer = mockDataTransfer({ plain: text, html: `<span>${text}</span>` })
+    await user.paste(dataTransfer)
+    expect(document.execCommand).toHaveBeenCalledWith('insertText', false, text)
   })
 })
