@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { EmailSubComponentProps } from '../EmailTemplateSubComponents/shared'
+import { DateRange } from '../EmailTemplateSubComponents/DateRange'
 import { Title } from '../EmailTemplateSubComponents/Title'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { ProgramName } from '../EmailTemplateSubComponents/ProgramName'
@@ -22,6 +23,8 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
   switch (props.emailSubComponent.kind) {
     case 'AdditionalContent':
       return <AdditionalContent {...props} />
+    case 'DateRange':
+      return <DateRange {...props} />
     case 'Title':
       return <Title {...props} />
     case 'ProgramName':

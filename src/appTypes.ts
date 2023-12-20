@@ -13,7 +13,7 @@ export const EmailTemplateComponentsMapping = {
     'InformationalBox',
   ],
   Footer: ['AdditionalContent'],
-  Header: ['Title', 'ProgramName', 'DepartmentSeal'],
+  Header: ['DateRange', 'Title', 'ProgramName', 'DepartmentSeal'],
   Name: [],
   Disclaimer: [],
   StateSeal: [],

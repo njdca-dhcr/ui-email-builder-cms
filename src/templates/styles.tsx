@@ -307,7 +307,7 @@ export const Text = {
 
 export const Spacing = {
   layout: {
-    maxWidth: 690,
+    maxWidth: 600,
   },
   size: {
     tiny: 5,

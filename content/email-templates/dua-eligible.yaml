@@ -6,6 +6,7 @@ components:
   - kind: Header
     subComponents:
       - kind: DepartmentSeal
+      - kind: DateRange
       - kind: Title
       - kind: ProgramName
   - kind: Name
