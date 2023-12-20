@@ -5,6 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 const defaultValue = {
   title: 'Supplemental Content Title',
@@ -17,11 +18,18 @@ const { Row } = EmailBlock
 export const SupplementalContent: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
     <Row
-      onClick={activate}
-      onFocus={activate}
+      onClick={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+      onFocus={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
       elements={[
         { part: 'cell', style: outerCellStyles, className: StyleDefaults.layout.narrow },
         'table',
@@ -29,6 +37,7 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ emailSubCompon
     >
       <Row>
         <EditableElement
+          ref={previewRef}
           aria-level={3}
           element="td"
           label="Supplemental content title"

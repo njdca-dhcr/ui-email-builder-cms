@@ -7,6 +7,7 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, SpacingCell, StyleDefaults, Text, Font } from '../styles'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 interface InformationalBoxValue {
   boxColor: BoxColor
@@ -26,19 +27,26 @@ export const useInformationalBoxValue = (id: string) => {
   return useEmailPartsContentFor(id, defaultValue)
 }
 
-const { Table, Row, Cell } = EmailBlock
+const { Row, Cell } = EmailBlock
 
 export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useInformationalBoxValue(emailSubComponent.id)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
     <>
       <Row
-        onClick={activate}
-        onFocus={activate}
+        onClick={(event) => {
+          activate(event)
+          scrollSidebar()
+        }}
+        onFocus={(event) => {
+          activate(event)
+          scrollSidebar()
+        }}
         elements={[
           'cell',
           'table',
@@ -65,7 +73,8 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
           <Row>
             <Cell>
               <EditableElement
-                avia-level={4}
+                ref={previewRef}
+                aria-level={4}
                 element="div"
                 value={value.title}
                 label="Informational box title"

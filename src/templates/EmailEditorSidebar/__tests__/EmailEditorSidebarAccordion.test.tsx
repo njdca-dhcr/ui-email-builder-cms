@@ -12,6 +12,7 @@ import {
   buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
 import { CurrentlyActiveEmailPart } from 'src/templates/CurrentlyActiveEmailPart'
+import { SYNC_SIDEBAR_AND_PREVIEW_SCROLL } from 'src/templates/SyncSidebarAndPreviewScroll'
 
 describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
   it('displays its children', () => {
@@ -263,7 +264,9 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
     )
-    expect(baseElement.querySelector('.active')).not.toBeNull()
+    expect(
+      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
+    ).not.toBeNull()
   })
 
   it('is highlighted when any of its subcomponents are active', () => {
@@ -283,7 +286,9 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
     )
-    expect(baseElement.querySelector('.active')).not.toBeNull()
+    expect(
+      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
+    ).not.toBeNull()
   })
 
   it('is not hightlighted when the component is inactive', () => {
@@ -300,7 +305,9 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
     )
-    expect(baseElement.querySelector('.active')).toBeNull()
+    expect(
+      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
+    ).toBeNull()
   })
 })
 
@@ -408,7 +415,9 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
     )
-    expect(baseElement.querySelector('.active')).not.toBeNull()
+    expect(
+      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass}`),
+    ).not.toBeNull()
   })
 
   it('is not hightlighted when the subcomponent is inactive', () => {
@@ -422,6 +431,8 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
     )
-    expect(baseElement.querySelector('.active')).toBeNull()
+    expect(
+      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass}`),
+    ).toBeNull()
   })
 })

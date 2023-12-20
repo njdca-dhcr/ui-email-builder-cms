@@ -9,6 +9,7 @@ import { UswdsIcon } from 'src/ui/'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { EditableTerms, TableTerm } from 'src/ui/EditableTermsTable'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 export const enum RulesRightsRegulationsVariant {
   Reminder,
@@ -93,6 +94,7 @@ const { Row, Cell, Link } = EmailBlock
 export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent.id)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
@@ -120,9 +122,16 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
         { part: 'cell', style: styles.innerContainer },
         'table',
       ]}
-      onClick={activate}
-      onFocus={activate}
+      onClick={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+      onFocus={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
     >
+      <tr ref={previewRef} />
       <Row>
         {(isReminder || isAppealRights) && (
           <Cell style={styles.iconContainer}>

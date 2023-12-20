@@ -7,6 +7,7 @@ import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../s
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 export const enum StatusVariant {
   Overview,
@@ -82,11 +83,23 @@ const { Table, Row, Cell } = EmailBlock
 export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useStatusValue(emailSubComponent.id)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
-    <Row key={value.variant} elements={['cell']} onClick={activate} onFocus={activate}>
+    <Row
+      key={value.variant}
+      elements={['cell']}
+      onClick={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+      onFocus={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+    >
       <Table>
         <Row
           elements={[
@@ -99,6 +112,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
         >
           <Row>
             <EditableElement
+              ref={previewRef}
               aria-level={2}
               element="td"
               value={value.status}

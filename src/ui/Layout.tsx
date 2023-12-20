@@ -35,11 +35,12 @@ export const PageContent: FC<PageContentProps> = ({ children, className, element
 interface SidebarProps {
   children: ReactNode
   className?: string
+  id?: string
 }
 
-export const Sidebar: FC<SidebarProps> = ({ children, className }) => {
+export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
   return (
-    <div className={classNames('sidebar', className)}>
+    <div id={id} className={classNames('sidebar', className)}>
       <SpacedSidebarContainer>
         <span className="sidebar-title">Email Builder (Beta)</span>
       </SpacedSidebarContainer>

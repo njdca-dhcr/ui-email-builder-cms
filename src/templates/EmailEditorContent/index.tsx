@@ -75,6 +75,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         </div>
       </div>
       <Root.div
+        id="preview-container"
         className={classNames('email-preview', {
           'email-preview-desktop': isPreviewDesktop,
           'email-preview-mobile': isPreviewMobile,

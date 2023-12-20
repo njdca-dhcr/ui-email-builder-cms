@@ -101,7 +101,7 @@
   border-bottom-right-radius: 20px;
 }
 
-.accordion-email-component .accordion-button-and-toggle.active {
+.accordion-email-component .accordion-button-and-toggle.active-email-component {
   background-color: var(--gray-medium);
 }
 
@@ -132,7 +132,7 @@
   transition: background-color ease-in-out 150ms;
 }
 
-.accordion-email-subcomponent .label-and-toggle.active {
+.accordion-email-subcomponent .label-and-toggle.active-email-subcomponent {
   background-color: var(--gray-medium);
 }
 

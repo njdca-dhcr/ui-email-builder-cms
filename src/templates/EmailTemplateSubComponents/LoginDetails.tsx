@@ -8,6 +8,7 @@ import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../s
 import { UswdsIcon } from 'src/ui'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 export const enum LoginDetailsVariant {
   Details,
@@ -61,6 +62,7 @@ export const useLoginDetailsValue = (id: string) => useEmailPartsContentFor(id, 
 export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information
   const setLoginInformationList = useCallback(
@@ -73,12 +75,23 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
       className="login-details"
       elements={[
         { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
-        { part: 'table', onClick: activate, onFocus: activate },
+        {
+          part: 'table',
+          onClick: (event) => {
+            activate(event)
+            scrollSidebar()
+          },
+          onFocus: (event) => {
+            activate(event)
+            scrollSidebar()
+          },
+        },
         'row',
         { part: 'cell', style: styles.innerContainer },
         'table',
       ]}
     >
+      <tr ref={previewRef} />
       <Row>
         <Cell style={styles.iconContainer}>
           {isDetails && <UswdsIcon icon={value.loginDetailsIcon} />}

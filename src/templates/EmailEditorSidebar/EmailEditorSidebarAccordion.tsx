@@ -16,6 +16,10 @@ import {
   useIsCurrentlyActiveEmailPart,
 } from '../CurrentlyActiveEmailPart'
 import classNames from 'classnames'
+import {
+  SYNC_SIDEBAR_AND_PREVIEW_SCROLL,
+  useSyncSidebarAndPreviewScroll,
+} from '../SyncSidebarAndPreviewScroll'
 
 interface ContainerProps {
   children: ReactNode
@@ -71,12 +75,18 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
   const toggleId = `toggle-${emailComponent.id}`
   const lacksSubComponents = (emailComponent.subComponents ?? []).length === 0
   const { isActive } = useIsCurrentlyActiveEmailComponent(emailComponent)
+  const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailComponent.id)
 
   return (
-    <AccordionItem disabled={lacksSubComponents} className="accordion-email-component">
+    <AccordionItem
+      disabled={lacksSubComponents}
+      className="accordion-email-component"
+      onClick={scrollPreview}
+      onFocus={scrollPreview}
+    >
       <div
         className={classNames('accordion-button-and-toggle', {
-          active: isActive,
+          [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass]: isActive,
           required: emailComponent.required,
           optional: !emailComponent.required,
         })}
@@ -110,10 +120,25 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
   const toggleId = `toggle-${emailSubComponent.id}`
   const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
   const { isActive } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
+  const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
-    <div className="accordion-email-subcomponent">
-      <div className={classNames('label-and-toggle', { active: isActive })}>
+    <div
+      className="accordion-email-subcomponent"
+      onClick={(event) => {
+        event.stopPropagation()
+        scrollPreview()
+      }}
+      onFocus={(event) => {
+        event.stopPropagation()
+        scrollPreview()
+      }}
+    >
+      <div
+        className={classNames('label-and-toggle', {
+          [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass]: isActive,
+        })}
+      >
         <label htmlFor={toggleId}>{labelForSubComponent(emailSubComponent.kind)}</label>
         <Toggle
           id={toggleId}
@@ -122,6 +147,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
           disabled={emailSubComponent.required ?? false}
         />
       </div>
+
       {emailSubComponent.description && (
         <p className="description">{emailSubComponent.description}</p>
       )}

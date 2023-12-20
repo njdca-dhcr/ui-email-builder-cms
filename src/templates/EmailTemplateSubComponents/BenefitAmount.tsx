@@ -7,6 +7,7 @@ import { Borders, Spacing, StyleDefaults, Text, Font } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 interface BenefitAmountValue {
   title: string
@@ -50,11 +51,22 @@ const { Row, Cell } = EmailBlock
 export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useBenefitAmountValue(emailSubComponent.id)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
-    <Row elements={['cell', 'table']} onClick={activate} onFocus={activate}>
+    <Row
+      elements={['cell', 'table']}
+      onClick={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+      onFocus={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+    >
       <Row
         elements={[
           { part: 'cell', style: styles.outerCell, className: StyleDefaults.layout.wide },
@@ -63,6 +75,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
       >
         <Row>
           <EditableElement
+            ref={previewRef}
             aria-level={2}
             element="td"
             value={value.title}

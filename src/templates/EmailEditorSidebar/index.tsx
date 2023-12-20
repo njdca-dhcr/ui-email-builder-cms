@@ -13,7 +13,7 @@ interface Props {
 
 export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
   return (
-    <Sidebar>
+    <Sidebar id="sidebar-container">
       <SpacedSidebarContainer>
         <BackLink />
         <SkipNavContent />

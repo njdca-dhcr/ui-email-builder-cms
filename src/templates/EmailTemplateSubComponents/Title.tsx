@@ -5,6 +5,7 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 const defaultValue = 'Title'
 
@@ -17,6 +18,7 @@ export const useTitleValue = (id: string) => {
 export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useTitleValue(emailSubComponent.id)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
     <Row
@@ -28,10 +30,17 @@ export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
       ]}
     >
       <EditableElement
+        ref={previewRef}
         element="h1"
         label="Title"
-        onClick={activate}
-        onFocus={activate}
+        onClick={(event) => {
+          activate(event)
+          scrollSidebar()
+        }}
+        onFocus={(event) => {
+          activate(event)
+          scrollSidebar()
+        }}
         onValueChange={setValue}
         style={styles}
         value={value}

@@ -6,6 +6,7 @@ import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 interface ProgramNameValue {
   name: string
@@ -26,6 +27,7 @@ export const useProgramNameValue = (id: string) => {
 export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useProgramNameValue(emailSubComponent.id)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const color = textColorForBackground(value.backgroundColor, {
     dark: Colors.black,
@@ -44,11 +46,18 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) =
     >
       <Table width="unset" elements={['row']}>
         <EditableElement
+          ref={previewRef}
           aria-level={2}
           element="td"
           label="Program name"
-          onClick={activate}
-          onFocus={activate}
+          onClick={(event) => {
+            activate(event)
+            scrollSidebar()
+          }}
+          onFocus={(event) => {
+            activate(event)
+            scrollSidebar()
+          }}
           onValueChange={(name) => setValue({ ...value, name })}
           role="heading"
           style={{ ...styles, color, backgroundColor: value.backgroundColor }}

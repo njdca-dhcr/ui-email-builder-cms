@@ -11,6 +11,7 @@ import { PreviewText } from './PreviewText'
 import './EmailEditorPage.css'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import uniqueId from 'lodash.uniqueid'
+import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Config
@@ -30,15 +31,17 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
     <Layout element="main">
       <ShouldShowEmailPart>
         <CurrentlyActiveEmailPart>
-          <ClearCurrentlyActiveEmailPart />
-          <PreviewText>
-            <EmailPartsContent>
-              <EmailEditorSidebar emailTemplate={emailTemplate} />
-              <PageContent element="div" className="email-editor-page-content">
-                <EmailEditorContent emailTemplate={emailTemplate} />
-              </PageContent>
-            </EmailPartsContent>
-          </PreviewText>
+          <SyncSidebarAndPreviewScroll>
+            <ClearCurrentlyActiveEmailPart />
+            <PreviewText>
+              <EmailPartsContent>
+                <EmailEditorSidebar emailTemplate={emailTemplate} />
+                <PageContent element="div" className="email-editor-page-content">
+                  <EmailEditorContent emailTemplate={emailTemplate} />
+                </PageContent>
+              </EmailPartsContent>
+            </PreviewText>
+          </SyncSidebarAndPreviewScroll>
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>
     </Layout>

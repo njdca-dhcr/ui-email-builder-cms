@@ -5,6 +5,7 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
+import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 export const enum DirectiveVariant {
   OneStep,
@@ -84,8 +85,9 @@ const { Table, Row, Cell, Link } = EmailBlock
 
 export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-
   const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
+
   return (
     <Row
       className="directive"
@@ -99,9 +101,16 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
           style: [DirectiveVariant.PayOnline].includes(value.variant) ? styles.payOnlineBox : {},
         },
       ]}
-      onClick={activate}
-      onFocus={activate}
+      onClick={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
+      onFocus={(event) => {
+        activate(event)
+        scrollSidebar()
+      }}
     >
+      <tr ref={previewRef} />
       {/* Directive Title */}
       {value.showTitle && (
         <>
