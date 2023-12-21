@@ -255,7 +255,7 @@ const styles = {
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   description: {
-    ...Text.body.main,
+    ...Text.body.main.regular,
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   iconContainer: {
