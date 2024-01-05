@@ -181,13 +181,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                 </Cell>
               </Row>
               <Row>
-                <Cell
-                  style={{
-                    fontWeight: 'bold',
-                    fontStyle: 'italic',
-                    paddingBottom: Spacing.size.medium,
-                  }}
-                >
+                <Cell style={{ paddingBottom: Spacing.size.medium }}>
                   <EditableElement
                     aria-level={5}
                     element="span"
@@ -195,12 +189,12 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                     label="Benefit Amount rate explanation"
                     onValueChange={(rateExplanation) => setValue({ ...value, rateExplanation })}
                     role="heading"
-                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
+                    style={styles.rateExplanation}
                   />
                 </Cell>
               </Row>
               <Row>
-                <Cell style={{ fontStyle: 'italic' }}>
+                <Cell>
                   <EditableElement
                     aria-level={5}
                     element="span"
@@ -210,7 +204,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                       setValue({ ...value, rateSupportiveInformation })
                     }
                     role="heading"
-                    style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
+                    style={styles.rateSupportiveInformation}
                   />
                 </Cell>
               </Row>
@@ -267,5 +261,11 @@ const styles = {
     paddingTop: Spacing.size.medium,
     paddingBottom: Spacing.size.medium,
     lineHeight: '1',
+  } as CSSProperties,
+  rateExplanation: {
+    ...Text.body.secondary.boldItalic,
+  } as CSSProperties,
+  rateSupportiveInformation: {
+    ...Text.body.secondary.italic,
   } as CSSProperties,
 }
