@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { EmailSubComponentControlsProps } from './shared'
 import { EmailTemplate } from 'src/appTypes'
 import { StatusControls } from './StatusControls'
@@ -53,5 +53,24 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
       ComponentControl =  null
   }
 
-  return ComponentControl ? <ControlWrapper><ComponentControl {...props} /></ControlWrapper> : null
+  return ComponentControl ? <ControlWrapper><ComponentControl emailSubComponent={emailSubComponent} {...props} /></ControlWrapper> : null
+}
+
+export const useSubComponentControlOptions = (emailSubComponent: EmailTemplate.UniqueSubComponent, value: any, setValue: (newValues: any) => void) => {
+  useEffect(() => {
+    let options:any = {}
+    if (emailSubComponent?.variant) {
+      options.variant = emailSubComponent.variant
+    }
+
+    if (emailSubComponent?.boxColor) {
+      options.boxColor = emailSubComponent.boxColor
+    }
+
+    if (emailSubComponent?.icon) {
+      options.icon = emailSubComponent.icon
+    }
+    
+    setValue({ ...value, ...options })
+  }, [])
 }

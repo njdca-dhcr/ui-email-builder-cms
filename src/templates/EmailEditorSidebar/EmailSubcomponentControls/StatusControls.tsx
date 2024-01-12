@@ -1,17 +1,20 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
+import { useSubComponentControlOptions } from '.'
 import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconSelect } from 'src/ui'
 
-export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
   const variantHtmlId = `select-variant-${id}`
   const boxColorHtmlId = `select-box-color-${id}`
   const iconHtmlId = `select-icon-${id}`
   const [value, setValue] = useStatusValue(id)
+
+  useSubComponentControlOptions(emailSubComponent, value, setValue)
 
   return (
     <Control.Group>

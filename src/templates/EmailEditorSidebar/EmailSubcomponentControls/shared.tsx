@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 import React, { FC, ReactNode } from 'react'
+import { EmailTemplate } from 'src/appTypes'
 
 export interface EmailSubComponentControlsProps {
   componentId: string
   id: string
+  emailSubComponent: EmailTemplate.UniqueSubComponent
 }
 
 interface ContainerProps {

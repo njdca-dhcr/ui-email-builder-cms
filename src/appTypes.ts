@@ -30,6 +30,9 @@ export namespace EmailTemplate {
     kind: SubComponentKind<T>
     description?: string
     required?: boolean
+    variant?: number
+    icon?: string
+    boxColor?: string
   }
 
   export interface Component<T extends ComponentKind = ComponentKind> {

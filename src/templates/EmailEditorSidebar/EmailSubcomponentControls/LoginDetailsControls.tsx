@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
+import { useSubComponentControlOptions } from '.'
 import { Input, Select, UswdsIconSelect } from 'src/ui'
 import {
   LoginDetailsVariant,
@@ -7,13 +8,15 @@ import {
 } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { VisuallyHidden } from '@reach/visually-hidden'
 
-export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
   const variantHtmlId = `variant-${id}`
   const iconHtmlId = `icon-${id}`
   const buttonLinkHtmlId = `buttonLink-${id}`
   const [value, setValue] = useLoginDetailsValue(id)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information
+
+  useSubComponentControlOptions(emailSubComponent, value, setValue)
 
   return (
     <Control.Group>

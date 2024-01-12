@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
+import { useSubComponentControlOptions } from '.'
+
 import { VisuallyHidden } from '@reach/visually-hidden'
 import {
   RulesRightsRegulationsVariant,
@@ -8,13 +10,15 @@ import {
 import { Input, Select, UswdsIconSelect } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
-export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
   const variantHtmlId = `variant-${id}`
   const iconHtmlId = `icon-${id}`
   const buttonLinkHtmlId = `buttonLink-${id}`
   const [value, setValue] = useRulesRightsRegulationsValue(id)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
+
+  useSubComponentControlOptions(emailSubComponent, value, setValue)
 
   return (
     <Control.Group>

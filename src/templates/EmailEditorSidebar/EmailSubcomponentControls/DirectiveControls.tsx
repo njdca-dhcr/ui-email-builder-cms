@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
+import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import {
   DirectiveVariant,
@@ -8,9 +9,11 @@ import {
 import { Input, Select } from 'src/ui/'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
-export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
+export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
   const htmlId = `select-${id}`
   const [value, setValue] = useDirectiveValue(id)
+
+  useSubComponentControlOptions(emailSubComponent, value, setValue)
 
   return (
     <Control.Group>
