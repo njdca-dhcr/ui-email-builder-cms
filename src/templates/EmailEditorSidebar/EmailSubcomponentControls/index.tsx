@@ -26,47 +26,32 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
   const { componentId, id } = props
   const shouldShowComponent = useShouldShowEmailPart(componentId)
   const shouldShowSubComponent = useShouldShowEmailPart(id)
+  let ComponentControl: FC<any> | null = null
 
   if (shouldShowComponent.off || shouldShowSubComponent.off) return null
 
   switch (emailSubComponent.kind) {
     case 'RulesRightsRegulations':
-      return (
-        <ControlWrapper>
-          <RulesRightsRegulationsControls {...props} />
-        </ControlWrapper>
-      )
+      ComponentControl = RulesRightsRegulationsControls
+      break
     case 'Status':
-      return (
-        <ControlWrapper>
-          <StatusControls {...props} />
-        </ControlWrapper>
-      )
+      ComponentControl = StatusControls
+      break
     case 'Directive':
-      return (
-        <ControlWrapper>
-          <DirectiveControls {...props} />
-        </ControlWrapper>
-      )
+      ComponentControl = DirectiveControls
+      break
     case 'LoginDetails':
-      return (
-        <ControlWrapper>
-          <LoginDetailsControls {...props} />
-        </ControlWrapper>
-      )
+      ComponentControl = LoginDetailsControls
+      break
     case 'ProgramName':
-      return (
-        <ControlWrapper>
-          <ProgramNameControls {...props} />
-        </ControlWrapper>
-      )
+      ComponentControl = ProgramNameControls
+      break
     case 'InformationalBox':
-      return (
-        <ControlWrapper>
-          <InformationalBoxControls {...props} />
-        </ControlWrapper>
-      )
+      ComponentControl = InformationalBoxControls
+      break
     default:
-      return null
+      ComponentControl =  null
   }
+
+  return ComponentControl ? <ControlWrapper><ComponentControl {...props} /></ControlWrapper> : null
 }
