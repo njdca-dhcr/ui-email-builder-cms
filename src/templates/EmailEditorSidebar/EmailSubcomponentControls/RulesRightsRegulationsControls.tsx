@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { useSubComponentControlOptions } from '.'
-
 import { VisuallyHidden } from '@reach/visually-hidden'
 import {
   RulesRightsRegulationsVariant,

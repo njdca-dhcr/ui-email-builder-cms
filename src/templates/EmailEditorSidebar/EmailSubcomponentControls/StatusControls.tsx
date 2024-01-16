@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useSubComponentControlOptions } from '.'
