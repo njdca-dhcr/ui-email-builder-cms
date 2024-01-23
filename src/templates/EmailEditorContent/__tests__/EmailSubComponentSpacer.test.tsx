@@ -54,12 +54,35 @@ describe('EmailSubComponentSpacer', () => {
     expect(size).toBeUndefined()
   })
 
-  it('is large when the subcomponent is Title', () => {
-    const size = renderWithSubComponents({
-      currentSubComponent: 'Title',
-      nextSubComponent: 'ProgramName',
+  describe('Title', () => {
+    it('is large when the next subcomponent should be shown', () => {
+      const size = renderWithSubComponents({
+        currentSubComponent: 'Title',
+        nextSubComponent: 'ProgramName',
+      })
+      expect(size).toEqual(`${spacingCellSizes.large}px`)
     })
-    expect(size).toEqual(`${spacingCellSizes.large}px`)
+
+    it('is nothing when the next subcomponent should not be shown', () => {
+      const nextSubComponent = buildUniqueEmailSubComponent('Body', {
+        kind: 'ProgramName',
+      })
+      const { baseElement } = render(
+        <ShouldShowEmailPart initialData={{ [nextSubComponent.id]: false }}>
+          <EmailSubComponentSpacer
+            currentSubComponent={buildUniqueEmailSubComponent('Body', {
+              kind: 'Title',
+            })}
+            nextSubComponent={nextSubComponent}
+          />
+        </ShouldShowEmailPart>,
+        {
+          wrapper: emailPartWrapper,
+        },
+      )
+      const spacer = baseElement.querySelector('td')
+      expect(spacer).toBeNull()
+    })
   })
 
   it('is nothing when the subcomponent is ProgramName', () => {

@@ -42,7 +42,7 @@ const sizeForSubComponentKind = (
     case 'RulesRightsRegulations':
       return 'extraLarge'
     case 'Title':
-      return 'large'
+      return shouldShowNext ? 'large' : undefined
     case 'Intro':
       return 'medium'
     case 'SupplementalContent':
