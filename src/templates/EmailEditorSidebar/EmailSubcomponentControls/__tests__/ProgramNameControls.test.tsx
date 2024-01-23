@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import { ProgramNameControls } from '../ProgramNameControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { faker } from '@faker-js/faker'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 describe('ProgramNameControls', () => {
   let componentId: string
@@ -16,7 +17,11 @@ describe('ProgramNameControls', () => {
   it('provides a color picker for the background color', () => {
     const { queryByText, baseElement } = render(
       <EmailPartsContent>
-        <ProgramNameControls componentId={componentId} id={id} />
+        <ProgramNameControls
+          componentId={componentId}
+          id={id}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'ProgramName' })}
+        />
       </EmailPartsContent>,
     )
     expect(queryByText('Background Color')).not.toBeNull()

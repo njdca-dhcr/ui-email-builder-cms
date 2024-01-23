@@ -8,7 +8,10 @@ import {
 } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { VisuallyHidden } from '@reach/visually-hidden'
 
-export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
+export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
+  id,
+  emailSubComponent,
+}) => {
   const variantHtmlId = `variant-${id}`
   const iconHtmlId = `icon-${id}`
   const buttonLinkHtmlId = `buttonLink-${id}`

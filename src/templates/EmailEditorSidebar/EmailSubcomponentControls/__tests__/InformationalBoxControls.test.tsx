@@ -6,6 +6,7 @@ import { InformationalBoxControls } from '../InformationalBoxControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useInformationalBoxValue } from 'src/templates/EmailTemplateSubComponents/InformationalBox'
 import { before } from 'node:test'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 describe('InformationalBoxControls', () => {
   let componentId: string
@@ -19,7 +20,11 @@ describe('InformationalBoxControls', () => {
     user = userEvent.setup()
     rendered = render(
       <EmailPartsContent>
-        <InformationalBoxControls componentId={componentId} id={id} />
+        <InformationalBoxControls
+          componentId={componentId}
+          id={id}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
+        />
       </EmailPartsContent>,
     )
   })

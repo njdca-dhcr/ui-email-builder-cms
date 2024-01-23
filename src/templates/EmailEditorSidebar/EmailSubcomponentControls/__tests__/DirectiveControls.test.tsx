@@ -4,13 +4,19 @@ import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { DirectiveControls } from '../DirectiveControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 describe('DirectiveControls', () => {
   it('provides a toggle for showing the title', async () => {
     const user = userEvent.setup()
-    const { getByRole, queryByRole } = render(
+    const { queryByRole } = render(
       <EmailPartsContent>
-        <DirectiveControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+        <DirectiveControls
+          componentId={faker.lorem.word()}
+          id={faker.lorem.word()}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+        />
+        ,
       </EmailPartsContent>,
     )
     let toggle = queryByRole('switch')
@@ -27,7 +33,12 @@ describe('DirectiveControls', () => {
     const user = userEvent.setup()
     const { getByRole, queryByRole } = render(
       <EmailPartsContent>
-        <DirectiveControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+        <DirectiveControls
+          componentId={faker.lorem.word()}
+          id={faker.lorem.word()}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+        />
+        ,
       </EmailPartsContent>,
     )
     let button = queryByRole('button')
@@ -46,7 +57,12 @@ describe('DirectiveControls', () => {
     const user = userEvent.setup()
     const { queryByRole } = render(
       <EmailPartsContent>
-        <DirectiveControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+        <DirectiveControls
+          componentId={faker.lorem.word()}
+          id={faker.lorem.word()}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+        />
+        ,
       </EmailPartsContent>,
     )
 

@@ -4,13 +4,19 @@ import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { StatusControls } from '../StatusControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 describe('StatusControls', () => {
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
     const { getByRole, queryByRole } = render(
       <EmailPartsContent>
-        <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+        <StatusControls
+          componentId={faker.lorem.word()}
+          id={faker.lorem.word()}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+        />
+        ,
       </EmailPartsContent>,
     )
     let button = queryByRole('button')
@@ -34,7 +40,12 @@ describe('StatusControls', () => {
     const user = userEvent.setup()
     const { queryByLabelText } = render(
       <EmailPartsContent>
-        <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+        <StatusControls
+          componentId={faker.lorem.word()}
+          id={faker.lorem.word()}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+        />
+        ,
       </EmailPartsContent>,
     )
     const toggle = queryByLabelText('Supportive Information')
@@ -52,7 +63,12 @@ describe('StatusControls', () => {
     const user = userEvent.setup()
     const { queryByLabelText } = render(
       <EmailPartsContent>
-        <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />,
+        <StatusControls
+          componentId={faker.lorem.word()}
+          id={faker.lorem.word()}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+        />
+        ,
       </EmailPartsContent>,
     )
     const toggle = queryByLabelText('Spacing After')
@@ -78,7 +94,11 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+            <StatusControls
+              componentId={faker.lorem.word()}
+              id={faker.lorem.word()}
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+            />
           </EmailPartsContent>,
         )
       })
@@ -98,7 +118,11 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+            <StatusControls
+              componentId={faker.lorem.word()}
+              id={faker.lorem.word()}
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+            />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
@@ -120,7 +144,11 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+            <StatusControls
+              componentId={faker.lorem.word()}
+              id={faker.lorem.word()}
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+            />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
@@ -142,7 +170,11 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+            <StatusControls
+              componentId={faker.lorem.word()}
+              id={faker.lorem.word()}
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+            />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
@@ -178,7 +210,11 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls componentId={faker.lorem.word()} id={faker.lorem.word()} />
+            <StatusControls
+              componentId={faker.lorem.word()}
+              id={faker.lorem.word()}
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+            />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))

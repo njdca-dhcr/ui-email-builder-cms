@@ -9,7 +9,10 @@ import {
 import { Input, Select } from 'src/ui/'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
-export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
+export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
+  id,
+  emailSubComponent,
+}) => {
   const htmlId = `select-${id}`
   const [value, setValue] = useDirectiveValue(id)
 

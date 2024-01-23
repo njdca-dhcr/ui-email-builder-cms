@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker'
 import { RulesRightsRegulationsControls } from '../RulesRightsRegulationsControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 describe('RulesRightsRegulationsControls', () => {
   let componentId: string
@@ -24,7 +25,14 @@ describe('RulesRightsRegulationsControls', () => {
     user = userEvent.setup()
     rendered = render(
       <EmailPartsContent>
-        <RulesRightsRegulationsControls componentId={componentId} id={id} />,
+        <RulesRightsRegulationsControls
+          componentId={componentId}
+          id={id}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', {
+            kind: 'RulesRightsRegulations',
+          })}
+        />
+        ,
         <AppealRightsHref />,
       </EmailPartsContent>,
     )

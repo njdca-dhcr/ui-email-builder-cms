@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker'
 import { LoginDetailsControls } from '../LoginDetailsControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
+import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 describe('LoginDetailsControls', () => {
   let componentId: string
@@ -24,7 +25,12 @@ describe('LoginDetailsControls', () => {
     user = userEvent.setup()
     rendered = render(
       <EmailPartsContent>
-        <LoginDetailsControls componentId={componentId} id={id} />,
+        <LoginDetailsControls
+          componentId={componentId}
+          id={id}
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })}
+        />
+        ,
         <ButtonHref />
       </EmailPartsContent>,
     )

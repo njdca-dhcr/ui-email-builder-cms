@@ -50,15 +50,23 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
       ComponentControl = InformationalBoxControls
       break
     default:
-      ComponentControl =  null
+      ComponentControl = null
   }
 
-  return ComponentControl ? <ControlWrapper><ComponentControl emailSubComponent={emailSubComponent} {...props} /></ControlWrapper> : null
+  return ComponentControl ? (
+    <ControlWrapper>
+      <ComponentControl emailSubComponent={emailSubComponent} {...props} />
+    </ControlWrapper>
+  ) : null
 }
 
-export const useSubComponentControlOptions = (emailSubComponent: EmailTemplate.UniqueSubComponent, value: any, setValue: (newValues: any) => void) => {
+export const useSubComponentControlOptions = (
+  emailSubComponent: EmailTemplate.UniqueSubComponent,
+  value: any,
+  setValue: (newValues: any) => void,
+) => {
   useEffect(() => {
-    let options:any = {}
+    let options: any = {}
     if (emailSubComponent?.variant) {
       options.variant = emailSubComponent.variant
     }
@@ -70,7 +78,7 @@ export const useSubComponentControlOptions = (emailSubComponent: EmailTemplate.U
     if (emailSubComponent?.icon) {
       options.icon = emailSubComponent.icon
     }
-    
+
     setValue({ ...value, ...options })
   }, [])
 }

@@ -90,6 +90,9 @@ describe('RulesRightsRegulations', () => {
           <RulesRightsRegulationsControls
             componentId={faker.lorem.word()}
             id={emailSubComponent.id}
+            emailSubComponent={buildUniqueEmailSubComponent('Body', {
+              kind: 'RulesRightsRegulations',
+            })}
           />,
         )
         await user.click(rendered.getByText('Reminder', { selector: 'span' }))
@@ -146,6 +149,9 @@ describe('RulesRightsRegulations', () => {
           <RulesRightsRegulationsControls
             componentId={faker.lorem.word()}
             id={emailSubComponent.id}
+            emailSubComponent={buildUniqueEmailSubComponent('Body', {
+              kind: 'RulesRightsRegulations',
+            })}
           />,
         )
         await user.click(rendered.getByText('Reminder', { selector: 'span' }))

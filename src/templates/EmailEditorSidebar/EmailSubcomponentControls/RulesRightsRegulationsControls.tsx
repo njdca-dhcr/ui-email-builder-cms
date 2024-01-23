@@ -9,7 +9,10 @@ import {
 import { Input, Select, UswdsIconSelect } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
-export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
+export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({
+  id,
+  emailSubComponent,
+}) => {
   const variantHtmlId = `variant-${id}`
   const iconHtmlId = `icon-${id}`
   const buttonLinkHtmlId = `buttonLink-${id}`
