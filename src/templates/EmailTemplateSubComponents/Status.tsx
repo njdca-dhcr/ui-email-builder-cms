@@ -147,6 +147,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
                   onValueChange={(documentsNeededLabel) =>
                     setValue({ ...value, documentsNeededLabel })
                   }
+                  style={styles.documentsNeededLabel}
                 />
               </Row>
               <Row>
@@ -377,6 +378,9 @@ const styles = {
   } as CSSProperties,
   description: {
     ...Text.body.main.bold,
+  } as CSSProperties,
+  documentsNeededLabel: {
+    ...Text.body.main.regular,
   } as CSSProperties,
   documentsNeededValue: {
     ...Text.body.main.bold,
