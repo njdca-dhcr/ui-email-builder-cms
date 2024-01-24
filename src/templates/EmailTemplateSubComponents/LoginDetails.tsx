@@ -10,6 +10,8 @@ import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
+const DISPLAYED_HREF_MAX_WIDTH = 297
+
 export const enum LoginDetailsVariant {
   Details,
   Information,
@@ -172,7 +174,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
             className="displayed-href"
             elements={[
               'cell',
-              { part: 'table', maxWidth: 297 },
+              { part: 'table', maxWidth: DISPLAYED_HREF_MAX_WIDTH },
               'row',
               { part: 'cell', style: styles.buttonHref },
             ]}
@@ -278,6 +280,9 @@ const styles = {
     color: Colors.gray,
     paddingBottom: Spacing.size.extraLarge,
     paddingTop: Spacing.size.small,
+    maxWidth: DISPLAYED_HREF_MAX_WIDTH,
+    overflowWrap: 'break-word',
+    wordBreak: 'break-all',
   } as CSSProperties,
   resetPasswordDetails: {
     ...Text.body.secondary.italic,

@@ -11,6 +11,8 @@ import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { EditableTerms, TableTerm } from 'src/ui/EditableTermsTable'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
+const DISPLAYED_HREF_MAX_WIDTH = 297
+
 export const enum RulesRightsRegulationsVariant {
   Reminder,
   AppealRights,
@@ -264,7 +266,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             className="displayed-href"
             elements={[
               'cell',
-              { part: 'table', maxWidth: 297 },
+              { part: 'table', maxWidth: DISPLAYED_HREF_MAX_WIDTH },
               'row',
               { part: 'cell', style: styles.appealHref },
             ]}
@@ -406,6 +408,9 @@ const styles = {
     color: Colors.gray,
     paddingTop: Spacing.size.medium,
     textDecoration: 'underline',
+    maxWidth: DISPLAYED_HREF_MAX_WIDTH,
+    overflowWrap: 'break-word',
+    wordBreak: 'break-all',
   } as CSSProperties,
   appealLabelAndValue: {
     paddingTop: Spacing.size.small,

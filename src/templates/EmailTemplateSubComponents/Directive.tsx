@@ -7,6 +7,8 @@ import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
+const DISPLAYED_HREF_MAX_WIDTH = 297
+
 export const enum DirectiveVariant {
   OneStep,
   ThreeStep,
@@ -581,6 +583,8 @@ const styles = {
     color: Colors.alert.neutral.dark,
     textAlign: 'left',
     wordBreak: 'break-all',
+    maxWidth: DISPLAYED_HREF_MAX_WIDTH,
+    overflowWrap: 'break-word',
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   step3AdditionalInfo: {
