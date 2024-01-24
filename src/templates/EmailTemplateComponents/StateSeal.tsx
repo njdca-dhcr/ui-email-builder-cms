@@ -68,6 +68,7 @@ export const StateSeal: FC<EmailComponentProps> = ({}) => {
 }
 
 const additionalDisclaimerStyles: CSSProperties = {
+  ...StyleDefaults.inline.colors,
   ...Text.caption.small.regular,
   color: '#777777',
   lineHeight: 1.5,
