@@ -6,6 +6,8 @@ import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
+  expectActiveEmailPartToBe,
+  expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
@@ -16,6 +18,7 @@ describe('Directive', () => {
   let emailSubComponent: EmailTemplate.UniqueSubComponent
   let user: UserEvent
   let rendered: RenderResult
+  let key: string
 
   const clearAndFillWithValue = async (label: string) => {
     const element = rendered.getByLabelText(label)
@@ -24,40 +27,20 @@ describe('Directive', () => {
   }
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+    key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)
   })
 
-  // it('activates when clicked', async () => {
-  //   rendered = render(
-  //     <Directive  id={id} emailSubComponent={emailSubComponent} />,
-  //     { wrapper: emailPartWrapper },
-  //   )
-  //   const { getByLabelText, baseElement } = rendered
-  //   expectActiveEmailPartToNotBe(key, baseElement)
-  //   await user.click(getByLabelText('Directive Title'))
-  //   expectActiveEmailPartToBe(key, baseElement)
-  // })
-
-  describe('default - One Step', () => {
-    it('has an editable title', async () => {
-      rendered = render(<Directive emailSubComponent={emailSubComponent} />, {
-        wrapper: emailPartWrapper,
-      })
-      await clearAndFillWithValue('Directive Title')
-      expect(rendered.queryByText(value)).not.toBeNull()
-      expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
+  it('activates when clicked', async () => {
+    rendered = render(<Directive emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
     })
-
-    it('has an editable supportive information', async () => {
-      rendered = render(<Directive emailSubComponent={emailSubComponent} />, {
-        wrapper: emailPartWrapper,
-      })
-      await clearAndFillWithValue('Supportive information')
-      expect(rendered.queryByText(value)).not.toBeNull()
-      expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
-    })
+    const { getByLabelText, baseElement } = rendered
+    expectActiveEmailPartToNotBe(key, baseElement)
+    await user.click(getByLabelText('Directive Title'))
+    expectActiveEmailPartToBe(key, baseElement)
   })
 
   describe('variants', () => {
@@ -87,6 +70,22 @@ describe('Directive', () => {
       })
     }
 
+    describe('One Step', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <Directive emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.OneStep + '')
+      })
+
+      itHasAnEditable('directive title', 'Directive Title')
+
+      itHasAnEditable('directive button', 'Directive Button')
+
+      itHasAnEditable('supportive information', 'Supportive information')
+    })
+
     describe('Three Steps', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
@@ -98,6 +97,8 @@ describe('Directive', () => {
           DirectiveVariant.ThreeStep + '',
         )
       })
+
+      itHasAnEditable('directive button', 'Directive Button')
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
 
@@ -111,10 +112,10 @@ describe('Directive', () => {
 
       itHasAnEditable('step 3 additional information', 'Additional information for Step 3')
 
-      // it('only has the correct fields', () => {
-      //   const all = rendered.baseElement.querySelectorAll('[aria-label]')
-      //   expect(all).toHaveLength(8)
-      // })
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(9)
+      })
     })
 
     describe('Three Steps w/ Step 2 Expansion', () => {
@@ -128,6 +129,8 @@ describe('Directive', () => {
           DirectiveVariant.StepTwoExpansion + '',
         )
       })
+
+      itHasAnEditable('directive button', 'Directive Button')
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
 
@@ -144,6 +147,11 @@ describe('Directive', () => {
       itHasAnEditable('step 3 label', 'Label for Step 3')
 
       itHasAnEditable('step 3 additional information', 'Additional information for Step 3')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(11)
+      })
     })
 
     describe('Pay Online', () => {
@@ -158,9 +166,16 @@ describe('Directive', () => {
         )
       })
 
+      itHasAnEditable('directive button', 'Directive Button')
+
       itHasAnEditable('alternative payment information', 'Alternative payment information')
 
       itHasAnEditable('supportive information', 'Alternative payment information')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(3)
+      })
     })
   })
 })

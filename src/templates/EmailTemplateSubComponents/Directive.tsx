@@ -156,7 +156,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
               ]}
             >
               <Link to={value.linkHref}>
-                <span style={styles.getStartedButtonText}>{value.buttonLabel}</span>
+                <EditableElement
+                  element="span"
+                  value={value.buttonLabel}
+                  label="Directive Button"
+                  onValueChange={(buttonLabel) => setValue({ ...value, buttonLabel })}
+                  style={styles.getStartedButtonText}
+                />
               </Link>
             </Row>
 
@@ -321,7 +327,13 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                           ]}
                         >
                           <Link to={value.linkHref}>
-                            <span style={styles.getStartedButtonText}>{value.buttonLabel}</span>
+                            <EditableElement
+                              element="span"
+                              value={value.buttonLabel}
+                              label="Directive Button"
+                              onValueChange={(buttonLabel) => setValue({ ...value, buttonLabel })}
+                              style={styles.getStartedButtonText}
+                            />
                           </Link>
                         </Row>
 
