@@ -173,8 +173,10 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
 
             {/* Same Link As Button */}
             <Row elements={[{ part: 'cell', style: styles.linkText, className: 'displayed-href' }]}>
-              {value.linkHref ||
-                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+              <Link to={value.linkHref}>
+                {value.linkHref ||
+                  'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+              </Link>
             </Row>
           </Row>
 
@@ -348,8 +350,10 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                             { part: 'cell', style: styles.linkText, className: 'displayed-href' },
                           ]}
                         >
-                          {value.linkHref ||
-                            'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                          <Link to={value.linkHref}>
+                            {value.linkHref ||
+                              'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                          </Link>
                         </Row>
                       </Row>
                     </Cell>

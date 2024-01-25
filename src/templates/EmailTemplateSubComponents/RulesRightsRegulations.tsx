@@ -271,8 +271,10 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
               { part: 'cell', style: styles.appealHref },
             ]}
           >
-            {value.appealRightsHref ||
-              'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+            <Link to={value.appealRightsHref}>
+              {value.appealRightsHref ||
+                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+            </Link>
           </Row>
           <Row condition={value.appealRightsShowInfoLabel}>
             <EditableElement

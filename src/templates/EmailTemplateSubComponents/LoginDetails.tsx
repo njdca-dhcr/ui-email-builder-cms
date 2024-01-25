@@ -179,8 +179,10 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
               { part: 'cell', style: styles.buttonHref },
             ]}
           >
-            {value.buttonHref ||
-              'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+            <Link to={value.buttonHref}>
+              {value.buttonHref ||
+                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+            </Link>
           </Row>
           <Row>
             <EditableElement
