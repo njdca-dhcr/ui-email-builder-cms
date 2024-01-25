@@ -8,14 +8,17 @@ interface Props {
   fieldsCompleted: () => boolean
 }
 
-export const DownloadButton: FC<Props> = ({ children, textToDownload, fileName, fieldsCompleted }) => {
+export const DownloadButton: FC<Props> = ({
+  children,
+  textToDownload,
+  fileName,
+  fieldsCompleted,
+}) => {
   const clickHandler = () => {
     if (fieldsCompleted()) {
       download(textToDownload(), fileName, 'text/html')
     }
   }
-  
-  return (
-    <button onClick={clickHandler}>{children}</button>
-  )
+
+  return <button onClick={clickHandler}>{children}</button>
 }

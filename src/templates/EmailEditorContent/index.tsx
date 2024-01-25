@@ -73,7 +73,10 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           </label>
         </fieldset>
         <div className="button-group">
-          <CopyToClipboardButton fieldsCompleted={hasPreviewText} textToCopy={() => toEmailText(titleValue)}>
+          <CopyToClipboardButton
+            fieldsCompleted={hasPreviewText}
+            textToCopy={() => toEmailText(titleValue)}
+          >
             Copy HTML
           </CopyToClipboardButton>
           <DownloadButton

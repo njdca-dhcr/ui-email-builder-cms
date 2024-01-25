@@ -12,6 +12,7 @@ import {
 import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
+import { PreviewText } from 'src/templates/PreviewText'
 
 jest.mock('src/utils/download', () => {
   return {
@@ -21,6 +22,7 @@ jest.mock('src/utils/download', () => {
 
 describe('EmailEditorContent', () => {
   let emailTemplate: EmailTemplate.UniqueConfig
+  // let windowSpy: jest.SpyInstance;
 
   beforeEach(() => {
     emailTemplate = buildUniqueEmailConfig({
@@ -33,7 +35,12 @@ describe('EmailEditorContent', () => {
         }),
       ],
     })
+    // windowSpy = jest.spyOn(globalThis, 'window', 'get')
   })
+
+  // afterEach(() => {
+  //   windowSpy.mockRestore()
+  // })
 
   it('can display the email in desktop or mobile', async () => {
     const user = userEvent.setup()
@@ -60,13 +67,37 @@ describe('EmailEditorContent', () => {
     expect(queryByText('Program Name')).not.toBeNull()
   })
 
+  // it('raises an alert if the user tries to export the email without preview text', async () => {
+  //   windowSpy.mockImplementation(() => ({
+  //     alert: jest.fn(),
+  //   }));
+
+  //   const user = userEvent.setup()
+  //   const { getByText } = render(
+  //     <EmailPartsContent>
+  //       <EmailEditorContent emailTemplate={emailTemplate} />
+  //     </EmailPartsContent>,
+  //   )
+  //   const value = faker.lorem.words(4)
+  //   await user.type(getByText('Title'), value)
+  //   await user.click(getByText('Copy HTML'))
+  //   // expect alert to have been called
+  //   expect(copy).toHaveBeenCalled()
+  //   await user.click(getByText('Download HTML'))
+  //   // expect alert to have been called
+  //   expect(download).toHaveBeenCalled()
+  //   expect(windowSpy).toHaveBeenCalledTimes(2)
+  // })
+
   it('allows users to copy the current preview into their clipboard', async () => {
     const user = userEvent.setup()
 
     const { getByText } = render(
-      <EmailPartsContent>
-        <EmailEditorContent emailTemplate={emailTemplate} />
-      </EmailPartsContent>,
+      <PreviewText initialValue="Some preview text">
+        <EmailPartsContent>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </EmailPartsContent>
+      </PreviewText>,
     )
 
     const value = faker.lorem.words(4)
@@ -85,9 +116,11 @@ describe('EmailEditorContent', () => {
     const user = userEvent.setup()
 
     const { getByText } = render(
-      <EmailPartsContent>
-        <EmailEditorContent emailTemplate={emailTemplate} />
-      </EmailPartsContent>,
+      <PreviewText initialValue="Some preview text">
+        <EmailPartsContent>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </EmailPartsContent>
+      </PreviewText>,
     )
 
     const value = faker.lorem.words(4)
