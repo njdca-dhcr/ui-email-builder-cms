@@ -5,10 +5,17 @@ interface Props {
   children: ReactNode
   textToDownload: () => string
   fileName: string
+  fieldsCompleted: () => boolean
 }
 
-export const DownloadButton: FC<Props> = ({ children, textToDownload, fileName }) => {
+export const DownloadButton: FC<Props> = ({ children, textToDownload, fileName, fieldsCompleted }) => {
+  const clickHandler = () => {
+    if (fieldsCompleted()) {
+      download(textToDownload(), fileName, 'text/html')
+    }
+  }
+  
   return (
-    <button onClick={() => download(textToDownload(), fileName, 'text/html')}>{children}</button>
+    <button onClick={clickHandler}>{children}</button>
   )
 }

@@ -16,6 +16,7 @@ import { DownloadButton } from 'src/ui/DownloadButton'
 import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
+import { usePreviewText } from '../PreviewText'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -28,8 +29,17 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getTitleSubComponent(emailTemplate)?.id ?? '')
-
+  const [previewText] = usePreviewText()
   const emailComponents = emailTemplate.components ?? []
+
+  const hasPreviewText = () => {
+    const text = previewText.trim()
+    const readyToCopy = text.length > 0
+    if (!readyToCopy) {
+      alert('Please add Preview Text before exporting HTML')
+    }
+    return readyToCopy
+  }
 
   return (
     <>
@@ -63,12 +73,13 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           </label>
         </fieldset>
         <div className="button-group">
-          <CopyToClipboardButton textToCopy={() => toEmailText(titleValue)}>
+          <CopyToClipboardButton fieldsCompleted={hasPreviewText} textToCopy={() => toEmailText(titleValue)}>
             Copy HTML
           </CopyToClipboardButton>
           <DownloadButton
             textToDownload={() => toEmailText(titleValue)}
             fileName={`${emailTemplate.name}.html`}
+            fieldsCompleted={hasPreviewText}
           >
             Download HTML
           </DownloadButton>
