@@ -419,6 +419,7 @@ const styles = {
   } as CSSProperties,
   amountLabel: {
     ...Text.header.h3.bold,
+    lineHeight: '25px',
     verticalAlign: 'center',
   } as CSSProperties,
   breakdownContainer: {
