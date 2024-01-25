@@ -363,7 +363,7 @@ const styles = {
     ...StyleDefaults.inline.colors,
   } as CSSProperties,
   innerCell: {
-    paddingLeft: 12,
+    paddingLeft: Spacing.size.large,
     borderLeft: Borders.large(Colors.alert.neutral.dark),
     paddingTop: Spacing.size.small,
     paddingBottom: Spacing.size.small,
