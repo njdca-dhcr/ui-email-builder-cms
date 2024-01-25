@@ -9,7 +9,10 @@ describe('CopyToClipboardButton', () => {
   it('renders its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <CopyToClipboardButton textToCopy={() => faker.lorem.paragraph()}>
+      <CopyToClipboardButton
+        fieldsCompleted={() => true}
+        textToCopy={() => faker.lorem.paragraph()}
+      >
         <div>{text}</div>
       </CopyToClipboardButton>,
     )
@@ -18,7 +21,10 @@ describe('CopyToClipboardButton', () => {
 
   it('is a button', () => {
     const { queryByRole } = render(
-      <CopyToClipboardButton textToCopy={() => faker.lorem.paragraph()}>
+      <CopyToClipboardButton
+        fieldsCompleted={() => true}
+        textToCopy={() => faker.lorem.paragraph()}
+      >
         {faker.lorem.word()}
       </CopyToClipboardButton>,
     )
@@ -31,7 +37,7 @@ describe('CopyToClipboardButton', () => {
     const textToCopy = faker.lorem.paragraph()
 
     const { getByRole } = render(
-      <CopyToClipboardButton textToCopy={() => textToCopy}>
+      <CopyToClipboardButton fieldsCompleted={() => true} textToCopy={() => textToCopy}>
         {faker.lorem.word()}
       </CopyToClipboardButton>,
     )
@@ -40,4 +46,8 @@ describe('CopyToClipboardButton', () => {
     await user.click(getByRole('button'))
     expect(copy).toHaveBeenCalledWith(textToCopy)
   })
+
+  // it('does not copy the given text to the clipboard when clicked if fields are not completed', async () => {
+
+  // })
 })
