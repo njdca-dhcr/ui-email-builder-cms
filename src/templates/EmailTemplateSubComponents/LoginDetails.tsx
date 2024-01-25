@@ -76,7 +76,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
     <Row
       className="login-details"
       elements={[
-        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
+        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.narrow },
         {
           part: 'table',
           onClick: (event) => {
