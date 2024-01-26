@@ -59,7 +59,22 @@ describe('DownloadButton', () => {
     expect(download).toHaveBeenCalledWith(html, fileName, 'text/html')
   })
 
-  // it('does not download the given content when clicked if fields are not completed', async () => {
+  it('does not download the given content when clicked if fields are not completed', async () => {
+    const user = userEvent.setup()
+    const html = `<div>${faker.lorem.paragraph()}</div>`
+    const fileName = `${faker.lorem.word()}.html`
 
-  // })
+    const { queryByRole } = render(
+      <DownloadButton fieldsCompleted={() => false} textToDownload={() => html} fileName={fileName}>
+        download
+      </DownloadButton>,
+    )
+
+    const button = queryByRole('button')
+    expect(button).not.toBeNull()
+
+    expect(download).not.toHaveBeenCalled()
+    await user.click(button!)
+    expect(download).not.toHaveBeenCalled()
+  })
 })

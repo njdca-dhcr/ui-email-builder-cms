@@ -47,7 +47,18 @@ describe('CopyToClipboardButton', () => {
     expect(copy).toHaveBeenCalledWith(textToCopy)
   })
 
-  // it('does not copy the given text to the clipboard when clicked if fields are not completed', async () => {
+  it('does not copy the given text to the clipboard when clicked if fields are not completed', async () => {
+    const user = userEvent.setup()
+    const textToCopy = faker.lorem.paragraph()
 
-  // })
+    const { getByRole } = render(
+      <CopyToClipboardButton fieldsCompleted={() => false} textToCopy={() => textToCopy}>
+        {faker.lorem.word()}
+      </CopyToClipboardButton>,
+    )
+
+    expect(copy).not.toHaveBeenCalled()
+    await user.click(getByRole('button'))
+    expect(copy).not.toHaveBeenCalled()
+  })
 })
