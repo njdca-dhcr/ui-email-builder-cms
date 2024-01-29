@@ -55,7 +55,7 @@ const cellContainerStyles: CSSProperties = {
 
 const styles: CSSProperties = {
   ...Text.header.h1.bold,
-  lineHeight: 1,
+  lineHeight: 1.2,
   margin: 0,
   padding: 0,
 }

@@ -354,11 +354,11 @@ const styles = {
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
-    paddingTop: Spacing.size.extraLarge,
+    paddingTop: 30,
   } as CSSProperties,
   title: {
     ...Text.header.h3.bold,
-    paddingTop: Spacing.size.large,
+    paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   eligibilityLabel: {
     ...Text.body.main.semibold,
@@ -395,8 +395,8 @@ const styles = {
   appealButton: {
     backgroundColor: Colors.black,
     borderRadius: 10,
-    paddingTop: Spacing.size.small,
-    paddingBottom: Spacing.size.small,
+    paddingTop: 15,
+    paddingBottom: 15,
     paddingLeft: 44,
     paddingRight: 44,
   } as CSSProperties,
