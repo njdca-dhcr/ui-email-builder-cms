@@ -43,7 +43,7 @@ img {
   }
 }
 
-@media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+@media only screen and (min-device-width: 375px) and (max-device-width: 431px) {
   u ~ div .email-container {
     min-width: 375px !important;
   }

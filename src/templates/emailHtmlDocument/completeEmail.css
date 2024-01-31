@@ -8,7 +8,7 @@ td.wide {
   padding-right: 20px;
 }
 
-@media screen and (min-width: 414px) {
+@media screen and (min-width: 432px) {
   td.narrow {
     padding-left: 50px;
     padding-right: 100px;
@@ -20,7 +20,7 @@ td.wide {
   }
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 432px) {
   .banner-link-container {
     display: inline-block;
   }
