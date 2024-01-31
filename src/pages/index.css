@@ -1,5 +1,5 @@
 .index-or {
-  font-size: var(--font-large);
+  font-size: var(--font-huge);
   font-weight: var(--weight-bold);
   line-height: 2rem;
   padding: 3rem 0;
@@ -40,7 +40,7 @@
   h3 a {
     align-self: flex-start;
     color: var(--blue-dark);
-    font-size: calc(var(--font-large) - 0.05rem);
+    font-size: calc(var(--font-huge) - 0.05rem);
     font-weight: var(--weight-bold);
     padding-bottom: 0.5rem;
     letter-spacing: -1px;

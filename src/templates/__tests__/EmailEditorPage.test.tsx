@@ -97,24 +97,6 @@ describe('EmailEditorPage', () => {
       expect(input()).toHaveTextContent(value)
     })
 
-    it('preserves entered subcomponent text after toggling a component off and then on again', async () => {
-      const value = faker.lorem.paragraph()
-      const { getAllByLabelText } = rendered
-      const input = () => getAllByLabelText('Title')[1]
-      const componentToggle = () => getAllByLabelText('Header')[0]
-
-      await user.clear(input()!)
-      await user.type(input()!, value)
-      expect(input()).toHaveTextContent(value)
-
-      await user.click(componentToggle())
-      expect(input()).toBeUndefined()
-
-      await user.click(componentToggle())
-      expect(input()).toBeDefined()
-      expect(input()).toHaveTextContent(value)
-    })
-
     it('preserves entered component text after toggling a component off and then on again', async () => {
       const value = faker.lorem.paragraph()
       const { queryByLabelText, getAllByLabelText } = rendered

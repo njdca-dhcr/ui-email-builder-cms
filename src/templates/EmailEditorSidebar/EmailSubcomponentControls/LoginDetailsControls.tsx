@@ -35,21 +35,26 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
           ]}
           onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
           value={value.variant + ''}
+          size="small"
         />
       </Control.Container>
 
       {isDetails && (
         <>
-          <Control.Container>
-            <Control.Label id={iconHtmlId}>Icon</Control.Label>
+          <Control.Container layout="column">
+            <Control.Label id={iconHtmlId} size="small">
+              Icon
+            </Control.Label>
             <UswdsIconSelect
               labelId={iconHtmlId}
               onChange={(loginDetailsIcon) => setValue({ ...value, loginDetailsIcon })}
               value={value.loginDetailsIcon}
             />
           </Control.Container>
-          <Control.Container>
-            <Control.Label htmlFor={buttonLinkHtmlId}>Button Link</Control.Label>
+          <Control.Container layout="column">
+            <Control.Label htmlFor={buttonLinkHtmlId} size="small">
+              Button Link
+            </Control.Label>
             <Input
               id={buttonLinkHtmlId}
               type="url"
@@ -61,8 +66,10 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
       )}
 
       {isInformation && (
-        <Control.Container>
-          <Control.Label id={iconHtmlId}>Icon</Control.Label>
+        <Control.Container layout="column">
+          <Control.Label id={iconHtmlId} size="small">
+            Icon
+          </Control.Label>
           <UswdsIconSelect
             labelId={iconHtmlId}
             onChange={(loginInformationIcon) => setValue({ ...value, loginInformationIcon })}

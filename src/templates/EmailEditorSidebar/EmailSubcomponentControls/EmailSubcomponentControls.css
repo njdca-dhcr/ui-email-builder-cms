@@ -1,12 +1,23 @@
 .control-group {
-  margin-top: 0.5rem;
+  padding-right: 3.125rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.status-control-group {
+  padding-top: 1rem;
 }
 
 .control-container {
-  margin-top: 1.25rem;
   display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.control-container.column {
   flex-direction: column;
-  gap: 0.5rem;
+  justify-content: flex-start;
 }
 
 .control-group > .control-container:first-of-type {
@@ -19,8 +30,9 @@ label.control-label {
   font-weight: var(--weight-normal);
 }
 
-.directive-title-toggle {
-  padding-top: 5px;
+label.control-label.small {
+  font-size: var(--font-tiny);
+  font-style: italic;
 }
 
 .status-supportive-information-toggle {
@@ -33,7 +45,6 @@ label.program-name-inline-color-picker {
   font-size: var(--font-small);
   font-weight: var(--weight-normal);
   gap: 0.5rem;
-  padding-top: 0.5rem;
 }
 
 .color-picker-inline {

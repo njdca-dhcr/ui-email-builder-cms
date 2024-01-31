@@ -18,9 +18,7 @@ interface WrapperProps {
   children: React.ReactElement
 }
 
-const ControlWrapper: FC<WrapperProps> = ({ children }) => (
-  <div className="subcomponent-control-wrapper">{children}</div>
-)
+const ControlWrapper: FC<WrapperProps> = ({ children }) => <div>{children}</div>
 
 export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...props }) => {
   const { componentId, id } = props

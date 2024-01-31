@@ -1,0 +1,49 @@
+.visibility-toggle {
+  --icon-length: 20px;
+  height: var(--icon-length);
+  position: relative;
+  width: var(--icon-length);
+}
+
+.visibility-toggle > input {
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  width: 100%;
+}
+
+.visibility-toggle .icons-container {
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.visibility-toggle .icon {
+  border-radius: 50%;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 150ms ease-in;
+  width: 100%;
+}
+
+.visibility-toggle:focus-within .icon {
+  outline: var(--default-browser-outline);
+}
+
+.visibility-toggle > input:disabled + .icons-container > .disabled-icon {
+  opacity: 1;
+}
+
+.visibility-toggle > input:checked:not(:disabled) + .icons-container > .active-icon {
+  opacity: 1;
+}
+
+.visibility-toggle > input:not(:checked):not(:disabled) + .icons-container > .inactive-icon {
+  opacity: 1;
+}

@@ -41,6 +41,10 @@ export const EmailLayout: FC<EmailLayoutProps> = ({ html, title }) => {
             rel="stylesheet"
           />
           <link
+            href="https://fonts.googleapis.com/css?family=Public%20Sans:600&display=swap&subset=cyrillic"
+            rel="stylesheet"
+          />
+          <link
             href="https://fonts.googleapis.com/css?family=Public%20Sans:400&display=swap&subset=cyrillic"
             rel="stylesheet"
           />

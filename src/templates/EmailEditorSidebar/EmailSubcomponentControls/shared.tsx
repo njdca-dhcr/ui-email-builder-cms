@@ -10,19 +10,22 @@ export interface EmailSubComponentControlsProps {
 
 interface ContainerProps {
   children: ReactNode
+  className?: string
+  layout?: 'horizontal' | 'column'
 }
 
-const Container: FC<ContainerProps> = ({ children }) => {
-  return <div className="control-container">{children}</div>
+const Container: FC<ContainerProps> = ({ children, className, layout }) => {
+  return <div className={classNames('control-container', className, layout)}>{children}</div>
 }
 Container.displayName = 'Control.Container'
 
 interface GroupProps {
   children: ReactNode
+  className?: string
 }
 
-const Group: FC<GroupProps> = ({ children }) => {
-  return <div className="control-group">{children}</div>
+const Group: FC<GroupProps> = ({ children, className }) => {
+  return <div className={classNames('control-group', className)}>{children}</div>
 }
 Group.displayName = 'Control.Group'
 
@@ -31,11 +34,12 @@ interface LabelProps {
   className?: string
   htmlFor?: string
   id?: string
+  size?: 'small'
 }
 
-const Label: FC<LabelProps> = ({ children, className, htmlFor, id }) => {
+const Label: FC<LabelProps> = ({ children, className, htmlFor, id, size }) => {
   return (
-    <label id={id} className={classNames('control-label', className)} htmlFor={htmlFor}>
+    <label id={id} className={classNames('control-label', className, size)} htmlFor={htmlFor}>
       {children}
     </label>
   )

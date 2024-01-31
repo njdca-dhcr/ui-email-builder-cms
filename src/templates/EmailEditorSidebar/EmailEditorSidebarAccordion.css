@@ -3,8 +3,8 @@
   display: flex;
   justify-content: space-between;
   padding-top: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 2.5rem;
+  padding-right: 2.125rem;
 }
 
 .sidebar-accordion-container h2 {
@@ -37,43 +37,20 @@
 }
 
 .accordion-email-component {
+  --left-spacing: 2.5rem;
+  --right-spacing: 2.125rem;
   border-bottom: 1px solid #e0e0e0;
-  padding: 1.5rem 2rem;
+  padding-bottom: 0.25rem;
+  padding-top: 1.5rem;
+}
+
+.accordion-email-component[data-disabled],
+.accordion-email-component[data-state='collapsed'] {
+  padding-bottom: 1.5rem;
 }
 
 .accordion-email-component:last-of-type {
   border-bottom: 0;
-}
-
-.accordion-email-component h3 {
-  align-items: center;
-  display: flex;
-  margin: 0;
-  position: relative;
-}
-
-.accordion-email-component button {
-  border: 0;
-  background-color: transparent;
-  font-size: var(--font-large);
-  font-weight: var(--weight-bold);
-  padding: 0;
-  padding-left: 1rem;
-}
-
-.accordion-email-component button[disabled] {
-  color: var(--black);
-  cursor: default;
-}
-
-.accordion-email-component .pointer-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: -0.5rem;
-  transition: transform 50ms ease-in-out;
-  pointer-events: none;
 }
 
 .accordion-email-component button[aria-expanded='false'] + .pointer-container {
@@ -90,36 +67,96 @@
 
 .accordion-email-component .accordion-button-and-toggle {
   align-items: center;
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
-  border-radius: 5px;
+  padding-left: var(--left-spacing);
+  padding-right: var(--right-spacing);
   transition: background-color ease-in-out 150ms;
 }
 
-.accordion-email-component .accordion-button-and-toggle.optional {
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+.accordion-email-component h3 {
+  align-items: center;
+  display: flex;
+  margin: 0;
+  position: relative;
+  width: 100%;
 }
 
-.accordion-email-component .accordion-button-and-toggle.active-email-component {
-  background-color: var(--gray-medium);
+.accordion-email-component button {
+  border: 0;
+  background-color: transparent;
+  font-size: var(--font-large);
+  font-weight: var(--weight-bold);
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.accordion-email-component button[disabled] {
+  color: var(--black);
+  cursor: default;
+}
+
+.accordion-email-component .pointer-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  transition: transform 50ms ease-in-out;
+  pointer-events: none;
 }
 
 .accordion-email-component .description {
-  color: var(--gray-dark);
-  font-size: var(--font-small);
   margin: 0;
   padding: 0;
-  padding-left: 1rem;
+  padding-left: var(--left-spacing);
+  padding-top: 2px;
+}
+
+.accordion-email-component .description,
+.accordion-email-component .description > a,
+.accordion-email-component .required-label {
+  color: var(--gray-dark);
+  font-size: var(--font-tiny);
+  font-style: italic;
+}
+
+.accordion-email-component .description > a {
+  text-decoration: underline;
+}
+
+.accordion-email-component .required-label {
+  align-self: flex-end;
 }
 
 .accordion-email-subcomponent {
   margin: 1rem 0;
-  padding: 0 2rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.75rem;
+  padding-left: var(--left-spacing);
+  padding-right: var(--right-spacing);
+  position: relative;
+  transition: background-color ease-in-out 150ms;
 }
 
-.accordion-email-subcomponent:first-of-type {
-  margin-top: 1.5rem;
+.accordion-email-subcomponent.active-email-subcomponent {
+  background-color: var(--blue-white);
+}
+
+.accordion-email-subcomponent .bar {
+  background-color: var(--gray-light-medium);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 0.625rem;
+  transition: background-color 150ms ease-in-out;
+}
+
+.accordion-email-subcomponent .bar.visible {
+  background-color: var(--blue-dark);
 }
 
 .accordion-email-subcomponent .label-and-toggle {
@@ -129,26 +166,13 @@
   border-radius: 5px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  transition: background-color ease-in-out 150ms;
-}
-
-.accordion-email-subcomponent .label-and-toggle.active-email-subcomponent {
-  background-color: var(--gray-medium);
 }
 
 .accordion-email-subcomponent label {
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-bold-light);
   cursor: pointer;
 }
 
 .accordion-email-subcomponent .description {
   padding-left: 0;
-}
-
-.accordion-email-component .subcomponent-control-wrapper {
-  padding: 0 1rem;
-}
-
-.accordion-email-subcomponent .subcomponent-part label {
-  font-weight: var(--weight-normal);
 }

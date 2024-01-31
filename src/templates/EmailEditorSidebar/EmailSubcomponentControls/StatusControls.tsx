@@ -17,7 +17,7 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
   useSubComponentControlOptions(emailSubComponent, value, setValue)
 
   return (
-    <Control.Group>
+    <Control.Group className="status-control-group">
       <VisuallyHidden>
         <span id={variantHtmlId}>Status variant</span>
       </VisuallyHidden>
@@ -38,22 +38,27 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
         ]}
         onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
         value={value.variant + ''}
+        size="small"
       />
       {[
         StatusVariant.OverviewWithReasonAndAmountDue,
         StatusVariant.OverviewWithReasonAndAmountBreakdown,
       ].includes(value.variant) && (
         <>
-          <Control.Container>
-            <Control.Label id={boxColorHtmlId}>Box Color</Control.Label>
+          <Control.Container layout="column">
+            <Control.Label id={boxColorHtmlId} size="small">
+              Box Color
+            </Control.Label>
             <SelectBoxColor
               labelId={boxColorHtmlId}
               value={value.boxColor}
               onChange={(boxColor) => setValue({ ...value, boxColor })}
             />
           </Control.Container>
-          <Control.Container>
-            <Control.Label id={iconHtmlId}>Icon</Control.Label>
+          <Control.Container layout="column">
+            <Control.Label id={iconHtmlId} size="small">
+              Icon
+            </Control.Label>
             <UswdsIconSelect
               labelId={iconHtmlId}
               onChange={(icon) => setValue({ ...value, icon })}
@@ -62,24 +67,20 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
           </Control.Container>
         </>
       )}
-      <Control.Container>
-        <SubComponentControlToggle
-          className="status-supportive-information-toggle"
-          subComponentId={id}
-          label="Supportive Information"
-          onChange={(showSupportiveInformation) =>
-            setValue({ ...value, showSupportiveInformation })
-          }
-          value={value.showSupportiveInformation}
-        />
-        <SubComponentControlToggle
-          className="status-space-after-toggle"
-          subComponentId={id}
-          label="Spacing After"
-          onChange={(spaceAfter) => setValue({ ...value, spaceAfter })}
-          value={value.spaceAfter}
-        />
-      </Control.Container>
+      <SubComponentControlToggle
+        className="status-supportive-information-toggle"
+        subComponentId={id}
+        label="Supportive Information +"
+        onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
+        value={value.showSupportiveInformation}
+      />
+      <SubComponentControlToggle
+        className="status-space-after-toggle"
+        subComponentId={id}
+        label="Spacing After"
+        onChange={(spaceAfter) => setValue({ ...value, spaceAfter })}
+        value={value.spaceAfter}
+      />
     </Control.Group>
   )
 }

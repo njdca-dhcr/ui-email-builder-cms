@@ -2,7 +2,7 @@ name: Build from Scratch
 description: You know what you want so make it happen.
 components:
   - kind: Banner
-    required: false
+    required: true
   - kind: Header
     subComponents:
       - kind: DepartmentSeal
@@ -27,4 +27,4 @@ components:
   - kind: StateSeal
     required: true
   - kind: Disclaimer
-    required: false
+    required: true

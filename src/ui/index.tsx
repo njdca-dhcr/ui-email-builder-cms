@@ -1,5 +1,4 @@
 import { BackArrowIcon } from './BackArrowIcon'
-import { CheckmarkIcon } from './CheckmarkIcon'
 import { ChevronDownIcon } from './ChevronDownIcon'
 import { CopyToClipboardButton } from './CopyToClipboardButton'
 import { EmailBlock } from './EmailBlock'
@@ -20,15 +19,11 @@ import { List } from './List'
 import { RightPointer } from './RightPointer'
 import { Select } from './Select'
 import { SidebarNavigation } from './SidebarNavigation'
-import { Toggle } from './Toggle'
-import { TogglePillIcon } from './TogglePillIcon'
-import { XIcon } from './XIcon'
 import { UswdsIcon } from './UswdsIcon'
 import { UswdsIconSelect } from './UswdsIconSelect'
 
 export {
   BackArrowIcon,
-  CheckmarkIcon,
   ChevronDownIcon,
   CopyToClipboardButton,
   EmailBlock,
@@ -47,9 +42,6 @@ export {
   RightPointer,
   Select,
   SidebarNavigation,
-  Toggle,
-  TogglePillIcon,
-  XIcon,
   UswdsIcon,
   UswdsIconSelect,
 }

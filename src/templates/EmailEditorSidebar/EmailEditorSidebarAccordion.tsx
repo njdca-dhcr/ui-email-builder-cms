@@ -5,7 +5,6 @@ import times from 'lodash.times'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { EmailTemplate } from 'src/appTypes'
 import { labelForSubComponent } from './labelForSubComponent'
-import { Toggle } from 'src/ui/Toggle'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import './EmailEditorSidebarAccordion.css'
 import { RightPointer } from 'src/ui/RightPointer'
@@ -20,6 +19,8 @@ import {
   SYNC_SIDEBAR_AND_PREVIEW_SCROLL,
   useSyncSidebarAndPreviewScroll,
 } from '../SyncSidebarAndPreviewScroll'
+import { Link } from 'gatsby'
+import { VisibilityToggle } from 'src/ui/VisibilityToggle'
 
 interface ContainerProps {
   children: ReactNode
@@ -70,12 +71,17 @@ interface EmailComponentProps {
   emailComponent: EmailTemplate.UniqueComponent
 }
 
+const EDITABLE_IN_SETTINGS: EmailTemplate.ComponentKind[] = ['Banner', 'Disclaimer', 'StateSeal']
+const SUBCOMPONENT_CONTAINERS: EmailTemplate.ComponentKind[] = ['Body', 'Footer', 'Header']
+
 const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) => {
   const shouldShow = useShouldShowEmailPart(emailComponent.id)
   const toggleId = `toggle-${emailComponent.id}`
   const lacksSubComponents = (emailComponent.subComponents ?? []).length === 0
   const { isActive } = useIsCurrentlyActiveEmailComponent(emailComponent)
   const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailComponent.id)
+  const isEditableInSettings = EDITABLE_IN_SETTINGS.includes(emailComponent.kind)
+  const isSubcomponentContainer = SUBCOMPONENT_CONTAINERS.includes(emailComponent.kind)
 
   return (
     <AccordionItem
@@ -87,25 +93,33 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
       <div
         className={classNames('accordion-button-and-toggle', {
           [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass]: isActive,
-          required: emailComponent.required,
-          optional: !emailComponent.required,
         })}
       >
         <h3>
           <AccordionButton>{labelForComponent(emailComponent.kind)}</AccordionButton>
-          <div className="pointer-container">
-            <RightPointer />
-          </div>
+          {isSubcomponentContainer && (
+            <div className="pointer-container">
+              <RightPointer />
+            </div>
+          )}
         </h3>
-        {!emailComponent.required && (
+        {isEditableInSettings && <span className="required-label">Required</span>}
+        {!emailComponent.required && !isSubcomponentContainer && (
           <label htmlFor={toggleId} className="label-and-toggle">
             <VisuallyHidden>{labelForComponent(emailComponent.kind)}</VisuallyHidden>
-            <Toggle id={toggleId} onChange={shouldShow.toggle} value={shouldShow.on} />
+            <VisibilityToggle id={toggleId} onChange={shouldShow.toggle} value={shouldShow.on} />
           </label>
         )}
       </div>
-      {emailComponent.description && <p className="description">{emailComponent.description}</p>}
-      <AccordionPanel>{children}</AccordionPanel>
+      {isEditableInSettings && (
+        <p className="description">
+          Edit this in <Link to="/settings">Settings</Link>
+        </p>
+      )}
+      {!isEditableInSettings && emailComponent.description && (
+        <p className="description">{emailComponent.description}</p>
+      )}
+      <AccordionPanel>{isSubcomponentContainer && children}</AccordionPanel>
     </AccordionItem>
   )
 }
@@ -124,7 +138,9 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
 
   return (
     <div
-      className="accordion-email-subcomponent"
+      className={classNames('accordion-email-subcomponent', {
+        [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass]: isActive && shouldShow.on,
+      })}
       onClick={(event) => {
         event.stopPropagation()
         scrollPreview()
@@ -134,13 +150,10 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
         scrollPreview()
       }}
     >
-      <div
-        className={classNames('label-and-toggle', {
-          [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass]: isActive,
-        })}
-      >
+      <div className={classNames('bar', { visible: shouldShow.on })} />
+      <div className="label-and-toggle">
         <label htmlFor={toggleId}>{labelForSubComponent(emailSubComponent.kind)}</label>
-        <Toggle
+        <VisibilityToggle
           id={toggleId}
           onChange={shouldShow.toggle}
           value={shouldShow.on}

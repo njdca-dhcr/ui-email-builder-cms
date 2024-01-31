@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { buildSubComponentPartKey } from 'src/utils/emailPartKeys'
-import { Toggle } from 'src/ui/'
-import classNames from 'classnames'
+import { VisibilityToggle } from 'src/ui/VisibilityToggle'
+import { Control } from './shared'
 
 interface SubComponentControlsToggleProps {
   className?: string
@@ -21,9 +21,9 @@ export const SubComponentControlToggle: FC<SubComponentControlsToggleProps> = ({
   const toggleId = `toggle-${buildSubComponentPartKey(subComponentId, label)}`
 
   return (
-    <div className={classNames('label-and-toggle', 'subcomponent-part', className)}>
-      <label htmlFor={toggleId}>{label}</label>
-      <Toggle id={toggleId} onChange={onChange} value={value} />
-    </div>
+    <Control.Container className={className}>
+      <Control.Label htmlFor={toggleId}>{label}</Control.Label>
+      <VisibilityToggle id={toggleId} onChange={onChange} value={value} />
+    </Control.Container>
   )
 }

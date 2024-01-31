@@ -12,7 +12,7 @@ import {
   renderEmailPart,
 } from 'src/testHelpers'
 import { Status, StatusVariant, useStatusValue } from '../Status'
-import { Toggle } from 'src/ui'
+import { VisibilityToggle } from 'src/ui/VisibilityToggle'
 
 describe('Status', () => {
   let value: string
@@ -32,7 +32,7 @@ describe('Status', () => {
     return (
       <label>
         toggle
-        <Toggle
+        <VisibilityToggle
           id=""
           onChange={(showSupportiveInformation) =>
             setValue({ ...value, showSupportiveInformation })

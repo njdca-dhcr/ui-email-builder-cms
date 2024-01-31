@@ -38,6 +38,7 @@ export const SelectBoxColor: FC<Props> = ({ labelId, onChange, value }) => {
       labelId={labelId}
       value={value}
       onChange={(newValue) => onChange(newValue as BoxColor)}
+      size="small"
       options={[
         { label: BoxColor.BenefitBlue, value: BoxColor.BenefitBlue },
         { label: BoxColor.GrantedGreen, value: BoxColor.GrantedGreen },

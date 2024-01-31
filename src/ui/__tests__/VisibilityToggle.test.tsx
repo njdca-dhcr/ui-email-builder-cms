@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { Toggle } from '../Toggle'
+import { VisibilityToggle } from '../VisibilityToggle'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 
-describe('Toggle', () => {
+describe('VisibilityToggle', () => {
   it('has its given id', () => {
     const id = faker.lorem.word()
-    const { baseElement } = render(<Toggle id={id} onChange={jest.fn()} value={true} />)
+    const { baseElement } = render(<VisibilityToggle id={id} onChange={jest.fn()} value={true} />)
     const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
     expect(checkbox).not.toBeNull()
     expect(checkbox.type).toEqual('checkbox')
@@ -17,7 +17,12 @@ describe('Toggle', () => {
   describe('when enabled', () => {
     it('can be "on"', () => {
       const { baseElement } = render(
-        <Toggle disabled={false} id={faker.lorem.word()} onChange={jest.fn()} value={true} />,
+        <VisibilityToggle
+          disabled={false}
+          id={faker.lorem.word()}
+          onChange={jest.fn()}
+          value={true}
+        />,
       )
       const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
       expect(checkbox.checked).toEqual(true)
@@ -25,7 +30,12 @@ describe('Toggle', () => {
 
     it('can be "off"', () => {
       const { baseElement } = render(
-        <Toggle disabled={false} id={faker.lorem.word()} onChange={jest.fn()} value={false} />,
+        <VisibilityToggle
+          disabled={false}
+          id={faker.lorem.word()}
+          onChange={jest.fn()}
+          value={false}
+        />,
       )
       const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
       expect(checkbox.checked).toEqual(false)
@@ -35,7 +45,12 @@ describe('Toggle', () => {
       const user = userEvent.setup()
       const handleChange = jest.fn()
       const { baseElement } = render(
-        <Toggle disabled={false} id={faker.lorem.word()} onChange={handleChange} value={true} />,
+        <VisibilityToggle
+          disabled={false}
+          id={faker.lorem.word()}
+          onChange={handleChange}
+          value={true}
+        />,
       )
       const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
 
@@ -48,7 +63,12 @@ describe('Toggle', () => {
   describe('when disabled', () => {
     it('can be "on"', () => {
       const { baseElement } = render(
-        <Toggle disabled={true} id={faker.lorem.word()} onChange={jest.fn()} value={true} />,
+        <VisibilityToggle
+          disabled={true}
+          id={faker.lorem.word()}
+          onChange={jest.fn()}
+          value={true}
+        />,
       )
       const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
       expect(checkbox.checked).toEqual(true)
@@ -56,7 +76,12 @@ describe('Toggle', () => {
 
     it('can be "off"', () => {
       const { baseElement } = render(
-        <Toggle disabled={true} id={faker.lorem.word()} onChange={jest.fn()} value={false} />,
+        <VisibilityToggle
+          disabled={true}
+          id={faker.lorem.word()}
+          onChange={jest.fn()}
+          value={false}
+        />,
       )
       const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
       expect(checkbox.checked).toEqual(false)
@@ -66,7 +91,12 @@ describe('Toggle', () => {
       const user = userEvent.setup()
       const handleChange = jest.fn()
       const { baseElement } = render(
-        <Toggle disabled={true} id={faker.lorem.word()} onChange={handleChange} value={true} />,
+        <VisibilityToggle
+          disabled={true}
+          id={faker.lorem.word()}
+          onChange={handleChange}
+          value={true}
+        />,
       )
       const checkbox: HTMLInputElement = baseElement.querySelector('input') as any
 

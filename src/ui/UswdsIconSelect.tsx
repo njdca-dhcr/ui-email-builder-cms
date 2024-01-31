@@ -17,6 +17,7 @@ const iconOptions = Object.keys(UswdsIconVariants).map((key) => ({
 export const UswdsIconSelect: FC<UswdsIconSelectProps> = ({ onChange, value, labelId }) => {
   return (
     <Select
+      size="small"
       labelId={labelId}
       options={iconOptions}
       onChange={(value) => onChange(value as UswdsIconVariantKey)}

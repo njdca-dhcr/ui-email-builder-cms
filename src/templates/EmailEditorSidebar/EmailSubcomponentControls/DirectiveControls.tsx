@@ -21,16 +21,6 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
   return (
     <Control.Group>
       <Control.Container>
-        <SubComponentControlToggle
-          className="directive-title-toggle"
-          subComponentId={id}
-          label="+ Title"
-          onChange={(showTitle) => setValue({ ...value, showTitle })}
-          value={value.showTitle}
-        />
-      </Control.Container>
-
-      <Control.Container>
         <VisuallyHidden>
           <span id={htmlId}>Directive variant</span>
         </VisuallyHidden>
@@ -49,11 +39,19 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
           ]}
           onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
           value={value.variant + ''}
+          size="small"
         />
       </Control.Container>
 
+      <SubComponentControlToggle
+        subComponentId={id}
+        label="Title +"
+        onChange={(showTitle) => setValue({ ...value, showTitle })}
+        value={value.showTitle}
+      />
+
       {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
-        <Control.Container>
+        <>
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
             subComponentId={id}
@@ -81,11 +79,13 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
             }
             value={value.showStep3AdditionalContent}
           />
-        </Control.Container>
+        </>
       )}
 
-      <Control.Container>
-        <Control.Label htmlFor="directive-link-input">Link</Control.Label>
+      <Control.Container layout="column">
+        <Control.Label htmlFor="directive-link-input" size="small">
+          Link
+        </Control.Label>
         <Input
           id="directive-link-input"
           className="directive-link-input"

@@ -37,12 +37,15 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
           ]}
           onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
           value={value.variant + ''}
+          size="small"
         />
       </Control.Container>
 
       {(isReminder || isAppealRights) && (
-        <Control.Container>
-          <Control.Label id={iconHtmlId}>Icon</Control.Label>
+        <Control.Container layout="column">
+          <Control.Label id={iconHtmlId} size="small">
+            Icon
+          </Control.Label>
           <UswdsIconSelect
             labelId={iconHtmlId}
             onChange={(icon) => setValue({ ...value, icon })}
@@ -53,27 +56,27 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 
       {isReminder && (
         <>
-          <Control.Container>
-            <SubComponentControlToggle
-              subComponentId={id}
-              label="Reminder Is For"
-              onChange={(showReminderIsFor) => setValue({ ...value, showReminderIsFor })}
-              value={value.showReminderIsFor}
-            />
-            <SubComponentControlToggle
-              subComponentId={id}
-              label="Footnote"
-              onChange={(showFootnote) => setValue({ ...value, showFootnote })}
-              value={value.showFootnote}
-            />
-          </Control.Container>
+          <SubComponentControlToggle
+            subComponentId={id}
+            label="Reminder Is For"
+            onChange={(showReminderIsFor) => setValue({ ...value, showReminderIsFor })}
+            value={value.showReminderIsFor}
+          />
+          <SubComponentControlToggle
+            subComponentId={id}
+            label="Footnote"
+            onChange={(showFootnote) => setValue({ ...value, showFootnote })}
+            value={value.showFootnote}
+          />
         </>
       )}
 
       {isAppealRights && (
         <>
-          <Control.Container>
-            <Control.Label htmlFor={buttonLinkHtmlId}>Button Link</Control.Label>
+          <Control.Container layout="column">
+            <Control.Label htmlFor={buttonLinkHtmlId} size="small">
+              Button Link
+            </Control.Label>
             <Input
               id={buttonLinkHtmlId}
               type="url"
@@ -81,30 +84,28 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
               onTextChange={(appealRightsHref) => setValue({ ...value, appealRightsHref })}
             />
           </Control.Container>
-          <Control.Container>
-            <SubComponentControlToggle
-              subComponentId={id}
-              label="Instruction"
-              onChange={(appealRightsShowInstruction) =>
-                setValue({ ...value, appealRightsShowInstruction })
-              }
-              value={value.appealRightsShowInstruction}
-            />
-            <SubComponentControlToggle
-              subComponentId={id}
-              label="Information Label"
-              onChange={(appealRightsShowInfoLabel) =>
-                setValue({ ...value, appealRightsShowInfoLabel })
-              }
-              value={value.appealRightsShowInfoLabel}
-            />
-            <SubComponentControlToggle
-              subComponentId={id}
-              label="Information"
-              onChange={(appealRightsShowTerms) => setValue({ ...value, appealRightsShowTerms })}
-              value={value.appealRightsShowTerms}
-            />
-          </Control.Container>
+          <SubComponentControlToggle
+            subComponentId={id}
+            label="Instruction"
+            onChange={(appealRightsShowInstruction) =>
+              setValue({ ...value, appealRightsShowInstruction })
+            }
+            value={value.appealRightsShowInstruction}
+          />
+          <SubComponentControlToggle
+            subComponentId={id}
+            label="Information Label"
+            onChange={(appealRightsShowInfoLabel) =>
+              setValue({ ...value, appealRightsShowInfoLabel })
+            }
+            value={value.appealRightsShowInfoLabel}
+          />
+          <SubComponentControlToggle
+            subComponentId={id}
+            label="Information"
+            onChange={(appealRightsShowTerms) => setValue({ ...value, appealRightsShowTerms })}
+            value={value.appealRightsShowTerms}
+          />
         </>
       )}
     </Control.Group>

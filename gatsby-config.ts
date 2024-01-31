@@ -64,6 +64,10 @@ const config: GatsbyConfig = {
           },
           {
             name: 'Public Sans',
+            file: 'https://fonts.googleapis.com/css?family=Public%20Sans:600&display=swap&subset=cyrillic',
+          },
+          {
+            name: 'Public Sans',
             file: 'https://fonts.googleapis.com/css?family=Public%20Sans:400&display=swap&subset=cyrillic',
           },
           {

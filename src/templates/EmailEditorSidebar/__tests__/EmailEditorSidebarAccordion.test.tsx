@@ -10,6 +10,7 @@ import {
   WrapperComponent,
   buildUniqueEmailComponent,
   buildUniqueEmailSubComponent,
+  urlFor,
 } from 'src/testHelpers'
 import { CurrentlyActiveEmailPart } from 'src/templates/CurrentlyActiveEmailPart'
 import { SYNC_SIDEBAR_AND_PREVIEW_SCROLL } from 'src/templates/SyncSidebarAndPreviewScroll'
@@ -129,10 +130,6 @@ describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
 describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   let emailComponent: EmailTemplate.UniqueComponent
 
-  beforeEach(() => {
-    emailComponent = buildUniqueEmailComponent('Header')
-  })
-
   const wrapper: WrapperComponent = ({ children }) => {
     return (
       <ShouldShowEmailPart>
@@ -143,171 +140,340 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
     )
   }
 
-  it('displays its children in an accordion panel', () => {
-    const text = faker.lorem.paragraph()
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span>{text}</span>
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    const panel = baseElement.querySelector('[data-reach-accordion-panel]')
-    expect(panel).not.toBeNull()
+  const itDisplaysADescriptionWhenAvailable = () => {
+    it('displays a description when available', () => {
+      emailComponent.description = faker.lorem.paragraph()
+      const { queryByText } = render(
+        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+          <span />
+        </EmailEditorSidebarAccordion.EmailComponent>,
+        { wrapper },
+      )
+      expect(queryByText(emailComponent.description)).not.toBeNull()
+    })
+  }
 
-    expect(panel).toContainHTML(`<span>${text}</span>`)
+  const itDoesNotDisplayADescriptionWhenUnavailable = () => {
+    it('does not display a description when unavailable', () => {
+      emailComponent.description = undefined
+      const { baseElement } = render(
+        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+          <span />
+        </EmailEditorSidebarAccordion.EmailComponent>,
+        { wrapper },
+      )
+      expect(baseElement.querySelector('.description')).toBeNull()
+    })
+  }
+
+  const itIsHighlightedWhenTheComponentIsActive = () => {
+    it('is highlighted when the component is active', () => {
+      const { baseElement } = render(
+        <ShouldShowEmailPart>
+          <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailComponent.id}>
+            <Accordion>
+              <AccordionItem>
+                <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+                  <span />
+                </EmailEditorSidebarAccordion.EmailComponent>
+              </AccordionItem>
+            </Accordion>
+          </CurrentlyActiveEmailPart>
+        </ShouldShowEmailPart>,
+      )
+      expect(
+        baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
+      ).not.toBeNull()
+    })
+  }
+
+  const itIsHighlightedWhenAnyOfItsSubcomponentsAreActive = () => {
+    it('is highlighted when any of its subcomponents are active', () => {
+      const emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+      emailComponent.subComponents = [emailSubComponent]
+
+      const { baseElement } = render(
+        <ShouldShowEmailPart>
+          <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailSubComponent.id}>
+            <Accordion>
+              <AccordionItem>
+                <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+                  <span />
+                </EmailEditorSidebarAccordion.EmailComponent>
+              </AccordionItem>
+            </Accordion>
+          </CurrentlyActiveEmailPart>
+        </ShouldShowEmailPart>,
+      )
+      expect(
+        baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
+      ).not.toBeNull()
+    })
+  }
+
+  const itIsNotHightlightedWhenTheComponentIsInactive = () => {
+    it('is not hightlighted when the component is inactive', () => {
+      const { baseElement } = render(
+        <ShouldShowEmailPart>
+          <CurrentlyActiveEmailPart initiallyActiveEmailPartId={faker.lorem.words(3)}>
+            <Accordion>
+              <AccordionItem>
+                <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+                  <span />
+                </EmailEditorSidebarAccordion.EmailComponent>
+              </AccordionItem>
+            </Accordion>
+          </CurrentlyActiveEmailPart>
+        </ShouldShowEmailPart>,
+      )
+      expect(
+        baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
+      ).toBeNull()
+    })
+  }
+
+  const itHasADisabledAccordionItem = () => {
+    it('has a disabled accordion item', () => {
+      const { baseElement } = render(
+        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+          <span />
+        </EmailEditorSidebarAccordion.EmailComponent>,
+        { wrapper },
+      )
+      const item = baseElement.querySelector('[data-reach-accordion-item] > div')
+      expect(item).not.toBeNull()
+      const attribute = item?.attributes.getNamedItem('data-disabled')
+      expect(attribute).not.toBeNull()
+    })
+  }
+
+  const itDoesNotDisplayChildrenInAnAccordionPanel = () => {
+    it('does not display children in an accordion panel', () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = render(
+        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+          <span>{text}</span>
+        </EmailEditorSidebarAccordion.EmailComponent>,
+        { wrapper },
+      )
+      const panel = baseElement.querySelector('[data-reach-accordion-panel]')
+      expect(panel).not.toBeNull()
+
+      expect(panel).not.toContainHTML(`<span>${text}</span>`)
+    })
+  }
+
+  describe('all', () => {
+    const allKinds: EmailTemplate.ComponentKind[] = [
+      'Banner',
+      'Body',
+      'Disclaimer',
+      'Footer',
+      'Header',
+      'Name',
+      'StateSeal',
+    ]
+
+    allKinds.forEach((kind) => {
+      describe(`when ${kind}`, () => {
+        beforeEach(() => {
+          emailComponent = buildUniqueEmailComponent(kind)
+        })
+
+        it('displays an accordion item header/button', () => {
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+
+          const headerButton = baseElement.querySelector('h3 > [data-reach-accordion-button]')
+          expect(headerButton).not.toBeNull()
+          const value = emailComponent.kind === 'StateSeal' ? 'State Seal' : emailComponent.kind
+          expect(headerButton).toHaveTextContent(value)
+        })
+      })
+    })
   })
 
-  it('displays an accordion item header/button', () => {
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
+  describe('when Name', () => {
+    beforeEach(() => {
+      emailComponent = buildUniqueEmailComponent('Name')
+    })
 
-    const headerButton = baseElement.querySelector('h3 > [data-reach-accordion-button]')
-    expect(headerButton).not.toBeNull()
-    expect(headerButton).toHaveTextContent(emailComponent.kind)
+    itDisplaysADescriptionWhenAvailable()
+
+    itDoesNotDisplayADescriptionWhenUnavailable()
+
+    itIsHighlightedWhenTheComponentIsActive()
+
+    itIsHighlightedWhenAnyOfItsSubcomponentsAreActive()
+
+    itIsNotHightlightedWhenTheComponentIsInactive()
+
+    itDoesNotDisplayChildrenInAnAccordionPanel()
+
+    itHasADisabledAccordionItem()
+
+    it('displays a toggle when the email component is not required', async () => {
+      const user = userEvent.setup()
+      emailComponent.required = false
+      const { baseElement } = render(
+        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+          <span />
+        </EmailEditorSidebarAccordion.EmailComponent>,
+        { wrapper },
+      )
+      const input = baseElement.querySelector('.label-and-toggle input')
+      expect(input).not.toBeNull()
+      expect(input).not.toBeDisabled()
+      expect(input).toBeChecked()
+
+      await user.click(input!)
+      expect(input).not.toBeChecked()
+    })
+
+    it('does not display a toggle when the email component is required', () => {
+      emailComponent.required = true
+      const { baseElement } = render(
+        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+          <span />
+        </EmailEditorSidebarAccordion.EmailComponent>,
+        { wrapper },
+      )
+      const input = baseElement.querySelector('input')
+      expect(input).toBeNull()
+    })
   })
 
-  it('displays a description when available', () => {
-    emailComponent.description = faker.lorem.paragraph()
-    const { queryByText } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    expect(queryByText(emailComponent.description)).not.toBeNull()
+  describe('subcomponent containers', () => {
+    const kinds: EmailTemplate.ComponentKind[] = ['Body', 'Footer', 'Header']
+
+    kinds.forEach((kind) => {
+      describe(`when ${kind}`, () => {
+        beforeEach(() => {
+          emailComponent = buildUniqueEmailComponent(kind)
+        })
+
+        itDisplaysADescriptionWhenAvailable()
+
+        itDoesNotDisplayADescriptionWhenUnavailable()
+
+        itIsHighlightedWhenTheComponentIsActive()
+
+        itIsHighlightedWhenAnyOfItsSubcomponentsAreActive()
+
+        itIsNotHightlightedWhenTheComponentIsInactive()
+
+        it('displays its children in an accordion panel', () => {
+          const text = faker.lorem.paragraph()
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span>{text}</span>
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+          const panel = baseElement.querySelector('[data-reach-accordion-panel]')
+          expect(panel).not.toBeNull()
+
+          expect(panel).toContainHTML(`<span>${text}</span>`)
+        })
+
+        it('does not display a toggle', () => {
+          emailComponent.required = false
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+          const input = baseElement.querySelector('input')
+          expect(input).toBeNull()
+        })
+
+        it('has an enabled accordion item when the email component has subcomponents', () => {
+          emailComponent.subComponents = [buildUniqueEmailSubComponent('Header', { kind: 'Title' })]
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+          const item = baseElement.querySelector('[data-reach-accordion-item] > div')
+          expect(item).not.toBeNull()
+          const attribute = item?.attributes.getNamedItem('data-disabled')
+          expect(attribute).toBeNull()
+        })
+
+        it('has a disabled accordion item when the email component lacks subcomponents', () => {
+          emailComponent.subComponents = []
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+          const item = baseElement.querySelector('[data-reach-accordion-item] > div')
+          expect(item).not.toBeNull()
+          const attribute = item?.attributes.getNamedItem('data-disabled')
+          expect(attribute).not.toBeNull()
+        })
+      })
+    })
   })
 
-  it('does not display a description when unavailable', () => {
-    emailComponent.description = undefined
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    expect(baseElement.querySelector('.description')).toBeNull()
-  })
+  describe('when edited in settings', () => {
+    const kinds: EmailTemplate.ComponentKind[] = ['Banner', 'StateSeal', 'Disclaimer']
 
-  it('displays a toggle when the email component is not required', async () => {
-    const user = userEvent.setup()
-    emailComponent.required = false
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    const input = baseElement.querySelector('.label-and-toggle input')
-    expect(input).not.toBeNull()
-    expect(input).not.toBeDisabled()
-    expect(input).toBeChecked()
+    kinds.forEach((kind) => {
+      describe(`when ${kind}`, () => {
+        beforeEach(() => {
+          emailComponent = buildUniqueEmailComponent(kind)
+        })
 
-    await user.click(input!)
-    expect(input).not.toBeChecked()
-  })
+        itDoesNotDisplayChildrenInAnAccordionPanel()
 
-  it('does not display a toggle when the email component is required', () => {
-    emailComponent.required = true
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    const input = baseElement.querySelector('input')
-    expect(input).toBeNull()
-  })
+        itHasADisabledAccordionItem()
 
-  it('has an enabled accordion item when the email component has subcomponents', () => {
-    emailComponent.subComponents = [buildUniqueEmailSubComponent('Header', { kind: 'Title' })]
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    const item = baseElement.querySelector('[data-reach-accordion-item] > div')
-    expect(item).not.toBeNull()
-    const attribute = item?.attributes.getNamedItem('data-disabled')
-    expect(attribute).toBeNull()
-  })
+        it('is marked as "required" and lacks a toggle', () => {
+          emailComponent.required = true
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
 
-  it('has a disabled accordion item when the email component lacks subcomponents', () => {
-    emailComponent.subComponents = []
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-        <span />
-      </EmailEditorSidebarAccordion.EmailComponent>,
-      { wrapper },
-    )
-    const item = baseElement.querySelector('[data-reach-accordion-item] > div')
-    expect(item).not.toBeNull()
-    const attribute = item?.attributes.getNamedItem('data-disabled')
-    expect(attribute).not.toBeNull()
-  })
+          const input = baseElement.querySelector('.label-and-toggle input')
+          expect(input).toBeNull()
+          expect(baseElement).toHaveTextContent('Required')
+        })
 
-  it('is highlighted when the component is active', () => {
-    const { baseElement } = render(
-      <ShouldShowEmailPart>
-        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailComponent.id}>
-          <Accordion>
-            <AccordionItem>
-              <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-                <span />
-              </EmailEditorSidebarAccordion.EmailComponent>
-            </AccordionItem>
-          </Accordion>
-        </CurrentlyActiveEmailPart>
-      </ShouldShowEmailPart>,
-    )
-    expect(
-      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
-    ).not.toBeNull()
-  })
+        it('has a link to settings', () => {
+          const { baseElement } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+          const link: HTMLAnchorElement | null = baseElement.querySelector('a')
+          expect(link).not.toBeNull()
+          expect(link!.href).toEqual(urlFor('/settings'))
+        })
 
-  it('is highlighted when any of its subcomponents are active', () => {
-    const emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
-    emailComponent.subComponents = [emailSubComponent]
-
-    const { baseElement } = render(
-      <ShouldShowEmailPart>
-        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailSubComponent.id}>
-          <Accordion>
-            <AccordionItem>
-              <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-                <span />
-              </EmailEditorSidebarAccordion.EmailComponent>
-            </AccordionItem>
-          </Accordion>
-        </CurrentlyActiveEmailPart>
-      </ShouldShowEmailPart>,
-    )
-    expect(
-      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
-    ).not.toBeNull()
-  })
-
-  it('is not hightlighted when the component is inactive', () => {
-    const { baseElement } = render(
-      <ShouldShowEmailPart>
-        <CurrentlyActiveEmailPart initiallyActiveEmailPartId={faker.lorem.words(3)}>
-          <Accordion>
-            <AccordionItem>
-              <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-                <span />
-              </EmailEditorSidebarAccordion.EmailComponent>
-            </AccordionItem>
-          </Accordion>
-        </CurrentlyActiveEmailPart>
-      </ShouldShowEmailPart>,
-    )
-    expect(
-      baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
-    ).toBeNull()
+        it('ignores description when present', () => {
+          emailComponent.description = faker.lorem.paragraph()
+          const { queryByText } = render(
+            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
+              <span />
+            </EmailEditorSidebarAccordion.EmailComponent>,
+            { wrapper },
+          )
+          expect(queryByText(emailComponent.description)).toBeNull()
+        })
+      })
+    })
   })
 })
 

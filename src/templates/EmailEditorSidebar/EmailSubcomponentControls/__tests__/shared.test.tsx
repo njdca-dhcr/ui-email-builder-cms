@@ -13,6 +13,17 @@ describe(Control.Group.displayName!, () => {
     )
     expect(baseElement).toContainHTML(`<span>${text}</span>`)
   })
+
+  it('accepts className', () => {
+    const { baseElement } = render(
+      <Control.Group className="my-class">
+        <span />
+      </Control.Group>,
+    )
+    const controlGroup: HTMLDivElement | null = baseElement.querySelector('.control-group') as any
+    expect(controlGroup).not.toBeNull()
+    expect(controlGroup?.className).toEqual('control-group my-class')
+  })
 })
 
 describe(Control.Container.displayName!, () => {
@@ -24,6 +35,32 @@ describe(Control.Container.displayName!, () => {
       </Control.Container>,
     )
     expect(baseElement).toContainHTML(`<span>${text}</span>`)
+  })
+
+  it('accepts className', () => {
+    const { baseElement } = render(
+      <Control.Container className="my-class">
+        <span />
+      </Control.Container>,
+    )
+    const controlContainer: HTMLDivElement | null = baseElement.querySelector(
+      '.control-container',
+    ) as any
+    expect(controlContainer).not.toBeNull()
+    expect(controlContainer?.className).toEqual('control-container my-class')
+  })
+
+  it('accepts a layout of column', () => {
+    const { baseElement } = render(
+      <Control.Container layout="column">
+        <span />
+      </Control.Container>,
+    )
+    const controlContainer: HTMLDivElement | null = baseElement.querySelector(
+      '.control-container',
+    ) as any
+    expect(controlContainer).not.toBeNull()
+    expect(controlContainer?.className).toEqual('control-container column')
   })
 })
 
@@ -60,6 +97,17 @@ describe(Control.Label.displayName!, () => {
     const label: HTMLLabelElement | null = baseElement.querySelector('label') as any
     expect(label).not.toBeNull()
     expect(label?.className).toEqual('control-label my-class')
+  })
+
+  it('accepts a size', () => {
+    const { baseElement } = render(
+      <Control.Label size="small">
+        <span />
+      </Control.Label>,
+    )
+    const label: HTMLLabelElement | null = baseElement.querySelector('label') as any
+    expect(label).not.toBeNull()
+    expect(label?.className).toEqual('control-label small')
   })
 
   it('accepts id', () => {
