@@ -151,7 +151,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
       }}
     >
       <div className={classNames('bar', { visible: shouldShow.on })} />
-      <div className="label-and-toggle">
+      <div className={classNames('label-and-toggle', { invisible: shouldShow.off })}>
         <label htmlFor={toggleId}>{labelForSubComponent(emailSubComponent.kind)}</label>
         <VisibilityToggle
           id={toggleId}
@@ -162,7 +162,9 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
       </div>
 
       {emailSubComponent.description && (
-        <p className="description">{emailSubComponent.description}</p>
+        <p className={classNames('description', { invisible: shouldShow.off })}>
+          {emailSubComponent.description}
+        </p>
       )}
       <EmailSubComponentControls
         componentId={componentId}

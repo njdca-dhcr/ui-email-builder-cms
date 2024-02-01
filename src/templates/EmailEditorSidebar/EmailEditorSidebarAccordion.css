@@ -165,11 +165,14 @@
 
 .accordion-email-subcomponent .label-and-toggle {
   align-items: center;
+  color: var(--black);
   display: flex;
   justify-content: space-between;
-  border-radius: 5px;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+  transition: color 150ms ease-in-out;
+}
+
+.accordion-email-subcomponent .label-and-toggle.invisible {
+  color: var(--gray-medium-dark);
 }
 
 .accordion-email-subcomponent label {
@@ -179,4 +182,9 @@
 
 .accordion-email-subcomponent .description {
   padding-left: 0;
+  transition: color 150ms ease-in-out;
+}
+
+.accordion-email-subcomponent .description.invisible {
+  color: var(--gray-medium-dark);
 }
