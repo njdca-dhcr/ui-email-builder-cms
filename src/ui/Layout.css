@@ -103,12 +103,15 @@
 }
 
 .select {
+  --border-radius: 0;
   border: 3px solid transparent;
+  border-radius: calc(2 * var(--border-radius));
   font-size: var(--font-medium);
   margin: -3px;
 }
 
 .select.small {
+  --border-radius: 3px;
   font-size: var(--font-small);
   width: fit-content;
 }
@@ -121,6 +124,7 @@
   align-items: center;
   background-color: var(--white);
   border: 1px solid var(--black);
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
