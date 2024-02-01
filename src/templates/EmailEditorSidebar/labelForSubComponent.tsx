@@ -15,7 +15,7 @@ export const labelForSubComponent = (subComponentKind: EmailTemplate.SubComponen
     case 'ProgramName':
       return 'Program Name'
     case 'RulesRightsRegulations':
-      return 'Rules, Rights, and Regulations'
+      return 'What else should they know?'
     case 'BenefitAmount':
       return 'Benefit Amount'
     default:

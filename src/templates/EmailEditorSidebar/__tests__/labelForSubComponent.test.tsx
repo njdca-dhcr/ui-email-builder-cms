@@ -39,9 +39,7 @@ describe('labelForSubComponent', () => {
 
   describe('when the subcomponent is RulesRightsRegulations', () => {
     it('is "Supplemental Content"', () => {
-      expect(labelForSubComponent('RulesRightsRegulations')).toEqual(
-        'Rules, Rights, and Regulations',
-      )
+      expect(labelForSubComponent('RulesRightsRegulations')).toEqual('What else should they know?')
     })
   })
 
