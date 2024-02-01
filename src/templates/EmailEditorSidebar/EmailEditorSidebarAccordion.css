@@ -53,6 +53,10 @@
   border-bottom: 0;
 }
 
+.accordion-email-component button {
+  cursor: pointer;
+}
+
 .accordion-email-component button[aria-expanded='false'] + .pointer-container {
   transform: rotate(180deg);
 }
