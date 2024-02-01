@@ -7,23 +7,32 @@ components:
     subComponents:
       - kind: DepartmentSeal
       - kind: DateRange
+        description: Using names of months is preferred over numbers (i.e. Jan 5 is clearer than 01/05)
       - kind: Title
+        description: Keep this short and to the point!
       - kind: ProgramName
   - kind: Name
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
   - kind: Body
     subComponents:
       - kind: Intro
+        description: Keep it simple and clear. Don't use filler language like "please" or
       - kind: Status
+        description: Make it obvious what the current state is
       - kind: Directive
       - kind: BenefitAmount
       - kind: SupplementalContent
+        description: Add other resources that will help color the message you're sending
       - kind: SupplementalContent
       - kind: RulesRightsRegulations
+        description: Rights? Regulations? Appeals? Reminders?
       - kind: LoginDetails
+        description: Just in case they need to reset their password
     required: true
   - kind: Footer
     subComponents:
       - kind: AdditionalContent
+        description: A great place to add links to find out more about programs and other state offerings. Do not use "click here"!
   - kind: StateSeal
     required: true
   - kind: Disclaimer
