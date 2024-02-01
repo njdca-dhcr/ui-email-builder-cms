@@ -42,6 +42,12 @@
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 0.25rem;
   padding-top: 1.5rem;
+  transition: background-color 150ms ease-in-out;
+}
+
+.accordion-email-component.active-email-component:not(:has(button[aria-expanded='true'])),
+.accordion-email-component.active-email-component:has([data-disabled='true']) {
+  background-color: var(--blue-white);
 }
 
 .accordion-email-component[data-disabled],

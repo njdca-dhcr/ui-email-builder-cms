@@ -86,15 +86,13 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
   return (
     <AccordionItem
       disabled={lacksSubComponents}
-      className="accordion-email-component"
+      className={classNames('accordion-email-component', {
+        [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass]: isActive,
+      })}
       onClick={scrollPreview}
       onFocus={scrollPreview}
     >
-      <div
-        className={classNames('accordion-button-and-toggle', {
-          [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass]: isActive,
-        })}
-      >
+      <div className="accordion-button-and-toggle">
         <h3>
           <AccordionButton>{labelForComponent(emailComponent.kind)}</AccordionButton>
           {isSubcomponentContainer && (
