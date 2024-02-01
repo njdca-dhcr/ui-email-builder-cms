@@ -58,11 +58,11 @@
 }
 
 .accordion-email-component button[aria-expanded='false'] + .pointer-container {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 .accordion-email-component button[aria-expanded='true'] + .pointer-container {
-  transform: rotate(90deg);
+  transform: rotate(0deg);
 }
 
 .accordion-email-component button[disabled] + .pointer-container {

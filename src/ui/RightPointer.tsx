@@ -2,15 +2,8 @@ import React, { FC } from 'react'
 
 export const RightPointer: FC = () => {
   return (
-    <svg
-      aria-hidden
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path fillRule="evenodd" clipRule="evenodd" d="M9 17L14 12L9 7L9 17Z" fill="black" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" fill="none" aria-hidden>
+      <path fill="#000" fillRule="evenodd" d="M.167.5 6 8 11.833.5H.167Z" clipRule="evenodd" />
     </svg>
   )
 }
