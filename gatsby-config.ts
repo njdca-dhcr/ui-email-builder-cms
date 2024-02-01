@@ -7,7 +7,7 @@ const config: GatsbyConfig = {
     siteUrl:
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:8000'
-        : 'https://email-builder-beta.netlify.app',
+        : 'https://main.dor49a0hhc0bh.amplifyapp.com',
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
