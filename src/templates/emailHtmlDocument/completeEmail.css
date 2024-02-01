@@ -24,4 +24,8 @@ td.wide {
   .banner-link-container {
     display: inline-block;
   }
+   
+  .get-started-button {
+    width: 100%;
+  }
 }

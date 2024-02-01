@@ -97,7 +97,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
         { part: 'cell', className: 'section-wrapper' },
         { part: 'table', className: 'el-center', align: 'center' },
         'row',
-        { part: 'cell', className: StyleDefaults.layout.narrow, style: styles.outerCellStyles },
+        { part: 'cell', className: StyleDefaults.layout.wide, style: styles.outerCellStyles },
         {
           part: 'table',
           style: [DirectiveVariant.PayOnline].includes(value.variant) ? styles.payOnlineBox : {},
@@ -150,7 +150,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
             <Row
               elements={[
                 'cell',
-                { part: 'table', width: 'unset' },
+                { part: 'table', width: 'unset', className: 'get-started-button' },
                 'row',
                 { part: 'cell', style: styles.getStartedButton },
               ]}
@@ -589,6 +589,7 @@ const styles = {
     paddingBottom: Spacing.size.medium,
     paddingLeft: 65,
     paddingRight: 65,
+    textAlign: 'center',
   } as CSSProperties,
   getStartedButtonText: {
     color: Colors.white,

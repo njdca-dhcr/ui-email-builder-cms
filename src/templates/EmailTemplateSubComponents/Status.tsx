@@ -90,6 +90,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   return (
     <Row
       key={value.variant}
+      className="status"
       elements={['cell']}
       onClick={(event) => {
         activate(event)
