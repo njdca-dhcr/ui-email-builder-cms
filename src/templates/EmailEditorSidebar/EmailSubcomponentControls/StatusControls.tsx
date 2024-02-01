@@ -70,7 +70,7 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
       <SubComponentControlToggle
         className="status-supportive-information-toggle"
         subComponentId={id}
-        label="Supportive Information +"
+        label="+ Supportive Information"
         onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
         value={value.showSupportiveInformation}
       />

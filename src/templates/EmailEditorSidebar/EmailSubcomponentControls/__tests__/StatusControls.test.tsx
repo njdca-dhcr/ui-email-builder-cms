@@ -48,7 +48,7 @@ describe('StatusControls', () => {
         ,
       </EmailPartsContent>,
     )
-    const toggle = queryByLabelText('Supportive Information +')
+    const toggle = queryByLabelText('+ Supportive Information')
     expect(toggle).not.toBeNull()
     expect(toggle).toBeChecked()
 

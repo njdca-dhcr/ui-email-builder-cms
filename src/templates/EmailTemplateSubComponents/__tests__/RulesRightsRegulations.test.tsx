@@ -135,9 +135,9 @@ describe('RulesRightsRegulations', () => {
         const { getByRole, queryByLabelText } = rendered
 
         expect(queryByLabelText('Reminder footnote')).not.toBeNull()
-        await user.click(getByRole('switch', { name: 'Footnote' }))
+        await user.click(getByRole('switch', { name: '+ Footnote' }))
         expect(queryByLabelText('Reminder footnote')).toBeNull()
-        await user.click(getByRole('switch', { name: 'Footnote' }))
+        await user.click(getByRole('switch', { name: '+ Footnote' }))
         expect(queryByLabelText('Reminder footnote')).not.toBeNull()
       })
     })

@@ -93,7 +93,7 @@ describe('RulesRightsRegulationsControls', () => {
 
       it('can have the footnote toggled on and off', async () => {
         const { getByRole } = rendered
-        const getSwitch = (): HTMLInputElement => getByRole('switch', { name: 'Footnote' }) as any
+        const getSwitch = (): HTMLInputElement => getByRole('switch', { name: '+ Footnote' }) as any
 
         expect(getSwitch()).toBeChecked()
         await user.click(getSwitch())

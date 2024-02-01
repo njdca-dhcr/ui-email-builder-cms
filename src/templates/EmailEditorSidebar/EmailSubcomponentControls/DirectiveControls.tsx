@@ -45,7 +45,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
 
       <SubComponentControlToggle
         subComponentId={id}
-        label="Title +"
+        label="+ Title"
         onChange={(showTitle) => setValue({ ...value, showTitle })}
         value={value.showTitle}
       />

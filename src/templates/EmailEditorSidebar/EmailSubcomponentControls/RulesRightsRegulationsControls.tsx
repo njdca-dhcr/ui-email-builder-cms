@@ -64,7 +64,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
           />
           <SubComponentControlToggle
             subComponentId={id}
-            label="Footnote"
+            label="+ Footnote"
             onChange={(showFootnote) => setValue({ ...value, showFootnote })}
             value={value.showFootnote}
           />
