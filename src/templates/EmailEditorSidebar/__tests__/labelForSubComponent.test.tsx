@@ -7,6 +7,18 @@ describe('labelForSubComponent', () => {
     expect(labelForSubComponent('Title')).toEqual('Title')
   })
 
+  describe('when the subcomponent is DateRange', () => {
+    it('is "Program Name"', () => {
+      expect(labelForSubComponent('DateRange')).toEqual('Date Range')
+    })
+  })
+
+  describe('when the subcomponent is LoginDetails', () => {
+    it('is "Program Name"', () => {
+      expect(labelForSubComponent('LoginDetails')).toEqual('Login Support')
+    })
+  })
+
   describe('when the subcomponent is ProgramName', () => {
     it('is "Program Name"', () => {
       expect(labelForSubComponent('ProgramName')).toEqual('Program Name')
