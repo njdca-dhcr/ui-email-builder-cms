@@ -54,7 +54,7 @@
 }
 
 .accordion-email-component button[aria-expanded='false'] + .pointer-container {
-  transform: rotate(0);
+  transform: rotate(180deg);
 }
 
 .accordion-email-component button[aria-expanded='true'] + .pointer-container {
@@ -104,8 +104,8 @@
   justify-content: center;
   position: absolute;
   right: 0;
-  transition: transform 50ms ease-in-out;
   pointer-events: none;
+  transition: transform 150ms ease-in-out;
 }
 
 .accordion-email-component .description {
