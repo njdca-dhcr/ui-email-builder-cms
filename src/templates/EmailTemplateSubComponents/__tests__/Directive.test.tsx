@@ -83,7 +83,14 @@ describe('Directive', () => {
 
       itHasAnEditable('directive button', 'Directive Button')
 
+      itHasAnEditable('directive link', 'Directive Link')
+
       itHasAnEditable('supportive information', 'Supportive information')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(4)
+      })
     })
 
     describe('Three Steps', () => {
@@ -100,6 +107,8 @@ describe('Directive', () => {
 
       itHasAnEditable('directive button', 'Directive Button')
 
+      itHasAnEditable('directive link', 'Directive Link')
+
       itHasAnEditable('step 1 label', 'Label for Step 1')
 
       itHasAnEditable('step 1 additional information', 'Additional information for Step 1')
@@ -114,7 +123,7 @@ describe('Directive', () => {
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(9)
+        expect(all).toHaveLength(10)
       })
     })
 
@@ -131,6 +140,8 @@ describe('Directive', () => {
       })
 
       itHasAnEditable('directive button', 'Directive Button')
+
+      itHasAnEditable('directive link', 'Directive Link')
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
 
@@ -150,7 +161,7 @@ describe('Directive', () => {
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(11)
+        expect(all).toHaveLength(12)
       })
     })
 
@@ -168,13 +179,15 @@ describe('Directive', () => {
 
       itHasAnEditable('directive button', 'Directive Button')
 
+      itHasAnEditable('directive link', 'Directive Link')
+
       itHasAnEditable('alternative payment information', 'Alternative payment information')
 
       itHasAnEditable('supportive information', 'Alternative payment information')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(3)
+        expect(all).toHaveLength(4)
       })
     })
   })

@@ -114,15 +114,6 @@ describe('RulesRightsRegulationsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))
       })
 
-      it('displays an input for the button link', async () => {
-        const { queryByLabelText, getByTestId } = rendered
-        const input: HTMLInputElement | null = queryByLabelText('Button Link') as any
-        expect(input).not.toBeNull()
-        const value = `https://${faker.lorem.word()}.gov/appeal`
-        await user.type(input!, value)
-        expect(getByTestId('appeal-rights-href')).toHaveTextContent(value)
-      })
-
       it('provides a dropdown for selecting an icon', async () => {
         const { getByRole, queryByRole, queryByText } = rendered
         let button = queryByText('Flag', { selector: 'span' })

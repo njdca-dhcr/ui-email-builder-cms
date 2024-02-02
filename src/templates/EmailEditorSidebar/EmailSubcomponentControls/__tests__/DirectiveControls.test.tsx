@@ -52,28 +52,4 @@ describe('DirectiveControls', () => {
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Pay Online')
   })
-
-  it('provides an input for the link href', async () => {
-    const user = userEvent.setup()
-    const { queryByRole } = render(
-      <EmailPartsContent>
-        <DirectiveControls
-          componentId={faker.lorem.word()}
-          id={faker.lorem.word()}
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
-        />
-        ,
-      </EmailPartsContent>,
-    )
-
-    let input = queryByRole('textbox')
-    expect(input).not.toBeNull()
-
-    const newUrl = faker.internet.url()
-    await user.clear(input!)
-    await user.type(input!, newUrl)
-    input = queryByRole('textbox')
-    expect(input).not.toBeNull()
-    expect(input).toHaveValue(newUrl)
-  })
 })

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { useSubComponentControlOptions } from '.'
-import { Input, Select, UswdsIconSelect } from 'src/ui'
+import { Select, UswdsIconSelect } from 'src/ui'
 import {
   LoginDetailsVariant,
   useLoginDetailsValue,
@@ -40,29 +40,16 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
       </Control.Container>
 
       {isDetails && (
-        <>
-          <Control.Container layout="column">
-            <Control.Label id={iconHtmlId} size="small">
-              Icon
-            </Control.Label>
-            <UswdsIconSelect
-              labelId={iconHtmlId}
-              onChange={(loginDetailsIcon) => setValue({ ...value, loginDetailsIcon })}
-              value={value.loginDetailsIcon}
-            />
-          </Control.Container>
-          <Control.Container layout="column">
-            <Control.Label htmlFor={buttonLinkHtmlId} size="small">
-              Button Link
-            </Control.Label>
-            <Input
-              id={buttonLinkHtmlId}
-              type="url"
-              value={value.buttonHref}
-              onTextChange={(buttonHref) => setValue({ ...value, buttonHref })}
-            />
-          </Control.Container>
-        </>
+        <Control.Container layout="column">
+          <Control.Label id={iconHtmlId} size="small">
+            Icon
+          </Control.Label>
+          <UswdsIconSelect
+            labelId={iconHtmlId}
+            onChange={(loginDetailsIcon) => setValue({ ...value, loginDetailsIcon })}
+            value={value.loginDetailsIcon}
+          />
+        </Control.Container>
       )}
 
       {isInformation && (

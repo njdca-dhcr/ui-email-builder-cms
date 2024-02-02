@@ -57,7 +57,8 @@ export const defaultValue: DirectiveValue = {
   title: 'Directive Title',
   showTitle: true,
   label: 'To help resolve this issue, complete the following steps:',
-  linkHref: '',
+  linkHref:
+    'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   buttonLabel: 'Get Started',
   step1Label: 'Step 1 Directive',
   showStep1AdditionalContent: true,
@@ -174,8 +175,12 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
             {/* Same Link As Button */}
             <Row elements={[{ part: 'cell', style: styles.linkText, className: 'displayed-href' }]}>
               <Link to={value.linkHref}>
-                {value.linkHref ||
-                  'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                <EditableElement
+                  element="span"
+                  label="Directive Link"
+                  value={value.linkHref}
+                  onValueChange={(linkHref) => setValue({ ...value, linkHref })}
+                />
               </Link>
             </Row>
           </Row>
@@ -351,8 +356,12 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                           ]}
                         >
                           <Link to={value.linkHref}>
-                            {value.linkHref ||
-                              'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+                            <EditableElement
+                              element="span"
+                              label="Directive Link"
+                              value={value.linkHref}
+                              onValueChange={(linkHref) => setValue({ ...value, linkHref })}
+                            />
                           </Link>
                         </Row>
                       </Row>

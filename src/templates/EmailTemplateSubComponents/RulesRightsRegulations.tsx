@@ -67,7 +67,8 @@ const defaultValue: RulesRightsRegulationsValue = {
   appealRightsShowInstruction: true,
   appealRightsInstruction: 'To begin an appeal online, get started below:',
   appealRightsButton: 'Get Started',
-  appealRightsHref: '',
+  appealRightsHref:
+    'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   appealRightsShowInfoLabel: true,
   appealRightsInfoLabel: 'For your appeal:',
   appealRightsShowTerms: true,
@@ -272,8 +273,12 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             ]}
           >
             <Link to={value.appealRightsHref}>
-              {value.appealRightsHref ||
-                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+              <EditableElement
+                element="span"
+                value={value.appealRightsHref}
+                label="Appeal Rights link"
+                onValueChange={(appealRightsHref) => setValue({ ...value, appealRightsHref })}
+              />
             </Link>
           </Row>
           <Row condition={value.appealRightsShowInfoLabel}>

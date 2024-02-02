@@ -90,11 +90,13 @@ describe('LoginDetails', () => {
 
       itHasAnEditable('button', 'Reset password button')
 
+      itHasAnEditable('link', 'Reset password link')
+
       itHasAnEditable('reset password details', 'Reset password details')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(6)
+        expect(all).toHaveLength(7)
       })
     })
 

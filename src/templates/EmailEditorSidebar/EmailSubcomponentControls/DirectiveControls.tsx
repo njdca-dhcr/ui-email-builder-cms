@@ -6,7 +6,7 @@ import {
   DirectiveVariant,
   useDirectiveValue,
 } from 'src/templates/EmailTemplateSubComponents/Directive'
-import { Input, Select } from 'src/ui/'
+import { Select } from 'src/ui/'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
@@ -81,18 +81,6 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
           />
         </>
       )}
-
-      <Control.Container layout="column">
-        <Control.Label htmlFor="directive-link-input" size="small">
-          Link
-        </Control.Label>
-        <Input
-          id="directive-link-input"
-          className="directive-link-input"
-          onTextChange={(linkHref) => setValue({ ...value, linkHref })}
-          value={value.linkHref}
-        />
-      </Control.Container>
     </Control.Group>
   )
 }

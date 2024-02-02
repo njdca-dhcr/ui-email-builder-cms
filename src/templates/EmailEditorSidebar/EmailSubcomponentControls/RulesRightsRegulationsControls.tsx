@@ -6,7 +6,7 @@ import {
   RulesRightsRegulationsVariant,
   useRulesRightsRegulationsValue,
 } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
-import { Input, Select, UswdsIconSelect } from 'src/ui'
+import { Select, UswdsIconSelect } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({
@@ -15,7 +15,6 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 }) => {
   const variantHtmlId = `variant-${id}`
   const iconHtmlId = `icon-${id}`
-  const buttonLinkHtmlId = `buttonLink-${id}`
   const [value, setValue] = useRulesRightsRegulationsValue(id)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
@@ -73,17 +72,6 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
 
       {isAppealRights && (
         <>
-          <Control.Container layout="column">
-            <Control.Label htmlFor={buttonLinkHtmlId} size="small">
-              Button Link
-            </Control.Label>
-            <Input
-              id={buttonLinkHtmlId}
-              type="url"
-              value={value.appealRightsHref}
-              onTextChange={(appealRightsHref) => setValue({ ...value, appealRightsHref })}
-            />
-          </Control.Container>
           <SubComponentControlToggle
             subComponentId={id}
             label="Instruction"

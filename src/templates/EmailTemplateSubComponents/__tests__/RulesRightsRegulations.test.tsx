@@ -171,6 +171,8 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('button', 'Appeal Rights button')
 
+      itHasAnEditable('link', 'Appeal Rights link')
+
       itHasAnEditable('info label', 'Appeal Rights information label')
 
       itHasAnEditable('table label 1', 'Appeal Rights row label 1')
@@ -187,7 +189,7 @@ describe('RulesRightsRegulations', () => {
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(11)
+        expect(all).toHaveLength(12)
       })
 
       it('can have the appealRightsInstruction toggled on and off', async () => {

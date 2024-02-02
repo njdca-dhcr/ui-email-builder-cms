@@ -44,7 +44,8 @@ const defaultValue: LoginDetailsValue = {
   resetPasswordMessage:
     "If you're having trouble logging in, send a request to reset your password.",
   button: 'Reset Password',
-  buttonHref: '',
+  buttonHref:
+    'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   resetPasswordDetails:
     'Your request may take up to 7-10 business days. An email will be sent to you when your password has been reset.',
   loginDetailsIcon: 'Lock',
@@ -180,8 +181,12 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
             ]}
           >
             <Link to={value.buttonHref}>
-              {value.buttonHref ||
-                'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link'}
+              <EditableElement
+                element="span"
+                onValueChange={(buttonHref) => setValue({ ...value, buttonHref })}
+                label="Reset password link"
+                value={value.buttonHref}
+              />
             </Link>
           </Row>
           <Row>

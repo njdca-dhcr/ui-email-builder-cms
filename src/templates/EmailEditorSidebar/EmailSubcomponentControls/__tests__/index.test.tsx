@@ -103,7 +103,7 @@ describe('EmailSubComponentControls', () => {
         id={id}
       />,
     )
-    expect(queryByText('Button Link')).not.toBeNull()
+    expect(queryByText('Icon')).not.toBeNull()
   })
 
   it('renders the InformationalBoxControls', () => {

@@ -185,11 +185,6 @@
   padding: 0.5rem;
 }
 
-.input.directive-link-input {
-  box-sizing: border-box;
-  width: 100%;
-}
-
 .link-button {
   background-color: var(--blue);
   border: 0;
