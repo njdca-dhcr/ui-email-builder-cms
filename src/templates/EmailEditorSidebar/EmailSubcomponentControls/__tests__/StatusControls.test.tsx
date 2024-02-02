@@ -59,9 +59,9 @@ describe('StatusControls', () => {
     expect(toggle).toBeChecked()
   })
 
-  it('provides a toggle for changing the spacing after the component', async () => {
+  it('provides radio buttons for changing the spacing after the subcomponent', async () => {
     const user = userEvent.setup()
-    const { queryByLabelText } = render(
+    const { getByLabelText } = render(
       <EmailPartsContent>
         <StatusControls
           componentId={faker.lorem.word()}
@@ -71,15 +71,18 @@ describe('StatusControls', () => {
         ,
       </EmailPartsContent>,
     )
-    const toggle = queryByLabelText('Spacing After')
-    expect(toggle).not.toBeNull()
-    expect(toggle).toBeChecked()
+    const smallButton = getByLabelText('Small')
+    const largeButton = getByLabelText('Large')
+    expect(smallButton).not.toBeChecked()
+    expect(largeButton).toBeChecked()
 
-    await user.click(toggle!)
-    expect(toggle).not.toBeChecked()
+    await user.click(smallButton)
+    expect(smallButton).toBeChecked()
+    expect(largeButton).not.toBeChecked()
 
-    await user.click(toggle!)
-    expect(toggle).toBeChecked()
+    await user.click(largeButton)
+    expect(smallButton).not.toBeChecked()
+    expect(largeButton).toBeChecked()
   })
 
   describe('variants', () => {

@@ -76,3 +76,62 @@ label.program-name-inline-color-picker {
 .color-picker-inline input[type='color']::-webkit-color-swatch {
   border: 0;
 }
+
+.radio-buttons-fieldset {
+  align-items: center;
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.radio-buttons-fieldset > .legend {
+  font-size: var(--font-small);
+}
+
+.radio-buttons {
+  --border-radius: 10px;
+  border: 1px solid var(--gray-medium);
+  border-radius: var(--border-radius);
+  display: flex;
+  overflow: hidden;
+}
+
+.radio-button {
+  background-color: var(--white);
+  border-left: 1px solid var(--gray-medium);
+  font-size: var(--font-tiny);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  transition: background-color 150ms ease-in-out;
+}
+
+.radio-button:has(:checked) {
+  background-color: var(--gray-medium);
+}
+
+.radio-button:first-of-type {
+  border-left: 0;
+}
+
+.radio-buttons > .radio-button > label {
+  font-weight: var(--weight-normal);
+  display: flex;
+  padding: 0.2rem 1.15rem;
+}
+
+.radio-buttons > .radio-button:first-of-type > label {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.radio-buttons > .radio-button:last-of-type > label {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.radio-buttons > .radio-button > label:focus-within {
+  outline: var(--default-browser-outline);
+}
