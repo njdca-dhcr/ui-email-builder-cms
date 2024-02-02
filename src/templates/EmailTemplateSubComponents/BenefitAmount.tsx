@@ -245,7 +245,7 @@ const styles = {
     paddingTop: 0,
   } as CSSProperties,
   title: {
-    ...Text.header.h2.bold,
+    ...Text.header.h3.bold,
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   description: {
