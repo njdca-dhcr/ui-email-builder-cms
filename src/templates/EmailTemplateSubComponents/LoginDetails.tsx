@@ -245,10 +245,10 @@ const styles = {
   innerContainer: {
     backgroundColor: Colors.alert.info.light,
     borderLeft: Borders.large(Colors.alert.info.dark),
-    paddingTop: Spacing.size.extraLarge,
-    paddingBottom: Spacing.size.extraLarge,
-    paddingLeft: Spacing.size.large,
-    paddingRight: Spacing.size.large,
+    paddingTop: Spacing.informationalBox.vertical,
+    paddingBottom: Spacing.informationalBox.vertical,
+    paddingLeft: Spacing.informationalBox.horizontal.left,
+    paddingRight: Spacing.informationalBox.horizontal.right,
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,

@@ -316,6 +316,13 @@ export const Spacing = {
     large: 20,
     extraLarge: 25,
   },
+  informationalBox: {
+    vertical: 25,
+    horizontal: {
+      left: 20,
+      right: 25,
+    },
+  },
 } as const
 
 export const Borders = {

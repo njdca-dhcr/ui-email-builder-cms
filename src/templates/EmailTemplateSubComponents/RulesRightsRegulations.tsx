@@ -352,18 +352,17 @@ const styles = {
   innerContainer: {
     backgroundColor: Colors.alert.neutral.light,
     borderLeft: Borders.large(Colors.alert.neutral.dark),
-    paddingLeft: Spacing.size.large,
-    paddingRight: Spacing.size.extraLarge,
-    paddingBottom: Spacing.size.extraLarge,
-    paddingTop: 0,
+    paddingLeft: Spacing.informationalBox.horizontal.left,
+    paddingRight: Spacing.informationalBox.horizontal.right,
+    paddingBottom: Spacing.informationalBox.vertical,
+    paddingTop: Spacing.informationalBox.vertical,
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
-    paddingTop: 30,
+    verticalAlign: 'middle',
   } as CSSProperties,
   title: {
     ...Text.header.h3.bold,
-    paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   eligibilityLabel: {
     ...Text.body.main.semibold,

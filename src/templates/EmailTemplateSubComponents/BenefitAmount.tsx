@@ -239,10 +239,10 @@ const styles = {
     ...StyleDefaults.inline.colors,
   } as CSSProperties,
   innerCell: {
-    paddingLeft: Spacing.size.medium,
-    paddingRight: Spacing.size.medium,
-    paddingBottom: Spacing.size.medium,
-    paddingTop: 0,
+    paddingLeft: Spacing.informationalBox.horizontal.left,
+    paddingRight: Spacing.informationalBox.horizontal.right,
+    paddingBottom: Spacing.informationalBox.vertical,
+    paddingTop: Spacing.informationalBox.vertical,
   } as CSSProperties,
   title: {
     ...Text.header.h3.bold,
@@ -254,11 +254,9 @@ const styles = {
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
-    paddingTop: Spacing.size.medium,
   } as CSSProperties,
   boxTitle: {
     ...Text.header.h3.bold,
-    paddingTop: Spacing.size.medium,
     paddingBottom: Spacing.size.medium,
     lineHeight: '1',
   } as CSSProperties,
