@@ -42,7 +42,7 @@ export const BannerMarkup: FC<BannerMarkupProps> = ({
       elements={[{ part: 'cell', style: { ...outerCellStyles, backgroundColor } }, 'table', 'row']}
       role="banner"
     >
-      <Cell className="banner-link-container">
+      <Cell className="banner-link-container top-nav-first-link">
         <Comp to={primaryLink} style={{ ...primaryLinkStyles, color }}>
           {primaryText}
         </Comp>

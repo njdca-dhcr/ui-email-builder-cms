@@ -31,7 +31,14 @@ td.wide {
 }
 
 @media screen and (max-width: 600px) {
+  .top-nav-first-link {
+      display: block;
+    }
+  
   .top-nav-second-link {
     padding-top: 15px;
+    display: block;
+    width: 100%;
+    text-align: left !important;
   }
 }
