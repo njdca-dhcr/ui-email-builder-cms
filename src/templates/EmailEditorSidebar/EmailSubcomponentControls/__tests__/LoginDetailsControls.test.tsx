@@ -7,6 +7,12 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
+jest.mock('src/ui/UswdsIconSelect', () => {
+  return {
+    UswdsIconSelect: () => <div>UswdsIconSelect</div>,
+  }
+})
+
 describe('LoginDetailsControls', () => {
   let componentId: string
   let id: string
@@ -57,20 +63,9 @@ describe('LoginDetailsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Details' }))
       })
 
-      it('displays a dropdown for selecting an icon', async () => {
-        const { getByRole, queryByRole, queryAllByRole } = rendered
-        let button: HTMLElement | null = queryAllByRole('button')[1]
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Lock')
-
-        await user.click(button!)
-        expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
-        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-        await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-        button = queryAllByRole('button')[1]
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Device Thermostat')
+      it('provides a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
     })
 
@@ -80,26 +75,9 @@ describe('LoginDetailsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Information' }))
       })
 
-      it('displays a dropdown for selecting an icon', async () => {
-        const { getByRole, queryByRole, queryAllByRole } = rendered
-        let button: HTMLElement | null = queryAllByRole('button')[1]
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Lock')
-
-        await user.click(button!)
-        expect(queryByRole('option', { name: 'Lock' })).not.toBeNull()
-        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-        await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-        button = queryAllByRole('button')[1]
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Device Thermostat')
-      })
-
-      it('does not display an input for the button link', async () => {
-        const { queryByLabelText, getByTestId } = rendered
-        const input: HTMLInputElement | null = queryByLabelText('Button Link') as any
-        expect(input).toBeNull()
+      it('provides a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
     })
   })

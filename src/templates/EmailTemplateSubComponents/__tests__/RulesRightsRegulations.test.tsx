@@ -100,8 +100,8 @@ describe('RulesRightsRegulations', () => {
       })
 
       it('has an icon', () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('img')).not.toBeNull()
+        const { baseElement } = rendered
+        expect(baseElement.querySelector('table img')).not.toBeNull()
       })
 
       itHasAnEditable('title', 'Reminder title')
@@ -159,8 +159,8 @@ describe('RulesRightsRegulations', () => {
       })
 
       it('has an icon', () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('img')).not.toBeNull()
+        const { baseElement } = rendered
+        expect(baseElement.querySelector('table img')).not.toBeNull()
       })
 
       itHasAnEditable('title', 'Appeal Rights title')
@@ -236,8 +236,8 @@ describe('RulesRightsRegulations', () => {
       })
 
       it('lacks an icon', () => {
-        const { queryByRole } = rendered
-        expect(queryByRole('img')).toBeNull()
+        const { baseElement } = rendered
+        expect(baseElement.querySelector('table img')).toBeNull()
       })
 
       itHasAnEditable('title', 'Your Rights title')

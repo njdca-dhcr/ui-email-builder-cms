@@ -7,6 +7,12 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
+jest.mock('src/ui/UswdsIconSelect', () => {
+  return {
+    UswdsIconSelect: () => <div>UswdsIconSelect</div>,
+  }
+})
+
 describe('RulesRightsRegulationsControls', () => {
   let componentId: string
   let id: string
@@ -63,20 +69,9 @@ describe('RulesRightsRegulationsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Reminder' }))
       })
 
-      it('provides a dropdown for selecting an icon', async () => {
-        const { getByRole, queryByRole, queryByText } = rendered
-        let button = queryByText('Flag', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Flag')
-
-        await user.click(button!)
-        expect(queryByRole('option', { name: 'Flag' })).not.toBeNull()
-        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-        await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-        button = queryByText('Device Thermostat', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Device Thermostat')
+      it('provides a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
 
       it('can have reminder is for toggled on and off', async () => {
@@ -114,20 +109,9 @@ describe('RulesRightsRegulationsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))
       })
 
-      it('provides a dropdown for selecting an icon', async () => {
-        const { getByRole, queryByRole, queryByText } = rendered
-        let button = queryByText('Flag', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Flag')
-
-        await user.click(button!)
-        expect(queryByRole('option', { name: 'Flag' })).not.toBeNull()
-        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-        await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-        button = queryByText('Device Thermostat', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Device Thermostat')
+      it('provides a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
 
       it('only has the correct switches', () => {
@@ -182,10 +166,9 @@ describe('RulesRightsRegulationsControls', () => {
         expect(rendered.baseElement.querySelectorAll('input')).toHaveLength(0)
       })
 
-      it('does not render a dropdown for selecting an icon', () => {
-        const { queryByText } = rendered
-        const button = queryByText('Flag', { selector: 'span' })
-        expect(button).toBeNull()
+      it('does not provide a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
 
       it('only has the correct switches', () => {

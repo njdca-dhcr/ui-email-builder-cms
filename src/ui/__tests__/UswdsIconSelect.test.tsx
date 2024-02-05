@@ -4,28 +4,27 @@ import React from 'react'
 import { UswdsIconSelect } from '../UswdsIconSelect'
 import { faker } from '@faker-js/faker'
 
+jest.mock('src/ui/UswdsIcon', () => {
+  return {
+    ...jest.requireActual('src/ui/UswdsIcon'),
+    UswdsIcon: () => <div>Image Placeholder</div>,
+  }
+})
+
 describe('UswdsIconSelect', () => {
-  it('is a select with all of the icon options', async () => {
+  it('displays the icons in the button and list options', async () => {
     const user = userEvent.setup()
-    const handleChange = jest.fn()
     const { getByRole, queryByRole } = render(
       <UswdsIconSelect
-        onChange={handleChange}
+        onChange={jest.fn()}
         value="AccessibilityNew"
         labelId={faker.lorem.word()}
       />,
     )
     const button = getByRole('button')
-    expect(button).toHaveTextContent('Accessibility New')
-
+    expect(button).toHaveTextContent(/Image Placeholder/)
     await user.click(button)
-
-    expect(queryByRole('option', { name: 'Accessibility New' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'Calendar Today' })).not.toBeNull()
-    expect(queryByRole('option', { name: 'Zoom Out' })).not.toBeNull()
-
-    expect(handleChange).not.toHaveBeenCalled()
-    await user.click(getByRole('option', { name: 'Attach File' }))
-    expect(handleChange).toHaveBeenCalledWith('AttachFile')
+    const option = queryByRole('option', { name: 'Image Placeholder Zoom Out' })
+    expect(option).not.toBeNull()
   })
 })

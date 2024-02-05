@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import {
   ListboxInput,
   ListboxButton,
@@ -13,29 +13,48 @@ import classNames from 'classnames'
 interface Props {
   labelId: string
   onChange: (value: string) => void
-  options: { label: string; value: string }[]
+  options: { label: string | ReactElement; value: string }[]
   size?: 'small' | 'large'
   value: string
+  renderValue?: (props: { value: string | null; valueLabel: string | null }) => ReactElement
+  'data-testid'?: string
 }
 
-export const Select: FC<Props> = ({ labelId, onChange, options, size, value }) => {
+export const Select: FC<Props> = ({
+  labelId,
+  onChange,
+  options,
+  renderValue,
+  size,
+  value,
+  ...props
+}) => {
   return (
     <ListboxInput
       aria-labelledby={labelId}
       className={classNames('select', size)}
+      data-testid={props['data-testid']}
       value={value}
       onChange={onChange}
     >
-      <ListboxButton arrow={<ChevronDownIcon />} className="select-button" />
-      <ListboxPopover className={classNames('select-options-popover', size)}>
-        <ListboxList>
-          {options.map((option) => (
-            <ListboxOption key={option.value} value={option.value} className="select-option">
-              {option.label}
-            </ListboxOption>
-          ))}
-        </ListboxList>
-      </ListboxPopover>
+      {({ value, valueLabel }) => (
+        <>
+          <ListboxButton arrow={<ChevronDownIcon />} className="select-button">
+            <span data-value={value}>
+              {renderValue ? renderValue({ value, valueLabel }) : valueLabel}
+            </span>
+          </ListboxButton>
+          <ListboxPopover className={classNames('select-options-popover', size)}>
+            <ListboxList>
+              {options.map((option) => (
+                <ListboxOption key={option.value} value={option.value} className="select-option">
+                  {option.label}
+                </ListboxOption>
+              ))}
+            </ListboxList>
+          </ListboxPopover>
+        </>
+      )}
     </ListboxInput>
   )
 }

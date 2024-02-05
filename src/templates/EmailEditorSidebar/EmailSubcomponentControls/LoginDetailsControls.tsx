@@ -14,7 +14,6 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
 }) => {
   const variantHtmlId = `variant-${id}`
   const iconHtmlId = `icon-${id}`
-  const buttonLinkHtmlId = `buttonLink-${id}`
   const [value, setValue] = useLoginDetailsValue(id)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information

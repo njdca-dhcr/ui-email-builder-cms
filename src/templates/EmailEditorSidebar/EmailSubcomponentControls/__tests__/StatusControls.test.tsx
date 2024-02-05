@@ -6,6 +6,12 @@ import { StatusControls } from '../StatusControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
+jest.mock('src/ui/UswdsIconSelect', () => {
+  return {
+    UswdsIconSelect: () => <div>UswdsIconSelect</div>,
+  }
+})
+
 describe('StatusControls', () => {
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
@@ -110,10 +116,9 @@ describe('StatusControls', () => {
         expect(rendered.queryAllByRole('button')).toHaveLength(1)
       })
 
-      it('does not provide a dropdown for selecting an icon', async () => {
-        const { queryByText } = rendered
-        let button = queryByText('Warning', { selector: 'span' })
-        expect(button).toBeNull()
+      it('does not provide a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
     })
 
@@ -136,10 +141,9 @@ describe('StatusControls', () => {
         expect(rendered.queryAllByRole('button')).toHaveLength(1)
       })
 
-      it('does not provide a dropdown for selecting an icon', async () => {
-        const { queryByText } = rendered
-        let button = queryByText('Warning', { selector: 'span' })
-        expect(button).toBeNull()
+      it('does not provide a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
     })
 
@@ -162,10 +166,9 @@ describe('StatusControls', () => {
         expect(rendered.queryAllByRole('button')).toHaveLength(1)
       })
 
-      it('does not provide a dropdown for selecting an icon', async () => {
-        const { queryByText } = rendered
-        let button = queryByText('Warning', { selector: 'span' })
-        expect(button).toBeNull()
+      it('does not provide a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
     })
 
@@ -192,20 +195,9 @@ describe('StatusControls', () => {
         expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
       })
 
-      it('provides a dropdown for selecting an icon', async () => {
-        const { getByRole, queryByRole, queryByText } = rendered
-        let button = queryByText('Warning', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Warning')
-
-        await user.click(button!)
-        expect(queryByRole('option', { name: 'Warning' })).not.toBeNull()
-        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-        await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-        button = queryByText('Device Thermostat', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Device Thermostat')
+      it('provides a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
     })
 
@@ -234,20 +226,9 @@ describe('StatusControls', () => {
         expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
       })
 
-      it('provides a dropdown for selecting an icon', async () => {
-        const { getByRole, queryByRole, queryByText } = rendered
-        let button = queryByText('Warning', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Warning')
-
-        await user.click(button!)
-        expect(queryByRole('option', { name: 'Warning' })).not.toBeNull()
-        expect(queryByRole('option', { name: 'Device Thermostat' })).not.toBeNull()
-        await user.click(getByRole('option', { name: 'Device Thermostat' }))
-
-        button = queryByText('Device Thermostat', { selector: 'span' })
-        expect(button).not.toBeNull()
-        expect(button).toHaveTextContent('Device Thermostat')
+      it('provides a dropdown for selecting an icon', () => {
+        const { baseElement } = rendered
+        expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
     })
   })
