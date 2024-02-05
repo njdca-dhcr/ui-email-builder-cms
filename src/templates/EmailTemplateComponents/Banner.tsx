@@ -47,7 +47,7 @@ export const BannerMarkup: FC<BannerMarkupProps> = ({
           {primaryText}
         </Comp>
       </Cell>
-      <Cell className="banner-link-container" style={secondaryLinkContainerStyles}>
+      <Cell className="banner-link-container top-nav-second-link" style={secondaryLinkContainerStyles}>
         <Comp to={secondaryLink} style={{ ...secondaryLinkStyles, color }}>
           {getHostName(secondaryLink)}
         </Comp>

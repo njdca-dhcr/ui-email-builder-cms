@@ -29,3 +29,9 @@ td.wide {
     width: 100%;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .top-nav-second-link {
+    padding-top: 15px;
+  }
+}
