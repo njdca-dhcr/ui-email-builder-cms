@@ -7,7 +7,6 @@ components:
     subComponents:
       - kind: DepartmentSeal
         required: true
-      - kind: DateRange
       - kind: Title
         required: true
       - kind: ProgramName
