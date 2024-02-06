@@ -36,6 +36,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) =
 
   return (
     <Row
+      className="program-name"
       elements={[
         {
           part: 'cell',

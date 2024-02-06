@@ -18,7 +18,7 @@ export const Intro: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
-    <Row>
+    <Row className="intro">
       <EditableElement
         ref={previewRef}
         element="td"

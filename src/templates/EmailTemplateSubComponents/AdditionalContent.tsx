@@ -19,6 +19,7 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ emailSubComponen
 
   return (
     <Row
+      className="additional-content"
       onClick={(event) => {
         activate(event)
         scrollSidebar()

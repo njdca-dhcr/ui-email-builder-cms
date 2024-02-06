@@ -20,6 +20,7 @@ export const DateRange: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
 
   return (
     <Row
+      className="date-range"
       elements={[
         'cell',
         'table',

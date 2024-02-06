@@ -57,6 +57,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
 
   return (
     <Row
+      className="benefit-amount"
       elements={['cell', 'table']}
       onClick={(event) => {
         activate(event)

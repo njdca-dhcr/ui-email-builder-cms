@@ -39,6 +39,7 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
   return (
     <>
       <Row
+        className="informational-box"
         onClick={(event) => {
           activate(event)
           scrollSidebar()
