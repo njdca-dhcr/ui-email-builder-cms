@@ -1,5 +1,6 @@
 import React, { CSSProperties, ReactNode, forwardRef } from 'react'
 import { AppElement, AppText } from './types'
+import { Colors } from 'src/templates/styles'
 
 interface RichTextElementProps {
   element: AppElement
@@ -14,7 +15,15 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
 
     switch (element.type) {
       case 'link':
-        return <a href={element.url} rel="noopener noreferrer" target="_blank" {...props} />
+        return (
+          <a
+            href={element.url}
+            rel="noopener noreferrer"
+            target="_blank"
+            style={{ color: Colors.linkBlue, textDecoration: 'underline', ...style }}
+            {...props}
+          />
+        )
       default:
         return <p {...props} style={{ ...style, margin: 0, padding: 0 }} />
     }

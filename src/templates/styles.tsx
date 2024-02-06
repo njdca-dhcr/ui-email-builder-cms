@@ -29,6 +29,7 @@ export const Colors = {
   grayDark: '#3d4551',
   grayLight: '#fafafa',
   white: '#ffffff',
+  linkBlue: '#2277c1',
 } as const
 
 const sansSerif = 'Public Sans, Helvetica, Arial, sans-serif'

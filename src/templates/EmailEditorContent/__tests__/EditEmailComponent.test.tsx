@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { render } from '@testing-library/react'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { RichTextValue } from 'src/ui/RichTextEditor'
 
 describe('EditEmailComponent', () => {
   let emailComponent: EmailTemplate.UniqueComponent
@@ -85,7 +86,8 @@ describe('EditEmailComponent', () => {
   it('can render a Disclaimer', () => {
     emailComponent = buildUniqueEmailComponent('Disclaimer')
     const text = faker.lorem.paragraph()
-    localStorage.setItem('disclaimer', JSON.stringify(text))
+    const richTextValue: RichTextValue = [{ type: 'paragraph', children: [{ text }] }]
+    localStorage.setItem('disclaimer', JSON.stringify(richTextValue))
     const { queryByText } = render(
       <EditEmailComponent emailComponent={emailComponent}>{null}</EditEmailComponent>,
       { wrapper: emailPartWrapper },

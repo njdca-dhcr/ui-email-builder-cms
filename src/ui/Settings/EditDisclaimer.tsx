@@ -5,8 +5,8 @@ import {
   useDisclaimerValue,
   styles as disclaimerStyles,
 } from 'src/templates/EmailTemplateComponents/Disclaimer'
-import { EditableElement } from '../EditableElement'
 import { Spacing } from 'src/templates/styles'
+import { RichTextEditableElement } from '../RichTextEditableElement'
 
 export const EditDisclaimer: FC = () => {
   const [disclaimer, setDisclaimer] = useDisclaimerValue()
@@ -21,7 +21,7 @@ export const EditDisclaimer: FC = () => {
         as security purposes.
       </Paragraph>
       <EmailBlock.Table elements={['row']} className="desktop" maxWidth={Spacing.layout.maxWidth}>
-        <EditableElement
+        <RichTextEditableElement
           label="Disclaimer"
           element="td"
           value={disclaimer}

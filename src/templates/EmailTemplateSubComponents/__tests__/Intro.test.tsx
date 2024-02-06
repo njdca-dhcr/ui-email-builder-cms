@@ -3,7 +3,6 @@ import { Intro } from '../Intro'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -26,8 +25,6 @@ describe('Intro', () => {
       { wrapper: emailPartWrapper },
     )
 
-    const key = emailSubComponent.id
-    const value = faker.lorem.words(4)
     const input = getByLabelText('Introduction')
     await user.click(input)
     expect(queryByTestId(richTextEditorTestId)).not.toBeNull()

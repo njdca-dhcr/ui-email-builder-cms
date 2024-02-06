@@ -1,19 +1,16 @@
 import React from 'react'
-import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { EditDisclaimer } from '../EditDisclaimer'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('EditDisclaimer', () => {
   it('is editable', async () => {
     const user = userEvent.setup()
-    const value = faker.lorem.paragraph()
-    const { queryByText, getByLabelText } = render(<EditDisclaimer />)
+    const { queryByTestId, getByLabelText } = render(<EditDisclaimer />)
 
     const disclaimerField = getByLabelText('Disclaimer')
-    await user.clear(disclaimerField)
-    await user.type(disclaimerField, value)
-    expect(queryByText(value)).not.toBeNull()
-    expect(localStorage.getItem('disclaimer')).toEqual(`"${value}"`)
+    await user.click(disclaimerField)
+    expect(queryByTestId(richTextEditorTestId)).not.toBeNull()
   })
 })

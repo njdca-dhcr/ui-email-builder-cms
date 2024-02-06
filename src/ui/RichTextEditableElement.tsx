@@ -16,12 +16,13 @@ export interface RichTextEditableElementProps {
   onClick?: TableHTMLAttributes<HTMLOrSVGElement>['onClick']
   onFocus?: TableHTMLAttributes<HTMLOrSVGElement>['onFocus']
   onValueChange: (value: RichTextValue) => void
+  readonly?: boolean
   value: RichTextValue
   style?: CSSProperties
 }
 
 export const RichTextEditableElement = forwardRef<any, RichTextEditableElementProps>(
-  ({ element: Element, label, onFocus, onValueChange, value, style, ...props }, ref) => {
+  ({ element: Element, label, onFocus, onValueChange, value, readonly, style, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false)
 
     if (isFocused) {
@@ -44,7 +45,9 @@ export const RichTextEditableElement = forwardRef<any, RichTextEditableElementPr
           style={style}
           onFocus={(event) => {
             onFocus && onFocus(event)
-            setIsFocused(true)
+            if (!readonly) {
+              setIsFocused(true)
+            }
           }}
           {...({ ref } as any)}
           {...props}
