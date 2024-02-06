@@ -2,13 +2,20 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
-import { EditableElement } from 'src/ui/EditableElement'
 import { StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
+import { RichTextValue } from 'src/ui/RichTextEditor'
 
-const defaultValue =
-  'You requested a waiver application for your Pandemic Unemployment Overpayment.'
+const defaultValue: RichTextValue = [
+  {
+    type: 'paragraph',
+    children: [
+      { text: 'You requested a waiver application for your Pandemic Unemployment Overpayment.' },
+    ],
+  },
+]
 
 const { Row } = EmailBlock
 
@@ -19,7 +26,7 @@ export const Intro: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
 
   return (
     <Row className="intro">
-      <EditableElement
+      <RichTextEditableElement
         ref={previewRef}
         element="td"
         className={StyleDefaults.layout.narrow}

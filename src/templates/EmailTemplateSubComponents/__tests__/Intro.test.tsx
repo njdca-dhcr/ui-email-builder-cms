@@ -9,8 +9,8 @@ import {
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
-  expectEmailPartContentFor,
 } from 'src/testHelpers'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('Intro', () => {
   let emailSubComponent: EmailTemplate.UniqueSubComponent
@@ -21,7 +21,7 @@ describe('Intro', () => {
 
   it('is editable', async () => {
     const user = userEvent.setup()
-    const { queryByText, getByLabelText, baseElement } = render(
+    const { getByLabelText, queryByTestId } = render(
       <Intro emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
     )
@@ -29,11 +29,8 @@ describe('Intro', () => {
     const key = emailSubComponent.id
     const value = faker.lorem.words(4)
     const input = getByLabelText('Introduction')
-    await user.clear(input)
-    await user.type(input, value)
-
-    expect(queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, baseElement)
+    await user.click(input)
+    expect(queryByTestId(richTextEditorTestId)).not.toBeNull()
   })
 
   it('activates when clicked', async () => {

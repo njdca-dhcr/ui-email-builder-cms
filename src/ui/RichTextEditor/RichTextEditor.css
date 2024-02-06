@@ -1,0 +1,68 @@
+.rte-toolbar {
+  background-color: var(--white);
+  border-radius: 3px;
+  border: 1px solid var(--black);
+  display: flex;
+  font-size: var(--font-small);
+  left: 3.125rem;
+  position: absolute;
+  top: -2.5rem;
+  width: fit-content;
+  z-index: 10;
+}
+
+.rte-link-button,
+.current-link,
+.mark-button {
+  align-items: center;
+  border-left: 1px solid var(--black);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  transition: background-color 100ms ease-in-out;
+}
+
+.rte-link-button:hover,
+.current-link:hover,
+.mark-button:hover {
+  background-color: var(--blue-white);
+}
+
+.mark-button:first-of-type {
+  border-left: 0;
+}
+
+.mark-button.active {
+  background-color: var(--gray-medium);
+}
+
+.mark-button.active:hover {
+  background-color: var(--gray-light-medium);
+}
+
+.mark-button.bold {
+  font-weight: var(--weight-bold);
+}
+
+.mark-button.italicized {
+  font-style: italic;
+}
+
+.mark-button.underlined {
+  text-decoration: underline;
+}
+
+.current-link {
+  cursor: default;
+}
+
+.current-link:hover {
+  background-color: var(--white);
+}
+
+.add-link-button {
+}
+
+.remove-link-button {
+}

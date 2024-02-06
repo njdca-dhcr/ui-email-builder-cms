@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import emailCSS from '!!raw-loader!./email.css'
 import editingEmailCSS from '!!raw-loader!./editingEmail.css'
 import completeEmailCSS from '!!raw-loader!./completeEmail.css'
+import richTextEditorCSS from '!!raw-loader!src/ui/RichTextEditor/RichTextEditor.css'
 
 const Style: FC<{ css: string }> = ({ css }) => {
   if (typeof css === 'string') {
@@ -20,6 +21,7 @@ export const EditingEmailCSS: FC = () => {
     <>
       <EmailCSS />
       <Style css={editingEmailCSS} />
+      <Style css={richTextEditorCSS} />
     </>
   )
 }
