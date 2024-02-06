@@ -159,6 +159,10 @@ export const DepartmentSealsMapping = {
     label: 'Maryland DOL',
     imageName: 'Maryland.png',
   },
+  'Maryland-DHS': {
+    label: 'Maryland DHS Logo',
+    imageName: 'Maryland-DHS-logo.png',
+  },
   'Massachusetts-Gray': {
     label: 'Massachusetts Gray Seal',
     imageName: 'Massachusetts-Alt.png',
