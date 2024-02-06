@@ -403,6 +403,7 @@ const styles = {
     paddingBottom: 15,
     paddingLeft: 44,
     paddingRight: 44,
+    textAlign: 'center',
   } as CSSProperties,
   appealButtonText: {
     ...Text.body.main.bold,
