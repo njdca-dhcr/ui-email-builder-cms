@@ -28,6 +28,10 @@ td.wide {
   .get-started-button {
     width: 100%;
   }
+
+  .informational-box .narrow {
+    padding-right: 20px;
+  }
 }
 
 @media screen and (max-width: 600px) {
