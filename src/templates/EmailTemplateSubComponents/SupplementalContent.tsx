@@ -6,11 +6,26 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
-const defaultValue = {
+interface SupplementalContentValue {
+  title: string
+  description: RichTextValue
+}
+
+const defaultValue: SupplementalContentValue = {
   title: 'Supplemental Content Title',
-  description:
-    'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  description: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        },
+      ],
+    },
+  ],
 }
 
 const { Row } = EmailBlock
@@ -48,7 +63,7 @@ export const SupplementalContent: FC<EmailSubComponentProps> = ({ emailSubCompon
         />
       </Row>
       <Row>
-        <EditableElement
+        <RichTextEditableElement
           element="td"
           label="Supplemental content description"
           onValueChange={(description) => setValue({ ...value, description })}

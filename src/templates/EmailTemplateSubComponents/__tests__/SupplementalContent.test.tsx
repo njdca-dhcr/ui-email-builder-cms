@@ -11,6 +11,7 @@ import {
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
 } from 'src/testHelpers'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('SupplementalContent', () => {
   let value: string
@@ -35,17 +36,21 @@ describe('SupplementalContent', () => {
     value = faker.lorem.words(4)
   })
 
+  const itHasAnEditableRichText = (testName: string, label: string) => {
+    it(`has an editable ${testName}`, async () => {
+      const input = rendered.getByLabelText(label)
+      await user.click(input)
+      expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
+    })
+  }
+
   it('has an editable title', async () => {
     await clearAndFillWithValue('Supplemental content title')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(key, rendered.baseElement)
   })
 
-  it('has an editable description', async () => {
-    await clearAndFillWithValue('Supplemental content description')
-    expect(rendered.queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, rendered.baseElement)
-  })
+  itHasAnEditableRichText('description', 'Supplemental content description')
 
   it('activates when clicked', async () => {
     const user = userEvent.setup()
