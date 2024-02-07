@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Control, EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useSubComponentControlOptions } from '.'
 import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
@@ -23,6 +23,7 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
         <span id={variantHtmlId}>Status variant</span>
       </VisuallyHidden>
       <Select
+        className={SELECT_VARIANT_CLASSNAME}
         labelId={variantHtmlId}
         options={[
           { label: 'Overview', value: StatusVariant.Overview + '' },

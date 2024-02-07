@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Control, EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import {
@@ -28,6 +28,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
           <span id={variantHtmlId}>Rules, Rights, and Regulations variant</span>
         </VisuallyHidden>
         <Select
+          className={SELECT_VARIANT_CLASSNAME}
           labelId={variantHtmlId}
           options={[
             { label: 'Reminder', value: RulesRightsRegulationsVariant.Reminder + '' },

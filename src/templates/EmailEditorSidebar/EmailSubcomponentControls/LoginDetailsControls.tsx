@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Control, EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { Select, UswdsIconSelect } from 'src/ui'
 import {
@@ -27,6 +27,7 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
           <span id={variantHtmlId}>Login Details variant</span>
         </VisuallyHidden>
         <Select
+          className={SELECT_VARIANT_CLASSNAME}
           labelId={variantHtmlId}
           options={[
             { label: 'Details', value: LoginDetailsVariant.Details + '' },

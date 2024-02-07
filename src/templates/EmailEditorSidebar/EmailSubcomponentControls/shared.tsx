@@ -51,3 +51,5 @@ export const Control = {
   Group,
   Label,
 }
+
+export const SELECT_VARIANT_CLASSNAME = 'select-variant'

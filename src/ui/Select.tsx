@@ -11,6 +11,7 @@ import { ChevronDownIcon } from './ChevronDownIcon'
 import classNames from 'classnames'
 
 interface Props {
+  className?: string
   labelId: string
   onChange: (value: string) => void
   options: { label: string | ReactElement; value: string }[]
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export const Select: FC<Props> = ({
+  className,
   labelId,
   onChange,
   options,
@@ -32,7 +34,7 @@ export const Select: FC<Props> = ({
   return (
     <ListboxInput
       aria-labelledby={labelId}
-      className={classNames('select', size)}
+      className={classNames('select', size, className)}
       data-testid={props['data-testid']}
       value={value}
       onChange={onChange}

@@ -135,3 +135,7 @@ label.program-name-inline-color-picker {
 .radio-buttons > .radio-button > label:focus-within {
   outline: var(--default-browser-outline);
 }
+
+.select.select-variant {
+  min-width: 18.5rem;
+}

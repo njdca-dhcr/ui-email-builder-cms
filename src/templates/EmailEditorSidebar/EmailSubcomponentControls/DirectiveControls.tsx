@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Control, EmailSubComponentControlsProps } from './shared'
+import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import {
@@ -26,6 +26,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
         </VisuallyHidden>
 
         <Select
+          className={SELECT_VARIANT_CLASSNAME}
           labelId={htmlId}
           options={[
             { label: 'One Step', value: DirectiveVariant.OneStep + '' },
