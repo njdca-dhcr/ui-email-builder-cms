@@ -8,6 +8,8 @@ import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
 export const enum StatusVariant {
   Overview,
@@ -22,8 +24,8 @@ interface StatusValue {
   icon: UswdsIconVariantKey
   // Always used
   status: string
-  description: string
-  supportiveInformation: string
+  description: RichTextValue
+  supportiveInformation: RichTextValue
   statusDueTo: string
   showSupportiveInformation: boolean
   spaceAfter: boolean
@@ -53,9 +55,29 @@ const defaultValue: StatusValue = {
   statusDueTo: 'because...',
   showSupportiveInformation: true,
   spaceAfter: true,
-  description: '{Data Reference} or a sentence that colors more of the status of claim',
-  supportiveInformation:
-    'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
+  description: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: '{Data Reference} or a sentence that colors more of the status of claim',
+          bold: true,
+        },
+      ],
+    },
+  ],
+  supportiveInformation: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
+          italic: true,
+        },
+      ],
+    },
+  ],
+
   documentsNeededLabel: 'We need the following:',
   documentsNeededValue: '{Name_of_document(s)}',
   emailToLabel: 'Email this to:',
@@ -203,7 +225,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
             </>
           ) : (
             <Row>
-              <EditableElement
+              <RichTextEditableElement
                 element="td"
                 value={value.description}
                 label="Status description"
@@ -329,7 +351,7 @@ export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
               <SpacingCell size="medium" />
             </Row>
             <Row>
-              <EditableElement
+              <RichTextEditableElement
                 element="td"
                 className={StyleDefaults.layout.narrow}
                 value={value.supportiveInformation}
@@ -388,7 +410,7 @@ const styles = {
     paddingBottom: Spacing.size.tiny,
   } as CSSProperties,
   description: {
-    ...Text.body.main.bold,
+    ...Text.body.main.regular,
   } as CSSProperties,
   documentsNeededLabel: {
     ...Text.body.main.regular,
@@ -466,7 +488,7 @@ const styles = {
   } as CSSProperties,
   supportiveInformation: {
     ...StyleDefaults.inline.colors,
-    ...Text.caption.large.italic,
+    ...Text.caption.large.regular,
     color: Colors.grayDark,
   } as CSSProperties,
   missingDocumentDeadline: {

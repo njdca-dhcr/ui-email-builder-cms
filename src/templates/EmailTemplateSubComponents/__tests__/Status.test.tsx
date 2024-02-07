@@ -13,6 +13,7 @@ import {
 } from 'src/testHelpers'
 import { Status, StatusVariant, useStatusValue } from '../Status'
 import { VisibilityToggle } from 'src/ui/VisibilityToggle'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('Status', () => {
   let value: string
@@ -43,29 +44,26 @@ describe('Status', () => {
     )
   }
 
+  const itHasAnEditable = (testName: string, label: string) => {
+    it(`has an editable ${testName}`, async () => {
+      await clearAndFillWithValue(label)
+      expect(rendered.queryByText(value)).not.toBeNull()
+      expectEmailPartContentFor(key, rendered.baseElement)
+    })
+  }
+  const itHasAnEditableRichText = (testName: string, label: string) => {
+    it(`has an editable ${testName}`, async () => {
+      const input = rendered.getByLabelText(label)
+      await user.click(input)
+      expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
+    })
+  }
+
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
     key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)
-  })
-
-  it('has an editable title', async () => {
-    rendered = render(<Status emailSubComponent={emailSubComponent} />, {
-      wrapper: emailPartWrapper,
-    })
-    await clearAndFillWithValue('Status title')
-    expect(rendered.queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, rendered.baseElement)
-  })
-
-  it('has an editable description', async () => {
-    rendered = render(<Status emailSubComponent={emailSubComponent} />, {
-      wrapper: emailPartWrapper,
-    })
-    await clearAndFillWithValue('Status description')
-    expect(rendered.queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('only displays supportive information when it is toggled on', async () => {
@@ -110,14 +108,6 @@ describe('Status', () => {
       )
     }
 
-    const itHasAnEditable = (testName: string, label: string) => {
-      it(`has an editable ${testName}`, async () => {
-        await clearAndFillWithValue(label)
-        expect(rendered.queryByText(value)).not.toBeNull()
-        expectEmailPartContentFor(key, rendered.baseElement)
-      })
-    }
-
     describe('Overview', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
@@ -129,9 +119,9 @@ describe('Status', () => {
 
       itHasAnEditable('title', 'Status title')
 
-      itHasAnEditable('description', 'Status description')
+      itHasAnEditableRichText('description', 'Status description')
 
-      itHasAnEditable('supportive information', 'Status supportive information')
+      itHasAnEditableRichText('supportive information', 'Status supportive information')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -153,9 +143,9 @@ describe('Status', () => {
 
       itHasAnEditable('title', 'Status title')
 
-      itHasAnEditable('description', 'Status description')
+      itHasAnEditableRichText('description', 'Status description')
 
-      itHasAnEditable('supportive information', 'Status supportive information')
+      itHasAnEditableRichText('supportive information', 'Status supportive information')
 
       itHasAnEditable('status due to', 'Status due to label')
 
@@ -183,7 +173,7 @@ describe('Status', () => {
 
       itHasAnEditable('documents needed value', 'Documents needed value')
 
-      itHasAnEditable('supportive information', 'Status supportive information')
+      itHasAnEditableRichText('supportive information', 'Status supportive information')
 
       itHasAnEditable('email to label', 'Email to label')
 
@@ -215,9 +205,9 @@ describe('Status', () => {
 
       itHasAnEditable('title', 'Status title')
 
-      itHasAnEditable('description', 'Status description')
+      itHasAnEditableRichText('description', 'Status description')
 
-      itHasAnEditable('supportive information', 'Status supportive information')
+      itHasAnEditableRichText('supportive information', 'Status supportive information')
 
       itHasAnEditable('status due to', 'Status due to label')
 
@@ -243,9 +233,9 @@ describe('Status', () => {
 
       itHasAnEditable('title', 'Status title')
 
-      itHasAnEditable('description', 'Status description')
+      itHasAnEditableRichText('description', 'Status description')
 
-      itHasAnEditable('supportive information', 'Status supportive information')
+      itHasAnEditableRichText('supportive information', 'Status supportive information')
 
       itHasAnEditable('status due to', 'Status due to label')
 
