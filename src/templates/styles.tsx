@@ -93,10 +93,12 @@ export const Text = {
       bold: defaultTextStyle({
         fontSize: 32,
         fontWeight: FontWeight.bold,
+        lineHeight: '40px',
       }),
       regular: defaultTextStyle({
         fontSize: 32,
         fontWeight: FontWeight.regular,
+        lineHeight: '40px',
       }),
     },
     h3: {
