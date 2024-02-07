@@ -12,6 +12,7 @@ import {
   renderEmailPart,
 } from 'src/testHelpers'
 import { Directive, DirectiveVariant, useDirectiveValue } from '../Directive'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('Directive', () => {
   let value: string
@@ -70,6 +71,14 @@ describe('Directive', () => {
       })
     }
 
+    const itHasAnEditableRichText = (testName: string, label: string) => {
+      it(`has an editable ${testName}`, async () => {
+        const input = rendered.getByLabelText(label)
+        await user.click(input)
+        expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
+      })
+    }
+
     describe('One Step', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
@@ -85,7 +94,7 @@ describe('Directive', () => {
 
       itHasAnEditable('directive link', 'Directive Link')
 
-      itHasAnEditable('supportive information', 'Supportive information')
+      itHasAnEditableRichText('supportive information', 'Supportive information')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -105,21 +114,23 @@ describe('Directive', () => {
         )
       })
 
+      itHasAnEditableRichText('label for the directive', 'Label for the Directive')
+
       itHasAnEditable('directive button', 'Directive Button')
 
       itHasAnEditable('directive link', 'Directive Link')
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
 
-      itHasAnEditable('step 1 additional information', 'Additional information for Step 1')
+      itHasAnEditableRichText('step 1 additional information', 'Additional information for Step 1')
 
       itHasAnEditable('step 2 label', 'Label for Step 2')
 
-      itHasAnEditable('step 2 additional information', 'Additional information for Step 2')
+      itHasAnEditableRichText('step 2 additional information', 'Additional information for Step 2')
 
       itHasAnEditable('step 3 label', 'Label for Step 3')
 
-      itHasAnEditable('step 3 additional information', 'Additional information for Step 3')
+      itHasAnEditableRichText('step 3 additional information', 'Additional information for Step 3')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -139,25 +150,27 @@ describe('Directive', () => {
         )
       })
 
+      itHasAnEditableRichText('label for the directive', 'Label for the Directive')
+
       itHasAnEditable('directive button', 'Directive Button')
 
       itHasAnEditable('directive link', 'Directive Link')
 
       itHasAnEditable('step 1 label', 'Label for Step 1')
 
-      itHasAnEditable('step 1 additional information', 'Additional information for Step 1')
+      itHasAnEditableRichText('step 1 additional information', 'Additional information for Step 1')
 
       itHasAnEditable('step 2 label', 'Label for Step 2')
 
-      itHasAnEditable('step 2 additional information', 'Additional information for Step 2')
+      itHasAnEditableRichText('step 2 additional information', 'Additional information for Step 2')
 
-      itHasAnEditable('Step 2 tertiary content', 'Tertiary information for Step 2')
+      itHasAnEditableRichText('Step 2 tertiary content', 'Tertiary information for Step 2')
 
-      itHasAnEditable('Step 2 case number information', 'Case number information')
+      itHasAnEditableRichText('Step 2 case number information', 'Case number information')
 
       itHasAnEditable('step 3 label', 'Label for Step 3')
 
-      itHasAnEditable('step 3 additional information', 'Additional information for Step 3')
+      itHasAnEditableRichText('step 3 additional information', 'Additional information for Step 3')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -183,7 +196,9 @@ describe('Directive', () => {
 
       itHasAnEditable('alternative payment information', 'Alternative payment information')
 
-      itHasAnEditable('supportive information', 'Alternative payment information')
+      itHasAnEditable('alternative payment information', 'Alternative payment information')
+
+      itHasAnEditableRichText('supportive information', 'Supportive information')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')

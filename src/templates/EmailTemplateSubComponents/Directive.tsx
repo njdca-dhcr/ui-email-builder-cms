@@ -6,6 +6,8 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
@@ -23,31 +25,31 @@ export interface DirectiveValue {
   // Always Used
   title: string
   showTitle: boolean
-  label: string
+  label: RichTextValue
   linkHref: string
   buttonLabel: string
 
   // OneStep
   step1Label: string
-  step1Additional: string
-  oneStepSupportiveText: string
+  step1Additional: RichTextValue
+  oneStepSupportiveText: RichTextValue
 
   // ThreeStep uses OneStep values
   step2Label: string
   showStep1AdditionalContent: boolean
   showStep2AdditionalContent: boolean
-  step2Additional: string
+  step2Additional: RichTextValue
   step3Label: string
   showStep3AdditionalContent: boolean
-  step3Additional: string
+  step3Additional: RichTextValue
 
   // StepTwoExpansion uses ThreeStep values
-  step2Tertiary: string
-  step2CaseNumber: string
+  step2Tertiary: RichTextValue
+  step2CaseNumber: RichTextValue
 
   // PayOnline uses OneStep values
   alternativePaymentLabel: string
-  payOnlineSupportiveText: string
+  payOnlineSupportiveText: RichTextValue
 
   // CostBreakdown
 }
@@ -56,28 +58,73 @@ export const defaultValue: DirectiveValue = {
   variant: DirectiveVariant.OneStep,
   title: 'Directive Title',
   showTitle: true,
-  label: 'To help resolve this issue, complete the following steps:',
+  label: [
+    {
+      type: 'paragraph',
+      children: [{ text: 'To help resolve this issue, complete the following steps:' }],
+    },
+  ],
   linkHref:
     'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   buttonLabel: 'Get Started',
   step1Label: 'Step 1 Directive',
   showStep1AdditionalContent: true,
-  step1Additional: 'Additional information around Step 1',
-  oneStepSupportiveText:
-    'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
+  step1Additional: [
+    {
+      type: 'paragraph',
+      children: [{ text: 'Additional information around Step 1' }],
+    },
+  ],
+  oneStepSupportiveText: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Supportive information around how the status above was informed and how a claimant will receive more detailed information and/or a determination.',
+          italic: true,
+        },
+      ],
+    },
+  ],
   step2Label: 'Step 2 Directive',
   showStep2AdditionalContent: true,
-  step2Additional: 'Additional information around Step 2',
-  step2Tertiary:
-    'Tertiary information around Step 2, (usually involving an alternate way to complete the second step).',
-  step2CaseNumber: 'Case #: [000000]',
+  step2Additional: [
+    {
+      type: 'paragraph',
+      children: [{ text: 'Additional information around Step 2' }],
+    },
+  ],
+  step2Tertiary: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Tertiary information around Step 2, (usually involving an alternate way to complete the second step).',
+        },
+      ],
+    },
+  ],
+  step2CaseNumber: [{ type: 'paragraph', children: [{ text: 'Case #: [000000]' }] }],
   step3Label: 'Step 3 Directive',
   showStep3AdditionalContent: true,
-  step3Additional: 'Additional information around Step 3',
+  step3Additional: [
+    {
+      type: 'paragraph',
+      children: [{ text: 'Additional information around Step 3' }],
+    },
+  ],
   alternativePaymentLabel:
     'Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951',
-  payOnlineSupportiveText:
-    'Make the check or money order payable to NJ Dept. of Labor and Workforce Development. Be sure to write your name and social security number on the payment.',
+  payOnlineSupportiveText: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Make the check or money order payable to NJ Dept. of Labor and Workforce Development. Be sure to write your name and social security number on the payment.',
+        },
+      ],
+    },
+  ],
 }
 
 export const useDirectiveValue = (id: string) => {
@@ -190,7 +237,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
 
           {[DirectiveVariant.OneStep].includes(value.variant) && (
             <tr>
-              <EditableElement
+              <RichTextEditableElement
                 element="td"
                 label="Supportive information"
                 onValueChange={(oneStepSupportiveText) =>
@@ -223,7 +270,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
               </tr>
 
               <tr>
-                <EditableElement
+                <RichTextEditableElement
                   element="td"
                   label="Supportive information"
                   onValueChange={(payOnlineSupportiveText) =>
@@ -244,7 +291,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
           {/* Directive Label */}
           <Row elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}>
             <div style={{ lineHeight: '150%' }}>
-              <EditableElement
+              <RichTextEditableElement
                 element="span"
                 label="Label for the Directive"
                 onValueChange={(label) => setValue({ ...value, label })}
@@ -307,7 +354,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                       <Row>
                         {value.showStep1AdditionalContent && (
                           <Cell style={{ lineHeight: '16px' }}>
-                            <EditableElement
+                            <RichTextEditableElement
                               element="span"
                               label="Additional information for Step 1"
                               onValueChange={(step1Additional) =>
@@ -331,7 +378,11 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                         <Row
                           elements={[
                             'cell',
-                            { part: 'table', width: 'unset' },
+                            {
+                              part: 'table',
+                              width: 'unset',
+                              className: StyleDefaults.layout.button,
+                            },
                             'row',
                             { part: 'cell', style: styles.getStartedButton },
                           ]}
@@ -424,7 +475,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                       {value.showStep2AdditionalContent && (
                         <>
                           <div style={{ lineHeight: '16px' }}>
-                            <EditableElement
+                            <RichTextEditableElement
                               element="span"
                               label="Additional information for Step 2"
                               onValueChange={(step2Additional) =>
@@ -438,7 +489,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
 
                           {[DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
                             <>
-                              <EditableElement
+                              <RichTextEditableElement
                                 element="div"
                                 label="Tertiary information for Step 2"
                                 onValueChange={(step2Tertiary) =>
@@ -449,7 +500,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                               />
                               <div style={styles.whiteSpace}>&nbsp;</div>
 
-                              <EditableElement
+                              <RichTextEditableElement
                                 element="div"
                                 label="Case number information"
                                 onValueChange={(step2CaseNumber) =>
@@ -511,7 +562,7 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
                     {value.showStep3AdditionalContent && (
                       <Cell style={styles.step3AdditionalInfo}>
                         <div style={{ lineHeight: '16px' }}>
-                          <EditableElement
+                          <RichTextEditableElement
                             element="span"
                             label="Additional information for Step 3"
                             onValueChange={(step3Additional) =>
@@ -629,7 +680,7 @@ const styles = {
   } as CSSProperties,
   supportiveInformation: {
     ...StyleDefaults.inline.colors,
-    ...Text.body.tertiary.italic,
+    ...Text.body.tertiary.regular,
     color: Colors.grayDark,
   } as CSSProperties,
   alternativePayment: {

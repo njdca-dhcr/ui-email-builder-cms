@@ -51,6 +51,7 @@ describe('Status', () => {
       expectEmailPartContentFor(key, rendered.baseElement)
     })
   }
+
   const itHasAnEditableRichText = (testName: string, label: string) => {
     it(`has an editable ${testName}`, async () => {
       const input = rendered.getByLabelText(label)
