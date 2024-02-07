@@ -248,7 +248,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
           <Row
             elements={[
               'cell',
-              { part: 'table', width: 'unset' },
+              { part: 'table', width: 'unset', className: StyleDefaults.layout.button },
               'row',
               { part: 'cell', style: styles.appealButton },
             ]}

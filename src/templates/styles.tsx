@@ -337,6 +337,7 @@ export const StyleDefaults = {
   layout: {
     narrow: 'narrow',
     wide: 'wide',
+    button: 'get-started-button',
   },
   inline: {
     colors: {

@@ -12,6 +12,10 @@
   display: inline-block;
 }
 
+.mobile .get-started-button {
+  width: 100%;
+}
+
 .desktop td.narrow {
   padding-left: 50px;
   padding-right: 100px;

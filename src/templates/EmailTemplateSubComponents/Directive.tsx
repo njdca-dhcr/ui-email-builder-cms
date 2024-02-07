@@ -151,9 +151,12 @@ export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
             <Row
               elements={[
                 'cell',
-                { part: 'table', width: 'unset', className: 'get-started-button' },
+                { part: 'table', width: 'unset', className: StyleDefaults.layout.button },
                 'row',
-                { part: 'cell', style: styles.getStartedButton },
+                {
+                  part: 'cell',
+                  style: styles.getStartedButton,
+                },
               ]}
             >
               <Link to={value.linkHref}>

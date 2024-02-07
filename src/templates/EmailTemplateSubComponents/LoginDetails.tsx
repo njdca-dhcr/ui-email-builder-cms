@@ -77,7 +77,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
     <Row
       className="login-details"
       elements={[
-        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.narrow },
+        { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
         {
           part: 'table',
           onClick: (event) => {
@@ -156,7 +156,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
           <Row
             elements={[
               'cell',
-              { part: 'table', width: 'unset' },
+              { part: 'table', width: 'unset', className: StyleDefaults.layout.button },
               'row',
               { part: 'cell', style: styles.button },
             ]}
@@ -276,6 +276,7 @@ const styles = {
     paddingBottom: Spacing.size.small,
     paddingLeft: Spacing.size.extraLarge,
     paddingRight: Spacing.size.extraLarge,
+    textAlign: 'center',
   } as CSSProperties,
   buttonText: {
     ...Text.body.main.bold,
