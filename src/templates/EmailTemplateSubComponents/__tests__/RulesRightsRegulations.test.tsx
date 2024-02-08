@@ -17,6 +17,7 @@ import {
   useRulesRightsRegulationsValue,
 } from '../RulesRightsRegulations'
 import { RulesRightsRegulationsControls } from 'src/templates/EmailEditorSidebar/EmailSubcomponentControls/RulesRightsRegulationsControls'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('RulesRightsRegulations', () => {
   let value: string
@@ -36,15 +37,6 @@ describe('RulesRightsRegulations', () => {
     key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)
-  })
-
-  it('has an editable title', async () => {
-    rendered = render(<RulesRightsRegulations emailSubComponent={emailSubComponent} />, {
-      wrapper: emailPartWrapper,
-    })
-    await clearAndFillWithValue('Reminder title')
-    expect(rendered.queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, rendered.baseElement)
   })
 
   it('activates when clicked', async () => {
@@ -83,6 +75,14 @@ describe('RulesRightsRegulations', () => {
       })
     }
 
+    const itHasAnEditableRichText = (testName: string, label: string) => {
+      it(`has an editable ${testName}`, async () => {
+        const input = rendered.getByLabelText(label)
+        await user.click(input)
+        expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
+      })
+    }
+
     describe('Reminder', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
@@ -112,9 +112,9 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('eligibility condition 2', 'Eligibility condition 2')
 
-      itHasAnEditable('reminder is for', 'Reminder is for')
+      itHasAnEditableRichText('reminder is for', 'Reminder is for')
 
-      itHasAnEditable('footnote', 'Reminder footnote')
+      itHasAnEditableRichText('footnote', 'Reminder footnote')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -165,9 +165,9 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('title', 'Appeal Rights title')
 
-      itHasAnEditable('summary', 'Appeal Rights summary')
+      itHasAnEditableRichText('summary', 'Appeal Rights summary')
 
-      itHasAnEditable('instruction', 'Appeal Rights instruction')
+      itHasAnEditableRichText('instruction', 'Appeal Rights instruction')
 
       itHasAnEditable('button', 'Appeal Rights button')
 

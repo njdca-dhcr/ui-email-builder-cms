@@ -10,6 +10,8 @@ import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { EditableTerms, TableTerm } from 'src/ui/EditableTermsTable'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
@@ -27,14 +29,14 @@ interface RulesRightsRegulationsValue {
   eligibilityLabel: string
   eligibilityConditionsList: string[]
   showReminderIsFor: boolean
-  reminderIsFor: string
+  reminderIsFor: RichTextValue
   showFootnote: boolean
-  footnote: string
+  footnote: RichTextValue
   // Appeal Rights
   appealRightsTitle: string
-  appealRightsSummary: string
+  appealRightsSummary: RichTextValue
   appealRightsShowInstruction: boolean
-  appealRightsInstruction: string
+  appealRightsInstruction: RichTextValue
   appealRightsButton: string
   appealRightsHref: string
   appealRightsShowInfoLabel: boolean
@@ -56,16 +58,45 @@ const defaultValue: RulesRightsRegulationsValue = {
     'Repayment would be unfair and unreasonable given the context',
   ],
   showReminderIsFor: true,
-  reminderIsFor:
-    'This waiver is for Pandemic Unemployment Assistance (PUA), Federal Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment Compensation (MEUC), and Pandemic Extended Unemployment Compensation (PEUC).',
+  reminderIsFor: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'This waiver is for Pandemic Unemployment Assistance (PUA), Federal Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment Compensation (MEUC), and Pandemic Extended Unemployment Compensation (PEUC).',
+          italic: true,
+        },
+      ],
+    },
+  ],
   showFootnote: true,
-  footnote:
-    '*State and federal laws, rules, and guidance will be used to make these determinations.',
+  footnote: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: '*State and federal laws, rules, and guidance will be used to make these determinations.',
+          italic: true,
+          bold: true,
+        },
+      ],
+    },
+  ],
   appealRightsTitle: 'Appeal Rights',
-  appealRightsSummary:
-    'If you disagree with this determination, you have the right to file an appeal. Your appeal must be received within seven (7) days after the date you received this email.',
+  appealRightsSummary: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'If you disagree with this determination, you have the right to file an appeal. Your appeal must be received within seven (7) days after the date you received this email.',
+        },
+      ],
+    },
+  ],
   appealRightsShowInstruction: true,
-  appealRightsInstruction: 'To begin an appeal online, get started below:',
+  appealRightsInstruction: [
+    { type: 'paragraph', children: [{ text: 'To begin an appeal online, get started below:' }] },
+  ],
   appealRightsButton: 'Get Started',
   appealRightsHref:
     'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
@@ -206,7 +237,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             </EditableList>
           </Row>
           <Row condition={value.showReminderIsFor}>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               value={value.reminderIsFor}
               label="Reminder is for"
@@ -215,7 +246,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             />
           </Row>
           <Row condition={value.showFootnote}>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               value={value.footnote}
               label="Reminder footnote"
@@ -226,7 +257,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
         </Cell>
         <Cell elements={['table']} condition={isAppealRights}>
           <Row>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               value={value.appealRightsSummary}
               label="Appeal Rights summary"
@@ -235,7 +266,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubCom
             />
           </Row>
           <Row condition={value.appealRightsShowInstruction}>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               value={value.appealRightsInstruction}
               label="Appeal Rights instruction"
@@ -377,11 +408,11 @@ const styles = {
     ...Text.body.main.semibold,
   } as CSSProperties,
   reminderIsFor: {
-    ...Text.body.secondary.italic,
+    ...Text.body.secondary.regular,
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   footnote: {
-    ...Text.body.secondary.boldItalic,
+    ...Text.body.secondary.regular,
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
   appealSummary: {
