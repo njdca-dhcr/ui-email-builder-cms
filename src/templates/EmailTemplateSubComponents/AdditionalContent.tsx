@@ -3,12 +3,21 @@ import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Colors, StyleDefaults, Text } from '../styles'
-import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
-const defaultValue =
-  'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.'
+const defaultValue: RichTextValue = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        text: 'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.',
+      },
+    ],
+  },
+]
 
 const { Row } = EmailBlock
 
@@ -29,7 +38,7 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ emailSubComponen
         scrollSidebar()
       }}
     >
-      <EditableElement
+      <RichTextEditableElement
         ref={previewRef}
         element="td"
         className={StyleDefaults.layout.narrow}
