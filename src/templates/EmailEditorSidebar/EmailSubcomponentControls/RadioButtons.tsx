@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react'
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 interface ButtonProps {
@@ -13,9 +12,7 @@ const Button: FC<ButtonProps> = ({ checked, label, onChange }) => {
     <div className="radio-button">
       <label>
         {label}
-        <VisuallyHidden>
-          <input type="radio" checked={checked} onChange={onChange} />
-        </VisuallyHidden>
+        <input type="radio" checked={checked} onChange={onChange} />
       </label>
     </div>
   )

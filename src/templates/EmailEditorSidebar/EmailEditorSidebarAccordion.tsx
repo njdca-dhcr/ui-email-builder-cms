@@ -21,6 +21,7 @@ import {
 } from '../SyncSidebarAndPreviewScroll'
 import { Link } from 'gatsby'
 import { VisibilityToggle } from 'src/ui/VisibilityToggle'
+import { EmailSubComponentFloatingControls } from './EmailSubcomponentControls/EmailSubcomponentFloatingControls'
 
 interface ContainerProps {
   children: ReactNode
@@ -135,41 +136,44 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
   const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
-    <div
-      className={classNames('accordion-email-subcomponent', {
-        [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass]: isActive && shouldShow.on,
-      })}
-      onClick={(event) => {
-        event.stopPropagation()
-        scrollPreview()
-      }}
-      onFocus={(event) => {
-        event.stopPropagation()
-        scrollPreview()
-      }}
-    >
-      <div className={classNames('bar', { visible: shouldShow.on })} />
-      <div className={classNames('label-and-toggle', { invisible: shouldShow.off })}>
-        <label htmlFor={toggleId}>{labelForSubComponent(emailSubComponent.kind)}</label>
-        <VisibilityToggle
-          id={toggleId}
-          onChange={shouldShow.toggle}
-          value={shouldShow.on}
-          disabled={emailSubComponent.required ?? false}
+    <>
+      <div
+        className={classNames('accordion-email-subcomponent', {
+          [SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass]: isActive && shouldShow.on,
+        })}
+        onClick={(event) => {
+          event.stopPropagation()
+          scrollPreview()
+        }}
+        onFocus={(event) => {
+          event.stopPropagation()
+          scrollPreview()
+        }}
+      >
+        <div className={classNames('bar', { visible: shouldShow.on })} />
+        <div className={classNames('label-and-toggle', { invisible: shouldShow.off })}>
+          <label htmlFor={toggleId}>{labelForSubComponent(emailSubComponent.kind)}</label>
+          <VisibilityToggle
+            id={toggleId}
+            onChange={shouldShow.toggle}
+            value={shouldShow.on}
+            disabled={emailSubComponent.required ?? false}
+          />
+        </div>
+
+        {emailSubComponent.description && (
+          <p className={classNames('description', { invisible: shouldShow.off })}>
+            {emailSubComponent.description}
+          </p>
+        )}
+        <EmailSubComponentControls
+          componentId={componentId}
+          id={emailSubComponent.id}
+          emailSubComponent={emailSubComponent}
         />
       </div>
-
-      {emailSubComponent.description && (
-        <p className={classNames('description', { invisible: shouldShow.off })}>
-          {emailSubComponent.description}
-        </p>
-      )}
-      <EmailSubComponentControls
-        componentId={componentId}
-        id={emailSubComponent.id}
-        emailSubComponent={emailSubComponent}
-      />
-    </div>
+      <EmailSubComponentFloatingControls emailSubComponent={emailSubComponent} />
+    </>
   )
 }
 EmailSubComponent.displayName = 'EmailEditorSidebarAccordion.EmailSubComponent'

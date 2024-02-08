@@ -82,13 +82,16 @@ label.program-name-inline-color-picker {
   border: 0;
   display: flex;
   justify-content: space-between;
-  margin: 0;
-  margin-top: 1rem;
+  margin: 1.5rem 0;
   padding: 0;
+  padding-left: 2.5rem;
+  padding-right: 2.25rem;
 }
 
 .radio-buttons-fieldset > .legend {
   font-size: var(--font-small);
+  font-weight: bold;
+  font-style: italic;
 }
 
 .radio-buttons {
@@ -105,7 +108,15 @@ label.program-name-inline-color-picker {
   font-size: var(--font-tiny);
   font-weight: var(--weight-normal);
   font-style: italic;
+  position: relative;
   transition: background-color 150ms ease-in-out;
+}
+
+.radio-button input[type='radio'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
 .radio-button:has(:checked) {

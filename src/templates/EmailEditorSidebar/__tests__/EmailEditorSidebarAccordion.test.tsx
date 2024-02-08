@@ -570,6 +570,18 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     expect(queryByText('Status variant')).not.toBeNull()
   })
 
+  it('displays subcomponent floating controls', () => {
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    const { queryByText } = render(
+      <EmailEditorSidebarAccordion.EmailSubComponent
+        componentId={faker.lorem.word()}
+        emailSubComponent={emailSubComponent}
+      />,
+      { wrapper },
+    )
+    expect(queryByText('Spacing')).not.toBeNull()
+  })
+
   it('is highlighted when the subcomponent is active', () => {
     const { baseElement } = render(
       <ShouldShowEmailPart>

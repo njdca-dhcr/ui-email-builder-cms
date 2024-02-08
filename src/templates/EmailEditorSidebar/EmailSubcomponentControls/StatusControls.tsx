@@ -7,7 +7,6 @@ import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconSelect } from 'src/ui'
-import { Radio } from './RadioButtons'
 
 export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
   const variantHtmlId = `select-variant-${id}`
@@ -76,18 +75,6 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
         onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
         value={value.showSupportiveInformation}
       />
-      <Radio.Fieldset legend="Spacing" legendId="status-spacing-control">
-        <Radio.Button
-          label="Small"
-          checked={!value.spaceAfter}
-          onChange={() => setValue({ ...value, spaceAfter: false })}
-        />
-        <Radio.Button
-          label="Large"
-          checked={value.spaceAfter}
-          onChange={() => setValue({ ...value, spaceAfter: true })}
-        />
-      </Radio.Fieldset>
     </Control.Group>
   )
 }
