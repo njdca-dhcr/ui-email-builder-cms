@@ -14,22 +14,22 @@ jest.mock('src/features', () => {
 
 describe('SidebarNavigation', () => {
   it('displays a home link', () => {
-    const { getByText } = render(<SidebarNavigation />)
-    const link: HTMLAnchorElement = getByText('Home') as any
+    const { getByRole } = render(<SidebarNavigation />)
+    const link: HTMLAnchorElement = getByRole('link', { name: 'Home' }) as any
     expect(link.tagName).toEqual('A')
     expect(link.href).toEqual(urlFor('/'))
   })
 
   it('displays a library link', () => {
-    const { getByText } = render(<SidebarNavigation />)
-    const link: HTMLAnchorElement = getByText('Library') as any
+    const { getByRole } = render(<SidebarNavigation />)
+    const link: HTMLAnchorElement = getByRole('link', { name: 'Library' }) as any
     expect(link.tagName).toEqual('A')
     expect(link.href).toEqual(urlFor('/library'))
   })
 
   it('displays a tips and tricks link', () => {
-    const { getByText } = render(<SidebarNavigation />)
-    const link: HTMLAnchorElement = getByText('Tips & Tricks') as any
+    const { getByRole } = render(<SidebarNavigation />)
+    const link: HTMLAnchorElement = getByRole('link', { name: 'Tips & Tricks' }) as any
     expect(link.tagName).toEqual('A')
     expect(link.href).toEqual(urlFor('/tips-and-tricks'))
   })
@@ -40,8 +40,8 @@ describe('SidebarNavigation', () => {
     })
 
     it('displays a settings link', () => {
-      const { getByText } = render(<SidebarNavigation />)
-      const link: HTMLAnchorElement = getByText('Settings') as any
+      const { getByRole } = render(<SidebarNavigation />)
+      const link: HTMLAnchorElement = getByRole('link', { name: 'Settings' }) as any
       expect(link.tagName).toEqual('A')
       expect(link.href).toEqual(urlFor('/settings'))
     })
