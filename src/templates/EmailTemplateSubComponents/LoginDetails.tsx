@@ -9,6 +9,8 @@ import { UswdsIcon } from 'src/ui'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
@@ -24,13 +26,13 @@ interface LoginDetailsValue {
   loginDetailsTitle: string
   usernameLabel: string
   usernameValue: string
-  resetPasswordMessage: string
+  resetPasswordMessage: RichTextValue
   button: string
   buttonHref: string
-  resetPasswordDetails: string
+  resetPasswordDetails: RichTextValue
   loginDetailsIcon: UswdsIconVariantKey
   loginInformationTitle: string
-  loginInformationDescription: string
+  loginInformationDescription: RichTextValue
   loginInformationList: string[]
   loginInformationIcon: UswdsIconVariantKey
 }
@@ -41,18 +43,42 @@ const defaultValue: LoginDetailsValue = {
   loginDetailsTitle: 'Login Details',
   usernameLabel: 'Your username is:',
   usernameValue: 'CAPTAIN AMERICA',
-  resetPasswordMessage:
-    "If you're having trouble logging in, send a request to reset your password.",
+  resetPasswordMessage: [
+    {
+      type: 'paragraph',
+      children: [
+        { text: "If you're having trouble logging in, send a request to reset your password." },
+      ],
+    },
+  ],
   button: 'Reset Password',
   buttonHref:
     'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
-  resetPasswordDetails:
-    'Your request may take up to 7-10 business days. An email will be sent to you when your password has been reset.',
+  resetPasswordDetails: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Your request may take up to 7-10 business days. An email will be sent to you when your password has been reset.',
+          italic: true,
+        },
+      ],
+    },
+  ],
   loginDetailsIcon: 'Lock',
   // Information
   loginInformationTitle: 'Important Login Information',
-  loginInformationDescription:
-    'Login using the same Login ID and Password you used to file your claim.',
+  loginInformationDescription: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Login using the same Login ID and Password you used to file your claim.',
+          bold: true,
+        },
+      ],
+    },
+  ],
   loginInformationList: [
     `<b>If you do not have an account,</b> create one here. After creating your account, return to this email and get started.`,
     `<b>Forget your username and password?</b> Follow the links on the login page to help access your account.`,
@@ -145,7 +171,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
             />
           </Row>
           <Row>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               onValueChange={(resetPasswordMessage) => setValue({ ...value, resetPasswordMessage })}
               label="Reset password message"
@@ -190,7 +216,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
             </Link>
           </Row>
           <Row>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               onValueChange={(resetPasswordDetails) => setValue({ ...value, resetPasswordDetails })}
               label="Reset password details"
@@ -204,7 +230,7 @@ export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) 
         <Cell>{null}</Cell>
         <Cell elements={['table']}>
           <Row>
-            <EditableElement
+            <RichTextEditableElement
               element="td"
               label="Login information description"
               value={value.loginInformationDescription}
@@ -293,10 +319,10 @@ const styles = {
     wordBreak: 'break-all',
   } as CSSProperties,
   resetPasswordDetails: {
-    ...Text.body.secondary.italic,
+    ...Text.body.secondary.regular,
   } as CSSProperties,
   loginInformationDescription: {
-    ...Text.body.main.semibold,
+    ...Text.body.main.regular,
   } as CSSProperties,
   loginInformationListContainer: {
     paddingLeft: Spacing.size.large,

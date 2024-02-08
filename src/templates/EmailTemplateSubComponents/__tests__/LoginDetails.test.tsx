@@ -12,6 +12,7 @@ import {
   renderEmailPart,
 } from 'src/testHelpers'
 import { LoginDetails, LoginDetailsVariant, useLoginDetailsValue } from '../LoginDetails'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('LoginDetails', () => {
   let emailSubComponent: EmailTemplate.UniqueSubComponent
@@ -72,6 +73,14 @@ describe('LoginDetails', () => {
       })
     }
 
+    const itHasAnEditableRichText = (testName: string, label: string) => {
+      it(`has an editable ${testName}`, async () => {
+        const input = rendered.getByLabelText(label)
+        await user.click(input)
+        expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
+      })
+    }
+
     describe('Details', () => {
       beforeEach(async () => {
         await user.selectOptions(
@@ -86,13 +95,13 @@ describe('LoginDetails', () => {
 
       itHasAnEditable('username value', 'Username value')
 
-      itHasAnEditable('reset password message', 'Reset password message')
+      itHasAnEditableRichText('reset password message', 'Reset password message')
 
       itHasAnEditable('button', 'Reset password button')
 
       itHasAnEditable('link', 'Reset password link')
 
-      itHasAnEditable('reset password details', 'Reset password details')
+      itHasAnEditableRichText('reset password details', 'Reset password details')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
@@ -110,7 +119,7 @@ describe('LoginDetails', () => {
 
       itHasAnEditable('title', 'Login information title')
 
-      itHasAnEditable('description', 'Login information description')
+      itHasAnEditableRichText('description', 'Login information description')
 
       itHasAnEditable('bullet 1', 'Login information bullet 1')
 
