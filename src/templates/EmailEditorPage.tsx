@@ -33,14 +33,14 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
         <CurrentlyActiveEmailPart>
           <SyncSidebarAndPreviewScroll>
             <ClearCurrentlyActiveEmailPart />
-            <PreviewText>
-              <EmailPartsContent>
-                <EmailEditorSidebar emailTemplate={emailTemplate} />
+            <EmailPartsContent>
+              <EmailEditorSidebar emailTemplate={emailTemplate} />
+              <PreviewText>
                 <PageContent element="div" className="email-editor-page-content">
                   <EmailEditorContent emailTemplate={emailTemplate} />
                 </PageContent>
-              </EmailPartsContent>
-            </PreviewText>
+              </PreviewText>
+            </EmailPartsContent>
           </SyncSidebarAndPreviewScroll>
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>

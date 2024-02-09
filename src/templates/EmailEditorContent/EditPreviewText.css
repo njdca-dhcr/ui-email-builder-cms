@@ -1,7 +1,8 @@
 .edit-preview-text {
   background-color: #f2f2f2;
   margin-top: 1rem;
-  padding-bottom: 2rem;
+  padding: 0 2rem 2rem 2rem;
+  width: 37.5rem;
 }
 
 .edit-preview-text h2 {

@@ -12,7 +12,7 @@ import { Layout, PageContent, Sidebar } from 'src/ui/Layout'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import 'src/templates/EmailEditorPage.css'
 import { PreviewText } from 'src/templates/PreviewText'
-import { EditPreviewText } from 'src/templates/EmailEditorSidebar/EditPreviewText'
+import { EditPreviewText } from 'src/templates/EmailEditorContent/EditPreviewText'
 import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
 import uniqueId from 'lodash.uniqueid'
 

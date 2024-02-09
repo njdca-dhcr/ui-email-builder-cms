@@ -137,6 +137,15 @@ describe('EmailEditorContent', () => {
     expect(givenType).toEqual('text/html')
   })
 
+  it('displays the edit preview text field', () => {
+    const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    const input = baseElement.querySelector('#edit-preview-text')
+
+    expect(input).not.toBeNull()
+  })
+
+
+
   it('renders the preview text', () => {
     const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()

@@ -17,6 +17,7 @@ import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { usePreviewText } from '../PreviewText'
+import { EditPreviewText } from './EditPreviewText'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -46,6 +47,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
       <VisuallyHidden>
         <h2>Email Preview</h2>
       </VisuallyHidden>
+      <EditPreviewText />
       <div className="email-preview-actions">
         <fieldset>
           <VisuallyHidden>

@@ -2,14 +2,13 @@ import React, { FC } from 'react'
 import { usePreviewText } from '../PreviewText'
 import './EditPreviewText.css'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { SpacedSidebarContainer } from 'src/ui/Layout'
 
 export const EditPreviewText: FC = () => {
   const id = 'edit-preview-text'
   const [value, setValue] = usePreviewText()
 
   return (
-    <SpacedSidebarContainer className="edit-preview-text">
+    <div className="edit-preview-text">
       <div className="edit-preview-text-content">
         <h2>Preview Text</h2>
         <p id="preview-text-description" className="description">
@@ -36,6 +35,6 @@ export const EditPreviewText: FC = () => {
           </p>
         </div>
       </div>
-    </SpacedSidebarContainer>
+    </div>
   )
 }

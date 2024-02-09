@@ -4,7 +4,6 @@ import { EmailTemplate } from 'src/appTypes'
 import { Sidebar, SpacedSidebarContainer } from 'src/ui/Layout'
 import { EmailEditorHeadingAndSelect } from './EmailEditorHeadingAndSelect'
 import { BackLink } from './BackLink'
-import { EditPreviewText } from './EditPreviewText'
 import { EmailEditorSidebarAccordion } from './EmailEditorSidebarAccordion'
 
 interface Props {
@@ -19,7 +18,6 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate }) => {
         <SkipNavContent />
         <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />
       </SpacedSidebarContainer>
-      <EditPreviewText />
       <EmailEditorSidebarAccordion.Container>
         {(emailTemplate.components ?? []).map((emailComponent) => (
           <EmailEditorSidebarAccordion.EmailComponent

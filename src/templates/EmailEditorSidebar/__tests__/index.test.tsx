@@ -28,13 +28,6 @@ describe('EmailEditorSidebar', () => {
     expect(h1?.tagName).toEqual('H1')
   })
 
-  it('displays the edit preview text field', () => {
-    const { baseElement } = render(<EmailEditorSidebar emailTemplate={emailTemplate} />)
-    const input = baseElement.querySelector('#edit-preview-text')
-
-    expect(input).not.toBeNull()
-  })
-
   it('displays email edit component and subcomponent toggles', () => {
     emailTemplate = buildUniqueEmailConfig({
       components: [
