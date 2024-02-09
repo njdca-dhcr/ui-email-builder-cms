@@ -51,6 +51,7 @@ collections:
                   - { label: 'Body - Supplemental Content', value: 'SupplementalContent' }
                   - { label: 'Body - Directive', value: 'Directive' }
                   - { label: 'Body - LoginDetails', value: 'LoginDetails' }
+                  - { label: 'Body - Informational Box', value: 'InformationalBox' }
                   - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
               - { label: 'Required', name: 'required', widget: 'boolean' }
               - { label: 'Description', name: 'description', widget: 'text' }

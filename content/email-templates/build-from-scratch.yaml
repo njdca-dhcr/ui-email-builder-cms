@@ -7,7 +7,8 @@ components:
     subComponents:
       - kind: DepartmentSeal
       - kind: DateRange
-        description: Using names of months is preferred over numbers (i.e. Jan 5 is clearer than 01/05)
+        description: Using names of months is preferred over numbers (i.e. Jan 5 is
+          clearer than 01/05)
       - kind: Title
         description: Keep this short and to the point!
       - kind: ProgramName
@@ -28,11 +29,13 @@ components:
         description: Rights? Regulations? Appeals? Reminders?
       - kind: LoginDetails
         description: Just in case they need to reset their password
+      - kind: InformationalBox
     required: true
   - kind: Footer
     subComponents:
       - kind: AdditionalContent
-        description: A great place to add links to find out more about programs and other state offerings. Do not use "click here"!
+        description: A great place to add links to find out more about programs and
+          other state offerings. Do not use "click here"!
   - kind: StateSeal
     required: true
   - kind: Disclaimer
