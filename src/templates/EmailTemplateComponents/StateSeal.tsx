@@ -4,7 +4,7 @@ import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import startCase from 'lodash.startcase'
 import { StateSealKey, StateSeals } from 'src/ui/StateSeal'
-import { Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
+import { SpacingCell, StyleDefaults, Text } from '../styles'
 import Config from '../../../gatsby-config'
 
 export interface StateSealValue {
@@ -43,13 +43,20 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       <Row>
         <SpacingCell size="medium" />
       </Row>
-      <Row>
-        <Cell className={StyleDefaults.layout.narrow} style={imageContainerStyles}>
+      <Row elements={[
+        {part: 'cell', className: StyleDefaults.layout.narrow},
+        'table',
+        'row'
+      ]}>
+        <Cell style={imageContainerStyles}>
           <img
-            src={`${Config.siteMetadata?.siteUrl}/state-seal-designation/${StateSeals[stateSealKey]}.png`}
+            src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[stateSealKey].image}.png`}
             alt={startCase(stateSealKey)}
             style={imageStyles}
           />
+        </Cell>
+        <Cell style={textStyles}>
+          {StateSeals[stateSealKey].title ?? `State of ${startCase(stateSealKey)}`}
         </Cell>
       </Row>
     </>
@@ -74,12 +81,24 @@ const additionalDisclaimerStyles: CSSProperties = {
   lineHeight: 1.5,
 }
 
+const imageWidth = 30
+
 const imageContainerStyles: CSSProperties = {
   ...StyleDefaults.inline.colors,
-  display: 'block',
+  paddingRight: '10px',
+  width: imageWidth,
 }
 
 const imageStyles: CSSProperties = {
-  height: 30,
-  display: 'block',
+  height: imageWidth,
+}
+
+const textStyles: CSSProperties = {
+...Text.body.main.regular,
+  color: '#5c5858',
+  fontFamily: 'EB Garamond, Helvetica, Arial, sans-serif',
+  textAlign: 'left',
+  fontWeight: 'normal',
+  fontVariant: 'small-caps',
+  paddingTop: '3px'
 }
