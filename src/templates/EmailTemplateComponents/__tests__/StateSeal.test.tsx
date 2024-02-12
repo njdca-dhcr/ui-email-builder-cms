@@ -21,7 +21,23 @@ describe('StateSealMarkup', () => {
     )
     const img: HTMLImageElement = getByRole('img') as any
     expect(img.alt).toEqual('New Jersey')
-    expect(img.src).toContain('/state-seal-designation/New-Jersey.png')
+    expect(img.src).toContain('/state-seals/New-Jersey.png')
+  })
+
+  it('displays the title if it exists', () => {
+    const { getByText } = render(
+      <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="DistrictOfColumbia" />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(getByText('District of Columbia')).not.toBeNull()
+  })
+
+  it('displays the default title if title does not exist', () => {
+    const { getByText } = render(
+      <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="NorthDakota" />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(getByText('State of North Dakota')).not.toBeNull()
   })
 })
 
@@ -51,7 +67,7 @@ describe('StateSeal', () => {
     )
     const img: HTMLImageElement = getByRole('img') as any
     expect(img.alt).toEqual('New Jersey')
-    expect(img.src).toContain('/state-seal-designation/New-Jersey.png')
+    expect(img.src).toContain('/state-seals/New-Jersey.png')
   })
 
   it('when there is no state seal value saved it renders without issue', () => {
