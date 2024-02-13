@@ -144,8 +144,6 @@ describe('EmailEditorContent', () => {
     expect(input).not.toBeNull()
   })
 
-
-
   it('renders the preview text', () => {
     const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()

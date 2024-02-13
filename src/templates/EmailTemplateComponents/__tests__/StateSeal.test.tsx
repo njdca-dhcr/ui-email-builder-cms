@@ -26,7 +26,10 @@ describe('StateSealMarkup', () => {
 
   it('displays the title if it exists', () => {
     const { getByText } = render(
-      <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="DistrictOfColumbia" />,
+      <StateSealMarkup
+        additionalDisclaimer={faker.lorem.paragraph()}
+        stateSealKey="DistrictOfColumbia"
+      />,
       { wrapper: emailPartWrapper },
     )
     expect(getByText('District of Columbia')).not.toBeNull()

@@ -43,11 +43,7 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       <Row>
         <SpacingCell size="medium" />
       </Row>
-      <Row elements={[
-        {part: 'cell', className: StyleDefaults.layout.narrow},
-        'table',
-        'row'
-      ]}>
+      <Row elements={[{ part: 'cell', className: StyleDefaults.layout.narrow }, 'table', 'row']}>
         <Cell style={imageContainerStyles}>
           <img
             src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[stateSealKey].image}.png`}
@@ -94,11 +90,11 @@ const imageStyles: CSSProperties = {
 }
 
 const textStyles: CSSProperties = {
-...Text.body.main.regular,
+  ...Text.body.main.regular,
   color: '#5c5858',
   fontFamily: 'EB Garamond, Helvetica, Arial, sans-serif',
   textAlign: 'left',
   fontWeight: 'normal',
   fontVariant: 'small-caps',
-  paddingTop: '3px'
+  paddingTop: '3px',
 }
