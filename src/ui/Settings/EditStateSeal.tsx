@@ -20,12 +20,12 @@ export const EditStateSeal: FC = () => {
   return (
     <>
       {/* <form> */}
-        <Heading element="h2" subheading>
-          New Jersey State Seal
-        </Heading>
-        <Paragraph>This state seal will show at the bottom of all emails.</Paragraph>
+      <Heading element="h2" subheading>
+        New Jersey State Seal
+      </Heading>
+      <Paragraph>This state seal will show at the bottom of all emails.</Paragraph>
 
-        {/* <div className="edit-state-seal-field-group">
+      {/* <div className="edit-state-seal-field-group">
           <VisuallyHidden as="label" id="state-seal-select">
             Select your state
           </VisuallyHidden>

@@ -15,7 +15,7 @@ export interface StateSealValue {
 
 const defaultValue: StateSealValue = {
   additionalDisclaimer: `The [Insert State] Department of Labor and Workforce Development is an equal opportunity employer and provides equal opportunity programs. Auxiliary aids and services are available upon request to assist individuals with disabilities.`,
-  stateSealKey: 'US',
+  stateSealKey: 'NewJersey',
 }
 
 export const useStateSealValue = () => {

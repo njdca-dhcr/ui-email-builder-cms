@@ -1,4 +1,4 @@
-name: Build from Scratch
+name: Blank Slate
 description: You know what you want so make it happen.
 components:
   - kind: Banner
@@ -9,48 +9,48 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
+        visibleByDefault: false
         description: Using names of months is preferred over numbers (i.e. Jan 5 is
           clearer than 01/05)
       - kind: Title
-        visibleByDefault: true
+        visibleByDefault: false
         description: Keep this short and to the point!
       - kind: ProgramName
-        visibleByDefault: true
+        visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
+    visibleByDefault: false
     description: Adding a name is highly encouraged. Avoid using "Dear" before the name
   - kind: Body
     required: true
     subComponents:
       - kind: Intro
-        visibleByDefault: true
+        visibleByDefault: false
         description: Keep it simple and clear. Don't use filler language like "please" or
       - kind: Status
-        visibleByDefault: true
+        visibleByDefault: false
         description: Make it obvious what the current state is
       - kind: Directive
-        visibleByDefault: true
+        visibleByDefault: false
       - kind: BenefitAmount
-        visibleByDefault: true
+        visibleByDefault: false
       - kind: SupplementalContent
-        visibleByDefault: true
+        visibleByDefault: false
         description: Add other resources that will help color the message you're sending
       - kind: SupplementalContent
-        visibleByDefault: true
+        visibleByDefault: false
       - kind: RulesRightsRegulations
-        visibleByDefault: true
+        visibleByDefault: false
         description: Rights? Regulations? Appeals? Reminders?
       - kind: LoginDetails
-        visibleByDefault: true
+        visibleByDefault: false
         description: Just in case they need to reset their password
       - kind: InformationalBox
-        visibleByDefault: true
+        visibleByDefault: false
   - kind: Footer
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
+        visibleByDefault: false
         description: A great place to add links to find out more about programs and
           other state offerings. Do not use "click here"!
   - kind: StateSeal

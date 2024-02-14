@@ -25,6 +25,7 @@ export const buildEmailTemplateSubComponent = <T extends EmailTemplate.Component
   return {
     kind: sample(possibleSubComponents)!,
     required: false,
+    visibleByDefault: true,
     ...options,
   }
 }
@@ -47,6 +48,7 @@ export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKin
   return {
     kind,
     required: false,
+    visibleByDefault: true,
     description: faker.lorem.words(3),
     ...options,
   }

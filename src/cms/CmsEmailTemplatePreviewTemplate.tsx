@@ -33,11 +33,13 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.UniqueConfig => {
         kind: componentEntry.get('kind') ?? '',
         description: componentEntry.get('description') ?? '',
         required: componentEntry.get('required') ?? false,
+        visibleByDefault: componentEntry.get('visibleByDefault') ?? true,
         subComponents: subComponentEntries.map((subComponent) => ({
           id: uniqueId(),
           kind: subComponent.get('kind'),
           description: subComponent.get('description'),
           required: subComponent.get('required'),
+          visibleByDefault: subComponent.get('visibleByDefault') ?? true,
         })),
       }
     }),

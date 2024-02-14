@@ -12,6 +12,7 @@ import './EmailEditorPage.css'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import uniqueId from 'lodash.uniqueid'
 import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
+import { shouldShowEmailPartsFromEmailTemplate } from 'src/utils/shouldShowEmailPartsFromEmailTemplate'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Config
@@ -29,7 +30,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
 
   return (
     <Layout element="main">
-      <ShouldShowEmailPart>
+      <ShouldShowEmailPart initialData={shouldShowEmailPartsFromEmailTemplate(emailTemplate)}>
         <CurrentlyActiveEmailPart>
           <SyncSidebarAndPreviewScroll>
             <ClearCurrentlyActiveEmailPart />

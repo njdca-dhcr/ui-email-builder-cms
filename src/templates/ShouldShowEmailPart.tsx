@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
 
-interface ShouldShowEmailPartContextData {
+export interface ShouldShowEmailPartContextData {
   [key: string]: boolean | undefined
 }
 

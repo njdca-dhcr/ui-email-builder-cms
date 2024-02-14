@@ -30,6 +30,7 @@ export namespace EmailTemplate {
     kind: SubComponentKind<T>
     description?: string
     required?: boolean
+    visibleByDefault?: boolean
     variant?: number
     icon?: string
     boxColor?: string
@@ -38,6 +39,7 @@ export namespace EmailTemplate {
   export interface Component<T extends ComponentKind = ComponentKind> {
     kind: T
     description?: string
+    visibleByDefault?: boolean
     required?: boolean
     subComponents?: SubComponentKind<T> extends any ? SubComponent<T>[] : never
   }

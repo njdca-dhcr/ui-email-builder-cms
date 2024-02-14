@@ -17,7 +17,7 @@ export const InformationalBoxControls: FC<EmailSubComponentControlsProps> = ({
 
   return (
     <Control.Group>
-      <Control.Container>
+      <Control.Container layout="column">
         <Control.Label id={iconHtmlId}>Icon</Control.Label>
         <UswdsIconSelect
           labelId={iconHtmlId}
@@ -25,7 +25,7 @@ export const InformationalBoxControls: FC<EmailSubComponentControlsProps> = ({
           value={value.icon}
         />
       </Control.Container>
-      <Control.Container>
+      <Control.Container layout="column">
         <Control.Label id={boxColorHtmlId}>Box Color</Control.Label>
         <SelectBoxColor
           labelId={boxColorHtmlId}
