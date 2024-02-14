@@ -8,7 +8,7 @@ import Config from '../../../gatsby-config'
 
 const { Row } = EmailBlock
 
-const defaultValue: DepartmentSealKey = 'SHIELD'
+const defaultValue: DepartmentSealKey = 'New-Jersey'
 
 export const useDepartmentSealValue = () => {
   return useLocalStorageJSON<DepartmentSealKey>('department-seal', defaultValue)
