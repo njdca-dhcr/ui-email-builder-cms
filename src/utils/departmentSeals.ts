@@ -243,6 +243,10 @@ export const DepartmentSealsMapping = {
     label: 'New Jersey Department of Labor Logo',
     imageName: 'New-Jersey.png',
   },
+  'New-Jersey-Blue': {
+    label: 'New Jersey Department of Labor Blue Logo',
+    imageName: 'New-Jersey-Blue.png',
+  },
   // 'New-Mexico-DWS': {
   //   label: 'New Mexico Department of Workforce Solutions Compact Logo',
   //   imageName: 'New-Mexico-Alt.png',
