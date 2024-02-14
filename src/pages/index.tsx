@@ -23,8 +23,25 @@ const IndexPage: FC = () => {
             <h1>Email Builder (Beta)</h1>
           </VisuallyHidden>
           <section>
+            <Heading element="h2">Create from scratch</Heading>
+            <Paragraph>Build custom emails that you are ready to test/deploy</Paragraph>
+            <List className="index-create-from-scratch-list">
+              <CreateFromScratchListItem
+                label="Blank Slate"
+                description="Start with nothing in the email and add on the elements you need"
+                linkTo="/email-templates/blank-slate/"
+              />
+              <CreateFromScratchListItem
+                label="Everything Bagel"
+                description="Start with all the options added and take away what you don’t want"
+                linkTo="/email-templates/everything-bagel/"
+              />
+            </List>
+          </section>
+          <section className="index-or">--or--</section>
+          <section>
             <div className="heading-and-actions">
-              <Heading element="h2">Start with a template</Heading>
+              <Heading element="h2">Use a template</Heading>
               <div>
                 <Link to="/library">See All Templates</Link>
               </div>
@@ -71,17 +88,33 @@ const IndexPage: FC = () => {
               />
             </List>
           </section>
-          <section className="index-or">--or--</section>
-          <section>
-            <Heading element="h2">Build your own email</Heading>
-            <Paragraph>You know what you want so make it happen.</Paragraph>
-            <Link to="/email-templates/build-from-scratch/" className="link-button">
-              Build from scratch
-            </Link>
-          </section>
         </SpacedContainer>
       </PageContent>
     </Layout>
+  )
+}
+
+interface CreateFromScratchListItemProps {
+  label: string
+  description: string
+  linkTo: string
+}
+
+const CreateFromScratchListItem: FC<CreateFromScratchListItemProps> = ({
+  label,
+  description,
+  linkTo,
+}) => {
+  return (
+    <li className="index-list-item create-from-scratch-list-item">
+      <h3>
+        <Link to={linkTo}>{label}</Link>
+      </h3>
+      <p>{description}</p>
+      <Link to={linkTo} className="link-button">
+        Get Started
+      </Link>
+    </li>
   )
 }
 

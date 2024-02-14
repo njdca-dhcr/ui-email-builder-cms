@@ -116,7 +116,7 @@
 }
 
 .spaced-container {
-  padding-top: 11.5rem;
+  padding-top: 6rem;
   padding-left: 5.25rem;
   padding-right: 9.75rem;
 }
@@ -202,17 +202,6 @@
   font-size: var(--font-medium);
   line-height: 1.5;
   padding: 0.5rem;
-}
-
-.link-button {
-  background-color: var(--blue);
-  border: 0;
-  border-radius: 3px;
-  color: var(--white);
-  font-size: var(--font-small);
-  font-weight: var(--weight-bold-light);
-  padding: 0.75rem 1rem;
-  text-decoration: none;
 }
 
 .uswds-icon-value,

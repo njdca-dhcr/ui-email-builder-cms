@@ -11,6 +11,12 @@
   justify-content: space-between;
 }
 
+.index-create-from-scratch-list {
+  align-items: stretch;
+  display: flex;
+  gap: 3rem;
+}
+
 .heading-and-actions {
   align-items: center;
   display: flex;
@@ -136,4 +142,20 @@
     transform: translateY(5px);
     width: 100%;
   }
+}
+
+.link-button {
+  background-color: var(--blue);
+  border: 0;
+  border-radius: 3px;
+  color: var(--white);
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold-light);
+  padding: 0.75rem 2.8rem;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.create-from-scratch-list-item {
+  max-width: 15.625rem;
 }
