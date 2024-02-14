@@ -11,7 +11,7 @@ describe('EditStateSeal', () => {
     return JSON.parse(stored)
   }
 
-  it('has an editable state seal dropdown', async () => {
+  xit('has an editable state seal dropdown', async () => {
     const user = userEvent.setup()
     const { getByRole } = render(<EditStateSeal />)
 

@@ -46,13 +46,13 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       <Row elements={[{ part: 'cell', className: StyleDefaults.layout.narrow }, 'table', 'row']}>
         <Cell style={imageContainerStyles}>
           <img
-            src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[stateSealKey].image}.png`}
+            src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[stateSealKey]?.image}.png`}
             alt={startCase(stateSealKey)}
             style={imageStyles}
           />
         </Cell>
         <Cell style={textStyles}>
-          {StateSeals[stateSealKey].title ?? `State of ${startCase(stateSealKey)}`}
+          {StateSeals[stateSealKey]?.title ?? `State of ${startCase(stateSealKey)}`}
         </Cell>
       </Row>
     </>
