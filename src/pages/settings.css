@@ -28,19 +28,27 @@
   flex: 1;
 }
 
-.banner-field label,
-.banner-field .custom-label {
+.banner-field label {
   display: block;
   padding-bottom: 0.5rem;
-}
-
-.banner-field-color label {
-  padding-bottom: 0;
 }
 
 .banner-field input {
   border-radius: 5px;
   width: calc(100% - 1rem);
+}
+
+.banner-field .color-input-and-picker {
+  align-items: center;
+  display: flex;
+  gap: 0.625rem;
+}
+
+.banner-field .color-input-and-picker input[type='text'] {
+  border: 1px solid var(--black);
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  width: 8rem;
 }
 
 .banner-color-picker {

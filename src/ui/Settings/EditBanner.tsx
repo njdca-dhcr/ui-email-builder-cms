@@ -1,10 +1,12 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { Heading, Paragraph } from 'src/ui/Layout'
 import { EmailBlock, Input } from 'src/ui'
 import { BannerMarkup, useBannerValue } from 'src/templates/EmailTemplateComponents/Banner'
 import { Spacing } from 'src/templates/styles'
 import { ColorPicker } from '../ColorPicker'
 import { EditableElement } from '../EditableElement'
+import { VisuallyHidden } from '@reach/visually-hidden'
+import { ColorInput } from '../ColorInput'
 
 export const EditBanner: FC = () => {
   const [banner, setBanner] = useBannerValue()
@@ -53,15 +55,23 @@ export const EditBanner: FC = () => {
       </div>
       <div className="banner-fields" style={{ maxWidth: Spacing.layout.maxWidth }}>
         <div className="banner-field banner-field-color">
-          <label htmlFor="background-color">
-            <span className="custom-label">Background Color</span>
+          <label htmlFor="background-color">Background Color</label>
+          <div className="color-input-and-picker">
+            <VisuallyHidden>
+              <label htmlFor="background-color-hex-code">Background Color Hex Code</label>
+            </VisuallyHidden>
+            <ColorInput
+              id="background-color-hex-code"
+              value={banner.backgroundColor}
+              onChange={(backgroundColor) => setBanner({ ...banner, backgroundColor })}
+            />
             <ColorPicker
               id="background-color"
               className="banner-color-picker"
               value={banner.backgroundColor}
               onChange={(backgroundColor) => setBanner({ ...banner, backgroundColor })}
             />
-          </label>
+          </div>
         </div>
         <div className="banner-field" />
       </div>

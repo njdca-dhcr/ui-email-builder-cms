@@ -38,9 +38,17 @@ describe('EditBanner', () => {
     expect(localStorageData().secondaryLink).toEqual(value)
   })
 
-  it('has an editable background color', () => {
-    const { queryByText, baseElement } = render(<EditBanner />)
+  it('has an editable background color', async () => {
+    localStorage.removeItem('banner')
+    const user = userEvent.setup()
+    const color = faker.color.rgb()
+    const { queryByText, baseElement, getByLabelText } = render(<EditBanner />)
     expect(queryByText('Background Color')).not.toBeNull()
     expect(baseElement.querySelector('input[type="color"]')).not.toBeNull()
+
+    const hexInput = getByLabelText('Background Color Hex Code')
+    await user.clear(hexInput)
+    await user.type(hexInput, color.replace('#', ''))
+    expect(localStorageData().backgroundColor).toEqual(color)
   })
 })
