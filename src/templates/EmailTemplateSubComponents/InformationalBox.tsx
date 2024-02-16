@@ -75,7 +75,7 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
             <Cell>
               <EditableElement
                 ref={previewRef}
-                aria-level={4}
+                aria-level={2}
                 element="div"
                 value={value.title}
                 label="Informational box title"
@@ -88,7 +88,6 @@ export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent
           <Row>
             <Cell>
               <EditableElement
-                aria-level={5}
                 element="span"
                 value={value.description}
                 label="Informational box content"

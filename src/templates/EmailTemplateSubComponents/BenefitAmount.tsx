@@ -89,12 +89,10 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
 
         <Row>
           <EditableElement
-            aria-level={3}
             element="td"
             value={value.description}
             label="Benefit Amount description"
             onValueChange={(description) => setValue({ ...value, description })}
-            role="text"
             style={styles.description}
           />
         </Row>
@@ -118,7 +116,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
             </Cell>
             <Cell align="left">
               <EditableElement
-                aria-level={4}
+                aria-level={3}
                 element="div"
                 value={value.boxTitle}
                 label="Benefit Amount box title"
@@ -134,22 +132,18 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
               <Row>
                 <Cell>
                   <EditableElement
-                    aria-level={5}
                     element="span"
                     value={value.weeklyRateLabel}
                     label="Benefit Amount weekly rate label"
                     onValueChange={(weeklyRateLabel) => setValue({ ...value, weeklyRateLabel })}
-                    role="heading"
                     style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                   &nbsp;&nbsp;&nbsp;
                   <EditableElement
-                    aria-level={5}
                     element="span"
                     value={value.weeklyRateValue}
                     label="Benefit Amount weekly rate value"
                     onValueChange={(weeklyRateValue) => setValue({ ...value, weeklyRateValue })}
-                    role="heading"
                     style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                 </Cell>
@@ -157,26 +151,22 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
               <Row>
                 <Cell style={{ fontWeight: 'bold', paddingBottom: Spacing.size.medium }}>
                   <EditableElement
-                    aria-level={5}
                     element="span"
                     value={value.partialWeeklyRateLabel}
                     label="Benefit Amount partial weekly rate label"
                     onValueChange={(partialWeeklyRateLabel) =>
                       setValue({ ...value, partialWeeklyRateLabel })
                     }
-                    role="heading"
                     style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                   &nbsp;&nbsp;&nbsp;
                   <EditableElement
-                    aria-level={5}
                     element="span"
                     value={value.partialWeeklyRateValue}
                     label="Benefit Amount partial weekly rate value"
                     onValueChange={(partialWeeklyRateValue) =>
                       setValue({ ...value, partialWeeklyRateValue })
                     }
-                    role="heading"
                     style={{ fontWeight: 'bold', fontFamily: Font.family.default }}
                   />
                 </Cell>
@@ -184,12 +174,10 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
               <Row>
                 <Cell style={{ paddingBottom: Spacing.size.medium }}>
                   <EditableElement
-                    aria-level={5}
                     element="span"
                     value={value.rateExplanation}
                     label="Benefit Amount rate explanation"
                     onValueChange={(rateExplanation) => setValue({ ...value, rateExplanation })}
-                    role="heading"
                     style={styles.rateExplanation}
                   />
                 </Cell>
@@ -197,14 +185,12 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
               <Row>
                 <Cell>
                   <EditableElement
-                    aria-level={5}
                     element="span"
                     value={value.rateSupportiveInformation}
                     label="Benefit Amount rate supportive information"
                     onValueChange={(rateSupportiveInformation) =>
                       setValue({ ...value, rateSupportiveInformation })
                     }
-                    role="heading"
                     style={styles.rateSupportiveInformation}
                   />
                 </Cell>
@@ -215,14 +201,12 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
 
         <Row>
           <EditableElement
-            aria-level={3}
             element="td"
             value={value.benefitSupportiveInformation}
             label="Benefit Amount supportive information"
             onValueChange={(benefitSupportiveInformation) =>
               setValue({ ...value, benefitSupportiveInformation })
             }
-            role="text"
             style={{
               paddingTop: Spacing.size.medium,
               fontFamily: Font.family.default,
