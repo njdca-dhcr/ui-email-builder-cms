@@ -16,6 +16,7 @@
 .sidebar-accordion-container .accordion-controls {
   border: 1px solid var(--gray-medium);
   border-radius: 10px;
+  min-width: 13.375rem;
   overflow: hidden;
 }
 
