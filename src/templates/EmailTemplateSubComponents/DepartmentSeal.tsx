@@ -4,14 +4,17 @@ import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { DepartmentSealKey, DepartmentSealsMapping } from 'src/utils/departmentSeals'
 import { SpacingCell, StyleDefaults } from '../styles'
-import Config from '../../../gatsby-config'
+import { buildSiteUrl } from 'src/utils/siteUrl'
+import { isAllStatesMode } from 'src/utils/appMode'
 
 const { Row } = EmailBlock
 
-const defaultValue: DepartmentSealKey = 'New-Jersey'
+const defaultValue = (): DepartmentSealKey => {
+  return isAllStatesMode() ? 'US-DOL-Color' : 'New-Jersey'
+}
 
 export const useDepartmentSealValue = () => {
-  return useLocalStorageJSON<DepartmentSealKey>('department-seal', defaultValue)
+  return useLocalStorageJSON<DepartmentSealKey>('department-seal', defaultValue())
 }
 
 export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> = ({
@@ -34,7 +37,7 @@ export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> 
     >
       <img
         alt={departmentSeal.label}
-        src={`${Config.siteMetadata?.siteUrl}/department-seals/${departmentSeal.imageName}`}
+        src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
         style={imageStyles}
       />
     </Row>

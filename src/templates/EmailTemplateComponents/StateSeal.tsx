@@ -5,7 +5,8 @@ import { EmailBlock } from 'src/ui'
 import startCase from 'lodash.startcase'
 import { StateSealKey, StateSeals } from 'src/ui/StateSeal'
 import { SpacingCell, StyleDefaults, Text } from '../styles'
-import Config from '../../../gatsby-config'
+import { buildSiteUrl } from 'src/utils/siteUrl'
+import { isAllStatesMode } from 'src/utils/appMode'
 
 export interface StateSealValue {
   stateSealKey: StateSealKey
@@ -13,13 +14,15 @@ export interface StateSealValue {
   [key: string]: null | string
 }
 
-const defaultValue: StateSealValue = {
-  additionalDisclaimer: `The [Insert State] Department of Labor and Workforce Development is an equal opportunity employer and provides equal opportunity programs. Auxiliary aids and services are available upon request to assist individuals with disabilities.`,
-  stateSealKey: 'NewJersey',
+const defaultValue = (): StateSealValue => {
+  return {
+    additionalDisclaimer: `The [Insert State] Department of Labor and Workforce Development is an equal opportunity employer and provides equal opportunity programs. Auxiliary aids and services are available upon request to assist individuals with disabilities.`,
+    stateSealKey: isAllStatesMode() ? 'US' : 'NewJersey',
+  }
 }
 
 export const useStateSealValue = () => {
-  return useLocalStorageJSON<StateSealValue>('stateSeal', defaultValue)
+  return useLocalStorageJSON<StateSealValue>('stateSeal', defaultValue())
 }
 
 const { Row, Cell } = EmailBlock
@@ -46,7 +49,7 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       <Row elements={[{ part: 'cell', className: StyleDefaults.layout.narrow }, 'table', 'row']}>
         <Cell style={imageContainerStyles}>
           <img
-            src={`${Config.siteMetadata?.siteUrl}/state-seals/${StateSeals[stateSealKey]?.image}.png`}
+            src={buildSiteUrl(`/state-seals/${StateSeals[stateSealKey].image}.png`)}
             alt={startCase(stateSealKey)}
             style={imageStyles}
           />

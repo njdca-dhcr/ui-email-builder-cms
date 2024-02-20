@@ -89,8 +89,6 @@ export const buildUniqueEmailConfig = (
 }
 
 export const urlFor = (path: string): string => `http://localhost${path}`
-export const absoluteUrlFor = (path: string): string =>
-  [Config.siteMetadata?.siteUrl, path].join('')
 
 export type WrapperComponent = FC<{ children: ReactNode; additional?: ReactNode }>
 

@@ -8,6 +8,7 @@ import { StateSealMarkup, useStateSealValue } from 'src/templates/EmailTemplateC
 import { EmailBlock } from '../EmailBlock'
 import { EditableElement } from '../EditableElement'
 import { Spacing } from 'src/templates/styles'
+import { isAllStatesMode } from 'src/utils/appMode'
 
 const stateSealOptions = Object.keys(StateSeals).map((key) => ({
   label: startCase(key),
@@ -19,24 +20,28 @@ export const EditStateSeal: FC = () => {
 
   return (
     <>
-      {/* <form> */}
       <Heading element="h2" subheading>
-        New Jersey State Seal
+        State Seal
       </Heading>
       <Paragraph>This state seal will show at the bottom of all emails.</Paragraph>
 
-      {/* <div className="edit-state-seal-field-group">
-          <VisuallyHidden as="label" id="state-seal-select">
-            Select your state
-          </VisuallyHidden>
-          <Select
-            labelId="state-seal-select"
-            onChange={((stateSealKey: StateSealKey) => setValue({ ...value, stateSealKey })) as any}
-            options={stateSealOptions}
-            value={value.stateSealKey}
-          />
-        </div> */}
-      {/* </form> */}
+      {isAllStatesMode() && (
+        <form>
+          <div className="edit-state-seal-field-group">
+            <VisuallyHidden as="label" id="state-seal-select">
+              Select your state
+            </VisuallyHidden>
+            <Select
+              labelId="state-seal-select"
+              onChange={
+                ((stateSealKey: StateSealKey) => setValue({ ...value, stateSealKey })) as any
+              }
+              options={stateSealOptions}
+              value={value.stateSealKey}
+            />
+          </div>
+        </form>
+      )}
       <div className="edit-state-seal-preview">
         <EmailBlock.Table className="desktop" maxWidth={Spacing.layout.maxWidth}>
           <StateSealMarkup

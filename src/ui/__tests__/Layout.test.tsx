@@ -13,6 +13,16 @@ import {
   SpacedContainer,
   SpacedSidebarContainer,
 } from '../Layout'
+import { asMock } from 'src/testHelpers'
+import { isAllStatesMode, isNJMode } from 'src/utils/appMode'
+
+jest.mock('src/utils/appMode', () => {
+  const actual = jest.requireActual('src/utils/appMode')
+  return {
+    ...actual,
+    isNJMode: jest.fn(),
+  }
+})
 
 describe('Layout', () => {
   it('displays its children', () => {
@@ -109,16 +119,57 @@ describe('Sidebar', () => {
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
   })
 
-  it('displays a title', () => {
-    const text = faker.lorem.paragraph()
-    const { baseElement } = render(
-      <Sidebar>
-        <div>{text}</div>
-      </Sidebar>,
-    )
-    const sidebarTitle = baseElement.querySelector('.sidebar-title')
-    expect(sidebarTitle).not.toBeNull()
-    expect(sidebarTitle).toHaveTextContent('Email Builder (Beta)')
+  describe('when in all states mode', () => {
+    beforeEach(() => {
+      asMock(isNJMode).mockReturnValue(false)
+    })
+
+    it('does not display a NJ department seal', () => {
+      const { baseElement } = render(
+        <Sidebar>
+          <div />
+        </Sidebar>,
+      )
+      expect(baseElement.querySelector('img')).toBeNull()
+    })
+
+    it('displays a generic title', () => {
+      const { baseElement } = render(
+        <Sidebar>
+          <div />
+        </Sidebar>,
+      )
+      const sidebarTitle = baseElement.querySelector('.sidebar-title')
+      expect(sidebarTitle).not.toBeNull()
+      expect(sidebarTitle).not.toHaveTextContent('New Jersey')
+      expect(sidebarTitle).toHaveTextContent('Email Builder (Beta)')
+    })
+  })
+
+  describe('when in NJ mode', () => {
+    beforeEach(() => {
+      asMock(isNJMode).mockReturnValue(true)
+    })
+
+    it('displays a NJ department seal', () => {
+      const { baseElement } = render(
+        <Sidebar>
+          <div />
+        </Sidebar>,
+      )
+      expect(baseElement.querySelector('img')).not.toBeNull()
+    })
+
+    it('displays a specific title ', () => {
+      const { baseElement } = render(
+        <Sidebar>
+          <div />
+        </Sidebar>,
+      )
+      const sidebarTitle = baseElement.querySelector('.sidebar-title')
+      expect(sidebarTitle).not.toBeNull()
+      expect(sidebarTitle).toHaveTextContent('New Jersey Email Builder (Beta)')
+    })
   })
 
   it('accepts a class name', () => {

@@ -4,6 +4,9 @@ import '@reach/skip-nav/styles.css'
 import { List } from './List'
 import './Layout.css'
 import classNames from 'classnames'
+import { isNJMode } from 'src/utils/appMode'
+import { DepartmentSealsMapping } from 'src/utils/departmentSeals'
+import { buildSiteUrl } from 'src/utils/siteUrl'
 
 interface LayoutProps {
   children: ReactNode
@@ -39,10 +42,22 @@ interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
+  const departmentSeal = DepartmentSealsMapping['New-Jersey']
   return (
     <div id={id} className={classNames('sidebar', className)}>
       <SpacedSidebarContainer>
-        <span className="sidebar-title">Email Builder (Beta)</span>
+        {isNJMode() && (
+          <div className="department-seal-container">
+            <img
+              alt={departmentSeal.label}
+              src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
+            />
+          </div>
+        )}
+        <span className="sidebar-title">
+          {isNJMode() && 'New Jersey '}
+          Email Builder (Beta)
+        </span>
       </SpacedSidebarContainer>
       {children}
     </div>

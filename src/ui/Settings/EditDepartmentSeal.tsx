@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import {
   DepartmentSealMarkup,
   useDepartmentSealValue,
@@ -8,17 +8,25 @@ import { Select } from '../Select'
 import { DepartmentSealKey, DepartmentSealsMapping } from 'src/utils/departmentSeals'
 import { EmailBlock } from '../EmailBlock'
 import { Spacing } from 'src/templates/styles'
+import { isAllStatesMode } from 'src/utils/appMode'
 
 const buildOptions = (): Array<{ label: string; value: string }> => {
-  return Object.keys(DepartmentSealsMapping).map((key) => {
+  const options = Object.keys(DepartmentSealsMapping).map((key) => {
     const { label }: { label: string } = DepartmentSealsMapping[key as DepartmentSealKey]
     return { label, value: key }
   })
+
+  if (isAllStatesMode()) {
+    return options
+  } else {
+    return options.filter(({ value }) => value.startsWith('New-Jersey'))
+  }
 }
-const options = buildOptions()
 
 export const EditDepartmentSeal: FC = () => {
   const [value, setValue] = useDepartmentSealValue()
+
+  const options = useMemo(buildOptions, [])
 
   return (
     <form>

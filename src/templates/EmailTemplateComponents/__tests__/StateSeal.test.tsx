@@ -32,7 +32,7 @@ describe('StateSealMarkup', () => {
     expect(getByText('State of New Jersey')).not.toBeNull()
   })
 
-  xit('displays the default title if title does not exist', () => {
+  it('displays the default title if title does not exist', () => {
     const { getByText } = render(
       <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="NorthDakota" />,
       { wrapper: emailPartWrapper },
