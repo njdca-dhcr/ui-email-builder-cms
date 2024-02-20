@@ -4,7 +4,7 @@ import postcssPresetEnv from 'postcss-preset-env'
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Email Builder`,
-    appMode: process.env.APP_MODE,
+    appMode: process.env.GATSBY_APP_MODE,
     env: process.env.NODE_ENV,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
