@@ -29,7 +29,7 @@ describe('siteUrl', () => {
   describe('when in production and all states mode', () => {
     it('is the configured siteUrl for all states', () => {
       Config.siteMetadata = { env: 'production', appMode: 'ALL' }
-      expect(siteUrl()).toEqual('TBD')
+      expect(siteUrl()).toEqual('https://email-builder-beta.netlify.app')
     })
   })
 
