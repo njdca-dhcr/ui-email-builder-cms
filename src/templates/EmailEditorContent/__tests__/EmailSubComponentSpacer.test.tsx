@@ -55,12 +55,12 @@ describe('EmailSubComponentSpacer', () => {
   })
 
   describe('Title', () => {
-    it('is large when the next subcomponent should be shown', () => {
+    it('is medium when the next subcomponent should be shown', () => {
       const size = renderWithSubComponents({
         currentSubComponent: 'Title',
         nextSubComponent: 'ProgramName',
       })
-      expect(size).toEqual(`${spacingCellSizes.large}px`)
+      expect(size).toEqual(`${spacingCellSizes.medium}px`)
     })
 
     it('is nothing when the next subcomponent should not be shown', () => {
