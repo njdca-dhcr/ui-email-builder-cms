@@ -22,6 +22,7 @@ export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
 
   return (
     <Row
+      className="title"
       elements={[
         'cell',
         'table',

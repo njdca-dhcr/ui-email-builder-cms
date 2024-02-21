@@ -16,7 +16,7 @@ export const Name: FC<EmailComponentProps> = ({ emailComponent }) => {
   const [value, setValue] = useEmailPartsContentFor(emailComponent.id, defaultValue)
   const { scrollSidebar, previewRef } = useSyncSidebarAndPreviewScroll(emailComponent.id)
   return (
-    <Row>
+    <Row className="name">
       <EditableElement
         ref={previewRef}
         element="td"

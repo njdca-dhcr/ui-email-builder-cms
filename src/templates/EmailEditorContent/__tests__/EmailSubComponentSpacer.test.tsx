@@ -46,12 +46,12 @@ describe('EmailSubComponentSpacer', () => {
     expect(baseElement.querySelector('td')).toBeNull()
   })
 
-  it('is nothing when the subcomponent is DepartmentSeal', () => {
+  it('is large when the subcomponent is DepartmentSeal', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'DepartmentSeal',
       nextSubComponent: 'Title',
     })
-    expect(size).toBeUndefined()
+    expect(size).toEqual(`${spacingCellSizes.large}px`)
   })
 
   describe('Title', () => {
@@ -176,6 +176,14 @@ describe('EmailSubComponentSpacer', () => {
   it('is extraLarge when the subcomponent is BenefitAmount', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'BenefitAmount',
+      nextSubComponent: 'LoginDetails',
+    })
+    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
+  })
+
+  it('is extraLarge when the subcomponent is InformationalBox', () => {
+    const size = renderWithSubComponents({
+      currentSubComponent: 'InformationalBox',
       nextSubComponent: 'LoginDetails',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)

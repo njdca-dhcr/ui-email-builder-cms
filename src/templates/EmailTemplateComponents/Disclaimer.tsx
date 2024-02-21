@@ -63,7 +63,7 @@ export const Disclaimer: FC<EmailComponentProps> = ({}) => {
   const [value] = useDisclaimerValue()
 
   return (
-    <Row role="contentinfo">
+    <Row role="contentinfo" className="disclaimer">
       <RichTextEditableElement
         element="td"
         label="Disclaimer"

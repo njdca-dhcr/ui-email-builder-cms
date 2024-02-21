@@ -19,7 +19,7 @@ export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
   if (!size) return null
 
   return (
-    <EmailBlock.Row>
+    <EmailBlock.Row className={`spacer-${size}`}>
       <SpacingCell size={size} />
     </EmailBlock.Row>
   )

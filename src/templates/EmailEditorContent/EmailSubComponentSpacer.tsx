@@ -24,7 +24,7 @@ export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSu
   if (!size) return null
 
   return (
-    <EmailBlock.Row>
+    <EmailBlock.Row className={`spacer-${size}`}>
       <SpacingCell size={size} />
     </EmailBlock.Row>
   )
@@ -38,6 +38,7 @@ const sizeForSubComponentKind = (
   switch (subComponentKind) {
     case 'BenefitAmount':
     case 'Directive':
+    case 'InformationalBox':
     case 'LoginDetails':
     case 'RulesRightsRegulations':
       return 'extraLarge'
@@ -45,6 +46,8 @@ const sizeForSubComponentKind = (
       return shouldShowNext ? 'medium' : undefined
     case 'Intro':
       return 'medium'
+    case 'DepartmentSeal':
+      return 'large'
     case 'SupplementalContent':
       return nextSubComponentKind === 'SupplementalContent' && shouldShowNext
         ? 'large'

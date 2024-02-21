@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { DepartmentSealKey, DepartmentSealsMapping } from 'src/utils/departmentSeals'
-import { SpacingCell, StyleDefaults } from '../styles'
+import { StyleDefaults } from '../styles'
 import { buildSiteUrl } from 'src/utils/siteUrl'
 import { isAllStatesMode } from 'src/utils/appMode'
 
@@ -24,6 +24,7 @@ export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> 
   return (
     <Row
       data-testid="department-seal"
+      className="department-seal"
       elements={[
         {
           part: 'cell',
@@ -54,15 +55,5 @@ const imageStyles: CSSProperties = {
 
 export const DepartmentSeal: FC<EmailSubComponentProps> = () => {
   const [value] = useDepartmentSealValue()
-  return (
-    <>
-      <DepartmentSealMarkup departmentSealKey={value} />
-      <Row>
-        <SpacingCell size="medium" />
-      </Row>
-      <Row>
-        <SpacingCell size="medium" />
-      </Row>
-    </>
-  )
+  return <DepartmentSealMarkup departmentSealKey={value} />
 }

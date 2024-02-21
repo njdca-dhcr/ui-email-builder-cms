@@ -42,15 +42,16 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
 
   return (
     <>
-      <Row>
+      <Row className="state-seal-disclaimer">
         <Cell className={className} style={additionalDisclaimerStyles}>
           {additionalDisclaimer}
         </Cell>
       </Row>
-      <Row>
+      <Row className="spacer-medium">
         <SpacingCell size="medium" />
       </Row>
       <Row
+        className="state-seal-image"
         elements={[
           {
             className,

@@ -39,6 +39,7 @@ export const BannerMarkup: FC<BannerMarkupProps> = ({
 
   return (
     <Row
+      className="banner"
       elements={[{ part: 'cell', style: { ...outerCellStyles, backgroundColor } }, 'table', 'row']}
       role="banner"
     >
