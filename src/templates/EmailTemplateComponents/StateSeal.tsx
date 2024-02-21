@@ -28,18 +28,22 @@ export const useStateSealValue = () => {
 const { Row, Cell } = EmailBlock
 
 interface StateSealMarkupProps {
-  stateSealKey: StateSealKey
   additionalDisclaimer: string | ReactElement
+  leftJustify?: boolean
+  stateSealKey: StateSealKey
 }
 
 export const StateSealMarkup: FC<StateSealMarkupProps> = ({
   additionalDisclaimer,
+  leftJustify,
   stateSealKey,
 }) => {
+  const className = leftJustify ? '' : StyleDefaults.layout.narrow
+
   return (
     <>
       <Row>
-        <Cell className={StyleDefaults.layout.narrow} style={additionalDisclaimerStyles}>
+        <Cell className={className} style={additionalDisclaimerStyles}>
           {additionalDisclaimer}
         </Cell>
       </Row>
@@ -49,8 +53,8 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       <Row
         elements={[
           {
+            className,
             part: 'cell',
-            className: StyleDefaults.layout.narrow,
             style: StyleDefaults.inline.colors,
           },
           'table',

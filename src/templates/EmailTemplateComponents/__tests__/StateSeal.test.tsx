@@ -39,6 +39,34 @@ describe('StateSealMarkup', () => {
     )
     expect(getByText('State of North Dakota')).not.toBeNull()
   })
+
+  describe('without a leftJustify prop', () => {
+    it('is narrow', () => {
+      const { baseElement } = render(
+        <StateSealMarkup
+          leftJustify={false}
+          additionalDisclaimer={faker.lorem.paragraph()}
+          stateSealKey="NorthDakota"
+        />,
+        { wrapper: emailPartWrapper },
+      )
+      expect(baseElement.querySelector('.narrow')).not.toBeNull()
+    })
+  })
+
+  describe('with a leftJustify prop', () => {
+    it('is not narrow', () => {
+      const { baseElement } = render(
+        <StateSealMarkup
+          leftJustify={true}
+          additionalDisclaimer={faker.lorem.paragraph()}
+          stateSealKey="NorthDakota"
+        />,
+        { wrapper: emailPartWrapper },
+      )
+      expect(baseElement.querySelector('.narrow')).toBeNull()
+    })
+  })
 })
 
 describe('StateSeal', () => {

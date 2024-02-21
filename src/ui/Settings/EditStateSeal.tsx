@@ -43,8 +43,9 @@ export const EditStateSeal: FC = () => {
         </form>
       )}
       <div className="edit-state-seal-preview">
-        <EmailBlock.Table className="desktop" maxWidth={Spacing.layout.maxWidth}>
+        <EmailBlock.Table className="desktop" maxWidth={Spacing.layout.maxWidth - 150}>
           <StateSealMarkup
+            leftJustify
             stateSealKey={value.stateSealKey}
             additionalDisclaimer={
               <EditableElement
