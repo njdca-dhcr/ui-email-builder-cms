@@ -111,10 +111,10 @@ const styles = {
     fontFamily: Font.family.default,
   } as CSSProperties,
   innerCell: {
-    paddingTop: Spacing.size.medium,
-    paddingRight: Spacing.size.medium,
-    paddingBottom: Spacing.size.medium,
-    paddingLeft: Spacing.size.medium,
+    paddingTop: Spacing.informationalBox.vertical,
+    paddingBottom: Spacing.informationalBox.vertical,
+    paddingLeft: Spacing.informationalBox.horizontal.left,
+    paddingRight: Spacing.informationalBox.horizontal.right,
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
