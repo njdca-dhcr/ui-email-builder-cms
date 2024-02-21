@@ -42,10 +42,6 @@
   border-bottom-right-radius: var(--border-radius);
 }
 
-.email-preview-actions label:focus-within {
-  outline: var(--default-browser-outline);
-}
-
 .button-group {
   display: flex;
   gap: 0.5rem;

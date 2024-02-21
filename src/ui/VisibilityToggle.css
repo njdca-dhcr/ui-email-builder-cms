@@ -32,10 +32,6 @@
   width: 100%;
 }
 
-.visibility-toggle:focus-within .icon {
-  outline: var(--default-browser-outline);
-}
-
 .visibility-toggle > input:disabled + .icons-container > .disabled-icon {
   opacity: 1;
 }

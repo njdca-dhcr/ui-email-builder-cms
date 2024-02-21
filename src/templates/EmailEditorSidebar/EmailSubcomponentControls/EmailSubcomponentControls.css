@@ -156,10 +156,6 @@ label.control-label.small {
   border-bottom-right-radius: var(--border-radius);
 }
 
-.radio-buttons > .radio-button > label:focus-within {
-  outline: var(--default-browser-outline);
-}
-
 .select.select-variant {
   min-width: 18.5rem;
 }

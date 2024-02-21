@@ -9,10 +9,6 @@
   position: relative;
 }
 
-.email-editor-heading-and-select:focus-within {
-  outline: var(--default-browser-outline);
-}
-
 .email-editor-heading-and-select h1 {
   font-size: 1.5rem;
   font-weight: var(--weight-bold);
