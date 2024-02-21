@@ -46,7 +46,17 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       <Row>
         <SpacingCell size="medium" />
       </Row>
-      <Row elements={[{ part: 'cell', className: StyleDefaults.layout.narrow }, 'table', 'row']}>
+      <Row
+        elements={[
+          {
+            part: 'cell',
+            className: StyleDefaults.layout.narrow,
+            style: StyleDefaults.inline.colors,
+          },
+          'table',
+          'row',
+        ]}
+      >
         <Cell style={imageContainerStyles}>
           <img
             src={buildSiteUrl(`/state-seals/${StateSeals[stateSealKey].image}.png`)}
