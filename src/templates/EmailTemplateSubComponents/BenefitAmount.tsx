@@ -183,17 +183,15 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
                 </Cell>
               </Row>
               <Row>
-                <Cell>
-                  <EditableElement
-                    element="span"
-                    value={value.rateSupportiveInformation}
-                    label="Benefit Amount rate supportive information"
-                    onValueChange={(rateSupportiveInformation) =>
-                      setValue({ ...value, rateSupportiveInformation })
-                    }
-                    style={styles.rateSupportiveInformation}
-                  />
-                </Cell>
+                <EditableElement
+                  element="td"
+                  value={value.rateSupportiveInformation}
+                  label="Benefit Amount rate supportive information"
+                  onValueChange={(rateSupportiveInformation) =>
+                    setValue({ ...value, rateSupportiveInformation })
+                  }
+                  style={styles.rateSupportiveInformation}
+                />
               </Row>
             </Cell>
           </Row>
@@ -209,8 +207,7 @@ export const BenefitAmount: FC<EmailSubComponentProps> = ({ emailSubComponent })
             }
             style={{
               paddingTop: Spacing.size.medium,
-              fontFamily: Font.family.default,
-              fontStyle: 'italic',
+              ...Text.body.tertiary.italic,
             }}
           />
         </Row>
@@ -234,7 +231,7 @@ const styles = {
     paddingBottom: Spacing.size.small,
   } as CSSProperties,
   description: {
-    ...Text.body.main.regular,
+    ...Text.body.secondary.regular,
     paddingBottom: Spacing.size.medium,
   } as CSSProperties,
   iconContainer: {
@@ -250,5 +247,6 @@ const styles = {
   } as CSSProperties,
   rateSupportiveInformation: {
     ...Text.body.secondary.italic,
+    lineHeight: '1.2',
   } as CSSProperties,
 }
