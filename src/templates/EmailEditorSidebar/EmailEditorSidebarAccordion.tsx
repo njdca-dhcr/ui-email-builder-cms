@@ -134,6 +134,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
   const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
   const { isActive } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
+  const isEditableInSettings = emailSubComponent.kind === 'DepartmentSeal'
 
   return (
     <>
@@ -161,7 +162,12 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
           />
         </div>
 
-        {emailSubComponent.description && (
+        {isEditableInSettings && (
+          <p className="description">
+            Edit this in <Link to="/settings">Settings</Link>
+          </p>
+        )}
+        {!isEditableInSettings && emailSubComponent.description && (
           <p className={classNames('description', { invisible: shouldShow.off })}>
             {emailSubComponent.description}
           </p>

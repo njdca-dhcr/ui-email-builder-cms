@@ -613,4 +613,35 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass}`),
     ).toBeNull()
   })
+
+  describe('when DepartmentSeal', () => {
+    beforeEach(() => {
+      emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DepartmentSeal' })
+    })
+
+    it('ignores description when present', () => {
+      emailSubComponent.description = faker.lorem.paragraph()
+      const { queryByText } = render(
+        <EmailEditorSidebarAccordion.EmailSubComponent
+          componentId={faker.lorem.word()}
+          emailSubComponent={emailSubComponent}
+        />,
+        { wrapper },
+      )
+      expect(queryByText(emailSubComponent.description)).toBeNull()
+    })
+
+    it('has a link to settings', () => {
+      const { baseElement } = render(
+        <EmailEditorSidebarAccordion.EmailSubComponent
+          componentId={faker.lorem.word()}
+          emailSubComponent={emailSubComponent}
+        />,
+        { wrapper },
+      )
+      const link: HTMLAnchorElement | null = baseElement.querySelector('a')
+      expect(link).not.toBeNull()
+      expect(link!.href).toEqual(urlFor('/settings'))
+    })
+  })
 })
