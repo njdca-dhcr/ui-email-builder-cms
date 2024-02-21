@@ -80,13 +80,13 @@ describe('EmailComponentSpacer', () => {
     expect(size).toBeUndefined()
   })
 
-  it(`is extraLarge when the current component is StateSeal`, () => {
+  it(`is nothing when the current component is StateSeal`, () => {
     const size = renderWithComponents({
       currentComponent: 'StateSeal',
       nextComponent: 'Disclaimer',
     })
 
-    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
+    expect(size).toBeUndefined()
   })
 
   it(`is medium when the current component is Footer`, () => {

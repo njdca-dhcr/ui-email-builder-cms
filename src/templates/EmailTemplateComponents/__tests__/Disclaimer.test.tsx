@@ -23,6 +23,6 @@ describe('Disclaimer', () => {
       <Disclaimer emailComponent={emailComponent}>{null}</Disclaimer>,
       { wrapper: emailPartWrapper },
     )
-    expect(baseElement.querySelector('td')).toHaveTextContent(disclaimerText)
+    expect(baseElement).toHaveTextContent(disclaimerText)
   })
 })

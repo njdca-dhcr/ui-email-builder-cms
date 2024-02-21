@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
-import { Colors, Spacing, Text } from '../styles'
+import { Colors, Spacing, Text, spacingCellSizes } from '../styles'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import { RichTextValue } from 'src/ui/RichTextEditor'
@@ -57,24 +57,58 @@ export const useDisclaimerValue = () => {
   return useLocalStorageJSON<any>('disclaimer', defaultValue)
 }
 
-const { Row } = EmailBlock
+const { Table, Row } = EmailBlock
 
 export const Disclaimer: FC<EmailComponentProps> = ({}) => {
   const [value] = useDisclaimerValue()
 
   return (
-    <Row role="contentinfo" className="disclaimer">
-      <RichTextEditableElement
-        element="td"
-        label="Disclaimer"
-        readonly
-        className="disclaimer"
-        style={styles}
-        onValueChange={() => null}
-        value={value}
-      />
-    </Row>
+    <>
+      <Row
+        className="spacer-large box-shadow"
+        elements={[
+          {
+            part: 'cell',
+            style: boxShadowContainerStyles,
+          },
+        ]}
+      >
+        <Table
+          elements={[
+            'row',
+            {
+              part: 'cell',
+              style: boxShadowCellStyles,
+            },
+          ]}
+        >
+          &nbsp;
+        </Table>
+      </Row>
+      <Row role="contentinfo" className="disclaimer">
+        <RichTextEditableElement
+          element="td"
+          label="Disclaimer"
+          readonly
+          className="disclaimer"
+          style={styles}
+          onValueChange={() => null}
+          value={value}
+        />
+      </Row>
+    </>
   )
+}
+
+const boxShadowContainerStyles: CSSProperties = {
+  height: spacingCellSizes.extraLarge,
+  backgroundColor: Colors.grayLight,
+}
+
+const boxShadowCellStyles: CSSProperties = {
+  backgroundColor: Colors.white,
+  boxShadow: 'rgba(0, 0, 0, 0.15) 0px 6px 3px -2px',
+  height: spacingCellSizes.extraLarge,
 }
 
 export const styles: CSSProperties = {

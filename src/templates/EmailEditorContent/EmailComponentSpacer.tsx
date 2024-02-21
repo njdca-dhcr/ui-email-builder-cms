@@ -31,7 +31,6 @@ const sizeForComponent = (
   switch (componentKind) {
     case 'Banner':
     case 'Header':
-    case 'StateSeal':
       return 'extraLarge'
     case 'Name':
     case 'Footer':
