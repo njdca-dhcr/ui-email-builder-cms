@@ -69,8 +69,8 @@ describe('EmailEditorPage', () => {
   describe('preview text', () => {
     it('allows users to edit preview text in the sidebar which is added to the email markup', async () => {
       const value = faker.lorem.paragraph()
-      const { getByLabelText, baseElement } = rendered
-      const input = getByLabelText('Preview text')
+      const { baseElement, getByRole } = rendered
+      const input = getByRole('textbox')
       await user.type(input, value)
       const previewText = baseElement.querySelector('#preview-text')
       expect(previewText).not.toBeNull()

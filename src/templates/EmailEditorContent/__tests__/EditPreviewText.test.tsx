@@ -9,13 +9,13 @@ describe('EditPreviewText', () => {
   it('displays and updates the preview text', async () => {
     const user = userEvent.setup()
     const value = faker.lorem.paragraph()
-    const { getByLabelText } = render(
+    const { getByRole } = render(
       <PreviewText>
         <EditPreviewText />
       </PreviewText>,
     )
 
-    const input = getByLabelText('Preview text')
+    const input = getByRole('textbox')
     await user.type(input, value)
     expect(input).toHaveValue(value)
   })

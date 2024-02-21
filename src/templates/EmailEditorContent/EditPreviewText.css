@@ -2,35 +2,61 @@
   align-items: center;
   border-bottom: 1px solid var(--gray-light-medium);
   display: flex;
-  gap: 1.5rem;
+  gap: 0.5rem;
   justify-content: space-between;
   padding: 1.375rem 0 1rem;
   width: 37.5rem;
 }
 
-.edit-preview-text h2 {
+.edit-preview-text-heading-container {
   display: flex;
-  font-size: 1rem;
-  font-weight: var(--weight-bold);
-  margin: 0;
-  min-width: 5.75rem;
-  width: fit-content;
+  flex-direction: column;
 }
 
-.edit-preview-text textarea {
+.edit-preview-text-heading-container h2 {
+  display: flex;
+  font-size: var(--font-medium);
+  font-weight: var(--weight-bold);
+  margin: 0;
+}
+.edit-preview-text-heading-container p {
+  color: var(--gray-medium-dark);
+  font-size: var(--font-tiny);
+  font-style: italic;
+  margin: 0;
+}
+
+.edit-preview-text-text-area-container {
   background-color: var(--gray-light);
-  border: 0;
   border-radius: 4px;
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.edit-preview-text-text-area-container textarea {
+  background-color: transparent;
+  border: 0;
   color: var(--gray-dark);
   flex: 1;
   font-family: var(--sans-serif);
   font-size: var(--font-small);
   line-height: 1.5;
+  padding: 0.5rem 2rem 0.5rem 1rem;
   resize: none;
-  padding: 0.5rem 1.375rem;
   width: 100%;
 }
 
-.edit-preview-text textarea::placeholder {
+.edit-preview-text-text-area-container textarea::placeholder {
   color: #c6cace;
+}
+
+.edit-preview-text-text-area-container p {
+  bottom: 0.5rem;
+  color: var(--gray-medium-dark);
+  font-size: var(--font-tiny);
+  font-style: italic;
+  margin: 0;
+  position: absolute;
+  right: 0.675rem;
 }
