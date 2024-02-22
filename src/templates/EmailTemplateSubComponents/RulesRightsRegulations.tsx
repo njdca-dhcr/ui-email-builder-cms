@@ -398,6 +398,7 @@ const styles = {
   eligibilityLabel: {
     ...Text.body.main.semibold,
     paddingBottom: Spacing.size.extraLarge,
+    paddingTop: Spacing.size.small,
   } as CSSProperties,
   eligibilityConditions: {
     margin: 0,
