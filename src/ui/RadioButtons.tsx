@@ -1,5 +1,6 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactElement, ReactNode } from 'react'
 import classNames from 'classnames'
+import './RadioButtons.css'
 
 interface ButtonProps {
   checked: boolean
@@ -24,17 +25,28 @@ interface FieldsetProps {
   children: ReactNode
   legend: string
   legendId: string
+  renderLegend?: (legend: ReactElement) => ReactElement
 }
 
-const Fieldset: FC<FieldsetProps> = ({ children, className, legend, legendId }) => {
+const Fieldset: FC<FieldsetProps> = ({
+  children,
+  className,
+  legend,
+  legendId,
+  renderLegend: givenRenderLegend,
+}) => {
+  const renderLegend = givenRenderLegend ?? ((legend: ReactElement) => legend)
+
   return (
     <fieldset
       className={classNames('radio-buttons-fieldset', className)}
       aria-labelledby={legendId}
     >
-      <div id={legendId} className="legend">
-        {legend}
-      </div>
+      {renderLegend(
+        <div id={legendId} className="legend">
+          {legend}
+        </div>,
+      )}
       <div className="radio-buttons">{children}</div>
     </fieldset>
   )

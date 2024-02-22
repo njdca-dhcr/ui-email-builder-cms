@@ -6,40 +6,15 @@
   width: 37.5rem;
 }
 
-.email-preview-actions fieldset {
-  --border-radius: 10px;
-  align-items: stretch;
-  border: 1px solid var(--gray-medium);
-  border-radius: var(--border-radius);
-  display: flex;
+.email-preview-actions .select-preview-type {
   margin: 0;
-  overflow: hidden;
   padding: 0;
-  height: 2.2rem;
-  width: 9.25rem;
 }
 
-.email-preview-actions label {
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  flex: 1;
+.email-preview-actions .select-preview-type label {
   font-size: var(--font-small);
-  font-weight: var(--weight-normal);
-  justify-content: center;
-}
-
-.email-preview-actions label:has(:checked) {
-  background-color: var(--gray-medium);
-}
-
-.email-preview-actions label:first-of-type {
-  border-top-left-radius: var(--border-radius);
-  border-bottom-left-radius: var(--border-radius);
-}
-.email-preview-actions label:last-of-type {
-  border-top-right-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
+  font-style: normal;
+  padding: 0.5rem 1rem;
 }
 
 .button-group {

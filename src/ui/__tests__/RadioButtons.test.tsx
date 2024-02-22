@@ -72,6 +72,21 @@ describe(Radio.Fieldset.displayName!, () => {
     expect(baseElement.querySelector(`#${legendId}`)).toHaveTextContent(legend)
   })
 
+  it('allows the legend to be wrapped', () => {
+    const legend = faker.lorem.paragraph()
+    const legendId = faker.lorem.word()
+    const { baseElement } = render(
+      <Radio.Fieldset
+        legend={legend}
+        legendId={legendId}
+        renderLegend={(legend) => <span className="my-class">{legend}</span>}
+      >
+        <p />
+      </Radio.Fieldset>,
+    )
+    expect(baseElement.querySelector(`.my-class > #${legendId}`)).toHaveTextContent(legend)
+  })
+
   it('is labelled by the legend', () => {
     const legend = faker.lorem.paragraph()
     const legendId = faker.lorem.word()

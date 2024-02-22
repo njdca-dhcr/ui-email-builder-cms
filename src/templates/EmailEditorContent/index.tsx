@@ -7,7 +7,7 @@ import { EditEmailSubComponent } from './EditEmailSubComponent'
 import './EmailEditorContent.css'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmailString'
-import { CopyToClipboardButton } from '../../ui/CopyToClipboardButton'
+import { CopyToClipboardButton } from 'src/ui/CopyToClipboardButton'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Spacing } from '../styles'
 import { PreviewTextHtml } from './PreviewTextHtml'
@@ -18,6 +18,7 @@ import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { usePreviewText } from '../PreviewText'
 import { EditPreviewText } from './EditPreviewText'
+import { Radio } from 'src/ui/RadioButtons'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -49,31 +50,23 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
       </VisuallyHidden>
       <EditPreviewText />
       <div className="email-preview-actions">
-        <fieldset>
-          <VisuallyHidden>
-            <legend>Select preview type</legend>
-          </VisuallyHidden>
-          <label>
-            Desktop
-            <VisuallyHidden>
-              <input
-                type="radio"
-                onChange={() => setPreviewType('desktop')}
-                checked={isPreviewDesktop}
-              />
-            </VisuallyHidden>
-          </label>
-          <label>
-            Mobile
-            <VisuallyHidden>
-              <input
-                type="radio"
-                onChange={() => setPreviewType('mobile')}
-                checked={isPreviewMobile}
-              />
-            </VisuallyHidden>
-          </label>
-        </fieldset>
+        <Radio.Fieldset
+          className="select-preview-type"
+          legend="Select preview type"
+          legendId="select-preview-type"
+          renderLegend={(legend) => <VisuallyHidden>{legend}</VisuallyHidden>}
+        >
+          <Radio.Button
+            checked={isPreviewDesktop}
+            label="Desktop"
+            onChange={() => setPreviewType('desktop')}
+          />
+          <Radio.Button
+            checked={isPreviewMobile}
+            label="Mobile"
+            onChange={() => setPreviewType('mobile')}
+          />
+        </Radio.Fieldset>
         <div className="button-group">
           <CopyToClipboardButton
             fieldsCompleted={hasPreviewText}

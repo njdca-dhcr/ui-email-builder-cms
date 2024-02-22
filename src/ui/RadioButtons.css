@@ -1,0 +1,78 @@
+.radio-buttons-fieldset {
+  align-items: center;
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+  padding: 0;
+  padding-left: 2.5rem;
+  padding-right: 2.25rem;
+}
+
+.radio-buttons-fieldset > .legend {
+  font-size: var(--font-small);
+  font-weight: bold;
+  font-style: italic;
+}
+
+.radio-buttons {
+  display: flex;
+  overflow: hidden;
+}
+
+.radio-button {
+  --border-radius: 10px;
+  --border-color: var(--gray-medium);
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  font-size: var(--font-tiny);
+  font-weight: var(--weight-normal);
+  font-style: italic;
+  position: relative;
+  transition:
+    background-color 150ms ease-in-out,
+    color 150ms ease-in-out;
+}
+
+.radio-button:first-of-type {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.radio-button:last-of-type {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.radio-button input[type='radio'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.radio-button:has(:checked) {
+  --border-color: var(--gray-dark-extra);
+  background-color: var(--gray-dark-extra);
+  color: var(--white);
+}
+
+.radio-button:not(:has(:checked)) {
+  border: 1px solid var(--gray-medium);
+}
+
+.radio-buttons > .radio-button > label {
+  font-weight: var(--weight-normal);
+  display: flex;
+  padding: 0.2rem 1.15rem;
+}
+
+.radio-buttons > .radio-button:first-of-type > label {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.radio-buttons > .radio-button:last-of-type > label {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
