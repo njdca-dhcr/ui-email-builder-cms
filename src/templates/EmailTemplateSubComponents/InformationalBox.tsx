@@ -117,6 +117,6 @@ const styles = {
   title: {
     ...Text.header.h3.bold,
     paddingBottom: Spacing.size.medium,
-    lineHeight: '1',
+    lineHeight: '1.2',
   } as CSSProperties,
 }
