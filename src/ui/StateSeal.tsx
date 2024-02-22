@@ -52,7 +52,7 @@ export const StateSeals: Record<string, StateSeal> = {
   SouthDakota: { image: 'South-Dakota' },
   Tennessee: { image: 'Tennessee' },
   Texas: { image: 'Texas' },
-  US: { image: 'United-States-Seal', title: 'United States of America' },
+  US: { image: 'US-Seal', title: 'United States of America' },
   USVirginIslands: { image: 'US-Virgin-Islands', title: 'Virgin Islands of the United States' },
   Utah: { image: 'Utah' },
   Vermont: { image: 'Vermont' },
