@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { UswdsIcon } from '../UswdsIcon'
-import { buildSiteUrl } from 'src/utils/siteUrl'
+import { buildIconUrl } from 'src/utils/siteUrl'
 
 describe('UswdsIcon', () => {
   it('displays the icon for the given key', () => {
@@ -9,6 +9,6 @@ describe('UswdsIcon', () => {
     const img: HTMLImageElement | null = queryByRole('img') as any
     expect(img).not.toBeNull()
     expect(img?.alt).toEqual('')
-    expect(img?.src).toEqual(buildSiteUrl('/icons/account_balance.png'))
+    expect(img?.src).toEqual(buildIconUrl('/account_balance.png'))
   })
 })
