@@ -13,7 +13,6 @@ components:
     subComponents:
       - kind: Intro
       - kind: Status
-      - kind: BenefitAmount
       - kind: SupplementalContent
     required: true
   - kind: Footer

@@ -32,15 +32,15 @@ export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSu
 
 const sizeForSubComponentKind = (
   subComponentKind: EmailTemplate.SubComponentKind,
-  nextSubComponentKind: EmailTemplate.SubComponentKind | undefined,
+  _nextSubComponentKind: EmailTemplate.SubComponentKind | undefined,
   shouldShowNext: boolean,
 ): 'medium' | 'large' | 'extraLarge' | undefined => {
   switch (subComponentKind) {
-    case 'BenefitAmount':
     case 'Directive':
     case 'InformationalBox':
     case 'LoginDetails':
     case 'RulesRightsRegulations':
+    case 'SupplementalContent':
       return 'extraLarge'
     case 'Title':
       return shouldShowNext ? 'medium' : undefined
@@ -48,9 +48,5 @@ const sizeForSubComponentKind = (
       return 'medium'
     case 'DepartmentSeal':
       return 'large'
-    case 'SupplementalContent':
-      return nextSubComponentKind === 'SupplementalContent' && shouldShowNext
-        ? 'large'
-        : 'extraLarge'
   }
 }

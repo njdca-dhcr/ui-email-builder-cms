@@ -58,15 +58,15 @@ describe('EmailSubComponentControls', () => {
     expect(baseElement.innerHTML).toEqual('<div></div>')
   })
 
-  it('renders nothing for SupplementalContent', () => {
-    const { baseElement } = render(
+  it('renders the SupplementalContentControls', () => {
+    const { queryByText } = render(
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })}
         componentId={componentId}
         id={id}
       />,
     )
-    expect(baseElement.innerHTML).toEqual('<div></div>')
+    expect(queryByText('Supplemental Content variant')).not.toBeNull()
   })
 
   it('renders the StatusControls', () => {

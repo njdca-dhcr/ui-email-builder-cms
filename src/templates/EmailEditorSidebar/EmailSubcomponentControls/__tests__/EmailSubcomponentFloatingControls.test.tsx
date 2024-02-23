@@ -32,7 +32,6 @@ describe('EmailSubcomponentFloatingControls', () => {
   itRendersNothing('Body', 'SupplementalContent')
   itRendersNothing('Body', 'Directive')
   itRendersNothing('Body', 'LoginDetails')
-  itRendersNothing('Body', 'BenefitAmount')
   itRendersNothing('Body', 'InformationalBox')
   itRendersNothing('Footer', 'AdditionalContent')
 

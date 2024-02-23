@@ -12,7 +12,6 @@ import { Directive } from '../EmailTemplateSubComponents/Directive'
 import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRightsRegulations'
 import { LoginDetails } from '../EmailTemplateSubComponents/LoginDetails'
 import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
-import { BenefitAmount } from '../EmailTemplateSubComponents/BenefitAmount'
 import { InformationalBox } from '../EmailTemplateSubComponents/InformationalBox'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
@@ -31,8 +30,6 @@ export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
       return <ProgramName {...props} />
     case 'Intro':
       return <Intro {...props} />
-    case 'BenefitAmount':
-      return <BenefitAmount {...props} />
     case 'RulesRightsRegulations':
       return <RulesRightsRegulations {...props} />
     case 'Status':

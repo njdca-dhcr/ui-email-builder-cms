@@ -117,44 +117,12 @@ describe('EmailSubComponentSpacer', () => {
     expect(size).toBeUndefined()
   })
 
-  describe('SupplementalContent', () => {
-    it('is extraLarge when not followed by SupplementalContent', () => {
-      const size = renderWithSubComponents({
-        currentSubComponent: 'SupplementalContent',
-        nextSubComponent: 'LoginDetails',
-      })
-      expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
+  it('is extraLarge when the subcomponent is SupplementalContent', () => {
+    const size = renderWithSubComponents({
+      currentSubComponent: 'SupplementalContent',
+      nextSubComponent: 'LoginDetails',
     })
-
-    it('is large when followed by SupplementalContent', () => {
-      const size = renderWithSubComponents({
-        currentSubComponent: 'SupplementalContent',
-        nextSubComponent: 'SupplementalContent',
-      })
-      expect(size).toEqual(`${spacingCellSizes.large}px`)
-    })
-
-    it('is extraLarge when followed by supplemental content that will not be shown', () => {
-      const nextSubComponent = buildUniqueEmailSubComponent('Body', {
-        kind: 'SupplementalContent',
-      })
-      const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [nextSubComponent.id]: false }}>
-          <EmailSubComponentSpacer
-            currentSubComponent={buildUniqueEmailSubComponent('Body', {
-              kind: 'SupplementalContent',
-            })}
-            nextSubComponent={nextSubComponent}
-          />
-        </ShouldShowEmailPart>,
-        {
-          wrapper: emailPartWrapper,
-        },
-      )
-      const spacer = baseElement.querySelector('td')
-      expect(spacer).not.toBeNull()
-      expect(spacer?.style.height).toEqual(`${spacingCellSizes.extraLarge}px`)
-    })
+    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
 
   it('is extraLarge when the subcomponent is Directive', () => {
@@ -169,14 +137,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'LoginDetails',
       nextSubComponent: undefined,
-    })
-    expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
-  })
-
-  it('is extraLarge when the subcomponent is BenefitAmount', () => {
-    const size = renderWithSubComponents({
-      currentSubComponent: 'BenefitAmount',
-      nextSubComponent: 'LoginDetails',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })

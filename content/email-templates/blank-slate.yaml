@@ -31,13 +31,9 @@ components:
         description: Make it obvious what the current state is
       - kind: Directive
         visibleByDefault: false
-      - kind: BenefitAmount
-        visibleByDefault: false
       - kind: SupplementalContent
         visibleByDefault: false
         description: Add other resources that will help color the message you're sending
-      - kind: SupplementalContent
-        visibleByDefault: false
       - kind: RulesRightsRegulations
         visibleByDefault: false
         description: Rights? Regulations? Appeals? Reminders?

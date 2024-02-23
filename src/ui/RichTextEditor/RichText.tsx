@@ -25,7 +25,7 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
           />
         )
       default:
-        return <p {...props} style={{ ...style, margin: 0, padding: 0 }} />
+        return <p {...props} style={{ ...style, margin: 0, padding: 0, whiteSpace: 'pre-wrap' }} />
     }
   },
 )

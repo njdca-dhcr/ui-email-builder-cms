@@ -1,10 +1,9 @@
-import React, { FC } from 'react'
+import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { RulesRightsRegulationsControls } from '../RulesRightsRegulationsControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 jest.mock('src/ui/UswdsIconSelect', () => {
@@ -19,12 +18,6 @@ describe('RulesRightsRegulationsControls', () => {
   let rendered: RenderResult
   let user: UserEvent
 
-  const AppealRightsHref: FC = () => {
-    const [value] = useRulesRightsRegulationsValue(id)
-
-    return <div data-testid="appeal-rights-href">{value.appealRightsHref}</div>
-  }
-
   beforeEach(() => {
     componentId = faker.lorem.word()
     id = faker.lorem.word()
@@ -38,8 +31,6 @@ describe('RulesRightsRegulationsControls', () => {
             kind: 'RulesRightsRegulations',
           })}
         />
-        ,
-        <AppealRightsHref />,
       </EmailPartsContent>,
     )
   })
@@ -59,7 +50,6 @@ describe('RulesRightsRegulationsControls', () => {
 
     button = queryByText('Appeal Rights', { selector: 'span' })
     expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Appeal Rights')
   })
 
   describe('variants', () => {

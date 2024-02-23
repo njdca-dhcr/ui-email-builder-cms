@@ -1,5 +1,9 @@
-import React from 'react'
-import { SupplementalContent } from '../SupplementalContent'
+import React, { FC } from 'react'
+import {
+  SupplementalContent,
+  SupplementalContentVariant,
+  useSupplementalContentValue,
+} from '../SupplementalContent'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
@@ -10,6 +14,7 @@ import {
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
+  renderEmailPart,
 } from 'src/testHelpers'
 import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
@@ -30,11 +35,16 @@ describe('SupplementalContent', () => {
     emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })
     key = emailSubComponent.id
     user = userEvent.setup()
-    rendered = render(<SupplementalContent emailSubComponent={emailSubComponent} />, {
-      wrapper: emailPartWrapper,
-    })
     value = faker.lorem.words(4)
   })
+
+  const itHasAnEditable = (testName: string, label: string) => {
+    it(`has an editable ${testName}`, async () => {
+      await clearAndFillWithValue(label)
+      expect(rendered.queryByText(value)).not.toBeNull()
+      expectEmailPartContentFor(key, rendered.baseElement)
+    })
+  }
 
   const itHasAnEditableRichText = (testName: string, label: string) => {
     it(`has an editable ${testName}`, async () => {
@@ -44,19 +54,114 @@ describe('SupplementalContent', () => {
     })
   }
 
-  it('has an editable title', async () => {
-    await clearAndFillWithValue('Supplemental content title')
-    expect(rendered.queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(key, rendered.baseElement)
-  })
-
-  itHasAnEditableRichText('description', 'Supplemental content description')
-
   it('activates when clicked', async () => {
-    const user = userEvent.setup()
+    rendered = render(<SupplementalContent emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
     const { getByLabelText, baseElement } = rendered
     expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByLabelText('Supplemental content title'))
     expectActiveEmailPartToBe(key, baseElement)
+  })
+
+  describe('variants', () => {
+    const VariantSelect: FC = () => {
+      const [value, setValue] = useSupplementalContentValue(emailSubComponent.id)
+      return (
+        <label>
+          Variant
+          <select
+            onChange={(event) => setValue({ ...value, variant: parseInt(event.target.value) })}
+            value={value.variant}
+          >
+            <option>{SupplementalContentVariant.BenefitAmount}</option>
+            <option>{SupplementalContentVariant.SingleSupplementalContent}</option>
+            <option>{SupplementalContentVariant.DoubleSupplementalContent}</option>
+          </select>
+        </label>
+      )
+    }
+
+    describe('Single Supplemental Content', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.SingleSupplementalContent + '',
+        )
+      })
+
+      itHasAnEditable('title', 'Supplemental content title')
+
+      itHasAnEditableRichText('description', 'Supplemental content description')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(2)
+      })
+    })
+
+    describe('Double Supplemental Content', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.DoubleSupplementalContent + '',
+        )
+      })
+
+      itHasAnEditable('title', 'Supplemental content title')
+
+      itHasAnEditableRichText('description', 'Supplemental content description')
+
+      itHasAnEditable('second title', 'Supplemental content title 2')
+
+      itHasAnEditableRichText('second description', 'Supplemental content description 2')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(4)
+      })
+    })
+
+    describe('Benefit Amount', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.BenefitAmount + '',
+        )
+      })
+
+      itHasAnEditable('benefit amount title', 'Benefit amount title')
+
+      itHasAnEditableRichText('benefit amount description', 'Benefit amount description')
+
+      itHasAnEditable('box title', 'Benefit amount box title')
+
+      itHasAnEditableRichText('main box copy', 'Benefit amount box copy')
+
+      itHasAnEditableRichText('supplemental box copy', 'Benefit amount supplemental box copy')
+
+      itHasAnEditableRichText('supportive information', 'Benefit amount box supportive information')
+
+      itHasAnEditable('title', 'Supplemental content title')
+
+      itHasAnEditableRichText('description', 'Supplemental content description')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(8)
+      })
+    })
   })
 })
