@@ -1,4 +1,14 @@
-import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
+import React, {
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 interface EmailPartsContentData<T extends any> {
   [key: string]: undefined | T
@@ -6,7 +16,7 @@ interface EmailPartsContentData<T extends any> {
 
 type EmailPartsContentContext<T = any> = [
   EmailPartsContentData<T>,
-  (data: EmailPartsContentData<T>) => void,
+  Dispatch<SetStateAction<EmailPartsContentData<T>>>,
 ]
 
 const EmailPartsContentContext = createContext<EmailPartsContentContext>([{}, () => {}])
@@ -24,16 +34,36 @@ export const useEmailPartsContentData = () => useContext(EmailPartsContentContex
 export const useEmailPartsContentFor = <T extends any>(
   id: string,
   defaultValue: T,
-): [T, (value: T) => void] => {
+): [T, (value: T | ((previous: T) => T)) => void] => {
   const [data, update] = useEmailPartsContentData()
 
   const value: T = data[id] ?? defaultValue
 
-  const updateValue = useCallback(
-    (newValue: T) => {
-      update({ ...data, [id]: newValue })
+  const updateValueWithCallback = useCallback(
+    (callback: (previous: T) => T) => {
+      update((data) => {
+        return { ...data, [id]: callback(data[id] ?? defaultValue) }
+      })
     },
-    [data, update, id],
+    [update, id, defaultValue],
+  )
+
+  const updateValueInPlace = useCallback(
+    (newValue: T) => {
+      updateValueWithCallback(() => newValue)
+    },
+    [updateValueWithCallback],
+  )
+
+  const updateValue = useCallback(
+    (newValueOrCallback: T | ((previous: T) => T)) => {
+      if (typeof newValueOrCallback === 'function') {
+        updateValueWithCallback(newValueOrCallback as any)
+      } else {
+        updateValueInPlace(newValueOrCallback)
+      }
+    },
+    [updateValueInPlace, updateValueWithCallback],
   )
 
   return [value, updateValue]

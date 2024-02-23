@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Radio } from 'src/ui/RadioButtons'
@@ -9,6 +9,12 @@ interface Props {
 
 export const StatusFloatingControls: FC<Props> = ({ emailSubComponent }) => {
   const [value, setValue] = useStatusValue(emailSubComponent.id)
+
+  useEffect(() => {
+    return () => {
+      setValue((previousValue) => ({ ...previousValue, spaceAfter: true }))
+    }
+  }, [setValue])
 
   return (
     <Radio.Fieldset legend="Spacing" legendId="status-spacing-control">

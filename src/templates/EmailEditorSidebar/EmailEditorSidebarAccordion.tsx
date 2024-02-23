@@ -127,9 +127,14 @@ EmailComponent.displayName = 'EmailEditorSidebarAccordion.EmailComponent'
 interface EmailSubComponentProps {
   componentId: string
   emailSubComponent: EmailTemplate.UniqueSubComponent
+  nextEmailSubComponent: EmailTemplate.UniqueSubComponent | undefined
 }
 
-const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubComponent }) => {
+const EmailSubComponent: FC<EmailSubComponentProps> = ({
+  componentId,
+  emailSubComponent,
+  nextEmailSubComponent,
+}) => {
   const toggleId = `toggle-${emailSubComponent.id}`
   const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
   const { isActive } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
@@ -178,7 +183,10 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({ componentId, emailSubCo
           emailSubComponent={emailSubComponent}
         />
       </div>
-      <EmailSubComponentFloatingControls emailSubComponent={emailSubComponent} />
+      <EmailSubComponentFloatingControls
+        emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={nextEmailSubComponent}
+      />
     </>
   )
 }

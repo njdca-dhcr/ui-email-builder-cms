@@ -493,6 +493,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={undefined}
       />,
       { wrapper },
     )
@@ -507,6 +508,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={undefined}
       />,
       { wrapper },
     )
@@ -525,6 +527,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={undefined}
       />,
       { wrapper },
     )
@@ -540,6 +543,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={undefined}
       />,
       { wrapper },
     )
@@ -552,6 +556,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={undefined}
       />,
       { wrapper },
     )
@@ -564,6 +569,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={undefined}
       />,
       { wrapper },
     )
@@ -576,6 +582,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
+        nextEmailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
       />,
       { wrapper },
     )
@@ -589,6 +596,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
           <EmailEditorSidebarAccordion.EmailSubComponent
             componentId={faker.lorem.word()}
             emailSubComponent={emailSubComponent}
+            nextEmailSubComponent={undefined}
           />
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
@@ -605,6 +613,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
           <EmailEditorSidebarAccordion.EmailSubComponent
             componentId={faker.lorem.word()}
             emailSubComponent={emailSubComponent}
+            nextEmailSubComponent={undefined}
           />
         </CurrentlyActiveEmailPart>
       </ShouldShowEmailPart>,
@@ -625,6 +634,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
         <EmailEditorSidebarAccordion.EmailSubComponent
           componentId={faker.lorem.word()}
           emailSubComponent={emailSubComponent}
+          nextEmailSubComponent={undefined}
         />,
         { wrapper },
       )
@@ -636,6 +646,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
         <EmailEditorSidebarAccordion.EmailSubComponent
           componentId={faker.lorem.word()}
           emailSubComponent={emailSubComponent}
+          nextEmailSubComponent={undefined}
         />,
         { wrapper },
       )
