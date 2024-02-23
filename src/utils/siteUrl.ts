@@ -11,6 +11,8 @@ const NJ_SITE_URL = 'https://main.dor49a0hhc0bh.amplifyapp.com'
 
 const ALL_STATES_SITE_URL = 'https://email-builder-beta.netlify.app'
 
+const ICON_URL = 'https://beta.nj.gov/files/dol-uimod-email/icons'
+
 export const siteUrl = (): string => {
   if (getEnv() === 'development') {
     return DEVELOPMENT_SITE_URL
@@ -25,4 +27,8 @@ export const siteUrl = (): string => {
 
 export const buildSiteUrl = (path: string): string => {
   return siteUrl() + path
+}
+
+export const buildIconUrl = (icon: string): string => {
+  return ICON_URL + icon
 }
