@@ -83,6 +83,8 @@ const styles = {
     letterSpacing: '-0.0125em',
   } as CSSProperties,
   container: {
+    display: 'flex',
+    flexDirection: 'column',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: 'fit-content',
