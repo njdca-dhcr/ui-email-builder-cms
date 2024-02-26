@@ -5,7 +5,6 @@ import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } fro
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { RichTextValue } from 'src/ui/RichTextEditor'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
 const TipsAndTricksPage: FC = () => {
   const [value, setValue] = useState<RichTextValue>([
@@ -39,27 +38,6 @@ const TipsAndTricksPage: FC = () => {
         <SpacedContainer>
           <Heading element="h1">Tips & Tricks</Heading>
           <Paragraph>Coming soon.</Paragraph>
-
-          <div style={{ border: '2px solid gray', borderRadius: 5 }}>
-            <table>
-              <tbody>
-                <tr>
-                  <RichTextEditableElement
-                    label="test"
-                    element="td"
-                    onValueChange={setValue}
-                    value={value}
-                    style={{ borderLeft: '2px solid black' }}
-                  />
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div>
-            <h3>Current value:</h3>
-            <pre>{JSON.stringify(value, null, 2)}</pre>
-          </div>
         </SpacedContainer>
       </PageContent>
     </Layout>
