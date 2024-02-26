@@ -142,14 +142,14 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 
   const itDisplaysADescriptionWhenAvailable = () => {
     it('displays a description when available', () => {
-      emailComponent.description = faker.lorem.paragraph()
-      const { queryByText } = render(
+      emailComponent.description = `<b>${faker.lorem.words(3)}</b>`
+      const { baseElement } = render(
         <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
           <span />
         </EmailEditorSidebarAccordion.EmailComponent>,
         { wrapper },
       )
-      expect(queryByText(emailComponent.description)).not.toBeNull()
+      expect(baseElement.querySelector('.description')).toContainHTML(emailComponent.description)
     })
   }
 
@@ -538,8 +538,8 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
   })
 
   it('displays a description when available', () => {
-    emailSubComponent.description = faker.lorem.paragraph()
-    const { queryByText } = render(
+    emailSubComponent.description = `<b>${faker.lorem.words(3)}</b>`
+    const { baseElement } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
         componentId={faker.lorem.word()}
         emailSubComponent={emailSubComponent}
@@ -547,7 +547,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
       />,
       { wrapper },
     )
-    expect(queryByText(emailSubComponent.description)).not.toBeNull()
+    expect(baseElement.querySelector('.description')).toContainHTML(emailSubComponent.description)
   })
 
   it('does not display a description when unavailable', () => {

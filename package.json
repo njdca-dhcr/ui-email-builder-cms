@@ -59,6 +59,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-shadow": "^20.4.0",
+    "sanitize-html": "^2.12.1",
     "slate-history": "^0.100.0",
     "slate-react": "^0.91.11"
   },
@@ -79,6 +80,7 @@
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@types/sanitize-html": "^2.11.0",
     "babel-jest": "^29.7.0",
     "babel-preset-gatsby": "^3.12.0",
     "identity-obj-proxy": "^3.0.0",

@@ -22,6 +22,7 @@ import {
 import { Link } from 'gatsby'
 import { VisibilityToggle } from 'src/ui/VisibilityToggle'
 import { EmailSubComponentFloatingControls } from './EmailSubcomponentControls/EmailSubcomponentFloatingControls'
+import { SimpleInlineHtml } from 'src/ui/SimpleInlineHtml'
 
 interface ContainerProps {
   children: ReactNode
@@ -116,7 +117,9 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
         </p>
       )}
       {!isEditableInSettings && emailComponent.description && (
-        <p className="description">{emailComponent.description}</p>
+        <p className="description">
+          <SimpleInlineHtml html={emailComponent.description} />
+        </p>
       )}
       <AccordionPanel>{isSubcomponentContainer && children}</AccordionPanel>
     </AccordionItem>
@@ -174,7 +177,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({
         )}
         {!isEditableInSettings && emailSubComponent.description && (
           <p className={classNames('description', { invisible: shouldShow.off })}>
-            {emailSubComponent.description}
+            <SimpleInlineHtml html={emailSubComponent.description} />
           </p>
         )}
         <EmailSubComponentControls

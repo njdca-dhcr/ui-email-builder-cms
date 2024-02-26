@@ -48,7 +48,7 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         description: A great place to add links to find out more about programs and
-          other state offerings. Do not use "click here"!
+          other state offerings. <strong>Do not use "click here"!</strong>
   - kind: StateSeal
     required: true
   - kind: Disclaimer
