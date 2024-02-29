@@ -14,7 +14,7 @@ import {
   SpacedSidebarContainer,
 } from '../Layout'
 import { asMock } from 'src/testHelpers'
-import { isAllStatesMode, isNJMode } from 'src/utils/appMode'
+import { isNJMode } from 'src/utils/appMode'
 
 jest.mock('src/utils/appMode', () => {
   const actual = jest.requireActual('src/utils/appMode')

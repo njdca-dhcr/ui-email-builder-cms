@@ -7,21 +7,46 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { isNJMode } from 'src/utils/appMode'
 
-interface ProgramNameValue {
+export enum ProgramNameNJPreset {
+  DependencyBenefits = 'Dependency Benefits',
+  DisasterUnemploymentAssistance = 'Disaster Unemployment Assistance (DUA)',
+  MixedEarnersUnemploymentCompensation = 'Mixed Earners Unemployment Compensation (MEUC)',
+  PandemicUnemploymentAssistance = 'Pandemic Unemployment Assistance (PUA)',
+  PandemicUnemploymentOverpayment = 'Pandemic Unemployment Overpayment',
+  UnemploymentInsurance = 'Unemployment Insurance (UI)',
+  UnemploymentInsuranceUiDependencyBenefits = 'Unemployment Insurance (UI) Dependency Benefits',
+  UnemploymentInsuranceUiMonetaryEligibility = 'Unemployment Insurance (UI) Monetary Eligibility',
+  Custom = 'Custom',
+}
+
+export interface ProgramNameValue {
+  preset: ProgramNameNJPreset
   name: string
   backgroundColor: string
 }
 
-const defaultValue: ProgramNameValue = {
-  name: 'Program Name',
-  backgroundColor: '#CCBDDF',
+const defaultValue = (): ProgramNameValue => {
+  if (isNJMode()) {
+    return {
+      preset: ProgramNameNJPreset.DependencyBenefits,
+      name: 'Dependency Benefits',
+      backgroundColor: '#E1E291',
+    }
+  } else {
+    return {
+      preset: ProgramNameNJPreset.DependencyBenefits,
+      name: 'Program Name',
+      backgroundColor: '#CCBDDF',
+    }
+  }
 }
 
 const { Table, Row } = EmailBlock
 
 export const useProgramNameValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+  return useEmailPartsContentFor(id, defaultValue())
 }
 
 export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
@@ -47,6 +72,7 @@ export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) =
     >
       <Table width="unset" elements={['row']}>
         <EditableElement
+          valueKey={value.preset}
           ref={previewRef}
           aria-level={2}
           element="td"

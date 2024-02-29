@@ -64,7 +64,7 @@ describe('EmailEditorContent', () => {
   it('can display the email components and subcomponents', () => {
     const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
     expect(queryByText('Title')).not.toBeNull()
-    expect(queryByText('Program Name')).not.toBeNull()
+    expect(queryByText('Dependency Benefits')).not.toBeNull()
   })
 
   it('raises an alert if the user tries to export the email without preview text', async () => {

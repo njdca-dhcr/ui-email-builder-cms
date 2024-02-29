@@ -33,7 +33,7 @@ describe('EmailSubComponentControls', () => {
         id={id}
       />,
     )
-    expect(queryByText('Background Color')).not.toBeNull()
+    expect(queryByText('Background Color Preset')).not.toBeNull()
   })
 
   it('renders nothing for AdditionalContent', () => {
