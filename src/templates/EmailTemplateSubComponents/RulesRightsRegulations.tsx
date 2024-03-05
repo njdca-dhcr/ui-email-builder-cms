@@ -6,47 +6,17 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
-import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { EditableTerms, TableTerm } from 'src/ui/EditableTermsTable'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
+import {
+  EmailTemplate,
+  RulesRightsRegulationsValue,
+  RulesRightsRegulationsVariant,
+} from 'src/appTypes'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
-
-export const enum RulesRightsRegulationsVariant {
-  Reminder,
-  AppealRights,
-  YourRights,
-}
-
-interface RulesRightsRegulationsValue {
-  variant: RulesRightsRegulationsVariant
-  icon: UswdsIconVariantKey
-  // Reminder
-  reminderTitle: string
-  eligibilityLabel: string
-  eligibilityConditionsList: string[]
-  showReminderIsFor: boolean
-  reminderIsFor: RichTextValue
-  showFootnote: boolean
-  footnote: RichTextValue
-  // Appeal Rights
-  appealRightsTitle: string
-  appealRightsSummary: RichTextValue
-  appealRightsShowInstruction: boolean
-  appealRightsInstruction: RichTextValue
-  appealRightsButton: string
-  appealRightsHref: string
-  appealRightsShowInfoLabel: boolean
-  appealRightsInfoLabel: string
-  appealRightsShowTerms: boolean
-  appealRightsTerms: TableTerm[]
-  // Your Rights
-  yourRightsTitle: string
-  yourRightsList: string[]
-}
 
 const defaultValue: RulesRightsRegulationsValue = {
   variant: RulesRightsRegulationsVariant.Reminder,
@@ -119,15 +89,19 @@ const defaultValue: RulesRightsRegulationsValue = {
   ],
 }
 
-export const useRulesRightsRegulationsValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+export const useRulesRightsRegulationsValue = (
+  emailSubComponent: EmailTemplate.RulesRightsRegulations,
+) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
 }
 
 const { Row, Cell, Link } = EmailBlock
 
-export const RulesRightsRegulations: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegulations'>> = ({
+  emailSubComponent,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent.id)
+  const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights

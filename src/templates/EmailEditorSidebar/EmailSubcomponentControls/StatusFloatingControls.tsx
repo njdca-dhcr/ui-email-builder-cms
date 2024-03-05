@@ -4,11 +4,11 @@ import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Radio } from 'src/ui/RadioButtons'
 
 interface Props {
-  emailSubComponent: EmailTemplate.UniqueSubComponent
+  emailSubComponent: EmailTemplate.Status
 }
 
 export const StatusFloatingControls: FC<Props> = ({ emailSubComponent }) => {
-  const [value, setValue] = useStatusValue(emailSubComponent.id)
+  const [value, setValue] = useStatusValue(emailSubComponent)
 
   useEffect(() => {
     return () => {

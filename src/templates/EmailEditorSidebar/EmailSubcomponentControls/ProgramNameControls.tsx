@@ -1,21 +1,20 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
-import {
-  ProgramNameNJPreset,
-  ProgramNameValue,
-  useProgramNameValue,
-} from 'src/templates/EmailTemplateSubComponents/ProgramName'
+import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/ProgramName'
 import { ColorPicker } from 'src/ui/ColorPicker'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { ColorInput } from 'src/ui/ColorInput'
 import { isNJMode } from 'src/utils/appMode'
 import { Select } from 'src/ui'
+import { ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
 
-export const ProgramNameControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
-  const presetSelectHtmlId = `program-name-preset-select-${id}`
-  const colorPickerHtmlId = `program-name-background-color-${id}`
-  const colorInputHtmlId = `program-name-background-color-input-${id}`
-  const [value, setValue] = useProgramNameValue(id)
+export const ProgramNameControls: FC<EmailSubComponentControlsProps<'ProgramName'>> = ({
+  emailSubComponent,
+}) => {
+  const presetSelectHtmlId = `program-name-preset-select-${emailSubComponent.id}`
+  const colorPickerHtmlId = `program-name-background-color-${emailSubComponent.id}`
+  const colorInputHtmlId = `program-name-background-color-input-${emailSubComponent.id}`
+  const [value, setValue] = useProgramNameValue(emailSubComponent)
   const isCustomPreset = ProgramNameNJPreset.Custom === value.preset
 
   return (

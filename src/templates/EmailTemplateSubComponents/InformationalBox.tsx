@@ -4,17 +4,11 @@ import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
-import { Borders, Spacing, SpacingCell, StyleDefaults, Text, Font } from '../styles'
+import { Borders, Spacing, StyleDefaults, Text, Font } from '../styles'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
-import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { UswdsIcon } from 'src/ui/UswdsIcon'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-
-interface InformationalBoxValue {
-  boxColor: BoxColor
-  icon: UswdsIconVariantKey
-  title: string
-  description: string
-}
+import { EmailTemplate, InformationalBoxValue } from 'src/appTypes'
 
 const defaultValue: InformationalBoxValue = {
   boxColor: BoxColor.BenefitBlue,
@@ -23,15 +17,17 @@ const defaultValue: InformationalBoxValue = {
   description: 'Confirmation number: 123456789',
 }
 
-export const useInformationalBoxValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+export const useInformationalBoxValue = (emailSubComponent: EmailTemplate.InformationalBox) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
 }
 
 const { Row, Cell } = EmailBlock
 
-export const InformationalBox: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const InformationalBox: FC<EmailSubComponentProps<'InformationalBox'>> = ({
+  emailSubComponent,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useInformationalBoxValue(emailSubComponent.id)
+  const [value, setValue] = useInformationalBoxValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]

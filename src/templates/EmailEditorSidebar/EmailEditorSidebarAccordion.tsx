@@ -182,7 +182,6 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({
         )}
         <EmailSubComponentControls
           componentId={componentId}
-          id={emailSubComponent.id}
           emailSubComponent={emailSubComponent}
         />
       </div>

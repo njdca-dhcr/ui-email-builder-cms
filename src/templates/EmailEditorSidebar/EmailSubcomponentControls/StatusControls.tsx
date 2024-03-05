@@ -2,17 +2,20 @@ import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useSubComponentControlOptions } from '.'
-import { StatusVariant, useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
+import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconSelect } from 'src/ui'
+import { StatusVariant } from 'src/appTypes'
 
-export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSubComponent }) => {
-  const variantHtmlId = `select-variant-${id}`
-  const boxColorHtmlId = `select-box-color-${id}`
-  const iconHtmlId = `select-icon-${id}`
-  const [value, setValue] = useStatusValue(id)
+export const StatusControls: FC<EmailSubComponentControlsProps<'Status'>> = ({
+  emailSubComponent,
+}) => {
+  const variantHtmlId = `select-variant-${emailSubComponent.id}`
+  const boxColorHtmlId = `select-box-color-${emailSubComponent.id}`
+  const iconHtmlId = `select-icon-${emailSubComponent.id}`
+  const [value, setValue] = useStatusValue(emailSubComponent)
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
 
@@ -25,20 +28,20 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
         className={SELECT_VARIANT_CLASSNAME}
         labelId={variantHtmlId}
         options={[
-          { label: 'Overview', value: StatusVariant.Overview + '' },
-          { label: 'Overview w/ Reason', value: StatusVariant.OverviewWithReason + '' },
-          { label: 'Missing Document Specifics', value: StatusVariant.MissingDocument + '' },
+          { label: 'Overview', value: StatusVariant.Overview },
+          { label: 'Overview w/ Reason', value: StatusVariant.OverviewWithReason },
+          { label: 'Missing Document Specifics', value: StatusVariant.MissingDocument },
           {
             label: 'Overview w/ Reason + Amount Due',
-            value: StatusVariant.OverviewWithReasonAndAmountDue + '',
+            value: StatusVariant.OverviewWithReasonAndAmountDue,
           },
           {
             label: 'Overview w/ Reason + Amount Breakdown',
-            value: StatusVariant.OverviewWithReasonAndAmountBreakdown + '',
+            value: StatusVariant.OverviewWithReasonAndAmountBreakdown,
           },
         ]}
-        onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-        value={value.variant + ''}
+        onChange={(newValue) => setValue({ ...value, variant: newValue as StatusVariant })}
+        value={value.variant}
         size="small"
       />
       {[
@@ -70,7 +73,7 @@ export const StatusControls: FC<EmailSubComponentControlsProps> = ({ id, emailSu
       )}
       <SubComponentControlToggle
         className="status-supportive-information-toggle"
-        subComponentId={id}
+        subComponentId={emailSubComponent.id}
         label="+ Supportive Information"
         onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
         value={value.showSupportiveInformation}

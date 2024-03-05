@@ -7,11 +7,9 @@ import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 
 describe('EmailSubComponentControls', () => {
   let componentId: string
-  let id: string
 
   beforeEach(() => {
     componentId = faker.lorem.words(2)
-    id = faker.lorem.words(3)
   })
 
   it('renders nothing for Title', () => {
@@ -19,7 +17,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Header', { kind: 'Title' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(baseElement.innerHTML).toEqual('<div></div>')
@@ -30,7 +27,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(queryByText('Background Color Preset')).not.toBeNull()
@@ -41,7 +37,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(baseElement.innerHTML).toEqual('<div></div>')
@@ -52,7 +47,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Intro' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(baseElement.innerHTML).toEqual('<div></div>')
@@ -63,7 +57,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(queryByText('Supplemental Content variant')).not.toBeNull()
@@ -74,7 +67,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(queryByText('Status variant')).not.toBeNull()
@@ -87,7 +79,6 @@ describe('EmailSubComponentControls', () => {
           kind: 'RulesRightsRegulations',
         })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(queryByText('Rules, Rights, and Regulations variant')).not.toBeNull()
@@ -100,7 +91,6 @@ describe('EmailSubComponentControls', () => {
           kind: 'LoginDetails',
         })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(queryByText('Icon')).not.toBeNull()
@@ -111,7 +101,6 @@ describe('EmailSubComponentControls', () => {
       <EmailSubComponentControls
         emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
         componentId={componentId}
-        id={id}
       />,
     )
     expect(queryByText('Box Color')).not.toBeNull()
@@ -126,7 +115,6 @@ describe('EmailSubComponentControls', () => {
               kind: 'RulesRightsRegulations',
             })}
             componentId={componentId}
-            id={id}
           />
         </ShouldShowEmailPart>,
       )
@@ -136,15 +124,12 @@ describe('EmailSubComponentControls', () => {
 
   describe('when the subcomponent is not being shown', () => {
     it('renders nothing', () => {
+      const subcomponent = buildUniqueEmailSubComponent('Body', {
+        kind: 'RulesRightsRegulations',
+      })
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [id]: false }}>
-          <EmailSubComponentControls
-            emailSubComponent={buildUniqueEmailSubComponent('Body', {
-              kind: 'RulesRightsRegulations',
-            })}
-            componentId={componentId}
-            id={id}
-          />
+        <ShouldShowEmailPart initialData={{ [subcomponent.id]: false }}>
+          <EmailSubComponentControls emailSubComponent={subcomponent} componentId={componentId} />
         </ShouldShowEmailPart>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')

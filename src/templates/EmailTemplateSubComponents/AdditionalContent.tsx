@@ -5,25 +5,33 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Colors, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
+import { AdditionalContentValue, EmailTemplate } from 'src/appTypes'
 
-const defaultValue: RichTextValue = [
-  {
-    type: 'paragraph',
-    children: [
-      {
-        text: 'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.',
-      },
-    ],
-  },
-]
+const defaultValue: AdditionalContentValue = {
+  content: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.',
+        },
+      ],
+    },
+  ],
+}
 
 const { Row } = EmailBlock
 
-export const AdditionalContent: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const useAdditionalContentValue = (emailSubComponent: EmailTemplate.AdditionalContent) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+}
+
+export const AdditionalContent: FC<EmailSubComponentProps<'AdditionalContent'>> = ({
+  emailSubComponent,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const [value, setValue] = useAdditionalContentValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
@@ -43,9 +51,9 @@ export const AdditionalContent: FC<EmailSubComponentProps> = ({ emailSubComponen
         element="td"
         className={StyleDefaults.layout.narrow}
         label="Additional content"
-        onValueChange={setValue}
+        onValueChange={(content) => setValue({ ...value, content })}
         style={styles}
-        value={value}
+        value={value.content}
       />
     </Row>
   )

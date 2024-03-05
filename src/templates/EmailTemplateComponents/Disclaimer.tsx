@@ -59,7 +59,7 @@ export const useDisclaimerValue = () => {
 
 const { Row } = EmailBlock
 
-export const Disclaimer: FC<EmailComponentProps> = ({}) => {
+export const Disclaimer: FC<EmailComponentProps<'Disclaimer'>> = ({}) => {
   const [value] = useDisclaimerValue()
 
   return (

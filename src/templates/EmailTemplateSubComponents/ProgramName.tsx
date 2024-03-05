@@ -8,24 +8,7 @@ import { EmailBlock } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { isNJMode } from 'src/utils/appMode'
-
-export enum ProgramNameNJPreset {
-  DependencyBenefits = 'Dependency Benefits',
-  DisasterUnemploymentAssistance = 'Disaster Unemployment Assistance (DUA)',
-  MixedEarnersUnemploymentCompensation = 'Mixed Earners Unemployment Compensation (MEUC)',
-  PandemicUnemploymentAssistance = 'Pandemic Unemployment Assistance (PUA)',
-  PandemicUnemploymentOverpayment = 'Pandemic Unemployment Overpayment',
-  UnemploymentInsurance = 'Unemployment Insurance (UI)',
-  UnemploymentInsuranceUiDependencyBenefits = 'Unemployment Insurance (UI) Dependency Benefits',
-  UnemploymentInsuranceUiMonetaryEligibility = 'Unemployment Insurance (UI) Monetary Eligibility',
-  Custom = 'Custom',
-}
-
-export interface ProgramNameValue {
-  preset: ProgramNameNJPreset
-  name: string
-  backgroundColor: string
-}
+import { EmailTemplate, ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
 
 const defaultValue = (): ProgramNameValue => {
   if (isNJMode()) {
@@ -45,13 +28,13 @@ const defaultValue = (): ProgramNameValue => {
 
 const { Table, Row } = EmailBlock
 
-export const useProgramNameValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue())
+export const useProgramNameValue = (emailSubComponent: EmailTemplate.ProgramName) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue())
 }
 
-export const ProgramName: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const ProgramName: FC<EmailSubComponentProps<'ProgramName'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useProgramNameValue(emailSubComponent.id)
+  const [value, setValue] = useProgramNameValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const color = textColorForBackground(value.backgroundColor, {

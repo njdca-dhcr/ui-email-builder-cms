@@ -5,18 +5,19 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { StyleDefaults, Text, Spacing } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { EmailSubComponentProps } from './shared'
+import { DateRangeValue, EmailTemplate } from 'src/appTypes'
 
-const defaultValue = '[00/00/0000] - [00/00/0000]'
+const defaultValue: DateRangeValue = { range: '[00/00/0000] - [00/00/0000]' }
 
 const { Row } = EmailBlock
 
-export const useDateRangeValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+export const useDateRangeValue = (emailSubComponent: EmailTemplate.DateRange) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
 }
 
-export const DateRange: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const DateRange: FC<EmailSubComponentProps<'DateRange'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useDateRangeValue(emailSubComponent.id)
+  const [value, setValue] = useDateRangeValue(emailSubComponent)
 
   return (
     <Row
@@ -33,9 +34,9 @@ export const DateRange: FC<EmailSubComponentProps> = ({ emailSubComponent }) => 
         label="Date Range"
         onClick={activate}
         onFocus={activate}
-        onValueChange={setValue}
+        onValueChange={(range) => setValue({ ...value, range })}
         style={styles}
-        value={value}
+        value={value.range}
       />
     </Row>
   )

@@ -2,19 +2,16 @@ import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { Select, UswdsIconSelect } from 'src/ui'
-import {
-  LoginDetailsVariant,
-  useLoginDetailsValue,
-} from 'src/templates/EmailTemplateSubComponents/LoginDetails'
+import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { VisuallyHidden } from '@reach/visually-hidden'
+import { LoginDetailsVariant } from 'src/appTypes'
 
-export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
-  id,
+export const LoginDetailsControls: FC<EmailSubComponentControlsProps<'LoginDetails'>> = ({
   emailSubComponent,
 }) => {
-  const variantHtmlId = `variant-${id}`
-  const iconHtmlId = `icon-${id}`
-  const [value, setValue] = useLoginDetailsValue(id)
+  const variantHtmlId = `variant-${emailSubComponent.id}`
+  const iconHtmlId = `icon-${emailSubComponent.id}`
+  const [value, setValue] = useLoginDetailsValue(emailSubComponent)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information
 
@@ -30,11 +27,11 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps> = ({
           className={SELECT_VARIANT_CLASSNAME}
           labelId={variantHtmlId}
           options={[
-            { label: 'Details', value: LoginDetailsVariant.Details + '' },
-            { label: 'Information', value: LoginDetailsVariant.Information + '' },
+            { label: 'Details', value: LoginDetailsVariant.Details },
+            { label: 'Information', value: LoginDetailsVariant.Information },
           ]}
-          onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-          value={value.variant + ''}
+          onChange={(newValue) => setValue({ ...value, variant: newValue as LoginDetailsVariant })}
+          value={value.variant}
           size="small"
         />
       </Control.Container>

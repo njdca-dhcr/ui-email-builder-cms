@@ -8,28 +8,64 @@ import { Disclaimer } from '../EmailTemplateComponents/Disclaimer'
 import { StateSeal } from '../EmailTemplateComponents/StateSeal'
 import { EmailComponentProps } from '../EmailTemplateComponents/shared'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
+import { EmailTemplate } from 'src/appTypes'
 
-export const EditEmailComponent: FC<EmailComponentProps> = (props) => {
-  const shouldShow = useShouldShowEmailPart(props.emailComponent.id)
+export const EditEmailComponent: FC<EmailComponentProps<EmailTemplate.ComponentKind>> = ({
+  emailComponent,
+  ...props
+}) => {
+  const shouldShow = useShouldShowEmailPart(emailComponent.id)
 
   if (shouldShow.off) return null
 
-  switch (props.emailComponent.kind) {
+  switch (emailComponent.kind) {
     case 'Header':
-      return <Header {...props} />
+      return (
+        <Header
+          {...props}
+          emailComponent={emailComponent as EmailTemplate.UniqueComponent<'Header'>}
+        />
+      )
     case 'Footer':
-      return <Footer {...props} />
+      return (
+        <Footer
+          {...props}
+          emailComponent={emailComponent as EmailTemplate.UniqueComponent<'Footer'>}
+        />
+      )
     case 'Banner':
-      return <Banner {...props} />
+      return (
+        <Banner
+          {...props}
+          emailComponent={emailComponent as EmailTemplate.UniqueComponent<'Banner'>}
+        />
+      )
     case 'Name':
-      return <Name {...props} />
+      return (
+        <Name {...props} emailComponent={emailComponent as EmailTemplate.UniqueComponent<'Name'>} />
+      )
     case 'Body':
-      return <Body {...props} />
+      return (
+        <Body {...props} emailComponent={emailComponent as EmailTemplate.UniqueComponent<'Body'>} />
+      )
     case 'Disclaimer':
-      return <Disclaimer {...props} />
+      return (
+        <Disclaimer
+          {...props}
+          emailComponent={emailComponent as EmailTemplate.UniqueComponent<'Disclaimer'>}
+        />
+      )
     case 'StateSeal':
-      return <StateSeal {...props} />
+      return (
+        <StateSeal
+          {...props}
+          emailComponent={emailComponent as EmailTemplate.UniqueComponent<'StateSeal'>}
+        />
+      )
     default:
-      console.warn(`Component (${props.emailComponent.kind}) not implemented`, props)
+      console.warn(`Component (${emailComponent.kind}) not implemented`, {
+        ...props,
+        emailComponent,
+      })
   }
 }

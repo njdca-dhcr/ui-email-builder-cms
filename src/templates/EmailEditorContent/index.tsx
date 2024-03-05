@@ -30,7 +30,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
-  const [titleValue] = useTitleValue(getTitleSubComponent(emailTemplate)?.id ?? '')
+  const [titleValue] = useTitleValue(getTitleSubComponent(emailTemplate))
   const [previewText] = usePreviewText()
   const emailComponents = emailTemplate.components ?? []
 
@@ -70,12 +70,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         <div className="button-group">
           <CopyToClipboardButton
             fieldsCompleted={hasPreviewText}
-            textToCopy={() => toEmailText(titleValue)}
+            textToCopy={() => toEmailText(titleValue.title)}
           >
             Copy HTML
           </CopyToClipboardButton>
           <DownloadButton
-            textToDownload={() => toEmailText(titleValue)}
+            textToDownload={() => toEmailText(titleValue.title)}
             fileName={`${emailTemplate.name}.html`}
             fieldsCompleted={hasPreviewText}
           >
@@ -132,9 +132,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
 
 const getTitleSubComponent = (
   emailTemplate: EmailTemplate.UniqueConfig,
-): EmailTemplate.UniqueSubComponent | null => {
+): EmailTemplate.Title | null => {
   const subComponents = (emailTemplate.components ?? []).flatMap(
     ({ subComponents }) => subComponents ?? [],
   )
-  return subComponents.find(({ kind }) => kind === 'Title') ?? null
+
+  return (
+    (subComponents.find(({ kind }) => kind === 'Title') as EmailTemplate.Title | undefined) ?? null
+  )
 }

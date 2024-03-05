@@ -2,19 +2,16 @@ import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import {
-  DirectiveVariant,
-  useDirectiveValue,
-} from 'src/templates/EmailTemplateSubComponents/Directive'
+import { useDirectiveValue } from 'src/templates/EmailTemplateSubComponents/Directive'
 import { Select } from 'src/ui/'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
+import { DirectiveVariant } from 'src/appTypes'
 
-export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
-  id,
+export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> = ({
   emailSubComponent,
 }) => {
-  const htmlId = `select-${id}`
-  const [value, setValue] = useDirectiveValue(id)
+  const htmlId = `select-${emailSubComponent.id}`
+  const [value, setValue] = useDirectiveValue(emailSubComponent)
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
 
@@ -29,23 +26,22 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
           className={SELECT_VARIANT_CLASSNAME}
           labelId={htmlId}
           options={[
-            { label: 'One Step', value: DirectiveVariant.OneStep + '' },
-            { label: 'Three Steps', value: DirectiveVariant.ThreeStep + '' },
+            { label: 'One Step', value: DirectiveVariant.OneStep },
+            { label: 'Three Steps', value: DirectiveVariant.ThreeStep },
             {
               label: 'Three Steps w/ Step 2 Expansion',
-              value: DirectiveVariant.StepTwoExpansion + '',
+              value: DirectiveVariant.StepTwoExpansion,
             },
-            // { label: 'Cost Breakdown', value: DirectiveVariant.CostBreakdown + '' },
-            { label: 'Pay Online', value: DirectiveVariant.PayOnline + '' },
+            { label: 'Pay Online', value: DirectiveVariant.PayOnline },
           ]}
-          onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-          value={value.variant + ''}
+          onChange={(newValue) => setValue({ ...value, variant: newValue as DirectiveVariant })}
+          value={value.variant}
           size="small"
         />
       </Control.Container>
 
       <SubComponentControlToggle
-        subComponentId={id}
+        subComponentId={emailSubComponent.id}
         label="+ Title"
         onChange={(showTitle) => setValue({ ...value, showTitle })}
         value={value.showTitle}
@@ -55,7 +51,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
         <>
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Step 1 Additional Content"
             onChange={(showStep1AdditionalContent) =>
               setValue({ ...value, showStep1AdditionalContent })
@@ -64,7 +60,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
           />
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Step 2 Additional Content"
             onChange={(showStep2AdditionalContent) =>
               setValue({ ...value, showStep2AdditionalContent })
@@ -73,7 +69,7 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps> = ({
           />
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Step 3 Additional Content"
             onChange={(showStep3AdditionalContent) =>
               setValue({ ...value, showStep3AdditionalContent })

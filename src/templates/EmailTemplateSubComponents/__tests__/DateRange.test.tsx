@@ -13,7 +13,7 @@ import {
 } from 'src/testHelpers'
 
 describe('Date Range', () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.DateRange
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DateRange' })

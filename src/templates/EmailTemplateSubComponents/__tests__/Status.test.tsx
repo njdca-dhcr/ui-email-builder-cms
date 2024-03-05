@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, StatusVariant } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -11,13 +11,13 @@ import {
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import { Status, StatusVariant, useStatusValue } from '../Status'
+import { Status, useStatusValue } from '../Status'
 import { VisibilityToggle } from 'src/ui/VisibilityToggle'
 import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('Status', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.Status
   let user: UserEvent
   let rendered: RenderResult
   let key: string
@@ -29,7 +29,7 @@ describe('Status', () => {
   }
 
   const ToggleSupportiveInformation: FC = () => {
-    const [value, setValue] = useStatusValue(emailSubComponent.id)
+    const [value, setValue] = useStatusValue(emailSubComponent)
     return (
       <label>
         toggle
@@ -91,12 +91,12 @@ describe('Status', () => {
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useStatusValue(emailSubComponent.id)
+      const [value, setValue] = useStatusValue(emailSubComponent)
       return (
         <label>
           Variant
           <select
-            onChange={(event) => setValue({ ...value, variant: parseInt(event.target.value) })}
+            onChange={(event) => setValue({ ...value, variant: event.target.value as any })}
             value={value.variant}
           >
             <option>{StatusVariant.Overview}</option>

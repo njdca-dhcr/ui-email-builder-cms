@@ -9,13 +9,12 @@ import {
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
 import { render } from '@testing-library/react'
-import Config from '../gatsby-config'
 import uniqueId from 'lodash.uniqueid'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
-  component: EmailTemplate.ComponentKind,
-  options?: Partial<EmailTemplate.SubComponent<T>>,
-): EmailTemplate.SubComponent<T> => {
+  component: T,
+  options?: Partial<EmailTemplate.SubComponent<T, any>>,
+): EmailTemplate.SubComponent<T, any> => {
   const possibleSubComponents = EmailTemplateComponentsMapping[component]
 
   if (possibleSubComponents.length === 0) {
@@ -30,10 +29,13 @@ export const buildEmailTemplateSubComponent = <T extends EmailTemplate.Component
   }
 }
 
-export const buildUniqueEmailSubComponent = (
-  component: EmailTemplate.ComponentKind,
-  options?: Partial<EmailTemplate.UniqueSubComponent>,
-): EmailTemplate.UniqueSubComponent => {
+export const buildUniqueEmailSubComponent = <
+  T extends EmailTemplate.ComponentKind,
+  K extends EmailTemplate.SubComponentKind<T>,
+>(
+  component: T,
+  options?: Partial<EmailTemplate.UniqueSubComponent<T, K>>,
+): EmailTemplate.UniqueSubComponent<T, K> => {
   return {
     ...buildEmailTemplateSubComponent(component, options),
     id: uniqueId(),
@@ -54,10 +56,10 @@ export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKin
   }
 }
 
-export const buildUniqueEmailComponent = (
-  kind: EmailTemplate.ComponentKind,
-  options?: Partial<EmailTemplate.UniqueComponent>,
-): EmailTemplate.UniqueComponent => {
+export const buildUniqueEmailComponent = <T extends EmailTemplate.ComponentKind>(
+  kind: T,
+  options?: Partial<EmailTemplate.UniqueComponent<T>>,
+): EmailTemplate.UniqueComponent<T> => {
   const { subComponents, ...emailComponent } = buildEmailTemplateComponent(kind, options)
   return {
     ...emailComponent,

@@ -22,7 +22,7 @@ export const EmailSubComponentFloatingControls: FC<Props> = ({
       return (
         nextEmailSubComponent?.kind === 'Directive' &&
         shouldShowNextSubComponent.on && (
-          <StatusFloatingControls emailSubComponent={emailSubComponent} />
+          <StatusFloatingControls emailSubComponent={emailSubComponent as EmailTemplate.Status} />
         )
       )
     default:

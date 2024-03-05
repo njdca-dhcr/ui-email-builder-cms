@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 
-export interface EmailComponentProps {
+export interface EmailComponentProps<T extends EmailTemplate.ComponentKind> {
   children: ReactNode
-  emailComponent: EmailTemplate.UniqueComponent
+  emailComponent: EmailTemplate.UniqueComponent<T>
 }

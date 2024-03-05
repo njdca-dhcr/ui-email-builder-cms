@@ -20,7 +20,7 @@ describe('DepartmentSealMarkup', () => {
 })
 
 describe('DepartmentSeal', () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.DepartmentSeal
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DepartmentSeal' })

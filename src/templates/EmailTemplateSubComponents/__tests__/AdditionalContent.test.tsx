@@ -13,7 +13,7 @@ import {
 import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('AdditionalContent', () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.AdditionalContent
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })

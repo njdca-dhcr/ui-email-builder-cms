@@ -5,13 +5,12 @@ import { UswdsIconSelect } from 'src/ui'
 import { useInformationalBoxValue } from 'src/templates/EmailTemplateSubComponents/InformationalBox'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 
-export const InformationalBoxControls: FC<EmailSubComponentControlsProps> = ({
-  id,
+export const InformationalBoxControls: FC<EmailSubComponentControlsProps<'InformationalBox'>> = ({
   emailSubComponent,
 }) => {
-  const iconHtmlId = `icon-${id}`
-  const boxColorHtmlId = `boxColor-${id}`
-  const [value, setValue] = useInformationalBoxValue(id)
+  const iconHtmlId = `icon-${emailSubComponent.id}`
+  const boxColorHtmlId = `boxColor-${emailSubComponent.id}`
+  const [value, setValue] = useInformationalBoxValue(emailSubComponent)
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
 

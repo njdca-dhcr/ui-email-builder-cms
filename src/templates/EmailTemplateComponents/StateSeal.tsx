@@ -7,12 +7,7 @@ import { StateSealKey, StateSeals } from 'src/ui/StateSeal'
 import { SpacingCell, StyleDefaults, Text } from '../styles'
 import { buildSiteUrl } from 'src/utils/siteUrl'
 import { isAllStatesMode } from 'src/utils/appMode'
-
-export interface StateSealValue {
-  stateSealKey: StateSealKey
-  additionalDisclaimer: string
-  [key: string]: null | string
-}
+import { StateSealValue } from 'src/appTypes'
 
 const defaultValue = (): StateSealValue => {
   return {
@@ -77,7 +72,7 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
   )
 }
 
-export const StateSeal: FC<EmailComponentProps> = ({}) => {
+export const StateSeal: FC<EmailComponentProps<'StateSeal'>> = ({}) => {
   const [value] = useStateSealValue()
 
   return (

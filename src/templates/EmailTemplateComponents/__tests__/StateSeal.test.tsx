@@ -1,8 +1,9 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { StateSeal, StateSealMarkup, StateSealValue } from '../StateSeal'
+import { StateSeal, StateSealMarkup } from '../StateSeal'
 import { faker } from '@faker-js/faker'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
+import { StateSealValue } from 'src/appTypes'
 
 describe('StateSealMarkup', () => {
   it('displays the additional content', () => {

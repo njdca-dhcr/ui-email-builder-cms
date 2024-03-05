@@ -18,8 +18,6 @@ describe('StatusControls', () => {
     const { getByRole, queryByRole } = render(
       <EmailPartsContent>
         <StatusControls
-          componentId={faker.lorem.word()}
-          id={faker.lorem.word()}
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         />
         ,
@@ -47,8 +45,6 @@ describe('StatusControls', () => {
     const { queryByLabelText } = render(
       <EmailPartsContent>
         <StatusControls
-          componentId={faker.lorem.word()}
-          id={faker.lorem.word()}
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         />
         ,
@@ -78,8 +74,6 @@ describe('StatusControls', () => {
         rendered = render(
           <EmailPartsContent>
             <StatusControls
-              componentId={faker.lorem.word()}
-              id={faker.lorem.word()}
               emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
             />
           </EmailPartsContent>,
@@ -101,8 +95,6 @@ describe('StatusControls', () => {
         rendered = render(
           <EmailPartsContent>
             <StatusControls
-              componentId={faker.lorem.word()}
-              id={faker.lorem.word()}
               emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
             />
           </EmailPartsContent>,
@@ -126,8 +118,6 @@ describe('StatusControls', () => {
         rendered = render(
           <EmailPartsContent>
             <StatusControls
-              componentId={faker.lorem.word()}
-              id={faker.lorem.word()}
               emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
             />
           </EmailPartsContent>,
@@ -151,8 +141,6 @@ describe('StatusControls', () => {
         rendered = render(
           <EmailPartsContent>
             <StatusControls
-              componentId={faker.lorem.word()}
-              id={faker.lorem.word()}
               emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
             />
           </EmailPartsContent>,
@@ -180,8 +168,6 @@ describe('StatusControls', () => {
         rendered = render(
           <EmailPartsContent>
             <StatusControls
-              componentId={faker.lorem.word()}
-              id={faker.lorem.word()}
               emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
             />
           </EmailPartsContent>,

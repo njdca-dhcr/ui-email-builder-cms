@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { faker } from '@faker-js/faker'
 import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, LoginDetailsVariant } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -11,11 +11,11 @@ import {
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import { LoginDetails, LoginDetailsVariant, useLoginDetailsValue } from '../LoginDetails'
+import { LoginDetails, useLoginDetailsValue } from '../LoginDetails'
 import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('LoginDetails', () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.LoginDetails
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
@@ -39,12 +39,12 @@ describe('LoginDetails', () => {
     let value: string
 
     const VariantSelect: FC = () => {
-      const [value, setValue] = useLoginDetailsValue(emailSubComponent.id)
+      const [value, setValue] = useLoginDetailsValue(emailSubComponent)
       return (
         <label>
           Variant
           <select
-            onChange={(event) => setValue({ ...value, variant: parseInt(event.target.value) })}
+            onChange={(event) => setValue({ ...value, variant: event.target.value as any })}
             value={value.variant}
           >
             <option>{LoginDetailsVariant.Details}</option>

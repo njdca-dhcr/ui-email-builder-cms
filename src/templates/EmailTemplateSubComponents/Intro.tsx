@@ -6,22 +6,28 @@ import { StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
-import { RichTextValue } from 'src/ui/RichTextEditor'
+import { EmailTemplate, IntroValue } from 'src/appTypes'
 
-const defaultValue: RichTextValue = [
-  {
-    type: 'paragraph',
-    children: [
-      { text: 'You requested a waiver application for your Pandemic Unemployment Overpayment.' },
-    ],
-  },
-]
+const defaultValue: IntroValue = {
+  intro: [
+    {
+      type: 'paragraph',
+      children: [
+        { text: 'You requested a waiver application for your Pandemic Unemployment Overpayment.' },
+      ],
+    },
+  ],
+}
 
 const { Row } = EmailBlock
 
-export const Intro: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const useIntroValue = (emailSubComponent: EmailTemplate.Intro) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+}
+
+export const Intro: FC<EmailSubComponentProps<'Intro'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const [value, setValue] = useIntroValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
@@ -39,9 +45,9 @@ export const Intro: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
           activate(event)
           scrollSidebar()
         }}
-        onValueChange={setValue}
+        onValueChange={(intro) => setValue({ ...value, intro })}
         style={styles}
-        value={value}
+        value={value.intro}
       />
     </Row>
   )

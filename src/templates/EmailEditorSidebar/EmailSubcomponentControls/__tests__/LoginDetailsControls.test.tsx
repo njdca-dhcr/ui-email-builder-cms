@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
 import { LoginDetailsControls } from '../LoginDetailsControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
+import { EmailTemplate } from 'src/appTypes'
 
 jest.mock('src/ui/UswdsIconSelect', () => {
   return {
@@ -14,29 +14,22 @@ jest.mock('src/ui/UswdsIconSelect', () => {
 })
 
 describe('LoginDetailsControls', () => {
-  let componentId: string
-  let id: string
+  let emailSubComponent: EmailTemplate.LoginDetails
   let rendered: RenderResult
   let user: UserEvent
 
   const ButtonHref: FC = () => {
-    const [value] = useLoginDetailsValue(id)
+    const [value] = useLoginDetailsValue(emailSubComponent)
 
     return <div data-testid="appeal-rights-href">{value.buttonHref}</div>
   }
 
   beforeEach(() => {
-    componentId = faker.lorem.word()
-    id = faker.lorem.word()
     user = userEvent.setup()
+    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
     rendered = render(
       <EmailPartsContent>
-        <LoginDetailsControls
-          componentId={componentId}
-          id={id}
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })}
-        />
-        ,
+        <LoginDetailsControls emailSubComponent={emailSubComponent} />
         <ButtonHref />
       </EmailPartsContent>,
     )

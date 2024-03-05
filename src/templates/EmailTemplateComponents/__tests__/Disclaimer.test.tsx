@@ -7,7 +7,7 @@ import { faker } from '@faker-js/faker'
 import { RichTextValue } from 'src/ui/RichTextEditor'
 
 describe('Disclaimer', () => {
-  let emailComponent: EmailTemplate.UniqueComponent
+  let emailComponent: EmailTemplate.Disclaimer
 
   beforeEach(() => {
     emailComponent = buildUniqueEmailComponent('Disclaimer')

@@ -6,47 +6,10 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
-import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { UswdsIcon } from 'src/ui/UswdsIcon'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
-
-export const enum StatusVariant {
-  Overview,
-  OverviewWithReason,
-  MissingDocument,
-  OverviewWithReasonAndAmountDue,
-  OverviewWithReasonAndAmountBreakdown,
-}
-
-interface StatusValue {
-  variant: StatusVariant
-  icon: UswdsIconVariantKey
-  // Always used
-  status: string
-  description: RichTextValue
-  supportiveInformation: RichTextValue
-  statusDueTo: string
-  showSupportiveInformation: boolean
-  spaceAfter: boolean
-  // Missing Document
-  documentsNeededLabel: string
-  documentsNeededValue: string
-  emailToLabel: string
-  emailToValue: string
-  subjectLineLabel: string
-  subjectLineValue: string
-  missingDocumentDeadline: string
-  // Amount/Breakdown
-  boxColor: BoxColor
-  amountLabel: string
-  overpaymentLabel: string
-  overpaymentValue: string
-  waivedLabel: string
-  waivedValue: string
-  totalLabel: string
-  totalValue: string
-}
+import { EmailTemplate, StatusValue, StatusVariant } from 'src/appTypes'
 
 const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,
@@ -96,15 +59,15 @@ const defaultValue: StatusValue = {
   totalValue: '$150',
 }
 
-export const useStatusValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+export const useStatusValue = (emailSubComponent: EmailTemplate.Status) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
 }
 
 const { Table, Row, Cell } = EmailBlock
 
-export const Status: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useStatusValue(emailSubComponent.id)
+  const [value, setValue] = useStatusValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const boxColorConfig = BoxColorConfigs[value.boxColor]

@@ -12,8 +12,6 @@ describe('DirectiveControls', () => {
     const { queryByRole } = render(
       <EmailPartsContent>
         <DirectiveControls
-          componentId={faker.lorem.word()}
-          id={faker.lorem.word()}
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
         />
         ,
@@ -34,8 +32,6 @@ describe('DirectiveControls', () => {
     const { getByRole, queryByRole } = render(
       <EmailPartsContent>
         <DirectiveControls
-          componentId={faker.lorem.word()}
-          id={faker.lorem.word()}
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
         />
         ,

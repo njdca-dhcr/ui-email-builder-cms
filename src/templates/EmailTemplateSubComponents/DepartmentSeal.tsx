@@ -53,7 +53,7 @@ const imageStyles: CSSProperties = {
   height: 60,
 }
 
-export const DepartmentSeal: FC<EmailSubComponentProps> = () => {
+export const DepartmentSeal: FC<EmailSubComponentProps<'DepartmentSeal'>> = () => {
   const [value] = useDepartmentSealValue()
   return <DepartmentSealMarkup departmentSealKey={value} />
 }

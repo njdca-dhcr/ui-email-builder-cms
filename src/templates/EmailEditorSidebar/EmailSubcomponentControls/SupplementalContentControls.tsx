@@ -2,17 +2,17 @@ import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Select, UswdsIconSelect } from 'src/ui'
-import {
-  SupplementalContentVariant,
-  useSupplementalContentValue,
-} from 'src/templates/EmailTemplateSubComponents/SupplementalContent'
+import { useSupplementalContentValue } from 'src/templates/EmailTemplateSubComponents/SupplementalContent'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
+import { SupplementalContentVariant } from 'src/appTypes'
 
-export const SupplementalContentControls: FC<EmailSubComponentControlsProps> = ({ id }) => {
-  const variantHtmlId = `variant-${id}`
-  const boxColorHtmlId = `select-box-color-${id}`
-  const iconHtmlId = `select-icon-${id}`
-  const [value, setValue] = useSupplementalContentValue(id)
+export const SupplementalContentControls: FC<
+  EmailSubComponentControlsProps<'SupplementalContent'>
+> = ({ emailSubComponent }) => {
+  const variantHtmlId = `variant-${emailSubComponent.id}`
+  const boxColorHtmlId = `select-box-color-${emailSubComponent.id}`
+  const iconHtmlId = `select-icon-${emailSubComponent.id}`
+  const [value, setValue] = useSupplementalContentValue(emailSubComponent)
 
   return (
     <Control.Group>
@@ -24,12 +24,14 @@ export const SupplementalContentControls: FC<EmailSubComponentControlsProps> = (
           className={SELECT_VARIANT_CLASSNAME}
           labelId={variantHtmlId}
           options={[
-            { label: 'Single', value: SupplementalContentVariant.SingleSupplementalContent + '' },
-            { label: 'Double', value: SupplementalContentVariant.DoubleSupplementalContent + '' },
-            { label: 'Benefit Amount', value: SupplementalContentVariant.BenefitAmount + '' },
+            { label: 'Single', value: SupplementalContentVariant.SingleSupplementalContent },
+            { label: 'Double', value: SupplementalContentVariant.DoubleSupplementalContent },
+            { label: 'Benefit Amount', value: SupplementalContentVariant.BenefitAmount },
           ]}
-          onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-          value={value.variant + ''}
+          onChange={(newValue) =>
+            setValue({ ...value, variant: newValue as SupplementalContentVariant })
+          }
+          value={value.variant}
           size="small"
         />
       </Control.Container>

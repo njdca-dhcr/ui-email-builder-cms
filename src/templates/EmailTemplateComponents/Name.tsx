@@ -6,14 +6,15 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Font, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
+import { NameValue } from 'src/appTypes'
 
-const defaultValue = 'FIRST LAST NAME:'
+const defaultValue: NameValue = { name: 'FIRST LAST NAME:' }
 
 const { Row } = EmailBlock
 
-export const Name: FC<EmailComponentProps> = ({ emailComponent }) => {
+export const Name: FC<EmailComponentProps<'Name'>> = ({ emailComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(emailComponent)
-  const [value, setValue] = useEmailPartsContentFor(emailComponent.id, defaultValue)
+  const [value, setValue] = useEmailPartsContentFor(emailComponent, defaultValue)
   const { scrollSidebar, previewRef } = useSyncSidebarAndPreviewScroll(emailComponent.id)
   return (
     <Row className="name">
@@ -30,9 +31,9 @@ export const Name: FC<EmailComponentProps> = ({ emailComponent }) => {
           activate(event)
           scrollSidebar()
         }}
-        onValueChange={setValue}
+        onValueChange={(name) => setValue({ ...value, name })}
         style={styles}
-        value={value}
+        value={value.name}
       />
     </Row>
   )

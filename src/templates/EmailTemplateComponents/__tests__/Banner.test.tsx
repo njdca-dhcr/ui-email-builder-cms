@@ -1,7 +1,7 @@
 import React from 'react'
-import { Banner, BannerMarkup, BannerValue } from '../Banner'
+import { Banner, BannerMarkup } from '../Banner'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { BannerValue, EmailTemplate } from 'src/appTypes'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 
@@ -115,7 +115,7 @@ describe('BannerMarkup', () => {
 })
 
 describe('Banner', () => {
-  let emailComponent: EmailTemplate.UniqueComponent
+  let emailComponent: EmailTemplate.Banner
   let bannerValue: BannerValue
   let secondaryLinkHost: string
 

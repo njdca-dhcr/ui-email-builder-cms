@@ -1,12 +1,8 @@
 import React, { FC } from 'react'
-import {
-  SupplementalContent,
-  SupplementalContentVariant,
-  useSupplementalContentValue,
-} from '../SupplementalContent'
+import { SupplementalContent, useSupplementalContentValue } from '../SupplementalContent'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, SupplementalContentVariant } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -20,7 +16,7 @@ import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('SupplementalContent', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.SupplementalContent
   let user: UserEvent
   let rendered: RenderResult
   let key: string
@@ -66,12 +62,12 @@ describe('SupplementalContent', () => {
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useSupplementalContentValue(emailSubComponent.id)
+      const [value, setValue] = useSupplementalContentValue(emailSubComponent)
       return (
         <label>
           Variant
           <select
-            onChange={(event) => setValue({ ...value, variant: parseInt(event.target.value) })}
+            onChange={(event) => setValue({ ...value, variant: event.target.value as any })}
             value={value.variant}
           >
             <option>{SupplementalContentVariant.BenefitAmount}</option>

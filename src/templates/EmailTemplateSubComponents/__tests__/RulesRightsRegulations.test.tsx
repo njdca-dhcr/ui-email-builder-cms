@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import React, { FC } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, RulesRightsRegulationsVariant } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -11,17 +11,13 @@ import {
   expectEmailPartContentFor,
   renderEmailPart,
 } from 'src/testHelpers'
-import {
-  RulesRightsRegulations,
-  RulesRightsRegulationsVariant,
-  useRulesRightsRegulationsValue,
-} from '../RulesRightsRegulations'
+import { RulesRightsRegulations, useRulesRightsRegulationsValue } from '../RulesRightsRegulations'
 import { RulesRightsRegulationsControls } from 'src/templates/EmailEditorSidebar/EmailSubcomponentControls/RulesRightsRegulationsControls'
 import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('RulesRightsRegulations', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.RulesRightsRegulations
   let user: UserEvent
   let rendered: RenderResult
   let key: string
@@ -51,12 +47,12 @@ describe('RulesRightsRegulations', () => {
 
   describe('variants', () => {
     const VariantSelect: FC = () => {
-      const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent.id)
+      const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent)
       return (
         <label>
           Variant
           <select
-            onChange={(event) => setValue({ ...value, variant: parseInt(event.target.value) })}
+            onChange={(event) => setValue({ ...value, variant: event.target.value as any })}
             value={value.variant}
           >
             <option>{RulesRightsRegulationsVariant.Reminder}</option>
@@ -87,13 +83,7 @@ describe('RulesRightsRegulations', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
           <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
-          <RulesRightsRegulationsControls
-            componentId={faker.lorem.word()}
-            id={emailSubComponent.id}
-            emailSubComponent={buildUniqueEmailSubComponent('Body', {
-              kind: 'RulesRightsRegulations',
-            })}
-          />,
+          <RulesRightsRegulationsControls emailSubComponent={emailSubComponent} />,
         )
         await user.click(rendered.getByText('Reminder', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Reminder' }))
@@ -146,13 +136,7 @@ describe('RulesRightsRegulations', () => {
       beforeEach(async () => {
         rendered = renderEmailPart(
           <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
-          <RulesRightsRegulationsControls
-            componentId={faker.lorem.word()}
-            id={emailSubComponent.id}
-            emailSubComponent={buildUniqueEmailSubComponent('Body', {
-              kind: 'RulesRightsRegulations',
-            })}
-          />,
+          <RulesRightsRegulationsControls emailSubComponent={emailSubComponent} />,
         )
         await user.click(rendered.getByText('Reminder', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))

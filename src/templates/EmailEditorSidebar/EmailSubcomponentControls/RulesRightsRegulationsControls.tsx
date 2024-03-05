@@ -2,20 +2,17 @@ import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import {
-  RulesRightsRegulationsVariant,
-  useRulesRightsRegulationsValue,
-} from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
+import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { Select, UswdsIconSelect } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
+import { RulesRightsRegulationsVariant } from 'src/appTypes'
 
-export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> = ({
-  id,
-  emailSubComponent,
-}) => {
-  const variantHtmlId = `variant-${id}`
-  const iconHtmlId = `icon-${id}`
-  const [value, setValue] = useRulesRightsRegulationsValue(id)
+export const RulesRightsRegulationsControls: FC<
+  EmailSubComponentControlsProps<'RulesRightsRegulations'>
+> = ({ emailSubComponent }) => {
+  const variantHtmlId = `variant-${emailSubComponent.id}`
+  const iconHtmlId = `icon-${emailSubComponent.id}`
+  const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
 
@@ -31,12 +28,14 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
           className={SELECT_VARIANT_CLASSNAME}
           labelId={variantHtmlId}
           options={[
-            { label: 'Reminder', value: RulesRightsRegulationsVariant.Reminder + '' },
-            { label: 'Appeal Rights', value: RulesRightsRegulationsVariant.AppealRights + '' },
-            { label: 'Your Rights', value: RulesRightsRegulationsVariant.YourRights + '' },
+            { label: 'Reminder', value: RulesRightsRegulationsVariant.Reminder },
+            { label: 'Appeal Rights', value: RulesRightsRegulationsVariant.AppealRights },
+            { label: 'Your Rights', value: RulesRightsRegulationsVariant.YourRights },
           ]}
-          onChange={(newValue) => setValue({ ...value, variant: parseInt(newValue) })}
-          value={value.variant + ''}
+          onChange={(newValue) =>
+            setValue({ ...value, variant: newValue as RulesRightsRegulationsVariant })
+          }
+          value={value.variant}
           size="small"
         />
       </Control.Container>
@@ -57,13 +56,13 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
       {isReminder && (
         <>
           <SubComponentControlToggle
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Reminder Is For"
             onChange={(showReminderIsFor) => setValue({ ...value, showReminderIsFor })}
             value={value.showReminderIsFor}
           />
           <SubComponentControlToggle
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="+ Footnote"
             onChange={(showFootnote) => setValue({ ...value, showFootnote })}
             value={value.showFootnote}
@@ -74,7 +73,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
       {isAppealRights && (
         <>
           <SubComponentControlToggle
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Instruction"
             onChange={(appealRightsShowInstruction) =>
               setValue({ ...value, appealRightsShowInstruction })
@@ -82,7 +81,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
             value={value.appealRightsShowInstruction}
           />
           <SubComponentControlToggle
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Information Label"
             onChange={(appealRightsShowInfoLabel) =>
               setValue({ ...value, appealRightsShowInfoLabel })
@@ -90,7 +89,7 @@ export const RulesRightsRegulationsControls: FC<EmailSubComponentControlsProps> 
             value={value.appealRightsShowInfoLabel}
           />
           <SubComponentControlToggle
-            subComponentId={id}
+            subComponentId={emailSubComponent.id}
             label="Information"
             onChange={(appealRightsShowTerms) => setValue({ ...value, appealRightsShowTerms })}
             value={value.appealRightsShowTerms}

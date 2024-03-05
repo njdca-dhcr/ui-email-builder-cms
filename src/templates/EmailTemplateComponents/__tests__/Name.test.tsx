@@ -14,7 +14,7 @@ import userEvent from '@testing-library/user-event'
 
 describe('Name', () => {
   let id: string
-  let emailComponent: EmailTemplate.UniqueComponent
+  let emailComponent: EmailTemplate.Name
 
   beforeEach(() => {
     id = faker.lorem.word()

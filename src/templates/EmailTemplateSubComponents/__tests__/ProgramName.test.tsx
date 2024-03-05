@@ -13,7 +13,7 @@ import {
 } from 'src/testHelpers'
 
 describe('ProgramName', () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.ProgramName
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })

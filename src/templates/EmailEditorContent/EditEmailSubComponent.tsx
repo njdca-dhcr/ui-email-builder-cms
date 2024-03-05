@@ -13,38 +13,123 @@ import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRight
 import { LoginDetails } from '../EmailTemplateSubComponents/LoginDetails'
 import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
 import { InformationalBox } from '../EmailTemplateSubComponents/InformationalBox'
+import { EmailTemplate } from 'src/appTypes'
 
-export const EditEmailSubComponent: FC<EmailSubComponentProps> = (props) => {
-  const shouldShow = useShouldShowEmailPart(props.emailSubComponent.id)
+export const EditEmailSubComponent: FC<EmailSubComponentProps<EmailTemplate.SubComponentKind>> = ({
+  emailSubComponent,
+  ...props
+}) => {
+  const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
 
   if (shouldShow.off) return null
 
-  switch (props.emailSubComponent.kind) {
+  switch (emailSubComponent.kind) {
     case 'AdditionalContent':
-      return <AdditionalContent {...props} />
+      return (
+        <AdditionalContent
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'AdditionalContent'>
+          }
+        />
+      )
     case 'DateRange':
-      return <DateRange {...props} />
+      return (
+        <DateRange
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'DateRange'>
+          }
+        />
+      )
     case 'Title':
-      return <Title {...props} />
+      return (
+        <Title
+          {...props}
+          emailSubComponent={emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'Title'>}
+        />
+      )
     case 'ProgramName':
-      return <ProgramName {...props} />
+      return (
+        <ProgramName
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'ProgramName'>
+          }
+        />
+      )
     case 'Intro':
-      return <Intro {...props} />
+      return (
+        <Intro
+          {...props}
+          emailSubComponent={emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'Intro'>}
+        />
+      )
     case 'RulesRightsRegulations':
-      return <RulesRightsRegulations {...props} />
+      return (
+        <RulesRightsRegulations
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'RulesRightsRegulations'>
+          }
+        />
+      )
     case 'Status':
-      return <Status {...props} />
+      return (
+        <Status
+          {...props}
+          emailSubComponent={emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'Status'>}
+        />
+      )
     case 'SupplementalContent':
-      return <SupplementalContent {...props} />
+      return (
+        <SupplementalContent
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'SupplementalContent'>
+          }
+        />
+      )
     case 'Directive':
-      return <Directive {...props} />
+      return (
+        <Directive
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'Directive'>
+          }
+        />
+      )
     case 'LoginDetails':
-      return <LoginDetails {...props} />
+      return (
+        <LoginDetails
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'LoginDetails'>
+          }
+        />
+      )
     case 'DepartmentSeal':
-      return <DepartmentSeal {...props} />
+      return (
+        <DepartmentSeal
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'DepartmentSeal'>
+          }
+        />
+      )
     case 'InformationalBox':
-      return <InformationalBox {...props} />
+      return (
+        <InformationalBox
+          {...props}
+          emailSubComponent={
+            emailSubComponent as EmailTemplate.UniqueSubComponent<any, 'InformationalBox'>
+          }
+        />
+      )
     default:
-      console.warn(`SubComponent (${props.emailSubComponent.kind}) not implemented`, props)
+      console.warn(`SubComponent (${emailSubComponent.kind}) not implemented`, {
+        ...props,
+        emailSubComponent,
+      })
   }
 }

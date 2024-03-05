@@ -2,10 +2,8 @@ import classNames from 'classnames'
 import React, { FC, ReactNode } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 
-export interface EmailSubComponentControlsProps {
-  componentId: string
-  id: string
-  emailSubComponent: EmailTemplate.UniqueSubComponent
+export interface EmailSubComponentControlsProps<T extends EmailTemplate.SubComponentKind> {
+  emailSubComponent: EmailTemplate.UniqueSubComponent<any, T>
 }
 
 interface ContainerProps {

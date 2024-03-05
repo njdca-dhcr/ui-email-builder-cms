@@ -12,7 +12,7 @@ import { InformationalBox } from '../InformationalBox'
 
 describe('InformationalBox', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.InformationalBox
   let user: UserEvent
   let rendered: RenderResult
 

@@ -6,18 +6,20 @@ import { StyleDefaults, Text } from '../styles'
 import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-
-const defaultValue = 'Title'
+import { EmailTemplate, TitleValue } from 'src/appTypes'
 
 const { Row } = EmailBlock
 
-export const useTitleValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+const defaultValue: TitleValue = { title: 'Title' }
+
+export const useTitleValue = (emailSubComponent: EmailTemplate.Title | null) => {
+  const title: EmailTemplate.Title = emailSubComponent ?? { id: '', kind: 'Title' }
+  return useEmailPartsContentFor(title, defaultValue)
 }
 
-export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const Title: FC<EmailSubComponentProps<'Title'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useTitleValue(emailSubComponent.id)
+  const [value, setValue] = useTitleValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   return (
@@ -42,9 +44,9 @@ export const Title: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
           activate(event)
           scrollSidebar()
         }}
-        onValueChange={setValue}
+        onValueChange={(title) => setValue({ ...value, title })}
         style={styles}
-        value={value}
+        value={value.title}
       />
     </Row>
   )

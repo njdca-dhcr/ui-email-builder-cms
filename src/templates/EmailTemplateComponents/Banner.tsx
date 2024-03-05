@@ -4,14 +4,7 @@ import { Colors, Font, Spacing, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
-
-export interface BannerValue {
-  backgroundColor: string
-  primaryText: string
-  primaryLink: string
-  secondaryLink: string
-  [key: string]: null | string
-}
+import { BannerValue } from 'src/appTypes'
 
 interface BannerMarkupProps {
   backgroundColor: string
@@ -95,7 +88,7 @@ export const useBannerValue = () => {
   return useLocalStorageJSON<BannerValue>('banner', defaultValue)
 }
 
-export const Banner: FC<EmailComponentProps> = ({}) => {
+export const Banner: FC<EmailComponentProps<'Banner'>> = ({}) => {
   const [value] = useBannerValue()
 
   return <BannerMarkup {...value} />

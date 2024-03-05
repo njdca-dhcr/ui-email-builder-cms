@@ -1,7 +1,6 @@
 import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
 import { InformationalBoxControls } from '../InformationalBoxControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
@@ -13,20 +12,14 @@ jest.mock('src/ui/UswdsIconSelect', () => {
 })
 
 describe('InformationalBoxControls', () => {
-  let componentId: string
-  let id: string
   let rendered: RenderResult
   let user: UserEvent
 
   beforeEach(() => {
-    componentId = faker.lorem.word()
-    id = faker.lorem.word()
     user = userEvent.setup()
     rendered = render(
       <EmailPartsContent>
         <InformationalBoxControls
-          componentId={componentId}
-          id={id}
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
         />
       </EmailPartsContent>,

@@ -1,5 +1,4 @@
 import React from 'react'
-import { faker } from '@faker-js/faker'
 import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
@@ -14,15 +13,11 @@ jest.mock('src/ui/UswdsIconSelect', () => {
 })
 
 describe('SupplementalContentControls', () => {
-  let componentId: string
-  let id: string
   let rendered: RenderResult
   let user: UserEvent
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.SupplementalContent
 
   beforeEach(() => {
-    componentId = faker.lorem.word()
-    id = faker.lorem.word()
     user = userEvent.setup()
     emailSubComponent = buildUniqueEmailSubComponent('Body', {
       kind: 'SupplementalContent',
@@ -33,11 +28,7 @@ describe('SupplementalContentControls', () => {
     beforeEach(() => {
       rendered = render(
         <EmailPartsContent>
-          <SupplementalContentControls
-            componentId={componentId}
-            id={emailSubComponent.id}
-            emailSubComponent={emailSubComponent}
-          />
+          <SupplementalContentControls emailSubComponent={emailSubComponent} />
         </EmailPartsContent>,
       )
     })
@@ -71,11 +62,7 @@ describe('SupplementalContentControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <SupplementalContentControls
-              componentId={componentId}
-              id={emailSubComponent.id}
-              emailSubComponent={emailSubComponent}
-            />
+            <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByText('Single', { selector: 'Span' }))
@@ -96,11 +83,7 @@ describe('SupplementalContentControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <SupplementalContentControls
-              componentId={componentId}
-              id={emailSubComponent.id}
-              emailSubComponent={emailSubComponent}
-            />
+            <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByText('Single', { selector: 'Span' }))
@@ -121,11 +104,7 @@ describe('SupplementalContentControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <SupplementalContentControls
-              componentId={componentId}
-              id={emailSubComponent.id}
-              emailSubComponent={emailSubComponent}
-            />
+            <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByText('Single', { selector: 'Span' }))

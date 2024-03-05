@@ -6,53 +6,10 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
+import { DirectiveValue, DirectiveVariant, EmailTemplate } from 'src/appTypes'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
-
-export const enum DirectiveVariant {
-  OneStep,
-  ThreeStep,
-  StepTwoExpansion,
-  // CostBreakdown,
-  PayOnline,
-}
-
-export interface DirectiveValue {
-  variant: DirectiveVariant
-
-  // Always Used
-  title: string
-  showTitle: boolean
-  label: RichTextValue
-  linkHref: string
-  buttonLabel: string
-
-  // OneStep
-  step1Label: string
-  step1Additional: RichTextValue
-  oneStepSupportiveText: RichTextValue
-
-  // ThreeStep uses OneStep values
-  step2Label: string
-  showStep1AdditionalContent: boolean
-  showStep2AdditionalContent: boolean
-  step2Additional: RichTextValue
-  step3Label: string
-  showStep3AdditionalContent: boolean
-  step3Additional: RichTextValue
-
-  // StepTwoExpansion uses ThreeStep values
-  step2Tertiary: RichTextValue
-  step2CaseNumber: RichTextValue
-
-  // PayOnline uses OneStep values
-  alternativePaymentLabel: string
-  payOnlineSupportiveText: RichTextValue
-
-  // CostBreakdown
-}
 
 export const defaultValue: DirectiveValue = {
   variant: DirectiveVariant.OneStep,
@@ -127,13 +84,13 @@ export const defaultValue: DirectiveValue = {
   ],
 }
 
-export const useDirectiveValue = (id: string) => {
-  return useEmailPartsContentFor(id, defaultValue)
+export const useDirectiveValue = (emailSubComponent: EmailTemplate.Directive) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
 }
 
 const { Table, Row, Cell, Link } = EmailBlock
 
-export const Directive: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)

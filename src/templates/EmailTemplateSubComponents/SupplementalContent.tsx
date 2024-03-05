@@ -6,35 +6,10 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
-import { UswdsIcon, UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { UswdsIcon } from 'src/ui/UswdsIcon'
 import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
-
-export const enum SupplementalContentVariant {
-  BenefitAmount,
-  SingleSupplementalContent,
-  DoubleSupplementalContent,
-}
-
-interface SupplementalContentValue {
-  variant: SupplementalContentVariant
-  // All
-  title: string
-  description: RichTextValue
-  // Double Supplemental Content
-  secondTitle: string
-  secondDescription: RichTextValue
-  // Benefit Amount
-  benefitAmountBoxColor: BoxColor
-  benefitAmountIcon: UswdsIconVariantKey
-  benefitAmountTitle: string
-  benefitAmountDescription: RichTextValue
-  benefitAmountBoxTitle: string
-  benefitAmountMainBoxCopy: RichTextValue
-  benefitAmountSupplementalBoxCopy: RichTextValue
-  benefitAmountSupportiveInformation: RichTextValue
-}
+import { EmailTemplate, SupplementalContentValue, SupplementalContentVariant } from 'src/appTypes'
 
 const defaultValue: SupplementalContentValue = {
   variant: SupplementalContentVariant.SingleSupplementalContent,
@@ -136,11 +111,17 @@ const defaultValue: SupplementalContentValue = {
 
 const { Row, Cell } = EmailBlock
 
-export const useSupplementalContentValue = (id: string) => useEmailPartsContentFor(id, defaultValue)
+export const useSupplementalContentValue = (
+  emailSubComponent: EmailTemplate.SupplementalContent,
+) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+}
 
-export const SupplementalContent: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent'>> = ({
+  emailSubComponent,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const [value, setValue] = useSupplementalContentValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
   const boxColorConfig = BoxColorConfigs[value.benefitAmountBoxColor]
 

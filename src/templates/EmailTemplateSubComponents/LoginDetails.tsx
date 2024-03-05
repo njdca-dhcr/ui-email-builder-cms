@@ -6,36 +6,14 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
-import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
+import { EmailTemplate, LoginDetailsValue, LoginDetailsVariant } from 'src/appTypes'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
-export const enum LoginDetailsVariant {
-  Details,
-  Information,
-}
-
 const { Row, Cell, Link } = EmailBlock
-
-interface LoginDetailsValue {
-  variant: LoginDetailsVariant
-  loginDetailsTitle: string
-  usernameLabel: string
-  usernameValue: string
-  resetPasswordMessage: RichTextValue
-  button: string
-  buttonHref: string
-  resetPasswordDetails: RichTextValue
-  loginDetailsIcon: UswdsIconVariantKey
-  loginInformationTitle: string
-  loginInformationDescription: RichTextValue
-  loginInformationList: string[]
-  loginInformationIcon: UswdsIconVariantKey
-}
 
 const defaultValue: LoginDetailsValue = {
   variant: LoginDetailsVariant.Details,
@@ -86,11 +64,13 @@ const defaultValue: LoginDetailsValue = {
   loginInformationIcon: 'LockOpen',
 }
 
-export const useLoginDetailsValue = (id: string) => useEmailPartsContentFor(id, defaultValue)
+export const useLoginDetailsValue = (emailSubComponent: EmailTemplate.LoginDetails) => {
+  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+}
 
-export const LoginDetails: FC<EmailSubComponentProps> = ({ emailSubComponent }) => {
+export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const [value, setValue] = useLoginDetailsValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information

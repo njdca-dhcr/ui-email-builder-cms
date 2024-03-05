@@ -2,10 +2,10 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { EditStateSeal } from '../EditStateSeal'
-import { StateSealValue } from 'src/templates/EmailTemplateComponents/StateSeal'
 import { faker } from '@faker-js/faker'
 import { asMock } from 'src/testHelpers'
 import { isAllStatesMode } from 'src/utils/appMode'
+import { StateSealValue } from 'src/appTypes'
 
 jest.mock('src/utils/appMode', () => {
   const actual = jest.requireActual('src/utils/appMode')

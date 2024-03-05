@@ -1,5 +1,5 @@
 import { EmailTemplate } from 'src/appTypes'
 
-export interface EmailSubComponentProps {
-  emailSubComponent: EmailTemplate.UniqueSubComponent
+export interface EmailSubComponentProps<T extends EmailTemplate.SubComponentKind> {
+  emailSubComponent: EmailTemplate.UniqueSubComponent<any, T>
 }

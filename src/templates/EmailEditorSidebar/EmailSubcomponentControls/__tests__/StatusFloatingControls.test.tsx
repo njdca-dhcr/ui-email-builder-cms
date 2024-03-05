@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React, { FC } from 'react'
-import { EmailPartsContent, useEmailPartsContentFor } from 'src/templates/EmailPartsContent'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { StatusFloatingControls } from '../StatusFloatingControls'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
+import { EmailTemplate } from 'src/appTypes'
 
 describe('StatusFloatingControls', () => {
   it('provides radio buttons for changing the spacing after the subcomponent', async () => {
@@ -30,18 +31,18 @@ describe('StatusFloatingControls', () => {
     expect(largeButton).toBeChecked()
   })
 
-  const Dummy: FC<{ id: string }> = ({ id }) => {
-    const [value] = useStatusValue(id)
+  const Dummy: FC<{ emailSubComponent: EmailTemplate.Status }> = ({ emailSubComponent }) => {
+    const [value] = useStatusValue(emailSubComponent)
     return <div id="dummy">Spacing after is: {value.spaceAfter ? 'true' : 'false'}</div>
   }
 
   it('sets the spacing after to be true when the component unmounts', async () => {
     const subComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
     const user = userEvent.setup()
-    const { getByLabelText, baseElement, rerender, debug } = render(
+    const { getByLabelText, baseElement, rerender } = render(
       <EmailPartsContent>
         <StatusFloatingControls emailSubComponent={subComponent} />
-        <Dummy id={subComponent.id} />
+        <Dummy emailSubComponent={subComponent} />
       </EmailPartsContent>,
     )
     const dummyContent = () => baseElement.querySelector('#dummy')
@@ -51,7 +52,7 @@ describe('StatusFloatingControls', () => {
     expect(dummyContent()).toHaveTextContent('Spacing after is: false')
     rerender(
       <EmailPartsContent>
-        <Dummy id={subComponent.id} />
+        <Dummy emailSubComponent={subComponent} />
       </EmailPartsContent>,
     )
     expect(dummyContent()).toHaveTextContent('Spacing after is: true')

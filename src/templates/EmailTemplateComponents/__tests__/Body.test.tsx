@@ -6,7 +6,7 @@ import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 
 describe('Body', () => {
-  let emailComponent: EmailTemplate.UniqueComponent
+  let emailComponent: EmailTemplate.Body
 
   beforeEach(() => {
     emailComponent = buildUniqueEmailComponent('Body')

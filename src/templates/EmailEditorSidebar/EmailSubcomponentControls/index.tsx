@@ -11,8 +11,8 @@ import { ProgramNameControls } from './ProgramNameControls'
 import { InformationalBoxControls } from './InformationalBoxControls'
 import { SupplementalContentControls } from './SupplementalContentControls'
 
-interface Props extends EmailSubComponentControlsProps {
-  emailSubComponent: EmailTemplate.UniqueSubComponent
+interface Props extends EmailSubComponentControlsProps<EmailTemplate.SubComponentKind> {
+  componentId: string
 }
 
 interface WrapperProps {
@@ -22,9 +22,9 @@ interface WrapperProps {
 const ControlWrapper: FC<WrapperProps> = ({ children }) => <div>{children}</div>
 
 export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...props }) => {
-  const { componentId, id } = props
+  const { componentId } = props
   const shouldShowComponent = useShouldShowEmailPart(componentId)
-  const shouldShowSubComponent = useShouldShowEmailPart(id)
+  const shouldShowSubComponent = useShouldShowEmailPart(emailSubComponent.id)
   let ComponentControl: FC<any> | null = null
 
   if (shouldShowComponent.off || shouldShowSubComponent.off) return null

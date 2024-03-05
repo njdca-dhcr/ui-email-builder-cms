@@ -7,8 +7,10 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react'
+import { EmailTemplate } from 'src/appTypes'
 
 interface EmailPartsContentData<T extends any> {
   [key: string]: undefined | T
@@ -31,21 +33,28 @@ export const EmailPartsContent: FC<{ children: ReactNode }> = ({ children }) => 
 
 export const useEmailPartsContentData = () => useContext(EmailPartsContentContext)
 
-export const useEmailPartsContentFor = <T extends any>(
-  id: string,
+export const useEmailPartsContentFor = <T extends object>(
+  emailPart: string | EmailTemplate.UniquePart,
   defaultValue: T,
 ): [T, (value: T | ((previous: T) => T)) => void] => {
   const [data, update] = useEmailPartsContentData()
 
-  const value: T = data[id] ?? defaultValue
+  const id = typeof emailPart === 'string' ? emailPart : emailPart.id
+  const mergedDefaultValue = useMemo(() => {
+    return typeof emailPart === 'string'
+      ? defaultValue
+      : { ...defaultValue, ...emailPart.defaultValue }
+  }, [])
+
+  const value: T = data[id] ?? mergedDefaultValue
 
   const updateValueWithCallback = useCallback(
     (callback: (previous: T) => T) => {
       update((data) => {
-        return { ...data, [id]: callback(data[id] ?? defaultValue) }
+        return { ...data, [id]: callback(data[id] ?? mergedDefaultValue) }
       })
     },
-    [update, id, defaultValue],
+    [update, id, mergedDefaultValue],
   )
 
   const updateValueInPlace = useCallback(
@@ -65,6 +74,12 @@ export const useEmailPartsContentFor = <T extends any>(
     },
     [updateValueInPlace, updateValueWithCallback],
   )
+
+  useEffect(() => {
+    if (process.env.GATSBY_LOG_EDITS) {
+      console.log(id, value)
+    }
+  }, [id, value])
 
   return [value, updateValue]
 }

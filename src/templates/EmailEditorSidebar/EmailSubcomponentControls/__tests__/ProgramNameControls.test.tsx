@@ -20,17 +20,15 @@ jest.mock('src/utils/appMode', () => {
 describe('ProgramNameControls', () => {
   let user: UserEvent
   let rendered: RenderResult
-  let componentId: string
-  let subComponent: EmailTemplate.UniqueSubComponent
+  let subComponent: EmailTemplate.ProgramName
 
   beforeEach(() => {
-    componentId = faker.lorem.word()
-    subComponent = buildUniqueEmailSubComponent('Body', { kind: 'ProgramName' })
+    subComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
   })
 
   describe('when in NJ mode', () => {
-    const Dummy: FC<{ id: string }> = ({ id }) => {
-      const [value] = useProgramNameValue(id)
+    const Dummy: FC = () => {
+      const [value] = useProgramNameValue(subComponent)
       return (
         <div>
           <span id="name">{value.name}</span>
@@ -47,12 +45,8 @@ describe('ProgramNameControls', () => {
       user = userEvent.setup()
       rendered = render(
         <EmailPartsContent>
-          <ProgramNameControls
-            componentId={componentId}
-            id={subComponent.id}
-            emailSubComponent={subComponent}
-          />
-          <Dummy id={subComponent.id} />
+          <ProgramNameControls emailSubComponent={subComponent} />
+          <Dummy />
         </EmailPartsContent>,
       )
     })
@@ -141,11 +135,7 @@ describe('ProgramNameControls', () => {
       user = userEvent.setup()
       rendered = render(
         <EmailPartsContent>
-          <ProgramNameControls
-            componentId={componentId}
-            id={subComponent.id}
-            emailSubComponent={subComponent}
-          />
+          <ProgramNameControls emailSubComponent={subComponent} />
         </EmailPartsContent>,
       )
     })
