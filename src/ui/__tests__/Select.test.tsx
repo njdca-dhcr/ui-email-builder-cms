@@ -52,7 +52,7 @@ describe('Select', () => {
       />,
     )
 
-    user.click(getByRole('button'))
+    await user.click(getByRole('button'))
     expect(baseElement).toContainHTML('<div class="my-option">B</div>')
   })
 
