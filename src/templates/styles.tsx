@@ -52,7 +52,7 @@ export const Font = {
     default: 1.5,
   },
   letterSpacing: {
-    default: '-0.44px',
+    default: '-1px',
   },
   weight: FontWeight,
   size: {
