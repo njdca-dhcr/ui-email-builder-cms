@@ -22,7 +22,7 @@ const IndexPage: FC = () => {
           <VisuallyHidden>
             <h1>Email Builder (Beta)</h1>
           </VisuallyHidden>
-          <section>
+          <section className="home-page-section">
             <Heading element="h2">Create from scratch</Heading>
             <Paragraph>Build custom emails that you are ready to test/deploy</Paragraph>
             <List className="index-create-from-scratch-list">
@@ -39,7 +39,7 @@ const IndexPage: FC = () => {
             </List>
           </section>
           <section className="index-or">--or--</section>
-          <section>
+          <section className="home-page-section">
             <div className="heading-and-actions">
               <Heading element="h2">Use a template</Heading>
               <div>

@@ -17,6 +17,10 @@
   gap: 3rem;
 }
 
+.home-page-section h2 {
+  letter-spacing: -1px;
+}
+
 .heading-and-actions {
   align-items: center;
   display: flex;
