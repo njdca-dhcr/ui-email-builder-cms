@@ -157,7 +157,7 @@ describe('Sidebar', () => {
           <div />
         </Sidebar>,
       )
-      expect(baseElement.querySelector('img')).not.toBeNull()
+      expect(baseElement.querySelector('a > img')).not.toBeNull()
     })
 
     it('displays a specific title ', () => {

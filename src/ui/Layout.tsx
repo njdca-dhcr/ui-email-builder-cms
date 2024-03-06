@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { isNJMode } from 'src/utils/appMode'
 import { DepartmentSealsMapping } from 'src/utils/departmentSeals'
 import { buildSiteUrl } from 'src/utils/siteUrl'
+import { Link } from 'gatsby'
 
 interface LayoutProps {
   children: ReactNode
@@ -47,12 +48,12 @@ export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
     <div id={id} className={classNames('sidebar', className)}>
       <SpacedSidebarContainer>
         {isNJMode() && (
-          <div className="department-seal-container">
+          <Link to="/" className="department-seal-container">
             <img
               alt={departmentSeal.label}
               src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
             />
-          </div>
+          </Link>
         )}
         <span className="sidebar-title">
           {isNJMode() && 'New Jersey '}
