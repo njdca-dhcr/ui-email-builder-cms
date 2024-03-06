@@ -48,4 +48,23 @@ describe('DirectiveControls', () => {
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Pay Online')
   })
+
+  it('provides a color picker for the background color', async () => {
+    const user = userEvent.setup()
+    const { getByLabelText } = render(
+      <EmailPartsContent>
+        <DirectiveControls
+          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+        />
+        ,
+      </EmailPartsContent>,
+    )
+    const color = faker.color.rgb()
+    const colorPicker = getByLabelText('Button Color')
+    const hexInput = getByLabelText('Button Color Hex Code')
+    await user.clear(hexInput)
+    await user.type(hexInput, color.replace('#', ''))
+    expect(hexInput).toHaveValue(color)
+    expect(colorPicker).toHaveValue(color)
+  })
 })

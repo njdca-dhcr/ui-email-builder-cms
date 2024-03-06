@@ -46,6 +46,7 @@ export interface DirectiveValue {
   label: RichTextValue
   linkHref: string
   buttonLabel: string
+  buttonColor: string
 
   // OneStep
   step1Label: RichTextValue

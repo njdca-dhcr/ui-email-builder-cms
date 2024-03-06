@@ -6,11 +6,15 @@ import { useDirectiveValue } from 'src/templates/EmailTemplateSubComponents/Dire
 import { Select } from 'src/ui/'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { DirectiveVariant } from 'src/appTypes'
+import { ColorInput } from 'src/ui/ColorInput'
+import { ColorPicker } from 'src/ui/ColorPicker'
 
 export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> = ({
   emailSubComponent,
 }) => {
-  const htmlId = `select-${emailSubComponent.id}`
+  const variantHtmlId = `directive-variant-${emailSubComponent.id}`
+  const buttonColorPickerHtmlId = `directive-button-color-picker-${emailSubComponent.id}`
+  const buttonColorInputHtmlId = `directive-button-color-input-${emailSubComponent.id}`
   const [value, setValue] = useDirectiveValue(emailSubComponent)
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
@@ -19,12 +23,12 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> 
     <Control.Group>
       <Control.Container>
         <VisuallyHidden>
-          <span id={htmlId}>Directive variant</span>
+          <span id={variantHtmlId}>Directive variant</span>
         </VisuallyHidden>
 
         <Select
           className={SELECT_VARIANT_CLASSNAME}
-          labelId={htmlId}
+          labelId={variantHtmlId}
           options={[
             { label: 'One Step', value: DirectiveVariant.OneStep },
             { label: 'Three Steps', value: DirectiveVariant.ThreeStep },
@@ -46,6 +50,26 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> 
         onChange={(showTitle) => setValue({ ...value, showTitle })}
         value={value.showTitle}
       />
+
+      <Control.Container className="program-name-inline-color-picker">
+        <Control.Label htmlFor={buttonColorPickerHtmlId}>Button Color</Control.Label>
+        <VisuallyHidden>
+          <label htmlFor={buttonColorInputHtmlId}>Button Color Hex Code</label>
+        </VisuallyHidden>
+        <div className="color-input-and-picker">
+          <ColorInput
+            id={buttonColorInputHtmlId}
+            value={value.buttonColor}
+            onChange={(buttonColor) => setValue({ ...value, buttonColor })}
+          />
+          <ColorPicker
+            id={buttonColorPickerHtmlId}
+            className="color-picker-inline"
+            value={value.buttonColor}
+            onChange={(buttonColor) => setValue({ ...value, buttonColor })}
+          />
+        </div>
+      </Control.Container>
 
       {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
         <>

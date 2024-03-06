@@ -8,6 +8,7 @@ import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { DirectiveValue, DirectiveVariant, EmailTemplate } from 'src/appTypes'
+import { textColorForBackground } from 'src/utils/textColorForBackground'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
@@ -24,6 +25,7 @@ export const defaultValue: DirectiveValue = {
   linkHref:
     'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   buttonLabel: 'Get Started',
+  buttonColor: Colors.black,
   step1Label: [{ type: 'paragraph', children: [{ text: 'Step 1 Directive', bold: true }] }],
   showStep1AdditionalContent: true,
   step1Additional: [
@@ -95,6 +97,11 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
   const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
+  const buttonTextColor = textColorForBackground(value.buttonColor, {
+    dark: Colors.black,
+    light: Colors.white,
+  })
+
   return (
     <Row
       className="directive"
@@ -159,7 +166,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                 'row',
                 {
                   part: 'cell',
-                  style: styles.getStartedButton,
+                  style: { ...styles.getStartedButton, backgroundColor: value.buttonColor },
                 },
               ]}
             >
@@ -169,7 +176,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                   value={value.buttonLabel}
                   label="Directive Button"
                   onValueChange={(buttonLabel) => setValue({ ...value, buttonLabel })}
-                  style={styles.getStartedButtonText}
+                  style={{ ...styles.getStartedButtonText, color: buttonTextColor }}
                 />
               </Link>
             </Row>
@@ -341,7 +348,13 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                               className: StyleDefaults.layout.button,
                             },
                             'row',
-                            { part: 'cell', style: styles.getStartedButton },
+                            {
+                              part: 'cell',
+                              style: {
+                                ...styles.getStartedButton,
+                                backgroundColor: value.buttonColor,
+                              },
+                            },
                           ]}
                         >
                           <Link to={value.linkHref}>
@@ -350,7 +363,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                               value={value.buttonLabel}
                               label="Directive Button"
                               onValueChange={(buttonLabel) => setValue({ ...value, buttonLabel })}
-                              style={styles.getStartedButtonText}
+                              style={{ ...styles.getStartedButtonText, color: buttonTextColor }}
                             />
                           </Link>
                         </Row>
@@ -603,7 +616,6 @@ const styles = {
     borderLeft: Borders.large(grayBar),
   } as CSSProperties,
   getStartedButton: {
-    backgroundColor: Colors.black,
     borderRadius: 10,
     paddingTop: Spacing.size.medium,
     paddingBottom: Spacing.size.medium,
@@ -612,7 +624,6 @@ const styles = {
     textAlign: 'center',
   } as CSSProperties,
   getStartedButtonText: {
-    color: Colors.white,
     fontWeight: Font.weight.bold,
   } as CSSProperties,
   linkText: {
