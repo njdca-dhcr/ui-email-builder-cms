@@ -120,15 +120,15 @@ describe('Directive', () => {
 
       itHasAnEditable('directive link', 'Directive Link')
 
-      itHasAnEditable('step 1 label', 'Label for Step 1')
+      itHasAnEditableRichText('step 1 label', 'Label for Step 1')
 
       itHasAnEditableRichText('step 1 additional information', 'Additional information for Step 1')
 
-      itHasAnEditable('step 2 label', 'Label for Step 2')
+      itHasAnEditableRichText('step 2 label', 'Label for Step 2')
 
       itHasAnEditableRichText('step 2 additional information', 'Additional information for Step 2')
 
-      itHasAnEditable('step 3 label', 'Label for Step 3')
+      itHasAnEditableRichText('step 3 label', 'Label for Step 3')
 
       itHasAnEditableRichText('step 3 additional information', 'Additional information for Step 3')
 
@@ -156,11 +156,11 @@ describe('Directive', () => {
 
       itHasAnEditable('directive link', 'Directive Link')
 
-      itHasAnEditable('step 1 label', 'Label for Step 1')
+      itHasAnEditableRichText('step 1 label', 'Label for Step 1')
 
       itHasAnEditableRichText('step 1 additional information', 'Additional information for Step 1')
 
-      itHasAnEditable('step 2 label', 'Label for Step 2')
+      itHasAnEditableRichText('step 2 label', 'Label for Step 2')
 
       itHasAnEditableRichText('step 2 additional information', 'Additional information for Step 2')
 
@@ -168,7 +168,7 @@ describe('Directive', () => {
 
       itHasAnEditableRichText('Step 2 case number information', 'Case number information')
 
-      itHasAnEditable('step 3 label', 'Label for Step 3')
+      itHasAnEditableRichText('step 3 label', 'Label for Step 3')
 
       itHasAnEditableRichText('step 3 additional information', 'Additional information for Step 3')
 

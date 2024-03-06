@@ -24,7 +24,7 @@ export const defaultValue: DirectiveValue = {
   linkHref:
     'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   buttonLabel: 'Get Started',
-  step1Label: 'Step 1 Directive',
+  step1Label: [{ type: 'paragraph', children: [{ text: 'Step 1 Directive', bold: true }] }],
   showStep1AdditionalContent: true,
   step1Additional: [
     {
@@ -43,7 +43,7 @@ export const defaultValue: DirectiveValue = {
       ],
     },
   ],
-  step2Label: 'Step 2 Directive',
+  step2Label: [{ type: 'paragraph', children: [{ text: 'Step 2 Directive', bold: true }] }],
   showStep2AdditionalContent: true,
   step2Additional: [
     {
@@ -62,7 +62,7 @@ export const defaultValue: DirectiveValue = {
     },
   ],
   step2CaseNumber: [{ type: 'paragraph', children: [{ text: 'Case #: [000000]' }] }],
-  step3Label: 'Step 3 Directive',
+  step3Label: [{ type: 'paragraph', children: [{ text: 'Step 3 Directive', bold: true }] }],
   showStep3AdditionalContent: true,
   step3Additional: [
     {
@@ -288,8 +288,8 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                     <Cell style={{ paddingLeft: '18px', paddingTop: '4px' }}>
                       <div style={{ lineHeight: '145%' }}>
                         <span style={styles.stepNumberLabel}>
-                          <EditableElement
-                            element="b"
+                          <RichTextEditableElement
+                            element="span"
                             label="Label for Step 1"
                             onValueChange={(step1Label) => setValue({ ...value, step1Label })}
                             value={value.step1Label}
@@ -407,8 +407,8 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                     <Cell style={{ paddingLeft: '18px', paddingTop: '4px' }}>
                       <div style={{ lineHeight: '145%' }}>
                         <span style={styles.stepNumberLabel}>
-                          <EditableElement
-                            element="b"
+                          <RichTextEditableElement
+                            element="span"
                             label="Label for Step 2"
                             onValueChange={(step2Label) => setValue({ ...value, step2Label })}
                             value={value.step2Label}
@@ -502,8 +502,8 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                     <Cell style={{ paddingLeft: '18px', paddingTop: '4px' }}>
                       <div style={{ lineHeight: '145%' }}>
                         <span style={styles.stepNumberLabel}>
-                          <EditableElement
-                            element="b"
+                          <RichTextEditableElement
+                            element="span"
                             label="Label for Step 3"
                             onValueChange={(step3Label) => setValue({ ...value, step3Label })}
                             value={value.step3Label}

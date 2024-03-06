@@ -48,16 +48,16 @@ export interface DirectiveValue {
   buttonLabel: string
 
   // OneStep
-  step1Label: string
+  step1Label: RichTextValue
   step1Additional: RichTextValue
   oneStepSupportiveText: RichTextValue
 
   // ThreeStep uses OneStep values
-  step2Label: string
+  step2Label: RichTextValue
   showStep1AdditionalContent: boolean
   showStep2AdditionalContent: boolean
   step2Additional: RichTextValue
-  step3Label: string
+  step3Label: RichTextValue
   showStep3AdditionalContent: boolean
   step3Additional: RichTextValue
 
