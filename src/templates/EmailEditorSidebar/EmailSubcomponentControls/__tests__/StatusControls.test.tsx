@@ -20,7 +20,6 @@ describe('StatusControls', () => {
         <StatusControls
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         />
-        ,
       </EmailPartsContent>,
     )
     let button = queryByRole('button')
@@ -47,7 +46,6 @@ describe('StatusControls', () => {
         <StatusControls
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         />
-        ,
       </EmailPartsContent>,
     )
     const toggle = queryByLabelText('+ Supportive Information')

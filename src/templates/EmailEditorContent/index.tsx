@@ -19,6 +19,7 @@ import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { usePreviewText } from '../PreviewText'
 import { EditPreviewText } from './EditPreviewText'
 import { Radio } from 'src/ui/RadioButtons'
+import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -30,7 +31,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
-  const [titleValue] = useTitleValue(getTitleSubComponent(emailTemplate))
+  const [titleValue] = useTitleValue(getSubComponentByKind(emailTemplate, 'Title'))
   const [previewText] = usePreviewText()
   const emailComponents = emailTemplate.components ?? []
 
@@ -127,17 +128,5 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         </div>
       </Root.div>
     </>
-  )
-}
-
-const getTitleSubComponent = (
-  emailTemplate: EmailTemplate.UniqueConfig,
-): EmailTemplate.Title | null => {
-  const subComponents = (emailTemplate.components ?? []).flatMap(
-    ({ subComponents }) => subComponents ?? [],
-  )
-
-  return (
-    (subComponents.find(({ kind }) => kind === 'Title') as EmailTemplate.Title | undefined) ?? null
   )
 }

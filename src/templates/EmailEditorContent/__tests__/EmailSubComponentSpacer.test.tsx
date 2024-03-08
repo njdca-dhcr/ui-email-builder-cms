@@ -1,31 +1,42 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { buildUniqueEmailSubComponent, emailPartWrapper } from 'src/testHelpers'
+import {
+  buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
+  buildUniqueEmailSubComponent,
+  emailPartWrapper,
+} from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailSubComponentSpacer } from '../EmailSubComponentSpacer'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 
 describe('EmailSubComponentSpacer', () => {
   const renderWithSubComponents = <T extends EmailTemplate.ComponentKind>({
     currentSubComponent,
     nextSubComponent,
     parentComponent,
+    shouldShowNextComponent,
   }: {
     currentSubComponent: EmailTemplate.SubComponentKind<T>
     nextSubComponent: EmailTemplate.SubComponentKind<T> | undefined
     parentComponent: T
+    shouldShowNextComponent?: boolean
   }) => {
+    const nextOne =
+      nextSubComponent && buildUniqueEmailSubComponent(parentComponent, { kind: nextSubComponent })
     const { baseElement } = render(
-      <EmailSubComponentSpacer
-        currentSubComponent={buildUniqueEmailSubComponent(parentComponent, {
-          kind: currentSubComponent,
-        })}
-        nextSubComponent={
-          nextSubComponent &&
-          buildUniqueEmailSubComponent(parentComponent, { kind: nextSubComponent })
-        }
-      />,
+      <ShouldShowEmailPart
+        initialData={nextOne ? { [nextOne.id]: shouldShowNextComponent ?? true } : {}}
+      >
+        <EmailSubComponentSpacer
+          currentSubComponent={buildUniqueEmailSubComponent(parentComponent, {
+            kind: currentSubComponent,
+          })}
+          nextSubComponent={nextOne}
+        />
+      </ShouldShowEmailPart>,
       {
         wrapper: emailPartWrapper,
       },
@@ -71,34 +82,75 @@ describe('EmailSubComponentSpacer', () => {
     })
 
     it('is nothing when the next subcomponent should not be shown', () => {
-      const nextSubComponent = buildUniqueEmailSubComponent('Header', {
-        kind: 'ProgramName',
+      const size = renderWithSubComponents({
+        currentSubComponent: 'Title',
+        nextSubComponent: 'ProgramName',
+        parentComponent: 'Header',
+        shouldShowNextComponent: false,
       })
+      expect(size).toBeUndefined()
+    })
+  })
+
+  describe('ProgramName', () => {
+    it('is nothing when it should not show the next subcomponent', () => {
+      const size = renderWithSubComponents({
+        currentSubComponent: 'ProgramName',
+        nextSubComponent: 'DirectiveButton',
+        parentComponent: 'Header',
+        shouldShowNextComponent: false,
+      })
+      expect(size).toBeUndefined()
+    })
+
+    it('is nothing when it there is no next subcomponent', () => {
+      const size = renderWithSubComponents({
+        currentSubComponent: 'ProgramName',
+        nextSubComponent: undefined,
+        parentComponent: 'Header',
+        shouldShowNextComponent: true,
+      })
+      expect(size).toBeUndefined()
+    })
+
+    it('is medium when it there is a next subcomponent that should be shown', () => {
+      const size = renderWithSubComponents({
+        currentSubComponent: 'ProgramName',
+        nextSubComponent: 'DirectiveButton',
+        parentComponent: 'Header',
+        shouldShowNextComponent: true,
+      })
+      expect(size).toEqual(`${spacingCellSizes.medium}px`)
+    })
+
+    it('is nothing when the next component should that should be shown is DirectiveButton but the Directive is hidden', () => {
+      const directive = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+      const directiveButton = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
+      const programName = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+
+      const emailTemplateConfig = buildUniqueEmailConfig({
+        components: [
+          buildUniqueEmailComponent('Header', { subComponents: [programName, directiveButton] }),
+          buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+        ],
+      })
+
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [nextSubComponent.id]: false }}>
-          <EmailSubComponentSpacer
-            currentSubComponent={buildUniqueEmailSubComponent('Header', {
-              kind: 'Title',
-            })}
-            nextSubComponent={nextSubComponent}
-          />
-        </ShouldShowEmailPart>,
+        <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
+          <ShouldShowEmailPart initialData={{ [directive.id]: false, [directiveButton.id]: true }}>
+            <EmailSubComponentSpacer
+              currentSubComponent={programName}
+              nextSubComponent={directiveButton}
+            />
+          </ShouldShowEmailPart>
+        </EmailTemplateConfig>,
         {
           wrapper: emailPartWrapper,
         },
       )
       const spacer = baseElement.querySelector('td')
-      expect(spacer).toBeNull()
+      expect(spacer?.style.height).toBeUndefined()
     })
-  })
-
-  it('is nothing when the subcomponent is ProgramName', () => {
-    const size = renderWithSubComponents({
-      currentSubComponent: 'ProgramName',
-      nextSubComponent: undefined,
-      parentComponent: 'Header',
-    })
-    expect(size).toBeUndefined()
   })
 
   it('is medium when the subcomponent is Intro', () => {

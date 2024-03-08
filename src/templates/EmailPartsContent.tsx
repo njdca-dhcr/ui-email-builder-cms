@@ -23,8 +23,11 @@ type EmailPartsContentContext<T = any> = [
 
 const EmailPartsContentContext = createContext<EmailPartsContentContext>([{}, () => {}])
 
-export const EmailPartsContent: FC<{ children: ReactNode }> = ({ children }) => {
-  const value = useState<EmailPartsContentData<any>>({})
+export const EmailPartsContent: FC<{
+  children: ReactNode
+  initialData?: EmailPartsContentData<any>
+}> = ({ children, initialData }) => {
+  const value = useState<EmailPartsContentData<any>>(initialData ?? {})
 
   return (
     <EmailPartsContentContext.Provider value={value}>{children}</EmailPartsContentContext.Provider>

@@ -29,7 +29,7 @@ export const EmailTemplateComponentsMapping = {
     'InformationalBox',
   ],
   Footer: ['AdditionalContent'],
-  Header: ['DateRange', 'Title', 'ProgramName', 'DepartmentSeal'],
+  Header: ['DateRange', 'Title', 'ProgramName', 'DepartmentSeal', 'DirectiveButton'],
   Name: [],
   Disclaimer: [],
   StateSeal: [],
@@ -59,6 +59,7 @@ export namespace EmailTemplate {
     Title: TitleValue
     ProgramName: ProgramNameValue
     DepartmentSeal: unknown
+    DirectiveButton: unknown
   }
 
   interface PartDefaultValueMapping
@@ -151,6 +152,7 @@ export namespace EmailTemplate {
   export type Status = UniqueSubComponent<'Body', 'Status'>
   export type SupplementalContent = UniqueSubComponent<'Body', 'SupplementalContent'>
   export type Directive = UniqueSubComponent<'Body', 'Directive'>
+  export type DirectiveButton = UniqueSubComponent<'Body', 'DirectiveButton'>
   export type LoginDetails = UniqueSubComponent<'Body', 'LoginDetails'>
   export type InformationalBox = UniqueSubComponent<'Body', 'InformationalBox'>
   export type AdditionalContent = UniqueSubComponent<'Footer', 'AdditionalContent'>

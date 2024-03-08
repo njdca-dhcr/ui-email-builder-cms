@@ -3,6 +3,8 @@ import { EmailTemplate } from 'src/appTypes'
 import { SpacingCell } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
+import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
+import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 
 interface Props {
   currentSubComponent: EmailTemplate.UniqueSubComponent
@@ -10,8 +12,12 @@ interface Props {
 }
 
 export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSubComponent }) => {
+  const emailTemplate = useEmailTemplateConfig()
   const shouldShow = useShouldShowEmailPart(currentSubComponent.id)
   const shouldShowNext = useShouldShowEmailPart(nextSubComponent?.id ?? '')
+  const shouldShowDirective = useShouldShowEmailPart(
+    getSubComponentByKind(emailTemplate, 'Directive')?.id ?? '',
+  )
 
   if (shouldShow.off) return null
 
@@ -19,6 +25,7 @@ export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSu
     currentSubComponent.kind,
     nextSubComponent?.kind,
     shouldShowNext.on,
+    shouldShowDirective.on,
   )
 
   if (!size) return null
@@ -32,8 +39,9 @@ export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSu
 
 const sizeForSubComponentKind = (
   subComponentKind: EmailTemplate.SubComponentKind,
-  _nextSubComponentKind: EmailTemplate.SubComponentKind | undefined,
+  nextSubComponentKind: EmailTemplate.SubComponentKind | undefined,
   shouldShowNext: boolean,
+  shouldShowDirective: boolean,
 ): 'medium' | 'large' | 'extraLarge' | undefined => {
   switch (subComponentKind) {
     case 'Directive':
@@ -48,5 +56,7 @@ const sizeForSubComponentKind = (
       return 'medium'
     case 'DepartmentSeal':
       return 'large'
+    case 'ProgramName':
+      return nextSubComponentKind && shouldShowNext && shouldShowDirective ? 'medium' : undefined
   }
 }

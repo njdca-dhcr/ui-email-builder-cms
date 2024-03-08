@@ -42,6 +42,15 @@ describe('EditEmailSubComponent', () => {
     expect(queryByLabelText('Program name')).not.toBeNull()
   })
 
+  it('can render DirectiveButton', () => {
+    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
+    const { queryByRole } = render(
+      <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByRole('link')).not.toBeNull()
+  })
+
   it('can render AdditionalContent', () => {
     emailSubComponent = buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })
     const { queryByLabelText } = render(

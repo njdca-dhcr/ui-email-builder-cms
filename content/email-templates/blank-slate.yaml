@@ -17,6 +17,8 @@ components:
         description: Keep this short and to the point!
       - kind: ProgramName
         visibleByDefault: false
+      - kind: DirectiveButton
+        visibleByDefault: false
   - kind: Name
     visibleByDefault: false
     description: Adding a name is highly encouraged. Avoid using "Dear" before the name
