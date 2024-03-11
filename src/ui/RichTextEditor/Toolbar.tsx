@@ -1,17 +1,18 @@
-import React, { FC, KeyboardEvent } from 'react'
+import React, { FC, KeyboardEvent, ReactElement } from 'react'
 import isHotkey from 'is-hotkey'
 import { Editor } from 'slate'
 import { AppMarkConfig, AppMarkKind } from './types'
 import { useSlate } from 'slate-react'
 import { LinkButtons } from './withInlines'
 import classNames from 'classnames'
+import { VisuallyHidden } from '@reach/visually-hidden'
 
 export const Toolbar: FC = () => {
   return (
     <div className="rte-toolbar">
-      <MarkButton format="bold" label="Bold" className="bold" />
-      <MarkButton format="italic" label="Italic" className="italicized" />
-      <MarkButton format="underline" label="Underline" className="underlined" />
+      <MarkButton format="bold" icon={<strong>B</strong>} label="Bold" className="bold" />
+      <MarkButton format="italic" icon={<em>i</em>} label="Italic" className="italicized" />
+      <MarkButton format="underline" icon={<u>U</u>} label="Underline" className="underlined" />
       <LinkButtons />
     </div>
   )
@@ -53,10 +54,11 @@ const isMarkActive = (editor: Editor, format: AppMarkKind) => {
 interface MarkButtonProps {
   className?: string
   format: AppMarkKind
+  icon: ReactElement
   label: string
 }
 
-const MarkButton: FC<MarkButtonProps> = ({ className, format, label }) => {
+const MarkButton: FC<MarkButtonProps> = ({ className, format, icon, label }) => {
   const editor = useSlate()
   const isActive = isMarkActive(editor, format)
 
@@ -68,7 +70,8 @@ const MarkButton: FC<MarkButtonProps> = ({ className, format, label }) => {
         toggleMark(editor, format)
       }}
     >
-      {label}
+      <span aria-hidden>{icon}</span>
+      <VisuallyHidden>{label}</VisuallyHidden>
     </span>
   )
 }
