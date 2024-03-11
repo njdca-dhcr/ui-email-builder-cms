@@ -46,3 +46,17 @@ td.wide {
     text-align: left !important;
   }
 }
+
+.darkmode {
+  display: none;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .darkmode {
+    display: block;
+  }
+
+  .lightmode {
+    display: none;
+  }
+}

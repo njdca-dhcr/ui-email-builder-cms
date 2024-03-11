@@ -35,6 +35,10 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
 }) => {
   const className = leftJustify ? '' : StyleDefaults.layout.narrow
 
+  const stateSeal = StateSeals[stateSealKey]
+  const stateName = startCase(stateSealKey)
+  const stateTitle = stateSeal.title || `State of ${stateName}`
+
   return (
     <>
       <Row className="state-seal-disclaimer">
@@ -59,14 +63,21 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
       >
         <Cell style={imageContainerStyles}>
           <img
-            src={buildSiteUrl(`/state-seals/${StateSeals[stateSealKey].image}.png`)}
-            alt={startCase(stateSealKey)}
+            className="lightmode"
+            src={buildSiteUrl(`/state-seals/${stateSeal.image}.png`)}
+            alt={`The seal of the ${stateTitle}`}
             style={imageStyles}
           />
+          {stateSeal.darkModeImage && (
+            <img
+              className="darkmode"
+              src={buildSiteUrl(`/state-seals/${stateSeal.darkModeImage}.png`)}
+              alt={`The seal of the ${stateTitle}`}
+              style={imageStyles}
+            />
+          )}
         </Cell>
-        <Cell style={textStyles}>
-          {StateSeals[stateSealKey]?.title ?? `State of ${startCase(stateSealKey)}`}
-        </Cell>
+        <Cell style={textStyles}>{stateTitle}</Cell>
       </Row>
     </>
   )

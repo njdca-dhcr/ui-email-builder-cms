@@ -17,12 +17,12 @@ describe('StateSealMarkup', () => {
 
   it('displays the selected state seal', () => {
     const { getByRole } = render(
-      <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="NewJersey" />,
+      <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="NewYork" />,
       { wrapper: emailPartWrapper },
     )
     const img: HTMLImageElement = getByRole('img') as any
-    expect(img.alt).toEqual('New Jersey')
-    expect(img.src).toContain('/state-seals/New-Jersey.png')
+    expect(img.alt).toEqual('The seal of the State of New York')
+    expect(img.src).toContain('/state-seals/New-York.png')
   })
 
   it('displays the title if it exists', () => {
@@ -68,6 +68,26 @@ describe('StateSealMarkup', () => {
       expect(baseElement.querySelector('.narrow')).toBeNull()
     })
   })
+
+  describe('when there is a state seal for dark mode', () => {
+    it('displays the light and the dark mode images', () => {
+      const { getAllByRole, baseElement } = render(
+        <StateSealMarkup additionalDisclaimer={faker.lorem.paragraph()} stateSealKey="NewJersey" />,
+        { wrapper: emailPartWrapper },
+      )
+      const imgs: HTMLImageElement[] = getAllByRole('img') as any
+      expect(imgs).toHaveLength(2)
+      imgs.forEach((img) => {
+        expect(img.alt).toEqual('The seal of the State of New Jersey')
+      })
+      expect(imgs.map((img) => img.className)).toEqual(['lightmode', 'darkmode'])
+
+      const lightModeImage: HTMLImageElement = baseElement.querySelector('.lightmode') as any
+      expect(lightModeImage.src).toContain('/state-seals/New-Jersey.png')
+      const darkModeImage: HTMLImageElement = baseElement.querySelector('.darkmode') as any
+      expect(darkModeImage.src).toContain('/state-seals/New-Jersey-White.png')
+    })
+  })
 })
 
 describe('StateSeal', () => {
@@ -90,21 +110,24 @@ describe('StateSeal', () => {
   })
 
   it('displays the selected state seal', () => {
-    const { getByRole } = render(
+    const { getAllByRole } = render(
       <StateSeal emailComponent={buildUniqueEmailComponent('StateSeal')}>{null}</StateSeal>,
       { wrapper: emailPartWrapper },
     )
-    const img: HTMLImageElement = getByRole('img') as any
-    expect(img.alt).toEqual('New Jersey')
-    expect(img.src).toContain('/state-seals/New-Jersey.png')
+    const imgs: HTMLImageElement[] = getAllByRole('img') as any
+    expect(imgs).toHaveLength(2)
+    imgs.forEach((img) => {
+      expect(img.alt).toEqual('The seal of the State of New Jersey')
+    })
+    expect(imgs.map((img) => img.className)).toEqual(['lightmode', 'darkmode'])
   })
 
   it('when there is no state seal value saved it renders without issue', () => {
     localStorage.removeItem('stateSeal')
-    const { queryByRole, queryByText } = render(
+    const { queryAllByRole } = render(
       <StateSeal emailComponent={buildUniqueEmailComponent('StateSeal')}>{null}</StateSeal>,
       { wrapper: emailPartWrapper },
     )
-    expect(queryByRole('img')).not.toBeNull()
+    expect(queryAllByRole('img')).toHaveLength(2)
   })
 })
