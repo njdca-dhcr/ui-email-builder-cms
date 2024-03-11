@@ -55,15 +55,15 @@ components:
                   bold: true
           linkHref: "https://hosted-pages.id.me/njdol"
           buttonLabel: Get Started
-          step1Label: Sign in to your account
+          step1Label: [{ type: "paragraph", children: [{ text: "Sign in to your account" }] }]
           showStep1AdditionalContent: true
           step1Additional:
             - type: paragraph
               children:
                 - text: This form will expire on 00/00/0000
-          step2Label: Answer the questions
+          step2Label: [{ type: "paragraph", children: [{ text: "Answer the questions" }] }]
           showStep2AdditionalContent: false
-          step3Label: Submit your form. Don't wait.
+          step3Label: [{ type: "paragraph", children: [{ text: "Submit your form. Don't wait." }] }]
           showStep3AdditionalContent: true
           step3Additional:
             - type: paragraph
