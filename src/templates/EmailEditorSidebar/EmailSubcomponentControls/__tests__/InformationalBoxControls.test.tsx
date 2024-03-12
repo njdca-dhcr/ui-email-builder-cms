@@ -46,4 +46,18 @@ describe('InformationalBoxControls', () => {
     expect(button).not.toBeNull()
     expect(button).toHaveTextContent('Yielding Yellow')
   })
+
+  it('provides a toggle for supportive information', async () => {
+    const user = userEvent.setup()
+    const { queryByLabelText } = rendered
+    const toggle = queryByLabelText('+ Supportive Information')
+    expect(toggle).not.toBeNull()
+    expect(toggle).toBeChecked()
+
+    await user.click(toggle!)
+    expect(toggle).not.toBeChecked()
+
+    await user.click(toggle!)
+    expect(toggle).toBeChecked()
+  })
 })

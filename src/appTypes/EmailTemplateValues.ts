@@ -80,6 +80,8 @@ export interface InformationalBoxValue {
   icon: UswdsIconVariantKey
   title: string
   description: string
+  showSupportiveInformation: boolean
+  supportiveInformation: RichTextValue
 }
 
 export interface IntroValue {

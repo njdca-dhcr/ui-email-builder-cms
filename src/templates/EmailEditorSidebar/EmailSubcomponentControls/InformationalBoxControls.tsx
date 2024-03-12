@@ -4,6 +4,7 @@ import { useSubComponentControlOptions } from '.'
 import { UswdsIconSelect } from 'src/ui'
 import { useInformationalBoxValue } from 'src/templates/EmailTemplateSubComponents/InformationalBox'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'
+import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const InformationalBoxControls: FC<EmailSubComponentControlsProps<'InformationalBox'>> = ({
   emailSubComponent,
@@ -32,6 +33,12 @@ export const InformationalBoxControls: FC<EmailSubComponentControlsProps<'Inform
           onChange={(boxColor) => setValue({ ...value, boxColor })}
         />
       </Control.Container>
+      <SubComponentControlToggle
+        subComponentId={emailSubComponent.id}
+        label="+ Supportive Information"
+        onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
+        value={value.showSupportiveInformation}
+      />
     </Control.Group>
   )
 }

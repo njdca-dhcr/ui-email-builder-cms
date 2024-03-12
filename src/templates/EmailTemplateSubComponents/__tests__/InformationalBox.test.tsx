@@ -9,6 +9,7 @@ import {
   expectEmailPartContentFor,
 } from 'src/testHelpers'
 import { InformationalBox } from '../InformationalBox'
+import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
 
 describe('InformationalBox', () => {
   let value: string
@@ -44,5 +45,14 @@ describe('InformationalBox', () => {
     await clearAndFillWithValue('Informational box content')
     expect(rendered.queryByText(value)).not.toBeNull()
     expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
+  })
+
+  it('has an editable supportive information', async () => {
+    rendered = render(<InformationalBox emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
+    const input = rendered.getByLabelText('Supportive information')
+    await user.click(input)
+    expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
   })
 })
