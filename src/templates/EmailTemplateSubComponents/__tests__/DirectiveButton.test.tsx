@@ -44,7 +44,7 @@ describe('DirectiveButton', () => {
     expect(link).toHaveTextContent(directiveValue.buttonLabel!)
     expect(link.href).toEqual(directiveValue.linkHref)
     expect(link.style.color).toEqual('rgb(27, 27, 27)')
-    const styledCell: HTMLElement | null = baseElement.querySelector('td[style]') as any
+    const styledCell: HTMLElement | null = baseElement.querySelector('td[style] td[style]') as any
     expect(styledCell?.style.backgroundColor).toEqual(directiveValue.buttonColor)
   })
 

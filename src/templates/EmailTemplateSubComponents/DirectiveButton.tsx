@@ -5,7 +5,7 @@ import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 import { EmailTemplate } from 'src/appTypes'
 import { useDirectiveValue } from './Directive'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
-import { Colors, Font, Spacing, StyleDefaults } from '../styles'
+import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 
@@ -36,8 +36,12 @@ export const DirectiveButton: FC<EmailSubComponentProps<'DirectiveButton'>> = ()
   return (
     <Row
       elements={[
-        { part: 'cell', className: StyleDefaults.layout.wide },
-        { part: 'table', width: 'unset', className: StyleDefaults.layout.button },
+        { part: 'cell', className: StyleDefaults.layout.wide, style: StyleDefaults.inline.colors },
+        {
+          part: 'table',
+          width: 'unset',
+          className: StyleDefaults.layout.button,
+        },
         'row',
         {
           part: 'cell',
@@ -53,7 +57,6 @@ export const DirectiveButton: FC<EmailSubComponentProps<'DirectiveButton'>> = ()
 }
 
 const cellStyles: CSSProperties = {
-  ...StyleDefaults.inline.colors,
   borderRadius: 10,
   paddingTop: Spacing.size.medium,
   paddingBottom: Spacing.size.medium,
@@ -61,7 +64,6 @@ const cellStyles: CSSProperties = {
   paddingRight: 65,
   textAlign: 'center',
 }
-
 const linkStyles: CSSProperties = {
-  fontWeight: Font.weight.bold,
+  ...Text.body.main.bold,
 }
