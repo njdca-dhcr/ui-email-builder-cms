@@ -86,7 +86,7 @@ describe('SupplementalContent', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          SupplementalContentVariant.SingleSupplementalContent + '',
+          SupplementalContentVariant.SingleSupplementalContent,
         )
       })
 
@@ -108,7 +108,7 @@ describe('SupplementalContent', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          SupplementalContentVariant.DoubleSupplementalContent + '',
+          SupplementalContentVariant.DoubleSupplementalContent,
         )
       })
 
@@ -134,7 +134,7 @@ describe('SupplementalContent', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          SupplementalContentVariant.BenefitAmount + '',
+          SupplementalContentVariant.BenefitAmount,
         )
       })
 

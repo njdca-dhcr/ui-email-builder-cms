@@ -215,7 +215,7 @@ describe('RulesRightsRegulations', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          RulesRightsRegulationsVariant.YourRights + '',
+          RulesRightsRegulationsVariant.YourRights,
         )
       })
 

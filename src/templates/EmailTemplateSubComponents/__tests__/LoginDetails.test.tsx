@@ -83,10 +83,7 @@ describe('LoginDetails', () => {
 
     describe('Details', () => {
       beforeEach(async () => {
-        await user.selectOptions(
-          rendered.getByLabelText('Variant'),
-          LoginDetailsVariant.Details + '',
-        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), LoginDetailsVariant.Details)
       })
 
       itHasAnEditable('title', 'Login details title')
@@ -113,7 +110,7 @@ describe('LoginDetails', () => {
       beforeEach(async () => {
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          LoginDetailsVariant.Information + '',
+          LoginDetailsVariant.Information,
         )
       })
 

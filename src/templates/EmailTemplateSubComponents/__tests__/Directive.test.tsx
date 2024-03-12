@@ -85,7 +85,7 @@ describe('Directive', () => {
           <Directive emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.OneStep + '')
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.OneStep)
       })
 
       itHasAnEditable('directive title', 'Directive Title')
@@ -108,10 +108,7 @@ describe('Directive', () => {
           <Directive emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(
-          rendered.getByLabelText('Variant'),
-          DirectiveVariant.ThreeStep + '',
-        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.ThreeStep)
       })
 
       itHasAnEditableRichText('label for the directive', 'Label for the Directive')
@@ -146,7 +143,7 @@ describe('Directive', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          DirectiveVariant.StepTwoExpansion + '',
+          DirectiveVariant.StepTwoExpansion,
         )
       })
 
@@ -184,10 +181,7 @@ describe('Directive', () => {
           <Directive emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(
-          rendered.getByLabelText('Variant'),
-          DirectiveVariant.PayOnline + '',
-        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.PayOnline)
       })
 
       itHasAnEditable('directive button', 'Directive Button')

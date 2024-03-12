@@ -115,7 +115,7 @@ describe('Status', () => {
           <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.Overview + '')
+        await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.Overview)
       })
 
       itHasAnEditable('title', 'Status title')
@@ -138,7 +138,7 @@ describe('Status', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          StatusVariant.OverviewWithReason + '',
+          StatusVariant.OverviewWithReason,
         )
       })
 
@@ -162,10 +162,7 @@ describe('Status', () => {
           <Status emailSubComponent={emailSubComponent} />,
           <VariantSelect />,
         )
-        await user.selectOptions(
-          rendered.getByLabelText('Variant'),
-          StatusVariant.MissingDocument + '',
-        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.MissingDocument)
       })
 
       itHasAnEditable('title', 'Status title')
@@ -200,7 +197,7 @@ describe('Status', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          StatusVariant.OverviewWithReasonAndAmountDue + '',
+          StatusVariant.OverviewWithReasonAndAmountDue,
         )
       })
 
@@ -228,7 +225,7 @@ describe('Status', () => {
         )
         await user.selectOptions(
           rendered.getByLabelText('Variant'),
-          StatusVariant.OverviewWithReasonAndAmountBreakdown + '',
+          StatusVariant.OverviewWithReasonAndAmountBreakdown,
         )
       })
 
