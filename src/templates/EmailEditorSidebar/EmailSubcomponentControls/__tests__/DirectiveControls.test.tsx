@@ -1,10 +1,11 @@
 import React from 'react'
-import userEvent from '@testing-library/user-event'
-import { render } from '@testing-library/react'
+import userEvent, { UserEvent } from '@testing-library/user-event'
+import { RenderResult, render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { DirectiveControls } from '../DirectiveControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
+import { DirectiveVariant } from 'src/appTypes'
 
 describe('DirectiveControls', () => {
   it('provides a toggle for showing the title', async () => {
@@ -66,5 +67,80 @@ describe('DirectiveControls', () => {
     await user.type(hexInput, color.replace('#', ''))
     expect(hexInput).toHaveValue(color)
     expect(colorPicker).toHaveValue(color)
+  })
+
+  describe('variants', () => {
+    let rendered: RenderResult
+    let user: UserEvent
+
+    const itProvidesAToggleFor = (testName: string, label: string) => {
+      it(`provides a toggle for ${testName}`, async () => {
+        const user = userEvent.setup()
+        const { queryByLabelText } = render(
+          <EmailPartsContent>
+            <DirectiveControls
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+            />
+          </EmailPartsContent>,
+        )
+        const toggle = queryByLabelText(label)
+        expect(toggle).not.toBeNull()
+        expect(toggle).toBeChecked()
+
+        await user.click(toggle!)
+        expect(toggle).not.toBeChecked()
+
+        await user.click(toggle!)
+        expect(toggle).toBeChecked()
+      })
+    }
+
+    beforeEach(() => {
+      user = userEvent.setup()
+    })
+
+    describe(DirectiveVariant.ThreeStep, () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <DirectiveControls
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+            />
+          </EmailPartsContent>,
+        )
+        await user.click(rendered.getByRole('button', { name: 'Directive variant One Step' }))
+        await user.click(rendered.getByRole('option', { name: 'Three Steps' }))
+      })
+
+      itProvidesAToggleFor('step 1 additional content', 'Step 1 Additional Content')
+
+      itProvidesAToggleFor('step 2 additional content', 'Step 2 Additional Content')
+
+      itProvidesAToggleFor('step 3 additional content', 'Step 3 Additional Content')
+
+      itProvidesAToggleFor('supportive information', '+ Supportive Information')
+    })
+
+    describe(DirectiveVariant.StepTwoExpansion, () => {
+      beforeEach(async () => {
+        rendered = render(
+          <EmailPartsContent>
+            <DirectiveControls
+              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+            />
+          </EmailPartsContent>,
+        )
+        await user.click(rendered.getByRole('button', { name: 'Directive variant One Step' }))
+        await user.click(rendered.getByRole('option', { name: 'Three Steps w/ Step 2 Expansion' }))
+      })
+
+      itProvidesAToggleFor('step 1 additional content', 'Step 1 Additional Content')
+
+      itProvidesAToggleFor('step 2 additional content', 'Step 2 Additional Content')
+
+      itProvidesAToggleFor('step 3 additional content', 'Step 3 Additional Content')
+
+      itProvidesAToggleFor('supportive information', '+ Supportive Information')
+    })
   })
 })

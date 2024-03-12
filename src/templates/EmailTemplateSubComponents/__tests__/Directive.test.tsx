@@ -129,9 +129,11 @@ describe('Directive', () => {
 
       itHasAnEditableRichText('step 3 additional information', 'Additional information for Step 3')
 
+      itHasAnEditableRichText('multiple steps supportive information', 'Supportive information')
+
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(10)
+        expect(all).toHaveLength(11)
       })
     })
 
@@ -169,9 +171,11 @@ describe('Directive', () => {
 
       itHasAnEditableRichText('step 3 additional information', 'Additional information for Step 3')
 
+      itHasAnEditableRichText('multiple steps supportive information', 'Supportive information')
+
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(12)
+        expect(all).toHaveLength(13)
       })
     })
 

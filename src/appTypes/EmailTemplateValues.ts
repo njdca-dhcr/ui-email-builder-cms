@@ -66,6 +66,10 @@ export interface DirectiveValue {
   step2Tertiary: RichTextValue
   step2CaseNumber: RichTextValue
 
+  // ThreeStep and StepTwoExpansion
+  showMultipleStepsSupportiveText: boolean
+  multipleStepsSupportiveText: RichTextValue
+
   // PayOnline uses OneStep values
   alternativePaymentLabel: string
   payOnlineSupportiveText: RichTextValue

@@ -3,7 +3,7 @@ import { EmailSubComponentProps } from './shared'
 import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
-import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
+import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
@@ -70,6 +70,18 @@ export const defaultValue: DirectiveValue = {
     {
       type: 'paragraph',
       children: [{ text: 'Additional information around Step 3' }],
+    },
+  ],
+  showMultipleStepsSupportiveText: true,
+  multipleStepsSupportiveText: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor quis congue eget, commodo eu urna. Donec laoreet a dui consequat sollicitudin. Aliquam et dapibus ex, at malesuada tellus.',
+          italic: true,
+        },
+      ],
     },
   ],
   alternativePaymentLabel:
@@ -550,6 +562,24 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
               </Table>
             </Cell>
           </Row>
+          {value.showMultipleStepsSupportiveText && (
+            <>
+              <Row>
+                <SpacingCell size="medium" />
+              </Row>
+              <Row>
+                <RichTextEditableElement
+                  element="td"
+                  label="Supportive information"
+                  onValueChange={(multipleStepsSupportiveText) =>
+                    setValue({ ...value, multipleStepsSupportiveText })
+                  }
+                  value={value.multipleStepsSupportiveText}
+                  style={styles.multipleStepsSupportiveText}
+                />
+              </Row>
+            </>
+          )}
         </>
       )}
     </Row>
@@ -661,5 +691,8 @@ const styles = {
     height: '10px',
     lineHeight: '10px',
     fontSize: '10px',
+  } as CSSProperties,
+  multipleStepsSupportiveText: {
+    ...Text.body.tertiary.regular,
   } as CSSProperties,
 }

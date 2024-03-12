@@ -100,6 +100,14 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> 
             }
             value={value.showStep3AdditionalContent}
           />
+          <SubComponentControlToggle
+            subComponentId={emailSubComponent.id}
+            label="+ Supportive Information"
+            onChange={(showMultipleStepsSupportiveText) =>
+              setValue({ ...value, showMultipleStepsSupportiveText })
+            }
+            value={value.showMultipleStepsSupportiveText}
+          />
         </>
       )}
     </Control.Group>
