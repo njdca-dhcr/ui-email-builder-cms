@@ -39,11 +39,11 @@ components:
       - kind: RulesRightsRegulations
         visibleByDefault: false
         description: Rights? Regulations? Appeals? Reminders?
+      - kind: InformationalBox
+        visibleByDefault: false
       - kind: LoginDetails
         visibleByDefault: false
         description: Just in case they need to reset their password
-      - kind: InformationalBox
-        visibleByDefault: false
   - kind: Footer
     required: true
     subComponents:
