@@ -19,24 +19,37 @@ describe('siteUrl', () => {
     })
   })
 
-  describe('when in production and NJ mode', () => {
-    it('is the configured siteUrl for New Jersey', () => {
-      Config.siteMetadata = { env: 'production', appMode: 'NJ' }
-      expect(siteUrl()).toEqual('https://main.dor49a0hhc0bh.amplifyapp.com')
+  describe('when in production', () => {
+    beforeEach(() => {
+      Config.siteMetadata = { env: 'production' }
     })
-  })
 
-  describe('when in production and all states mode', () => {
-    it('is the configured siteUrl for all states', () => {
-      Config.siteMetadata = { env: 'production', appMode: 'ALL' }
-      expect(siteUrl()).toEqual('https://email-builder-beta.netlify.app')
+    describe('when in NJ mode', () => {
+      it('is the configured siteUrl for New Jersey', () => {
+        Config.siteMetadata!.appMode = 'NJ'
+        expect(siteUrl()).toEqual('https://main.dor49a0hhc0bh.amplifyapp.com')
+      })
     })
-  })
 
-  describe('when in production and the mode is not specified', () => {
-    it('is the configured siteUrl for New Jersey', () => {
-      Config.siteMetadata = { env: 'production', appMode: undefined }
-      expect(siteUrl()).toEqual('https://main.dor49a0hhc0bh.amplifyapp.com')
+    describe('when in KY mode', () => {
+      it('is the kentucky url', () => {
+        Config.siteMetadata!.appMode = 'KY'
+        expect(siteUrl()).toEqual('https://email-builder-beta-kentucky.netlify.app')
+      })
+    })
+
+    describe('when in all states mode', () => {
+      it('is the all states url', () => {
+        Config.siteMetadata!.appMode = 'ALL'
+        expect(siteUrl()).toEqual('https://email-builder-beta-all-states-secret.netlify.app')
+      })
+    })
+
+    describe('when the mode is not specified', () => {
+      it('is the configured siteUrl for New Jersey', () => {
+        Config.siteMetadata!.appMode = undefined
+        expect(siteUrl()).toEqual('https://main.dor49a0hhc0bh.amplifyapp.com')
+      })
     })
   })
 })
@@ -50,5 +63,13 @@ describe('buildSiteUrl', () => {
 
     Config.siteMetadata = { env: 'development', appMode: 'NJ' }
     expect(buildSiteUrl(path)).toEqual(`http://localhost:8000${path}`)
+
+    Config.siteMetadata = { env: 'production', appMode: 'ALL' }
+    expect(buildSiteUrl(path)).toEqual(
+      `https://email-builder-beta-all-states-secret.netlify.app${path}`,
+    )
+
+    Config.siteMetadata = { env: 'production', appMode: 'KY' }
+    expect(buildSiteUrl(path)).toEqual(`https://email-builder-beta-kentucky.netlify.app${path}`)
   })
 })
