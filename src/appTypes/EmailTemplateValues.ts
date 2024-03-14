@@ -1,8 +1,8 @@
 import { TableTerm } from 'src/ui/EditableTermsTable'
 import { RichTextValue } from 'src/ui/RichTextEditor'
 import { BoxColor } from 'src/ui/SelectBoxColor'
-import { StateSealKey } from 'src/ui/StateSeal'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { StateAbbreviation } from 'src/utils/statesAndTerritories'
 
 export interface BannerValue {
   backgroundColor: string
@@ -17,7 +17,7 @@ export interface NameValue {
 }
 
 export interface StateSealValue {
-  stateSealKey: StateSealKey
+  stateAbbreviation: StateAbbreviation
   additionalDisclaimer: string
   [key: string]: null | string
 }

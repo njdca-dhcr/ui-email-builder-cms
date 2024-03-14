@@ -1,5 +1,6 @@
 name: Waiver Application
 description: Often used for campaigns, or general registration announcements.
+appModes: ["ALL", "NJ", "KY"]
 components:
   - kind: Banner
     required: true

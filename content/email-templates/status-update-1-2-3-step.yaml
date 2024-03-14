@@ -1,5 +1,6 @@
 name: Status Update + 1, 2, 3, step
 description: Confirmations, updates, determinations, and any other status related messaging.
+appModes: ["ALL", "NJ", "KY"]
 components:
   - kind: Banner
     required: true

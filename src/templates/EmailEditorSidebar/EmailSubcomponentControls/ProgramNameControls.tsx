@@ -4,7 +4,7 @@ import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/Pr
 import { ColorPicker } from 'src/ui/ColorPicker'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { ColorInput } from 'src/ui/ColorInput'
-import { isNJMode } from 'src/utils/appMode'
+import { isAppMode } from 'src/utils/appMode'
 import { Select } from 'src/ui'
 import { ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
 
@@ -16,10 +16,11 @@ export const ProgramNameControls: FC<EmailSubComponentControlsProps<'ProgramName
   const colorInputHtmlId = `program-name-background-color-input-${emailSubComponent.id}`
   const [value, setValue] = useProgramNameValue(emailSubComponent)
   const isCustomPreset = ProgramNameNJPreset.Custom === value.preset
+  const isNJMode = isAppMode('NJ')
 
   return (
     <Control.Group>
-      {isNJMode() && (
+      {isNJMode && (
         <Control.Container layout="column">
           <Control.Label id={presetSelectHtmlId}>Background Color Preset</Control.Label>
           <Select
@@ -68,7 +69,7 @@ export const ProgramNameControls: FC<EmailSubComponentControlsProps<'ProgramName
         </Control.Container>
       )}
 
-      {(isCustomPreset || !isNJMode()) && (
+      {(isCustomPreset || !isNJMode) && (
         <Control.Container className="program-name-inline-color-picker">
           <Control.Label htmlFor={colorPickerHtmlId}>Background Color</Control.Label>
           <VisuallyHidden>

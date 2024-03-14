@@ -1,5 +1,6 @@
 name: Blank Slate
 description: You know what you want so make it happen.
+appModes: ["ALL", "NJ", "KY"]
 components:
   - kind: Banner
     required: true

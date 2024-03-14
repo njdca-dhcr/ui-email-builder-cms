@@ -1,5 +1,6 @@
 name: Disaster Unemployment Assistance - Eligible
 description: You are going to get some money from us.
+appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
     required: false

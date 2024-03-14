@@ -1,3 +1,4 @@
+import { AppMode } from 'src/utils/appMode'
 import {
   AdditionalContentValue,
   BannerValue,
@@ -127,6 +128,7 @@ export namespace EmailTemplate {
     name: string
     description?: string
     components?: Component[]
+    appModes?: AppMode[]
   }
 
   export interface UniqueConfig {

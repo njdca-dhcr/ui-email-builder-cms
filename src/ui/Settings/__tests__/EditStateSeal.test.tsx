@@ -3,23 +3,18 @@ import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { EditStateSeal } from '../EditStateSeal'
 import { faker } from '@faker-js/faker'
-import { asMock } from 'src/testHelpers'
-import { isAllStatesMode } from 'src/utils/appMode'
+import { mockAppMode } from 'src/testHelpers'
 import { StateSealValue } from 'src/appTypes'
-
-jest.mock('src/utils/appMode', () => {
-  const actual = jest.requireActual('src/utils/appMode')
-  return {
-    ...actual,
-    isAllStatesMode: jest.fn(),
-  }
-})
 
 describe('EditStateSeal', () => {
   const stored = (): StateSealValue => {
     const stored = localStorage.getItem('stateSeal') ?? '{}'
     return JSON.parse(stored)
   }
+
+  beforeEach(() => {
+    localStorage.removeItem('stateSeal')
+  })
 
   afterEach(() => {
     localStorage.removeItem('stateSeal')
@@ -38,7 +33,7 @@ describe('EditStateSeal', () => {
 
   describe('in all states mode', () => {
     it('has an editable state seal dropdown', async () => {
-      asMock(isAllStatesMode).mockReturnValue(true)
+      mockAppMode('ALL')
       const user = userEvent.setup()
       const { getByRole } = render(<EditStateSeal />)
 
@@ -49,13 +44,13 @@ describe('EditStateSeal', () => {
       await user.click(getByRole('option', { name: 'California' }))
 
       expect(stateSealSelect()).toHaveTextContent('California')
-      expect(stored().stateSealKey).toEqual('California')
+      expect(stored().stateAbbreviation).toEqual('CA')
     })
   })
 
-  describe('in NJ mode', () => {
+  describe('in state mode', () => {
     it('lacks an editable state seal dropdown', () => {
-      asMock(isAllStatesMode).mockReturnValue(false)
+      mockAppMode('NJ')
       const { queryByRole } = render(<EditStateSeal />)
       expect(queryByRole('button')).toBeNull()
     })

@@ -9,6 +9,7 @@ import 'src/styles/app.css'
 import './index.css'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { isRestricted } from 'src/utils/appMode'
 
 const IndexPage: FC = () => {
   return (
@@ -31,11 +32,13 @@ const IndexPage: FC = () => {
                 description="Start with nothing in the email and add on the elements you need"
                 linkTo="/email-templates/blank-slate/"
               />
-              <CreateFromScratchListItem
-                label="Everything Bagel"
-                description="Start with all the options added and take away what you don’t want"
-                linkTo="/email-templates/everything-bagel/"
-              />
+              {!isRestricted() && (
+                <CreateFromScratchListItem
+                  label="Everything Bagel"
+                  description="Start with all the options added and take away what you don’t want"
+                  linkTo="/email-templates/everything-bagel/"
+                />
+              )}
             </List>
           </section>
           <section className="index-or">--or--</section>

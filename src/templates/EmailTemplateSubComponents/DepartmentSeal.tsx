@@ -2,25 +2,29 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
-import { DepartmentSealKey, DepartmentSealsMapping } from 'src/utils/departmentSeals'
 import { StyleDefaults } from '../styles'
 import { buildSiteUrl } from 'src/utils/siteUrl'
-import { isAllStatesMode } from 'src/utils/appMode'
+import { appModeAsStateAbbreviation, isAllStatesMode } from 'src/utils/appMode'
+import { departmentSealByImageName, departmentSealsForState } from 'src/utils/departmentSeals'
 
 const { Row } = EmailBlock
 
-const defaultValue = (): DepartmentSealKey => {
-  return isAllStatesMode() ? 'US-DOL-Color' : 'New-Jersey'
+const defaultValue = (): string => {
+  const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
+  const [departmentSeal] = departmentSealsForState(stateAbbreviation)
+
+  return departmentSeal?.imageName ?? 'US-DOL.png'
 }
 
 export const useDepartmentSealValue = () => {
-  return useLocalStorageJSON<DepartmentSealKey>('department-seal', defaultValue())
+  return useLocalStorageJSON<string>('department-seal', defaultValue())
 }
 
-export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> = ({
-  departmentSealKey,
+export const DepartmentSealMarkup: FC<{ departmentSealImageName: string }> = ({
+  departmentSealImageName,
 }) => {
-  const departmentSeal = DepartmentSealsMapping[departmentSealKey]
+  const departmentSeal = departmentSealByImageName(departmentSealImageName)
+
   return (
     <Row
       data-testid="department-seal"
@@ -36,11 +40,13 @@ export const DepartmentSealMarkup: FC<{ departmentSealKey: DepartmentSealKey }> 
         'cell',
       ]}
     >
-      <img
-        alt={departmentSeal.label}
-        src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
-        style={imageStyles}
-      />
+      {departmentSeal && (
+        <img
+          alt={departmentSeal.label}
+          src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
+          style={imageStyles}
+        />
+      )}
     </Row>
   )
 }
@@ -55,5 +61,5 @@ const imageStyles: CSSProperties = {
 
 export const DepartmentSeal: FC<EmailSubComponentProps<'DepartmentSeal'>> = () => {
   const [value] = useDepartmentSealValue()
-  return <DepartmentSealMarkup departmentSealKey={value} />
+  return <DepartmentSealMarkup departmentSealImageName={value} />
 }

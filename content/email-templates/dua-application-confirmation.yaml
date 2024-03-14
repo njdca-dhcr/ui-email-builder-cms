@@ -1,5 +1,6 @@
 name: DUA Application Confirmation
 description: Disaster Unemployment Assistance Application Confirmation
+appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
     required: true

@@ -5,6 +5,8 @@ import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { BannerValue } from 'src/appTypes'
+import { appModeAsStateAbbreviation } from 'src/utils/appMode'
+import { stateById } from 'src/utils/statesAndTerritories'
 
 interface BannerMarkupProps {
   backgroundColor: string
@@ -77,15 +79,21 @@ const getHostName = (url: string): string => {
   return url.replace(/^https?:\/\//, '').replace(/\/$/, '')
 }
 
-const defaultValue: BannerValue = {
-  backgroundColor: Colors.black,
-  primaryText: 'New Jersey Department of Labor and Workforce Development',
-  primaryLink: 'https://www.nj.gov/labor/',
-  secondaryLink: 'https://myunemployment.nj.gov/',
+const defaultValue = (): BannerValue => {
+  const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
+  const state = stateById(stateAbbreviation)
+  const lowercasedAbbreviation = stateAbbreviation.toLowerCase()
+
+  return {
+    backgroundColor: Colors.black,
+    primaryText: `${state.name} Department of Labor and Workforce Development`,
+    primaryLink: `https://www.${lowercasedAbbreviation}.gov/labor/`,
+    secondaryLink: `https://myunemployment.${lowercasedAbbreviation}.gov/`,
+  }
 }
 
 export const useBannerValue = () => {
-  return useLocalStorageJSON<BannerValue>('banner', defaultValue)
+  return useLocalStorageJSON<BannerValue>('banner', defaultValue())
 }
 
 export const Banner: FC<EmailComponentProps<'Banner'>> = ({}) => {

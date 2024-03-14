@@ -4,10 +4,11 @@ import '@reach/skip-nav/styles.css'
 import { List } from './List'
 import './Layout.css'
 import classNames from 'classnames'
-import { isNJMode } from 'src/utils/appMode'
-import { DepartmentSealsMapping } from 'src/utils/departmentSeals'
+import { appModeAsStateAbbreviation } from 'src/utils/appMode'
+import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
 import { buildSiteUrl } from 'src/utils/siteUrl'
 import { Link } from 'gatsby'
+import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
 
 interface LayoutProps {
   children: ReactNode
@@ -43,11 +44,14 @@ interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
-  const departmentSeal = DepartmentSealsMapping['New-Jersey']
+  const stateAbbreviation = appModeAsStateAbbreviation()
+  const state = stateById(appModeAsStateAbbreviation() ?? 'US')
+  const departmentSeal = departmentSealForState(stateAbbreviation)
+
   return (
     <div id={id} className={classNames('sidebar', className)}>
       <SpacedSidebarContainer>
-        {isNJMode() && (
+        {departmentSeal && (
           <Link to="/" className="department-seal-container">
             <img
               alt={departmentSeal.label}
@@ -56,13 +60,23 @@ export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
           </Link>
         )}
         <span className="sidebar-title">
-          {isNJMode() && 'New Jersey '}
+          {state && `${state.name} `}
           Email Builder (Beta)
         </span>
       </SpacedSidebarContainer>
       {children}
     </div>
   )
+}
+
+const departmentSealForState = (
+  state: StateAbbreviation | null,
+): (typeof DEPARTMENT_SEALS)[number] | null => {
+  if (!state) return null
+
+  const [firstDepartment] = departmentSealsForState(state)
+
+  return firstDepartment ?? null
 }
 
 interface SidebarListProps {

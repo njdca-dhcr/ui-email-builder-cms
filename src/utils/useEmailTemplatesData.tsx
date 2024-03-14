@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
+import { AppMode, appMode } from './appMode'
 
 const query = graphql`
   query EmailTemplatesData {
@@ -8,6 +9,7 @@ const query = graphql`
           id
           name
           description
+          appModes
           parent {
             id
             ... on File {
@@ -26,15 +28,19 @@ export const useEmailTemplatesData = (): {
   name: string
   description: string
   path: string
+  appModes: AppMode[]
 }[] => {
   const { emailTemplates } = useStaticQuery<Queries.EmailTemplatesDataQuery>(query)
 
-  return emailTemplates.edges.map(({ node }) => {
-    return {
-      id: node.id,
-      name: node.name!,
-      description: node.description!,
-      path: `/email-templates/${(node.parent as any).name}`,
-    }
-  })
+  return emailTemplates.edges
+    .map(({ node }) => {
+      return {
+        id: node.id,
+        name: node.name!,
+        description: node.description!,
+        path: `/email-templates/${(node.parent as any).name}`,
+        appModes: (node.appModes ?? []) as any,
+      }
+    })
+    .filter(({ appModes }) => appModes.includes(appMode()))
 }

@@ -8,6 +8,7 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
+  mockAppMode,
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
@@ -22,7 +23,7 @@ jest.mock('src/utils/download', () => {
 
 describe('EmailEditorContent', () => {
   let emailTemplate: EmailTemplate.UniqueConfig
-  // let windowSpy: jest.SpyInstance
+  let alertSpy: jest.SpyInstance
 
   beforeEach(() => {
     emailTemplate = buildUniqueEmailConfig({
@@ -35,12 +36,13 @@ describe('EmailEditorContent', () => {
         }),
       ],
     })
-    // windowSpy = jest.spyOn(globalThis, 'window', 'get')
+    alertSpy = jest.spyOn(window, 'alert')
+    alertSpy.mockReturnValue(false)
   })
 
-  // afterEach(() => {
-  //   windowSpy.mockRestore()
-  // })
+  afterEach(() => {
+    alertSpy.mockRestore()
+  })
 
   it('can display the email in desktop or mobile', async () => {
     const user = userEvent.setup()
@@ -68,25 +70,23 @@ describe('EmailEditorContent', () => {
   })
 
   it('raises an alert if the user tries to export the email without preview text', async () => {
-    // windowSpy.mockImplementation(() => ({
-    //   alert: jest.fn(),
-    // }))
-
     const user = userEvent.setup()
-    // const { getByText } = render(
-    //   <EmailPartsContent>
-    //     <EmailEditorContent emailTemplate={emailTemplate} />
-    //   </EmailPartsContent>,
-    // )
-    //   const value = faker.lorem.words(4)
-    //   await user.type(getByText('Title'), value)
-    //   await user.click(getByText('Copy HTML'))
-    //   // expect alert to have been called
-    //   expect(copy).toHaveBeenCalled()
-    //   await user.click(getByText('Download HTML'))
-    //   // expect alert to have been called
-    //   expect(download).toHaveBeenCalled()
-    //   expect(windowSpy).toHaveBeenCalledTimes(2)
+    const { getByText } = render(
+      <EmailPartsContent>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+      </EmailPartsContent>,
+    )
+    const value = faker.lorem.words(4)
+    await user.type(getByText('Title'), value)
+    await user.click(getByText('Copy HTML'))
+    expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
+    expect(alertSpy).toHaveBeenCalledTimes(1)
+    expect(copy).not.toHaveBeenCalled()
+
+    await user.click(getByText('Download HTML'))
+    expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
+    expect(download).not.toHaveBeenCalled()
+    expect(alertSpy).toHaveBeenCalledTimes(2)
   })
 
   it('allows users to copy the current preview into their clipboard', async () => {
@@ -147,5 +147,21 @@ describe('EmailEditorContent', () => {
   it('renders the preview text', () => {
     const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()
+  })
+
+  describe('when restricted', () => {
+    beforeEach(() => {
+      mockAppMode('KY')
+    })
+
+    it('does not have a download HTML button', () => {
+      const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+      expect(queryByText('Download HTML')).toBeNull()
+    })
+
+    it('does not have a copy HTML button', () => {
+      const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+      expect(queryByText('Copy HTML')).toBeNull()
+    })
   })
 })

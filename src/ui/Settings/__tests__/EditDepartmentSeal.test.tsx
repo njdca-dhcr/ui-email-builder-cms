@@ -2,25 +2,16 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { EditDepartmentSeal } from '../EditDepartmentSeal'
-import { asMock } from 'src/testHelpers'
-import { isAllStatesMode } from 'src/utils/appMode'
-
-jest.mock('src/utils/appMode', () => {
-  const actual = jest.requireActual('src/utils/appMode')
-  return {
-    ...actual,
-    isAllStatesMode: jest.fn(),
-  }
-})
+import { mockAppMode } from 'src/testHelpers'
 
 describe('EditDepartmentSeal', () => {
   beforeEach(() => {
-    localStorage.removeItem('department-seal')
+    localStorage.clear()
   })
 
-  describe('when in NJ mode', () => {
+  describe('when in state mode', () => {
     it('only provides New Jersey related state seals in the dropdown', async () => {
-      asMock(isAllStatesMode).mockReturnValue(false)
+      mockAppMode('NJ')
       const user = userEvent.setup()
       const { getByRole, queryByRole } = render(<EditDepartmentSeal />)
       const button = (): Element => getByRole('button')
@@ -38,7 +29,7 @@ describe('EditDepartmentSeal', () => {
 
   describe('when in all states mode', () => {
     it('provides a dropdown for selecting the department seal', async () => {
-      asMock(isAllStatesMode).mockReturnValue(true)
+      mockAppMode('ALL')
       const user = userEvent.setup()
       const { getByRole, queryByRole } = render(<EditDepartmentSeal />)
       const button = (): Element => getByRole('button')

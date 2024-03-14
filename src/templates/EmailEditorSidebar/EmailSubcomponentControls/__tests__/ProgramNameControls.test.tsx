@@ -3,19 +3,10 @@ import { RenderResult, render } from '@testing-library/react'
 import { ProgramNameControls } from '../ProgramNameControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { faker } from '@faker-js/faker'
-import { asMock, buildUniqueEmailSubComponent } from 'src/testHelpers'
+import { buildUniqueEmailSubComponent, mockAppMode } from 'src/testHelpers'
 import { UserEvent, userEvent } from '@testing-library/user-event'
-import { isNJMode } from 'src/utils/appMode'
 import { EmailTemplate } from 'src/appTypes'
 import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/ProgramName'
-
-jest.mock('src/utils/appMode', () => {
-  const actual = jest.requireActual('src/utils/appMode')
-  return {
-    ...actual,
-    isNJMode: jest.fn(),
-  }
-})
 
 describe('ProgramNameControls', () => {
   let user: UserEvent
@@ -41,7 +32,7 @@ describe('ProgramNameControls', () => {
     const currentBackgroundColor = () => rendered.baseElement.querySelector('#background-color')
 
     beforeEach(() => {
-      asMock(isNJMode).mockReturnValue(true)
+      mockAppMode('NJ')
       user = userEvent.setup()
       rendered = render(
         <EmailPartsContent>
@@ -131,7 +122,34 @@ describe('ProgramNameControls', () => {
 
   describe('when in all states mode', () => {
     beforeEach(() => {
-      asMock(isNJMode).mockReturnValue(false)
+      mockAppMode('ALL')
+      user = userEvent.setup()
+      rendered = render(
+        <EmailPartsContent>
+          <ProgramNameControls emailSubComponent={subComponent} />
+        </EmailPartsContent>,
+      )
+    })
+
+    it('provides a color picker for the background color', async () => {
+      const color = faker.color.rgb()
+      const { getByLabelText } = rendered
+      const colorPicker = getByLabelText('Background Color')
+      const hexInput = getByLabelText('Background Color Hex Code')
+      await user.clear(hexInput)
+      await user.type(hexInput, color.replace('#', ''))
+      expect(hexInput).toHaveValue(color)
+      expect(colorPicker).toHaveValue(color)
+    })
+
+    it('does not provide a curated set of colors', () => {
+      expect(rendered.baseElement).not.toHaveTextContent('Background Color Preset')
+    })
+  })
+
+  describe('when in another state mode', () => {
+    beforeEach(() => {
+      mockAppMode('AK')
       user = userEvent.setup()
       rendered = render(
         <EmailPartsContent>

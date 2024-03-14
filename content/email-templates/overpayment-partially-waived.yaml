@@ -1,5 +1,6 @@
 name: Overpayment Partially Waived
 description: PUA focused but can still be applied to general overpayment campaigns
+appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
     required: true

@@ -20,6 +20,7 @@ import { usePreviewText } from '../PreviewText'
 import { EditPreviewText } from './EditPreviewText'
 import { Radio } from 'src/ui/RadioButtons'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
+import { isRestricted } from 'src/utils/appMode'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -68,21 +69,23 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             onChange={() => setPreviewType('mobile')}
           />
         </Radio.Fieldset>
-        <div className="button-group">
-          <CopyToClipboardButton
-            fieldsCompleted={hasPreviewText}
-            textToCopy={() => toEmailText(titleValue.title)}
-          >
-            Copy HTML
-          </CopyToClipboardButton>
-          <DownloadButton
-            textToDownload={() => toEmailText(titleValue.title)}
-            fileName={`${emailTemplate.name}.html`}
-            fieldsCompleted={hasPreviewText}
-          >
-            Download HTML
-          </DownloadButton>
-        </div>
+        {!isRestricted() && (
+          <div className="button-group">
+            <CopyToClipboardButton
+              fieldsCompleted={hasPreviewText}
+              textToCopy={() => toEmailText(titleValue.title)}
+            >
+              Copy HTML
+            </CopyToClipboardButton>
+            <DownloadButton
+              textToDownload={() => toEmailText(titleValue.title)}
+              fileName={`${emailTemplate.name}.html`}
+              fieldsCompleted={hasPreviewText}
+            >
+              Download HTML
+            </DownloadButton>
+          </div>
+        )}
       </div>
       <Root.div
         id="preview-container"

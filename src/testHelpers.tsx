@@ -10,6 +10,8 @@ import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
 import { render } from '@testing-library/react'
 import uniqueId from 'lodash.uniqueid'
+import { AppMode } from './utils/appMode'
+import Config from '../gatsby-config'
 
 export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
   component: T,
@@ -177,4 +179,8 @@ export const mockDataTransfer = ({
     clearData: () => null,
     setDragImage: () => null,
   }
+}
+
+export const mockAppMode = (appMode: AppMode | undefined) => {
+  Config.siteMetadata = { ...Config.siteMetadata, appMode }
 }

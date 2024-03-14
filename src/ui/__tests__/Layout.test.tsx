@@ -13,16 +13,7 @@ import {
   SpacedContainer,
   SpacedSidebarContainer,
 } from '../Layout'
-import { asMock } from 'src/testHelpers'
-import { isNJMode } from 'src/utils/appMode'
-
-jest.mock('src/utils/appMode', () => {
-  const actual = jest.requireActual('src/utils/appMode')
-  return {
-    ...actual,
-    isNJMode: jest.fn(),
-  }
-})
+import { mockAppMode } from 'src/testHelpers'
 
 describe('Layout', () => {
   it('displays its children', () => {
@@ -121,7 +112,7 @@ describe('Sidebar', () => {
 
   describe('when in all states mode', () => {
     beforeEach(() => {
-      asMock(isNJMode).mockReturnValue(false)
+      mockAppMode('ALL')
     })
 
     it('does not display a NJ department seal', () => {
@@ -146,29 +137,57 @@ describe('Sidebar', () => {
     })
   })
 
-  describe('when in NJ mode', () => {
-    beforeEach(() => {
-      asMock(isNJMode).mockReturnValue(true)
+  describe('when in a state mode mode', () => {
+    describe('NJ for example', () => {
+      beforeEach(() => {
+        mockAppMode('NJ')
+      })
+
+      it('displays a NJ department seal', () => {
+        const { baseElement } = render(
+          <Sidebar>
+            <div />
+          </Sidebar>,
+        )
+        expect(baseElement.querySelector('a > img')).not.toBeNull()
+      })
+
+      it('displays a specific title ', () => {
+        const { baseElement } = render(
+          <Sidebar>
+            <div />
+          </Sidebar>,
+        )
+        const sidebarTitle = baseElement.querySelector('.sidebar-title')
+        expect(sidebarTitle).not.toBeNull()
+        expect(sidebarTitle).toHaveTextContent('New Jersey Email Builder (Beta)')
+      })
     })
 
-    it('displays a NJ department seal', () => {
-      const { baseElement } = render(
-        <Sidebar>
-          <div />
-        </Sidebar>,
-      )
-      expect(baseElement.querySelector('a > img')).not.toBeNull()
-    })
+    describe('KY for example', () => {
+      beforeEach(() => {
+        mockAppMode('KY')
+      })
 
-    it('displays a specific title ', () => {
-      const { baseElement } = render(
-        <Sidebar>
-          <div />
-        </Sidebar>,
-      )
-      const sidebarTitle = baseElement.querySelector('.sidebar-title')
-      expect(sidebarTitle).not.toBeNull()
-      expect(sidebarTitle).toHaveTextContent('New Jersey Email Builder (Beta)')
+      it('displays a KY department seal', () => {
+        const { baseElement } = render(
+          <Sidebar>
+            <div />
+          </Sidebar>,
+        )
+        expect(baseElement.querySelector('a > img')).not.toBeNull()
+      })
+
+      it('displays a specific title ', () => {
+        const { baseElement } = render(
+          <Sidebar>
+            <div />
+          </Sidebar>,
+        )
+        const sidebarTitle = baseElement.querySelector('.sidebar-title')
+        expect(sidebarTitle).not.toBeNull()
+        expect(sidebarTitle).toHaveTextContent('Kentucky Email Builder (Beta)')
+      })
     })
   })
 

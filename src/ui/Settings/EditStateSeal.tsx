@@ -3,16 +3,17 @@ import startCase from 'lodash.startcase'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Heading, Paragraph } from 'src/ui/Layout'
 import { Select } from 'src/ui/Select'
-import { StateSealKey, StateSeals } from 'src/ui/StateSeal'
+import { STATE_SEALS } from 'src/utils/StateSeal'
 import { StateSealMarkup, useStateSealValue } from 'src/templates/EmailTemplateComponents/StateSeal'
 import { EmailBlock } from '../EmailBlock'
 import { EditableElement } from '../EditableElement'
 import { Spacing } from 'src/templates/styles'
 import { isAllStatesMode } from 'src/utils/appMode'
+import { StateAbbreviation } from 'src/utils/statesAndTerritories'
 
-const stateSealOptions = Object.keys(StateSeals).map((key) => ({
-  label: startCase(key),
-  value: key,
+const stateSealOptions = STATE_SEALS.map(({ state, image }) => ({
+  label: startCase(image),
+  value: state,
 }))
 
 export const EditStateSeal: FC = () => {
@@ -34,10 +35,11 @@ export const EditStateSeal: FC = () => {
             <Select
               labelId="state-seal-select"
               onChange={
-                ((stateSealKey: StateSealKey) => setValue({ ...value, stateSealKey })) as any
+                ((stateAbbreviation: StateAbbreviation) =>
+                  setValue({ ...value, stateAbbreviation })) as any
               }
               options={stateSealOptions}
-              value={value.stateSealKey}
+              value={value.stateAbbreviation}
             />
           </div>
         </form>
@@ -46,7 +48,7 @@ export const EditStateSeal: FC = () => {
         <EmailBlock.Table className="desktop" maxWidth={Spacing.layout.maxWidth - 150}>
           <StateSealMarkup
             leftJustify
-            stateSealKey={value.stateSealKey}
+            stateAbbreviation={value.stateAbbreviation}
             additionalDisclaimer={
               <EditableElement
                 element="span"

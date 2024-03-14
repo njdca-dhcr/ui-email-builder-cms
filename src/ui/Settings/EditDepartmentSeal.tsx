@@ -5,22 +5,20 @@ import {
 } from 'src/templates/EmailTemplateSubComponents/DepartmentSeal'
 import { Heading, Paragraph } from 'src/ui/Layout'
 import { Select } from '../Select'
-import { DepartmentSealKey, DepartmentSealsMapping } from 'src/utils/departmentSeals'
 import { EmailBlock } from '../EmailBlock'
 import { Spacing } from 'src/templates/styles'
-import { isAllStatesMode } from 'src/utils/appMode'
+import { appModeAsStateAbbreviation } from 'src/utils/appMode'
+import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
 
 const buildOptions = (): Array<{ label: string; value: string }> => {
-  const options = Object.keys(DepartmentSealsMapping).map((key) => {
-    const { label }: { label: string } = DepartmentSealsMapping[key as DepartmentSealKey]
-    return { label, value: key }
-  })
+  const stateAbbreviation = appModeAsStateAbbreviation()
+  const departmentSeals = stateAbbreviation
+    ? departmentSealsForState(stateAbbreviation)
+    : DEPARTMENT_SEALS
 
-  if (isAllStatesMode()) {
-    return options
-  } else {
-    return options.filter(({ value }) => value.startsWith('New-Jersey'))
-  }
+  return departmentSeals.map((departmentSeal) => {
+    return { label: departmentSeal.label, value: departmentSeal.imageName }
+  })
 }
 
 export const EditDepartmentSeal: FC = () => {
@@ -40,13 +38,13 @@ export const EditDepartmentSeal: FC = () => {
         <Select
           labelId="department-seal-select"
           value={value}
-          onChange={(newValue) => setValue(newValue as DepartmentSealKey)}
+          onChange={(newValue) => setValue(newValue)}
           options={options}
         />
       </div>
       <div className="department-seal-preview-container">
         <EmailBlock.Table maxWidth={Spacing.layout.maxWidth} className="desktop">
-          <DepartmentSealMarkup departmentSealKey={value} />
+          <DepartmentSealMarkup departmentSealImageName={value} />
         </EmailBlock.Table>
       </div>
     </form>

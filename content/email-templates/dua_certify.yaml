@@ -1,5 +1,6 @@
 name: DUA Certify
 description: Disaster Unemployment Assistance Certify
+appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
     required: true

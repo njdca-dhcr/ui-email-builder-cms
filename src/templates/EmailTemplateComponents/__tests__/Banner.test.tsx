@@ -1,9 +1,10 @@
 import React from 'react'
-import { Banner, BannerMarkup } from '../Banner'
-import { render } from '@testing-library/react'
+import { Banner, BannerMarkup, useBannerValue } from '../Banner'
+import { render, renderHook } from '@testing-library/react'
 import { BannerValue, EmailTemplate } from 'src/appTypes'
-import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
+import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
+import { Colors } from 'src/templates/styles'
 
 describe('BannerMarkup', () => {
   it('displays the primary text', () => {
@@ -166,5 +167,91 @@ describe('Banner', () => {
       wrapper: emailPartWrapper,
     })
     expect(queryAllByRole('link')).toHaveLength(2)
+  })
+})
+
+describe('useBannerValue', () => {
+  let value: BannerValue
+
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
+  describe('in all states mode', () => {
+    beforeEach(() => {
+      mockAppMode('ALL')
+      const { result } = renderHook(() => useBannerValue())
+      value = result.current[0]
+    })
+
+    it('has primary text', () => {
+      expect(value.primaryText).toEqual(
+        'United States Department of Labor and Workforce Development',
+      )
+    })
+
+    it('has a primary link', () => {
+      expect(value.primaryLink).toEqual('https://www.us.gov/labor/')
+    })
+
+    it('has a secondary link', () => {
+      expect(value.secondaryLink).toEqual('https://myunemployment.us.gov/')
+    })
+
+    it('has a color', () => {
+      expect(value.backgroundColor).toEqual(Colors.black)
+    })
+  })
+
+  describe('in state mode', () => {
+    describe('for example NJ', () => {
+      beforeEach(() => {
+        mockAppMode('NJ')
+        const { result } = renderHook(() => useBannerValue())
+        value = result.current[0]
+      })
+
+      it('has primary text', () => {
+        expect(value.primaryText).toEqual(
+          'New Jersey Department of Labor and Workforce Development',
+        )
+      })
+
+      it('has a primary link', () => {
+        expect(value.primaryLink).toEqual('https://www.nj.gov/labor/')
+      })
+
+      it('has a secondary link', () => {
+        expect(value.secondaryLink).toEqual('https://myunemployment.nj.gov/')
+      })
+
+      it('has a color', () => {
+        expect(value.backgroundColor).toEqual(Colors.black)
+      })
+    })
+
+    describe('for example KY', () => {
+      beforeEach(() => {
+        mockAppMode('KY')
+        const { result } = renderHook(() => useBannerValue())
+        value = result.current[0]
+      })
+
+      it('has primary text', () => {
+        expect(value.primaryText).toEqual('Kentucky Department of Labor and Workforce Development')
+      })
+
+      it('has a primary link', () => {
+        expect(value.primaryLink).toEqual('https://www.ky.gov/labor/')
+      })
+
+      it('has a secondary link', () => {
+        expect(value.secondaryLink).toEqual('https://myunemployment.ky.gov/')
+      })
+
+      it('has a color', () => {
+        expect(value.backgroundColor).toEqual(Colors.black)
+      })
+    })
   })
 })

@@ -7,11 +7,11 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { EmailBlock } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { isNJMode } from 'src/utils/appMode'
+import { isAppMode } from 'src/utils/appMode'
 import { EmailTemplate, ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
 
 const defaultValue = (): ProgramNameValue => {
-  if (isNJMode()) {
+  if (isAppMode('NJ')) {
     return {
       preset: ProgramNameNJPreset.DependencyBenefits,
       name: 'Dependency Benefits',

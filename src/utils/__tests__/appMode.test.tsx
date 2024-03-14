@@ -1,56 +1,98 @@
-import Config from '../../../gatsby-config'
-import { appMode, isAllStatesMode, isNJMode } from '../appMode'
+import { mockAppMode } from 'src/testHelpers'
+import { appMode, isAllStatesMode, isAppMode, isRestricted, isStateMode } from '../appMode'
+import { StateAbbreviation } from '../statesAndTerritories'
 
-jest.mock('../../../gatsby-config', () => {
-  return {
-    sideMetadata: {
-      appMode: 'NJ',
-    },
-  }
+beforeEach(() => {
+  mockAppMode('NJ')
 })
 
 describe('appMode', () => {
   it('is NJ when configured to NJ', () => {
-    Config.siteMetadata = { appMode: 'NJ' }
+    mockAppMode('NJ')
     expect(appMode()).toEqual('NJ')
   })
 
   it('is NJ when unconfigured', () => {
-    Config.siteMetadata = { appMode: undefined }
+    mockAppMode(undefined)
     expect(appMode()).toEqual('NJ')
   })
 
   it('is all states when configured to all states', () => {
-    Config.siteMetadata = { appMode: 'ALL' }
+    mockAppMode('ALL')
     expect(appMode()).toEqual('ALL')
   })
 })
 
-describe('isNJMode', () => {
-  it('is true when in NJ mode', () => {
-    Config.siteMetadata = { appMode: undefined }
-    expect(isNJMode()).toEqual(true)
+describe('isAppMode', () => {
+  it('is true when the appMode is the given mode', () => {
+    mockAppMode(undefined)
+    expect(isAppMode('NJ')).toEqual(true)
 
-    Config.siteMetadata = { appMode: 'NJ' }
-    expect(isNJMode()).toEqual(true)
+    mockAppMode('CA')
+    expect(isAppMode('CA')).toEqual(true)
+
+    mockAppMode('NJ')
+    expect(isAppMode('NJ')).toEqual(true)
+
+    mockAppMode('WY')
+    expect(isAppMode('WY')).toEqual(true)
   })
 
-  it('is false when not in NJ mode', () => {
-    Config.siteMetadata = { appMode: 'ALL' }
-    expect(isNJMode()).toEqual(false)
+  it('is false when the appMode is not the given mode', () => {
+    mockAppMode(undefined)
+    expect(isAppMode('NY')).toEqual(false)
+
+    mockAppMode('CA')
+    expect(isAppMode('NY')).toEqual(false)
+    expect(isAppMode('NJ')).toEqual(false)
   })
 })
 
 describe('isAllStatesMode', () => {
   it('is true when in all states mode', () => {
-    Config.siteMetadata = { appMode: 'ALL' }
+    mockAppMode('ALL')
     expect(isAllStatesMode()).toEqual(true)
   })
 
   it('is false when not in all states mode', () => {
-    Config.siteMetadata = { appMode: undefined }
+    mockAppMode(undefined)
     expect(isAllStatesMode()).toEqual(false)
-    Config.siteMetadata = { appMode: 'NJ' }
+    mockAppMode('NJ')
     expect(isAllStatesMode()).toEqual(false)
+  })
+})
+
+describe('isStateMode', () => {
+  it('is false when in not in state mode', () => {
+    mockAppMode('ALL')
+    expect(isStateMode()).toEqual(false)
+  })
+
+  it('is true when in state mode', () => {
+    mockAppMode(undefined)
+    expect(isStateMode()).toEqual(true)
+    mockAppMode('CA')
+    expect(isStateMode()).toEqual(true)
+  })
+})
+
+describe('isRestricted', () => {
+  it('is false when all states', () => {
+    mockAppMode('ALL')
+    expect(isRestricted()).toEqual(false)
+  })
+
+  it('is false when NJ', () => {
+    mockAppMode('NJ')
+    expect(isRestricted()).toEqual(false)
+  })
+
+  it('is true when not all states or NJ', () => {
+    const stateAbbreviations: StateAbbreviation[] = ['AK', 'CA', 'KY', 'WY']
+
+    stateAbbreviations.forEach((state) => {
+      mockAppMode(state)
+      expect(isRestricted()).toEqual(true)
+    })
   })
 })

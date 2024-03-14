@@ -1,5 +1,6 @@
 name: Everything Bagel
 description: You know what you want so make it happen.
+appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
     required: true
