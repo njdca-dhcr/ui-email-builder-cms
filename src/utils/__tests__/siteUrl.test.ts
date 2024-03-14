@@ -41,7 +41,7 @@ describe('siteUrl', () => {
     describe('when in all states mode', () => {
       it('is the all states url', () => {
         Config.siteMetadata!.appMode = 'ALL'
-        expect(siteUrl()).toEqual('https://email-builder-beta-all-states-secret.netlify.app')
+        expect(siteUrl()).toEqual('https://email-builder-all-states-secret.netlify.app')
       })
     })
 
@@ -65,9 +65,7 @@ describe('buildSiteUrl', () => {
     expect(buildSiteUrl(path)).toEqual(`http://localhost:8000${path}`)
 
     Config.siteMetadata = { env: 'production', appMode: 'ALL' }
-    expect(buildSiteUrl(path)).toEqual(
-      `https://email-builder-beta-all-states-secret.netlify.app${path}`,
-    )
+    expect(buildSiteUrl(path)).toEqual(`https://email-builder-all-states-secret.netlify.app${path}`)
 
     Config.siteMetadata = { env: 'production', appMode: 'KY' }
     expect(buildSiteUrl(path)).toEqual(`https://email-builder-beta-kentucky.netlify.app${path}`)

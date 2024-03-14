@@ -1,6 +1,6 @@
 import Config from '../../gatsby-config'
-import { appModeAsStateAbbreviation, isAllStatesMode } from './appMode'
-import { StateAbbreviation, stateById } from './statesAndTerritories'
+import { appModeAsStateAbbreviation } from './appMode'
+import { stateById } from './statesAndTerritories'
 
 const getEnv = (): 'development' | 'production' => {
   return Config.siteMetadata?.env as any
@@ -9,6 +9,8 @@ const getEnv = (): 'development' | 'production' => {
 const DEVELOPMENT_SITE_URL = 'http://localhost:8000'
 
 const NJ_SITE_URL = 'https://main.dor49a0hhc0bh.amplifyapp.com'
+
+const ALL_STATES_SITE_URL = 'https://email-builder-all-states-secret.netlify.app'
 
 const ICON_URL = 'https://beta.nj.gov/files/dol-uimod-email/icons'
 
@@ -29,7 +31,7 @@ export const siteUrl = (): string => {
     const state = stateById(stateAbbreviation)
     return netlifySiteUrl(state.name.toLowerCase())
   } else {
-    return netlifySiteUrl('all-states-secret')
+    return ALL_STATES_SITE_URL
   }
 }
 
