@@ -6,7 +6,7 @@ import './Layout.css'
 import classNames from 'classnames'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
-import { buildDepartmentSealUrl, buildSiteUrl } from 'src/utils/siteUrl'
+import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 import { Link } from 'gatsby'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
 

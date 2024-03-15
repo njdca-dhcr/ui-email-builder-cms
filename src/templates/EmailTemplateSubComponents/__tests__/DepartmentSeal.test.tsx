@@ -3,7 +3,7 @@ import { buildUniqueEmailSubComponent, emailPartWrapper, mockAppMode } from 'src
 import { DepartmentSeal, DepartmentSealMarkup, useDepartmentSealValue } from '../DepartmentSeal'
 import { EmailTemplate } from 'src/appTypes'
 import { render, renderHook } from '@testing-library/react'
-import { buildSiteUrl } from 'src/utils/siteUrl'
+import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 
 describe('DepartmentSealMarkup', () => {
   it('displays the given image', () => {
@@ -18,7 +18,7 @@ describe('DepartmentSealMarkup', () => {
     expect(departmentSeal).not.toBeNull()
     const img = departmentSeal?.querySelector('img')
     expect(img).not.toBeNull()
-    expect(img?.src).toEqual(buildSiteUrl('/department-seals/New-Jersey.png'))
+    expect(img?.src).toEqual(buildDepartmentSealUrl('/New-Jersey.png'))
   })
 })
 
@@ -40,7 +40,7 @@ describe('DepartmentSeal', () => {
     expect(departmentSeal).not.toBeNull()
     let img = departmentSeal?.querySelector('img')
     expect(img).not.toBeNull()
-    expect(img?.src).toEqual(buildSiteUrl('/department-seals/New-Jersey.png'))
+    expect(img?.src).toEqual(buildDepartmentSealUrl('/New-Jersey.png'))
 
     localStorage.setItem('department-seal', JSON.stringify('New-Jersey-Blue.png'))
     rerender(<DepartmentSeal key="2" emailSubComponent={emailSubComponent} />)
@@ -49,7 +49,7 @@ describe('DepartmentSeal', () => {
     expect(departmentSeal).not.toBeNull()
     img = departmentSeal?.querySelector('img')
     expect(img).not.toBeNull()
-    expect(img?.src).toEqual(buildSiteUrl('/department-seals/New-Jersey-Blue.png'))
+    expect(img?.src).toEqual(buildDepartmentSealUrl('/New-Jersey-Blue.png'))
   })
 })
 
