@@ -6,7 +6,7 @@ import './Layout.css'
 import classNames from 'classnames'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
-import { buildSiteUrl } from 'src/utils/siteUrl'
+import { buildDepartmentSealUrl, buildSiteUrl } from 'src/utils/siteUrl'
 import { Link } from 'gatsby'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
 
@@ -55,7 +55,7 @@ export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
           <Link to="/" className="department-seal-container">
             <img
               alt={departmentSeal.label}
-              src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
+              src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
             />
           </Link>
         )}

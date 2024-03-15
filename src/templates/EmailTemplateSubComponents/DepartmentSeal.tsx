@@ -3,8 +3,8 @@ import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui'
 import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { StyleDefaults } from '../styles'
-import { buildSiteUrl } from 'src/utils/siteUrl'
-import { appModeAsStateAbbreviation, isAllStatesMode } from 'src/utils/appMode'
+import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
+import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { departmentSealByImageName, departmentSealsForState } from 'src/utils/departmentSeals'
 
 const { Row } = EmailBlock
@@ -43,7 +43,7 @@ export const DepartmentSealMarkup: FC<{ departmentSealImageName: string }> = ({
       {departmentSeal && (
         <img
           alt={departmentSeal.label}
-          src={buildSiteUrl(`/department-seals/${departmentSeal.imageName}`)}
+          src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
           style={imageStyles}
         />
       )}

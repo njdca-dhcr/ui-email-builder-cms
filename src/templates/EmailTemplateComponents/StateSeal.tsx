@@ -4,7 +4,7 @@ import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import { stateSealFor } from 'src/utils/StateSeal'
 import { SpacingCell, StyleDefaults, Text } from '../styles'
-import { buildSiteUrl } from 'src/utils/siteUrl'
+import { buildStateSealUrl } from 'src/utils/siteUrl'
 import { appModeAsStateAbbreviation, isAllStatesMode } from 'src/utils/appMode'
 import { StateSealValue } from 'src/appTypes'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
@@ -70,14 +70,14 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
             <Cell style={imageContainerStyles}>
               <img
                 className="lightmode"
-                src={buildSiteUrl(`/state-seals/${stateSeal.image}.png`)}
+                src={buildStateSealUrl(`/${stateSeal.image}.png`)}
                 alt={`The seal of the ${stateTitle}`}
                 style={imageStyles}
               />
               {stateSeal.darkModeImage && (
                 <img
                   className="darkmode"
-                  src={buildSiteUrl(`/state-seals/${stateSeal.darkModeImage}.png`)}
+                  src={buildStateSealUrl(`/${stateSeal.darkModeImage}.png`)}
                   alt={`The seal of the ${stateTitle}`}
                   style={imageStyles}
                 />
