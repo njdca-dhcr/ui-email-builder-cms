@@ -1,0 +1,116 @@
+name: Dependency - Eligible
+description: When someone's weekly benefit can be raised.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: You are eligible for Dependency Benefits
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Dependency Benefits
+          name: Dependency Benefits
+          backgroundColor: "#F1DEA0"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "{!EADJ_ISSUE__C.EADJ_CLAIMANT_NAME__C}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: Your request for Dependency Benefits has been reviewed.
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview
+          status: >-
+            Your weekly benefit rate will increase by
+            {!eadj_Issue__c.eAdj_Depend_increase_percent__c}*
+          statusDueTo: because...
+          showSupportiveInformation: true
+          spaceAfter: true
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    Eligible to claim {!eadj_Issue__c.Number_of_Dependents__c}
+                    dependent(s)
+                  bold: true
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    This determination was made based on available information. You will
+                    receive a formal letter in the mail with your new adjusted weekly
+                    benefit rate and information about how to appeal if you disagree with
+                    the determination.
+                  italic: true
+            - type: paragraph
+              children:
+                - italic: true
+                  text: " "
+            - type: paragraph
+              children:
+                - italic: true
+                  text: "*Your benefit rate can increase up to 15% depending on the number of dependents approved, but the total payment won't be higher than the maximum "
+                - type: link
+                  url: "https://nj.gov/labor/myunemployment/before/about/calculator/"
+                  children:
+                    - italic: true
+                      text: weekly benefit rate
+                - italic: true
+                  text: " allowed in the state of New Jersey."
+      - kind: SupplementalContent
+        required: true
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: When will I receive my extra benefits?
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you received payment at the old benefit rate, you will receive the
+                    extra money you are owed from previous weeks within the next 5-7
+                    business days.
+          secondTitle: Feedback (Optional)
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                  children:
+                    - text: here
+                - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
