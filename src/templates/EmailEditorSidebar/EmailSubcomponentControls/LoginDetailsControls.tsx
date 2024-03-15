@@ -5,6 +5,7 @@ import { Select, UswdsIconSelect } from 'src/ui'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { LoginDetailsVariant } from 'src/appTypes'
+import { SubComponentControlToggle } from './SubComponentControlToggle'
 
 export const LoginDetailsControls: FC<EmailSubComponentControlsProps<'LoginDetails'>> = ({
   emailSubComponent,
@@ -50,16 +51,26 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps<'LoginDetai
       )}
 
       {isInformation && (
-        <Control.Container layout="column">
-          <Control.Label id={iconHtmlId} size="small">
-            Icon
-          </Control.Label>
-          <UswdsIconSelect
-            labelId={iconHtmlId}
-            onChange={(loginInformationIcon) => setValue({ ...value, loginInformationIcon })}
-            value={value.loginInformationIcon}
+        <>
+          <Control.Container layout="column">
+            <Control.Label id={iconHtmlId} size="small">
+              Icon
+            </Control.Label>
+            <UswdsIconSelect
+              labelId={iconHtmlId}
+              onChange={(loginInformationIcon) => setValue({ ...value, loginInformationIcon })}
+              value={value.loginInformationIcon}
+            />
+          </Control.Container>
+          <SubComponentControlToggle
+            subComponentId={emailSubComponent.id}
+            label="+ Login Information List"
+            onChange={(showLoginInformationList) =>
+              setValue({ ...value, showLoginInformationList })
+            }
+            value={value.showLoginInformationList}
           />
-        </Control.Container>
+        </>
       )}
     </Control.Group>
   )

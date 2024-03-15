@@ -1,0 +1,159 @@
+name: Dependency - Confirmation Application Received
+description: When someone's application has been received and you want them to know you're on it.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: Your application has been received
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Dependency Benefits
+          name: Dependency Benefits
+          backgroundColor: "#F1DEA0"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "{!EADJ_UI_CASE__C.EADJ_CLAIMANT_NAME__C}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: >-
+                    Your request to increase your weekly benefit rate with Dependency
+                    Benefits is
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview
+          status: Received &amp; Under Review
+          showSupportiveInformation: true
+          spaceAfter: true
+          description:
+            - type: paragraph
+              children:
+                - text: "It may take up to 4 weeks "
+                  bold: true
+                - text: to determine your eligibility.
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    Your determination, its details, and appeal rights will arrive via
+                    email.
+                  italic: true
+      - kind: SupplementalContent
+        required: true
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: Start/Continue Weekly Certification
+          description:
+            - type: paragraph
+              children:
+                - text: "While we review your application,"
+                - text: " you must start/continue to certify for benefits every week."
+                  bold: true
+                - text: " If your application is approved, you will only receive benefits for the weeks you have certified and have been found eligible."
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: "You can certify for benefits "
+                - text: Sunday to Friday from 8am - 7pm.
+                  bold: true
+          secondTitle: Feedback (Optional)
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                  children:
+                    - text: "here"
+                - text: .
+      - kind: LoginDetails
+        required: true
+        visibleByDefault: true
+        description: Just in case they need to reset their password
+        defaultValue:
+          variant: Information
+          loginInformationTitle: "Important: Keep an eye out for emails from NJDOL"
+          loginInformationDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    You may receive multiple emails about other issues on your claim that
+                    require a response.
+                - bold: true
+                  text: " It is important to respond to these emails in a timely manner."
+            - type: paragraph
+              children:
+                - bold: true
+                  text: ""
+            - type: paragraph
+              children:
+                - text: >-
+                    It is possible that your claim may remain on hold even after a
+                    monetary determination has been made due to an issue that needs to be
+                    resolved.
+          showLoginInformationList: false
+          loginInformationList:
+            - >-
+              <b>If you do not have an account,</b> create one here. After creating your
+              account, return to this email and get started.
+            - >-
+              <b>Forget your username and password?</b> Follow the links on the login page
+              to help access your account.
+          loginInformationIcon: Flag
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information on New Jersey's unemployment program can be found "
+                - type: link
+                  url: >-
+                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                  children:
+                    - text: here
+                - text: .
+
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true

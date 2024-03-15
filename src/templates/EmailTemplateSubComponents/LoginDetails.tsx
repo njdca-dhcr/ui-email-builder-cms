@@ -57,6 +57,7 @@ const defaultValue: LoginDetailsValue = {
       ],
     },
   ],
+  showLoginInformationList: true,
   loginInformationList: [
     `<b>If you do not have an account,</b> create one here. After creating your account, return to this email and get started.`,
     `<b>Forget your username and password?</b> Follow the links on the login page to help access your account.`,
@@ -220,7 +221,10 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
               style={styles.loginInformationDescription}
             />
           </Row>
-          <Row elements={[{ part: 'cell', style: styles.loginInformationListContainer }]}>
+          <Row
+            condition={value.showLoginInformationList}
+            elements={[{ part: 'cell', style: styles.loginInformationListContainer }]}
+          >
             <EditableList
               collection={value.loginInformationList}
               element="ul"

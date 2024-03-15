@@ -60,6 +60,12 @@ describe('LoginDetailsControls', () => {
         const { baseElement } = rendered
         expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
+
+      it('does not provide a toggle for the login information list', async () => {
+        const { queryByLabelText } = rendered
+        const toggle = queryByLabelText('+ Login Information List')
+        expect(toggle).toBeNull()
+      })
     })
 
     describe('Login Information', () => {
@@ -71,6 +77,19 @@ describe('LoginDetailsControls', () => {
       it('provides a dropdown for selecting an icon', () => {
         const { baseElement } = rendered
         expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
+      })
+
+      it('provides a toggle for the login information list', async () => {
+        const { queryByLabelText } = rendered
+        const toggle = queryByLabelText('+ Login Information List')
+        expect(toggle).not.toBeNull()
+        expect(toggle).toBeChecked()
+
+        await user.click(toggle!)
+        expect(toggle).not.toBeChecked()
+
+        await user.click(toggle!)
+        expect(toggle).toBeChecked()
       })
     })
   })
