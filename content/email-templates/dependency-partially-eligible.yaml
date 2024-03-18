@@ -1,0 +1,154 @@
+name: Dependency - Partially Eligible
+description: When someone is partially eligible for benefits.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: You are partially eligible for Dependency Benefits
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Dependency Benefits
+          name: Dependency Benefits
+          backgroundColor: "#F1DEA0"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "{!EADJ_ISSUE__C.EADJ_CLAIMANT_NAME__C}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: Your application for Dependency Benefits has been reviewed and
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview
+          status: "{!eadj_Issue__c.Partial_Eligible_Percent__c}*"
+          showSupportiveInformation: false
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    Eligible to claim {!eadj_Issue__c.Number_of_Dependents__c}
+                    dependent(s)
+                  bold: true
+      - kind: InformationalBox
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          boxColor: Benefit Blue
+          icon: Bookmark
+          title: Dependent Details
+          description: "{!EADJ_ISSUE__C.SPOUSE_CIVIL_UNION_PARTNER_NAME_EMAIL__C}<br>{!eadj_Issue__c.Spouse_Civil_Union_Partner_Name_Email__c}\t{!eadj_Issue__c.Spouse_Civil_Union_Determination__c}<br>{!eadj_Issue__c.Spouse_Civil_Union_Denial_Reason__c}<br>&nbsp;<br>CHILD<br>{!eadj_Issue__c.First_Dependent_Name__c}\t{!eadj_Issue__c.First_Dependent_Determination__c}<br>{!eadj_Issue__c.First_Dependent_Denial_Reason__c}<br>&nbsp;<br>CHILD<br>{!eadj_Issue__c.Second_Dependent_Name__c}\t{!eadj_Issue__c.Second_Dependent_Determination__c}<br>{!eadj_Issue__c.Second_Dependent_Denial_Reason__c}<br>&nbsp;<br>CHILD<br>{!eadj_Issue__c.Third_Dependent_Name__c}\t{!eadj_Issue__c.Third_Dependent_Determination__c}<br>{!eadj_Issue__c.Third_Dependent_Denial_Reason__c}<br>"
+          showSupportiveInformation: true
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - italic: true
+                  text: >-
+                    This determination was made based on available information. You will
+                    receive a formal letter in the mail with your new adjusted weekly
+                    benefit rate and information about how to appeal if you disagree with
+                    the determination.
+            - type: paragraph
+              children:
+                - italic: true
+                  text: ""
+            - type: paragraph
+              children:
+                - italic: true
+                  text: >-
+                    *Your benefit rate can increase up to 15% depending on the number of
+                    dependents approved, but the total payment won't be higher than the
+                    maximum weekly benefit rate weekly benefit rate allowed in the state
+                    of New Jersey.
+      - kind: SupplementalContent
+        required: true
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: When will I receive my extra benefits?
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you received payment at the old benefit rate, you will receive the
+                    extra money you are owed from previous weeks within the next 5-7
+                    business days.
+          secondTitle: Feedback (Optional)
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                  children:
+                    - text: here
+                - text: .
+      - kind: RulesRightsRegulations
+        visibleByDefault: true
+        description: Rights? Regulations? Appeals? Reminders?
+        required: true
+        defaultValue:
+          variant: Appeal Rights
+          icon: Flag
+          appealRightsTitle: Appeal Rights
+          appealRightsSummary:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you disagree with this determination, you have the right to file an
+                    appeal.
+                - text: >-
+                    Your appeal must be received by
+                    {!eadj_Issue__c.Determination_sent_7_day_lapse__c}.
+                  bold: true
+          appealRightsShowInstruction: false
+          appealRightsInstruction:
+            - type: paragraph
+              children:
+                - text: "To begin an appeal online, get started below:"
+          appealRightsButton: Get Started
+          appealRightsHref: "https://www.state.nj.us/labor/salesforce/uia-w2l/onlineappealsProd.htm"
+          appealRightsShowInfoLabel: true
+          appealRightsInfoLabel: "For your appeal:"
+          appealRightsShowTerms: true
+          appealRightsTerms:
+            - label: "Program Code:"
+              value: "{!eadj_Issue__c.PC_Code__c}"
+            - label: "Date of Claim:"
+              value: "{!eadj_Issue__c.eadj_Date_of_Claim__c}"
+            - label: "Date of Determination:"
+              value: "{!eadj_Issue__c.LastModifiedDate}"
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
