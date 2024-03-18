@@ -1,5 +1,5 @@
-name: Dependency - Ineligible Breakdown
-description: When someone's weekly benefit rate is not going to increase.
+name: Dependency - Ineligible
+description: When someone is not eligible for benefits.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -41,25 +41,24 @@ components:
           intro:
             - type: paragraph
               children:
-                - text: Your application for Dependency Benefits has been reviewed and
+                - text: >-
+                    Your application for Dependency Benefits has been reviewed, and you have been found to be
       - kind: Status
         required: true
         visibleByDefault: true
         description: Make it obvious what the current state is
         defaultValue:
-          variant: Overview
-          status: Your weekly benefit rate will not increase
-          showSupportiveInformation: false
-          showDescription: false
-      - kind: InformationalBox
-        visibleByDefault: true
-        required: true
-        defaultValue:
-          boxColor: Benefit Blue
-          icon: Bookmark
-          title: Dependent Details
-          description: "{!EADJ_ISSUE__C.SPOUSE_CIVIL_UNION_PARTNER_NAME_EMAIL__C}<br>{!eadj_Issue__c.Spouse_Civil_Union_Partner_Name_Email__c}\t{!eadj_Issue__c.Spouse_Civil_Union_Determination__c}&nbsp;<br>{!eadj_Issue__c.Spouse_Civil_Union_Denial_Reason__c}<br><br>CHILD&nbsp;<br>{!eadj_Issue__c.First_Dependent_Name__c}\t{!eadj_Issue__c.First_Dependent_Determination__c}<br>{!eadj_Issue__c.First_Dependent_Denial_Reason__c}<br>&nbsp;<br>CHILD&nbsp;<br>{!eadj_Issue__c.Second_Dependent_Name__c}\t{!eadj_Issue__c.Second_Dependent_Determination__c}<br>{!eadj_Issue__c.Second_Dependent_Denial_Reason__c}<br>&nbsp;<br>CHILD&nbsp;<br>{!eadj_Issue__c.Third_Dependent_Name__c}\t{!eadj_Issue__c.Third_Dependent_Determination__c}<br>&nbsp;{!eadj_Issue__c.Third_Dependent_Denial_Reason__c}<br>"
+          variant: Overview With Reason
+          status: Ineligible
+          statusDueTo: because...
           showSupportiveInformation: true
+          spaceAfter: true
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: "{!eadj_Issue__c.Dependency_General_Denied__c}"
+                  bold: true
           supportiveInformation:
             - type: paragraph
               children:
@@ -78,8 +77,11 @@ components:
               children:
                 - text: >-
                     If you disagree with this determination, you have the right to file an
-                    appeal. Your appeal must be received within seven (7) days after the
-                    date you received this email.
+                    appeal.
+                - text: >-
+                    Your appeal must be received by
+                    {!eadj_Issue__c.Determination_sent_7_day_lapse__c}.
+                  bold: true
           appealRightsShowInstruction: false
           appealRightsButton: Get Started
           appealRightsHref: "https://www.state.nj.us/labor/salesforce/uia-w2l/onlineappealsProd.htm"
@@ -110,6 +112,26 @@ components:
                   children:
                     - text: here
                 - text: .
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information on Dependency Benefits can be found "
+                - type: link
+                  url: >-
+                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                  children:
+                    - text: here
+                - text: .
+
   - kind: StateSeal
     required: true
   - kind: Disclaimer
