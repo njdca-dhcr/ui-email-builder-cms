@@ -179,6 +179,8 @@ export interface StatusValue {
   statusDueTo: string
   showSupportiveInformation: boolean
   spaceAfter: boolean
+  // Almost always used
+  showDescription: boolean
   // Missing Document
   documentsNeededLabel: string
   documentsNeededValue: string

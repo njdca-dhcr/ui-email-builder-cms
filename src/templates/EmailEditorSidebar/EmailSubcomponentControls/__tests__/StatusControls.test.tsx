@@ -1,7 +1,6 @@
 import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
 import { StatusControls } from '../StatusControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
@@ -63,6 +62,29 @@ describe('StatusControls', () => {
     let rendered: RenderResult
     let user: UserEvent
 
+    const itProvidesAToggleFor = (testName: string, label: string) => {
+      it(`provides a toggle for ${testName}`, async () => {
+        const { queryByLabelText } = rendered
+        const toggle = queryByLabelText(label)
+        expect(toggle).not.toBeNull()
+        expect(toggle).toBeChecked()
+
+        await user.click(toggle!)
+        expect(toggle).not.toBeChecked()
+
+        await user.click(toggle!)
+        expect(toggle).toBeChecked()
+      })
+    }
+
+    const itDoesNotProvideAToggleFor = (testName: string, label: string) => {
+      it(`does not provide a toggle for ${testName}`, async () => {
+        const { queryByLabelText } = rendered
+        const toggle = queryByLabelText(label)
+        expect(toggle).toBeNull()
+      })
+    }
+
     beforeEach(() => {
       user = userEvent.setup()
     })
@@ -86,6 +108,8 @@ describe('StatusControls', () => {
         const { baseElement } = rendered
         expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
+
+      itProvidesAToggleFor('description', '+ Description')
     })
 
     describe('Overview w/ Reason', () => {
@@ -109,6 +133,8 @@ describe('StatusControls', () => {
         const { baseElement } = rendered
         expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
+
+      itDoesNotProvideAToggleFor('description', '+ Description')
     })
 
     describe('Missing Document', () => {
@@ -132,6 +158,8 @@ describe('StatusControls', () => {
         const { baseElement } = rendered
         expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
+
+      itDoesNotProvideAToggleFor('description', '+ Description')
     })
 
     describe('Overview w/ Reason + Amount Due', () => {
@@ -159,6 +187,8 @@ describe('StatusControls', () => {
         const { baseElement } = rendered
         expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
+
+      itDoesNotProvideAToggleFor('description', '+ Description')
     })
 
     describe('Overview w/ Reason + Amount Breakdown', () => {
@@ -188,6 +218,8 @@ describe('StatusControls', () => {
         const { baseElement } = rendered
         expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
+
+      itDoesNotProvideAToggleFor('description', '+ Description')
     })
   })
 })

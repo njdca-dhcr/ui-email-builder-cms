@@ -71,6 +71,14 @@ export const StatusControls: FC<EmailSubComponentControlsProps<'Status'>> = ({
           </Control.Container>
         </>
       )}
+      {[StatusVariant.Overview].includes(value.variant) && (
+        <SubComponentControlToggle
+          subComponentId={emailSubComponent.id}
+          label="+ Description"
+          onChange={(showDescription) => setValue({ ...value, showDescription })}
+          value={value.showDescription}
+        />
+      )}
       <SubComponentControlToggle
         className="status-supportive-information-toggle"
         subComponentId={emailSubComponent.id}

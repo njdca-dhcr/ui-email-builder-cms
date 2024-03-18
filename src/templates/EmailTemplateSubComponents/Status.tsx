@@ -18,6 +18,7 @@ const defaultValue: StatusValue = {
   statusDueTo: 'because...',
   showSupportiveInformation: true,
   spaceAfter: true,
+  showDescription: true,
   description: [
     {
       type: 'paragraph',
@@ -187,15 +188,17 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
               </Row>
             </>
           ) : (
-            <Row>
-              <RichTextEditableElement
-                element="td"
-                value={value.description}
-                label="Status description"
-                onValueChange={(description) => setValue({ ...value, description })}
-                style={styles.description}
-              />
-            </Row>
+            value.showDescription && (
+              <Row>
+                <RichTextEditableElement
+                  element="td"
+                  value={value.description}
+                  label="Status description"
+                  onValueChange={(description) => setValue({ ...value, description })}
+                  style={styles.description}
+                />
+              </Row>
+            )
           )}
         </Row>
         <Row
