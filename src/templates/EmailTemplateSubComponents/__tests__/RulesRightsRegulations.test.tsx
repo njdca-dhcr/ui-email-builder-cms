@@ -226,6 +226,8 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('title', 'Your Rights title')
 
+      itHasAnEditableRichText('description', 'Your Rights description')
+
       itHasAnEditable('right 1', 'Your Rights 1')
 
       itHasAnEditable('right 2', 'Your Rights 2')

@@ -158,6 +158,8 @@ export interface RulesRightsRegulationsValue {
   appealRightsTerms: TableTerm[]
   // Your Rights
   yourRightsTitle: string
+  showYourRightsDescription: boolean
+  yourRightsDescription: RichTextValue
   yourRightsList: string[]
 }
 

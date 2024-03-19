@@ -79,6 +79,18 @@ const defaultValue: RulesRightsRegulationsValue = {
     { label: 'Date of Determination:', value: '00/00/0000' },
   ],
   yourRightsTitle: 'Your Rights:',
+  showYourRightsDescription: true,
+  yourRightsDescription: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'A dependent is an unemployed spouse/civil union partner or an unemployed, unmarried child (including stepchild or legally adopted child) under the age of 19 (or 22 if the child is attending school full-time).',
+          italic: true,
+        },
+      ],
+    },
+  ],
   yourRightsList: [
     `You may represent yourself or you may be represented at your own expense by an attorney or non-attorney`,
     `You may request a postponement, if you require additional time to prepare your response to this questionnaire`,
@@ -95,7 +107,7 @@ export const useRulesRightsRegulationsValue = (
   return useEmailPartsContentFor(emailSubComponent, defaultValue)
 }
 
-const { Row, Cell, Link } = EmailBlock
+const { Row, Cell, Link, Table } = EmailBlock
 
 export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegulations'>> = ({
   emailSubComponent,
@@ -327,23 +339,38 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
             </EditableTerms.Table>
           </Row>
         </Cell>
-        <Cell condition={isYourRights} style={styles.yourRightsListContainer}>
-          <EditableList
-            collection={value.yourRightsList}
-            element="ol"
-            setCollection={setYourRightsList}
-            style={styles.yourRightsList}
-          >
-            {value.yourRightsList.map((right, index) => (
-              <EditableListItem
-                key={index}
-                label={`Your Rights ${index + 1}`}
-                index={index}
-                value={right}
-                style={styles.yourRightsListItem}
+        <Cell condition={isYourRights}>
+          <Table>
+            <Row condition={value.showYourRightsDescription}>
+              <RichTextEditableElement
+                element="td"
+                value={value.yourRightsDescription}
+                label="Your Rights description"
+                onValueChange={(yourRightsDescription) =>
+                  setValue({ ...value, yourRightsDescription })
+                }
+                style={styles.yourRightsDescription}
               />
-            ))}
-          </EditableList>
+            </Row>
+            <Row elements={[{ part: 'cell', style: styles.yourRightsListContainer }]}>
+              <EditableList
+                collection={value.yourRightsList}
+                element="ol"
+                setCollection={setYourRightsList}
+                style={styles.yourRightsList}
+              >
+                {value.yourRightsList.map((right, index) => (
+                  <EditableListItem
+                    key={index}
+                    label={`Your Rights ${index + 1}`}
+                    index={index}
+                    value={right}
+                    style={styles.yourRightsListItem}
+                  />
+                ))}
+              </EditableList>
+            </Row>
+          </Table>
         </Cell>
       </Row>
     </Row>
@@ -436,9 +463,13 @@ const styles = {
     ...Text.header.h4.bold,
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
+  yourRightsDescription: {
+    ...Text.body.secondary.regular,
+    paddingTop: Spacing.size.medium,
+  },
   yourRightsListContainer: {
+    paddingTop: Spacing.size.medium,
     paddingLeft: Spacing.size.medium,
-    paddingTop: Spacing.size.large,
   } as CSSProperties,
   yourRightsList: {
     margin: 0,

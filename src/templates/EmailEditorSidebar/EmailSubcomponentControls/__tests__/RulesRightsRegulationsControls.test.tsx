@@ -145,18 +145,26 @@ describe('RulesRightsRegulationsControls', () => {
         await user.click(rendered.getByRole('option', { name: 'Your Rights' }))
       })
 
-      it('does not render any inputs', () => {
-        expect(rendered.baseElement.querySelectorAll('input')).toHaveLength(0)
-      })
-
       it('does not provide a dropdown for selecting an icon', () => {
         const { baseElement } = rendered
         expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
 
+      it('can have the description toggled on and off', async () => {
+        const { getByRole } = rendered
+        const getSwitch = (): HTMLInputElement =>
+          getByRole('switch', { name: 'Description' }) as any
+
+        expect(getSwitch()).toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).not.toBeChecked()
+        await user.click(getSwitch())
+        expect(getSwitch()).toBeChecked()
+      })
+
       it('only has the correct switches', () => {
         const all = rendered.queryAllByRole('switch')
-        expect(all).toHaveLength(0)
+        expect(all).toHaveLength(1)
       })
     })
   })

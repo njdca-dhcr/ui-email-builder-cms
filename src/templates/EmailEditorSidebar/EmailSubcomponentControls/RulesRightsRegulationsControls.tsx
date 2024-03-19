@@ -15,6 +15,7 @@ export const RulesRightsRegulationsControls: FC<
   const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
+  const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
 
@@ -95,6 +96,17 @@ export const RulesRightsRegulationsControls: FC<
             value={value.appealRightsShowTerms}
           />
         </>
+      )}
+
+      {isYourRights && (
+        <SubComponentControlToggle
+          subComponentId={emailSubComponent.id}
+          label="Description"
+          onChange={(showYourRightsDescription) =>
+            setValue({ ...value, showYourRightsDescription })
+          }
+          value={value.showYourRightsDescription}
+        />
       )}
     </Control.Group>
   )
