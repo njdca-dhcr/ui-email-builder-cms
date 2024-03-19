@@ -42,6 +42,7 @@ describe('SupplementalContentControls', () => {
       await user.click(button!)
       expect(queryByRole('option', { name: 'Single' })).not.toBeNull()
       expect(queryByRole('option', { name: 'Double' })).not.toBeNull()
+      expect(queryByRole('option', { name: 'Triple' })).not.toBeNull()
       expect(queryByRole('option', { name: 'Benefit Amount' })).not.toBeNull()
       await user.click(getByRole('option', { name: 'Double' }))
 

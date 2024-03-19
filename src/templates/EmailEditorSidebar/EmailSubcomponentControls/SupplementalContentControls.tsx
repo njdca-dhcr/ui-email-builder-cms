@@ -26,6 +26,7 @@ export const SupplementalContentControls: FC<
           options={[
             { label: 'Single', value: SupplementalContentVariant.SingleSupplementalContent },
             { label: 'Double', value: SupplementalContentVariant.DoubleSupplementalContent },
+            { label: 'Triple', value: SupplementalContentVariant.TripleSupplementalContent },
             { label: 'Benefit Amount', value: SupplementalContentVariant.BenefitAmount },
           ]}
           onChange={(newValue) =>

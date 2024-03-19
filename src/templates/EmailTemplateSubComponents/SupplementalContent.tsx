@@ -35,6 +35,17 @@ const defaultValue: SupplementalContentValue = {
       ],
     },
   ],
+  thirdTitle: 'Supplemental Content Title 3',
+  thirdDescription: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        },
+      ],
+    },
+  ],
   benefitAmountBoxColor: BoxColor.GrantedGreen,
   benefitAmountIcon: 'CreditCard',
   benefitAmountTitle: 'Your Benefit Details',
@@ -264,7 +275,10 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
             value={value.description}
           />
         </Row>
-        {[SupplementalContentVariant.DoubleSupplementalContent].includes(value.variant) && (
+        {[
+          SupplementalContentVariant.DoubleSupplementalContent,
+          SupplementalContentVariant.TripleSupplementalContent,
+        ].includes(value.variant) && (
           <>
             <Row>
               <SpacingCell size="large" />
@@ -288,6 +302,34 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
                 onValueChange={(secondDescription) => setValue({ ...value, secondDescription })}
                 style={styles.supplementContentDescription}
                 value={value.secondDescription}
+              />
+            </Row>
+          </>
+        )}
+        {[SupplementalContentVariant.TripleSupplementalContent].includes(value.variant) && (
+          <>
+            <Row>
+              <SpacingCell size="large" />
+            </Row>
+            <Row>
+              <EditableElement
+                ref={previewRef}
+                aria-level={3}
+                element="td"
+                label="Supplemental content title 3"
+                onValueChange={(thirdTitle) => setValue({ ...value, thirdTitle })}
+                role="heading"
+                style={styles.supplementalContentTitle}
+                value={value.thirdTitle}
+              />
+            </Row>
+            <Row>
+              <RichTextEditableElement
+                element="td"
+                label="Supplemental content description 3"
+                onValueChange={(thirdDescription) => setValue({ ...value, thirdDescription })}
+                style={styles.supplementContentDescription}
+                value={value.thirdDescription}
               />
             </Row>
           </>

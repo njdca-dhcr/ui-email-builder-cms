@@ -204,6 +204,7 @@ export const enum SupplementalContentVariant {
   BenefitAmount = 'Benefit Amount',
   SingleSupplementalContent = 'Single Supplemental Content',
   DoubleSupplementalContent = 'Double Supplemental Content',
+  TripleSupplementalContent = 'Triple Supplemental Content',
 }
 
 export interface SupplementalContentValue {
@@ -211,9 +212,12 @@ export interface SupplementalContentValue {
   // All
   title: string
   description: RichTextValue
-  // Double Supplemental Content
+  // Double and Triple Supplemental Content
   secondTitle: string
   secondDescription: RichTextValue
+  // Triple Supplemental Content
+  thirdTitle: string
+  thirdDescription: RichTextValue
   // Benefit Amount
   benefitAmountBoxColor: BoxColor
   benefitAmountIcon: UswdsIconVariantKey

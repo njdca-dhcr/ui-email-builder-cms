@@ -73,6 +73,7 @@ describe('SupplementalContent', () => {
             <option>{SupplementalContentVariant.BenefitAmount}</option>
             <option>{SupplementalContentVariant.SingleSupplementalContent}</option>
             <option>{SupplementalContentVariant.DoubleSupplementalContent}</option>
+            <option>{SupplementalContentVariant.TripleSupplementalContent}</option>
           </select>
         </label>
       )
@@ -123,6 +124,36 @@ describe('SupplementalContent', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(4)
+      })
+    })
+
+    describe('Triple Supplemental Content', () => {
+      beforeEach(async () => {
+        rendered = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.TripleSupplementalContent,
+        )
+      })
+
+      itHasAnEditable('title', 'Supplemental content title')
+
+      itHasAnEditableRichText('description', 'Supplemental content description')
+
+      itHasAnEditable('second title', 'Supplemental content title 2')
+
+      itHasAnEditableRichText('second description', 'Supplemental content description 2')
+
+      itHasAnEditable('third title', 'Supplemental content title 3')
+
+      itHasAnEditableRichText('third description', 'Supplemental content description 3')
+
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(6)
       })
     })
 
