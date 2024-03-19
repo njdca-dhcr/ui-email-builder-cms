@@ -24,8 +24,16 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
             {...props}
           />
         )
-      default:
+      case 'bulleted-list':
+        return <ul {...props} style={{ margin: 0, padding: 0 }} />
+      case 'numbered-list':
+        return <ol {...props} style={{ margin: 0, padding: 0 }} />
+      case 'list-item':
+        return <li {...props} />
+      case 'paragraph':
         return <p {...props} style={{ ...style, margin: 0, padding: 0, whiteSpace: 'pre-wrap' }} />
+      default:
+        return <div {...props} />
     }
   },
 )

@@ -36,6 +36,67 @@ describe('RichTextElement', () => {
       expect(paragraph!.dataset['foo']).toEqual('foo')
     })
   })
+
+  describe('bulleted list element', () => {
+    it('is a "ul" tag', () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = render(
+        <RichTextElement element={{ type: 'bulleted-list' }} data-foo="foo">
+          <li>{text}</li>
+        </RichTextElement>,
+      )
+      const list = baseElement.querySelector('ul')
+      expect(list).not.toBeNull()
+      expect(list).toContainHTML(`<li>${text}</li>`)
+      expect(list!.dataset['foo']).toEqual('foo')
+    })
+  })
+
+  describe('numbered list element', () => {
+    it('is a "ol" tag', () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = render(
+        <RichTextElement element={{ type: 'numbered-list' }} data-foo="foo">
+          <li>{text}</li>
+        </RichTextElement>,
+      )
+      const list = baseElement.querySelector('ol')
+      expect(list).not.toBeNull()
+      expect(list).toContainHTML(`<li>${text}</li>`)
+      expect(list!.dataset['foo']).toEqual('foo')
+    })
+  })
+
+  describe('list item element', () => {
+    it('is a "li" tag', () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = render(
+        <RichTextElement element={{ type: 'list-item' }} data-foo="foo">
+          <span>{text}</span>
+        </RichTextElement>,
+      )
+      const listItem = baseElement.querySelector('li')
+      expect(listItem).not.toBeNull()
+      expect(listItem).toContainHTML(`<span>${text}</span>`)
+      expect(listItem!.dataset['foo']).toEqual('foo')
+    })
+  })
+
+  describe('unknown element', () => {
+    it('is a "div" tag', () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = render(
+        <RichTextElement element={{ type: undefined }} id="div" data-foo="foo">
+          <span>{text}</span>
+        </RichTextElement>,
+      )
+      const div: HTMLElement | null = baseElement.querySelector('#div')
+      expect(div).not.toBeNull()
+      expect(div).toContainHTML(`<span>${text}</span>`)
+      expect(div!.tagName).toEqual('DIV')
+      expect(div!.dataset['foo']).toEqual('foo')
+    })
+  })
 })
 
 describe('RichTextLeaf', () => {

@@ -27,6 +27,26 @@ export interface LinkElement extends BaseElement {
   url: string
 }
 
-export type AppElement = ParagraphElement | LinkElement | UnknownElement
+export interface BulletedListElement extends BaseElement {
+  type: 'bulleted-list'
+}
+
+export interface NumberedListElement extends BaseElement {
+  type: 'numbered-list'
+}
+
+export interface ListItemElement extends BaseElement {
+  type: 'list-item'
+}
+
+type BlockElement = ParagraphElement | BulletedListElement | NumberedListElement | ListItemElement
+
+type InlineElement = LinkElement
+
+export type BlockElementType = BlockElement['type']
+
+export type AppElement = BlockElement | InlineElement | UnknownElement
+
+export type AppElementType = AppElement['type']
 
 export type AppDescendant = AppText | AppElement

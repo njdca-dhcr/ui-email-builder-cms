@@ -13,6 +13,7 @@
 }
 
 .rte-link-button,
+.block-button,
 .current-link,
 .mark-button {
   align-items: center;
@@ -25,11 +26,13 @@
 }
 
 .rte-link-button:hover,
+.block-button:hover,
 .current-link:hover,
 .mark-button:hover {
   background-color: var(--blue-white);
 }
 
+.block-button.active,
 .mark-button.active {
   background-color: var(--gray-medium);
 }

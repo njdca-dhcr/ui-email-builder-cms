@@ -3,6 +3,9 @@ import { Editor, Transforms, Range, Element as SlateElement, Node as SlateNode }
 import { ReactEditor, useSlate } from 'slate-react'
 import isUrl from 'is-url'
 import { AppElement, LinkElement } from './types'
+import { VisuallyHidden } from '@reach/visually-hidden'
+import { RemoveLinkIcon } from './icons/RemoveLinkIcon'
+import { AddLinkIcon } from './icons/AddLinkIcon'
 
 export const withInlines = (editor: ReactEditor) => {
   const anyEditor: any = editor
@@ -106,7 +109,8 @@ export const AddLinkButton: FC = () => {
         insertLink(editor, url)
       }}
     >
-      Add Link
+      <AddLinkIcon />
+      <VisuallyHidden>Add Link</VisuallyHidden>
     </span>
   )
 }
@@ -123,7 +127,8 @@ export const RemoveLinkButton: FC = () => {
         }
       }}
     >
-      Remove Link
+      <RemoveLinkIcon />
+      <VisuallyHidden>Remove Link</VisuallyHidden>
     </span>
   )
 }
