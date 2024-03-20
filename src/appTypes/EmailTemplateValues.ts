@@ -1,4 +1,3 @@
-import { TableTerm } from 'src/ui/EditableTermsTable'
 import { RichTextValue } from 'src/ui/RichTextEditor'
 import { BoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
@@ -154,8 +153,8 @@ export interface RulesRightsRegulationsValue {
   appealRightsHref: string
   appealRightsShowInfoLabel: boolean
   appealRightsInfoLabel: string
-  appealRightsShowTerms: boolean
-  appealRightsTerms: TableTerm[]
+  appealRightsShowInfo: boolean
+  appealRightsInfo: RichTextValue
   // Your Rights
   yourRightsTitle: string
   showYourRightsDescription: boolean

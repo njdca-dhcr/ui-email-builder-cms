@@ -92,8 +92,8 @@ export const RulesRightsRegulationsControls: FC<
           <SubComponentControlToggle
             subComponentId={emailSubComponent.id}
             label="Information"
-            onChange={(appealRightsShowTerms) => setValue({ ...value, appealRightsShowTerms })}
-            value={value.appealRightsShowTerms}
+            onChange={(appealRightsShowInfo) => setValue({ ...value, appealRightsShowInfo })}
+            value={value.appealRightsShowInfo}
           />
         </>
       )}

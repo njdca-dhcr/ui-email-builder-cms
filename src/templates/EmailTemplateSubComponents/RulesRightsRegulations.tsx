@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useCallback, useMemo } from 'react'
+import React, { CSSProperties, FC, useCallback } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
@@ -7,7 +7,6 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
 import { EditableList, EditableListItem } from 'src/ui/EditableList'
-import { EditableTerms, TableTerm } from 'src/ui/EditableTermsTable'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import {
@@ -72,11 +71,20 @@ const defaultValue: RulesRightsRegulationsValue = {
     'https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link',
   appealRightsShowInfoLabel: true,
   appealRightsInfoLabel: 'For your appeal:',
-  appealRightsShowTerms: true,
-  appealRightsTerms: [
-    { label: 'Program Code:', value: '###' },
-    { label: 'Date of Claim:', value: '00/00/0000' },
-    { label: 'Date of Determination:', value: '00/00/0000' },
+  appealRightsShowInfo: true,
+  appealRightsInfo: [
+    {
+      type: 'paragraph',
+      children: [{ text: 'Program Code:', bold: true }, { text: '  ###' }],
+    },
+    {
+      type: 'paragraph',
+      children: [{ text: 'Date of Claim:', bold: true }, { text: '  00/00/0000' }],
+    },
+    {
+      type: 'paragraph',
+      children: [{ text: 'Date of Determination:', bold: true }, { text: '  00/00/0000' }],
+    },
   ],
   yourRightsTitle: 'Your Rights:',
   showYourRightsDescription: true,
@@ -122,10 +130,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
     (eligibilityConditionsList: string[]) => setValue({ ...value, eligibilityConditionsList }),
     [value, setValue],
   )
-  const setAppealRightsTerms = useCallback(
-    (appealRightsTerms: TableTerm[]) => setValue({ ...value, appealRightsTerms }),
-    [value, setValue],
-  )
+
   const setYourRightsList = useCallback(
     (yourRightsList: string[]) => setValue({ ...value, yourRightsList }),
     [value, setValue],
@@ -310,33 +315,14 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
               style={styles.appealInfoLabel}
             />
           </Row>
-          <Row elements={['cell']} condition={value.appealRightsShowTerms}>
-            <EditableTerms.Table
-              collection={value.appealRightsTerms}
-              setCollection={setAppealRightsTerms}
-              style={styles.appealLabelAndValue}
-            >
-              {value.appealRightsTerms.map((_item, index) => (
-                <EditableTerms.Row
-                  key={index}
-                  index={index}
-                  label={(props) => (
-                    <EditableElement
-                      {...props}
-                      label={`Appeal Rights row label ${index + 1}`}
-                      style={styles.appealLabel}
-                    />
-                  )}
-                  value={(props) => (
-                    <EditableElement
-                      {...props}
-                      label={`Appeal Rights row value ${index + 1}`}
-                      style={styles.appealText}
-                    />
-                  )}
-                />
-              ))}
-            </EditableTerms.Table>
+          <Row condition={value.appealRightsShowInfo}>
+            <RichTextEditableElement
+              element="td"
+              label="Appeal Rights information"
+              value={value.appealRightsInfo}
+              onValueChange={(appealRightsInfo) => setValue({ ...value, appealRightsInfo })}
+              style={styles.appealRightsInfo}
+            />
           </Row>
         </Cell>
         <Cell condition={isYourRights}>
@@ -452,12 +438,9 @@ const styles = {
     overflowWrap: 'break-word',
     wordBreak: 'break-all',
   } as CSSProperties,
-  appealLabelAndValue: {
+  appealRightsInfo: {
+    ...Text.body.secondary.regular,
     paddingTop: Spacing.size.small,
-  } as CSSProperties,
-  appealLabel: {
-    ...Text.body.secondary.semibold,
-    paddingRight: Spacing.size.small,
   } as CSSProperties,
   appealInfoLabel: {
     ...Text.header.h4.bold,

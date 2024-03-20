@@ -140,14 +140,23 @@ components:
           appealRightsHref: "https://www.state.nj.us/labor/salesforce/uia-w2l/onlineappealsProd.htm"
           appealRightsShowInfoLabel: true
           appealRightsInfoLabel: "For your appeal:"
-          appealRightsShowTerms: true
-          appealRightsTerms:
-            - label: "Program Code:"
-              value: "{!eadj_Issue__c.PC_Code__c}"
-            - label: "Date of Claim:"
-              value: "{!eadj_Issue__c.eadj_Date_of_Claim__c}"
-            - label: "Date of Determination:"
-              value: "{!eadj_Issue__c.LastModifiedDate}"
+          appealRightsShowInfo: true
+          appealRightsInfo:
+            - type: paragraph
+              children:
+                - text: "Program Code:"
+                  bold: true
+                - text: "  {!eadj_Issue__c.PC_Code__c}"
+            - type: paragraph
+              children:
+                - text: "Date of Claim:  "
+                  bold: true
+                - text: "{!eadj_Issue__c.eadj_Date_of_Claim__c}"
+            - type: paragraph
+              children:
+                - text: "Date of Determination:"
+                  bold: true
+                - text: "  {!eadj_Issue__c.LastModifiedDate}"
   - kind: StateSeal
     required: true
   - kind: Disclaimer

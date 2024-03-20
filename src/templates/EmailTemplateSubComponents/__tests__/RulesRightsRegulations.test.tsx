@@ -159,21 +159,11 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('info label', 'Appeal Rights information label')
 
-      itHasAnEditable('table label 1', 'Appeal Rights row label 1')
-
-      itHasAnEditable('table value 1', 'Appeal Rights row value 1')
-
-      itHasAnEditable('table label 2', 'Appeal Rights row label 2')
-
-      itHasAnEditable('table value 2', 'Appeal Rights row value 2')
-
-      itHasAnEditable('table label 3', 'Appeal Rights row label 3')
-
-      itHasAnEditable('table value 3', 'Appeal Rights row value 3')
+      itHasAnEditableRichText('appeal rights information', 'Appeal Rights information')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(12)
+        expect(all).toHaveLength(7)
       })
 
       it('can have the appealRightsInstruction toggled on and off', async () => {
@@ -196,14 +186,14 @@ describe('RulesRightsRegulations', () => {
         expect(queryByLabelText('Appeal Rights information label')).not.toBeNull()
       })
 
-      it('can have the appealRightsInfoLabel toggled on and off', async () => {
+      it('can have the appealRightsInfo toggled on and off', async () => {
         const { getByRole, queryByLabelText } = rendered
 
-        expect(queryByLabelText('Appeal Rights row label 1')).not.toBeNull()
+        expect(queryByLabelText('Appeal Rights information')).not.toBeNull()
         await user.click(getByRole('switch', { name: 'Information' }))
-        expect(queryByLabelText('Appeal Rights row label 1')).toBeNull()
+        expect(queryByLabelText('Appeal Rights information')).toBeNull()
         await user.click(getByRole('switch', { name: 'Information' }))
-        expect(queryByLabelText('Appeal Rights row label 1')).not.toBeNull()
+        expect(queryByLabelText('Appeal Rights information')).not.toBeNull()
       })
     })
 
