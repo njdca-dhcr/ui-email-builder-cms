@@ -430,10 +430,6 @@ const styles = {
   eligibilityConditions: {
     margin: 0,
     padding: 0,
-    paddingLeft: Spacing.size.large,
-  } as CSSProperties,
-  eligibilityCondition: {
-    ...Text.body.main.semibold,
   } as CSSProperties,
   reminderIsFor: {
     ...Text.body.secondary.regular,
@@ -493,7 +489,6 @@ const styles = {
   yourRightsList: {
     ...Text.body.list.small,
     paddingTop: Spacing.size.medium,
-    paddingLeft: Spacing.size.medium,
   } as CSSProperties,
   yourRightsListRichText: {
     'list-item': {

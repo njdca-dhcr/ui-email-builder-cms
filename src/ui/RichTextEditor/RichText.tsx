@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactNode, createContext, forwardRef, useContext } from 'react'
 import { AppElement, AppText } from './types'
-import { Colors } from 'src/templates/styles'
+import { Colors, Spacing } from 'src/templates/styles'
 
 export type RichTextAdditionalStyles = {
   'bulleted-list'?: CSSProperties
@@ -44,9 +44,31 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
           />
         )
       case 'bulleted-list':
-        return <ul {...props} style={{ margin: 0, padding: 0, ...additionalStyle, ...style }} />
+        return (
+          <ul
+            {...props}
+            style={{
+              margin: 0,
+              padding: 0,
+              marginLeft: Spacing.size.medium,
+              ...additionalStyle,
+              ...style,
+            }}
+          />
+        )
       case 'numbered-list':
-        return <ol {...props} style={{ margin: 0, padding: 0, ...additionalStyle, ...style }} />
+        return (
+          <ol
+            {...props}
+            style={{
+              margin: 0,
+              padding: 0,
+              marginLeft: Spacing.size.medium,
+              ...additionalStyle,
+              ...style,
+            }}
+          />
+        )
       case 'list-item':
         return <li {...props} style={{ ...additionalStyle, ...style }} />
       case 'paragraph':

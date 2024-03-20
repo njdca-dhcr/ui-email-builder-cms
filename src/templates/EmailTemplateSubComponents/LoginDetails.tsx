@@ -245,7 +245,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
               label="Login information content"
               value={value.loginInformationBody}
               onValueChange={(loginInformationBody) => setValue({ ...value, loginInformationBody })}
-              style={styles.loginInformationListContainer}
+              style={styles.loginInformationBody}
             />
           </Row>
         </Cell>
@@ -314,9 +314,8 @@ const styles = {
   loginInformationDescription: {
     ...Text.body.main.regular,
   } as CSSProperties,
-  loginInformationListContainer: {
+  loginInformationBody: {
     ...Text.body.secondary.regular,
-    paddingLeft: Spacing.size.large,
     paddingTop: Spacing.size.extraLarge,
   } as CSSProperties,
 } as const
