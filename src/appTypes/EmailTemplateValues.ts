@@ -78,7 +78,7 @@ export interface InformationalBoxValue {
   boxColor: BoxColor
   icon: UswdsIconVariantKey
   title: string
-  description: string
+  description: RichTextValue
   showSupportiveInformation: boolean
   supportiveInformation: RichTextValue
 }

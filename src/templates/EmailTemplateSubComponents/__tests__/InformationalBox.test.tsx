@@ -42,9 +42,10 @@ describe('InformationalBox', () => {
     rendered = render(<InformationalBox emailSubComponent={emailSubComponent} />, {
       wrapper: emailPartWrapper,
     })
-    await clearAndFillWithValue('Informational box content')
-    expect(rendered.queryByText(value)).not.toBeNull()
-    expectEmailPartContentFor(emailSubComponent.id, rendered.baseElement)
+
+    const input = rendered.getByLabelText('Informational box content')
+    await user.click(input)
+    expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
   })
 
   it('has an editable supportive information', async () => {

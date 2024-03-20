@@ -15,7 +15,7 @@ const defaultValue: InformationalBoxValue = {
   boxColor: BoxColor.BenefitBlue,
   icon: 'LockOpen',
   title: 'Application confirmation number',
-  description: 'Confirmation number: 123456789',
+  description: [{ type: 'paragraph', children: [{ text: 'Confirmation number: 123456789' }] }],
   showSupportiveInformation: true,
   supportiveInformation: [
     {
@@ -97,15 +97,13 @@ export const InformationalBox: FC<EmailSubComponentProps<'InformationalBox'>> = 
             </Cell>
           </Row>
           <Row>
-            <Cell>
-              <EditableElement
-                element="span"
-                value={value.description}
-                label="Informational box content"
-                onValueChange={(description) => setValue({ ...value, description })}
-                style={{ fontFamily: Font.family.default }}
-              />
-            </Cell>
+            <RichTextEditableElement
+              element="td"
+              value={value.description}
+              label="Informational box content"
+              onValueChange={(description) => setValue({ ...value, description })}
+              style={styles.description}
+            />
           </Row>
         </Cell>
       </Row>
@@ -149,6 +147,9 @@ const styles = {
     ...Text.header.h3.bold,
     paddingBottom: Spacing.size.medium,
     lineHeight: '1.2',
+  } as CSSProperties,
+  description: {
+    ...Text.body.main.regular,
   } as CSSProperties,
   supportiveInformation: {
     ...Text.body.tertiary.regular,

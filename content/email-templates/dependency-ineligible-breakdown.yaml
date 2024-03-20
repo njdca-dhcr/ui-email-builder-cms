@@ -58,7 +58,57 @@ components:
           boxColor: Benefit Blue
           icon: Bookmark
           title: Dependent Details
-          description: "{!EADJ_ISSUE__C.SPOUSE_CIVIL_UNION_PARTNER_NAME_EMAIL__C}<br>{!eadj_Issue__c.Spouse_Civil_Union_Partner_Name_Email__c}\t{!eadj_Issue__c.Spouse_Civil_Union_Determination__c}&nbsp;<br>{!eadj_Issue__c.Spouse_Civil_Union_Denial_Reason__c}<br><br>CHILD&nbsp;<br>{!eadj_Issue__c.First_Dependent_Name__c}\t{!eadj_Issue__c.First_Dependent_Determination__c}<br>{!eadj_Issue__c.First_Dependent_Denial_Reason__c}<br>&nbsp;<br>CHILD&nbsp;<br>{!eadj_Issue__c.Second_Dependent_Name__c}\t{!eadj_Issue__c.Second_Dependent_Determination__c}<br>{!eadj_Issue__c.Second_Dependent_Denial_Reason__c}<br>&nbsp;<br>CHILD&nbsp;<br>{!eadj_Issue__c.Third_Dependent_Name__c}\t{!eadj_Issue__c.Third_Dependent_Determination__c}<br>&nbsp;{!eadj_Issue__c.Third_Dependent_Denial_Reason__c}<br>"
+          description:
+            - type: paragraph
+              children:
+                - text: "{!EADJ_ISSUE__C.SPOUSE_CIVIL_UNION_PARTNER_NAME_EMAIL__C}"
+            - type: paragraph
+              children:
+                - text: >-
+                    {!eadj_Issue__c.Spouse_Civil_Union_Partner_Name_Email__c}
+                    {!eadj_Issue__c.Spouse_Civil_Union_Determination__c}
+            - type: paragraph
+              children:
+                - text: "{!eadj_Issue__c.Spouse_Civil_Union_Denial_Reason__c}"
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: "CHILD "
+            - type: paragraph
+              children:
+                - text: >-
+                    {!eadj_Issue__c.First_Dependent_Name__c}
+                    {!eadj_Issue__c.First_Dependent_Determination__c}
+            - type: paragraph
+              children:
+                - text: "{!eadj_Issue__c.First_Dependent_Denial_Reason__c}"
+            - type: paragraph
+              children:
+                - text: " "
+            - type: paragraph
+              children:
+                - text: "CHILD "
+            - type: paragraph
+              children:
+                - text: >-
+                    {!eadj_Issue__c.Second_Dependent_Name__c}
+                    {!eadj_Issue__c.Second_Dependent_Determination__c}
+            - type: paragraph
+              children:
+                - text: "{!eadj_Issue__c.Second_Dependent_Denial_Reason__c}"
+            - type: paragraph
+              children:
+                - text: " "
+            - type: paragraph
+              children:
+                - text: "CHILD "
+            - type: paragraph
+              children:
+                - text: >-
+                    {!eadj_Issue__c.Third_Dependent_Name__c}
+                    {!eadj_Issue__c.Third_Dependent_Determination__c}{!eadj_Issue__c.Third_Dependent_Denial_Reason__c}
           showSupportiveInformation: true
           supportiveInformation:
             - type: paragraph
