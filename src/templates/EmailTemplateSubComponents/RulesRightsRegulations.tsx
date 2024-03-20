@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useCallback } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
@@ -6,7 +6,6 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui/'
-import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import {
@@ -14,6 +13,7 @@ import {
   RulesRightsRegulationsValue,
   RulesRightsRegulationsVariant,
 } from 'src/appTypes'
+import { RichTextAdditionalStyles } from 'src/ui/RichTextEditor'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
@@ -22,9 +22,25 @@ const defaultValue: RulesRightsRegulationsValue = {
   icon: 'Flag',
   reminderTitle: 'Reminder',
   eligibilityLabel: 'You may only be eligible for this waiver if...',
-  eligibilityConditionsList: [
-    'Overpayment was due to no fault of your own*',
-    'Repayment would be unfair and unreasonable given the context',
+  eligibilityConditions: [
+    {
+      type: 'numbered-list',
+      children: [
+        {
+          type: 'list-item',
+          children: [{ text: 'Overpayment was due to no fault of your own*', bold: true }],
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'Repayment would be unfair and unreasonable given the context',
+              bold: true,
+            },
+          ],
+        },
+      ],
+    },
   ],
   showReminderIsFor: true,
   reminderIsFor: [
@@ -100,12 +116,59 @@ const defaultValue: RulesRightsRegulationsValue = {
     },
   ],
   yourRightsList: [
-    `You may represent yourself or you may be represented at your own expense by an attorney or non-attorney`,
-    `You may request a postponement, if you require additional time to prepare your response to this questionnaire`,
-    `You may request that your employer produce any documents which relate to your eligibility for benefits`,
-    `You may request that statements be taken from your witnesses who have firsthand knowledge of the case`,
-    `You or your representative will have the opportunity to provide witness statements, present documents and provide a closing statement or summary `,
-    `If the reason for the questionnaire is related to your employment, any questions that you may have for your former employer may be included on the form and the reviewing claims examiner may, at his/her discretion, pose the question(s) to your former employer.`,
+    {
+      type: 'numbered-list',
+      children: [
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'You may represent yourself or you may be represented at your own expense by an attorney or non-attorney',
+            },
+          ],
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'You may request a postponement, if you require additional time to prepare your response to this questionnaire',
+            },
+          ],
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'You may request that your employer produce any documents which relate to your eligibility for benefits',
+            },
+          ],
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'You may request that statements be taken from your witnesses who have firsthand knowledge of the case',
+            },
+          ],
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'You or your representative will have the opportunity to provide witness statements, present documents and provide a closing statement or summary',
+            },
+          ],
+        },
+        {
+          type: 'list-item',
+          children: [
+            {
+              text: 'If the reason for the questionnaire is related to your employment, any questions that you may have for your former employer may be included on the form and the reviewing claims examiner may, at his/her discretion, pose the question(s) to your former employer.',
+            },
+          ],
+        },
+      ],
+    },
   ],
 }
 
@@ -126,15 +189,6 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
-  const setEligibilityConditionsList = useCallback(
-    (eligibilityConditionsList: string[]) => setValue({ ...value, eligibilityConditionsList }),
-    [value, setValue],
-  )
-
-  const setYourRightsList = useCallback(
-    (yourRightsList: string[]) => setValue({ ...value, yourRightsList }),
-    [value, setValue],
-  )
 
   return (
     <Row
@@ -209,23 +263,17 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
               style={styles.eligibilityLabel}
             />
           </Row>
-          <Row elements={['cell']}>
-            <EditableList
-              collection={value.eligibilityConditionsList}
-              element="ol"
-              setCollection={setEligibilityConditionsList}
+          <Row>
+            <RichTextEditableElement
+              element="td"
+              className="rrr-reminder-eligibility-conditions"
+              label="Eligibility conditions"
+              value={value.eligibilityConditions}
+              onValueChange={(eligibilityConditions) =>
+                setValue({ ...value, eligibilityConditions })
+              }
               style={styles.eligibilityConditions}
-            >
-              {value.eligibilityConditionsList.map((eligibilityCondition, index) => (
-                <EditableListItem
-                  key={index}
-                  label={`Eligibility condition ${index + 1}`}
-                  index={index}
-                  value={eligibilityCondition}
-                  style={styles.eligibilityCondition}
-                />
-              ))}
-            </EditableList>
+            />
           </Row>
           <Row condition={value.showReminderIsFor}>
             <RichTextEditableElement
@@ -338,23 +386,15 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
                 style={styles.yourRightsDescription}
               />
             </Row>
-            <Row elements={[{ part: 'cell', style: styles.yourRightsListContainer }]}>
-              <EditableList
-                collection={value.yourRightsList}
-                element="ol"
-                setCollection={setYourRightsList}
+            <Row>
+              <RichTextEditableElement
+                element="td"
+                label="Your Rights body"
+                value={value.yourRightsList}
+                onValueChange={(yourRightsList) => setValue({ ...value, yourRightsList })}
                 style={styles.yourRightsList}
-              >
-                {value.yourRightsList.map((right, index) => (
-                  <EditableListItem
-                    key={index}
-                    label={`Your Rights ${index + 1}`}
-                    index={index}
-                    value={right}
-                    style={styles.yourRightsListItem}
-                  />
-                ))}
-              </EditableList>
+                additionalStyles={styles.yourRightsListRichText}
+              />
             </Row>
           </Table>
         </Cell>
@@ -450,16 +490,14 @@ const styles = {
     ...Text.body.secondary.regular,
     paddingTop: Spacing.size.medium,
   },
-  yourRightsListContainer: {
+  yourRightsList: {
+    ...Text.body.list.small,
     paddingTop: Spacing.size.medium,
     paddingLeft: Spacing.size.medium,
   } as CSSProperties,
-  yourRightsList: {
-    margin: 0,
-    padding: 0,
-  } as CSSProperties,
-  yourRightsListItem: {
-    ...Text.body.list.small,
-    marginBottom: Font.size.small,
-  } as CSSProperties,
+  yourRightsListRichText: {
+    'list-item': {
+      marginBottom: Font.size.small,
+    },
+  } as RichTextAdditionalStyles,
 } as const

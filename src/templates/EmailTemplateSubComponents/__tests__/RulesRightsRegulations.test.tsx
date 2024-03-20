@@ -98,9 +98,7 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('eligibility label', 'Eligibility label')
 
-      itHasAnEditable('eligibility condition 1', 'Eligibility condition 1')
-
-      itHasAnEditable('eligibility condition 2', 'Eligibility condition 2')
+      itHasAnEditableRichText('eligibility conditions', 'Eligibility conditions')
 
       itHasAnEditableRichText('reminder is for', 'Reminder is for')
 
@@ -108,7 +106,7 @@ describe('RulesRightsRegulations', () => {
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(6)
+        expect(all).toHaveLength(5)
       })
 
       it('can have reminder is for toggled on and off', async () => {
@@ -218,17 +216,12 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditableRichText('description', 'Your Rights description')
 
-      itHasAnEditable('right 1', 'Your Rights 1')
+      itHasAnEditableRichText('body', 'Your Rights body')
 
-      itHasAnEditable('right 2', 'Your Rights 2')
-
-      itHasAnEditable('right 3', 'Your Rights 3')
-
-      itHasAnEditable('right 4', 'Your Rights 4')
-
-      itHasAnEditable('right 5', 'Your Rights 5')
-
-      itHasAnEditable('right 6', 'Your Rights 6')
+      it('only has the correct fields', () => {
+        const all = rendered.baseElement.querySelectorAll('[aria-label]')
+        expect(all).toHaveLength(3)
+      })
     })
   })
 })

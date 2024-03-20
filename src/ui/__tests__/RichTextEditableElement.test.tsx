@@ -53,6 +53,17 @@ describe('RichTextEditableElement', () => {
       expect(paragraph).not.toBeNull()
       expect(paragraph).toHaveTextContent(text)
     })
+
+    it('displays the rich text value with additional styles', async () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = await renderRichTextEditableElement({
+        value: [{ type: 'paragraph', children: [{ text }] }],
+        additionalStyles: { paragraph: { fontWeight: 'bolder' } },
+      })
+      const paragraph = baseElement.querySelector('p')
+      expect(paragraph).not.toBeNull()
+      expect(paragraph?.style.fontWeight).toEqual('bolder')
+    })
   })
 
   describe('when blurred', () => {
@@ -83,6 +94,17 @@ describe('RichTextEditableElement', () => {
       const paragraph = baseElement.querySelector('p')
       expect(paragraph).not.toBeNull()
       expect(paragraph).toHaveTextContent(text)
+    })
+
+    it('displays the additional styles', () => {
+      const text = faker.lorem.paragraph()
+      const { baseElement } = renderRichTextEditableElement({
+        additionalStyles: { paragraph: { fontWeight: 'bolder' } },
+        value: [{ type: 'paragraph', children: [{ text }] }],
+      })
+      const paragraph = baseElement.querySelector('p')
+      expect(paragraph).not.toBeNull()
+      expect(paragraph?.style.fontWeight).toEqual('bolder')
     })
   })
 })

@@ -1,17 +1,30 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { RichTextElement, RichTextLeaf } from '../RichText'
+import { RichTextAdditionalStylesContext, RichTextElement, RichTextLeaf } from '../RichText'
 import { faker } from '@faker-js/faker'
+import sample from 'lodash.sample'
 
 describe('RichTextElement', () => {
+  let color: string
+
+  beforeEach(() => {
+    color = sample(['rgb(35, 119, 193)', 'rgb(34, 119, 195)', 'rgb(33, 119, 193)']) as string
+  })
+
   describe('link element', () => {
     it('is an "a" tag', () => {
       const text = faker.lorem.paragraph()
       const url = faker.internet.url({ appendSlash: true })
       const { getByRole } = render(
-        <RichTextElement element={{ type: 'link', url }} data-foo="foo">
-          <span>{text}</span>
-        </RichTextElement>,
+        <RichTextAdditionalStylesContext.Provider value={{ link: { color } }}>
+          <RichTextElement
+            element={{ type: 'link', url }}
+            data-foo="foo"
+            style={{ fontWeight: 'bold' }}
+          >
+            <span>{text}</span>
+          </RichTextElement>
+        </RichTextAdditionalStylesContext.Provider>,
       )
       const link: HTMLAnchorElement = getByRole('link') as any
       expect(link.href).toEqual(url)
@@ -19,6 +32,8 @@ describe('RichTextElement', () => {
       expect(link.target).toEqual('_blank')
       expect(link).toContainHTML(`<span>${text}</span>`)
       expect(link.dataset['foo']).toEqual('foo')
+      expect(link.style.color).toEqual(color)
+      expect(link.style.fontWeight).toEqual('bold')
     })
   })
 
@@ -26,14 +41,22 @@ describe('RichTextElement', () => {
     it('is a "p" tag', () => {
       const text = faker.lorem.paragraph()
       const { baseElement } = render(
-        <RichTextElement element={{ type: 'paragraph' }} data-foo="foo">
-          <span>{text}</span>
-        </RichTextElement>,
+        <RichTextAdditionalStylesContext.Provider value={{ paragraph: { color } }}>
+          <RichTextElement
+            element={{ type: 'paragraph' }}
+            data-foo="foo"
+            style={{ fontWeight: 'bold' }}
+          >
+            <span>{text}</span>
+          </RichTextElement>
+        </RichTextAdditionalStylesContext.Provider>,
       )
       const paragraph = baseElement.querySelector('p')
       expect(paragraph).not.toBeNull()
       expect(paragraph).toContainHTML(`<span>${text}</span>`)
       expect(paragraph!.dataset['foo']).toEqual('foo')
+      expect(paragraph!.style.color).toEqual(color)
+      expect(paragraph!.style.fontWeight).toEqual('bold')
     })
   })
 
@@ -41,14 +64,22 @@ describe('RichTextElement', () => {
     it('is a "ul" tag', () => {
       const text = faker.lorem.paragraph()
       const { baseElement } = render(
-        <RichTextElement element={{ type: 'bulleted-list' }} data-foo="foo">
-          <li>{text}</li>
-        </RichTextElement>,
+        <RichTextAdditionalStylesContext.Provider value={{ 'bulleted-list': { color } }}>
+          <RichTextElement
+            element={{ type: 'bulleted-list' }}
+            data-foo="foo"
+            style={{ fontWeight: 'bold' }}
+          >
+            <li>{text}</li>
+          </RichTextElement>
+        </RichTextAdditionalStylesContext.Provider>,
       )
       const list = baseElement.querySelector('ul')
       expect(list).not.toBeNull()
       expect(list).toContainHTML(`<li>${text}</li>`)
       expect(list!.dataset['foo']).toEqual('foo')
+      expect(list!.style.color).toEqual(color)
+      expect(list!.style.fontWeight).toEqual('bold')
     })
   })
 
@@ -56,14 +87,22 @@ describe('RichTextElement', () => {
     it('is a "ol" tag', () => {
       const text = faker.lorem.paragraph()
       const { baseElement } = render(
-        <RichTextElement element={{ type: 'numbered-list' }} data-foo="foo">
-          <li>{text}</li>
-        </RichTextElement>,
+        <RichTextAdditionalStylesContext.Provider value={{ 'numbered-list': { color } }}>
+          <RichTextElement
+            element={{ type: 'numbered-list' }}
+            data-foo="foo"
+            style={{ fontWeight: 'bold' }}
+          >
+            <li>{text}</li>
+          </RichTextElement>
+        </RichTextAdditionalStylesContext.Provider>,
       )
       const list = baseElement.querySelector('ol')
       expect(list).not.toBeNull()
       expect(list).toContainHTML(`<li>${text}</li>`)
       expect(list!.dataset['foo']).toEqual('foo')
+      expect(list!.style.color).toEqual(color)
+      expect(list!.style.fontWeight).toEqual('bold')
     })
   })
 
@@ -71,14 +110,22 @@ describe('RichTextElement', () => {
     it('is a "li" tag', () => {
       const text = faker.lorem.paragraph()
       const { baseElement } = render(
-        <RichTextElement element={{ type: 'list-item' }} data-foo="foo">
-          <span>{text}</span>
-        </RichTextElement>,
+        <RichTextAdditionalStylesContext.Provider value={{ 'list-item': { color } }}>
+          <RichTextElement
+            element={{ type: 'list-item' }}
+            data-foo="foo"
+            style={{ fontWeight: 'bold' }}
+          >
+            <span>{text}</span>
+          </RichTextElement>
+        </RichTextAdditionalStylesContext.Provider>,
       )
       const listItem = baseElement.querySelector('li')
       expect(listItem).not.toBeNull()
       expect(listItem).toContainHTML(`<span>${text}</span>`)
       expect(listItem!.dataset['foo']).toEqual('foo')
+      expect(listItem!.style.color).toEqual(color)
+      expect(listItem!.style.fontWeight).toEqual('bold')
     })
   })
 

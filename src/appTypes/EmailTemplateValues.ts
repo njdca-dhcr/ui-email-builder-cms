@@ -139,7 +139,7 @@ export interface RulesRightsRegulationsValue {
   // Reminder
   reminderTitle: string
   eligibilityLabel: string
-  eligibilityConditionsList: string[]
+  eligibilityConditions: RichTextValue
   showReminderIsFor: boolean
   reminderIsFor: RichTextValue
   showFootnote: boolean
@@ -159,7 +159,7 @@ export interface RulesRightsRegulationsValue {
   yourRightsTitle: string
   showYourRightsDescription: boolean
   yourRightsDescription: RichTextValue
-  yourRightsList: string[]
+  yourRightsList: RichTextValue
 }
 
 export const enum StatusVariant {
