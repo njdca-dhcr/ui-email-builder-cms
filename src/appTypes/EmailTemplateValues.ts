@@ -105,8 +105,8 @@ export interface LoginDetailsValue {
   loginDetailsIcon: UswdsIconVariantKey
   loginInformationTitle: string
   loginInformationDescription: RichTextValue
-  showLoginInformationList: boolean
-  loginInformationList: string[]
+  showLoginInformationBody: boolean
+  loginInformationBody: RichTextValue
   loginInformationIcon: UswdsIconVariantKey
 }
 

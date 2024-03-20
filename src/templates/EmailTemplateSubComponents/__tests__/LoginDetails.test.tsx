@@ -118,13 +118,11 @@ describe('LoginDetails', () => {
 
       itHasAnEditableRichText('description', 'Login information description')
 
-      itHasAnEditable('bullet 1', 'Login information bullet 1')
-
-      itHasAnEditable('bullet 2', 'Login information bullet 2')
+      itHasAnEditableRichText('content', 'Login information content')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(4)
+        expect(all).toHaveLength(3)
       })
     })
   })

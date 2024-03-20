@@ -64,11 +64,11 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps<'LoginDetai
           </Control.Container>
           <SubComponentControlToggle
             subComponentId={emailSubComponent.id}
-            label="+ Login Information List"
-            onChange={(showLoginInformationList) =>
-              setValue({ ...value, showLoginInformationList })
+            label="+ Login Information Body"
+            onChange={(showLoginInformationBody) =>
+              setValue({ ...value, showLoginInformationBody })
             }
-            value={value.showLoginInformationList}
+            value={value.showLoginInformationBody}
           />
         </>
       )}

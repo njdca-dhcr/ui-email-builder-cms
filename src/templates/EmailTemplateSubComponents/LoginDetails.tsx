@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, useCallback } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui/EmailBlock'
 import { EditableElement } from 'src/ui/EditableElement'
@@ -6,7 +6,6 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
-import { EditableList, EditableListItem } from 'src/ui/EditableList'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { EmailTemplate, LoginDetailsValue, LoginDetailsVariant } from 'src/appTypes'
@@ -57,10 +56,33 @@ const defaultValue: LoginDetailsValue = {
       ],
     },
   ],
-  showLoginInformationList: true,
-  loginInformationList: [
-    `<b>If you do not have an account,</b> create one here. After creating your account, return to this email and get started.`,
-    `<b>Forget your username and password?</b> Follow the links on the login page to help access your account.`,
+  showLoginInformationBody: true,
+  loginInformationBody: [
+    {
+      type: 'bulleted-list',
+      children: [
+        {
+          type: 'list-item',
+          children: [
+            { text: 'If you do not have an account,', bold: true, italic: true },
+            {
+              text: ' create one here. After creating your account, return to this email and get started.',
+              italic: true,
+            },
+          ],
+        },
+        {
+          type: 'list-item',
+          children: [
+            { text: 'Forget your username and password?', bold: true, italic: true },
+            {
+              text: ' Follow the links on the login page to help access your account.',
+              italic: true,
+            },
+          ],
+        },
+      ],
+    },
   ],
   loginInformationIcon: 'LockOpen',
 }
@@ -75,10 +97,6 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
   const isDetails = value.variant === LoginDetailsVariant.Details
   const isInformation = value.variant === LoginDetailsVariant.Information
-  const setLoginInformationList = useCallback(
-    (loginInformationList: string[]) => setValue({ ...value, loginInformationList }),
-    [value, setValue],
-  )
 
   return (
     <Row
@@ -221,26 +239,14 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
               style={styles.loginInformationDescription}
             />
           </Row>
-          <Row
-            condition={value.showLoginInformationList}
-            elements={[{ part: 'cell', style: styles.loginInformationListContainer }]}
-          >
-            <EditableList
-              collection={value.loginInformationList}
-              element="ul"
-              setCollection={setLoginInformationList}
-              style={styles.loginInformationList}
-            >
-              {value.loginInformationList.map((info, index) => (
-                <EditableListItem
-                  key={index}
-                  index={index}
-                  value={info}
-                  label={`Login information bullet ${index + 1}`}
-                  style={styles.loginInformationListItem}
-                />
-              ))}
-            </EditableList>
+          <Row condition={value.showLoginInformationBody}>
+            <RichTextEditableElement
+              element="td"
+              label="Login information content"
+              value={value.loginInformationBody}
+              onValueChange={(loginInformationBody) => setValue({ ...value, loginInformationBody })}
+              style={styles.loginInformationListContainer}
+            />
           </Row>
         </Cell>
       </Row>
@@ -309,14 +315,8 @@ const styles = {
     ...Text.body.main.regular,
   } as CSSProperties,
   loginInformationListContainer: {
+    ...Text.body.secondary.regular,
     paddingLeft: Spacing.size.large,
     paddingTop: Spacing.size.extraLarge,
-  } as CSSProperties,
-  loginInformationList: {
-    margin: 0,
-    padding: 0,
-  } as CSSProperties,
-  loginInformationListItem: {
-    ...Text.body.secondary.italic,
   } as CSSProperties,
 } as const
