@@ -79,7 +79,6 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
               ...style,
               margin: 0,
               padding: 0,
-              whiteSpace: 'pre-wrap',
               ...additionalStyle,
               ...style,
             }}
