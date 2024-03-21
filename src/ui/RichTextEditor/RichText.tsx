@@ -76,7 +76,6 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
           <p
             {...props}
             style={{
-              ...style,
               margin: 0,
               padding: 0,
               ...additionalStyle,
