@@ -130,13 +130,12 @@ components:
           content:
             - type: paragraph
               children:
-                - text: "More information on Dependency Benefits can be found "
+                - text: ""
                 - type: link
-                  url: >-
-                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                  url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
                   children:
-                    - text: here
-                - text: .
+                    - text: Click here
+                - text: " for tips on how to attach documents to a form."
   - kind: StateSeal
     required: true
   - kind: Disclaimer
