@@ -124,24 +124,7 @@ components:
                     It is possible that your claim may remain on hold even after a
                     monetary determination has been made due to an issue that needs to be
                     resolved.
-          showLoginInformationBody: true
-          loginInformationBody:
-            - type: bulleted-list
-              children:
-                - type: list-item
-                  children:
-                    - text: "If you do not have an account,"
-                      bold: true
-                      italic: true
-                    - text: " create one here. After creating your account, return to this email and get started."
-                      italic: true
-                - type: list-item
-                  children:
-                    - text: Forget your username and password?
-                      bold: true
-                      italic: true
-                    - text: " Follow the links on the login page to help access your account."
-                      italic: true
+          showLoginInformationBody: false
           loginInformationIcon: Flag
   - kind: Footer
     required: true
