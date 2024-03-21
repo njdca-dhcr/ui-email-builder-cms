@@ -44,4 +44,5 @@ const styles: CSSProperties = {
   ...Text.body.main.regular,
   fontFamily: Font.family.serifMonospace,
   fontWeight: Font.weight.boldLight,
+  textTransform: 'uppercase',
 }

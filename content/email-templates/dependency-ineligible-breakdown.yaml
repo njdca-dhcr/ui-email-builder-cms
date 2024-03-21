@@ -29,7 +29,7 @@ components:
     required: true
     description: Adding a name is highly encouraged. Avoid using "Dear" before the name
     defaultValue:
-      name: "{!EADJ_ISSUE__C.EADJ_CLAIMANT_NAME__C}:"
+      name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
   - kind: Body
     required: true
     subComponents:
