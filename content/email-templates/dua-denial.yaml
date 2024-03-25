@@ -1,5 +1,5 @@
-name: DUA - Preliminary Eligible
-description: When someone's application has been received but more information is required.
+name: DUA - Denial
+description: When someone is not eligible and their application has been denied.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -14,7 +14,7 @@ components:
         visibleByDefault: true
         description: Keep this short and to the point!
         defaultValue:
-          title: Application recieved; More information required
+          title: You are Not Elibible
       - kind: ProgramName
         visibleByDefault: true
         required: true
@@ -42,129 +42,35 @@ components:
             - type: paragraph
               children:
                 - text: >-
-                    Your Disaster Unemployment Assistance (DUA) application is received but we are...
+                    Your Disaster Unemployment Assistance (DUA) eligibility has been reviewed, and you have been found to be:
       - kind: Status
         required: true
         visibleByDefault: true
         description: Make it obvious what the current state is
         defaultValue:
-          variant: Missing Document
-          status: >-
-            Missing Documents<br>required by
-            {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}
+          variant: Overview With Reason
+          status: Not Eligible
           statusDueTo: because...
           showSupportiveInformation: true
-          spaceAfter: false
+          spaceAfter: true
           showDescription: true
           description:
             - type: paragraph
               children:
-                - text: "{Data Reference} or a sentence that colors more of the status of claim"
+                - text: "{!eadj_Claim_cDUA_Denial_Reasons_c}"
                   bold: true
           supportiveInformation:
             - type: paragraph
               children:
-                - text: >-
-                    This determination was made based on the DUA regulations 20 CFR 625.
-                    Its details and breakdown can be found in the document that will be
-                    mailed to you. A link for this regulation is available
+                - text: "This determination was made based on federal DUA regulations. A link for these regulations is available "
                   italic: true
-                - text: " "
                 - type: link
-                  url: "https://oui.doleta.gov/unemploy/pdf/20_CFR_625-Disaster.pdf"
+                  url: "#ENTER-LINK"
                   children:
                     - italic: true
                       text: here
                 - italic: true
                   text: .
-          documentsNeededLabel: "We need the following:"
-          documentsNeededValue: "{!eadj_Claim_c.DUA_Missing_Docs_c}"
-          emailToLabel: "Email this to:"
-          emailToValue: "&nbsp;DUA@dol.nj.gov"
-          subjectLineLabel: "Subject Line:"
-          subjectLineValue: "Eligible Pending Review Documents<br>{!eadj_Claim_c.Name}"
-          showMissingDocumentDeadline: false
-      - kind: InformationalBox
-        visibleByDefault: true
-        required: true
-        defaultValue:
-          boxColor: Yielding Yellow
-          icon: Alarm
-          title: "Submit by {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}"
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you do not submit by
-                    {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}, your benefits may be
-                    reduced or denied and you will be required to pay back any DUA funds
-                    overpaid.
-                  italic: true
-          showSupportiveInformation: false
-      - kind: SupplementalContent
-        visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
-        defaultValue:
-          variant: Benefit Amount
-          title: Weekly Certifications
-          description:
-            - type: paragraph
-              children:
-                - text: You will start to receive weekly DUA certification emails.
-                  bold: true
-                - text: " This is different from standard UI certification."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: >-
-                    You must complete and submit each week's certification in order to
-                    receive your benefits. If you don't, we will be unable to disperse
-                    your benefits.
-          benefitAmountBoxColor: Granted Green
-          benefitAmountIcon: CreditCard
-          benefitAmountTitle: Your Benefit Details
-          benefitAmountDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    A detailed breakdown of your benefit amount and how we got to that
-                    number will be mailed to you. If you disagree with it, appeal rights
-                    and processes are available.
-          benefitAmountBoxTitle: Benefit Amount
-          benefitAmountMainBoxCopy:
-            - type: paragraph
-              children:
-                - text: "Weekly Rate:   ${!eadj_Claim__c.DUA_Monetary_WBR__c}"
-                  bold: true
-            - type: paragraph
-              children:
-                - text: "Partial Weekly Rate:   ${!eadj_Claim__c.DUA_PWBR__C}"
-                  bold: true
-          benefitAmountSupplementalBoxCopy:
-            - type: paragraph
-              children:
-                - text: "{!eadj_Claim__c.DUA_dependency__c}"
-                  bold: true
-                  italic: true
-            - type: paragraph
-              children:
-                - text: " "
-            - type: paragraph
-              children:
-                - text: >-
-                    This amount is subject to change based on the submitted tax record or
-                    dependency documents you send in
-                  italic: true
-          benefitAmountSupportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you're working part-time, a partial weekly rate (which is 20%
-                    higher than your weekly rate) will be used to calculate your benefit
-                    amount.
-                  italic: true
       - kind: RulesRightsRegulations
         visibleByDefault: true
         required: true
@@ -213,6 +119,26 @@ components:
             - type: paragraph
               children:
                 - text: "        Mail: Date you physically received written documentation"
+      - kind: SupplementalContent
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Single Supplemental Content
+          title: Feedback (Optional)
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    This email is a new beta design created by New Jersey's Division of
+                    Unemployment Insurance in collaboration with New Jersey's Office of
+                    Innovation. Take our 2 minute survey
+                - text: " "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
+                  children:
+                    - text: here
+                - text: .
   - kind: Footer
     required: true
     subComponents:
