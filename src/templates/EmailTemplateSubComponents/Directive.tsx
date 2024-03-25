@@ -16,6 +16,7 @@ export const defaultValue: DirectiveValue = {
   variant: DirectiveVariant.OneStep,
   title: 'Directive Title',
   showTitle: true,
+  showLabel: true,
   label: [
     {
       type: 'paragraph',
@@ -265,7 +266,10 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
       {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
         <>
           {/* Directive Label */}
-          <Row elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}>
+          <Row
+            condition={value.showLabel}
+            elements={['cell', 'table', 'row', { part: 'cell', style: { textAlign: 'left' } }]}
+          >
             <div style={{ lineHeight: '150%' }}>
               <RichTextEditableElement
                 element="span"

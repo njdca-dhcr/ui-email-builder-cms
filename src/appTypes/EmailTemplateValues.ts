@@ -43,6 +43,7 @@ export interface DirectiveValue {
   title: string
   showTitle: boolean
   label: RichTextValue
+  showLabel: boolean
   linkHref: string
   buttonLabel: string
   buttonColor: string

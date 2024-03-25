@@ -50,6 +50,12 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> 
         onChange={(showTitle) => setValue({ ...value, showTitle })}
         value={value.showTitle}
       />
+      <SubComponentControlToggle
+        subComponentId={emailSubComponent.id}
+        label="+ Label"
+        onChange={(showLabel) => setValue({ ...value, showLabel })}
+        value={value.showLabel}
+      />
 
       <Control.Container className="program-name-inline-color-picker">
         <Control.Label htmlFor={buttonColorPickerHtmlId}>Button Color</Control.Label>
