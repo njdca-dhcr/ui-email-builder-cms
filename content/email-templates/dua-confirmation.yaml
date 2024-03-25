@@ -1,5 +1,5 @@
-name: DUA Application Confirmation
-description: Disaster Unemployment Assistance Application Confirmation
+name: DUA - Confirmation
+description: When someone's application has been received.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -10,54 +10,56 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: Title
+        required: true
         visibleByDefault: true
         description: Keep this short and to the point!
         defaultValue:
-          title: "Application Received"
+          title: Application Received
       - kind: ProgramName
         visibleByDefault: true
+        required: true
         defaultValue:
-          preset: "Disaster Unemployment Assistance (DUA)"
-          name: "Disaster Unemployment Assistance (DUA)"
+          preset: Disaster Unemployment Assistance (DUA)
+          name: Disaster Unemployment Assistance (DUA)
           backgroundColor: "#CCBDDF"
+      - kind: DirectiveButton
+        visibleByDefault: false
   - kind: Name
     visibleByDefault: true
+    required: true
     description: Adding a name is highly encouraged. Avoid using "Dear" before the name
     defaultValue:
-      name: "{!EADJ_ISSUE__C.EADJ_CLAIMANT_NAME__C}:"
+      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
   - kind: Body
     required: true
     subComponents:
       - kind: Intro
+        required: true
         visibleByDefault: true
         description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
               children:
-                - text: Your Disaster Unemployment Assistance (DUA) application is
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: "You will receive:"
+                - text: >-
+                    Your Disaster Unemployment Assistance (DUA) application is
       - kind: Status
+        required: true
         visibleByDefault: true
         description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
-          icon: Warning
           status: Received &amp; Under Review
           statusDueTo: because...
           showSupportiveInformation: true
           spaceAfter: true
+          showDescription: true
           description:
             - type: paragraph
               children:
                 - text: It may take up to 2 weeks
                   bold: true
-                - text: " to determine your eligibility."
+                - text: " to determine your eligibility (results)."
           supportiveInformation:
             - type: paragraph
               children:
@@ -65,71 +67,70 @@ components:
                     If you are eligible, you will receive an email directing you to
                     complete your weekly certification.
                   italic: true
-          documentsNeededLabel: "We need the following:"
-          documentsNeededValue: "{Name_of_document(s)}"
-          emailToLabel: "Email this to:"
-          emailToValue: DUA@unemployment.gov
-          subjectLineLabel: "Subject Line:"
-          subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
-          missingDocumentDeadline: >-
-            If you do not submit your documents by 00/00/0000, you will be denied your
-            claim and will be required to pay back any DUA funds released to you.
-          boxColor: Yielding Yellow
-          amountLabel: You owe $200
-          overpaymentLabel: Overpayment Total
-          overpaymentValue: $200
-          waivedLabel: Amount waived
-          waivedValue: $50
-          totalLabel: You must pay
-          totalValue: $150
+
       - kind: SupplementalContent
         visibleByDefault: true
         description: Add other resources that will help color the message you're sending
         defaultValue:
-          variant: "Single Supplemental Content"
-          title: You can only participate in one program<br>
+          variant: Double Supplemental Content
+          title: You can only participate in one program
           description:
             - type: paragraph
               children:
                 - text: >-
                     Disaster Unemployment Assistance (DUA) replaces your Unemployment
-                    Insurance (UI) certification process.
-                - text: " "
+                    Insurance (UI) benefits.
                 - text: You cannot participate in both.
                   bold: true
             - type: paragraph
               children:
-                - bold: true
-                  text: ""
+                - text: ""
+            - type: paragraph
+              children:
+                - text: ""
+                - type: link
+                  url: "#ENTER-LINK"
+                  children:
+                    - text: ""
+                - text: >-
+                    If approved for DUA, you will complete weekly certification forms for
+                    DUA.
+                  italic: true
+          secondTitle: Feedback (Optional)
+          secondDescription:
             - type: paragraph
               children:
                 - text: >-
-                    You do not need to certify for Unemployment Insurance (UI) if you are
-                    receiving DUA.
+                    This email is a new beta design created by New Jersey's Division of
+                    Unemployment Insurance in collaboration with New Jersey's Office of
+                    Innovation. Take our 2 minute survey
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
+                  children:
+                    - text: here
+                - text: .
   - kind: Footer
     required: true
     subComponents:
       - kind: AdditionalContent
         visibleByDefault: true
+        required: true
         description: A great place to add links to find out more about programs and
           other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph
               children:
-                - text: >-
-                    More information on New Jersey's Disaster Unemployment Assistance
-                    (DUA) can be found
-                - text: " "
+                - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
                 - type: link
-                  url: >-
-                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                  url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
                   children:
                     - text: here
-                - text: ".  Frequently Asked Questions can be found "
+                - text: ". Frequently Asked Questions can be found "
                 - type: link
                   url: >-
-                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                    https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
                   children:
                     - text: here
                 - text: .
