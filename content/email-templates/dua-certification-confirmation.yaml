@@ -1,5 +1,5 @@
-name: DUA - Confirmation
-description: When someone's application has been received.
+name: DUA - Certification Confirmation
+description: When someone's weekly certification has been received is under review.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -14,7 +14,7 @@ components:
         visibleByDefault: true
         description: Keep this short and to the point!
         defaultValue:
-          title: Application Received
+          title: Weekly Certification Received
       - kind: ProgramName
         visibleByDefault: true
         required: true
@@ -42,7 +42,7 @@ components:
             - type: paragraph
               children:
                 - text: >-
-                    Your Disaster Unemployment Assistance (DUA) application is
+                    Your Disaster Unemployment Assistance (DUA) weekly certification is
       - kind: Status
         required: true
         visibleByDefault: true
@@ -59,52 +59,34 @@ components:
               children:
                 - text: It may take up to 2 weeks
                   bold: true
-                - text: " to determine your eligibility (results)."
+                - text: " to determine if payment can be processed"
           supportiveInformation:
             - type: paragraph
               children:
                 - text: >-
-                    If you are eligible, you will receive an email directing you to
-                    complete your weekly certification.
+                    A payment and/or determination will be made based on available
+                    information. If you are ineligible for this certification period, you
+                    will receive details in the mail.
                   italic: true
       - kind: SupplementalContent
         visibleByDefault: true
         description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
-          title: You can only participate in one program
+          title: Next Week
           description:
             - type: paragraph
               children:
                 - text: >-
-                    Disaster Unemployment Assistance (DUA) replaces your Unemployment
-                    Insurance (UI) benefits.
-                - text: You cannot participate in both.
-                  bold: true
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: >-
-                    If approved for DUA, you will complete weekly certification forms for
-                    DUA.
-                  italic: true
-          secondTitle: Feedback (Optional)
+                    You will continue to receive certification emails. Complete these on a
+                    weekly basis until the end of the program.
+          secondTitle: Did you return to work full-time?
           secondDescription:
             - type: paragraph
               children:
                 - text: >-
-                    This email is a new beta design created by New Jersey's Division of
-                    Unemployment Insurance in collaboration with New Jersey's Office of
-                    Innovation. Take our 2 minute survey
-                - text: " "
-                - type: link
-                  url: >-
-                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
-                  children:
-                    - text: here
-                - text: .
+                    If you returned to work full-time and are no longer pursuing DUA, you
+                    can simply stop certifying. There are no additional forms.
   - kind: Footer
     required: true
     subComponents:
