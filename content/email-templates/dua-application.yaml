@@ -19,9 +19,9 @@ components:
         visibleByDefault: true
         required: true
         defaultValue:
-          preset: Dependency Benefits
-          name: Dependency Benefits
-          backgroundColor: "#F1DEA0"
+          preset: Disaster Unemployment Assistance (DUA)
+          name: Disaster Unemployment Assistance (DUA)
+          backgroundColor: "#CCBDDF"
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
