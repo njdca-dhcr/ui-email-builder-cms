@@ -86,6 +86,16 @@ export const StatusControls: FC<EmailSubComponentControlsProps<'Status'>> = ({
         onChange={(showSupportiveInformation) => setValue({ ...value, showSupportiveInformation })}
         value={value.showSupportiveInformation}
       />
+      {[StatusVariant.MissingDocument].includes(value.variant) && (
+        <SubComponentControlToggle
+          subComponentId={emailSubComponent.id}
+          label="+ Missing Document Deadline"
+          onChange={(showMissingDocumentDeadline) =>
+            setValue({ ...value, showMissingDocumentDeadline })
+          }
+          value={value.showMissingDocumentDeadline}
+        />
+      )}
     </Control.Group>
   )
 }

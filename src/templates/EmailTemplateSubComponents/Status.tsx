@@ -48,6 +48,7 @@ const defaultValue: StatusValue = {
   emailToValue: 'DUA@unemployment.gov',
   subjectLineLabel: 'Subject Line:',
   subjectLineValue: 'Eligible Pending Review Documents<br/>{Name_of_claimant}',
+  showMissingDocumentDeadline: true,
   missingDocumentDeadline:
     'If you do not submit your documents by 00/00/0000, you will be denied your claim and will be required to pay back any DUA funds released to you.',
   boxColor: BoxColor.YieldingYellow,
@@ -330,25 +331,26 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             </Row>
           </>
         )}
-        {[StatusVariant.MissingDocument].includes(value.variant) && (
-          <>
-            <Row>
-              <SpacingCell size="medium" />
-            </Row>
-            <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
-              <EditableElement
-                element="td"
-                className={StyleDefaults.layout.narrow}
-                value={value.missingDocumentDeadline}
-                label="Status deadline description"
-                onValueChange={(missingDocumentDeadline) =>
-                  setValue({ ...value, missingDocumentDeadline })
-                }
-                style={styles.missingDocumentDeadline}
-              />
-            </Row>
-          </>
-        )}
+        {[StatusVariant.MissingDocument].includes(value.variant) &&
+          value.showMissingDocumentDeadline && (
+            <>
+              <Row>
+                <SpacingCell size="medium" />
+              </Row>
+              <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
+                <EditableElement
+                  element="td"
+                  className={StyleDefaults.layout.narrow}
+                  value={value.missingDocumentDeadline}
+                  label="Status deadline description"
+                  onValueChange={(missingDocumentDeadline) =>
+                    setValue({ ...value, missingDocumentDeadline })
+                  }
+                  style={styles.missingDocumentDeadline}
+                />
+              </Row>
+            </>
+          )}
         <Row>
           <SpacingCell size={value.spaceAfter ? 'extraLarge' : 'medium'} />
         </Row>

@@ -189,6 +189,7 @@ export interface StatusValue {
   emailToValue: string
   subjectLineLabel: string
   subjectLineValue: string
+  showMissingDocumentDeadline: boolean
   missingDocumentDeadline: string
   // Amount/Breakdown
   boxColor: BoxColor

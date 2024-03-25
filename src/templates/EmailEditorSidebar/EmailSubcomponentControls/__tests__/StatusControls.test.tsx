@@ -110,6 +110,8 @@ describe('StatusControls', () => {
       })
 
       itProvidesAToggleFor('description', '+ Description')
+
+      itDoesNotProvideAToggleFor('missing document deadline', '+ Missing Document Deadline')
     })
 
     describe('Overview w/ Reason', () => {
@@ -135,6 +137,8 @@ describe('StatusControls', () => {
       })
 
       itDoesNotProvideAToggleFor('description', '+ Description')
+
+      itDoesNotProvideAToggleFor('missing document deadline', '+ Missing Document Deadline')
     })
 
     describe('Missing Document', () => {
@@ -158,6 +162,8 @@ describe('StatusControls', () => {
         const { baseElement } = rendered
         expect(baseElement).not.toHaveTextContent(/UswdsIconSelect/)
       })
+
+      itProvidesAToggleFor('missing document deadline', '+ Missing Document Deadline')
 
       itDoesNotProvideAToggleFor('description', '+ Description')
     })
@@ -189,6 +195,8 @@ describe('StatusControls', () => {
       })
 
       itDoesNotProvideAToggleFor('description', '+ Description')
+
+      itDoesNotProvideAToggleFor('missing document deadline', '+ Missing Document Deadline')
     })
 
     describe('Overview w/ Reason + Amount Breakdown', () => {
@@ -220,6 +228,8 @@ describe('StatusControls', () => {
       })
 
       itDoesNotProvideAToggleFor('description', '+ Description')
+
+      itDoesNotProvideAToggleFor('missing document deadline', '+ Missing Document Deadline')
     })
   })
 })
