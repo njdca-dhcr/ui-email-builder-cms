@@ -107,7 +107,7 @@ const { Table, Row, Cell, Link } = EmailBlock
 
 export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
-  const [value, setValue] = useEmailPartsContentFor(emailSubComponent.id, defaultValue)
+  const [value, setValue] = useDirectiveValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
   const buttonTextColor = textColorForBackground(value.buttonColor, {
