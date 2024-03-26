@@ -171,6 +171,13 @@ export const enum StatusVariant {
   OverviewWithReasonAndAmountBreakdown = 'Overview With Reason And Amount Breakdown',
 }
 
+export interface ReceiptLineItem {
+  bold?: boolean
+  italic?: boolean
+  label: string
+  value: string
+}
+
 export interface StatusValue {
   variant: StatusVariant
   icon: UswdsIconVariantKey
@@ -195,12 +202,8 @@ export interface StatusValue {
   // Amount/Breakdown
   boxColor: BoxColor
   amountLabel: string
-  overpaymentLabel: string
-  overpaymentValue: string
-  waivedLabel: string
-  waivedValue: string
-  totalLabel: string
-  totalValue: string
+  amountLineItems: ReceiptLineItem[]
+  amountTotal: ReceiptLineItem
 }
 
 export const enum SupplementalContentVariant {

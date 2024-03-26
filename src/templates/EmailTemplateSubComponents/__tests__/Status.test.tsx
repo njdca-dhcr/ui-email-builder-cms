@@ -239,17 +239,17 @@ describe('Status', () => {
 
       itHasAnEditable('amount label', 'Amount label')
 
-      itHasAnEditable('overpayment label', 'Overpayment label')
+      itHasAnEditable('line item label 1', 'Line item label 1')
 
-      itHasAnEditable('overpayment value', 'Overpayment value')
+      itHasAnEditable('line item label 2', 'Line item label 2')
 
-      itHasAnEditable('waived label', 'Waived label')
+      itHasAnEditable('line item value 1', 'Line item value 1')
 
-      itHasAnEditable('waived value', 'Waived value')
+      itHasAnEditable('line item value 2', 'Line item value 2')
 
-      itHasAnEditable('total label', 'Amount total label')
+      itHasAnEditable('total label', 'Total label')
 
-      itHasAnEditable('total value', 'Amount total value')
+      itHasAnEditable('total value', 'Total value')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')

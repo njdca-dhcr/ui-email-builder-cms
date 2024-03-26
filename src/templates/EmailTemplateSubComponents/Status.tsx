@@ -10,6 +10,7 @@ import { UswdsIcon } from 'src/ui/UswdsIcon'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { EmailTemplate, StatusValue, StatusVariant } from 'src/appTypes'
+import { EditableReceipt } from 'src/ui/EditableReceipt'
 
 const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,
@@ -53,12 +54,11 @@ const defaultValue: StatusValue = {
     'If you do not submit your documents by 00/00/0000, you will be denied your claim and will be required to pay back any DUA funds released to you.',
   boxColor: BoxColor.YieldingYellow,
   amountLabel: 'You owe $200',
-  overpaymentLabel: 'Overpayment Total',
-  overpaymentValue: '$200',
-  waivedLabel: 'Amount waived',
-  waivedValue: '$50',
-  totalLabel: 'You must pay',
-  totalValue: '$150',
+  amountLineItems: [
+    { label: 'Overpayment Total', value: '$200' },
+    { label: 'Amount waived', value: '$50', bold: true, italic: true },
+  ],
+  amountTotal: { label: 'You must pay', value: '$150', bold: true },
 }
 
 export const useStatusValue = (emailSubComponent: EmailTemplate.Status) => {
@@ -248,67 +248,25 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             condition={[StatusVariant.OverviewWithReasonAndAmountBreakdown].includes(value.variant)}
           >
             <Cell>{null}</Cell>
-            <Cell
-              elements={[{ part: 'table', role: 'table', maxWidth: 273 }]}
-              style={styles.breakdownContainer}
-            >
-              <Row role="row">
-                <EditableElement
-                  element="td"
-                  value={value.overpaymentLabel}
-                  label="Overpayment label"
-                  onValueChange={(overpaymentLabel) => setValue({ ...value, overpaymentLabel })}
-                  role="rowheader"
-                  style={styles.overpaymentLabel}
-                />
-                <EditableElement
-                  align="right"
-                  element="td"
-                  value={value.overpaymentValue}
-                  label="Overpayment value"
-                  onValueChange={(overpaymentValue) => setValue({ ...value, overpaymentValue })}
-                  role="cell"
-                  style={styles.overpaymentValue}
-                />
-              </Row>
-              <Row role="row">
-                <EditableElement
-                  element="td"
-                  value={value.waivedLabel}
-                  label="Waived label"
-                  onValueChange={(waivedLabel) => setValue({ ...value, waivedLabel })}
-                  role="rowheader"
-                  style={styles.waivedLabel}
-                />
-                <EditableElement
-                  align="right"
-                  element="td"
-                  value={value.waivedValue}
-                  label="Waived value"
-                  onValueChange={(waivedValue) => setValue({ ...value, waivedValue })}
-                  role="cell"
-                  style={styles.waivedValue}
-                />
-              </Row>
-              <Row role="row">
-                <EditableElement
-                  element="td"
-                  value={value.totalLabel}
-                  label="Amount total label"
-                  onValueChange={(totalLabel) => setValue({ ...value, totalLabel })}
-                  role="rowheader"
-                  style={styles.totalLabel}
-                />
-                <EditableElement
-                  align="right"
-                  element="td"
-                  value={value.totalValue}
-                  label="Amount total value"
-                  onValueChange={(totalValue) => setValue({ ...value, totalValue })}
-                  role="cell"
-                  style={styles.totalValue}
-                />
-              </Row>
+            <Cell style={styles.breakdownContainer}>
+              <EditableReceipt
+                lineItems={value.amountLineItems}
+                total={value.amountTotal}
+                onLineItemChange={(index, part, newValue) => {
+                  setValue({
+                    ...value,
+                    amountLineItems: value.amountLineItems.map((lineItem, i) =>
+                      i === index ? { ...lineItem, [part]: newValue } : lineItem,
+                    ),
+                  })
+                }}
+                onTotalChange={(part, newValue) => {
+                  setValue({
+                    ...value,
+                    amountTotal: { ...value.amountTotal, [part]: newValue },
+                  })
+                }}
+              />
             </Cell>
           </Row>
         </Row>
@@ -427,24 +385,6 @@ const styles = {
   } as CSSProperties,
   breakdownContainer: {
     paddingTop: Spacing.size.medium,
-  } as CSSProperties,
-  overpaymentLabel: {
-    ...Text.caption.large.regular,
-    paddingBottom: Spacing.size.tiny,
-  } as CSSProperties,
-  overpaymentValue: {
-    ...Text.caption.large.regular,
-    paddingBottom: Spacing.size.tiny,
-  } as CSSProperties,
-  waivedLabel: {
-    ...Text.caption.large.boldItalic,
-    borderBottom: `2px solid ${Colors.black}`,
-    paddingBottom: Spacing.size.small,
-  } as CSSProperties,
-  waivedValue: {
-    ...Text.caption.large.boldItalic,
-    borderBottom: `2px solid ${Colors.black}`,
-    paddingBottom: Spacing.size.small,
   } as CSSProperties,
   totalLabel: {
     ...Text.body.main.bold,
