@@ -56,34 +56,6 @@ describe('RulesRightsRegulationsControls', () => {
         const { baseElement } = rendered
         expect(baseElement).toHaveTextContent(/UswdsIconSelect/)
       })
-
-      it('can have reminder is for toggled on and off', async () => {
-        const { getByRole } = rendered
-        const getSwitch = (): HTMLInputElement =>
-          getByRole('switch', { name: 'Reminder Is For' }) as any
-
-        expect(getSwitch()).toBeChecked()
-        await user.click(getSwitch())
-        expect(getSwitch()).not.toBeChecked()
-        await user.click(getSwitch())
-        expect(getSwitch()).toBeChecked()
-      })
-
-      it('can have the footnote toggled on and off', async () => {
-        const { getByRole } = rendered
-        const getSwitch = (): HTMLInputElement => getByRole('switch', { name: '+ Footnote' }) as any
-
-        expect(getSwitch()).toBeChecked()
-        await user.click(getSwitch())
-        expect(getSwitch()).not.toBeChecked()
-        await user.click(getSwitch())
-        expect(getSwitch()).toBeChecked()
-      })
-
-      it('only has the correct switches', () => {
-        const all = rendered.queryAllByRole('switch')
-        expect(all).toHaveLength(2)
-      })
     })
 
     describe('Appeal Rights', () => {

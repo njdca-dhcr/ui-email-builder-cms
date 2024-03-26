@@ -139,12 +139,7 @@ export interface RulesRightsRegulationsValue {
   icon: UswdsIconVariantKey
   // Reminder
   reminderTitle: string
-  eligibilityLabel: string
-  eligibilityConditions: RichTextValue
-  showReminderIsFor: boolean
-  reminderIsFor: RichTextValue
-  showFootnote: boolean
-  footnote: RichTextValue
+  reminderDescription: RichTextValue
   // Appeal Rights
   appealRightsTitle: string
   appealRightsSummary: RichTextValue

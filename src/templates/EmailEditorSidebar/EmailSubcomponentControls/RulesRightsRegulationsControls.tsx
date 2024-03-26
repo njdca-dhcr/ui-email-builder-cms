@@ -54,23 +54,6 @@ export const RulesRightsRegulationsControls: FC<
         </Control.Container>
       )}
 
-      {isReminder && (
-        <>
-          <SubComponentControlToggle
-            subComponentId={emailSubComponent.id}
-            label="Reminder Is For"
-            onChange={(showReminderIsFor) => setValue({ ...value, showReminderIsFor })}
-            value={value.showReminderIsFor}
-          />
-          <SubComponentControlToggle
-            subComponentId={emailSubComponent.id}
-            label="+ Footnote"
-            onChange={(showFootnote) => setValue({ ...value, showFootnote })}
-            value={value.showFootnote}
-          />
-        </>
-      )}
-
       {isAppealRights && (
         <>
           <SubComponentControlToggle

@@ -21,29 +21,57 @@ const defaultValue: RulesRightsRegulationsValue = {
   variant: RulesRightsRegulationsVariant.Reminder,
   icon: 'Flag',
   reminderTitle: 'Reminder',
-  eligibilityLabel: 'You may only be eligible for this waiver if...',
-  eligibilityConditions: [
+  reminderDescription: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: 'You may only be eligible for this waiver if...',
+          bold: true,
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      children: [
+        {
+          bold: true,
+          text: '',
+        },
+      ],
+    },
     {
       type: 'numbered-list',
       children: [
         {
           type: 'list-item',
-          children: [{ text: 'Overpayment was due to no fault of your own*', bold: true }],
+          children: [
+            {
+              bold: true,
+              text: 'Overpayment was due to no fault of your own*',
+            },
+          ],
         },
         {
           type: 'list-item',
           children: [
             {
-              text: 'Repayment would be unfair and unreasonable given the context',
               bold: true,
+              text: 'Repayment would be unfair and unreasonable given the context',
             },
           ],
         },
       ],
     },
-  ],
-  showReminderIsFor: true,
-  reminderIsFor: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          bold: true,
+          text: '',
+        },
+      ],
+    },
     {
       type: 'paragraph',
       children: [
@@ -53,15 +81,19 @@ const defaultValue: RulesRightsRegulationsValue = {
         },
       ],
     },
-  ],
-  showFootnote: true,
-  footnote: [
+    {
+      type: 'paragraph',
+      children: [
+        {
+          text: '',
+        },
+      ],
+    },
     {
       type: 'paragraph',
       children: [
         {
           text: '*State and federal laws, rules, and guidance will be used to make these determinations.',
-          italic: true,
           bold: true,
         },
       ],
@@ -225,7 +257,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
             label="Reminder title"
             onValueChange={(reminderTitle) => setValue({ ...value, reminderTitle })}
             role="heading"
-            style={styles.title}
+            style={styles.reminderTitle}
           />
         )}
         {isAppealRights && (
@@ -236,7 +268,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
             label="Appeal Rights title"
             onValueChange={(appealRightsTitle) => setValue({ ...value, appealRightsTitle })}
             role="heading"
-            style={styles.title}
+            style={styles.reminderTitle}
           />
         )}
         {isYourRights && (
@@ -247,7 +279,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
             label="Your Rights title"
             onValueChange={(yourRightsTitle) => setValue({ ...value, yourRightsTitle })}
             role="heading"
-            style={styles.title}
+            style={styles.reminderTitle}
           />
         )}
       </Row>
@@ -255,42 +287,13 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         {(isReminder || isAppealRights) && <Cell>{null}</Cell>}
         <Cell elements={['table']} condition={isReminder}>
           <Row>
-            <EditableElement
-              element="td"
-              value={value.eligibilityLabel}
-              label="Eligibility label"
-              onValueChange={(eligibilityLabel) => setValue({ ...value, eligibilityLabel })}
-              style={styles.eligibilityLabel}
-            />
-          </Row>
-          <Row>
             <RichTextEditableElement
               element="td"
-              className="rrr-reminder-eligibility-conditions"
-              label="Eligibility conditions"
-              value={value.eligibilityConditions}
-              onValueChange={(eligibilityConditions) =>
-                setValue({ ...value, eligibilityConditions })
-              }
-              style={styles.eligibilityConditions}
-            />
-          </Row>
-          <Row condition={value.showReminderIsFor}>
-            <RichTextEditableElement
-              element="td"
-              value={value.reminderIsFor}
-              label="Reminder is for"
-              onValueChange={(reminderIsFor) => setValue({ ...value, reminderIsFor })}
-              style={styles.reminderIsFor}
-            />
-          </Row>
-          <Row condition={value.showFootnote}>
-            <RichTextEditableElement
-              element="td"
-              value={value.footnote}
-              label="Reminder footnote"
-              onValueChange={(footnote) => setValue({ ...value, footnote })}
-              style={styles.footnote}
+              className="rrr-reminder"
+              label="Reminder description"
+              value={value.reminderDescription}
+              onValueChange={(reminderDescription) => setValue({ ...value, reminderDescription })}
+              style={styles.reminderDescription}
             />
           </Row>
         </Cell>
@@ -419,25 +422,12 @@ const styles = {
     paddingRight: Spacing.size.medium,
     verticalAlign: 'middle',
   } as CSSProperties,
-  title: {
+  reminderTitle: {
     ...Text.header.h3.bold,
   } as CSSProperties,
-  eligibilityLabel: {
-    ...Text.body.main.semibold,
-    paddingBottom: Spacing.size.extraLarge,
-    paddingTop: Spacing.size.small,
-  } as CSSProperties,
-  eligibilityConditions: {
-    margin: 0,
-    padding: 0,
-  } as CSSProperties,
-  reminderIsFor: {
-    ...Text.body.secondary.regular,
-    paddingTop: Spacing.size.extraLarge,
-  } as CSSProperties,
-  footnote: {
-    ...Text.body.secondary.regular,
-    paddingTop: Spacing.size.extraLarge,
+  reminderDescription: {
+    ...Text.body.main.regular,
+    paddingTop: Spacing.size.medium,
   } as CSSProperties,
   appealSummary: {
     ...Text.body.secondary.regular,

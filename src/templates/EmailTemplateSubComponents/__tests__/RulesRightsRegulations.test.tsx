@@ -96,37 +96,11 @@ describe('RulesRightsRegulations', () => {
 
       itHasAnEditable('title', 'Reminder title')
 
-      itHasAnEditable('eligibility label', 'Eligibility label')
-
-      itHasAnEditableRichText('eligibility conditions', 'Eligibility conditions')
-
-      itHasAnEditableRichText('reminder is for', 'Reminder is for')
-
-      itHasAnEditableRichText('footnote', 'Reminder footnote')
+      itHasAnEditableRichText('reminder description', 'Reminder description')
 
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
-        expect(all).toHaveLength(5)
-      })
-
-      it('can have reminder is for toggled on and off', async () => {
-        const { getByRole, queryByLabelText } = rendered
-
-        expect(queryByLabelText('Reminder is for')).not.toBeNull()
-        await user.click(getByRole('switch', { name: 'Reminder Is For' }))
-        expect(queryByLabelText('Reminder is for')).toBeNull()
-        await user.click(getByRole('switch', { name: 'Reminder Is For' }))
-        expect(queryByLabelText('Reminder is for')).not.toBeNull()
-      })
-
-      it('can have the footnote toggled on and off', async () => {
-        const { getByRole, queryByLabelText } = rendered
-
-        expect(queryByLabelText('Reminder footnote')).not.toBeNull()
-        await user.click(getByRole('switch', { name: '+ Footnote' }))
-        expect(queryByLabelText('Reminder footnote')).toBeNull()
-        await user.click(getByRole('switch', { name: '+ Footnote' }))
-        expect(queryByLabelText('Reminder footnote')).not.toBeNull()
+        expect(all).toHaveLength(2)
       })
     })
 
