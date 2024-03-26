@@ -1,0 +1,218 @@
+name: DUA - Weekly Ineligible
+description: When someone's benefits will not be sent.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: Benefits will not be sent
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Disaster Unemployment Assistance (DUA)
+          name: Disaster Unemployment Assistance (DUA)
+          backgroundColor: "#CCBDDF"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: >-
+                    Your Disaster Unemployment Assistance (DUA) benefits are unable to be
+                    dispersed as you have been found to be ineligible for the week listed below.
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview With Reason And Amount Breakdown
+          icon: Folder
+          status: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
+          statusDueTo: For
+          showSupportiveInformation: true
+          spaceAfter: false
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: "{!eadj_UI_Case__c.DUA_Cert_Range_for_Email__c}"
+                  bold: true
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    This determination was made based on the DUA regulations 20 CFR 625.
+                    Its details and breakdown can be found in the document that will be
+                    mailed to you. A link for this regulation is available
+                  italic: true
+                - text: " "
+                - type: link
+                  url: "https://oui.doleta.gov/unemploy/pdf/20_CFR_625-Disaster.pdf"
+                  children:
+                    - italic: true
+                      text: here
+                - italic: true
+                  text: .
+          showMissingDocumentDeadline: false
+          boxColor: Benefit Blue
+          amountLabel: Calculation Details
+          amountLineItems:
+            - label: Your Benefit Amount
+              value: "${!eadj_Issue__c.eMon_DUA_WBR__c}"
+              bold: true
+            - label: Earnings
+              value: "${!eadj_Issue__c.DUA_Earnings__c}"
+            - label: Garnishment
+              value: "${!eadj_Issue__c.DUA_Garnishment__c}"
+            - label: Pension
+              value: "${!eadj_Issue__c.DUA_Pension_Deduction__c}"
+            - label: Applied to Overpayment
+              value: "{!eadj_Issue__c.DUA_Applied_Overpay__c}"
+          amountTotal:
+            label: You will receive
+            value: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
+            bold: true
+      - kind: SupplementalContent
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: Next Week
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    You will continue to receive certification emails which you must
+                    complete on a weekly basis until the end of the program.
+          secondTitle: Did you return to work full-time?
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you returned to work full-time and are no longer pursuing DUA, you
+                    can simply stop certifying. There are no additional forms.
+      - kind: RulesRightsRegulations
+        visibleByDefault: true
+        required: true
+        description: Rights? Regulations? Appeals? Reminders?
+        defaultValue:
+          variant: Appeal Rights
+          icon: Flag
+          appealRightsTitle: Appeal Rights
+          appealRightsSummary:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you disagree with this determination, you have the right to file an
+                    appeal.
+                - text: >-
+                    Your appeal must be received by
+                    {!eadj_Claim__c.DUA_Determination_60_day_lapse__c}.
+                  bold: true
+          appealRightsShowInstruction: false
+          appealRightsInstruction:
+            - type: paragraph
+              children:
+                - text: "To begin an appeal online, get started below:"
+          appealRightsButton: Get Started
+          appealRightsHref: >-
+            https://www.nj.gov/labor/salesforce/uia-w2l/onlineappealsProd.htm?_gl=1*18faptt*_g[%E2%80%A6]wLjA.&amp;_ga=2.141211767.475107882.1705677406-154199185.1616181038
+          appealRightsShowInfoLabel: true
+          appealRightsInfoLabel: "For your appeal:"
+          appealRightsShowInfo: true
+          appealRightsInfo:
+            - type: paragraph
+              children:
+                - text: "Program Code:"
+                  bold: true
+                - text: "  {!eadj_Issue__c.PC_Code__c}"
+            - type: paragraph
+              children:
+                - text: "Date of Claim:"
+                  bold: true
+                - text: "  {!eadj_Issue__c.eadj_Date_of_Claim__c}"
+            - type: paragraph
+              children:
+                - text: "Date of Determination:"
+                  bold: true
+                - text: " "
+            - type: paragraph
+              children:
+                - text: "        Email: {!eadj_Claim_c.LastModifiedDate}"
+            - type: paragraph
+              children:
+                - text: "        Mail: Date you physically received written documentation"
+      - kind: InformationalBox
+        visibleByDefault: true
+        defaultValue:
+          boxColor: Governing Gray
+          icon: InfoOutline
+          title: Don't know why you're ineligible?
+          description:
+            - type: paragraph
+              children:
+                - text: "Call:"
+                  bold: true
+                - text: " 732-761-2020"
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: >-
+                    You will also receive a mailed determination with the reason for the
+                    denial.
+                  italic: true
+          showSupportiveInformation: false
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                - type: link
+                  url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                  children:
+                    - text: here
+                - text: ". Frequently Asked Questions can be found "
+                - type: link
+                  url: >-
+                    https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                  children:
+                    - text: here
+                - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
