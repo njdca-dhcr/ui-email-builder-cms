@@ -1,0 +1,163 @@
+name: DUA - Program Ending
+description: When the Disaster Unemeployment Assistance program is ending.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: DUA program ending
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Disaster Unemployment Assistance (DUA)
+          name: Disaster Unemployment Assistance (DUA)
+          backgroundColor: "#CCBDDF"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: "The Disaster Unemployment Assistance (DUA) program is ending on:"
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview
+          icon: Folder
+          status: "March 5th, 2023"
+          statusDueTo: For
+          showSupportiveInformation: true
+          spaceAfter: false
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: You will no longer be receiving benefits after this date
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    At this time there is no additional federal or state unemployment
+                    assistance available. If any DUA benefits becomes available, all
+                    potentially eligible people will be notified.
+                  italic: true
+      - kind: SupplementalContent
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: What can I do now?
+          description:
+            - type: paragraph
+              children:
+                - text: "There are other state resources that are available to you:"
+            - type: paragraph
+              children:
+                - text: ""
+            - type: bulleted-list
+              children:
+                - type: list-item
+                  children:
+                    - text: "Individuals and families in need of "
+                    - text: public assistance
+                      bold: true
+                    - text: ", can be found "
+                    - type: link
+                      url: >-
+                        https://www.nj.gov/labor/myunemployment/labor/myunemployment/help/resources-support/
+                      children:
+                        - text: here
+                    - text: ""
+                - type: list-item
+                  children:
+                    - text: "Online tools for "
+                    - text: "finding employment, sending resumes"
+                      bold: true
+                    - text: " to potential employers, and learning about "
+                    - text: new career paths
+                      bold: true
+                    - text: " and training programs can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/career-services/"
+                      children:
+                        - text: here
+                    - text: ""
+                - type: list-item
+                  children:
+                    - text: "Updates on "
+                    - text: "potential extensions of DUA "
+                      bold: true
+                    - text: "on the Unemployment Insurance website can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/"
+                      children:
+                        - text: here
+                    - text: ""
+          secondTitle: Feedback (Optional)
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    This email is a new beta design created by New Jersey's Division of
+                    Unemployment Insurance in collaboration with New Jersey's Office of
+                    Innovation. Take our 2 minute survey
+                - text: " "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
+                  children:
+                    - text: here
+                - text: .
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                - type: link
+                  url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                  children:
+                    - text: here
+                - text: ". Frequently Asked Questions can be found "
+                - type: link
+                  url: >-
+                    https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                  children:
+                    - text: here
+                - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
