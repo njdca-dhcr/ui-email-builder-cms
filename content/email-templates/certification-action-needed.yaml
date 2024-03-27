@@ -1,0 +1,174 @@
+name: Certification - Action Needed
+description: When someone's certification has been received but needs further action to process.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: DateRange
+        visibleByDefault: true
+        description: Using names of months is preferred over numbers (i.e. Jan 5 is
+          clearer than 01/05)
+        defaultValue:
+          range: "[December 1 - 21, 2023] "
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: Certification Received—action needed to process payment
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Unemployment Insurance (UI)
+          name: Unemployment Insurance (UI)
+          backgroundColor: "#B9D8F3"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "Captain America:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: >-
+                    Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits is received and
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview
+          status: We need details about your employer(s)
+          statusDueTo: because...
+          showSupportiveInformation: false
+          spaceAfter: true
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: "because... "
+                - text: >-
+                    you reported one week with earnings followed by a week without
+                    earnings
+                  bold: true
+            - type: paragraph
+              children:
+                - text: "Confirmation #23095132401217"
+                  italic: true
+      - kind: Directive
+        visibleByDefault: true
+        defaultValue:
+          variant: Three Steps
+          title: "Complete the following steps:"
+          showTitle: true
+          showLabel: false
+          linkHref: >-
+            https://secure.dol.state.nj.us/sso/XUI/#login/&amp;realm=ui&amp;goto=https%3A%2F%2Fclaimproxy.dol.state.nj.us%3A443%2Fnjsuccess
+          buttonLabel: Get Started
+          buttonColor: "#1b1b1b"
+          step1Label:
+            - type: paragraph
+              children:
+                - text: Login
+                  bold: true
+                - text: " to your account"
+          showStep1AdditionalContent: false
+          step1Additional:
+            - type: paragraph
+              children:
+                - text: Additional information around Step 1
+          oneStepSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    Supportive information around how the status above was informed and
+                    how a claimant will receive more detailed information and/or a
+                    determination.
+                  italic: true
+          step2Label:
+            - type: paragraph
+              children:
+                - text: Click
+                  bold: true
+                - text: " “File a claim” & "
+                - text: Answer
+                  bold: true
+                - text: " the questions*"
+          showStep2AdditionalContent: true
+          step2Additional:
+            - type: paragraph
+              children:
+                - text: >-
+                    *Question 1: “Have you worked since you last filed a claim for
+                    benefits?”
+                  italic: true
+            - type: paragraph
+              children:
+                - italic: true
+                  text: "Answer: “Yes,” and select an employer listed or add a new employer"
+          step3Label:
+            - type: paragraph
+              children:
+                - text: Submit
+                  bold: true
+                - text: " your answers."
+                - bold: true
+                  text: " Don’t wait."
+          showStep3AdditionalContent: false
+          showMultipleStepsSupportiveText: false
+      - kind: SupplementalContent
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Single Supplemental Content
+          title: Feedback (Optional)
+          description:
+            - type: paragraph
+              children:
+                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                  children:
+                    - text: "here"
+                - text: .
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information on New Jersey’s unemployment program can be found "
+                - type: link
+                  url: >-
+                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                  children:
+                    - text: here
+                - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
