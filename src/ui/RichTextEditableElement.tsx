@@ -63,7 +63,7 @@ export const RichTextEditableElement = forwardRef<any, RichTextEditableElementPr
         <RichTextAdditionalStylesContext.Provider value={memoizedAdditionalStyles}>
           <Element
             aria-label={label}
-            tabIndex={-1}
+            tabIndex={0}
             style={style}
             onFocus={(event) => {
               onFocus && onFocus(event)

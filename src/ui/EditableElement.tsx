@@ -19,6 +19,7 @@ export const EditableElement = forwardRef<HTMLElement, Props>(
         {...props}
         aria-label={label}
         contentEditable
+        tabIndex={0}
         onInput={(event) => {
           onValueChange((event.target as any).innerHTML)
         }}
