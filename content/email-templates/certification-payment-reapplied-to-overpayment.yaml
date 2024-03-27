@@ -130,7 +130,7 @@ components:
             - type: paragraph
               children:
                 - text: "You can certify for benefits "
-                - text: Sunday to Friday from 8am – 7pm.
+                - text: Sunday to Friday from 8am - 7pm.
                   bold: true
           secondTitle: Feedback (Optional)
           secondDescription:

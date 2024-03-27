@@ -55,7 +55,6 @@ components:
         description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
-          icon: Folder
           status: Requires manual review
           showSupportiveInformation: true
           spaceAfter: false
