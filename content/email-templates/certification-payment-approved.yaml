@@ -1,0 +1,174 @@
+name: Certification - Payment Approved
+description: When someone's Unemployment Insurance benefits are processing.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: Certification Received—payment approved
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Unemployment Insurance (UI)
+          name: Unemployment Insurance (UI)
+          backgroundColor: "#B9D8F3"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "Captain America:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: >-
+                    Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits is received and is now processing for payment.
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: "This week you will receive:"
+                  bold: true
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview With Reason And Amount Breakdown
+          icon: Folder
+          status: $100
+          statusDueTo: ""
+          showSupportiveInformation: true
+          spaceAfter: false
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: It may take 2 - 3 business days
+                  bold: true
+                - text: " for funds to appear "
+            - type: paragraph
+              children:
+                - text: "Confirmation #23095132401217 "
+                  italic: true
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    If there is a holiday that falls within this period, please allow 1
+                    additional day for processing.
+                  italic: true
+            - type: paragraph
+              children:
+                - italic: true
+                  text: ""
+            - type: paragraph
+              children:
+                - italic: true
+                  text: >-
+                    If money was deducted from your benefit amount, it is because of
+                    retirement pay or earned wages reported by you, previous overpayments,
+                    child support obligation, or you chose to withhold federal taxes.
+          boxColor: Benefit Blue
+          amountLabel: Calculation Details
+          amountLineItems:
+            - label: Your Benefit Amount
+              value: "$692"
+            - label: Amount deducted
+              value: "$350"
+              bold: true
+              italic: true
+          amountTotal:
+            label: Your payment
+            value: "$342"
+            bold: true
+      - kind: SupplementalContent
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: Look for payment confirmation
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    Another email will be sent to you when payment is sent to your direct
+                    deposit account or your NJDOL provided debit card.
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: >-
+                    Depending on your bank's processes, time to receive your funds will
+                    vary.
+                  italic: true
+          secondTitle: Feedback (Optional)
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                  children:
+                    - text: "here"
+                - text: .
+      - kind: RulesRightsRegulations
+        visibleByDefault: true
+        required: true
+        description: Rights? Regulations? Appeals? Reminders?
+        defaultValue:
+          variant: Reminder
+          icon: Flag
+          reminderTitle: Questions about your payment amount?
+          reminderDescription:
+            - type: paragraph
+              children:
+                - text: "Call: "
+                  bold: true
+                - text: " 732-761-2020"
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information on New Jersey’s unemployment program can be found "
+                - type: link
+                  url: >-
+                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                  children:
+                    - text: here
+                - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
