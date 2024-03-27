@@ -18,6 +18,12 @@ const config: GatsbyConfig = {
     `gatsby-plugin-root-import`,
     `gatsby-transformer-yaml`,
     {
+      resolve: 'gatsby-plugin-html-attributes',
+      options: {
+        lang: 'en-US',
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Email Builder (Beta)`,
