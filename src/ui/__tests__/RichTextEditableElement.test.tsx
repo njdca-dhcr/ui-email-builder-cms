@@ -106,5 +106,28 @@ describe('RichTextEditableElement', () => {
       expect(paragraph).not.toBeNull()
       expect(paragraph?.style.fontWeight).toEqual('bolder')
     })
+
+    it('has a tabIndex', () => {
+      const { baseElement } = renderRichTextEditableElement({
+        element: 'article',
+        value: [{ type: 'paragraph', children: [{ text: 'foo' }] }],
+      })
+      const article = baseElement.querySelector('article')
+      expect(article).not.toBeNull()
+      expect(article?.tabIndex).toEqual(0)
+    })
+
+    describe('when readonly', () => {
+      it('lacks a tabIndex', () => {
+        const { baseElement } = renderRichTextEditableElement({
+          element: 'article',
+          readonly: true,
+          value: [{ type: 'paragraph', children: [{ text: 'foo' }] }],
+        })
+        const article = baseElement.querySelector('article')
+        expect(article).not.toBeNull()
+        expect(article?.tabIndex).toEqual(-1)
+      })
+    })
   })
 })

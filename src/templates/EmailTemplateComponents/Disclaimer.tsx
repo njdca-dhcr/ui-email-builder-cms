@@ -12,7 +12,6 @@ import capitalize from 'lodash.capitalize'
 const defaultValue = (): RichTextValue => {
   const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
   const state = stateById(stateAbbreviation)
-  const lowercasedStateAbbreviation = stateAbbreviation.toLowerCase()
   const title =
     state.kind === AreaKind.Federal ? state.name : `${capitalize(state.kind)} of ${state.name}`
 

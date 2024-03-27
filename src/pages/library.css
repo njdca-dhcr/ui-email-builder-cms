@@ -8,7 +8,10 @@
 .library-filter-input {
   flex: 1;
   border-right-width: 0;
-  outline: none;
+}
+
+.library-filter-input:focus {
+  outline: var(--default-browser-outline);
 }
 
 .library-filter-form input[type='search']::-webkit-calendar-picker-indicator {

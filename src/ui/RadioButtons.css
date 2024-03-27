@@ -34,6 +34,10 @@
     color 150ms ease-in-out;
 }
 
+.radio-button:focus-within {
+  outline: var(--default-browser-outline);
+}
+
 .radio-button:first-of-type {
   border-top-left-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);

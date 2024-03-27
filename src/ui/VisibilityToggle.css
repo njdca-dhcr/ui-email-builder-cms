@@ -5,6 +5,10 @@
   width: var(--icon-length);
 }
 
+.visibility-toggle:focus-within {
+  outline: var(--default-browser-outline);
+}
+
 .visibility-toggle > input {
   height: 100%;
   margin: 0;
