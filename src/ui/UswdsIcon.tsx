@@ -8,7 +8,7 @@ interface UswdsIconProps {
 }
 
 export const UswdsIcon: FC<UswdsIconProps> = ({ icon }) => {
-  return <img src={buildIconUrl(`/${UswdsIconVariants[icon]}.png`)} alt="" />
+  return <img src={buildIconUrl(`/${UswdsIconVariants[icon]}.png`)} alt="" loading="lazy" />
 }
 
 export const UswdsIconVariants = {
