@@ -20,14 +20,14 @@
   margin: 0;
 }
 .edit-preview-text-heading-container p {
-  color: var(--gray-medium-dark);
+  color: var(--gray-dark);
   font-size: var(--font-tiny);
   font-style: italic;
   margin: 0;
 }
 
 .edit-preview-text-text-area-container {
-  background-color: var(--gray-light);
+  background-color: var(--gray-light-medium);
   border-radius: 4px;
   display: flex;
   flex: 1;
@@ -48,7 +48,7 @@
 }
 
 .edit-preview-text-text-area-container textarea::placeholder {
-  color: #c6cace;
+  color: var(--gray-medium-dark);
 }
 
 .edit-preview-text-text-area-container p {
