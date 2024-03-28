@@ -22,8 +22,6 @@ components:
           preset: Disaster Unemployment Assistance (DUA)
           name: Disaster Unemployment Assistance (DUA)
           backgroundColor: "#CCBDDF"
-      - kind: DirectiveButton
-        visibleByDefault: false
   - kind: Name
     visibleByDefault: true
     required: true

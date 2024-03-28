@@ -22,8 +22,6 @@ components:
           preset: Unemployment Insurance (UI)
           name: Unemployment Insurance (UI)
           backgroundColor: "#B9D8F3"
-      - kind: DirectiveButton
-        visibleByDefault: false
   - kind: Name
     visibleByDefault: true
     required: true
