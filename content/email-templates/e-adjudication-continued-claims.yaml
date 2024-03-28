@@ -98,14 +98,6 @@ components:
             - type: paragraph
               children:
                 - text: This form will expire on 5/12/2022
-          oneStepSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    Supportive information around how the status above was informed and
-                    how a claimant will receive more detailed information and/or a
-                    determination.
-                  italic: true
           step2Label:
             - type: paragraph
               children:

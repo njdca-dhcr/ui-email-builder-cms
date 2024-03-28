@@ -90,18 +90,6 @@ components:
                   bold: true
                 - text: " to your account"
           showStep1AdditionalContent: false
-          step1Additional:
-            - type: paragraph
-              children:
-                - text: Additional information around Step 1
-          oneStepSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    Supportive information around how the status above was informed and
-                    how a claimant will receive more detailed information and/or a
-                    determination.
-                  italic: true
           step2Label:
             - type: paragraph
               children:

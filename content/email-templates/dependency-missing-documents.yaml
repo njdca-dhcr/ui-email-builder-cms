@@ -81,14 +81,6 @@ components:
             - type: paragraph
               children:
                 - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
-          oneStepSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    Supportive information around how the status above was informed and
-                    how a claimant will receive more detailed information and/or a
-                    determination.
-                  italic: true
           step2Label:
             - type: paragraph
               children:
