@@ -12,7 +12,6 @@ components:
         required: true
       - kind: ProgramName
   - kind: Name
-    description: Adding a name is highly encouraged
   - kind: Body
     required: true
     subComponents:

@@ -33,7 +33,6 @@ components:
   - kind: Name
     visibleByDefault: true
     required: true
-    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
     defaultValue:
       name: "Captain America:"
   - kind: Body

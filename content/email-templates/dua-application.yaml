@@ -27,7 +27,6 @@ components:
   - kind: Name
     visibleByDefault: true
     required: true
-    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
   - kind: Body

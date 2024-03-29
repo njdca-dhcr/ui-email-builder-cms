@@ -96,7 +96,6 @@ export namespace EmailTemplate {
   export interface Component<T extends ComponentKind = ComponentKind> {
     kind: T
     defaultValue?: Partial<ComponentDefaultValueMapping[T]>
-    description?: string
     visibleByDefault?: boolean
     required?: boolean
     subComponents?: SubComponentKind<T> extends any ? SubComponent<T>[] : never

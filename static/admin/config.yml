@@ -35,7 +35,6 @@ collections:
               widget: 'boolean',
               default: true,
             }
-          - { label: 'Description', name: 'description', widget: 'text' }
           - label: Sub-Components
             name: subComponents
             widget: list

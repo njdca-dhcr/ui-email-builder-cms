@@ -140,32 +140,6 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
     )
   }
 
-  const itDisplaysADescriptionWhenAvailable = () => {
-    it('displays a description when available', () => {
-      emailComponent.description = `<b>${faker.lorem.words(3)}</b>`
-      const { baseElement } = render(
-        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-          <span />
-        </EmailEditorSidebarAccordion.EmailComponent>,
-        { wrapper },
-      )
-      expect(baseElement.querySelector('.description')).toContainHTML(emailComponent.description)
-    })
-  }
-
-  const itDoesNotDisplayADescriptionWhenUnavailable = () => {
-    it('does not display a description when unavailable', () => {
-      emailComponent.description = undefined
-      const { baseElement } = render(
-        <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-          <span />
-        </EmailEditorSidebarAccordion.EmailComponent>,
-        { wrapper },
-      )
-      expect(baseElement.querySelector('.description')).toBeNull()
-    })
-  }
-
   const itIsHighlightedWhenTheComponentIsActive = () => {
     it('is highlighted when the component is active', () => {
       const { baseElement } = render(
@@ -302,10 +276,6 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
       emailComponent = buildUniqueEmailComponent('Name')
     })
 
-    itDisplaysADescriptionWhenAvailable()
-
-    itDoesNotDisplayADescriptionWhenUnavailable()
-
     itIsHighlightedWhenTheComponentIsActive()
 
     itIsHighlightedWhenAnyOfItsSubcomponentsAreActive()
@@ -355,10 +325,6 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
         beforeEach(() => {
           emailComponent = buildUniqueEmailComponent(kind)
         })
-
-        itDisplaysADescriptionWhenAvailable()
-
-        itDoesNotDisplayADescriptionWhenUnavailable()
 
         itIsHighlightedWhenTheComponentIsActive()
 
@@ -448,29 +414,6 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
           const input = baseElement.querySelector('.label-and-toggle input')
           expect(input).toBeNull()
           expect(baseElement).toHaveTextContent('Required')
-        })
-
-        it('has a link to settings', () => {
-          const { baseElement } = render(
-            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-              <span />
-            </EmailEditorSidebarAccordion.EmailComponent>,
-            { wrapper },
-          )
-          const link: HTMLAnchorElement | null = baseElement.querySelector('a')
-          expect(link).not.toBeNull()
-          expect(link!.href).toEqual(urlFor('/settings'))
-        })
-
-        it('ignores description when present', () => {
-          emailComponent.description = faker.lorem.paragraph()
-          const { queryByText } = render(
-            <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
-              <span />
-            </EmailEditorSidebarAccordion.EmailComponent>,
-            { wrapper },
-          )
-          expect(queryByText(emailComponent.description)).toBeNull()
         })
       })
     })

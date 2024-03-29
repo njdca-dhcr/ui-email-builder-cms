@@ -53,7 +53,6 @@ export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKin
     kind,
     required: false,
     visibleByDefault: true,
-    description: faker.lorem.words(3),
     ...options,
   }
 }

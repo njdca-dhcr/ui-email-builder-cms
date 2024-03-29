@@ -22,7 +22,6 @@ components:
         visibleByDefault: true
   - kind: Name
     visibleByDefault: true
-    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
   - kind: Body
     required: true
     subComponents:

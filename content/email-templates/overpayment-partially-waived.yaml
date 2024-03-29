@@ -13,7 +13,6 @@ components:
       - kind: ProgramName
         required: false
   - kind: Name
-    description: "Adding a name is highly encouraged "
   - kind: Body
     subComponents:
       - kind: Intro
