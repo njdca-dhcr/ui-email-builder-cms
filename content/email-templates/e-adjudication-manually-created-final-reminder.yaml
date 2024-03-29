@@ -1,5 +1,5 @@
-name: eAdjudication - Initial Source (Final Reminder)
-description: When there's an issue with someone's UI claim and it will expire soon.
+name: eAdjudication - Manually Created (Final Reminder)
+description: When there's an issue with someone's UI claim that requires more information and the claim will expire soon.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
