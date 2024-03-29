@@ -22,7 +22,7 @@ collections:
       - label: Components
         name: components
         widget: list
-        summary: '{{fields.kind}} {{fields.description}}'
+        summary: '{{fields.kind}}'
         fields:
           - label: 'Select component'
             name: 'kind'
@@ -65,4 +65,3 @@ collections:
                   widget: 'boolean',
                   default: true,
                 }
-              - { label: 'Description', name: 'description', widget: 'text' }

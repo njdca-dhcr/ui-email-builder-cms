@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: DUA program ending
       - kind: ProgramName
@@ -33,7 +32,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -42,7 +40,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
           icon: Folder
@@ -65,7 +62,6 @@ components:
                   italic: true
       - kind: SupplementalContent
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
           title: What can I do now?
@@ -136,8 +132,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: New issue regarding your claim
       - kind: ProgramName
@@ -35,7 +34,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -44,7 +42,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview With Reason
           status: More information needed
@@ -116,7 +113,6 @@ components:
                   italic: true
       - kind: RulesRightsRegulations
         visibleByDefault: true
-        description: Rights? Regulations? Appeals? Reminders?
         defaultValue:
           variant: Your Rights
           yourRightsTitle: "Your Rights:"
@@ -168,7 +164,6 @@ components:
                         his/her discretion, pose the question(s) to your former employer.
       - kind: LoginDetails
         visibleByDefault: true
-        description: Just in case they need to reset their password
         defaultValue:
           variant: Information
           loginInformationTitle: Important Login Information
@@ -204,8 +199,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

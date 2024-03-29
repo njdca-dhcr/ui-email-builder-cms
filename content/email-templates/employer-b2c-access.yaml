@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Employer Response Portal Access
       - kind: DirectiveButton
@@ -28,7 +27,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -37,7 +35,6 @@ components:
       - kind: LoginDetails
         required: true
         visibleByDefault: true
-        description: Just in case they need to reset their password
         defaultValue:
           variant: Information
           loginDetailsTitle: "Your Username:"
@@ -76,7 +73,6 @@ components:
       - kind: SupplementalContent
         required: true
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Single Supplemental Content
           title: Finish creating your account
@@ -152,7 +148,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
           icon: Warning
@@ -275,7 +270,6 @@ components:
       - kind: SupplementalContent
         required: true
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
           title: Need additional accounts for your company?
@@ -367,7 +361,6 @@ components:
                   italic: true
       - kind: RulesRightsRegulations
         visibleByDefault: true
-        description: Rights? Regulations? Appeals? Reminders?
         required: true
         defaultValue:
           variant: Appeal Rights
@@ -502,7 +495,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph

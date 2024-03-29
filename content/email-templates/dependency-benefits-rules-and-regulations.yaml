@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Dependency Benefits Rules & Regulations
       - kind: ProgramName
@@ -33,7 +32,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -42,7 +40,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
           status: Your application will be sent in a separate email
@@ -87,7 +84,6 @@ components:
       - kind: SupplementalContent
         required: true
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Triple Supplemental Content
           title: How do I qualify?
@@ -176,7 +172,6 @@ components:
                     - text: Other legal documents
       - kind: RulesRightsRegulations
         visibleByDefault: true
-        description: Rights? Regulations? Appeals? Reminders?
         required: true
         defaultValue:
           variant: Your Rights

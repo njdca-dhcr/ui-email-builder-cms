@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Benefits will not be sent
       - kind: ProgramName
@@ -33,7 +32,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -44,7 +42,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview With Reason And Amount Breakdown
           icon: Folder
@@ -95,7 +92,6 @@ components:
             bold: true
       - kind: SupplementalContent
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
           title: Next Week
@@ -115,7 +111,6 @@ components:
       - kind: RulesRightsRegulations
         visibleByDefault: true
         required: true
-        description: Rights? Regulations? Appeals? Reminders?
         defaultValue:
           variant: Appeal Rights
           icon: Flag
@@ -191,8 +186,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

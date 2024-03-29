@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Application recieved; More information required
       - kind: ProgramName
@@ -33,7 +32,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -43,7 +41,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Missing Document
           status: >-
@@ -100,7 +97,6 @@ components:
           showSupportiveInformation: false
       - kind: SupplementalContent
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Benefit Amount
           title: Weekly Certifications
@@ -165,7 +161,6 @@ components:
       - kind: RulesRightsRegulations
         visibleByDefault: true
         required: true
-        description: Rights? Regulations? Appeals? Reminders?
         defaultValue:
           variant: Appeal Rights
           icon: Flag
@@ -216,8 +211,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

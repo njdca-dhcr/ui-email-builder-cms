@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: You are not eligible for Dependency Benefits
       - kind: ProgramName
@@ -33,7 +32,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -42,7 +40,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
           status: Your weekly benefit rate will not increase
@@ -120,7 +117,6 @@ components:
       - kind: RulesRightsRegulations
         visibleByDefault: true
         required: true
-        description: Rights? Regulations? Appeals? Reminders?
         defaultValue:
           variant: Appeal Rights
           icon: Flag
@@ -157,7 +153,6 @@ components:
       - kind: SupplementalContent
         required: true
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Single Supplemental Content
           title: Feedback (Optional)

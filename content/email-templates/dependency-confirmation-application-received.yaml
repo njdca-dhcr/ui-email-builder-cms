@@ -12,7 +12,6 @@ components:
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Your application has been received
       - kind: ProgramName
@@ -33,7 +32,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -44,7 +42,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview
           status: Received &amp; Under Review
@@ -66,7 +63,6 @@ components:
       - kind: SupplementalContent
         required: true
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
           title: Start/Continue Weekly Certification
@@ -99,7 +95,6 @@ components:
       - kind: LoginDetails
         required: true
         visibleByDefault: true
-        description: Just in case they need to reset their password
         defaultValue:
           variant: Information
           loginInformationTitle: "Important: Keep an eye out for emails from NJDOL"
@@ -129,8 +124,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

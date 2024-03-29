@@ -480,32 +480,6 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     expect(input).toBeChecked()
   })
 
-  it('displays a description when available', () => {
-    emailSubComponent.description = `<b>${faker.lorem.words(3)}</b>`
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
-        emailSubComponent={emailSubComponent}
-        nextEmailSubComponent={undefined}
-      />,
-      { wrapper },
-    )
-    expect(baseElement.querySelector('.description')).toContainHTML(emailSubComponent.description)
-  })
-
-  it('does not display a description when unavailable', () => {
-    emailSubComponent.description = undefined
-    const { baseElement } = render(
-      <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
-        emailSubComponent={emailSubComponent}
-        nextEmailSubComponent={undefined}
-      />,
-      { wrapper },
-    )
-    expect(baseElement.querySelector('.description')).toBeNull()
-  })
-
   it('displays subcomponent controls', () => {
     emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
     const { queryByText } = render(
@@ -564,38 +538,5 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     expect(
       baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass}`),
     ).toBeNull()
-  })
-
-  describe('when DepartmentSeal', () => {
-    beforeEach(() => {
-      emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DepartmentSeal' })
-    })
-
-    it('ignores description when present', () => {
-      emailSubComponent.description = faker.lorem.paragraph()
-      const { queryByText } = render(
-        <EmailEditorSidebarAccordion.EmailSubComponent
-          componentId={faker.lorem.word()}
-          emailSubComponent={emailSubComponent}
-          nextEmailSubComponent={undefined}
-        />,
-        { wrapper },
-      )
-      expect(queryByText(emailSubComponent.description)).toBeNull()
-    })
-
-    it('has a link to settings', () => {
-      const { baseElement } = render(
-        <EmailEditorSidebarAccordion.EmailSubComponent
-          componentId={faker.lorem.word()}
-          emailSubComponent={emailSubComponent}
-          nextEmailSubComponent={undefined}
-        />,
-        { wrapper },
-      )
-      const link: HTMLAnchorElement | null = baseElement.querySelector('a')
-      expect(link).not.toBeNull()
-      expect(link!.href).toEqual(urlFor('/settings'))
-    })
   })
 })

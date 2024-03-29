@@ -11,14 +11,11 @@ components:
         required: true
       - kind: DateRange
         visibleByDefault: true
-        description: Using names of months is preferred over numbers (i.e. Jan 5 is
-          clearer than 01/05)
         defaultValue:
           range: "[00/00/0000 - 00/00/0000] "
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Certification Received—you will not receive funds this week
       - kind: ProgramName
@@ -39,7 +36,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -49,7 +45,6 @@ components:
       - kind: Status
         required: true
         visibleByDefault: true
-        description: Make it obvious what the current state is
         defaultValue:
           variant: Overview With Reason And Amount Breakdown
           icon: Folder
@@ -91,7 +86,6 @@ components:
             bold: true
       - kind: SupplementalContent
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
           title: Continue Weekly Certifications
@@ -127,7 +121,6 @@ components:
       - kind: RulesRightsRegulations
         visibleByDefault: true
         required: true
-        description: Rights? Regulations? Appeals? Reminders?
         defaultValue:
           variant: Reminder
           icon: Flag
@@ -144,8 +137,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

@@ -11,14 +11,11 @@ components:
         required: true
       - kind: DateRange
         visibleByDefault: true
-        description: Using names of months is preferred over numbers (i.e. Jan 5 is
-          clearer than 01/05)
         defaultValue:
           range: "{!eadj_UI_Case__c.DUA_Cert_Range_for_Email__c}"
       - kind: Title
         required: true
         visibleByDefault: true
-        description: Keep this short and to the point!
         defaultValue:
           title: Certify for benefits
       - kind: ProgramName
@@ -41,7 +38,6 @@ components:
       - kind: Intro
         required: true
         visibleByDefault: true
-        description: Keep it simple and clear. Don't use filler language like "please" or
         defaultValue:
           intro:
             - type: paragraph
@@ -98,7 +94,6 @@ components:
           showLabel: false
       - kind: SupplementalContent
         visibleByDefault: true
-        description: Add other resources that will help color the message you're sending
         defaultValue:
           variant: Double Supplemental Content
           title: Weekly Certifications
@@ -139,8 +134,6 @@ components:
       - kind: AdditionalContent
         visibleByDefault: true
         required: true
-        description: A great place to add links to find out more about programs and
-          other state offerings. <strong>Do not use "click here"!</strong>
         defaultValue:
           content:
             - type: paragraph

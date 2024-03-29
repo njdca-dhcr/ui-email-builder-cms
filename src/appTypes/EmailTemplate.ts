@@ -85,7 +85,6 @@ export namespace EmailTemplate {
   > {
     kind: K
     defaultValue?: Partial<SubComponentDefaultValueMapping[K]>
-    description?: string
     required?: boolean
     visibleByDefault?: boolean
     variant?: number

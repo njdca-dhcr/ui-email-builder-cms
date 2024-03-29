@@ -19,11 +19,10 @@ import {
   SYNC_SIDEBAR_AND_PREVIEW_SCROLL,
   useSyncSidebarAndPreviewScroll,
 } from '../SyncSidebarAndPreviewScroll'
-import { Link } from 'gatsby'
 import { VisibilityToggle } from 'src/ui/VisibilityToggle'
 import { EmailSubComponentFloatingControls } from './EmailSubcomponentControls/EmailSubcomponentFloatingControls'
-import { SimpleInlineHtml } from 'src/ui/SimpleInlineHtml'
 import { EmailComponentDescription } from './EmailComponentDescription'
+import { EmailSubComponentDescription } from './EmailSubComponentDescription'
 
 interface ContainerProps {
   children: ReactNode
@@ -161,17 +160,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({
             disabled={emailSubComponent.required ?? false}
           />
         </div>
-
-        {isEditableInSettings && (
-          <p className="description">
-            Edit this in <Link to="/settings">Settings</Link>
-          </p>
-        )}
-        {!isEditableInSettings && emailSubComponent.description && (
-          <p className={classNames('description', { invisible: shouldShow.off })}>
-            <SimpleInlineHtml html={emailSubComponent.description} />
-          </p>
-        )}
+        <EmailSubComponentDescription emailSubComponent={emailSubComponent} />
         <EmailSubComponentControls
           componentId={componentId}
           emailSubComponent={emailSubComponent}
