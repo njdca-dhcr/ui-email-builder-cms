@@ -1,5 +1,5 @@
-name: eAdjudication - Confirmation
-description: When someone's response has been received and is under review.
+name: eAdjudication - Confirmation Weekly
+description: When someone's questionnaire has been received and is under review.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -9,12 +9,18 @@ components:
     subComponents:
       - kind: DepartmentSeal
         required: true
+      - kind: DateRange
+        visibleByDefault: false
+        description: Using names of months is preferred over numbers (i.e. Jan 5 is
+          clearer than 01/05)
+        defaultValue:
+          range: "[00/00/0000 - 00/00/0000]"
       - kind: Title
         required: true
         visibleByDefault: true
         description: Keep this short and to the point!
         defaultValue:
-          title: Your response has been received
+          title: Questionnaire received
       - kind: ProgramName
         visibleByDefault: true
         required: true
@@ -49,24 +55,20 @@ components:
         defaultValue:
           variant: Overview
           status: Received &amp; Under Review
-          statusDueTo: ""
-          showSupportiveInformation: false
+          showSupportiveInformation: true
           spaceAfter: true
           showDescription: true
           description:
             - type: paragraph
               children:
-                - text: "Time Stamp: "
-                  bold: true
-                - text: "02/27/2023 @ 11:21 am"
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
                 - text: It may take up to 4 weeks
                   bold: true
-                - text: " to determine your eligibility."
+                - text: " to determine your eligibility (results)."
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: Your determination details will arrive in the mail.
+                  italic: true
       - kind: SupplementalContent
         visibleByDefault: true
         description: Add other resources that will help color the message you're sending
@@ -76,17 +78,18 @@ components:
           description:
             - type: paragraph
               children:
-                - text: Continue to certify for benefits every week.
+                - text: "While we review your claim, "
+                - text: you must continue to certify for benefits every week.
                   bold: true
-                - text: " You will receive a link next week to complete."
+                - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
             - type: paragraph
               children:
                 - text: ""
             - type: paragraph
               children:
-                - text: >-
-                    You will only receive benefits for the weeks you have certified and
-                    have been found eligible.
+                - text: "You can now certify for benefits "
+                - text: Sunday to Friday from 8am – 7pm.
+                  bold: true
           secondTitle: Feedback (Optional)
           secondDescription:
             - type: paragraph
