@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Dependency Benefits Rules & Regulations
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Dependency Benefits
           name: Dependency Benefits
           backgroundColor: "#F1DEA0"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -39,7 +35,6 @@ components:
                 - text: You have requested to apply for Dependency Benefits. This email contains information about dependency benefits that may help you with your application.
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: Your application will be sent in a separate email
@@ -47,7 +42,6 @@ components:
           spaceAfter: false
           showDescription: false
       - kind: InformationalBox
-        visibleByDefault: true
         required: true
         defaultValue:
           boxColor: Benefit Blue
@@ -83,7 +77,6 @@ components:
           showSupportiveInformation: false
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Triple Supplemental Content
           title: How do I qualify?
@@ -171,7 +164,6 @@ components:
                   children:
                     - text: Other legal documents
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Your Rights

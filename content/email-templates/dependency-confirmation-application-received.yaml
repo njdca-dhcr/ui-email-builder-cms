@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Your application has been received
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Dependency Benefits
           name: Dependency Benefits
           backgroundColor: "#F1DEA0"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -41,7 +37,6 @@ components:
                     Benefits is
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: Received &amp; Under Review
@@ -62,7 +57,6 @@ components:
                   italic: true
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Start/Continue Weekly Certification
@@ -94,7 +88,6 @@ components:
                 - text: .
       - kind: LoginDetails
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Information
           loginInformationTitle: "Important: Keep an eye out for emails from NJDOL"
@@ -122,7 +115,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

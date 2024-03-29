@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: You are not eligible for Dependency Benefits
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Dependency Benefits
           name: Dependency Benefits
           backgroundColor: "#F1DEA0"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -39,14 +35,12 @@ components:
                 - text: Your application for Dependency Benefits has been reviewed and
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: Your weekly benefit rate will not increase
           showSupportiveInformation: false
           showDescription: false
       - kind: InformationalBox
-        visibleByDefault: true
         required: true
         defaultValue:
           boxColor: Benefit Blue
@@ -115,7 +109,6 @@ components:
                 - italic: true
                   text: This determination was made based on available information.
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Appeal Rights
@@ -152,7 +145,6 @@ components:
                 - text: "  {!eadj_Issue__c.LastModifiedDate}"
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Single Supplemental Content
           title: Feedback (Optional)

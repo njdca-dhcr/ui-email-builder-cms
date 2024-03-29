@@ -11,13 +11,11 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Employer Response Portal Access
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!Receiving_User.Full_Name__c}:"
@@ -26,7 +24,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -34,7 +31,6 @@ components:
                 - text: Welcome to the Employer Response Portal.
       - kind: LoginDetails
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Information
           loginDetailsTitle: "Your Username:"
@@ -72,7 +68,6 @@ components:
           loginInformationIcon: Person
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Single Supplemental Content
           title: Finish creating your account
@@ -147,7 +142,6 @@ components:
                   italic: true
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           icon: Warning
@@ -188,7 +182,6 @@ components:
           totalLabel: You must pay
           totalValue: $150
       - kind: Directive
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: One Step
@@ -269,7 +262,6 @@ components:
                     number on the payment.
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Need additional accounts for your company?
@@ -360,7 +352,6 @@ components:
                     amount.
                   italic: true
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Appeal Rights
@@ -494,7 +485,6 @@ components:
                         his/her discretion, pose the question(s) to your former employer.
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph

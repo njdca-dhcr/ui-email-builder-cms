@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Benefits are on the way
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Disaster Unemployment Assistance (DUA)
           name: Disaster Unemployment Assistance (DUA)
           backgroundColor: "#CCBDDF"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -48,7 +44,6 @@ components:
                 - text: "You will receive:"
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason And Amount Breakdown
           icon: Folder
@@ -96,7 +91,6 @@ components:
             value: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
             bold: true
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Next Week
@@ -114,7 +108,6 @@ components:
                     If you returned to work full-time and are no longer pursuing DUA, you
                     can simply stop certifying. There are no additional forms.
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Reminder
@@ -147,7 +140,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

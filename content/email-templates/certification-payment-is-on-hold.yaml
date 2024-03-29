@@ -10,23 +10,19 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
         defaultValue:
           range: "[00/00/0000 - 00/00/0000]"
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Certification Received—payment is on hold
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
           name: Unemployment Insurance (UI)
           backgroundColor: "#B9D8F3"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "Captain America:"
@@ -35,7 +31,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -44,7 +39,6 @@ components:
                     Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: Requires manual review
@@ -69,7 +63,6 @@ components:
                     additional day for processing.
                   italic: true
       - kind: InformationalBox
-        visibleByDefault: true
         defaultValue:
           boxColor: Benefit Blue
           icon: Info
@@ -137,7 +130,6 @@ components:
                   italic: true
           showSupportiveInformation: false
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: If we can pay you...
@@ -155,7 +147,6 @@ components:
                     You will receive a link to an online questionnaire. The faster you
                     send us your responses, the faster we can make a determination.
       - kind: InformationalBox
-        visibleByDefault: true
         defaultValue:
           boxColor: Yielding Yellow
           icon: Autorenew
@@ -175,7 +166,6 @@ components:
                 - text: You can certify for benefits Sunday to Friday from 8am - 7pm.
           showSupportiveInformation: false
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Reminder
@@ -191,7 +181,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

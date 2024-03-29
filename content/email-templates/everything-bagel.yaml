@@ -10,37 +10,24 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
       - kind: Title
-        visibleByDefault: true
       - kind: ProgramName
-        visibleByDefault: true
       - kind: DirectiveButton
-        visibleByDefault: true
   - kind: Name
-    visibleByDefault: true
   - kind: Body
     required: true
     subComponents:
       - kind: Intro
-        visibleByDefault: true
       - kind: Status
-        visibleByDefault: true
       - kind: Directive
-        visibleByDefault: true
       - kind: SupplementalContent
-        visibleByDefault: true
       - kind: RulesRightsRegulations
-        visibleByDefault: true
       - kind: InformationalBox
-        visibleByDefault: true
       - kind: LoginDetails
-        visibleByDefault: true
   - kind: Footer
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
   - kind: StateSeal
     required: true
   - kind: Disclaimer

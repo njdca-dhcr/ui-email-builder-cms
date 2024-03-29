@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Application recieved; More information required
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Disaster Unemployment Assistance (DUA)
           name: Disaster Unemployment Assistance (DUA)
           backgroundColor: "#CCBDDF"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -40,7 +36,6 @@ components:
                     Your Disaster Unemployment Assistance (DUA) application is received but we are...
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Missing Document
           status: >-
@@ -79,7 +74,6 @@ components:
           subjectLineValue: "Eligible Pending Review Documents<br>{!eadj_Claim_c.Name}"
           showMissingDocumentDeadline: false
       - kind: InformationalBox
-        visibleByDefault: true
         required: true
         defaultValue:
           boxColor: Yielding Yellow
@@ -96,7 +90,6 @@ components:
                   italic: true
           showSupportiveInformation: false
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Benefit Amount
           title: Weekly Certifications
@@ -159,7 +152,6 @@ components:
                     amount.
                   italic: true
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Appeal Rights
@@ -209,7 +201,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

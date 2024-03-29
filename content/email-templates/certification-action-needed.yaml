@@ -10,16 +10,13 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
         defaultValue:
           range: "[December 1 - 21, 2023] "
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Certification Received—action needed to process payment
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
@@ -28,7 +25,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "Captain America:"
@@ -37,7 +33,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -46,7 +41,6 @@ components:
                     Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits is received and
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: We need details about your employer(s)
@@ -67,7 +61,6 @@ components:
                 - text: "Confirmation #23095132401217"
                   italic: true
       - kind: Directive
-        visibleByDefault: true
         defaultValue:
           variant: Three Steps
           title: "Complete the following steps:"
@@ -116,7 +109,6 @@ components:
           showStep3AdditionalContent: false
           showMultipleStepsSupportiveText: false
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Single Supplemental Content
           title: Feedback (Optional)
@@ -134,7 +126,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

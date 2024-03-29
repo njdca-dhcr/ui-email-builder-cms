@@ -11,11 +11,9 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Registration complete
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Custom
@@ -24,7 +22,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "CAPTAIN AMERICA:"
@@ -33,7 +30,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -41,7 +37,6 @@ components:
                 - text: The registration/confirmation you submitted for your scheduled hearing was
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason
           status: Received &amp; confirmed
@@ -55,7 +50,6 @@ components:
                 - text: "March 22, 2024 @ 11am"
                   bold: true
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: How to prepare for your appeal
@@ -116,7 +110,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

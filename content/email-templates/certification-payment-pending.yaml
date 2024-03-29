@@ -10,23 +10,19 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
         defaultValue:
           range: "[00/00/0000 - 00/00/0000]"
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Certification Received—pending payment
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
           name: Unemployment Insurance (UI)
           backgroundColor: "#B9D8F3"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "Captain America:"
@@ -35,7 +31,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -44,7 +39,6 @@ components:
                     Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits is received and is
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: Pending payment
@@ -57,7 +51,6 @@ components:
                 - text: "Confirmation #23095132401217"
                   italic: true
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Appealing a disqualification? Waiting for an interview?
@@ -87,7 +80,6 @@ components:
                 - text: Sunday to Friday from 8am - 7pm.
                   bold: true
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Reminder
@@ -111,7 +103,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

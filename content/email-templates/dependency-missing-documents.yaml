@@ -11,11 +11,9 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Missing Document(s)
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Dependency Benefits
@@ -24,7 +22,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -33,7 +30,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -42,7 +38,6 @@ components:
                     We have received your application for Dependency Benefits, but we need more information to decide if you are eligible.
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason
           status: Document(s) needed
@@ -55,7 +50,6 @@ components:
                 - text: "{!eadj_UI_Case__c.eAdj_Dependency_Docs_Needed__c}"
                   bold: true
       - kind: Directive
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Three Steps
@@ -110,7 +104,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

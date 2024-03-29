@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: DUA program ending
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Disaster Unemployment Assistance (DUA)
           name: Disaster Unemployment Assistance (DUA)
           backgroundColor: "#CCBDDF"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -39,7 +35,6 @@ components:
                 - text: "The Disaster Unemployment Assistance (DUA) program is ending on:"
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           icon: Folder
@@ -61,7 +56,6 @@ components:
                     potentially eligible people will be notified.
                   italic: true
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: What can I do now?
@@ -130,7 +124,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

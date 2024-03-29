@@ -11,11 +11,9 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Finish submitting your form
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
@@ -24,7 +22,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "CAPTAIN AMERICA:"
@@ -33,7 +30,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -41,7 +37,6 @@ components:
                 - text: Your Unemployment Insurance (UI) claim is under review and it has been found to be
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: More information needed
@@ -53,7 +48,6 @@ components:
               children:
                 - text: "If you do not submit your form, you may not be eligible for benefits."
       - kind: Directive
-        visibleByDefault: true
         defaultValue:
           variant: Three Steps
           showTitle: false

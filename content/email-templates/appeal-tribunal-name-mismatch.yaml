@@ -11,11 +11,9 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Incomplete Registration/ Confirmation
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Custom
@@ -24,7 +22,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "CAPTAIN AMERICA:"
@@ -33,7 +30,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -41,7 +37,6 @@ components:
                 - text: The registration/confirmation you submitted for your scheduled hearing was
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason
           status: Unsuccessful
@@ -55,7 +50,6 @@ components:
                 - text: there is a mismatch between the docket number and the appeal record
                   bold: true
       - kind: Directive
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Three Steps w/ Step 2 Expansion
@@ -113,7 +107,6 @@ components:
                   bold: true
           showMultipleStepsSupportiveText: false
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: You must receive a confirmation email
@@ -141,7 +134,6 @@ components:
                     participate in the hearing.
                   italic: true
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         defaultValue:
           variant: Reminder
           icon: Flag
@@ -155,7 +147,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

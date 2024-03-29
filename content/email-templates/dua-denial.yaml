@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: You are Not Elibible
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Disaster Unemployment Assistance (DUA)
           name: Disaster Unemployment Assistance (DUA)
           backgroundColor: "#CCBDDF"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -40,7 +36,6 @@ components:
                     Your Disaster Unemployment Assistance (DUA) eligibility has been reviewed, and you have been found to be:
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason
           status: Not Eligible
@@ -66,7 +61,6 @@ components:
                 - italic: true
                   text: .
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Appeal Rights
@@ -113,7 +107,6 @@ components:
               children:
                 - text: "        Mail: Date you physically received written documentation"
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Single Supplemental Content
           title: Feedback (Optional)
@@ -135,7 +128,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

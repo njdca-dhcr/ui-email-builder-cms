@@ -10,16 +10,13 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
         defaultValue:
           range: "{!eadj_UI_Case__c.DUA_Cert_Range_for_Email__c}"
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Certify for benefits
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Disaster Unemployment Assistance (DUA)
@@ -28,7 +25,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -37,7 +33,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -45,7 +40,6 @@ components:
                 - text: >-
                     Your Disaster Unemployment Assistance (DUA) weekly certification(s) is ready for you to complete.
       - kind: Directive
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Three Steps
@@ -93,7 +87,6 @@ components:
           showMultipleStepsSupportiveText: false
           showLabel: false
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Weekly Certifications
@@ -132,7 +125,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

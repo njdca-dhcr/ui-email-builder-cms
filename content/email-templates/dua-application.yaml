@@ -11,11 +11,9 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Ready for you to apply
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Disaster Unemployment Assistance (DUA)
@@ -24,7 +22,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
@@ -33,7 +30,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -41,7 +37,6 @@ components:
                 - text: >-
                     Our records show that you may be applying for unemployment due to a recent disaster that took place.
       - kind: Directive
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Three Steps w/ Step 2 Expansion
@@ -107,7 +102,6 @@ components:
                 - text: Additional information around Step 3
           showMultipleStepsSupportiveText: false
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Required Documentation
@@ -152,7 +146,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

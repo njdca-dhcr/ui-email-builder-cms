@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: You are partially eligible for Dependency Benefits
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Dependency Benefits
           name: Dependency Benefits
           backgroundColor: "#F1DEA0"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -39,7 +35,6 @@ components:
                 - text: Your application for Dependency Benefits has been reviewed and
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: "{!eadj_Issue__c.Partial_Eligible_Percent__c}*"
@@ -53,7 +48,6 @@ components:
                     dependent(s)
                   bold: true
       - kind: InformationalBox
-        visibleByDefault: true
         required: true
         defaultValue:
           boxColor: Benefit Blue
@@ -140,7 +134,6 @@ components:
                     of New Jersey.
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: When will I receive my extra benefits?
@@ -163,7 +156,6 @@ components:
                     - text: here
                 - text: .
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Appeal Rights

@@ -10,16 +10,13 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: true
         defaultValue:
           range: "[00/00/0000 - 00/00/0000] "
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: There's an issue with your weekly certification
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
@@ -28,7 +25,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "CAPTAIN AMERICA:"
@@ -37,7 +33,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -45,7 +40,6 @@ components:
                 - text: Your Unemployment Insurance (UI) certification has an issue and we need some more information.
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason
           status: More information needed
@@ -68,7 +62,6 @@ components:
                   text: "Concerning: "
                 - text: "[6 days before] - {!eadj_UI_Case__c.eAdj_Cert_Week_Ending_Date__c}"
       - kind: Directive
-        visibleByDefault: true
         defaultValue:
           variant: Three Steps
           showTitle: false
@@ -125,7 +118,6 @@ components:
                     your results.
                   italic: true
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         defaultValue:
           variant: Your Rights
           yourRightsTitle: "Your Rights:"
@@ -176,7 +168,6 @@ components:
                         included on the form and the reviewing claims examiner may, at
                         his/her discretion, pose the question(s) to your former employer.
       - kind: LoginDetails
-        visibleByDefault: true
         defaultValue:
           variant: Information
           loginInformationTitle: Important Login Information
@@ -210,7 +201,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

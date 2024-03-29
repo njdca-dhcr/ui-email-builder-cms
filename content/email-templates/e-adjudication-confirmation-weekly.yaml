@@ -15,11 +15,9 @@ components:
           range: "[00/00/0000 - 00/00/0000]"
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Questionnaire received
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
@@ -28,7 +26,6 @@ components:
       - kind: DirectiveButton
         visibleByDefault: false
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "CAPTAIN AMERICA:"
@@ -37,7 +34,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -45,7 +41,6 @@ components:
                 - text: Your Unemployment Insurance (UI) response is
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: Received &amp; Under Review
@@ -64,7 +59,6 @@ components:
                 - text: Your determination details will arrive in the mail.
                   italic: true
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Weekly Certifications
@@ -102,7 +96,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

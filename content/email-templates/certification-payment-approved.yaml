@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Certification Received—payment approved
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Unemployment Insurance (UI)
           name: Unemployment Insurance (UI)
           backgroundColor: "#B9D8F3"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "Captain America:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -47,7 +43,6 @@ components:
                   bold: true
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview With Reason And Amount Breakdown
           icon: Folder
@@ -98,7 +93,6 @@ components:
             value: "$342"
             bold: true
       - kind: SupplementalContent
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: Look for payment confirmation
@@ -129,7 +123,6 @@ components:
                     - text: "here"
                 - text: .
       - kind: RulesRightsRegulations
-        visibleByDefault: true
         required: true
         defaultValue:
           variant: Reminder
@@ -145,7 +138,6 @@ components:
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: true
         required: true
         defaultValue:
           content:

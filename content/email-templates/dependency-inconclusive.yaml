@@ -11,18 +11,15 @@ components:
         required: true
       - kind: Title
         required: true
-        visibleByDefault: true
         defaultValue:
           title: Dependency Benefits cannot be determined
       - kind: ProgramName
-        visibleByDefault: true
         required: true
         defaultValue:
           preset: Dependency Benefits
           name: Dependency Benefits
           backgroundColor: "#F1DEA0"
   - kind: Name
-    visibleByDefault: true
     required: true
     defaultValue:
       name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
@@ -31,7 +28,6 @@ components:
     subComponents:
       - kind: Intro
         required: true
-        visibleByDefault: true
         defaultValue:
           intro:
             - type: paragraph
@@ -39,7 +35,6 @@ components:
                 - text: Your Dependency Benefits claim cannot be reviewed at this time.
       - kind: Status
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Overview
           status: You need a valid Unemployment Insurance claim
@@ -57,7 +52,6 @@ components:
                   text: This determination was made based on available information.
       - kind: SupplementalContent
         required: true
-        visibleByDefault: true
         defaultValue:
           variant: Double Supplemental Content
           title: What you can do
