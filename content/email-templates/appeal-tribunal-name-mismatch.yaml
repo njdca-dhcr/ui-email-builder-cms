@@ -1,0 +1,178 @@
+name: Appeal Tribunal - Name Mismatch
+description: When someone's registration/confirmation is unsuccessful due to a mismatch.
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        visibleByDefault: true
+        description: Keep this short and to the point!
+        defaultValue:
+          title: Incomplete Registration/ Confirmation
+      - kind: ProgramName
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          preset: Custom
+          name: Appeal Tribunal
+          backgroundColor: "#0076d6"
+      - kind: DirectiveButton
+        visibleByDefault: false
+  - kind: Name
+    visibleByDefault: true
+    required: true
+    description: Adding a name is highly encouraged. Avoid using "Dear" before the name
+    defaultValue:
+      name: "CAPTAIN AMERICA:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        visibleByDefault: true
+        description: Keep it simple and clear. Don't use filler language like "please" or
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: The registration/confirmation you submitted for your scheduled hearing was
+      - kind: Status
+        required: true
+        visibleByDefault: true
+        description: Make it obvious what the current state is
+        defaultValue:
+          variant: Overview With Reason
+          status: Unsuccessful
+          statusDueTo: because...
+          showSupportiveInformation: false
+          spaceAfter: false
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: there is a mismatch between the docket number and the appeal record
+                  bold: true
+      - kind: Directive
+        visibleByDefault: true
+        required: true
+        defaultValue:
+          variant: Three Steps w/ Step 2 Expansion
+          title: "Please try again:"
+          showTitle: true
+          showLabel: false
+          linkHref: "https://www.nj.gov/labor/ui/appeals/onlineregistration.html"
+          buttonLabel: Get Started
+          buttonColor: "#1b1b1b"
+          step1Label:
+            - type: paragraph
+              children:
+                - text: Go back to
+                  bold: true
+                - text: " the form"
+          showStep1AdditionalContent: true
+          step1Additional:
+            - type: paragraph
+              children:
+                - text: Have your paper notice close by
+          step2Label:
+            - type: paragraph
+              children:
+                - text: Answer
+                  bold: true
+                - text: " the questions"
+          showStep2AdditionalContent: true
+          step2Additional:
+            - type: paragraph
+              children:
+                - text: Double check your docket number and appeal record number
+          step2Tertiary:
+            - type: paragraph
+              children:
+                - text: Your entry must contain at least six (6) numbers and no letters
+                  italic: true
+          step2CaseNumber:
+            - type: paragraph
+              children:
+                - text: "Example: 123456"
+          step3Label:
+            - type: paragraph
+              children:
+                - text: Submit
+                  bold: true
+                - text: " your form."
+                - bold: true
+                  text: " Don’t wait."
+          showStep3AdditionalContent: true
+          step3Additional:
+            - type: paragraph
+              children:
+                - text: "Must be received "
+                - text: before 3pm the business day before your hearing
+                  bold: true
+          showMultipleStepsSupportiveText: false
+      - kind: SupplementalContent
+        visibleByDefault: true
+        description: Add other resources that will help color the message you're sending
+        defaultValue:
+          variant: Double Supplemental Content
+          title: You must receive a confirmation email
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    You will not be registered for your hearing until you receive a
+                    confirmation email.
+          secondTitle: Are others going to join your appeal call?
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: All parties are required to register
+                  bold: true
+                - text: " by 3pm EST on the business day before your hearing date."
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: >-
+                    If any party does not follow the instructions properly without a valid
+                    reason, their appeal may be rejected, or they might not be allowed to
+                    participate in the hearing.
+                  italic: true
+      - kind: RulesRightsRegulations
+        visibleByDefault: true
+        description: Rights? Regulations? Appeals? Reminders?
+        defaultValue:
+          variant: Reminder
+          icon: Flag
+          reminderTitle: Can't register online?
+          reminderDescription:
+            - type: paragraph
+              children:
+                - text: "Call:  123-456-7890                                                                                "
+                  bold: true
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        visibleByDefault: true
+        required: true
+        description: A great place to add links to find out more about programs and
+          other state offerings. <strong>Do not use "click here"!</strong>
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: >-
+                    More information on the Appeal process can be found here. Frequently
+                    Asked Questions can be found here.
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
