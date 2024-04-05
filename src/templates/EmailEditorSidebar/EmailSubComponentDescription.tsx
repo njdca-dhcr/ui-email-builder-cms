@@ -2,6 +2,7 @@ import React, { FC, ReactElement, ReactNode } from 'react'
 import { Link } from 'gatsby'
 import { EmailTemplate } from 'src/appTypes'
 import { MoreInfoAboutStatus } from './MoreInfoAboutSubComponent'
+import { MoreInfoAboutAdditionalContent } from './MoreInfoAboutSubComponent'
 
 interface Props {
   emailSubComponent: EmailTemplate.SubComponent
@@ -12,7 +13,7 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
     case 'DepartmentSeal':
       return (
         <Description moreInfo={<></>}>
-          Edit this in <Link to="/settings">Settings</Link>
+          Edit this in&nbsp;<Link to="/settings">Settings</Link>
         </Description>
       )
     case 'DateRange':
@@ -49,9 +50,11 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
       )
     case 'AdditionalContent':
       return (
-        <Description moreInfo={<></>}>
-          A great place to add links to find out more about programs and other state offerings.{' '}
-          <strong>Do not use "click here"!</strong>
+        <Description moreInfo={<MoreInfoAboutAdditionalContent />}>
+          <span>
+            A great place to add links to find out more about programs and other state offerings.{' '}
+            <strong>Do not use "click here"!</strong>
+          </span>
         </Description>
       )
     case 'DirectiveButton':

@@ -172,7 +172,7 @@ describe('EmailSubComponentDescription', () => {
 
   describe('AdditionalContent', () => {
     it('is a simple description', () => {
-      const { baseElement } = render(
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Body', {
             kind: 'AdditionalContent',
@@ -184,6 +184,9 @@ describe('EmailSubComponentDescription', () => {
       expect(result).toHaveTextContent(
         'A great place to add links to find out more about programs and other state offerings. Do not use "click here"!',
       )
+      expect(
+        queryByRole('button', { name: 'More information about Additional Content' }),
+      ).not.toBeNull()
     })
   })
 })
