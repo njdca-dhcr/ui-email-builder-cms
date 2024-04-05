@@ -34,14 +34,16 @@ describe('EmailSubComponentDescription', () => {
   })
 
   describe('ProgramName', () => {
-    it('is nothing', () => {
-      const { baseElement } = render(
+    it('is a simple description', () => {
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })}
         />,
       )
       const result = baseElement.querySelector('.description')
-      expect(result).toBeNull()
+      expect(result).not.toBeNull()
+      expect(result).toHaveTextContent('Let people know which program this email concerns')
+      expect(queryByRole('button', { name: 'More information about Program Name' })).not.toBeNull()
     })
   })
 

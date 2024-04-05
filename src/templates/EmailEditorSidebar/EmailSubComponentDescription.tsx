@@ -5,6 +5,7 @@ import {
   MoreInfoAboutDateRange,
   MoreInfoAboutStatus,
   MoreInfoAboutAdditionalContent,
+  MoreInfoAboutProgramName,
 } from './MoreInfoAboutSubComponent'
 
 interface Props {
@@ -60,8 +61,13 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
           </span>
         </Description>
       )
-    case 'DirectiveButton':
     case 'ProgramName':
+      return (
+        <Description moreInfo={<MoreInfoAboutProgramName />}>
+          Let people know which program this email concerns
+        </Description>
+      )
+    case 'DirectiveButton':
     case 'Directive':
     case 'InformationalBox':
       return null
