@@ -8,6 +8,8 @@ export const labelForSubComponent = (subComponentKind: EmailTemplate.SubComponen
       return 'Date Range'
     case 'DepartmentSeal':
       return 'Department Seal'
+    case 'DirectiveButton':
+      return 'Directive Button'
     case 'LoginDetails':
       return 'Login Support'
     case 'SupplementalContent':
