@@ -1,0 +1,20 @@
+.more-info-button {
+  background-color: transparent;
+  border: 0;
+  opacity: 0.5;
+  padding: 0;
+}
+
+.more-info-title {
+  font-size: 2rem;
+  margin: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.more-info-image {
+  box-shadow: 0 0 0.5rem var(--blue-gray-light);
+  border-radius: 3px;
+  display: block;
+  margin: 0 auto;
+}

@@ -188,8 +188,21 @@
 }
 
 .accordion-email-subcomponent .description {
+  align-items: center;
+  display: flex;
+  gap: 0.25rem;
   padding-left: 0;
   transition: color 150ms ease-in-out;
+}
+
+.accordion-email-subcomponent .description > .more-info-button img {
+  height: 1.2rem;
+}
+
+.accordion-email-subcomponent .description > .more-info-button,
+.accordion-email-subcomponent .description > span {
+  display: flex;
+  width: fit-content;
 }
 
 .accordion-email-subcomponent .description.invisible {

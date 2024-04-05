@@ -1,6 +1,7 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactElement, ReactNode } from 'react'
 import { Link } from 'gatsby'
 import { EmailTemplate } from 'src/appTypes'
+import { MoreInfoAboutStatus } from './MoreInfoAboutSubComponent'
 
 interface Props {
   emailSubComponent: EmailTemplate.SubComponent
@@ -10,37 +11,45 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
   switch (emailSubComponent.kind) {
     case 'DepartmentSeal':
       return (
-        <Description>
+        <Description moreInfo={<></>}>
           Edit this in <Link to="/settings">Settings</Link>
         </Description>
       )
     case 'DateRange':
       return (
-        <Description>
+        <Description moreInfo={<></>}>
           Using names of months is preferred over numbers (i.e. Jan 5 is clearer than 01/05)
         </Description>
       )
     case 'Title':
-      return <Description>Keep this short and to the point!</Description>
+      return <Description moreInfo={<></>}>Keep this short and to the point!</Description>
     case 'Intro':
       return (
-        <Description>Keep it simple and clear. Don't use filler language like "please"</Description>
+        <Description moreInfo={<></>}>
+          Keep it simple and clear. Don't use filler language like "please"
+        </Description>
       )
     case 'RulesRightsRegulations':
-      return <Description>Rights? Regulations? Appeals? Reminders?</Description>
+      return <Description moreInfo={<></>}>Rights? Regulations? Appeals? Reminders?</Description>
     case 'Status':
-      return <Description>Make it obvious what the current state is</Description>
+      return (
+        <Description moreInfo={<MoreInfoAboutStatus />}>
+          Make it obvious what the current state is.
+        </Description>
+      )
     case 'SupplementalContent':
       return (
-        <Description>
+        <Description moreInfo={<></>}>
           Add other resources that will help color the message you're sending
         </Description>
       )
     case 'LoginDetails':
-      return <Description>Just in case they need to reset their password</Description>
+      return (
+        <Description moreInfo={<></>}>Just in case they need to reset their password</Description>
+      )
     case 'AdditionalContent':
       return (
-        <Description>
+        <Description moreInfo={<></>}>
           A great place to add links to find out more about programs and other state offerings.{' '}
           <strong>Do not use "click here"!</strong>
         </Description>
@@ -53,6 +62,16 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
   }
 }
 
-const Description: FC<{ children: ReactNode }> = ({ children }) => {
-  return <p className="description">{children}</p>
+interface DescriptionProps {
+  moreInfo: ReactElement
+  children: ReactNode
+}
+
+const Description: FC<DescriptionProps> = ({ children, moreInfo }) => {
+  return (
+    <p className="description">
+      {moreInfo}
+      <span>{children}</span>
+    </p>
+  )
 }

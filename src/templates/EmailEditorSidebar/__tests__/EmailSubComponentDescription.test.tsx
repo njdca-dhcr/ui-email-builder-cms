@@ -89,8 +89,8 @@ describe('EmailSubComponentDescription', () => {
   })
 
   describe('Status', () => {
-    it('is a simple description', () => {
-      const { baseElement } = render(
+    it('is a simple description with a more info button', () => {
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Status' })}
         />,
@@ -98,6 +98,7 @@ describe('EmailSubComponentDescription', () => {
       const result = baseElement.querySelector('.description')
       expect(result).not.toBeNull()
       expect(result).toHaveTextContent('Make it obvious what the current state is')
+      expect(queryByRole('button', { name: 'More information about Status' })).not.toBeNull()
     })
   })
 

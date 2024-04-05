@@ -1,0 +1,22 @@
+.dialog-overlay {
+  background-color: rgba(241, 241, 241, 0.8);
+}
+
+.dialog-content {
+  border-radius: 3px;
+  box-shadow: 0 0 0.5rem var(--blue-gray-light);
+  padding: 3rem;
+  position: relative;
+  max-height: 68vh;
+  overflow-y: auto;
+}
+
+.dialog-close {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
