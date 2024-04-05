@@ -1,8 +1,11 @@
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { Link } from 'gatsby'
 import { EmailTemplate } from 'src/appTypes'
-import { MoreInfoAboutStatus } from './MoreInfoAboutSubComponent'
-import { MoreInfoAboutAdditionalContent } from './MoreInfoAboutSubComponent'
+import {
+  MoreInfoAboutDateRange,
+  MoreInfoAboutStatus,
+  MoreInfoAboutAdditionalContent,
+} from './MoreInfoAboutSubComponent'
 
 interface Props {
   emailSubComponent: EmailTemplate.SubComponent
@@ -18,7 +21,7 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
       )
     case 'DateRange':
       return (
-        <Description moreInfo={<></>}>
+        <Description moreInfo={<MoreInfoAboutDateRange />}>
           Using names of months is preferred over numbers (i.e. Jan 5 is clearer than 01/05)
         </Description>
       )

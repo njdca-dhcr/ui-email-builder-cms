@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { MoreInfoAboutStatus } from '../MoreInfoAboutStatus'
 import { MoreInfoAboutAdditionalContent } from '../MoreInfoAboutAdditionalContent'
+import { MoreInfoAboutDateRange } from '../MoreInfoAboutDateRange'
 
 describe('MoreInfoAboutSubComponent', () => {
   describe('MoreInfoAboutStatus', () => {
@@ -14,6 +15,13 @@ describe('MoreInfoAboutSubComponent', () => {
   describe('MoreInfoAboutAdditionalContent', () => {
     it('renders without issue', () => {
       const { baseElement } = render(<MoreInfoAboutAdditionalContent />)
+      expect(baseElement.querySelector('button')).not.toBeNull()
+    })
+  })
+
+  describe('MoreInfoAboutDateRange', () => {
+    it('renders without issue', () => {
+      const { baseElement } = render(<MoreInfoAboutDateRange />)
       expect(baseElement.querySelector('button')).not.toBeNull()
     })
   })

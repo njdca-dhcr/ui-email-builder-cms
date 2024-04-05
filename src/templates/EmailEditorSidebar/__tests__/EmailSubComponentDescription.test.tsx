@@ -6,7 +6,7 @@ import { EmailSubComponentDescription } from '../EmailSubComponentDescription'
 describe('EmailSubComponentDescription', () => {
   describe('DateRange', () => {
     it('is a simple description', () => {
-      const { baseElement } = render(
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'DateRange' })}
         />,
@@ -16,6 +16,7 @@ describe('EmailSubComponentDescription', () => {
       expect(result).toHaveTextContent(
         'Using names of months is preferred over numbers (i.e. Jan 5 is clearer than 01/05)',
       )
+      expect(queryByRole('button', { name: 'More information about Date Range' })).not.toBeNull()
     })
   })
 
