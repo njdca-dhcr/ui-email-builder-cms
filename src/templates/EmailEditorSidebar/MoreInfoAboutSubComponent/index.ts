@@ -1,4 +1,5 @@
 export { MoreInfoAboutAdditionalContent } from './MoreInfoAboutAdditionalContent'
+export { MoreInfoAboutDirectiveButton } from './MoreInfoAboutDirectiveButton'
 export { MoreInfoAboutDateRange } from './MoreInfoAboutDateRange'
 export { MoreInfoAboutStatus } from './MoreInfoAboutStatus'
 export { MoreInfoAboutProgramName } from './MoreInfoAboutProgramName'

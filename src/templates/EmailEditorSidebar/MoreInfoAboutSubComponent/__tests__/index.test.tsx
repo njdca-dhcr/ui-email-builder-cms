@@ -4,6 +4,7 @@ import { MoreInfoAboutStatus } from '../MoreInfoAboutStatus'
 import { MoreInfoAboutAdditionalContent } from '../MoreInfoAboutAdditionalContent'
 import { MoreInfoAboutDateRange } from '../MoreInfoAboutDateRange'
 import { MoreInfoAboutProgramName } from '../MoreInfoAboutProgramName'
+import { MoreInfoAboutDirectiveButton } from '../MoreInfoAboutDirectiveButton'
 
 describe('MoreInfoAboutSubComponent', () => {
   describe('MoreInfoAboutStatus', () => {
@@ -30,6 +31,13 @@ describe('MoreInfoAboutSubComponent', () => {
   describe('MoreInfoAboutProgramName', () => {
     it('renders without issue', () => {
       const { baseElement } = render(<MoreInfoAboutProgramName />)
+      expect(baseElement.querySelector('button')).not.toBeNull()
+    })
+  })
+
+  describe('MoreInfoAboutDirectiveButton', () => {
+    it('renders without issue', () => {
+      const { baseElement } = render(<MoreInfoAboutDirectiveButton />)
       expect(baseElement.querySelector('button')).not.toBeNull()
     })
   })

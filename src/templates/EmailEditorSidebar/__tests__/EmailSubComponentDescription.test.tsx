@@ -135,14 +135,20 @@ describe('EmailSubComponentDescription', () => {
   })
 
   describe('DirectiveButton', () => {
-    it('is nothing', () => {
-      const { baseElement } = render(
+    it('is a simple description', () => {
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'DirectiveButton' })}
         />,
       )
       const result = baseElement.querySelector('.description')
-      expect(result).toBeNull()
+      expect(result).not.toBeNull()
+      expect(result).toHaveTextContent(
+        'This button is always the same as the one that appears in the Directive',
+      )
+      expect(
+        queryByRole('button', { name: 'More information about Directive Button' }),
+      ).not.toBeNull()
     })
   })
 

@@ -6,6 +6,7 @@ import {
   MoreInfoAboutStatus,
   MoreInfoAboutAdditionalContent,
   MoreInfoAboutProgramName,
+  MoreInfoAboutDirectiveButton,
 } from './MoreInfoAboutSubComponent'
 
 interface Props {
@@ -68,6 +69,11 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
         </Description>
       )
     case 'DirectiveButton':
+      return (
+        <Description moreInfo={<MoreInfoAboutDirectiveButton />}>
+          This button is always the same as the one that appears in the Directive
+        </Description>
+      )
     case 'Directive':
     case 'InformationalBox':
       return null
