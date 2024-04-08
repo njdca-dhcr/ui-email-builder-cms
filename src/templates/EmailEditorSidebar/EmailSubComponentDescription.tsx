@@ -10,7 +10,7 @@ import {
   MoreInfoAboutDirective,
   MoreInfoAboutRulesRightsRegulations,
   MoreInfoAboutInformationalBox,
-} from './MoreInfoAboutSubComponent'
+} from 'src/guides/MoreInfoAboutSubComponent'
 
 interface Props {
   emailSubComponent: EmailTemplate.SubComponent
@@ -20,7 +20,7 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
   switch (emailSubComponent.kind) {
     case 'DepartmentSeal':
       return (
-        <Description moreInfo={<></>}>
+        <Description>
           Edit this in&nbsp;<Link to="/settings">Settings</Link>
         </Description>
       )
@@ -31,12 +31,10 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
         </Description>
       )
     case 'Title':
-      return <Description moreInfo={<></>}>Keep this short and to the point!</Description>
+      return <Description>Keep this short and to the point!</Description>
     case 'Intro':
       return (
-        <Description moreInfo={<></>}>
-          Keep it simple and clear. Don't use filler language like "please"
-        </Description>
+        <Description>Keep it simple and clear. Don't use filler language like "please"</Description>
       )
     case 'RulesRightsRegulations':
       return (
@@ -52,14 +50,12 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
       )
     case 'SupplementalContent':
       return (
-        <Description moreInfo={<></>}>
+        <Description>
           Add other resources that will help color the message you're sending
         </Description>
       )
     case 'LoginDetails':
-      return (
-        <Description moreInfo={<></>}>Just in case they need to reset their password</Description>
-      )
+      return <Description>Just in case they need to reset their password</Description>
     case 'AdditionalContent':
       return (
         <Description moreInfo={<MoreInfoAboutAdditionalContent />}>
@@ -97,7 +93,7 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
 }
 
 interface DescriptionProps {
-  moreInfo: ReactElement
+  moreInfo?: ReactElement
   children: ReactNode
 }
 
