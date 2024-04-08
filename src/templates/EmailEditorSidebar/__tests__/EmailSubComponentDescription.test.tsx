@@ -78,7 +78,7 @@ describe('EmailSubComponentDescription', () => {
 
   describe('RulesRightsRegulations', () => {
     it('is a simple description', () => {
-      const { baseElement } = render(
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Body', {
             kind: 'RulesRightsRegulations',
@@ -88,6 +88,11 @@ describe('EmailSubComponentDescription', () => {
       const result = baseElement.querySelector('.description')
       expect(result).not.toBeNull()
       expect(result).toHaveTextContent('Rights? Regulations? Appeals? Reminders?')
+      expect(
+        queryByRole('button', {
+          name: 'More information about Rights, Regulations, Appeals, and Reminders',
+        }),
+      ).not.toBeNull()
     })
   })
 

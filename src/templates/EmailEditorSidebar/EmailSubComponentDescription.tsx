@@ -8,6 +8,7 @@ import {
   MoreInfoAboutProgramName,
   MoreInfoAboutDirectiveButton,
   MoreInfoAboutDirective,
+  MoreInfoAboutRulesRightsRegulations,
 } from './MoreInfoAboutSubComponent'
 
 interface Props {
@@ -37,7 +38,11 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
         </Description>
       )
     case 'RulesRightsRegulations':
-      return <Description moreInfo={<></>}>Rights? Regulations? Appeals? Reminders?</Description>
+      return (
+        <Description moreInfo={<MoreInfoAboutRulesRightsRegulations />}>
+          Rights? Regulations? Appeals? Reminders?
+        </Description>
+      )
     case 'Status':
       return (
         <Description moreInfo={<MoreInfoAboutStatus />}>
