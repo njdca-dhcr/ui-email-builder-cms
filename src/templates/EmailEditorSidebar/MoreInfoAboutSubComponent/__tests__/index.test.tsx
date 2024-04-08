@@ -7,6 +7,7 @@ import { MoreInfoAboutProgramName } from '../MoreInfoAboutProgramName'
 import { MoreInfoAboutDirectiveButton } from '../MoreInfoAboutDirectiveButton'
 import { MoreInfoAboutDirective } from '../MoreInfoAboutDirective'
 import { MoreInfoAboutRulesRightsRegulations } from '../MoreInfoAboutRulesRightsRegulations'
+import { MoreInfoAboutInformationalBox } from '../MoreInfoAboutInformationalBox'
 
 describe('MoreInfoAboutSubComponent', () => {
   describe('MoreInfoAboutStatus', () => {
@@ -54,6 +55,13 @@ describe('MoreInfoAboutSubComponent', () => {
   describe('MoreInfoAboutRulesRightsRegulations', () => {
     it('renders without issue', () => {
       const { baseElement } = render(<MoreInfoAboutRulesRightsRegulations />)
+      expect(baseElement.querySelector('button')).not.toBeNull()
+    })
+  })
+
+  describe('MoreInfoAboutInformationalBox', () => {
+    it('renders without issue', () => {
+      const { baseElement } = render(<MoreInfoAboutInformationalBox />)
       expect(baseElement.querySelector('button')).not.toBeNull()
     })
   })

@@ -2,6 +2,7 @@ export { MoreInfoAboutAdditionalContent } from './MoreInfoAboutAdditionalContent
 export { MoreInfoAboutDirective } from './MoreInfoAboutDirective'
 export { MoreInfoAboutDirectiveButton } from './MoreInfoAboutDirectiveButton'
 export { MoreInfoAboutDateRange } from './MoreInfoAboutDateRange'
+export { MoreInfoAboutInformationalBox } from './MoreInfoAboutInformationalBox'
 export { MoreInfoAboutStatus } from './MoreInfoAboutStatus'
 export { MoreInfoAboutProgramName } from './MoreInfoAboutProgramName'
 export { MoreInfoAboutRulesRightsRegulations } from './MoreInfoAboutRulesRightsRegulations'

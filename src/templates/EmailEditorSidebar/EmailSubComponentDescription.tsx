@@ -9,6 +9,7 @@ import {
   MoreInfoAboutDirectiveButton,
   MoreInfoAboutDirective,
   MoreInfoAboutRulesRightsRegulations,
+  MoreInfoAboutInformationalBox,
 } from './MoreInfoAboutSubComponent'
 
 interface Props {
@@ -87,7 +88,11 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
         </Description>
       )
     case 'InformationalBox':
-      return null
+      return (
+        <Description moreInfo={<MoreInfoAboutInformationalBox />}>
+          Call out information in colors
+        </Description>
+      )
   }
 }
 
