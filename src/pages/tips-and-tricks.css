@@ -1,0 +1,19 @@
+.tips-and-tricks a {
+  color: var(--blue);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.tips-and-tricks a:hover,
+.tips-and-tricks a:focus {
+  text-decoration: underline;
+}
+
+.tips-and-tricks h2:target,
+.tips-and-tricks h3:target,
+.tips-and-tricks h4:target {
+  background-color: var(--blue-white);
+  border-radius: 3px;
+  padding: 0 0.25rem;
+  width: fit-content;
+}
