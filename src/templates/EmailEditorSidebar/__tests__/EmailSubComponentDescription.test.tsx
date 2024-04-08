@@ -123,14 +123,16 @@ describe('EmailSubComponentDescription', () => {
   })
 
   describe('Directive', () => {
-    it('is nothing', () => {
-      const { baseElement } = render(
+    it('is a simple description', () => {
+      const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
           emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Directive' })}
         />,
       )
       const result = baseElement.querySelector('.description')
-      expect(result).toBeNull()
+      expect(result).not.toBeNull()
+      expect(result).toHaveTextContent('Tell people how to do what they need to do, step by step')
+      expect(queryByRole('button', { name: 'More information about Directive' })).not.toBeNull()
     })
   })
 
