@@ -3,6 +3,7 @@ import { MoreInfo } from 'src/ui/MoreInfo'
 import { MoreInfoImage } from './Shared'
 import directiveButtonPng from './images/directive-button.png'
 import directive3StepPng from './images/directive-3-step.png'
+import directiveControlsPng from './images/directive-controls.png'
 
 export const MoreInfoAboutDirective: FC = () => {
   const directiveButton = <strong>Directive Button</strong>
@@ -17,6 +18,14 @@ export const MoreInfoAboutDirective: FC = () => {
       <MoreInfoImage
         alt={`A three step directive feature the same black directive button`}
         src={directive3StepPng}
+      />
+      <p>
+        The {directive} is configurable, so if there's a step that doesn't require as much
+        explanation as the others you can make adjustments in the {directive} controls.
+      </p>
+      <MoreInfoImage
+        alt={`The sidebar controls for a directive with "Three Steps" selected`}
+        src={directiveControlsPng}
       />
       <p>
         Some emails feature a {directiveButton} in the header. This will always has the same
