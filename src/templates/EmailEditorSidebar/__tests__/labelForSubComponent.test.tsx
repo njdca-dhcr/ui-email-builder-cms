@@ -54,4 +54,10 @@ describe('labelForSubComponent', () => {
       expect(labelForSubComponent('DirectiveButton')).toEqual('Directive Button')
     })
   })
+
+  describe('when the subcomponent is InformationalBox', () => {
+    it('is "Department Seal"', () => {
+      expect(labelForSubComponent('InformationalBox')).toEqual('Informational Box')
+    })
+  })
 })
