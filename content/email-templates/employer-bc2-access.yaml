@@ -1,4 +1,4 @@
-name: Employer - B2C Access
+name: Employer - BC2 Access
 description: When an employer requests to reset their password to access BC2 related inquiries.
 appModes: ["ALL", "NJ"]
 components:
@@ -291,6 +291,7 @@ components:
                     This email is a new beta design created by New Jersey's Division of
                     Unemployment Insurance in collaboration with New Jersey's Office of
                     Innovation. Take our 2 minute survey
+                - text: " "
                 - type: link
                   url: "https://forms.office.com/g/50ttt7iewq"
                   children:
@@ -359,7 +360,7 @@ components:
           reminderTitle: Are you looking for the BC28 or BC3E portal?
           eligibilityLabel: >-
             <span style="font-weight: normal;">You may be trying to access the "Request
-            for Separation Information", also known as the BC2 or the "Monetary with
+            for Separation Information", also known as the BC28 or the "Monetary with
             Separation Request", also known as BC3E</span>
           eligibilityConditions:
             - type: numbered-list
