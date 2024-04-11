@@ -2,6 +2,7 @@ export interface AppMarkConfig {
   bold?: boolean
   italic?: boolean
   underline?: boolean
+  textSize?: TextSize
 }
 
 export type AppMarkKind = keyof AppMarkConfig
@@ -27,6 +28,11 @@ export interface LinkElement extends BaseElement {
   url: string
 }
 
+export interface TextSizeElement extends BaseElement {
+  type: 'text-size'
+  size: TextSize
+}
+
 export interface BulletedListElement extends BaseElement {
   type: 'bulleted-list'
 }
@@ -41,7 +47,7 @@ export interface ListItemElement extends BaseElement {
 
 type BlockElement = ParagraphElement | BulletedListElement | NumberedListElement | ListItemElement
 
-type InlineElement = LinkElement
+type InlineElement = LinkElement | TextSizeElement
 
 export type BlockElementType = BlockElement['type']
 
@@ -50,3 +56,7 @@ export type AppElement = BlockElement | InlineElement | UnknownElement
 export type AppElementType = AppElement['type']
 
 export type AppDescendant = AppText | AppElement
+
+export type TextSize = 'tiny' | 'small' | 'medium' | 'large' | 'extraLarge'
+
+export type Polarity = 'increase' | 'decrease'

@@ -15,7 +15,8 @@
 .rte-link-button,
 .block-button,
 .current-link,
-.mark-button {
+.mark-button,
+.adjust-button {
   align-items: center;
   cursor: pointer;
   font-size: var(--font-small);
@@ -28,12 +29,14 @@
 .rte-link-button:hover,
 .block-button:hover,
 .current-link:hover,
-.mark-button:hover {
+.mark-button:hover,
+.adjust-button:hover {
   background-color: var(--blue-white);
 }
 
 .block-button.active,
-.mark-button.active {
+.mark-button.active,
+.adjust-button.active {
   background-color: var(--gray-medium);
 }
 
@@ -61,8 +64,6 @@
   background-color: var(--white);
 }
 
-.add-link-button {
-}
+.add-link-button {}
 
-.remove-link-button {
-}
+.remove-link-button {}

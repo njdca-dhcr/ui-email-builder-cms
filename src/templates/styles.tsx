@@ -35,11 +35,11 @@ export const Colors = {
 const sansSerif = 'Public Sans, Helvetica, Arial, sans-serif'
 
 const FontWeight = {
-  bold: 700,
-  semibold: 600,
-  boldExtra: 800,
-  boldLight: 500,
   regular: 400,
+  boldLight: 500,
+  semibold: 600,
+  bold: 700,
+  boldExtra: 800,
 }
 
 export const Font = {

@@ -1,13 +1,14 @@
-import React, { FC, Fragment, KeyboardEvent, ReactElement } from 'react'
+import React, { FC, KeyboardEvent, ReactElement } from 'react'
 import isHotkey from 'is-hotkey'
 import { Editor, Transforms, Element as SlateElement } from 'slate'
-import { AppElement, AppElementType, AppMarkConfig, AppMarkKind } from './types'
-import { useSlate } from 'slate-react'
+import { AppElement, AppElementType, AppMarkConfig, AppMarkKind, Polarity, TextSize } from './types'
+import { ReactEditor, useSlate } from 'slate-react'
 import { LinkButtons } from './withInlines'
 import classNames from 'classnames'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { BulletedListIcon } from './icons/BulletedListIcon'
 import { NumberedListIcon } from './icons/NumberedListIcon'
+import { Font } from 'src/templates/styles'
 
 export const Toolbar: FC = () => {
   return (
@@ -15,6 +16,8 @@ export const Toolbar: FC = () => {
       <MarkButton format="bold" icon="B" label="Bold" className="bold" />
       <MarkButton format="italic" icon="i" label="Italic" className="italicized" />
       <MarkButton format="underline" icon="U" label="Underline" className="underlined" />
+      <SizeButton icon="T+" polarity="increase" label="Increase font-size" />
+      <SizeButton icon="T-" polarity="decrease" label="Decrease font-size" />
       <BlockButton icon={<BulletedListIcon />} label="Bulleted list" format="bulleted-list" />
       <BlockButton icon={<NumberedListIcon />} label="Numbered list" format="numbered-list" />
       <LinkButtons />
@@ -103,7 +106,7 @@ const MarkButton: FC<MarkButtonProps> = ({ className, format, icon, label }) => 
 
   return (
     <span
-      className={classNames('mark-button', className, { active: isActive })}
+      className={classNames('mark-button', className, { active: isActive && !isAdjustButton })}
       onMouseDown={(event) => {
         event.preventDefault()
         toggleMark(editor, format)
@@ -113,6 +116,52 @@ const MarkButton: FC<MarkButtonProps> = ({ className, format, icon, label }) => 
       <VisuallyHidden>{label}</VisuallyHidden>
     </span>
   )
+}
+
+const sizes = {
+  tiny: Font.size.tiny,
+  small: Font.size.small,
+  medium: Font.size.medium,
+  large: Font.size.large,
+  extraLarge: Font.size.extraLarge,
+}
+
+interface SizeButtonProps {
+  className?: string
+  polarity: 'increase' | 'decrease'
+  icon: ReactElement | string
+  label: string
+}
+
+const SizeButton: FC<SizeButtonProps> = ({ className, polarity, icon, label }) => {
+  const editor: ReactEditor = useSlate() as ReactEditor
+
+  return (
+    <span
+      className={classNames('adjust-button', className)}
+      onMouseDown={(event) => {
+        event.preventDefault()
+        changeSize(editor, polarity)
+      }}
+    >
+      <span aria-hidden>{icon}</span>
+      <VisuallyHidden>{label}</VisuallyHidden>
+    </span>
+  )
+}
+
+const changeSize = (editor: ReactEditor, polarity: Polarity) => {
+  const textSize: TextSize = (Editor.marks(editor) as any)?.textSize ?? 'medium'
+  const possibleSizes = Object.keys(sizes)
+  const currentIndex = possibleSizes.indexOf(textSize)
+  let newIndex: number
+  if (polarity === 'increase') {
+    newIndex = currentIndex + 1 < possibleSizes.length ? currentIndex + 1 : currentIndex
+  } else {
+    newIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex
+  }
+
+  Editor.addMark(editor, 'textSize', possibleSizes[newIndex])
 }
 
 interface BlockButtonProps {

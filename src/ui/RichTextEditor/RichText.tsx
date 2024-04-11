@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactNode, createContext, forwardRef, useContext } from 'react'
 import { AppElement, AppText } from './types'
-import { Colors, Spacing } from 'src/templates/styles'
+import { Colors, Font, Spacing } from 'src/templates/styles'
 
 export type RichTextAdditionalStyles = {
   'bulleted-list'?: CSSProperties
@@ -8,6 +8,7 @@ export type RichTextAdditionalStyles = {
   'numbered-list'?: CSSProperties
   link?: CSSProperties
   paragraph?: CSSProperties
+  'text-size'?: CSSProperties
 }
 
 export const RichTextAdditionalStylesContext = createContext<RichTextAdditionalStyles>({})
@@ -90,6 +91,14 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
   },
 )
 
+const sizes = {
+  tiny: Font.size.tiny,
+  small: Font.size.small,
+  medium: Font.size.medium,
+  large: Font.size.large,
+  extraLarge: Font.size.extraLarge,
+}
+
 interface RichTextLeafProps {
   leaf: AppText
   children?: ReactNode
@@ -112,6 +121,8 @@ export const RichTextLeaf = forwardRef<any, RichTextLeafProps>(
       children = <u>{children}</u>
     }
 
-    return <span {...props}>{children}</span>
+    const fontSize = leaf.textSize ? sizes[leaf.textSize] : undefined
+
+    return <span {...props} style={{ ...remainingProps.style, fontSize }}>{children}</span>
   },
 )
