@@ -137,6 +137,7 @@ export const enum RulesRightsRegulationsVariant {
 export interface RulesRightsRegulationsValue {
   variant: RulesRightsRegulationsVariant
   icon: UswdsIconVariantKey
+  boxColor: BoxColor
   // Reminder
   reminderTitle: string
   reminderDescription: RichTextValue

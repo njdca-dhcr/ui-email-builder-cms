@@ -106,7 +106,7 @@ const MarkButton: FC<MarkButtonProps> = ({ className, format, icon, label }) => 
 
   return (
     <span
-      className={classNames('mark-button', className, { active: isActive && !isAdjustButton })}
+      className={classNames('mark-button', className, { active: isActive })}
       onMouseDown={(event) => {
         event.preventDefault()
         toggleMark(editor, format)

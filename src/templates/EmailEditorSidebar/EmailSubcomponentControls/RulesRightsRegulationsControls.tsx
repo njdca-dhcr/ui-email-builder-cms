@@ -4,6 +4,7 @@ import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { Select, UswdsIconSelect } from 'src/ui'
+import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { RulesRightsRegulationsVariant } from 'src/appTypes'
 
@@ -12,6 +13,7 @@ export const RulesRightsRegulationsControls: FC<
 > = ({ emailSubComponent }) => {
   const variantHtmlId = `variant-${emailSubComponent.id}`
   const iconHtmlId = `icon-${emailSubComponent.id}`
+  const boxColorHtmlId = `boxColor-${emailSubComponent.id}`
   const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent)
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
@@ -38,6 +40,15 @@ export const RulesRightsRegulationsControls: FC<
           }
           value={value.variant}
           size="small"
+        />
+      </Control.Container>
+
+      <Control.Container layout="column">
+        <Control.Label id={boxColorHtmlId}>Box Color</Control.Label>
+        <SelectBoxColor
+          labelId={boxColorHtmlId}
+          value={value.boxColor}
+          onChange={(boxColor) => setValue({ ...value, boxColor })}
         />
       </Control.Container>
 

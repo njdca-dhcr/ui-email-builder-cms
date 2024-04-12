@@ -5,6 +5,7 @@ import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
+import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { UswdsIcon } from 'src/ui/'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
@@ -20,6 +21,7 @@ const DISPLAYED_HREF_MAX_WIDTH = 297
 const defaultValue: RulesRightsRegulationsValue = {
   variant: RulesRightsRegulationsVariant.Reminder,
   icon: 'Flag',
+  boxColor: BoxColor.GoverningGray,
   reminderTitle: 'Reminder',
   reminderDescription: [
     {
@@ -221,6 +223,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
   const isReminder = value.variant === RulesRightsRegulationsVariant.Reminder
   const isAppealRights = value.variant === RulesRightsRegulationsVariant.AppealRights
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
+  const boxColorConfig = BoxColorConfigs[value.boxColor]
 
   return (
     <Row
@@ -230,7 +233,13 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         { part: 'cell', style: styles.outerContainer, className: StyleDefaults.layout.wide },
         'table',
         'row',
-        { part: 'cell', style: styles.innerContainer },
+        {
+          part: 'cell', style: {
+            ...styles.innerContainer,
+            backgroundColor: boxColorConfig.backgroundColor,
+            borderLeft: Borders.large(boxColorConfig.accentColor)
+          },
+        },
         'table',
       ]}
       onClick={(event) => {
@@ -420,7 +429,7 @@ const styles = {
   } as CSSProperties,
   iconContainer: {
     paddingRight: Spacing.size.medium,
-    verticalAlign: 'middle',
+    paddingTop: Spacing.size.tiny,
   } as CSSProperties,
   reminderTitle: {
     ...Text.header.h3.bold,
