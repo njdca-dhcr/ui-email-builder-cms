@@ -12,7 +12,7 @@ components:
       - kind: Title
         required: true
         defaultValue:
-          title: Reset your password
+          title: Overpayment Waiver Application
       - kind: ProgramName
         required: true
         defaultValue:

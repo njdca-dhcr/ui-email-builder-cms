@@ -1,5 +1,5 @@
 name: Overpayment - Application
-description: To invite claimants to apply for an overpayment waiver
+description: To confirm that we received their application
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -12,7 +12,7 @@ components:
       - kind: Title
         required: true
         defaultValue:
-          title: Reset your password
+          title: Your waiver application has been received
       - kind: ProgramName
         required: true
         defaultValue:
