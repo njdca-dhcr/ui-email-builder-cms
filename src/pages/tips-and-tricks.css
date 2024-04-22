@@ -17,3 +17,18 @@
   padding: 0 0.25rem;
   width: fit-content;
 }
+
+.tips-and-tricks .icon {
+  display: inline-block;
+  transform: translateY(6px);
+}
+
+.tips-and-tricks h2 .icon {
+  display: inline-block;
+  transform: translateY(4px);
+}
+
+.tips-and-tricks h2 {
+  border-top: 1px lightgray solid;
+  padding-top: 1rem;
+}
