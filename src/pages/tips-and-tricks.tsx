@@ -293,9 +293,9 @@ const InternalLink: FC<{ children: ReactNode; to: string }> = ({ children, to })
 
 const Icon: FC<{ icon: UswdsIconVariantKey }> = ({ icon }) => {
   return (
-    <div className="icon">
+    <span className="icon">
       <UswdsIcon icon={icon} />
-    </div>
+    </span>
   )
 }
 
