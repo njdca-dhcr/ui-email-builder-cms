@@ -123,6 +123,10 @@ export const RichTextLeaf = forwardRef<any, RichTextLeafProps>(
 
     const fontSize = leaf.textSize ? sizes[leaf.textSize] : undefined
 
-    return <span {...props} style={{ ...remainingProps.style, fontSize }}>{children}</span>
+    return (
+      <span {...props} style={{ ...remainingProps.style, fontSize }}>
+        {children}
+      </span>
+    )
   },
 )

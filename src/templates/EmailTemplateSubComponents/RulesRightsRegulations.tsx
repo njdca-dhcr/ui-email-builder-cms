@@ -234,10 +234,11 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         'table',
         'row',
         {
-          part: 'cell', style: {
+          part: 'cell',
+          style: {
             ...styles.innerContainer,
             backgroundColor: boxColorConfig.backgroundColor,
-            borderLeft: Borders.large(boxColorConfig.accentColor)
+            borderLeft: Borders.large(boxColorConfig.accentColor),
           },
         },
         'table',
