@@ -1,4 +1,4 @@
-name: Overpayment - Application
+name: Overpayment - Confirmation
 description: To confirm that we received their application
 appModes: ["ALL", "NJ"]
 components:

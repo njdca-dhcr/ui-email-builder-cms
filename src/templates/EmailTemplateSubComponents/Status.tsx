@@ -211,7 +211,6 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             { part: 'cell', style: styles.amountContainer, className: StyleDefaults.layout.narrow },
             {
               part: 'table',
-              maxWidth: 345,
               width:
                 StatusVariant.OverviewWithReasonAndAmountDue === value.variant
                   ? 'unset'
@@ -220,9 +219,9 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
                 ...styles.amountTable,
                 ...(StatusVariant.OverviewWithReasonAndAmountDue === value.variant
                   ? {
-                      paddingTop: Spacing.size.medium,
-                      paddingBottom: Spacing.size.medium,
-                    }
+                    paddingTop: Spacing.size.medium,
+                    paddingBottom: Spacing.size.medium,
+                  }
                   : {}),
                 backgroundColor: boxColorConfig.backgroundColor,
                 borderLeft: Borders.large(boxColorConfig.accentColor),
@@ -364,7 +363,6 @@ const styles = {
   } as CSSProperties,
   amountContainer: {
     ...StyleDefaults.inline.colors,
-    paddingRight: Spacing.size.small,
     paddingTop: Spacing.size.small,
   } as CSSProperties,
   amountTable: {
@@ -374,7 +372,6 @@ const styles = {
     paddingBottom: Spacing.informationalBox.vertical,
   } as CSSProperties,
   amountIcon: {
-    verticalAlign: 'middle',
     paddingRight: Spacing.size.medium,
     width: 32,
   } as CSSProperties,
