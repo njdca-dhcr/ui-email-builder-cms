@@ -32,3 +32,10 @@
   border-top: 1px lightgray solid;
   padding-top: 1rem;
 }
+
+.tips-and-tricks .illustration {
+  box-shadow: 0 0 0.5rem var(--blue-gray-light);
+  border-radius: 3px;
+  display: block;
+  margin: 0 auto;
+}

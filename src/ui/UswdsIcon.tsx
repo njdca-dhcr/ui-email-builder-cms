@@ -238,7 +238,7 @@ export const UswdsIconVariants = {
   UploadFile: 'upload_file',
   VerifiedUser: 'verified_user',
   Verified: 'verified',
-  VisisbilityOff: 'visibility_off',
+  VisibilityOff: 'visibility_off',
   Visibility: 'visibility',
   VolumeOff: 'volume_off',
   Warning: 'warning',
