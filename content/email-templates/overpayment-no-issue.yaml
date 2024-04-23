@@ -1,0 +1,180 @@
+name: Overpayment - No Issue
+description: To tell the claimant they did not have an overpayment issue
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        defaultValue:
+          title: Overpayment Inquiry Closed
+      - kind: ProgramName
+        required: true
+        defaultValue:
+          preset: Custom
+          name: Pandemic Unemployment Overpayment
+          backgroundColor: "#f1dea0"
+  - kind: Name
+    required: true
+    defaultValue:
+      name: "{!eadj_Issue__c.eAdj_Claimant_Name__c}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: >-
+                    Thank you for answering and submitting your Overpayment 
+                    Waiver Application form. After review, it has been found that:
+      - kind: Status
+        required: true
+        defaultValue:
+          variant: Overview
+          icon: Warning
+          status: You do not have an overpayment
+          statusDueTo: because...
+          showSupportiveInformation: true
+          spaceAfter: true
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - bold: true
+                  text: "This waiver is not needed for your case "
+                - text: and we have closed this inquiry.
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - text: This determination was made based on available information.
+                  italic: true
+          documentsNeededLabel: "We need the following:"
+          documentsNeededValue: "{Name_of_document(s)}"
+          emailToLabel: "Email this to:"
+          emailToValue: DUA@unemployment.gov
+          subjectLineLabel: "Subject Line:"
+          subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
+          showMissingDocumentDeadline: true
+          missingDocumentDeadline: >-
+            If you do not submit your documents by 00/00/0000, you will be denied your
+            claim and will be required to pay back any DUA funds released to you.
+          boxColor: Yielding Yellow
+          amountLabel: "You Owe {!eadj_Issue__c.eadj_Overpay_Amount_Still_Due__c}"
+          amountLineItems:
+            - label: Overpayment Total
+              value: $200
+            - label: Amount waived
+              value: $50
+              bold: true
+              italic: true
+          amountTotal:
+            label: You must pay
+            value: $150
+            bold: true
+      - kind: SupplementalContent
+        required: true
+        defaultValue:
+          variant: Double Supplemental Content
+          title: You're all set
+          description:
+            - type: paragraph
+              children:
+                - text: >-
+                    We have fully processed your request and have waived your entire
+                    overpayment.
+                - text: " "
+                - text: There is nothing left for you to do.
+                  bold: true
+          secondTitle: Feedback (Optional)
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    This email is a new beta design created by New Jersey's Division of
+                    Unemployment Insurance in collaboration with New Jersey's Office of
+                    Innovation. Take our 2 minute survey
+                - type: link
+                  url: >-
+                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                  children:
+                    - text: here
+                - text: .
+          thirdTitle: Supplemental Content Title 3
+          thirdDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                    purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                    ipsum dolor sit amet, consectetur adipiscing elit.
+          benefitAmountBoxColor: Granted Green
+          benefitAmountIcon: CreditCard
+          benefitAmountTitle: Your Benefit Details
+          benefitAmountDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    A detailed breakdown of your benefit amount and how we got to that
+                    number will be mailed to you. If you disagree with it, appeal rights
+                    and processes are available.
+          benefitAmountBoxTitle: Benefit Amount
+          benefitAmountMainBoxCopy:
+            - type: paragraph
+              children:
+                - text: "Weekly Rate:   "
+                  bold: true
+                - text: $400
+                  bold: true
+            - type: paragraph
+              children:
+                - text: "Partial Weekly Rate:   "
+                  bold: true
+                - text: $200
+                  bold: true
+          benefitAmountSupplementalBoxCopy:
+            - type: paragraph
+              children:
+                - text: This rate includes an increase for dependency benefits
+                  bold: true
+                  italic: true
+            - type: paragraph
+              children:
+                - text: " "
+            - type: paragraph
+              children:
+                - text: >-
+                    This amount is subject to change based on the submitted tax record or
+                    dependency documents you send in.
+                  italic: true
+          benefitAmountSupportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you're working part-time, a partial weekly rate (which is 20%
+                    higher than your weekly rate) will be used to calculate your benefit
+                    amount.
+                  italic: true
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        required: true
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: "More information  on Pandemic Overpayment Waivers can be found "
+                - type: link
+                  url: >-
+                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                  children:
+                    - text: here
+                - text: .
