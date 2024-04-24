@@ -174,3 +174,7 @@ components:
                   children:
                     - text: here
                 - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true

@@ -1,5 +1,5 @@
-name: Overpayment - Application
-description: To invite claimants to apply for an overpayment waiver
+name: Overpayment - Reminder
+description: Reminder to claimant to fill out the application
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
@@ -12,7 +12,7 @@ components:
       - kind: Title
         required: true
         defaultValue:
-          title: Overpayment Waiver Application
+          title: Expiring Soon &mdash;<br/>Overpayment<br/>Waiver Application
       - kind: ProgramName
         required: true
         defaultValue:
@@ -22,7 +22,7 @@ components:
   - kind: Name
     required: true
     defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+      name: "{!eadj_Issue__c.eAdj_Claimant_Name__c}:"
   - kind: Body
     required: true
     subComponents:
@@ -32,14 +32,24 @@ components:
           intro:
             - type: paragraph
               children:
-                - text: >-
-                    You requested a waiver application for your Pandemic Unemployment
-                    Overpayment.
+                - text: This is a final reminder
+                  bold: true
+                - text: " that your Pandemic Unemployment Overpayment waiver application is open and available."
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: "Expires:"
+                  bold: true
+                - text: " in 3 days, on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}. Don't wait!"
       - kind: Directive
         required: true
         defaultValue:
           variant: One Step
-          title: 'Apply &amp; Submit<span style="font-weight: normal;">&nbsp;waiver form:</span>'
+          title: >-
+            Answer &amp; Submit<span style="font-weight: normal;">&nbsp;waiver
+            form:</span>
           showTitle: true
           showLabel: true
           label:
@@ -62,8 +72,8 @@ components:
           oneStepSupportiveText:
             - type: paragraph
               children:
-                - text: "This link will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
-                  textSize: small
+                - text: ""
+                  italic: true
           step2Label:
             - type: paragraph
               children:
@@ -139,7 +149,9 @@ components:
                 - type: list-item
                   children:
                     - bold: true
-                      text: Repayment would be unfair and unreasonable given the context
+                      text: >-
+                        Repayment would be unfair and unreasonable because you have
+                        already made financial decisions based on these payments
             - type: paragraph
               children:
                 - bold: true
@@ -161,7 +173,6 @@ components:
                     *State and federal laws, rules, and guidance will be used to make
                     these determinations.
                   bold: true
-                  textSize: small
           appealRightsTitle: Appeal Rights
           appealRightsSummary:
             - type: paragraph
@@ -244,57 +255,6 @@ components:
                         any questions that you may have for your former employer may be
                         included on the form and the reviewing claims examiner may, at
                         his/her discretion, pose the question(s) to your former employer.
-      - kind: LoginDetails
-        required: true
-        defaultValue:
-          variant: Details
-          loginDetailsTitle: Login Details
-          usernameLabel: "Your username is:"
-          usernameValue: "{!EADJ_UI_CASE__C.eadj_Claimant_Email_c}"
-          resetPasswordMessage:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you're having trouble logging in, send a request to reset your
-                    password.
-          button: Reset Password
-          buttonHref: >-
-            https://forms.office.com/Pages/ResponsePage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8zTKxTpe0RMmjY7qrMr_3BUOFlVUklYTzhDQjlWR0NaMVk1NjBQODJDWCQlQCN0PWcu
-          resetPasswordDetails:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your request may take up to 7-10 business days. An email will be sent
-                    to you when your password has been reset.
-                  italic: true
-          loginDetailsIcon: Lock
-          loginInformationTitle: Important Login Information
-          loginInformationDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    Login using the same Login ID and Password you used to file your
-                    claim.
-                  bold: true
-          showLoginInformationBody: true
-          loginInformationBody:
-            - type: bulleted-list
-              children:
-                - type: list-item
-                  children:
-                    - text: "If you do not have an account,"
-                      bold: true
-                      italic: true
-                    - text: " create one here. After creating your account, return to this email and get started."
-                      italic: true
-                - type: list-item
-                  children:
-                    - text: Forget your username and password?
-                      bold: true
-                      italic: true
-                    - text: " Follow the links on the login page to help access your account."
-                      italic: true
-          loginInformationIcon: LockOpen
   - kind: Footer
     required: true
     subComponents:
