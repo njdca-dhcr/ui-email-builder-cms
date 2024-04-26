@@ -1,0 +1,256 @@
+name: MEUC - Apply For Higher Rate
+description: To invite PUA recipients to apply for a higher rate
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: Title
+        required: true
+        defaultValue:
+          title: Apply for a higher weekly benefit rate
+      - kind: ProgramName
+        required: true
+        defaultValue:
+          preset: Custom
+          name: Pandemic Unemployment Assistance (PUA)
+          backgroundColor: "#f1dea0"
+  - kind: Name
+    required: true
+    defaultValue:
+      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: >-
+                    You are receiving this email because you have a Pandemic 
+                    Unemployment Assistance (PUA) claim at New Jersey's 
+                    minimum rate.
+                - text: You may be eligible for an extra $100 per week
+                  bold: true
+      - kind: Directive
+        required: true
+        defaultValue:
+          variant: Three Steps
+          title: Directive Title
+          showTitle: false
+          showLabel: true
+          label:
+            - type: paragraph
+              children:
+                - text: "To apply, complete the following steps:"
+                  bold: true
+          linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
+          buttonLabel: Get Started
+          buttonColor: "#2378C3"
+          step1Label:
+            - type: paragraph
+              children:
+                - text: Login & Answer
+                  bold: true
+                - text: " all the questions"
+          showStep1AdditionalContent: true
+          step1Additional:
+            - type: paragraph
+              children:
+                - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
+          oneStepSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    Supportive information around how the status above was informed and
+                    how a claimant will receive more detailed information and/or a
+                    determination.
+                  italic: true
+          step2Label:
+            - type: paragraph
+              children:
+                - text: Upload
+                  bold: true
+                - text: " documentation"
+          showStep2AdditionalContent: true
+          step2Additional:
+            - type: paragraph
+              children:
+                - text: "Submit {!eadj_UI_Case__c.eMon_Applicable_Tax_Year__c} proof of income"
+          step2Tertiary:
+            - type: paragraph
+              children:
+                - text: >-
+                    Tertiary information around Step 2, (usually involving an alternate
+                    way to complete the second step).
+          step2CaseNumber:
+            - type: paragraph
+              children:
+                - text: "Case #: [000000]"
+          step3Label:
+            - type: paragraph
+              children:
+                - text: Submit
+                  bold: true
+                - text: " your file(s). "
+                - text: Don't wait.
+                  bold: true
+          showStep3AdditionalContent: false
+          step3Additional:
+            - type: paragraph
+              children:
+                - text: Additional information around Step 3
+          showMultipleStepsSupportiveText: false
+          multipleStepsSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
+                    tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
+                    quis congue eget, commodo eu urna. Donec laoreet a dui consequat
+                    sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
+                  italic: true
+          alternativePaymentLabel: >-
+            Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
+            Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
+          payOnlineSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    Make the check or money order payable to NJ Dept. of Labor and
+                    Workforce Development. Be sure to write your name and social security
+                    number on the payment.
+      - kind: SupplementalContent
+        required: true
+        defaultValue:
+          variant: Single Supplemental Content
+          title: Acceptable documentation
+          description:
+            - type: paragraph
+              children:
+                - text: "Tax forms (most common):"
+            - type: bulleted-list
+              children:
+                - type: list-item
+                  children:
+                    - text: 1040 (pages 1 & 2)
+                - type: list-item
+                  children:
+                    - text: W-2s
+                - type: list-item
+                  children:
+                    - text: Schedule SE
+                - type: list-item
+                  children:
+                    - text: Schedule C
+                - type: list-item
+                  children:
+                    - text: 1065 with K-1
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: >-
+                    A full list of acceptable documents can be found on the document
+                    upload page. Keep in mind that this information will be kept secure.
+          secondTitle: Supplemental Content Title 2
+          secondDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                    purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                    ipsum dolor sit amet, consectetur adipiscing elit.
+          thirdTitle: Supplemental Content Title 3
+          thirdDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                    purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                    ipsum dolor sit amet, consectetur adipiscing elit.
+          benefitAmountBoxColor: Granted Green
+          benefitAmountIcon: CreditCard
+          benefitAmountTitle: Your Benefit Details
+          benefitAmountDescription:
+            - type: paragraph
+              children:
+                - text: >-
+                    A detailed breakdown of your benefit amount and how we got to that
+                    number will be mailed to you. If you disagree with it, appeal rights
+                    and processes are available.
+          benefitAmountBoxTitle: Benefit Amount
+          benefitAmountMainBoxCopy:
+            - type: paragraph
+              children:
+                - text: "Weekly Rate:   "
+                  bold: true
+                - text: $400
+                  bold: true
+            - type: paragraph
+              children:
+                - text: "Partial Weekly Rate:   "
+                  bold: true
+                - text: $200
+                  bold: true
+          benefitAmountSupplementalBoxCopy:
+            - type: paragraph
+              children:
+                - text: This rate includes an increase for dependency benefits
+                  bold: true
+                  italic: true
+            - type: paragraph
+              children:
+                - text: " "
+            - type: paragraph
+              children:
+                - text: >-
+                    This amount is subject to change based on the submitted tax record or
+                    dependency documents you send in.
+                  italic: true
+          benefitAmountSupportiveInformation:
+            - type: paragraph
+              children:
+                - text: >-
+                    If you're working part-time, a partial weekly rate (which is 20%
+                    higher than your weekly rate) will be used to calculate your benefit
+                    amount.
+                  italic: true
+  - kind: Footer
+    required: true
+    subComponents:
+      - kind: AdditionalContent
+        required: true
+        defaultValue:
+          content:
+            - type: paragraph
+              children:
+                - text: ""
+                - type: link
+                  url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
+                  children:
+                    - text: Click here
+                - text: " for tips on how to attach documents to a form."
+            - type: paragraph
+              children:
+                - text: ""
+            - type: paragraph
+              children:
+                - text: "More information on New Jersey's Unemployment Insurance program can be found "
+                - type: link
+                  url: >-
+                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                  children:
+                    - text: here
+                - text: .
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
