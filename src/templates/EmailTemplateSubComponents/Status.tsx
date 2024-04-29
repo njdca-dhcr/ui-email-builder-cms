@@ -219,9 +219,9 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
                 ...styles.amountTable,
                 ...(StatusVariant.OverviewWithReasonAndAmountDue === value.variant
                   ? {
-                    paddingTop: Spacing.size.medium,
-                    paddingBottom: Spacing.size.medium,
-                  }
+                      paddingTop: Spacing.size.medium,
+                      paddingBottom: Spacing.size.medium,
+                    }
                   : {}),
                 backgroundColor: boxColorConfig.backgroundColor,
                 borderLeft: Borders.large(boxColorConfig.accentColor),

@@ -173,31 +173,29 @@ const TipsAndTricksPage: FC = () => {
               src={emailEditingPagePng}
               alt="The email editing page of an email concerning DUA eligibility"
             />
-            <p>
-              It's divided into several parts:
-              <ul>
-                <li>
-                  <InternalLink to="#sidebar-controls">
-                    <Icon icon="SupportAgent" /> Sidebar Controls
-                  </InternalLink>
-                </li>
-                <li>
-                  <InternalLink to="#preview-text">
-                    <Icon icon="Chat" /> Preview Text
-                  </InternalLink>
-                </li>
-                <li>
-                  <InternalLink to="#email-preview-controls">
-                    <Icon icon="ToggleOff" /> Email Preview Controls
-                  </InternalLink>
-                </li>
-                <li>
-                  <InternalLink to="#email-preview-editing">
-                    <Icon icon="ToggleOn" /> Email Preview
-                  </InternalLink>
-                </li>
-              </ul>
-            </p>
+            <p>It's divided into several parts:</p>
+            <ul>
+              <li>
+                <InternalLink to="#sidebar-controls">
+                  <Icon icon="SupportAgent" /> Sidebar Controls
+                </InternalLink>
+              </li>
+              <li>
+                <InternalLink to="#preview-text">
+                  <Icon icon="Chat" /> Preview Text
+                </InternalLink>
+              </li>
+              <li>
+                <InternalLink to="#email-preview-controls">
+                  <Icon icon="ToggleOff" /> Email Preview Controls
+                </InternalLink>
+              </li>
+              <li>
+                <InternalLink to="#email-preview-editing">
+                  <Icon icon="ToggleOn" /> Email Preview
+                </InternalLink>
+              </li>
+            </ul>
             <h3 id="sidebar-controls">
               <Icon icon="SupportAgent" /> Sidebar Controls
             </h3>
