@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { navigate } from 'gatsby'
-import { useId } from '@reach/auto-id'
 import { EmailTemplate } from 'src/appTypes'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import './EmailEditorHeadingAndSelect.css'
@@ -13,7 +12,7 @@ interface Props {
 }
 
 export const EmailEditorHeadingAndSelect: FC<Props> = ({ emailTemplate }) => {
-  const selectLabelId = useId('template-select')
+  const selectLabelId = 'template-select'
   const emailTemplates = useEmailTemplatesData().filter(({ name }) => {
     return name !== emailTemplate.name
   })
