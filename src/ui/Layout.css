@@ -4,6 +4,29 @@
   height: 100vh;
 }
 
+[href='#skip-to-content'] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+[href='#skip-to-content']:focus {
+  padding: 1rem;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: white;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  clip: auto;
+}
+
 .sidebar {
   background-color: var(--gray-light);
   display: flex;

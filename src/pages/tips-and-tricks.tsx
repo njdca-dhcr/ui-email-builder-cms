@@ -1,7 +1,14 @@
 import React, { FC, ReactNode } from 'react'
 import { HeadFC } from 'gatsby'
-import { SkipNavContent } from '@reach/skip-nav'
-import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
+import {
+  Heading,
+  Layout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SkipNavContent,
+  SpacedContainer,
+} from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import './tips-and-tricks.css'

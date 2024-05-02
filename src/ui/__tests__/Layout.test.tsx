@@ -10,10 +10,12 @@ import {
   SideBarList,
   SideBarListItem,
   SideBarListItemBottom,
+  SkipNavContent,
+  SkipNavLink,
   SpacedContainer,
   SpacedSidebarContainer,
 } from '../Layout'
-import { mockAppMode } from 'src/testHelpers'
+import { mockAppMode, urlFor } from 'src/testHelpers'
 
 describe('Layout', () => {
   it('displays its children', () => {
@@ -48,6 +50,22 @@ describe('Layout', () => {
     const layout = baseElement.querySelector('.layout')
     expect(layout).not.toBeNull()
     expect(layout?.tagName).toEqual('MAIN')
+  })
+})
+
+describe('SkipNavLink', () => {
+  it('is a link to the skip nav content element', async () => {
+    const { baseElement } = render(<SkipNavLink />)
+    const link: HTMLAnchorElement = baseElement.querySelector('a')!
+    expect(link).toHaveTextContent('Skip to content')
+    expect(link.href).toEqual('http://localhost/#skip-to-content')
+  })
+})
+
+describe('SkipNavContent', () => {
+  it('is an element with skip nav content id', () => {
+    const { baseElement } = render(<SkipNavContent />)
+    expect(baseElement).toContainHTML('<div id="skip-to-content"></div>')
   })
 })
 

@@ -1,8 +1,15 @@
 import React from 'react'
-import { Link, HeadFC, PageProps } from 'gatsby'
-import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
+import { HeadFC, PageProps } from 'gatsby'
+import {
+  Heading,
+  Layout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SkipNavContent,
+  SpacedContainer,
+} from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
-import { SkipNavContent } from '@reach/skip-nav'
 
 const NotFoundPage: React.FC<PageProps> = () => {
   return (

@@ -1,9 +1,16 @@
 import React, { FC, ReactElement } from 'react'
 import { Link, type HeadFC } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-import { SkipNavContent } from '@reach/skip-nav'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
+import {
+  Heading,
+  Layout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SkipNavContent,
+  SpacedContainer,
+} from 'src/ui/Layout'
 import { List } from 'src/ui/List'
 import 'src/styles/app.css'
 import './index.css'

@@ -1,7 +1,14 @@
 import React, { FC } from 'react'
 import { HeadFC } from 'gatsby'
-import { SkipNavContent } from '@reach/skip-nav'
-import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
+import {
+  Heading,
+  Layout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SkipNavContent,
+  SpacedContainer,
+} from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { EditDisclaimer, EditBanner, EditStateSeal, EditDepartmentSeal } from 'src/ui/Settings'
 import './settings.css'

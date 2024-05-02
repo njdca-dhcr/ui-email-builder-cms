@@ -1,7 +1,14 @@
 import React, { FC, useState } from 'react'
 import { HeadFC, Link } from 'gatsby'
-import { SkipNavContent } from '@reach/skip-nav'
-import { Heading, Layout, PageContent, Paragraph, Sidebar, SpacedContainer } from 'src/ui/Layout'
+import {
+  Heading,
+  Layout,
+  PageContent,
+  Paragraph,
+  Sidebar,
+  SkipNavContent,
+  SpacedContainer,
+} from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { List } from 'src/ui/List'

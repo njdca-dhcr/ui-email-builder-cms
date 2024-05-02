@@ -1,6 +1,4 @@
 import React, { FC, ReactNode } from 'react'
-import { SkipNavLink } from '@reach/skip-nav'
-import '@reach/skip-nav/styles.css'
 import { List } from './List'
 import './Layout.css'
 import classNames from 'classnames'
@@ -24,6 +22,16 @@ export const Layout: FC<LayoutProps> = ({ children, element }) => {
       {children}
     </Element>
   )
+}
+
+const SKIP_TO_CONTENT = 'skip-to-content'
+
+export const SkipNavLink: FC = () => {
+  return <a href={`#${SKIP_TO_CONTENT}`}>Skip to content</a>
+}
+
+export const SkipNavContent: FC = () => {
+  return <div id={SKIP_TO_CONTENT} />
 }
 
 interface PageContentProps {
