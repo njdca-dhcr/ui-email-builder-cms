@@ -5,7 +5,7 @@ import { BannerMarkup, useBannerValue } from 'src/templates/EmailTemplateCompone
 import { Spacing } from 'src/templates/styles'
 import { ColorPicker } from '../ColorPicker'
 import { EditableElement } from '../EditableElement'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { ColorInput } from '../ColorInput'
 
 export const EditBanner: FC = () => {

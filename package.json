@@ -27,12 +27,12 @@
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.0.2",
+    "@radix-ui/react-visually-hidden": "^1.0.3",
     "@reach/accordion": "^0.18.0",
     "@reach/auto-id": "^0.18.0",
     "@reach/dialog": "^0.18.0",
     "@reach/listbox": "^0.18.0",
     "@reach/skip-nav": "^0.18.0",
-    "@reach/visually-hidden": "^0.18.0",
     "autoprefixer": "^10.4.15",
     "classnames": "^2.3.2",
     "copy-to-clipboard": "^3.3.3",

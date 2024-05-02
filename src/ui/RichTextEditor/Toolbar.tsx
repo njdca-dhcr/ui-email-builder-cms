@@ -5,7 +5,7 @@ import { AppElement, AppElementType, AppMarkConfig, AppMarkKind, Polarity, TextS
 import { ReactEditor, useSlate } from 'slate-react'
 import { LinkButtons } from './withInlines'
 import classNames from 'classnames'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { BulletedListIcon } from './icons/BulletedListIcon'
 import { NumberedListIcon } from './icons/NumberedListIcon'
 import { Font } from 'src/templates/styles'

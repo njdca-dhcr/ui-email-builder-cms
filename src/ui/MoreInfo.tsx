@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react'
 import { Dialog } from './Dialog'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { UswdsIcon } from './UswdsIcon'
 import './MoreInfo.css'
 

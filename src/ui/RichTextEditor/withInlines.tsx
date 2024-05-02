@@ -3,7 +3,7 @@ import { Editor, Transforms, Range, Element as SlateElement, Node as SlateNode }
 import { ReactEditor, useSlate } from 'slate-react'
 import isUrl from 'is-url'
 import { AppElement, LinkElement } from './types'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { RemoveLinkIcon } from './icons/RemoveLinkIcon'
 import { AddLinkIcon } from './icons/AddLinkIcon'
 

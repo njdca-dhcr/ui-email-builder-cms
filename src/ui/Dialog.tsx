@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react'
 import { DialogOverlay, DialogContent } from '@reach/dialog'
 import '@reach/dialog/styles.css'
 import './Dialog.css'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { UswdsIcon } from './UswdsIcon'
 
 interface Props {

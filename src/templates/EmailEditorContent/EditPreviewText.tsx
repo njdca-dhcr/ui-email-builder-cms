@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { usePreviewText } from '../PreviewText'
 import './EditPreviewText.css'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 export const EditPreviewText: FC = () => {
   const headingId = 'edit-preview-text'

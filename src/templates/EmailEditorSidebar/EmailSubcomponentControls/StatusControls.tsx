@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useSubComponentControlOptions } from '.'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Select } from 'src/ui/Select'

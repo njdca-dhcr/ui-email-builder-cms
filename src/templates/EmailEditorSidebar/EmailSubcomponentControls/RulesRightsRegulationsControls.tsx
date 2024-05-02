@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
 import { Select, UswdsIconSelect } from 'src/ui'
 import { SelectBoxColor } from 'src/ui/SelectBoxColor'

@@ -4,7 +4,7 @@ import { useId } from '@reach/auto-id'
 import { EmailTemplate } from 'src/appTypes'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import './EmailEditorHeadingAndSelect.css'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { ChevronDownIcon } from 'src/ui/ChevronDownIcon'
 import { Select } from 'src/ui'
 

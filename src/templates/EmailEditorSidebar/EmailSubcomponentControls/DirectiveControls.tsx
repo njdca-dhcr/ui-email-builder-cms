@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useDirectiveValue } from 'src/templates/EmailTemplateSubComponents/Directive'
 import { Select } from 'src/ui/'
 import { SubComponentControlToggle } from './SubComponentControlToggle'

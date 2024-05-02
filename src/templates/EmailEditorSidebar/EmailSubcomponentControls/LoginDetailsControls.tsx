@@ -3,7 +3,7 @@ import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } fro
 import { useSubComponentControlOptions } from '.'
 import { Select, UswdsIconSelect } from 'src/ui'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { LoginDetailsVariant } from 'src/appTypes'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 

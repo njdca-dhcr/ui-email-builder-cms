@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import startCase from 'lodash.startcase'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Heading, Paragraph } from 'src/ui/Layout'
 import { Select } from 'src/ui/Select'
 import { STATE_SEALS } from 'src/utils/StateSeal'
@@ -29,8 +29,8 @@ export const EditStateSeal: FC = () => {
       {isAllStatesMode() && (
         <form>
           <div className="edit-state-seal-field-group">
-            <VisuallyHidden as="label" id="state-seal-select">
-              Select your state
+            <VisuallyHidden>
+              <label id="state-seal-select">Select your state</label>
             </VisuallyHidden>
             <Select
               labelId="state-seal-select"
