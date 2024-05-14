@@ -16,7 +16,6 @@ export const ExportImageButton: FC<Props> = ({
   children
 }) => {
   const buttonHandler = () => {
-    console.log('handler')
     if (fieldsCompleted()) {
       exportImage()
     }
