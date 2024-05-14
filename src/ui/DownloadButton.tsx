@@ -16,7 +16,7 @@ export const DownloadButton: FC<Props> = ({
 }) => {
   const clickHandler = () => {
     if (fieldsCompleted()) {
-      download(textToDownload(), fileName, 'text/html')
+      download({ fileData: textToDownload(), fileName, fileType: 'text/html' })
     }
   }
 

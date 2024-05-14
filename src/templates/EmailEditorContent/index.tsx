@@ -8,11 +8,12 @@ import './EmailEditorContent.css'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmailString'
 import { CopyToClipboardButton } from 'src/ui/CopyToClipboardButton'
+import { DownloadButton } from 'src/ui/DownloadButton'
+import { ExportImageButton } from 'src/ui/ExportImageButton'
 import { EmailTable } from 'src/ui/EmailTable'
 import { Spacing } from '../styles'
 import { PreviewTextHtml } from './PreviewTextHtml'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
-import { DownloadButton } from 'src/ui/DownloadButton'
 import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
@@ -71,6 +72,13 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         </Radio.Fieldset>
         {!isRestricted() && (
           <div className="button-group">
+            <ExportImageButton
+              fieldsCompleted={hasPreviewText}
+              html={toEmailText(titleValue.title)}
+              fileName={emailTemplate.name}
+            >
+              Export Image
+            </ExportImageButton>
             <CopyToClipboardButton
               fieldsCompleted={hasPreviewText}
               textToCopy={() => toEmailText(titleValue.title)}
