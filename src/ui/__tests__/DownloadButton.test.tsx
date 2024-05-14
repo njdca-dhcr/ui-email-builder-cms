@@ -56,7 +56,7 @@ describe('DownloadButton', () => {
 
     expect(download).not.toHaveBeenCalled()
     await user.click(button!)
-    expect(download).toHaveBeenCalledWith(html, fileName, 'text/html')
+    expect(download).toHaveBeenCalledWith({ fileData: html, fileName, fileType: 'text/html' })
   })
 
   it('does not download the given content when clicked if fields are not completed', async () => {
