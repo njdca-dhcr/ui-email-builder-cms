@@ -1,6 +1,7 @@
 name: Employer - Confirmation
 description: When an employer requests to reset their password to access BC2 related inquiries.
 appModes: ["ALL", "NJ"]
+previewText: We received your employer response for Captain America and it is under review. Make sure you have an Employer Access Account! Sign up today.
 components:
   - kind: Banner
     required: true

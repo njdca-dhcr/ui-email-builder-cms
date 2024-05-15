@@ -1,6 +1,7 @@
 name: Certification - Payment Pending
 description: When someone's certification has been received but payment is pending.
 appModes: ["ALL", "NJ"]
+previewText: We’re holding your payment until we come to a determination.
 components:
   - kind: Banner
     required: true

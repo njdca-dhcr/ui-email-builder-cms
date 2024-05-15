@@ -1,6 +1,7 @@
 name: Certification - Payment Reapplied (to Overpayment)
 description: When someone will not receive Unemployment Insurance benefits this week due to overpayment.
 appModes: ["ALL", "NJ"]
+previewText: You will not receive funds this week—your payment was applied to an overpayment. Continue to certify weekly.
 components:
   - kind: Banner
     required: true

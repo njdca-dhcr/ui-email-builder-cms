@@ -1,6 +1,7 @@
 name: DUA - Weekly Eligible (Overpayment)
 description: When someone's benefits are on the way and there's been an overpayment.
 appModes: ["ALL", "NJ"]
+previewText: We are processing your payment of $165 for May 12 - May 19. See details of your benefit breakdown.
 components:
   - kind: Banner
     required: true

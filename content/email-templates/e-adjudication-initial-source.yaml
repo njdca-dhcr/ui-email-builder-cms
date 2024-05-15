@@ -1,6 +1,7 @@
 name: eAdjudication - Initial Source
 description: When there's an issue with someone's UI claim.
 appModes: ["ALL", "NJ"]
+previewText: Your claim has an issue that needs attention. Login, answer the questions, and submit your answers today. Don’t wait.
 components:
   - kind: Banner
     required: true

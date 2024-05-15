@@ -1,6 +1,7 @@
 name: DUA - Program Ending
 description: When the Disaster Unemeployment Assistance program is ending.
 appModes: ["ALL", "NJ"]
+previewText: The DUA program is ending. You will no longer be receiving benefits after March 5, 2023. Additional resources can be found within this email.
 components:
   - kind: Banner
     required: true

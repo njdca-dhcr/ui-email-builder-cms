@@ -1,6 +1,7 @@
 name: Dependency - Ineligible Breakdown
 description: When someone's weekly benefit rate is not going to increase.
 appModes: ["ALL", "NJ"]
+previewText: You are not eligible to claim {3} dependents and your weekly benefit rate will not increase. Details are included in this email as well as appeal rights.
 components:
   - kind: Banner
     required: true

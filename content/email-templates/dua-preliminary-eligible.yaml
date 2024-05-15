@@ -1,6 +1,7 @@
 name: DUA - Preliminary Eligible
 description: When someone's application has been received but more information is required.
 appModes: ["ALL", "NJ"]
+previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
 components:
   - kind: Banner
     required: true

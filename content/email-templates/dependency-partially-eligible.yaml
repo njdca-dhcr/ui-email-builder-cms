@@ -1,6 +1,7 @@
 name: Dependency - Partially Eligible
 description: When someone is partially eligible for benefits.
 appModes: ["ALL", "NJ"]
+previewText: "You are eligible to claim {3} dependents and {your weekly benefit rate will increase by #%}. Details are included in this email as well as appeal rights."
 components:
   - kind: Banner
     required: true

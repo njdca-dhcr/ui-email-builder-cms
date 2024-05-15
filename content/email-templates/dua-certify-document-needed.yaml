@@ -1,6 +1,7 @@
 name: DUA - Certify - Document Needed
 description: When someone needs to submit documentation to receive benefits.
 appModes: ["ALL", "NJ"]
+previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
 components:
   - kind: Banner
     required: true

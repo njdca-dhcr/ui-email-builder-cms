@@ -1,6 +1,7 @@
 name: Certification - Action Needed
 description: When someone's certification has been received but needs further action to process.
 appModes: ["ALL", "NJ"]
+previewText: We need more information from you regarding your recent work with earnings. Take action today. Don’t wait.
 components:
   - kind: Banner
     required: true

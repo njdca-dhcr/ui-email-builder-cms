@@ -1,9 +1,10 @@
 name: ID.me - Identity Confirmation; Start Certifying
 description: >-
-  To confirm to the claimant that their ID.me process is complete 
-  and to tell them to begin certifying on the calculated date based 
+  To confirm to the claimant that their ID.me process is complete
+  and to tell them to begin certifying on the calculated date based
   on their claim. Graphic of how this date is calculated is included.
 appModes: ["ALL", "NJ"]
+previewText: We’ve confirmed your identity and you can start certifying on {October 12}. Remember to certify every week! Details enclosed.
 components:
   - kind: Banner
     required: true

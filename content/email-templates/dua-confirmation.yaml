@@ -1,6 +1,7 @@
 name: DUA - Confirmation
 description: When someone's application has been received.
 appModes: ["ALL", "NJ"]
+previewText: Application received. Your DUA application is received and under review. It make take up to 2 weeks to determine your eligibility.
 components:
   - kind: Banner
     required: true

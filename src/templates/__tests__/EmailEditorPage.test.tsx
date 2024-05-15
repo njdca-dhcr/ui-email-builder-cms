@@ -14,10 +14,13 @@ describe('EmailEditorPage', () => {
   let emailTemplate: EmailTemplate.Config
   let rendered: RenderResult
   let user: UserEvent
+  let defaultPreviewText: string
 
   beforeEach(() => {
     user = userEvent.setup()
+    defaultPreviewText = faker.lorem.paragraph()
     emailTemplate = buildEmailTemplateConfig({
+      previewText: defaultPreviewText,
       components: [
         buildEmailTemplateComponent('Header', {
           subComponents: [
@@ -71,10 +74,11 @@ describe('EmailEditorPage', () => {
       const value = faker.lorem.paragraph()
       const { baseElement, getByRole } = rendered
       const input = getByRole('textbox')
+      expect(input).toHaveValue(defaultPreviewText)
       await user.type(input, value)
       const previewText = baseElement.querySelector('#preview-text')
       expect(previewText).not.toBeNull()
-      expect(previewText).toHaveTextContent(value)
+      expect(previewText).toHaveTextContent(defaultPreviewText + value)
     })
   })
 

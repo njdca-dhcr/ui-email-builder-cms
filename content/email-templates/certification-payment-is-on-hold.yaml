@@ -1,6 +1,7 @@
 name: Certification - Payment is On Hold
 description: When someone's certification has been received but requires manual review.
 appModes: ["ALL", "NJ"]
+previewText: Your certification requires manual review. It may take up to 5 business days to review your answers and release funds.
 components:
   - kind: Banner
     required: true

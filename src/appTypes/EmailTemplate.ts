@@ -125,6 +125,7 @@ export namespace EmailTemplate {
   export interface Config {
     name: string
     description?: string
+    previewText?: string
     components?: Component[]
     appModes?: AppMode[]
   }
@@ -132,6 +133,7 @@ export namespace EmailTemplate {
   export interface UniqueConfig {
     name: string
     description?: string
+    previewText?: string
     components?: UniqueComponent[]
   }
 

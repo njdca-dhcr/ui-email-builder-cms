@@ -38,7 +38,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
               <ClearCurrentlyActiveEmailPart />
               <EmailPartsContent>
                 <EmailEditorSidebar emailTemplate={emailTemplate} />
-                <PreviewText>
+                <PreviewText initialValue={emailTemplate.previewText}>
                   <PageContent element="div" className="email-editor-page-content">
                     <EmailEditorContent emailTemplate={emailTemplate} />
                   </PageContent>
