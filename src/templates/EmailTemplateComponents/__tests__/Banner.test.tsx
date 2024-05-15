@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Banner, BannerMarkup, useBannerValue } from '../Banner'
 import { render, renderHook } from '@testing-library/react'
 import { BannerValue, EmailTemplate } from 'src/appTypes'
 import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import { Colors } from 'src/templates/styles'
+import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
 describe('BannerMarkup', () => {
   it('displays the primary text', () => {
@@ -177,10 +178,14 @@ describe('useBannerValue', () => {
     localStorage.clear()
   })
 
+  const emptyUserInfo: FC<{ children: ReactNode }> = ({ children }) => {
+    return <UserInfoProvider userInfo={{}}>{children}</UserInfoProvider>
+  }
+
   describe('in all states mode', () => {
     beforeEach(() => {
       mockAppMode('ALL')
-      const { result } = renderHook(() => useBannerValue())
+      const { result } = renderHook(() => useBannerValue(), { wrapper: emptyUserInfo })
       value = result.current[0]
     })
 
@@ -207,7 +212,7 @@ describe('useBannerValue', () => {
     describe('for example NJ', () => {
       beforeEach(() => {
         mockAppMode('NJ')
-        const { result } = renderHook(() => useBannerValue())
+        const { result } = renderHook(() => useBannerValue(), { wrapper: emptyUserInfo })
         value = result.current[0]
       })
 
@@ -252,6 +257,45 @@ describe('useBannerValue', () => {
       it('has a color', () => {
         expect(value.backgroundColor).toEqual(Colors.black)
       })
+    })
+  })
+
+  describe('when there is banner information in the user information', () => {
+    let userInfoBannerValue: BannerValue
+
+    beforeEach(() => {
+      userInfoBannerValue = {
+        primaryText: faker.lorem.sentence(),
+        backgroundColor: faker.color.rgb(),
+        primaryLink: faker.internet.url(),
+        secondaryLink: faker.internet.url(),
+      }
+      const { result } = renderHook(() => useBannerValue(), {
+        wrapper: ({ children }) => {
+          return (
+            <UserInfoProvider userInfo={{ banner: userInfoBannerValue }}>
+              {children}
+            </UserInfoProvider>
+          )
+        },
+      })
+      value = result.current[0]
+    })
+
+    it('uses the primary text from user info', () => {
+      expect(value.primaryText).toEqual(userInfoBannerValue.primaryText)
+    })
+
+    it('uses the primary link from user info', () => {
+      expect(value.primaryLink).toEqual(userInfoBannerValue.primaryLink)
+    })
+
+    it('uses the secondary link from user info', () => {
+      expect(value.secondaryLink).toEqual(userInfoBannerValue.secondaryLink)
+    })
+
+    it('uses the color from user info', () => {
+      expect(value.backgroundColor).toEqual(userInfoBannerValue.backgroundColor)
     })
   })
 })

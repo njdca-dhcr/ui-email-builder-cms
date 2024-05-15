@@ -19,8 +19,6 @@ components:
           preset: Custom
           name: Appeal Tribunal
           backgroundColor: "#0076d6"
-      - kind: DirectiveButton
-        visibleByDefault: false
   - kind: Name
     required: true
     defaultValue:

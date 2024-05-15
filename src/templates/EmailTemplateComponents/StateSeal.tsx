@@ -1,6 +1,5 @@
 import React, { CSSProperties, FC, ReactElement } from 'react'
 import { EmailComponentProps } from './shared'
-import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { EmailBlock } from 'src/ui'
 import { stateSealFor } from 'src/utils/StateSeal'
 import { SpacingCell, StyleDefaults, Text } from '../styles'
@@ -9,6 +8,8 @@ import { appModeAsStateAbbreviation, isAllStatesMode } from 'src/utils/appMode'
 import { StateSealValue } from 'src/appTypes'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
 import capitalize from 'lodash.capitalize'
+import { useUserInfoValue } from 'src/utils/UserInfoContext'
+import { stateSealSchema } from 'src/utils/userInfoSchemas'
 
 const defaultValue = (): StateSealValue => {
   const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
@@ -20,9 +21,8 @@ const defaultValue = (): StateSealValue => {
   }
 }
 
-export const useStateSealValue = () => {
-  return useLocalStorageJSON<StateSealValue>('stateSeal', defaultValue())
-}
+export const useStateSealValue = () =>
+  useUserInfoValue('stateSeal', defaultValue(), stateSealSchema)
 
 const { Row, Cell } = EmailBlock
 

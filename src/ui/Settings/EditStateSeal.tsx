@@ -10,6 +10,10 @@ import { EditableElement } from '../EditableElement'
 import { Spacing } from 'src/templates/styles'
 import { isAllStatesMode } from 'src/utils/appMode'
 import { StateAbbreviation } from 'src/utils/statesAndTerritories'
+import { useUpdateStateSeal } from 'src/network/useUpdateStateSeal'
+import { SaveButton } from './SaveButton'
+import { LoadingOverlay } from '../LoadingOverlay'
+import { Alert } from '../Alert'
 
 const stateSealOptions = STATE_SEALS.map(({ state, image }) => ({
   label: startCase(image),
@@ -17,51 +21,57 @@ const stateSealOptions = STATE_SEALS.map(({ state, image }) => ({
 }))
 
 export const EditStateSeal: FC = () => {
-  const [value, setValue] = useStateSealValue()
+  const [stateSeal, setValue, { hasChanges }] = useStateSealValue()
+  const { error, mutate, isPending } = useUpdateStateSeal()
 
   return (
-    <>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault()
+        mutate(stateSeal)
+      }}
+    >
       <Heading element="h2" subheading>
         State Seal
       </Heading>
       <Paragraph>This state seal will show at the bottom of all emails.</Paragraph>
-
+      {error && <Alert>{error.message}</Alert>}
       {isAllStatesMode() && (
-        <form>
-          <div className="edit-state-seal-field-group">
-            <VisuallyHidden>
-              <label id="state-seal-select">Select your state</label>
-            </VisuallyHidden>
-            <Select
-              labelId="state-seal-select"
-              onChange={
-                ((stateAbbreviation: StateAbbreviation) =>
-                  setValue({ ...value, stateAbbreviation })) as any
-              }
-              options={stateSealOptions}
-              value={value.stateAbbreviation}
-            />
-          </div>
-        </form>
+        <div className="edit-state-seal-field-group">
+          <VisuallyHidden>
+            <label id="state-seal-select">Select your state</label>
+          </VisuallyHidden>
+          <Select
+            labelId="state-seal-select"
+            onChange={
+              ((stateAbbreviation: StateAbbreviation) =>
+                setValue({ ...stateSeal, stateAbbreviation })) as any
+            }
+            options={stateSealOptions}
+            value={stateSeal.stateAbbreviation}
+          />
+        </div>
       )}
       <div className="edit-state-seal-preview">
         <EmailBlock.Table className="desktop" maxWidth={Spacing.layout.maxWidth - 150}>
           <StateSealMarkup
             leftJustify
-            stateAbbreviation={value.stateAbbreviation}
+            stateAbbreviation={stateSeal.stateAbbreviation}
             additionalDisclaimer={
               <EditableElement
                 element="span"
                 label="Additional Disclaimer"
-                value={value.additionalDisclaimer}
+                value={stateSeal.additionalDisclaimer}
                 onValueChange={(additionalDisclaimer) =>
-                  setValue({ ...value, additionalDisclaimer })
+                  setValue({ ...stateSeal, additionalDisclaimer })
                 }
               />
             }
           />
         </EmailBlock.Table>
       </div>
-    </>
+      <SaveButton hasChanges={hasChanges} isPending={isPending} />
+      {isPending && <LoadingOverlay description="Saving state seal" />}
+    </form>
   )
 }

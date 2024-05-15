@@ -5,8 +5,12 @@ import classNames from 'classnames'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
 import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
+import { AuthProvider, useAuth } from 'src/utils/AuthContext'
+import { WhenSignedIn } from 'src/utils/WhenSignedIn'
+import { WhenSignedOut } from 'src/utils/WhenSignedOut'
+import { OnlyWithBackendUrl } from 'src/utils/OnlyWithBackendUrl'
 
 interface LayoutProps {
   children: ReactNode
@@ -42,7 +46,12 @@ interface PageContentProps {
 
 export const PageContent: FC<PageContentProps> = ({ children, className, element }) => {
   const Element = element ?? 'div'
-  return <Element className={classNames('page-content', className)}>{children}</Element>
+  return (
+    <Element className={classNames('page-content', className)}>
+      <AuthButtons />
+      {children}
+    </Element>
+  )
 }
 
 interface SidebarProps {
@@ -150,4 +159,37 @@ export const SpacedSidebarContainer: FC<SpacedSidebarContainerProps> = ({
   className,
 }) => {
   return <div className={classNames('spaced-sidebar-container', className)}>{children}</div>
+}
+
+export const SignOutButton: FC = () => {
+  const [_auth, setAuth] = useAuth()
+
+  return (
+    <button
+      className="sign-out-button"
+      onClick={() => {
+        setAuth(null)
+        navigate('/')
+      }}
+    >
+      Sign Out
+    </button>
+  )
+}
+
+export const AuthButtons: FC = () => {
+  return (
+    <OnlyWithBackendUrl>
+      <div className="auth-buttons">
+        <WhenSignedOut>
+          <Link to="/sign-in" className="sign-in-link">
+            Sign In
+          </Link>
+        </WhenSignedOut>
+        <WhenSignedIn>
+          <SignOutButton />
+        </WhenSignedIn>
+      </div>
+    </OnlyWithBackendUrl>
+  )
 }

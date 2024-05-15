@@ -1,24 +1,16 @@
 import { RichTextValue } from 'src/ui/RichTextEditor'
 import { BoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
-import { StateAbbreviation } from 'src/utils/statesAndTerritories'
 
-export interface BannerValue {
-  backgroundColor: string
-  primaryText: string
-  primaryLink: string
-  secondaryLink: string
-  [key: string]: null | string
-}
+export type {
+  BannerValue,
+  DepartmentSealValue,
+  StateSealValue,
+  DisclaimerValue,
+} from 'src/utils/userInfoSchemas'
 
 export interface NameValue {
   name: string
-}
-
-export interface StateSealValue {
-  stateAbbreviation: StateAbbreviation
-  additionalDisclaimer: string
-  [key: string]: null | string
 }
 
 export interface AdditionalContentValue {

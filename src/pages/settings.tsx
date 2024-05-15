@@ -14,8 +14,30 @@ import { EditDisclaimer, EditBanner, EditStateSeal, EditDepartmentSeal } from 's
 import './settings.css'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { EditingEmailCSS } from 'src/templates/emailHtmlDocument/EmailCSS'
+import { LoadingOverlay } from 'src/ui/LoadingOverlay'
+import { useUser } from 'src/network/useUser'
+import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
 const SettingsPage: FC = () => {
+  const { data: user, isLoading, error, enabled } = useUser()
+
+  const forms = (
+    <>
+      <div className="section-container">
+        <EditBanner />
+      </div>
+      <div className="section-container">
+        <EditDepartmentSeal />
+      </div>
+      <div className="section-container">
+        <EditStateSeal />
+      </div>
+      <div className="section-container">
+        <EditDisclaimer />
+      </div>
+    </>
+  )
+
   return (
     <Layout element="div">
       <Sidebar>
@@ -33,20 +55,11 @@ const SettingsPage: FC = () => {
               </Paragraph>
             </div>
 
-            <div className="section-container">
-              <EditBanner />
-            </div>
+            {error && <Paragraph>{error.message}</Paragraph>}
 
-            <div className="section-container">
-              <EditDepartmentSeal />
-            </div>
-            <div className="section-container">
-              <EditStateSeal />
-            </div>
-            <div className="section-container">
-              <EditDisclaimer />
-            </div>
+            {enabled && user ? <UserInfoProvider userInfo={user}>{forms}</UserInfoProvider> : forms}
           </div>
+          {isLoading && <LoadingOverlay description="Loading your settings" />}
         </SpacedContainer>
       </PageContent>
       <EditingEmailCSS />

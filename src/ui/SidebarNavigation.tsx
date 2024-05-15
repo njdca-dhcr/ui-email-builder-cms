@@ -9,6 +9,7 @@ import { Link } from 'gatsby'
 import { availableFeatures } from 'src/features'
 import { UswdsIcon } from './UswdsIcon'
 import classNames from 'classnames'
+import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 
 interface Props {}
 
@@ -19,7 +20,10 @@ export const SidebarNavigation: FC<Props> = () => {
     <nav data-testid={TEST_ID}>
       <SideBarList>
         <SpacedLink to="/" text="Home" icon={<UswdsIcon icon="Home" />} />
-        <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="FolderOpen" />} />
+        <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="AccountBalance" />} />
+        <WhenSignedIn>
+          <SpacedLink to="/my-library" text="My Library" icon={<UswdsIcon icon="FolderOpen" />} />
+        </WhenSignedIn>
         <SpacedLink
           to="/tips-and-tricks"
           text="Tips & Tricks"

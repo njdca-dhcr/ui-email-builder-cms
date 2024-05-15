@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { HeadFC, PageProps } from 'gatsby'
 import {
   Heading,
@@ -10,8 +10,9 @@ import {
   SpacedContainer,
 } from 'src/ui/Layout'
 import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 
-const NotFoundPage: React.FC<PageProps> = () => {
+const NotFoundPage: FC<PageProps> = () => {
   return (
     <Layout element="div">
       <Sidebar>
@@ -21,7 +22,7 @@ const NotFoundPage: React.FC<PageProps> = () => {
       <PageContent element="main">
         <SpacedContainer>
           <Heading element="h1">Page not found</Heading>
-          <Paragraph>Sorry 😔, we couldn’t find what you were looking for.</Paragraph>
+          <Paragraph>Sorry 😔, we couldn't find what you were looking for.</Paragraph>
         </SpacedContainer>
       </PageContent>
     </Layout>
@@ -30,4 +31,4 @@ const NotFoundPage: React.FC<PageProps> = () => {
 
 export default NotFoundPage
 
-export const Head: HeadFC = () => <title>Not found</title>
+export const Head: HeadFC = () => <title>{formatPageTitle('Not found')}</title>

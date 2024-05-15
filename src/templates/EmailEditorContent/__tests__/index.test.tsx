@@ -130,7 +130,9 @@ describe('EmailEditorContent', () => {
     await user.click(getByText('Download HTML'))
     expect(download).toHaveBeenCalled()
 
-    const [{ fileData: givenHtml, fileName: givenFileName, fileType: givenType }] = (download as jest.Mock).mock.calls[0]
+    const [{ fileData: givenHtml, fileName: givenFileName, fileType: givenType }] = (
+      download as jest.Mock
+    ).mock.calls[0]
     expect(givenHtml).toContain(`${value}</h1>`)
     expect(givenHtml).toContain(`${value}</title>`)
     expect(givenFileName).toEqual(`${emailTemplate.name}.html`)

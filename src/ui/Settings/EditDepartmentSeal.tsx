@@ -9,6 +9,10 @@ import { EmailBlock } from '../EmailBlock'
 import { Spacing } from 'src/templates/styles'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
+import { LoadingOverlay } from '../LoadingOverlay'
+import { SaveButton } from './SaveButton'
+import { useUpdateDepartmentSeal } from 'src/network/useUpdateDepartmentSeal'
+import { Alert } from '../Alert'
 
 const buildOptions = (): Array<{ label: string; value: string }> => {
   const stateAbbreviation = appModeAsStateAbbreviation()
@@ -22,31 +26,38 @@ const buildOptions = (): Array<{ label: string; value: string }> => {
 }
 
 export const EditDepartmentSeal: FC = () => {
-  const [value, setValue] = useDepartmentSealValue()
-
+  const [departmentSeal, setValue, { hasChanges }] = useDepartmentSealValue()
+  const { error, mutate, isPending } = useUpdateDepartmentSeal()
   const options = useMemo(buildOptions, [])
 
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault()
+        mutate(departmentSeal)
+      }}
+    >
       <Heading element="h2" subheading>
         Department Seal
       </Heading>
       <Paragraph>This will automatically show up when creating new emails.</Paragraph>
-
+      {error && <Alert>{error.message}</Alert>}
       <div className="edit-department-seal-field-group">
         <label id="department-seal-select">Current Seal</label>
         <Select
           labelId="department-seal-select"
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
+          value={departmentSeal.seal}
+          onChange={(newValue) => setValue({ seal: newValue })}
           options={options}
         />
       </div>
       <div className="department-seal-preview-container">
         <EmailBlock.Table maxWidth={Spacing.layout.maxWidth} className="desktop">
-          <DepartmentSealMarkup departmentSealImageName={value} />
+          <DepartmentSealMarkup departmentSealImageName={departmentSeal.seal} />
         </EmailBlock.Table>
       </div>
+      <SaveButton hasChanges={hasChanges} isPending={isPending} />
+      {isPending && <LoadingOverlay description="Saving department seal" />}
     </form>
   )
 }

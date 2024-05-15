@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker'
 import { act, renderHook } from '@testing-library/react'
 import { useLocalStorage, useLocalStorageJSON } from '../useLocalStorage'
+import { randomBannerValue, randomObject } from 'src/factories'
+import { BannerValue, bannerSchema } from '../userInfoSchemas'
 
 describe('useLocalStorage', () => {
   let key: string
@@ -15,7 +17,6 @@ describe('useLocalStorage', () => {
 
   describe('value', () => {
     it('provides the value for the given key from local storage', () => {
-      const key = faker.lorem.word()
       const storageValue = faker.lorem.word()
       localStorage.setItem(key, storageValue)
       const { result } = renderHook(() => useLocalStorage(key, ''))
@@ -24,7 +25,6 @@ describe('useLocalStorage', () => {
     })
 
     it('provides the default value for the given key when there is no value in localStorage', () => {
-      const key = faker.lorem.word()
       const defaultValue = faker.lorem.word()
       const { result } = renderHook(() => useLocalStorage(key, defaultValue))
       const [value] = result.current
@@ -34,7 +34,6 @@ describe('useLocalStorage', () => {
 
   describe('setValue', () => {
     it('provides a function to update the value in local storage', () => {
-      const key = faker.lorem.word()
       const storageValue = faker.lorem.word()
       const { result } = renderHook(() => useLocalStorage(key, ''))
       const [_value, setValue] = result.current
@@ -43,7 +42,6 @@ describe('useLocalStorage', () => {
     })
 
     it('provides a function to update the value in the hook', () => {
-      const key = faker.lorem.word()
       const storageValue = faker.lorem.word()
       const { result } = renderHook(() => useLocalStorage(key, ''))
       const [_value, setValue] = result.current
@@ -121,7 +119,6 @@ describe('useLocalStorageJSON', () => {
 
   describe('setValue', () => {
     it('provides a function to update a json value', () => {
-      const key = faker.lorem.word()
       const storageValue = {
         [faker.lorem.word()]: faker.lorem.word(),
         number: Math.random(),
@@ -132,6 +129,38 @@ describe('useLocalStorageJSON', () => {
       act(() => setValue(storageValue))
       const [value] = result.current
       expect(value).toEqual(storageValue)
+    })
+  })
+
+  describe('when the json value is not parse-able', () => {
+    it('uses the default value', () => {
+      localStorage.setItem(key, 'invalid json')
+      const defaultValue = randomObject()
+      const { result } = renderHook(() => useLocalStorageJSON(key, defaultValue))
+      const [value] = result.current
+      expect(value).toEqual(defaultValue)
+    })
+  })
+
+  describe('when given a schema', () => {
+    it('is the stored value when it matches the schema', () => {
+      const storedValue: BannerValue = randomBannerValue()
+      localStorage.setItem(key, JSON.stringify(storedValue))
+      const defaultValue = randomBannerValue()
+      const { result } = renderHook(() => useLocalStorageJSON(key, defaultValue, bannerSchema))
+      const [value] = result.current
+      expect(value).toEqual(storedValue)
+    })
+
+    it('is the default value when the stored value does not match the schema', () => {
+      const storedValue: Partial<BannerValue> = randomBannerValue()
+      delete storedValue.primaryLink
+      localStorage.setItem(key, JSON.stringify(storedValue))
+
+      const defaultValue = randomBannerValue()
+      const { result } = renderHook(() => useLocalStorageJSON(key, defaultValue, bannerSchema))
+      const [value] = result.current
+      expect(value).toEqual(defaultValue)
     })
   })
 })

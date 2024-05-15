@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import {
+  AuthButtons,
   Heading,
   Layout,
   PageContent,
@@ -10,12 +11,22 @@ import {
   SideBarList,
   SideBarListItem,
   SideBarListItemBottom,
+  SignOutButton,
   SkipNavContent,
   SkipNavLink,
   SpacedContainer,
   SpacedSidebarContainer,
 } from '../Layout'
-import { mockAppMode, urlFor } from 'src/testHelpers'
+import {
+  currentAuthCredentials,
+  mockAppMode,
+  mockBackendUrl,
+  userIsNotSignedIn,
+  userIsSignedIn,
+} from 'src/testHelpers'
+import { AuthProvider, useAuth } from 'src/utils/AuthContext'
+import userEvent from '@testing-library/user-event'
+import { navigate } from 'gatsby'
 
 describe('Layout', () => {
   it('displays its children', () => {
@@ -371,5 +382,114 @@ describe('SpacedSidebarContainer', () => {
     )
     const container = baseElement.querySelector('.spaced-sidebar-container.my-class')
     expect(container).not.toBeNull()
+  })
+})
+
+describe('SignOutButton', () => {
+  const Dummy: FC = () => {
+    const [auth] = useAuth()
+    return auth ? 'is signed in' : 'is signed out'
+  }
+
+  beforeEach(() => {
+    userIsSignedIn()
+  })
+
+  it('clears the auth info', async () => {
+    const user = userEvent.setup()
+    const { baseElement, getByRole } = render(
+      <AuthProvider>
+        <SignOutButton />
+        <Dummy />
+      </AuthProvider>,
+    )
+    expect(baseElement).toHaveTextContent('is signed in')
+    await user.click(getByRole('button'))
+    expect(baseElement).toHaveTextContent('is signed out')
+    expect(currentAuthCredentials()).toBeNull()
+  })
+
+  it('navigates to the home page', async () => {
+    const user = userEvent.setup()
+    const { getByRole } = render(
+      <AuthProvider>
+        <SignOutButton />
+        <Dummy />
+      </AuthProvider>,
+    )
+    expect(navigate).not.toHaveBeenCalled()
+    await user.click(getByRole('button'))
+    expect(navigate).toHaveBeenCalledWith('/')
+  })
+})
+
+describe('AuthButtons', () => {
+  beforeEach(() => {
+    mockBackendUrl(faker.internet.url())
+  })
+
+  describe('when signed in', () => {
+    beforeEach(() => {
+      userIsSignedIn()
+    })
+
+    it('renders a sign out button', () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <AuthButtons />
+        </AuthProvider>,
+      )
+      expect(queryByRole('button', { name: 'Sign Out' })).not.toBeNull()
+    })
+
+    it('does not render a sign in link', () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <AuthButtons />
+        </AuthProvider>,
+      )
+      expect(queryByRole('link')).toBeNull()
+    })
+  })
+
+  describe('when not signed in', () => {
+    beforeEach(() => {
+      userIsNotSignedIn()
+    })
+
+    it('renders a sign in link', () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <AuthButtons />
+        </AuthProvider>,
+      )
+      expect(queryByRole('link', { name: 'Sign In' })).not.toBeNull()
+    })
+
+    it('does not render a sign out button', () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <AuthButtons />
+        </AuthProvider>,
+      )
+      expect(queryByRole('button')).toBeNull()
+    })
+  })
+
+  describe('without a backend url', () => {
+    beforeEach(() => {
+      mockBackendUrl(undefined)
+    })
+
+    it('renders nothing', () => {
+      const { queryByRole, baseElement } = render(
+        <AuthProvider>
+          <AuthButtons />
+        </AuthProvider>,
+      )
+      expect(queryByRole('link')).toBeNull()
+      expect(queryByRole('button')).toBeNull()
+      expect(baseElement.querySelector('.auth-buttons')).toBeNull()
+    })
   })
 })

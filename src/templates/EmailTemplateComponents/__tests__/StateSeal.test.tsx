@@ -1,9 +1,10 @@
 import { render, renderHook } from '@testing-library/react'
-import React from 'react'
+import React, { FC, ReactNode } from 'react'
 import { StateSeal, StateSealMarkup, useStateSealValue } from '../StateSeal'
 import { faker } from '@faker-js/faker'
 import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { StateSealValue } from 'src/appTypes'
+import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
 describe('StateSealMarkup', () => {
   it('displays the additional content', () => {
@@ -137,19 +138,23 @@ describe('useStateSealValue', () => {
     localStorage.clear()
   })
 
+  const emptyUserInfo: FC<{ children: ReactNode }> = ({ children }) => {
+    return <UserInfoProvider userInfo={{}}>{children}</UserInfoProvider>
+  }
+
   describe('when in all states mode', () => {
     beforeEach(() => {
       mockAppMode('ALL')
     })
 
     it('uses US as the state seal key', () => {
-      const { result } = renderHook(() => useStateSealValue())
+      const { result } = renderHook(() => useStateSealValue(), { wrapper: emptyUserInfo })
       const [value] = result.current
       expect(value.stateAbbreviation).toEqual('US')
     })
 
     it('has disclaimer with an insert state placeholder', () => {
-      const { result } = renderHook(() => useStateSealValue())
+      const { result } = renderHook(() => useStateSealValue(), { wrapper: emptyUserInfo })
       const [value] = result.current
       expect(value.additionalDisclaimer).toContain('[Insert State]')
     })
@@ -162,13 +167,13 @@ describe('useStateSealValue', () => {
       })
 
       it('uses the current app mode to find the state seal key', () => {
-        const { result } = renderHook(() => useStateSealValue())
+        const { result } = renderHook(() => useStateSealValue(), { wrapper: emptyUserInfo })
         const [value] = result.current
         expect(value.stateAbbreviation).toEqual('NY')
       })
 
       it('has specific disclaimer', () => {
-        const { result } = renderHook(() => useStateSealValue())
+        const { result } = renderHook(() => useStateSealValue(), { wrapper: emptyUserInfo })
         const [value] = result.current
         expect(value.additionalDisclaimer).not.toContain('[Insert State]')
       })
@@ -180,16 +185,47 @@ describe('useStateSealValue', () => {
       })
 
       it('uses the current app mode to find the state seal key', () => {
-        const { result } = renderHook(() => useStateSealValue())
+        const { result } = renderHook(() => useStateSealValue(), { wrapper: emptyUserInfo })
         const [value] = result.current
         expect(value.stateAbbreviation).toEqual('NJ')
       })
 
-      it('has specific disclaimer', () => {
-        const { result } = renderHook(() => useStateSealValue())
+      it('has a specific disclaimer', () => {
+        const { result } = renderHook(() => useStateSealValue(), { wrapper: emptyUserInfo })
         const [value] = result.current
         expect(value.additionalDisclaimer).not.toContain('[Insert State]')
       })
+    })
+  })
+
+  describe('when there is state seal information in the user information', () => {
+    let userInfoStateSealValue: StateSealValue
+
+    beforeEach(() => {
+      userInfoStateSealValue = {
+        stateAbbreviation: 'AK',
+        additionalDisclaimer: faker.lorem.paragraph(),
+      }
+    })
+
+    const wrapper: FC<{ children: ReactNode }> = ({ children }) => {
+      return (
+        <UserInfoProvider userInfo={{ stateSeal: userInfoStateSealValue }}>
+          {children}
+        </UserInfoProvider>
+      )
+    }
+
+    it('uses the state seal key from user info', () => {
+      const { result } = renderHook(() => useStateSealValue(), { wrapper })
+      const [value] = result.current
+      expect(value.stateAbbreviation).toEqual(userInfoStateSealValue.stateAbbreviation)
+    })
+
+    it('uses the disclaimer from user info', () => {
+      const { result } = renderHook(() => useStateSealValue(), { wrapper })
+      const [value] = result.current
+      expect(value.additionalDisclaimer).toEqual(userInfoStateSealValue.additionalDisclaimer)
     })
   })
 })

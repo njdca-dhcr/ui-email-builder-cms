@@ -1,7 +1,5 @@
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { faker } from '@faker-js/faker'
-import sample from 'lodash.sample'
-import { EmailTemplate, EmailTemplateComponentsMapping } from './appTypes'
 import {
   CurrentlyActiveEmailPart,
   useCurrentlyActiveEmailPartData,
@@ -9,87 +7,11 @@ import {
 import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
 import { render } from '@testing-library/react'
-import uniqueId from 'lodash.uniqueid'
 import { AppMode } from './utils/appMode'
 import Config from '../gatsby-config'
+import { AUTH_LOCAL_STORAGE_KEY, AuthInfo } from './utils/AuthContext'
 
-export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
-  component: T,
-  options?: Partial<EmailTemplate.SubComponent<T, any>>,
-): EmailTemplate.SubComponent<T, any> => {
-  const possibleSubComponents = EmailTemplateComponentsMapping[component]
-
-  if (possibleSubComponents.length === 0) {
-    throw new Error(`Component ${component} does not have SubComponents`)
-  }
-
-  return {
-    kind: sample(possibleSubComponents)!,
-    required: false,
-    visibleByDefault: true,
-    ...options,
-  }
-}
-
-export const buildUniqueEmailSubComponent = <
-  T extends EmailTemplate.ComponentKind,
-  K extends EmailTemplate.SubComponentKind<T>,
->(
-  component: T,
-  options?: Partial<EmailTemplate.UniqueSubComponent<T, K>>,
-): EmailTemplate.UniqueSubComponent<T, K> => {
-  return {
-    ...buildEmailTemplateSubComponent(component, options),
-    id: uniqueId(),
-    ...options,
-  }
-}
-
-export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKind>(
-  kind: T,
-  options?: Partial<EmailTemplate.Component<T>>,
-): EmailTemplate.Component<T> => {
-  return {
-    kind,
-    required: false,
-    visibleByDefault: true,
-    ...options,
-  }
-}
-
-export const buildUniqueEmailComponent = <T extends EmailTemplate.ComponentKind>(
-  kind: T,
-  options?: Partial<EmailTemplate.UniqueComponent<T>>,
-): EmailTemplate.UniqueComponent<T> => {
-  const { subComponents, ...emailComponent } = buildEmailTemplateComponent(kind, options)
-  return {
-    ...emailComponent,
-    id: uniqueId(),
-    ...options,
-  }
-}
-
-export const buildEmailTemplateConfig = (
-  options?: Partial<EmailTemplate.Config>,
-): EmailTemplate.Config => {
-  return {
-    name: faker.lorem.word(),
-    description: faker.lorem.paragraph(),
-    components: [buildEmailTemplateComponent('Header'), buildEmailTemplateComponent('Footer')],
-    ...options,
-  }
-}
-
-export const buildUniqueEmailConfig = (
-  options?: Partial<EmailTemplate.UniqueConfig>,
-): EmailTemplate.UniqueConfig => {
-  return {
-    name: faker.lorem.word(),
-    description: faker.lorem.paragraph(),
-    components: [buildUniqueEmailComponent('Header'), buildUniqueEmailComponent('Footer')],
-    ...options,
-  }
-}
+export * from './factories'
 
 export const urlFor = (path: string): string => `http://localhost${path}`
 
@@ -182,4 +104,27 @@ export const mockDataTransfer = ({
 
 export const mockAppMode = (appMode: AppMode | undefined) => {
   Config.siteMetadata = { ...Config.siteMetadata, appMode }
+}
+
+export const mockBackendUrl = (backendUrl: string | undefined) => {
+  Config.siteMetadata = { ...Config.siteMetadata, backendUrl }
+}
+
+export const userIsSignedIn = (auth?: Partial<AuthInfo>) => {
+  const authToPersist: AuthInfo = {
+    idToken: faker.lorem.words(3),
+    refreshToken: faker.lorem.words(3),
+    ...auth,
+  }
+  localStorage.setItem(AUTH_LOCAL_STORAGE_KEY, JSON.stringify(authToPersist))
+}
+
+export const userIsNotSignedIn = () => localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY)
+
+export const currentAuthCredentials = (): AuthInfo | null => {
+  const json = localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)
+
+  if (!json) return null
+
+  return JSON.parse(json)
 }

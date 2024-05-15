@@ -9,12 +9,7 @@ interface Props {
   fieldsCompleted: () => boolean
 }
 
-export const ExportImageButton: FC<Props> = ({
-  fieldsCompleted,
-  html,
-  fileName,
-  children
-}) => {
+export const ExportImageButton: FC<Props> = ({ fieldsCompleted, html, fileName, children }) => {
   const buttonHandler = () => {
     if (fieldsCompleted()) {
       exportImage()
@@ -26,9 +21,9 @@ export const ExportImageButton: FC<Props> = ({
       const response = await fetch(`${Config.siteMetadata?.backendUrl}/image-export`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ html })
+        body: JSON.stringify({ html }),
       })
       const imageBlob = await response.blob()
       download({ fileBlob: imageBlob, fileName: `${fileName}.png`, fileType: 'image/png' })

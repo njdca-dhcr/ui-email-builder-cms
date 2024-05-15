@@ -1,0 +1,29 @@
+.loading-overlay {
+  align-items: center;
+  background-color: rgba(238, 238, 238, 0.75);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.loading-overlay .spinner {
+  animation: loading-overlay-spinner-spin 1.5s linear infinite;
+  border: 3px solid transparent;
+  border-bottom-color: var(--blue-dark);
+  border-left-color: var(--blue-dark);
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-top-color: var(--blue-dark);
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+@keyframes loading-overlay-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

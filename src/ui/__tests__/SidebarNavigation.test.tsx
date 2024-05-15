@@ -1,8 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { SidebarNavigation } from '../SidebarNavigation'
-import { asMock, urlFor } from 'src/testHelpers'
+import { asMock, mockBackendUrl, urlFor, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
 import { availableFeatures, Features } from 'src/features'
+import { AuthProvider } from 'src/utils/AuthContext'
+import { faker } from '@faker-js/faker'
 
 jest.mock('src/features', () => {
   return {
@@ -32,6 +34,40 @@ describe('SidebarNavigation', () => {
     const link: HTMLAnchorElement = getByRole('link', { name: 'Tips & Tricks' }) as any
     expect(link.tagName).toEqual('A')
     expect(link.href).toEqual(urlFor('/tips-and-tricks'))
+  })
+
+  describe('when signed in', () => {
+    beforeEach(() => {
+      mockBackendUrl(faker.internet.url())
+      userIsSignedIn()
+    })
+
+    it('displays a my library link', () => {
+      const { getByRole } = render(
+        <AuthProvider>
+          <SidebarNavigation />
+        </AuthProvider>,
+      )
+      const link: HTMLAnchorElement = getByRole('link', { name: 'My Library' }) as any
+      expect(link.tagName).toEqual('A')
+      expect(link.href).toEqual(urlFor('/my-library'))
+    })
+  })
+
+  describe('when signed out', () => {
+    beforeEach(() => {
+      mockBackendUrl(faker.internet.url())
+      userIsNotSignedIn()
+    })
+
+    it('does not display a my library link', () => {
+      const { queryByText } = render(
+        <AuthProvider>
+          <SidebarNavigation />
+        </AuthProvider>,
+      )
+      expect(queryByText('My Library')).toBeNull()
+    })
   })
 
   describe('settings is available', () => {

@@ -1,0 +1,54 @@
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  padding-bottom: 1rem;
+}
+
+.auth-field label {
+  font-weight: var(--weight-bold);
+}
+
+.auth-field .description {
+  font-size: var(--font-small);
+  line-height: var(--font-small);
+  font-style: italic;
+  margin: 0;
+  padding-top: 0.25rem;
+}
+
+.auth-field .label-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.auth-field .label-container p {
+  background-color: var(--alert-error-light);
+  border-radius: 3px;
+  display: block;
+  padding: 0 0.25rem;
+  margin: 0;
+  font-size: var(--font-small);
+  font-style: italic;
+}
+
+.auth-form .errors {
+  background-color: var(--alert-error-light);
+  border-radius: 3px;
+  width: fit-content;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form button {
+  background-color: var(--blue);
+  border: 0;
+  border-radius: 3px;
+  color: var(--white);
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold-light);
+  padding: 0.75rem 2.8rem;
+  width: fit-content;
+}

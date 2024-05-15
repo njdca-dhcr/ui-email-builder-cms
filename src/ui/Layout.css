@@ -120,6 +120,7 @@
   flex: 4;
   height: 100%;
   overflow: auto;
+  position: relative;
 }
 
 .heading {
@@ -240,4 +241,34 @@
 .uswds-icon-label {
   display: flex;
   padding-left: 0.25rem;
+}
+
+.auth-buttons {
+  position: absolute;
+  top: 0.75rem;
+  right: 1.5rem;
+}
+
+.sign-in-link,
+.sign-out-button {
+  background-color: transparent;
+  border: 1px solid var(--gray-medium-dark);
+  border-radius: 3px;
+  color: var(--gray-dark-extra);
+  cursor: pointer;
+  font-family: var(--sans-serif);
+  font-size: 1rem;
+  font-weight: var(--weight-bold-light);
+  padding: 0.75rem 1.5rem;
+  transition: background-color ease-in-out 100ms;
+}
+
+.sign-out-button:hover,
+.sign-out-button:focus {
+  background-color: var(--gray-light);
+}
+
+.sign-in-link {
+  display: block;
+  text-decoration: none;
 }

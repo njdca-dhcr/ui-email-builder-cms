@@ -7,16 +7,29 @@ import { ColorPicker } from '../ColorPicker'
 import { EditableElement } from '../EditableElement'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { ColorInput } from '../ColorInput'
+import { useUpdateBanner } from 'src/network/useUpdateBanner'
+import { LoadingOverlay } from '../LoadingOverlay'
+import { Alert } from '../Alert'
+import { SaveButton } from './SaveButton'
 
 export const EditBanner: FC = () => {
-  const [banner, setBanner] = useBannerValue()
+  const [banner, setBanner, { hasChanges }] = useBannerValue()
+  const { error, mutate, isPending } = useUpdateBanner()
 
   return (
-    <form className="edit-banner-form">
+    <form
+      className="edit-banner-form"
+      onSubmit={(event) => {
+        event.preventDefault()
+        mutate(banner)
+      }}
+    >
       <Heading element="h2" subheading>
         Banner
       </Heading>
       <Paragraph>At the very top of every email, it will show this:</Paragraph>
+      {error && <Alert>{error.message}</Alert>}
+
       <EmailBlock.Table maxWidth={Spacing.layout.maxWidth} className="desktop">
         <BannerMarkup
           disableLinks
@@ -75,6 +88,8 @@ export const EditBanner: FC = () => {
         </div>
         <div className="banner-field" />
       </div>
+      <SaveButton hasChanges={hasChanges} isPending={isPending} />
+      {isPending && <LoadingOverlay description="Saving banner" />}
     </form>
   )
 }

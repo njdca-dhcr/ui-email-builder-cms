@@ -23,7 +23,7 @@ const LibaryPage: FC = () => {
   const filteredEmailTemplates = emailTemplates.filter(({ name, description }) => {
     return (
       name.toLowerCase().includes(lowerCaseFilterQuery) ||
-      description.toLowerCase().includes(lowerCaseFilterQuery)
+      description?.toLowerCase().includes(lowerCaseFilterQuery)
     )
   })
 

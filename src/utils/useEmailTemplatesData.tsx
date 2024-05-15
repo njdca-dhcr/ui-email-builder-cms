@@ -26,7 +26,7 @@ const query = graphql`
 export const useEmailTemplatesData = (): {
   id: string
   name: string
-  description: string
+  description?: string
   path: string
   appModes: AppMode[]
 }[] => {

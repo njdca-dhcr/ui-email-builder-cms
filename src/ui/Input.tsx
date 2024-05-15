@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { FC, HTMLAttributes, InputHTMLAttributes } from 'react'
+import React, { FC, InputHTMLAttributes } from 'react'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onTextChange: (value: string) => void

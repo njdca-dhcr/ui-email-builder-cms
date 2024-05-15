@@ -2,11 +2,12 @@ import React, { CSSProperties, FC, ReactElement } from 'react'
 import { EmailComponentProps } from './shared'
 import { Colors, Font, Spacing, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
-import { useLocalStorageJSON } from 'src/utils/useLocalStorage'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { BannerValue } from 'src/appTypes'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { stateById } from 'src/utils/statesAndTerritories'
+import { useUserInfoValue } from 'src/utils/UserInfoContext'
+import { bannerSchema } from 'src/utils/userInfoSchemas'
 
 interface BannerMarkupProps {
   backgroundColor: string
@@ -92,9 +93,7 @@ const defaultValue = (): BannerValue => {
   }
 }
 
-export const useBannerValue = () => {
-  return useLocalStorageJSON<BannerValue>('banner', defaultValue())
-}
+export const useBannerValue = () => useUserInfoValue('banner', defaultValue(), bannerSchema)
 
 export const Banner: FC<EmailComponentProps<'Banner'>> = ({}) => {
   const [value] = useBannerValue()

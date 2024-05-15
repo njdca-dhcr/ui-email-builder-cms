@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { download } from '../download'
 
 describe('download', () => {
-  beforeEach(() => { })
+  beforeEach(() => {})
 
   it('downloads the given string as a file', async () => {
     const text = faker.lorem.paragraph()

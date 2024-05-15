@@ -3,6 +3,12 @@
   flex-direction: column;
 }
 
+.settings-header-and-forms form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 .heading-container {
   margin-bottom: 6rem;
 }
@@ -107,4 +113,23 @@
 .edit-disclaimer {
   display: flex;
   flex-direction: column;
+}
+
+.save-setting-button {
+  background-color: var(--blue);
+  border-radius: 3px;
+  border: 0;
+  color: var(--white);
+  cursor: pointer;
+  display: block;
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold-light);
+  margin-top: 2.5rem;
+  padding: 0.75rem 2.8rem;
+  width: fit-content;
+}
+
+.save-setting-button:disabled {
+  background-color: var(--gray-medium-dark);
+  cursor: unset;
 }
