@@ -6,17 +6,19 @@ interface Props {
   children?: ReactNode
   html: string
   fileName: string
-  fieldsCompleted: () => boolean
 }
 
-export const ExportImageButton: FC<Props> = ({ fieldsCompleted, html, fileName, children }) => {
+export const ExportImageButton: FC<Props> = ({
+  html,
+  fileName,
+  children
+}) => {
   const buttonHandler = () => {
-    if (fieldsCompleted()) {
-      exportImage()
-    }
+    exportImage()
   }
 
   const exportImage = async () => {
+    // change to useRequest once it's merged
     try {
       const response = await fetch(`${Config.siteMetadata?.backendUrl}/image-export`, {
         method: 'POST',

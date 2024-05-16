@@ -73,7 +73,6 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         {!isRestricted() && (
           <div className="button-group">
             {/* <ExportImageButton
-              fieldsCompleted={hasPreviewText}
               html={toEmailText(titleValue.title)}
               fileName={emailTemplate.name}
             >
