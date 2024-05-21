@@ -26,7 +26,16 @@ describe('ExportImageButton', () => {
   })
 
   it('is a button', () => {
-
+    const { queryByRole } = render(
+      <ExportImageButton
+        html={faker.lorem.paragraph()}
+        fileName={faker.lorem.word()}
+      >
+        {faker.lorem.word()}
+      </ExportImageButton>,
+    )
+    const button = queryByRole('button')
+    expect(button).not.toBeNull()
   })
 
   it('sends the html to the server when clicked', async () => {
