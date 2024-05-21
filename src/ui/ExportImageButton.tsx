@@ -8,11 +8,7 @@ interface Props {
   fileName: string
 }
 
-export const ExportImageButton: FC<Props> = ({
-  html,
-  fileName,
-  children
-}) => {
+export const ExportImageButton: FC<Props> = ({ html, fileName, children }) => {
   const buttonHandler = () => {
     exportImage()
   }

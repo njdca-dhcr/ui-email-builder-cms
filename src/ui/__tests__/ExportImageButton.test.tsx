@@ -15,25 +15,16 @@ describe('ExportImageButton', () => {
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <ExportImageButton
-        html={faker.lorem.paragraph()}
-        fileName={faker.lorem.word()}
-      >
+      <ExportImageButton html={faker.lorem.paragraph()} fileName={faker.lorem.word()}>
         <div>{text}</div>
-      </ExportImageButton>
+      </ExportImageButton>,
     )
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
   })
 
-  it('is a button', () => {
+  it('is a button', () => {})
 
-  })
+  it('sends the html to the server when clicked', async () => {})
 
-  it('sends the html to the server when clicked', async () => {
-
-  })
-
-  it('downloads the image when the server responds', async () => {
-
-  })
+  it('downloads the image when the server responds', async () => {})
 })
