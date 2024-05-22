@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: `Email Builder`,
     appMode: process.env.GATSBY_APP_MODE,
-    backendUrl: process.env.BACKEND_URL,
+    backendUrl: process.env.GATSBY_BACKEND_URL,
     env: process.env.NODE_ENV,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
