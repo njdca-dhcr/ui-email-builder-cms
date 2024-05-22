@@ -1,32 +1,17 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useAuthedFetch } from './useAuthedFetch'
 
-export const useExportImage = (page: string) => {
-  const authedFetch = useAuthedFetch('blob')
+export const useExportImage = () => {
+  const authedFetch = useAuthedFetch('blob', false)
 
-  // const hashCode = (str: string): number => {
-  //   let hash = 0;
-  //   for (let i = 0, len = str.length; i < len; i++) {
-  //     let chr = str.charCodeAt(i);
-  //     hash = (hash << 5) - hash + chr;
-  //     hash |= 0; // Convert to 32bit integer
-  //   }
-  //   return hash;
-  // }
-
-  // const makeQuery = (html: string) => {
-  //   return useQuery({
-  //     queryKey: ['useExportImage', page, hashCode(html)],
-  //     queryFn: async () => {
-  //       const result = await authedFetch({
-  //         path: '/image-export',
-  //         method: 'POST',
-  //         body: { html: JSON.stringify({ html }) }
-  //       })
-  //       return result.blob!
-  //     },
-  //   })
-  // }
-
-  return makeQuery
+  return useMutation({
+    mutationFn: async (html: string) => {
+      const result = await authedFetch({
+        body: { html },
+        method: 'POST',
+        path: '/image-export',
+      })
+      return result.blob
+    }
+  })
 }

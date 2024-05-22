@@ -75,7 +75,6 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             <ExportImageButton
               html={toEmailText(titleValue.title)}
               fileName={emailTemplate.name}
-              page={window.location.pathname}
             >
               Export Image
             </ExportImageButton>
