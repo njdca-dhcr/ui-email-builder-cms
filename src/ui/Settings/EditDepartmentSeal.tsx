@@ -12,7 +12,7 @@ import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentS
 import { LoadingOverlay } from '../LoadingOverlay'
 import { SaveButton } from './SaveButton'
 import { useUpdateDepartmentSeal } from 'src/network/useUpdateDepartmentSeal'
-import { Alert } from '../Alert'
+import { Form, FormErrorMessage } from '../Form'
 
 const buildOptions = (): Array<{ label: string; value: string }> => {
   const stateAbbreviation = appModeAsStateAbbreviation()
@@ -31,17 +31,12 @@ export const EditDepartmentSeal: FC = () => {
   const options = useMemo(buildOptions, [])
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        mutate(departmentSeal)
-      }}
-    >
+    <Form onSubmit={() => mutate(departmentSeal)}>
       <Heading element="h2" subheading>
         Department Seal
       </Heading>
       <Paragraph>This will automatically show up when creating new emails.</Paragraph>
-      {error && <Alert>{error.message}</Alert>}
+      <FormErrorMessage errorMessage={error?.message} />
       <div className="edit-department-seal-field-group">
         <label id="department-seal-select">Current Seal</label>
         <Select
@@ -58,6 +53,6 @@ export const EditDepartmentSeal: FC = () => {
       </div>
       <SaveButton hasChanges={hasChanges} isPending={isPending} />
       {isPending && <LoadingOverlay description="Saving department seal" />}
-    </form>
+    </Form>
   )
 }

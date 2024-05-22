@@ -1,5 +1,12 @@
 import React from 'react'
-import { Form, FormField, FormFieldProps, FormProps } from '../Form'
+import {
+  Form,
+  FormErrorMessage,
+  FormErrorMessageProps,
+  FormField,
+  FormFieldProps,
+  FormProps,
+} from '../Form'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
@@ -145,6 +152,30 @@ describe('FormField', () => {
     it('renders does not render an error message if none is given', () => {
       const { baseElement } = renderFormField({ error: undefined })
       expect(baseElement.querySelector('p')).toBeNull()
+    })
+  })
+})
+
+describe('FormErrorMessage', () => {
+  const renderFormErrorMessage = (props: Partial<FormErrorMessageProps>) => {
+    return render(<FormErrorMessage errorMessage={faker.lorem.sentence()} {...props} />)
+  }
+
+  describe('with an error message', () => {
+    it('displays the error message', () => {
+      const errorMessage = faker.lorem.sentence()
+      const { queryByRole } = renderFormErrorMessage({ errorMessage })
+      const errors = queryByRole('alert')
+      expect(errors).not.toBeNull()
+      expect(errors).toHaveTextContent(errorMessage)
+    })
+  })
+
+  describe('without an error message', () => {
+    it('does not display the errors', () => {
+      const { queryByRole } = renderFormErrorMessage({ errorMessage: undefined })
+      const errors = queryByRole('alert')
+      expect(errors).toBeNull()
     })
   })
 })

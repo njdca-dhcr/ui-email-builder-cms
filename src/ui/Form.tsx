@@ -19,10 +19,18 @@ export const Form: FC<FormProps> = ({ className, children, errorMessage, onSubmi
       }}
       {...props}
     >
-      {errorMessage && <Alert className="errors">{errorMessage}</Alert>}
+      <FormErrorMessage errorMessage={errorMessage} />
       {children}
     </form>
   )
+}
+
+export interface FormErrorMessageProps {
+  errorMessage: string | undefined
+}
+
+export const FormErrorMessage: FC<FormErrorMessageProps> = ({ errorMessage }) => {
+  return errorMessage && <Alert className="errors">{errorMessage}</Alert>
 }
 
 export interface FormFieldProps extends InputProps {

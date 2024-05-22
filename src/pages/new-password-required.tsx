@@ -52,8 +52,8 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
           <Heading element="h1">New Password Required</Heading>
           <Paragraph>Please replace the administrator set password before continuing</Paragraph>
           <Form
-            className="auth-form"
-            onSubmit={async (event) => {
+            errorMessage={errorMessage}
+            onSubmit={async () => {
               if (!hasCorrectState(locationState)) return
               setErrorMessage('')
               setPasswordIsInvalid(false)
@@ -93,7 +93,6 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
               setLoading(false)
             }}
           >
-            {errorMessage && <Alert className="errors">{errorMessage}</Alert>}
             <FormField
               type="password"
               id={passwordId}

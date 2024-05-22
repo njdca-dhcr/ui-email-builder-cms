@@ -44,7 +44,7 @@ const SignInPage: FC = () => {
           <Heading element="h1">Sign In</Heading>
           <Paragraph>Sign in to save and edit your email templates.</Paragraph>
           <Form
-            className="auth-form"
+            errorMessage={errorMessage}
             onSubmit={async () => {
               setLoading(true)
               const result = await signIn({ email, password })
@@ -67,7 +67,6 @@ const SignInPage: FC = () => {
               setLoading(false)
             }}
           >
-            {errorMessage && <Alert className="errors">{errorMessage}</Alert>}
             <FormField
               id="email-field"
               type="email"

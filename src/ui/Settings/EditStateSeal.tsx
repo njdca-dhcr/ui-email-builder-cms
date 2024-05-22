@@ -13,7 +13,7 @@ import { StateAbbreviation } from 'src/utils/statesAndTerritories'
 import { useUpdateStateSeal } from 'src/network/useUpdateStateSeal'
 import { SaveButton } from './SaveButton'
 import { LoadingOverlay } from '../LoadingOverlay'
-import { Alert } from '../Alert'
+import { Form, FormErrorMessage } from '../Form'
 
 const stateSealOptions = STATE_SEALS.map(({ state, image }) => ({
   label: startCase(image),
@@ -25,17 +25,12 @@ export const EditStateSeal: FC = () => {
   const { error, mutate, isPending } = useUpdateStateSeal()
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        mutate(stateSeal)
-      }}
-    >
+    <Form onSubmit={() => mutate(stateSeal)}>
       <Heading element="h2" subheading>
         State Seal
       </Heading>
       <Paragraph>This state seal will show at the bottom of all emails.</Paragraph>
-      {error && <Alert>{error.message}</Alert>}
+      <FormErrorMessage errorMessage={error?.message} />
       {isAllStatesMode() && (
         <div className="edit-state-seal-field-group">
           <VisuallyHidden>
@@ -72,6 +67,6 @@ export const EditStateSeal: FC = () => {
       </div>
       <SaveButton hasChanges={hasChanges} isPending={isPending} />
       {isPending && <LoadingOverlay description="Saving state seal" />}
-    </form>
+    </Form>
   )
 }
