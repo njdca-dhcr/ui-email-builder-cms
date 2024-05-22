@@ -1,15 +1,23 @@
-.auth-field {
+.form .errors {
+  background-color: var(--alert-error-light);
+  border-radius: 3px;
+  width: fit-content;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-field {
   display: flex;
   flex-direction: column;
   max-width: 50%;
   padding-bottom: 1rem;
 }
 
-.auth-field label {
+.form-field label {
   font-weight: var(--weight-bold);
 }
 
-.auth-field .description {
+.form-field .description {
   font-size: var(--font-small);
   line-height: var(--font-small);
   font-style: italic;
@@ -17,14 +25,14 @@
   padding-top: 0.25rem;
 }
 
-.auth-field .label-container {
+.form-field .label-container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding-bottom: 0.25rem;
 }
 
-.auth-field .label-container p {
+.form-field .label-container p {
   background-color: var(--alert-error-light);
   border-radius: 3px;
   display: block;
@@ -32,12 +40,4 @@
   margin: 0;
   font-size: var(--font-small);
   font-style: italic;
-}
-
-.auth-form .errors {
-  background-color: var(--alert-error-light);
-  border-radius: 3px;
-  width: fit-content;
-  padding: 0.5rem;
-  margin-bottom: 1.5rem;
 }

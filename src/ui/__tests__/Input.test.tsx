@@ -19,6 +19,15 @@ describe('Input', () => {
     expect(handleChange).toHaveBeenCalledWith('a')
   })
 
+  it('can be uncontrolled', async () => {
+    const user = userEvent.setup()
+    const value = faker.lorem.words(3)
+    const { getByRole } = render(<Input />)
+    const input: HTMLInputElement = getByRole('textbox') as any
+    await expect(user.type(input, value)).resolves.not.toThrowError()
+    expect(input.value).toEqual(value)
+  })
+
   it('accepts input element props', () => {
     const value = faker.lorem.paragraph()
     const id = faker.lorem.word()

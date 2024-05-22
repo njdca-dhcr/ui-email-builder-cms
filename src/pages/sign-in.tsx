@@ -16,10 +16,8 @@ import { signIn } from 'src/network/auth'
 import { backendUrl } from 'src/utils/backendUrl'
 import { useAuth } from 'src/utils/AuthContext'
 import { Alert } from 'src/ui/Alert'
-import { AuthField } from 'src/ui/AuthField'
 import { Button } from 'src/ui/Button'
-import 'src/styles/auth.css'
-import { Form } from 'src/ui/Form'
+import { Form, FormField } from 'src/ui/Form'
 
 const SignInPage: FC = () => {
   const [email, setEmail] = useState('')
@@ -47,7 +45,7 @@ const SignInPage: FC = () => {
           <Paragraph>Sign in to save and edit your email templates.</Paragraph>
           <Form
             className="auth-form"
-            onSubmit={async (event) => {
+            onSubmit={async () => {
               setLoading(true)
               const result = await signIn({ email, password })
               switch (result.kind) {
@@ -70,16 +68,16 @@ const SignInPage: FC = () => {
             }}
           >
             {errorMessage && <Alert className="errors">{errorMessage}</Alert>}
-            <AuthField
-              inputId="email-field"
+            <FormField
+              id="email-field"
               type="email"
               label="Email"
               onTextChange={setEmail}
               value={email}
               required
             />
-            <AuthField
-              inputId="password-field"
+            <FormField
+              id="password-field"
               type="password"
               label="Password"
               onTextChange={setPassword}

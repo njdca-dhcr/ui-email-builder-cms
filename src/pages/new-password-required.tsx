@@ -15,10 +15,8 @@ import { Alert } from 'src/ui/Alert'
 import { LoadingOverlay } from 'src/ui/LoadingOverlay'
 import { newPasswordRequired } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
-import { AuthField } from 'src/ui/AuthField'
-import 'src/styles/auth.css'
 import { Button } from 'src/ui/Button'
-import { Form } from 'src/ui/Form'
+import { Form, FormField } from 'src/ui/Form'
 
 type PresentLocationState = { username: string; session: string }
 type EmptyLocationState = {}
@@ -96,9 +94,9 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
             }}
           >
             {errorMessage && <Alert className="errors">{errorMessage}</Alert>}
-            <AuthField
+            <FormField
               type="password"
-              inputId={passwordId}
+              id={passwordId}
               label="Password"
               value={password}
               onTextChange={setPassword}
@@ -107,9 +105,9 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
               required
               minLength={8}
             />
-            <AuthField
+            <FormField
               type="password"
-              inputId={passwordConfirmationId}
+              id={passwordConfirmationId}
               label="Confirm Password"
               value={passwordConfirmation}
               onTextChange={setPasswordConfirmation}
