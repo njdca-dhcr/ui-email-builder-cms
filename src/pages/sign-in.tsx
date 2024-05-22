@@ -17,7 +17,9 @@ import { backendUrl } from 'src/utils/backendUrl'
 import { useAuth } from 'src/utils/AuthContext'
 import { Alert } from 'src/ui/Alert'
 import { AuthField } from 'src/ui/AuthField'
+import { Button } from 'src/ui/Button'
 import 'src/styles/auth.css'
+import { Form } from 'src/ui/Form'
 
 const SignInPage: FC = () => {
   const [email, setEmail] = useState('')
@@ -43,10 +45,9 @@ const SignInPage: FC = () => {
         <SpacedContainer>
           <Heading element="h1">Sign In</Heading>
           <Paragraph>Sign in to save and edit your email templates.</Paragraph>
-          <form
+          <Form
             className="auth-form"
             onSubmit={async (event) => {
-              event.preventDefault()
               setLoading(true)
               const result = await signIn({ email, password })
               switch (result.kind) {
@@ -85,8 +86,8 @@ const SignInPage: FC = () => {
               value={password}
               required
             />
-            <button type="submit">Sign In</button>
-          </form>
+            <Button type="submit">Sign In</Button>
+          </Form>
         </SpacedContainer>
         {loading && <LoadingOverlay description="Signing in" />}
       </PageContent>

@@ -17,6 +17,8 @@ import { newPasswordRequired } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
 import { AuthField } from 'src/ui/AuthField'
 import 'src/styles/auth.css'
+import { Button } from 'src/ui/Button'
+import { Form } from 'src/ui/Form'
 
 type PresentLocationState = { username: string; session: string }
 type EmptyLocationState = {}
@@ -51,10 +53,9 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
         <SpacedContainer>
           <Heading element="h1">New Password Required</Heading>
           <Paragraph>Please replace the administrator set password before continuing</Paragraph>
-          <form
+          <Form
             className="auth-form"
             onSubmit={async (event) => {
-              event.preventDefault()
               if (!hasCorrectState(locationState)) return
               setErrorMessage('')
               setPasswordIsInvalid(false)
@@ -117,8 +118,8 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
               required
               minLength={8}
             />
-            <button type="submit">Update Password</button>
-          </form>
+            <Button type="submit">Update Password</Button>
+          </Form>
         </SpacedContainer>
         {loading && <LoadingOverlay description="Updating Password" />}
       </PageContent>

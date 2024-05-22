@@ -1,0 +1,17 @@
+.button {
+  background-color: var(--blue);
+  border-radius: 3px;
+  border: 0;
+  color: var(--white);
+  cursor: pointer;
+  display: block;
+  font-size: var(--font-small);
+  font-weight: var(--weight-bold-light);
+  padding: 0.75rem 2.8rem;
+  width: fit-content;
+}
+
+.button:disabled {
+  background-color: var(--gray-medium-dark);
+  cursor: unset;
+}

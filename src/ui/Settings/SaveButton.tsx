@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useIsSignedIn } from 'src/utils/AuthContext'
+import { Button } from '../Button'
 
 export interface SaveButtonProps {
   hasChanges: boolean
@@ -12,8 +13,8 @@ export const SaveButton: FC<SaveButtonProps> = ({ hasChanges, isPending }) => {
   if (!isSignedIn) return null
 
   return (
-    <button className="save-setting-button" disabled={isPending || !hasChanges} type="submit">
+    <Button className="save-setting-button" disabled={isPending || !hasChanges} type="submit">
       Save
-    </button>
+    </Button>
   )
 }
