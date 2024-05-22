@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EmailTemplate } from 'src/appTypes'
 import {
   buildUniqueEmailComponent,
@@ -24,8 +25,10 @@ jest.mock('src/utils/download', () => {
 describe('EmailEditorContent', () => {
   let emailTemplate: EmailTemplate.UniqueConfig
   let alertSpy: jest.SpyInstance
+  let client: QueryClient
 
   beforeEach(() => {
+    client = new QueryClient()
     emailTemplate = buildUniqueEmailConfig({
       components: [
         buildUniqueEmailComponent('Header', {
@@ -47,7 +50,9 @@ describe('EmailEditorContent', () => {
   it('can display the email in desktop or mobile', async () => {
     const user = userEvent.setup()
     const { baseElement, getByLabelText } = render(
-      <EmailEditorContent emailTemplate={emailTemplate} />,
+      <QueryClientProvider client={client}>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+      </QueryClientProvider>,
     )
 
     expect(baseElement.querySelector('.email-preview-desktop')).not.toBeNull()
@@ -64,7 +69,11 @@ describe('EmailEditorContent', () => {
   })
 
   it('can display the email components and subcomponents', () => {
-    const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    const { queryByText } = render(
+      <QueryClientProvider client={client}>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+       </QueryClientProvider>
+    )
     expect(queryByText('Title')).not.toBeNull()
     expect(queryByText('Dependency Benefits')).not.toBeNull()
   })
@@ -72,9 +81,11 @@ describe('EmailEditorContent', () => {
   it('raises an alert if the user tries to export the email without preview text', async () => {
     const user = userEvent.setup()
     const { getByText } = render(
-      <EmailPartsContent>
-        <EmailEditorContent emailTemplate={emailTemplate} />
-      </EmailPartsContent>,
+      <QueryClientProvider client={client}>
+        <EmailPartsContent>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </EmailPartsContent>
+      </QueryClientProvider>,
     )
     const value = faker.lorem.words(4)
     await user.type(getByText('Title'), value)
@@ -93,11 +104,13 @@ describe('EmailEditorContent', () => {
     const user = userEvent.setup()
 
     const { getByText } = render(
-      <PreviewText initialValue="Some preview text">
-        <EmailPartsContent>
-          <EmailEditorContent emailTemplate={emailTemplate} />
-        </EmailPartsContent>
-      </PreviewText>,
+      <QueryClientProvider client={client}>
+        <PreviewText initialValue="Some preview text">
+          <EmailPartsContent>
+            <EmailEditorContent emailTemplate={emailTemplate} />
+          </EmailPartsContent>
+        </PreviewText>
+      </QueryClientProvider>,
     )
 
     const value = faker.lorem.words(4)
@@ -116,11 +129,13 @@ describe('EmailEditorContent', () => {
     const user = userEvent.setup()
 
     const { getByText } = render(
-      <PreviewText initialValue="Some preview text">
-        <EmailPartsContent>
-          <EmailEditorContent emailTemplate={emailTemplate} />
-        </EmailPartsContent>
-      </PreviewText>,
+      <QueryClientProvider client={client}>
+        <PreviewText initialValue="Some preview text">
+          <EmailPartsContent>
+            <EmailEditorContent emailTemplate={emailTemplate} />
+          </EmailPartsContent>
+        </PreviewText>
+      </QueryClientProvider>,
     )
 
     const value = faker.lorem.words(4)
@@ -140,14 +155,22 @@ describe('EmailEditorContent', () => {
   })
 
   it('displays the edit preview text field', () => {
-    const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    const { baseElement } = render(
+      <QueryClientProvider client={client}>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+      </QueryClientProvider>
+    )
     const input = baseElement.querySelector('#edit-preview-text')
 
     expect(input).not.toBeNull()
   })
 
   it('renders the preview text', () => {
-    const { baseElement } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+    const { baseElement } = render(
+      <QueryClientProvider client={client}>
+        <EmailEditorContent emailTemplate={emailTemplate} />
+      </QueryClientProvider>
+    )
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()
   })
 
@@ -157,12 +180,20 @@ describe('EmailEditorContent', () => {
     })
 
     it('does not have a download HTML button', () => {
-      const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+      const { queryByText } = render(
+        <QueryClientProvider client={client}>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </QueryClientProvider>
+      )
       expect(queryByText('Download HTML')).toBeNull()
     })
 
     it('does not have a copy HTML button', () => {
-      const { queryByText } = render(<EmailEditorContent emailTemplate={emailTemplate} />)
+      const { queryByText } = render(
+        <QueryClientProvider client={client}>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </QueryClientProvider>
+      )
       expect(queryByText('Copy HTML')).toBeNull()
     })
   })

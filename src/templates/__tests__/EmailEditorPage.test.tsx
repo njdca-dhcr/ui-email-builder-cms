@@ -1,5 +1,6 @@
 import React from 'react'
 import { RenderResult, render } from '@testing-library/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { EmailTemplate } from 'src/appTypes'
 import EmailEditorPage, { Head } from '../EmailEditorPage'
 import {
@@ -17,6 +18,7 @@ describe('EmailEditorPage', () => {
   let defaultPreviewText: string
 
   beforeEach(() => {
+    const client = new QueryClient()
     user = userEvent.setup()
     defaultPreviewText = faker.lorem.paragraph()
     emailTemplate = buildEmailTemplateConfig({
@@ -42,7 +44,7 @@ describe('EmailEditorPage', () => {
         buildEmailTemplateComponent('Disclaimer'),
       ],
     })
-    rendered = render(<EmailEditorPage pageContext={{ emailTemplate }} />)
+    rendered = render(<QueryClientProvider client={client}> <EmailEditorPage pageContext={{ emailTemplate }} /> </QueryClientProvider>)
   })
 
   it('is displays the layout', () => {
