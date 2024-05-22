@@ -1,35 +1,34 @@
 import React, { FC, ReactNode } from 'react'
 import { download } from 'src/utils/download'
-import Config from '../../gatsby-config'
+import { useAuthedFetch } from 'src/network/useAuthedFetch'
+import { useExportImage } from 'src/network/useExportImage'
 
 interface Props {
   children?: ReactNode
-  html: string
   fileName: string
+  html: string
 }
 
-export const ExportImageButton: FC<Props> = ({ html, fileName, children }) => {
+export const ExportImageButton: FC<Props> = ({
+  children,
+  fileName,
+  html,
+}) => {
+
+  const authedFetch = useAuthedFetch('blob', false)
+  const { mutate, isPending } = useExportImage()
+
   const buttonHandler = () => {
-    exportImage()
+    mutate(html, {
+      onSuccess: (imageBlob) => {
+        download({ fileBlob: imageBlob, fileName: `${fileName}.png`, fileType: 'image/png' })
+      },
+      onError: (error) => {
+        console.error('error:', error)
+      },
+    
+    })
   }
 
-  const exportImage = async () => {
-    // change to useRequest once it's merged
-    try {
-      const response = await fetch(`${Config.siteMetadata?.backendUrl}/image-export`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ html }),
-      })
-      const imageBlob = await response.blob()
-      download({ fileBlob: imageBlob, fileName: `${fileName}.png`, fileType: 'image/png' })
-    } catch (error) {
-      console.error('Error:', error)
-      alert('Error exporting. Please try again.')
-    }
-  }
-
-  return <button onClick={buttonHandler}>{children}</button>
+  return <button disabled={isPending} onClick={buttonHandler}>{children}</button>
 }

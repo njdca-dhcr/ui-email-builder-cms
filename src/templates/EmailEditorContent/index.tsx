@@ -72,12 +72,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         </Radio.Fieldset>
         {!isRestricted() && (
           <div className="button-group">
-            {/* <ExportImageButton
+            <ExportImageButton
               html={toEmailText(titleValue.title)}
               fileName={emailTemplate.name}
             >
               Export Image
-            </ExportImageButton> */}
+            </ExportImageButton>
             <CopyToClipboardButton
               fieldsCompleted={hasPreviewText}
               textToCopy={() => toEmailText(titleValue.title)}

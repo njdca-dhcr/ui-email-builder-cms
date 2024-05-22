@@ -12,6 +12,19 @@ jest.mock('src/utils/download', () => {
 })
 
 describe('ExportImageButton', () => {
+  it('is a button', () => {
+    const { queryByRole } = render(
+      <ExportImageButton
+        html={faker.lorem.paragraph()}
+        fileName={faker.lorem.word()}
+      >
+        {faker.lorem.word()}
+      </ExportImageButton>,
+    )
+    const button = queryByRole('button')
+    expect(button).not.toBeNull()
+  })
+  
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
@@ -22,9 +35,6 @@ describe('ExportImageButton', () => {
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
   })
 
-  it('is a button', () => {})
-
   it('sends the html to the server when clicked', async () => {})
-
   it('downloads the image when the server responds', async () => {})
 })
