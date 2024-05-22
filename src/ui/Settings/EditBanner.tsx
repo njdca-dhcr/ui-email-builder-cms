@@ -17,7 +17,7 @@ export const EditBanner: FC = () => {
   const { error, mutate, isPending } = useUpdateBanner()
 
   return (
-    <Form className="edit-banner-form" onSubmit={() => mutate(banner)}>
+    <Form onSubmit={() => mutate(banner)}>
       <Heading element="h2" subheading>
         Banner
       </Heading>

@@ -103,6 +103,7 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
               description="must be at least 8 characters long and contain least one number, one lowercase letter, one uppercase letter, and one symbol"
               required
               minLength={8}
+              style={{ maxWidth: '50%' }}
             />
             <FormField
               type="password"
@@ -114,6 +115,7 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
               description="must match the password"
               required
               minLength={8}
+              style={{ maxWidth: '50%' }}
             />
             <Button type="submit">Update Password</Button>
           </Form>

@@ -74,6 +74,7 @@ const SignInPage: FC = () => {
               onTextChange={setEmail}
               value={email}
               required
+              style={{ maxWidth: '50%' }}
             />
             <FormField
               id="password-field"
@@ -82,6 +83,7 @@ const SignInPage: FC = () => {
               onTextChange={setPassword}
               value={password}
               required
+              style={{ maxWidth: '50%' }}
             />
             <Button type="submit">Sign In</Button>
           </Form>

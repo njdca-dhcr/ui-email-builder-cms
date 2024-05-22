@@ -22,6 +22,8 @@ import { EditPreviewText } from './EditPreviewText'
 import { Radio } from 'src/ui/RadioButtons'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { isRestricted } from 'src/utils/appMode'
+import { SaveEmailTemplate } from './SaveEmailTemplate'
+import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -72,10 +74,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
         </Radio.Fieldset>
         {!isRestricted() && (
           <div className="button-group">
-            <ExportImageButton
-              html={toEmailText(titleValue.title)}
-              fileName={emailTemplate.name}
-            >
+            <ExportImageButton html={toEmailText(titleValue.title)} fileName={emailTemplate.name}>
               Export Image
             </ExportImageButton>
             <CopyToClipboardButton
@@ -91,6 +90,9 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             >
               Download HTML
             </DownloadButton>
+            <WhenSignedIn>
+              <SaveEmailTemplate />
+            </WhenSignedIn>
           </div>
         )}
       </div>

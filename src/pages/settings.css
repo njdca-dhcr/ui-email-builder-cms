@@ -17,11 +17,6 @@
   margin-bottom: 6rem;
 }
 
-.edit-banner-form {
-  display: flex;
-  flex-direction: column;
-}
-
 .banner-fields {
   align-items: center;
   display: flex;
