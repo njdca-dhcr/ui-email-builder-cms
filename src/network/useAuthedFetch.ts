@@ -7,14 +7,17 @@ type useAuthedFetchParams = Omit<AuthedFetchJSONParams, 'idToken'>
 
 export type AuthedFetch = <T>(params: useAuthedFetchParams) => Promise<AppResponse<T>>
 
-export const useAuthedFetch = (responseType: 'json' | 'blob' = 'json', authRequired: boolean = true): AuthedFetch => {
+export const useAuthedFetch = (
+  responseType: 'json' | 'blob' = 'json',
+  authRequired: boolean = true,
+): AuthedFetch => {
   const [auth, setAuth] = useAuth()
 
   return useCallback(
     async <T>(params: useAuthedFetchParams): Promise<AppResponse<T>> => {
       const authedRequest = responseType === 'blob' ? authedFetchBlob : authedFetchJSON
-      
-      if (!authRequired) return await authedRequest({ ...params, idToken: ''})
+
+      if (!authRequired) return await authedRequest({ ...params, idToken: '' })
       if (!auth) throw new Error('must be signed in to make that request')
 
       const originalResponse = await authedRequest({ ...params, idToken: auth.idToken })

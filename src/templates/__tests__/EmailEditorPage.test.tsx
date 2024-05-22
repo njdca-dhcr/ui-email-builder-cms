@@ -44,7 +44,11 @@ describe('EmailEditorPage', () => {
         buildEmailTemplateComponent('Disclaimer'),
       ],
     })
-    rendered = render(<QueryClientProvider client={client}> <EmailEditorPage pageContext={{ emailTemplate }} /> </QueryClientProvider>)
+    rendered = render(
+      <QueryClientProvider client={client}>
+        <EmailEditorPage pageContext={{ emailTemplate }} />{' '}
+      </QueryClientProvider>,
+    )
   })
 
   it('is displays the layout', () => {

@@ -27,11 +27,12 @@ export const authedFetchJSON = async ({
 
   const headers: AppHeaders = ['get', 'GET'].includes(method)
     ? {
-      Authorization: `Bearer ${idToken}`,
-    } : {
-      Authorization: `Bearer ${idToken}`,
-      'Content-Type': 'application/json',
-    }
+        Authorization: `Bearer ${idToken}`,
+      }
+    : {
+        Authorization: `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      }
 
   const response = await fetch(url, {
     body: JSON.stringify(body),
@@ -52,11 +53,12 @@ export const authedFetchBlob = async ({
 
   const headers: AppHeaders = ['get', 'GET'].includes(method)
     ? {
-      Authorization: `Bearer ${idToken}`,
-    } : {
-      Authorization: `Bearer ${idToken}`,
-      'Content-Type': 'application/json',
-    }
+        Authorization: `Bearer ${idToken}`,
+      }
+    : {
+        Authorization: `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      }
 
   const response = await fetch(url, {
     body: JSON.stringify(body),

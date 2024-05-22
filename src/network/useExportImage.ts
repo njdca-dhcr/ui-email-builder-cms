@@ -12,6 +12,6 @@ export const useExportImage = () => {
         path: '/image-export',
       })
       return result.blob
-    }
+    },
   })
 }

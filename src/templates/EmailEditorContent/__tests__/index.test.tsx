@@ -72,7 +72,7 @@ describe('EmailEditorContent', () => {
     const { queryByText } = render(
       <QueryClientProvider client={client}>
         <EmailEditorContent emailTemplate={emailTemplate} />
-       </QueryClientProvider>
+      </QueryClientProvider>,
     )
     expect(queryByText('Title')).not.toBeNull()
     expect(queryByText('Dependency Benefits')).not.toBeNull()
@@ -158,7 +158,7 @@ describe('EmailEditorContent', () => {
     const { baseElement } = render(
       <QueryClientProvider client={client}>
         <EmailEditorContent emailTemplate={emailTemplate} />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     )
     const input = baseElement.querySelector('#edit-preview-text')
 
@@ -169,7 +169,7 @@ describe('EmailEditorContent', () => {
     const { baseElement } = render(
       <QueryClientProvider client={client}>
         <EmailEditorContent emailTemplate={emailTemplate} />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     )
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()
   })
@@ -183,7 +183,7 @@ describe('EmailEditorContent', () => {
       const { queryByText } = render(
         <QueryClientProvider client={client}>
           <EmailEditorContent emailTemplate={emailTemplate} />
-        </QueryClientProvider>
+        </QueryClientProvider>,
       )
       expect(queryByText('Download HTML')).toBeNull()
     })
@@ -192,7 +192,7 @@ describe('EmailEditorContent', () => {
       const { queryByText } = render(
         <QueryClientProvider client={client}>
           <EmailEditorContent emailTemplate={emailTemplate} />
-        </QueryClientProvider>
+        </QueryClientProvider>,
       )
       expect(queryByText('Copy HTML')).toBeNull()
     })

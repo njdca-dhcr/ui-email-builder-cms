@@ -9,12 +9,7 @@ interface Props {
   html: string
 }
 
-export const ExportImageButton: FC<Props> = ({
-  children,
-  fileName,
-  html,
-}) => {
-
+export const ExportImageButton: FC<Props> = ({ children, fileName, html }) => {
   const authedFetch = useAuthedFetch('blob', false)
   const { mutate, isPending } = useExportImage()
 
@@ -26,9 +21,12 @@ export const ExportImageButton: FC<Props> = ({
       onError: (error) => {
         console.error('error:', error)
       },
-    
     })
   }
 
-  return <button disabled={isPending} onClick={buttonHandler}>{children}</button>
+  return (
+    <button disabled={isPending} onClick={buttonHandler}>
+      {children}
+    </button>
+  )
 }

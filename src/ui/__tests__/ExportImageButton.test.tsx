@@ -22,10 +22,7 @@ describe('ExportImageButton', () => {
   it('is a button', () => {
     const { queryByRole } = render(
       <QueryClientProvider client={client}>
-        <ExportImageButton
-          html={faker.lorem.paragraph()}
-          fileName={faker.lorem.word()}
-        >
+        <ExportImageButton html={faker.lorem.paragraph()} fileName={faker.lorem.word()}>
           {faker.lorem.word()}
         </ExportImageButton>
       </QueryClientProvider>,
