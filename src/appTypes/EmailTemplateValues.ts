@@ -1,4 +1,4 @@
-import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextValue } from 'src/ui'
 import { BoxColor } from 'src/ui/SelectBoxColor'
 import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 

@@ -14,6 +14,7 @@ import uniqueId from 'lodash.uniqueid'
 import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
 import { shouldShowEmailPartsFromEmailTemplate } from 'src/utils/shouldShowEmailPartsFromEmailTemplate'
 import { EmailTemplateConfig } from './EmailTemplateConfig'
+import { EmailEditorHeadingAndSelect } from './EmailEditorSidebar/EmailEditorHeadingAndSelect'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Config
@@ -37,7 +38,10 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
             <SyncSidebarAndPreviewScroll>
               <ClearCurrentlyActiveEmailPart />
               <EmailPartsContent>
-                <EmailEditorSidebar emailTemplate={emailTemplate} />
+                <EmailEditorSidebar
+                  emailTemplate={emailTemplate}
+                  heading={<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />}
+                />
                 <PreviewText initialValue={emailTemplate.previewText}>
                   <PageContent element="div" className="email-editor-page-content">
                     <EmailEditorContent emailTemplate={emailTemplate} />

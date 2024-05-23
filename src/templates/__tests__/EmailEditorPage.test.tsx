@@ -68,6 +68,11 @@ describe('EmailEditorPage', () => {
     expect(queryByText('Back')).not.toBeNull()
   })
 
+  it('displays the heading and select navigator', () => {
+    const { baseElement } = rendered
+    expect(baseElement).toHaveTextContent('Go to')
+  })
+
   describe('Head', () => {
     it("uses the email template's name as the title", () => {
       const { baseElement } = render(<Head pageContext={{ emailTemplate }} {...({} as any)} />)

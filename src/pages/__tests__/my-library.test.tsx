@@ -48,11 +48,11 @@ describe('My Library page', () => {
 
       const firstLink: HTMLAnchorElement | null = queryByText(emailTemplate1.name) as any
       expect(firstLink).not.toBeNull()
-      expect(firstLink!.href).toEqual(urlFor(`/email-template/${emailTemplate1.id}`))
+      expect(firstLink!.href).toEqual(urlFor(`/email-templates/${emailTemplate1.id}`))
 
       const secondLink: HTMLAnchorElement | null = queryByText(emailTemplate2.name) as any
       expect(secondLink).not.toBeNull()
-      expect(secondLink!.href).toEqual(urlFor(`/email-template/${emailTemplate2.id}`))
+      expect(secondLink!.href).toEqual(urlFor(`/email-templates/${emailTemplate2.id}`))
     })
   })
 

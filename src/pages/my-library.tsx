@@ -33,7 +33,7 @@ const MyLibraryPage: FC = () => {
             <List className="library-list">
               {emailTemplates.map(({ id, name, description }) => (
                 <li key={id} className="library-item">
-                  <Link to={`/email-template/${id}`} className="library-name">
+                  <Link to={`/email-templates/${id}`} className="library-name">
                     {name}
                   </Link>
                   <p className="library-description">{description}</p>
