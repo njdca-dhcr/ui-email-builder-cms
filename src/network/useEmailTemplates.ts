@@ -8,11 +8,13 @@ export interface EmailTemplateIndex {
   description?: string
 }
 
+export const QUERY_KEY = 'useEmailTemplates'
+
 export const useEmailTemplates = () => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({
-    queryKey: ['useEmailTemplates'],
+    queryKey: [QUERY_KEY],
     queryFn: async () => {
       const result = await authedFetch<{ emailTemplates: EmailTemplateIndex[] }>({
         path: '/email-templates',
