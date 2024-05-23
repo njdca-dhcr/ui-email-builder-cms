@@ -21,7 +21,10 @@ describe('useCreateEmailTemplate', () => {
   it('creates an email template', async () => {
     const client = new QueryClient()
     const emailTemplate = buildUniqueEmailConfig()
-    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { emailTemplate } })
+    asMock(mockAuthedFetch).mockResolvedValue({
+      statusCode: 200,
+      json: { emailTemplate: { id: 'saved id' } },
+    })
 
     const { result } = renderHook(() => useCreateEmailTemplate(), {
       wrapper: ({ children }) => {
@@ -40,7 +43,7 @@ describe('useCreateEmailTemplate', () => {
       method: 'POST',
       body: { emailTemplate },
     })
-    expect(result.current.data).toEqual(emailTemplate)
+    expect(result.current.data).toEqual({ emailTemplate: { id: 'saved id' } })
   })
 
   it('invalidates the useEmailTemplates query', async () => {
