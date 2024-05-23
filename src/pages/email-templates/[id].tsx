@@ -14,6 +14,7 @@ import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { shouldShowEmailPartsFromEmailTemplate } from 'src/utils/shouldShowEmailPartsFromEmailTemplate'
 import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
+import { PreviewText } from 'src/templates/PreviewText'
 
 export type Props = PageProps<null, null, null>
 
@@ -35,7 +36,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                 <EmailEditorSidebar
                   emailTemplate={emailTemplate}
                   heading={
-                    <h1>
+                    <h1 style={{ fontSize: '1.5rem' }}>
                       {byQueryState(query, {
                         data: ({ name }) => name,
                         loading: () => 'Loading...',
@@ -44,10 +45,12 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                     </h1>
                   }
                 />
-                <PageContent element="div" className="email-editor-page-content">
-                  {error && <Alert>{error.message}</Alert>}
-                  {emailTemplate && <EmailEditorContent emailTemplate={emailTemplate} />}
-                </PageContent>
+                <PreviewText initialValue={emailTemplate?.previewText}>
+                  <PageContent element="div" className="email-editor-page-content">
+                    {error && <Alert>{error.message}</Alert>}
+                    {emailTemplate && <EmailEditorContent emailTemplate={emailTemplate} />}
+                  </PageContent>
+                </PreviewText>
                 {isLoading && <LoadingOverlay description="Loading your email template" />}
               </EmailPartsContent>
             </SyncSidebarAndPreviewScroll>

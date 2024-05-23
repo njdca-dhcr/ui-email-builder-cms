@@ -67,12 +67,15 @@ describe('Email Template Show Page', () => {
   describe('when successful', () => {
     let emailTemplate: EmailTemplateShow
     let title: string
+    let previewText: string
 
     beforeEach(() => {
       title = faker.lorem.words(3)
+      previewText = faker.lorem.paragraph()
       emailTemplate = {
         id: randomUUID(),
         ...buildUniqueEmailConfig({
+          previewText,
           components: [
             buildUniqueEmailComponent('Header', {
               subComponents: [
@@ -94,16 +97,22 @@ describe('Email Template Show Page', () => {
       expect(queryByText(emailTemplate.name)).not.toBeNull()
     })
 
-    xit('displays the EmailEditorContent', () => {
+    it('displays the EmailEditorContent', () => {
       const { baseElement } = renderEmailTemplateShowPage()
       const h1 = baseElement.querySelector('h1[contenteditable="true"]')
       expect(h1).not.toBeNull()
       expect(h1).toHaveTextContent(title)
     })
 
-    xit('displays the EmailEditorSidebar', () => {
+    it('displays the EmailEditorSidebar', () => {
       const { queryByText } = renderEmailTemplateShowPage()
       expect(queryByText('Back')).not.toBeNull()
+    })
+
+    it('loads the saved preview text', () => {
+      const { getByLabelText } = renderEmailTemplateShowPage()
+      const textarea: HTMLTextAreaElement = getByLabelText('Preview Text') as any
+      expect(textarea).toHaveValue(previewText)
     })
   })
 
