@@ -1,22 +1,22 @@
 import React, { FC, useEffect, useState } from 'react'
 import { HeadFC, navigate, PageProps } from 'gatsby'
 import {
+  Button,
+  Form,
+  FormField,
   Heading,
   Layout,
+  LoadingOverlay,
   PageContent,
   Paragraph,
   Sidebar,
+  SidebarNavigation,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+} from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { Alert } from 'src/ui/Alert'
-import { LoadingOverlay } from 'src/ui/LoadingOverlay'
 import { newPasswordRequired } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
-import { Button } from 'src/ui/Button'
-import { Form, FormField } from 'src/ui/Form'
 
 type PresentLocationState = { username: string; session: string }
 type EmptyLocationState = {}

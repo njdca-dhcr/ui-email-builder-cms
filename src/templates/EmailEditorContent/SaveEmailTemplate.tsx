@@ -1,14 +1,11 @@
 import React, { FC, useState } from 'react'
-import { Button } from 'src/ui/Button'
-import { Dialog } from 'src/ui/Dialog'
-import { Form, FormField } from 'src/ui/Form'
+import { Button, Dialog, LoadingOverlay, Form, FormField } from 'src/ui'
 import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 import {
   CreateEmailTemplateErrorResponse,
   useCreateEmailTemplate,
 } from 'src/network/useCreateEmailTemplate'
 import { navigate } from 'gatsby'
-import { LoadingOverlay } from 'src/ui/LoadingOverlay'
 import { useEmailPartsContentData } from '../EmailPartsContent'
 import { EmailTemplate } from 'src/appTypes'
 import { usePreviewText } from '../PreviewText'

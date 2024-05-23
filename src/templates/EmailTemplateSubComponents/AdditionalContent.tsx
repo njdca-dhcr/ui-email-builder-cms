@@ -3,9 +3,8 @@ import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Colors, StyleDefaults, Text } from '../styles'
-import { EmailBlock } from 'src/ui'
+import { EmailBlock, RichTextEditableElement } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { AdditionalContentValue, EmailTemplate } from 'src/appTypes'
 
 const defaultValue: AdditionalContentValue = {

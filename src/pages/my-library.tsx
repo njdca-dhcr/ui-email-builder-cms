@@ -1,19 +1,19 @@
 import React, { FC } from 'react'
 import { HeadFC, Link } from 'gatsby'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
 import {
   Heading,
   Layout,
+  List,
+  LoadingOverlay,
   PageContent,
   Paragraph,
   Sidebar,
+  SidebarNavigation,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { List } from 'src/ui'
+} from 'src/ui'
 import { useEmailTemplates } from 'src/network/useEmailTemplates'
-import { LoadingOverlay } from 'src/ui/LoadingOverlay'
 
 const MyLibraryPage: FC = () => {
   const { data: emailTemplates, isLoading, error } = useEmailTemplates()

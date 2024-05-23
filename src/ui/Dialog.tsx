@@ -5,7 +5,7 @@ import { Content, Description, Overlay, Portal, Root, Title, Trigger } from '@ra
 import { UswdsIcon } from './UswdsIcon'
 import './Dialog.css'
 
-export interface Props {
+export interface DialogProps {
   contents: (options: { close: () => void }) => ReactNode
   description?: string
   descriptionClassName?: string
@@ -14,7 +14,7 @@ export interface Props {
   trigger: ReactElement
 }
 
-export const Dialog: FC<Props> = ({
+export const Dialog: FC<DialogProps> = ({
   contents,
   description,
   descriptionClassName,

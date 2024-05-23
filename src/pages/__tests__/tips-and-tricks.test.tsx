@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import TipsAndTricksPage from '../tips-and-tricks'
-import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
+import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 
 describe('Library page', () => {
   it('is displayed in a layout', () => {

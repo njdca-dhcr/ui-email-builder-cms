@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { Select, UswdsIconSelect } from 'src/ui'
+import { Select, SelectBoxColor, UswdsIconSelect } from 'src/ui'
 import { useSupplementalContentValue } from 'src/templates/EmailTemplateSubComponents/SupplementalContent'
-import { SelectBoxColor } from 'src/ui/SelectBoxColor'
 import { SupplementalContentVariant } from 'src/appTypes'
 
 export const SupplementalContentControls: FC<

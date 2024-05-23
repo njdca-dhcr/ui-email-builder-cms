@@ -12,7 +12,7 @@ import {
   renderEmailPart,
 } from 'src/testHelpers'
 import { LoginDetails, useLoginDetailsValue } from '../LoginDetails'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('LoginDetails', () => {
   let emailSubComponent: EmailTemplate.LoginDetails

@@ -9,13 +9,11 @@ import { EmailEditorContent } from 'src/templates/EmailEditorContent'
 import { EmailEditorSidebar } from 'src/templates/EmailEditorSidebar'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
-import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
-import { Layout, PageContent } from 'src/ui'
-import { Alert } from 'src/ui/Alert'
-import { LoadingOverlay } from 'src/ui/LoadingOverlay'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
+import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { shouldShowEmailPartsFromEmailTemplate } from 'src/utils/shouldShowEmailPartsFromEmailTemplate'
+import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
 
 export type Props = PageProps<null, null, null>
 

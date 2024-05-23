@@ -1,16 +1,21 @@
 import React, { FC } from 'react'
-import { Heading, Paragraph } from 'src/ui/Layout'
-import { EmailBlock, Input } from 'src/ui'
 import { BannerMarkup, useBannerValue } from 'src/templates/EmailTemplateComponents/Banner'
 import { Spacing } from 'src/templates/styles'
-import { ColorPicker } from '../ColorPicker'
-import { EditableElement } from '../EditableElement'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { ColorInput } from '../ColorInput'
 import { useUpdateBanner } from 'src/network/useUpdateBanner'
-import { LoadingOverlay } from '../LoadingOverlay'
 import { SaveButton } from './SaveButton'
-import { Form, FormErrorMessage } from '../Form'
+import {
+  Form,
+  FormErrorMessage,
+  LoadingOverlay,
+  Heading,
+  Paragraph,
+  ColorInput,
+  EditableElement,
+  ColorPicker,
+  EmailBlock,
+  Input,
+} from 'src/ui'
 
 export const EditBanner: FC = () => {
   const [banner, setBanner, { hasChanges }] = useBannerValue()

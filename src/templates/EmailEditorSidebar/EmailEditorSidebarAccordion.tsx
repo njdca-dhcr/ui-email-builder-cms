@@ -7,7 +7,7 @@ import { EmailTemplate } from 'src/appTypes'
 import { labelForSubComponent } from './labelForSubComponent'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import './EmailEditorSidebarAccordion.css'
-import { RightPointer } from 'src/ui/RightPointer'
+import { RightPointer, VisibilityToggle } from 'src/ui'
 import { EmailSubComponentControls } from './EmailSubcomponentControls'
 import { labelForComponent } from './labelForComponent'
 import {
@@ -19,7 +19,6 @@ import {
   SYNC_SIDEBAR_AND_PREVIEW_SCROLL,
   useSyncSidebarAndPreviewScroll,
 } from '../SyncSidebarAndPreviewScroll'
-import { VisibilityToggle } from 'src/ui/VisibilityToggle'
 import { EmailSubComponentFloatingControls } from './EmailSubcomponentControls/EmailSubcomponentFloatingControls'
 import { EmailComponentDescription } from './EmailComponentDescription'
 import { EmailSubComponentDescription } from './EmailSubComponentDescription'

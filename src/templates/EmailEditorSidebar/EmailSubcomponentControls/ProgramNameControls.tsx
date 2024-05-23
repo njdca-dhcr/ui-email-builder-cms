@@ -1,11 +1,9 @@
 import React, { FC } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/ProgramName'
-import { ColorPicker } from 'src/ui/ColorPicker'
+import { ColorInput, ColorPicker, Select } from 'src/ui'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { ColorInput } from 'src/ui/ColorInput'
 import { isAppMode } from 'src/utils/appMode'
-import { Select } from 'src/ui'
 import { ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
 
 export const ProgramNameControls: FC<EmailSubComponentControlsProps<'ProgramName'>> = ({

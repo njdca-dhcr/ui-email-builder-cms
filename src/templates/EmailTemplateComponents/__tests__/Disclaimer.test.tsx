@@ -4,7 +4,7 @@ import { render, renderHook } from '@testing-library/react'
 import { DisclaimerValue, EmailTemplate } from 'src/appTypes'
 import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
-import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextValue } from 'src/ui'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
 describe('Disclaimer', () => {

@@ -1,9 +1,8 @@
 import React, { FC, CSSProperties } from 'react'
-import { EditableElement } from 'src/ui/EditableElement'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { StyleDefaults, Text, Spacing } from '../styles'
-import { EmailBlock } from 'src/ui'
+import { EmailBlock, EditableElement } from 'src/ui'
 import { EmailSubComponentProps } from './shared'
 import { DateRangeValue, EmailTemplate } from 'src/appTypes'
 

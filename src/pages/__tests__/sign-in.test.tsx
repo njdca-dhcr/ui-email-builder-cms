@@ -1,7 +1,7 @@
 import React from 'react'
 import { RenderResult, render } from '@testing-library/react'
 import SignIn from '../sign-in'
-import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
+import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import { navigate } from 'gatsby'

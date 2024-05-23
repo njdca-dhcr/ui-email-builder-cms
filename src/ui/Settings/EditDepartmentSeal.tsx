@@ -3,13 +3,12 @@ import {
   DepartmentSealMarkup,
   useDepartmentSealValue,
 } from 'src/templates/EmailTemplateSubComponents/DepartmentSeal'
-import { Heading, Paragraph } from 'src/ui/Layout'
+import { LoadingOverlay, Heading, Paragraph } from 'src/ui'
 import { Select } from '../Select'
 import { EmailBlock } from '../EmailBlock'
 import { Spacing } from 'src/templates/styles'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
-import { LoadingOverlay } from '../LoadingOverlay'
 import { SaveButton } from './SaveButton'
 import { useUpdateDepartmentSeal } from 'src/network/useUpdateDepartmentSeal'
 import { Form, FormErrorMessage } from '../Form'

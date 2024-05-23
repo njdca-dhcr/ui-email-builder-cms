@@ -5,18 +5,18 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import {
   Heading,
   Layout,
+  List,
   PageContent,
   Paragraph,
   Sidebar,
+  SidebarNavigation,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { List } from 'src/ui/List'
-import 'src/styles/app.css'
-import './index.css'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+} from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { isRestricted } from 'src/utils/appMode'
+import 'src/styles/app.css'
+import './index.css'
 
 const IndexPage: FC = () => {
   return (

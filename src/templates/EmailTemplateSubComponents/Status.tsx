@@ -1,16 +1,19 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
-import { EditableElement } from 'src/ui/EditableElement'
+import {
+  BoxColor,
+  BoxColorConfigs,
+  EditableElement,
+  EditableReceipt,
+  EmailBlock,
+  RichTextEditableElement,
+  UswdsIcon,
+} from 'src/ui'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
-import { EmailBlock } from 'src/ui/EmailBlock'
-import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
-import { UswdsIcon } from 'src/ui/UswdsIcon'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { EmailTemplate, StatusValue, StatusVariant } from 'src/appTypes'
-import { EditableReceipt } from 'src/ui/EditableReceipt'
 
 const defaultValue: StatusValue = {
   variant: StatusVariant.Overview,

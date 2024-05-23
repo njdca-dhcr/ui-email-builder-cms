@@ -3,11 +3,9 @@ import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } fro
 import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useDirectiveValue } from 'src/templates/EmailTemplateSubComponents/Directive'
-import { Select } from 'src/ui/'
+import { ColorInput, ColorPicker, Select } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { DirectiveVariant } from 'src/appTypes'
-import { ColorInput } from 'src/ui/ColorInput'
-import { ColorPicker } from 'src/ui/ColorPicker'
 
 export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> = ({
   emailSubComponent,

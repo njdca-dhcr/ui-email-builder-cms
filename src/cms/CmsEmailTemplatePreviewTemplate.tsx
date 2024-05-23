@@ -8,7 +8,7 @@ import {
   ClearCurrentlyActiveEmailPart,
   CurrentlyActiveEmailPart,
 } from 'src/templates/CurrentlyActiveEmailPart'
-import { Layout, PageContent, Sidebar } from 'src/ui/Layout'
+import { Layout, PageContent, Sidebar } from 'src/ui'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import 'src/templates/EmailEditorPage.css'
 import { PreviewText } from 'src/templates/PreviewText'

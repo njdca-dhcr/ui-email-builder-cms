@@ -9,7 +9,7 @@ import {
   expectEmailPartContentFor,
 } from 'src/testHelpers'
 import { InformationalBox } from '../InformationalBox'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('InformationalBox', () => {
   let value: string

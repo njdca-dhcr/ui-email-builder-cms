@@ -2,10 +2,9 @@ import React, { FC } from 'react'
 import { navigate } from 'gatsby'
 import { EmailTemplate } from 'src/appTypes'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
-import './EmailEditorHeadingAndSelect.css'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { ChevronDownIcon } from 'src/ui/ChevronDownIcon'
-import { Select } from 'src/ui'
+import { ChevronDownIcon, Select } from 'src/ui'
+import './EmailEditorHeadingAndSelect.css'
 
 interface Props {
   emailTemplate: EmailTemplate.Config

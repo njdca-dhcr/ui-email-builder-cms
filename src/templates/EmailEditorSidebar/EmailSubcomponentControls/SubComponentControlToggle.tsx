@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { buildSubComponentPartKey } from 'src/utils/emailPartKeys'
-import { VisibilityToggle } from 'src/ui/VisibilityToggle'
+import { VisibilityToggle } from 'src/ui'
 import { Control } from './shared'
 
 interface SubComponentControlsToggleProps {

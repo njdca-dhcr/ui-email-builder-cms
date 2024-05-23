@@ -8,15 +8,15 @@ import {
   Sidebar,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+  LoadingOverlay,
+  SidebarNavigation,
+} from 'src/ui'
 import { EditDisclaimer, EditBanner, EditStateSeal, EditDepartmentSeal } from 'src/ui/Settings'
-import './settings.css'
-import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { EditingEmailCSS } from 'src/templates/emailHtmlDocument/EmailCSS'
-import { LoadingOverlay } from 'src/ui/LoadingOverlay'
-import { useUser } from 'src/network/useUser'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { useUser } from 'src/network/useUser'
+import './settings.css'
 
 const SettingsPage: FC = () => {
   const { data: user, isLoading, error, enabled } = useUser()

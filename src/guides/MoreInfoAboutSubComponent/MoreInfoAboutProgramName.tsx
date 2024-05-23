@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { MoreInfo } from 'src/ui/MoreInfo'
+import { MoreInfo } from 'src/ui'
 import { MoreInfoImage } from './Shared'
 import programNameUiPng from './images/program-name-ui.png'
 import programNameUiEligibilityPng from './images/program-name-ui-eligibility.png'

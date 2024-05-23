@@ -5,7 +5,6 @@ import { faker } from '@faker-js/faker'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { render } from '@testing-library/react'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
-import { RichTextValue } from 'src/ui/RichTextEditor'
 
 describe('EditEmailComponent', () => {
   let emailComponent: EmailTemplate.UniqueComponent

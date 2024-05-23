@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-import { Heading, Paragraph } from 'src/ui/Layout'
-import { EmailBlock } from 'src/ui'
+import { EmailBlock, Heading, LoadingOverlay, Paragraph } from 'src/ui'
 import {
   useDisclaimerValue,
   styles as disclaimerStyles,
@@ -9,7 +8,6 @@ import { Spacing } from 'src/templates/styles'
 import { RichTextEditableElement } from '../RichTextEditableElement'
 import { useUpdateDisclaimer } from 'src/network/useUpdateDisclaimer'
 import { SaveButton } from './SaveButton'
-import { LoadingOverlay } from '../LoadingOverlay'
 import { Form, FormErrorMessage } from '../Form'
 
 export const EditDisclaimer: FC = () => {

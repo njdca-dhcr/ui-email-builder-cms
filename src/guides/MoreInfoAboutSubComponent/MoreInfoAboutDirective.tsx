@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { MoreInfo } from 'src/ui/MoreInfo'
+import { MoreInfo } from 'src/ui'
 import { MoreInfoImage } from './Shared'
 import directiveButtonPng from './images/directive-button.png'
 import directive3StepPng from './images/directive-3-step.png'

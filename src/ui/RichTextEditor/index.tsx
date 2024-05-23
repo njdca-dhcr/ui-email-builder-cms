@@ -19,7 +19,7 @@ export { RichTextElement, RichTextLeaf, RichTextAdditionalStylesContext } from '
 
 export type RichTextValue = AppDescendant[]
 
-export const TEST_ID = 'rich-text-editor'
+export const RICH_TEXT_EDITOR_TEST_ID = 'rich-text-editor'
 
 interface RichTextEditorProps {
   additionalStyles?: RichTextAdditionalStyles
@@ -56,7 +56,7 @@ export const RichTextEditor: FC<RichTextEditorProps> = ({
         <Editable
           aria-label={label}
           autoFocus={autoFocus}
-          data-testid={TEST_ID}
+          data-testid={RICH_TEXT_EDITOR_TEST_ID}
           onBlur={onEditorBlur}
           onKeyDown={(event) => handleHotKeyPress(event, editor)}
           renderElement={renderElement}

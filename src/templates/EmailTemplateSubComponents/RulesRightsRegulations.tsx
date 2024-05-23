@@ -1,20 +1,23 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
-import { EmailBlock } from 'src/ui/EmailBlock'
-import { EditableElement } from 'src/ui/EditableElement'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { Borders, Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
-import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
-import { UswdsIcon } from 'src/ui/'
+import {
+  BoxColor,
+  BoxColorConfigs,
+  EditableElement,
+  EmailBlock,
+  RichTextAdditionalStyles,
+  RichTextEditableElement,
+  UswdsIcon,
+} from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import {
   EmailTemplate,
   RulesRightsRegulationsValue,
   RulesRightsRegulationsVariant,
 } from 'src/appTypes'
-import { RichTextAdditionalStyles } from 'src/ui/RichTextEditor'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 

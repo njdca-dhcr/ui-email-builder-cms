@@ -6,10 +6,10 @@ import {
   PageContent,
   Paragraph,
   Sidebar,
+  SidebarNavigation,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+} from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 
 const NotFoundPage: FC<PageProps> = () => {

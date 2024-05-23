@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { STATE_AND_TERRITORY_ABBREVIATIONS } from './statesAndTerritories'
-import { RichTextValue } from 'src/ui/RichTextEditor'
+import { RichTextValue } from 'src/ui'
 
 export const bannerSchema = z.object({
   backgroundColor: z.string(),

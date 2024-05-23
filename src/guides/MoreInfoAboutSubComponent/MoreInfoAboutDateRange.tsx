@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { MoreInfo } from 'src/ui/MoreInfo'
+import { MoreInfo } from 'src/ui'
 import { MoreInfoImage } from './Shared'
 import dateRangeOriginalSentOnPng from './images/date-range-original-sent-on.png'
 import dateRangeSimplePng from './images/date-range-simple.png'

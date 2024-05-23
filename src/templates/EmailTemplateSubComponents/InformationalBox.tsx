@@ -1,15 +1,18 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from '../EmailTemplateSubComponents/shared'
-import { EmailBlock } from 'src/ui/EmailBlock'
-import { EditableElement } from 'src/ui/EditableElement'
+import {
+  BoxColor,
+  BoxColorConfigs,
+  EditableElement,
+  EmailBlock,
+  RichTextEditableElement,
+  UswdsIcon,
+} from 'src/ui'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, StyleDefaults, Text, Font, SpacingCell } from '../styles'
-import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
-import { UswdsIcon } from 'src/ui/UswdsIcon'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { EmailTemplate, InformationalBoxValue } from 'src/appTypes'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 
 const defaultValue: InformationalBoxValue = {
   boxColor: BoxColor.BenefitBlue,

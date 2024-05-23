@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useIsSignedIn } from 'src/utils/AuthContext'
-import { Button } from '../Button'
+import { Button } from 'src/ui'
 
 export interface SaveButtonProps {
   hasChanges: boolean

@@ -13,7 +13,7 @@ import {
 } from 'src/testHelpers'
 import { RulesRightsRegulations, useRulesRightsRegulationsValue } from '../RulesRightsRegulations'
 import { RulesRightsRegulationsControls } from 'src/templates/EmailEditorSidebar/EmailSubcomponentControls/RulesRightsRegulationsControls'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('RulesRightsRegulations', () => {
   let value: string

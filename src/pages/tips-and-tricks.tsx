@@ -6,14 +6,13 @@ import {
   PageContent,
   Paragraph,
   Sidebar,
+  SidebarNavigation,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+  UswdsIcon,
+  UswdsIconVariantKey,
+} from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import './tips-and-tricks.css'
-import { UswdsIcon } from 'src/ui'
-import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
 import settingsPagePng from 'src/images/tips-and-tricks/settings-page.png'
 import libraryPagePng from 'src/images/tips-and-tricks/library-page.png'
 import emailEditingPageSidebarArrowsPng from 'src/images/tips-and-tricks/email-editing-page-sidebar-arrows.png'
@@ -22,6 +21,7 @@ import emailEditingPagePreviewTextPng from 'src/images/tips-and-tricks/email-edi
 import emailEditingPagePreviewControlsPng from 'src/images/tips-and-tricks/email-editing-page-preview-controls.png'
 import emailEditingPagePng from 'src/images/tips-and-tricks/email-editing-page-base.png'
 import richTextEditingPng from 'src/images/tips-and-tricks/rich-text-editing.png'
+import './tips-and-tricks.css'
 
 const TipsAndTricksPage: FC = () => {
   return (

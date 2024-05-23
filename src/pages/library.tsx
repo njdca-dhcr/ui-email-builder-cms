@@ -8,13 +8,13 @@ import {
   Sidebar,
   SkipNavContent,
   SpacedContainer,
-} from 'src/ui/Layout'
-import { SidebarNavigation } from 'src/ui/SidebarNavigation'
+  SidebarNavigation,
+  List,
+  Input,
+} from 'src/ui'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
-import { List } from 'src/ui/List'
-import './library.css'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { Input } from 'src/ui'
+import './library.css'
 
 const LibaryPage: FC = () => {
   const [filterQuery, setFilterQuery] = useState('')

@@ -13,7 +13,7 @@ import {
 } from 'src/testHelpers'
 import { Status, useStatusValue } from '../Status'
 import { VisibilityToggle } from 'src/ui/VisibilityToggle'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('Status', () => {
   let value: string

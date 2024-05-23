@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { Dialog, Props } from '../Dialog'
+import { Dialog, DialogProps } from '../Dialog'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 
@@ -29,7 +29,7 @@ describe('Dialog', () => {
       user = userEvent.setup()
     })
 
-    const renderAndOpenDialog = async (props: Partial<Props>) => {
+    const renderAndOpenDialog = async (props: Partial<DialogProps>) => {
       const rendered = render(
         <Dialog
           title={faker.lorem.words(3)}

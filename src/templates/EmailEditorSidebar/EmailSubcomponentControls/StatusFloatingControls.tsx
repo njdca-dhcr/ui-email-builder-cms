@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
-import { Radio } from 'src/ui/RadioButtons'
+import { Radio } from 'src/ui'
 
 interface Props {
   emailSubComponent: EmailTemplate.Status

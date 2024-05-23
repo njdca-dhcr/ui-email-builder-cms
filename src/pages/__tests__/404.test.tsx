@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import NotFoundPage from '../404'
-import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
+import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 
 describe('NotFound page', () => {
   it('is displayed in a layout', () => {

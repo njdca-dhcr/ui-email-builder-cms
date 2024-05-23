@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { RichTextEditableElement, RichTextEditableElementProps } from '../RichTextEditableElement'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { TEST_ID as richTextEditorTestId } from '../RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from '../RichTextEditor'
 import { faker } from '@faker-js/faker'
 
 describe('RichTextEditableElement', () => {

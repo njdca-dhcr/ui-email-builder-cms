@@ -1,5 +1,5 @@
 import React, { CSSProperties, FC } from 'react'
-import { EmailBlock } from 'src/ui'
+import { EmailBlock } from 'src/ui/EmailBlock'
 
 export const Colors = {
   alert: {

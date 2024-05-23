@@ -1,14 +1,17 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
-import { EditableElement } from 'src/ui/EditableElement'
+import {
+  BoxColor,
+  BoxColorConfigs,
+  EditableElement,
+  EmailBlock,
+  RichTextEditableElement,
+  UswdsIcon,
+} from 'src/ui'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
-import { EmailBlock } from 'src/ui/EmailBlock'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
-import { UswdsIcon } from 'src/ui/UswdsIcon'
-import { BoxColor, BoxColorConfigs } from 'src/ui/SelectBoxColor'
 import { EmailTemplate, SupplementalContentValue, SupplementalContentVariant } from 'src/appTypes'
 
 const defaultValue: SupplementalContentValue = {

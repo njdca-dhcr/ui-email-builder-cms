@@ -3,10 +3,8 @@ import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } fro
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useSubComponentControlOptions } from '.'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
-import { Select } from 'src/ui/Select'
+import { Select, SelectBoxColor, UswdsIconSelect } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
-import { SelectBoxColor } from 'src/ui/SelectBoxColor'
-import { UswdsIconSelect } from 'src/ui'
 import { StatusVariant } from 'src/appTypes'
 
 export const StatusControls: FC<EmailSubComponentControlsProps<'Status'>> = ({

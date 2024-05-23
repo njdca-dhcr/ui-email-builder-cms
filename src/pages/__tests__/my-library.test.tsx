@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import MyLibraryPage from '../my-library'
-import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
+import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { asMock, buildEmailTemplateIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
 import { useEmailTemplates } from 'src/network/useEmailTemplates'
 import { EmailTemplateIndex } from 'src/network/useEmailTemplates'

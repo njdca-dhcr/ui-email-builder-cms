@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EditDisclaimer } from '../EditDisclaimer'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 import { useUpdateDisclaimer } from 'src/network/useUpdateDisclaimer'
 import {
   asMock,

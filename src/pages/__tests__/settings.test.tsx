@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import Settings from '../settings'
-import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
+import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { useUser, UserShow } from 'src/network/useUser'
 import { asMock, buildUseQueryResult } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'

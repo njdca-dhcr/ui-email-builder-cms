@@ -3,14 +3,13 @@ import { AdditionalContent } from '../AdditionalContent'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
-import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
 } from 'src/testHelpers'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('AdditionalContent', () => {
   let emailSubComponent: EmailTemplate.AdditionalContent

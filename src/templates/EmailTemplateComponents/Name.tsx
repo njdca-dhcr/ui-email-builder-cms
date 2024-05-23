@@ -1,10 +1,9 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailComponentProps } from './shared'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
-import { EditableElement } from 'src/ui/EditableElement'
+import { EmailBlock, EditableElement } from 'src/ui'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Font, StyleDefaults, Text } from '../styles'
-import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { NameValue } from 'src/appTypes'
 

@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react'
 import { EmailTemplate } from 'src/appTypes'
-import { Sidebar, SkipNavContent, SpacedSidebarContainer } from 'src/ui/Layout'
+import { Sidebar, SkipNavContent, SpacedSidebarContainer } from 'src/ui'
 import { BackLink } from './BackLink'
 import { EmailEditorSidebarAccordion } from './EmailEditorSidebarAccordion'
 

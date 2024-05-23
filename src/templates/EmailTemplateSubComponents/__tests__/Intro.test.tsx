@@ -9,7 +9,7 @@ import {
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
 } from 'src/testHelpers'
-import { TEST_ID as richTextEditorTestId } from 'src/ui/RichTextEditor'
+import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('Intro', () => {
   let emailSubComponent: EmailTemplate.Intro

@@ -1,13 +1,11 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
-import { EmailBlock } from 'src/ui/EmailBlock'
-import { EditableElement } from 'src/ui/EditableElement'
+import { EmailBlock, EditableElement, RichTextEditableElement } from 'src/ui'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { EmailTemplate, LoginDetailsValue, LoginDetailsVariant } from 'src/appTypes'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297

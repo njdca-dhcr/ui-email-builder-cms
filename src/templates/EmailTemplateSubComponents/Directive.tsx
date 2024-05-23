@@ -1,12 +1,10 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
-import { EditableElement } from 'src/ui/EditableElement'
+import { EmailBlock, EditableElement, RichTextEditableElement } from 'src/ui'
 import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
-import { EmailBlock } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { RichTextEditableElement } from 'src/ui/RichTextEditableElement'
 import { DirectiveValue, DirectiveVariant, EmailTemplate } from 'src/appTypes'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 

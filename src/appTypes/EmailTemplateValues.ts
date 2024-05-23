@@ -1,6 +1,5 @@
 import { RichTextValue } from 'src/ui'
-import { BoxColor } from 'src/ui/SelectBoxColor'
-import { UswdsIconVariantKey } from 'src/ui/UswdsIcon'
+import { BoxColor, UswdsIconVariantKey } from 'src/ui'
 
 export type {
   BannerValue,

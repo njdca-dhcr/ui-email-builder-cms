@@ -1,19 +1,18 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import EmailTemplateShowPage, { Props } from '../[id]'
-import { TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import {
   asMock,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
   buildUseQueryResult,
-  urlFor,
 } from 'src/testHelpers'
 import { useEmailTemplate } from 'src/network/useEmailTemplate'
 import { EmailTemplateShow } from 'src/network/useEmailTemplate'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 jest.mock('src/network/useEmailTemplate', () => {
   return {
@@ -24,18 +23,20 @@ jest.mock('src/network/useEmailTemplate', () => {
 describe('Email Template Show Page', () => {
   const renderEmailTemplateShowPage = (props?: Partial<Props>) => {
     return render(
-      <EmailTemplateShowPage
-        pageContext={null}
-        uri=""
-        path=""
-        location={{} as any}
-        pageResources={{} as any}
-        params={{ id: faker.lorem.word() }}
-        children={undefined}
-        data={null}
-        serverData={{}}
-        {...props}
-      />,
+      <QueryClientProvider client={new QueryClient()}>
+        <EmailTemplateShowPage
+          pageContext={null}
+          uri=""
+          path=""
+          location={{} as any}
+          pageResources={{} as any}
+          params={{ id: faker.lorem.word() }}
+          children={undefined}
+          data={null}
+          serverData={{}}
+          {...props}
+        />
+      </QueryClientProvider>,
     )
   }
 

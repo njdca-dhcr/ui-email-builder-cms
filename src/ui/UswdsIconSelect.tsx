@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import startCase from 'lodash.startcase'
-import { Select } from 'src/ui'
-import { UswdsIcon, UswdsIconVariantKey, UswdsIconVariants } from 'src/ui/UswdsIcon'
+import { Select, UswdsIcon, UswdsIconVariantKey, UswdsIconVariants } from 'src/ui'
 
 interface UswdsIconSelectProps {
   onChange: (icon: UswdsIconVariantKey) => void

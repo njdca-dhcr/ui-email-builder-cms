@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode } from 'react'
+import React, { FC, ReactElement } from 'react'
 import {
   SideBarList,
   SideBarListItem,
@@ -13,11 +13,11 @@ import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 
 interface Props {}
 
-export const TEST_ID = 'sidebar-navigation'
+export const SIDEBAR_NAVIGATION_TEST_ID = 'sidebar-navigation'
 
 export const SidebarNavigation: FC<Props> = () => {
   return (
-    <nav data-testid={TEST_ID}>
+    <nav data-testid={SIDEBAR_NAVIGATION_TEST_ID}>
       <SideBarList>
         <SpacedLink to="/" text="Home" icon={<UswdsIcon icon="Home" />} />
         <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="AccountBalance" />} />

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Link, navigate } from 'gatsby'
-import { BackArrowIcon } from 'src/ui/BackArrowIcon'
+import { BackArrowIcon } from 'src/ui'
 
 export const BackLink: FC = () => {
   return (
