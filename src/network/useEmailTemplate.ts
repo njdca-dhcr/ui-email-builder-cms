@@ -6,13 +6,13 @@ export interface EmailTemplateShow extends EmailTemplate.UniqueConfig {
   id: string
 }
 
-const buildQueryKey = (id: string): string => `useEmailTemplate('${id}')`
+export const buildUseEmailTemplateQueryKey = (id: string): string => `useEmailTemplate('${id}')`
 
 export const useEmailTemplate = (id: string) => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({
-    queryKey: [buildQueryKey(id)],
+    queryKey: [buildUseEmailTemplateQueryKey(id)],
     queryFn: async () => {
       const result = await authedFetch<{ emailTemplate: EmailTemplateShow }>({
         path: `/email-templates/${id}`,

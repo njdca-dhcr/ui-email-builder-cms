@@ -131,6 +131,7 @@ export namespace EmailTemplate {
   }
 
   export interface UniqueConfig {
+    id?: string
     name: string
     description?: string
     previewText?: string
