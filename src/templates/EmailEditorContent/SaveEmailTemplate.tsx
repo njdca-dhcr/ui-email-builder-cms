@@ -9,6 +9,7 @@ import { navigate } from 'gatsby'
 import { useEmailPartsContentData } from '../EmailPartsContent'
 import { EmailTemplate } from 'src/appTypes'
 import { usePreviewText } from '../PreviewText'
+import { useCreateOrUpdateEmailTemplate } from 'src/network/useCreateOrUpdateEmailTemplate'
 
 export const SaveEmailTemplate: FC = () => {
   const emailTemplate = useEmailTemplateConfig()
@@ -17,14 +18,18 @@ export const SaveEmailTemplate: FC = () => {
   const [validationErrors, setValidationErrors] = useState<
     CreateEmailTemplateErrorResponse['errors'] | null
   >(null)
-  const { error, mutateAsync, isPending } = useCreateEmailTemplate()
+  const { error, mutateAsync, isPending } = useCreateOrUpdateEmailTemplate(emailTemplate.id)
 
   return (
     <Dialog
       trigger={<Button>Save</Button>}
       title="Save Email Template"
-      description="Save this email template to your library"
-      contents={() => (
+      description={
+        emailTemplate.id
+          ? 'Update this email template in your library'
+          : 'Save this email template to your library'
+      }
+      contents={({ close }) => (
         <>
           <Form
             errorMessage={error?.message}
@@ -40,6 +45,8 @@ export const SaveEmailTemplate: FC = () => {
 
               if (result && 'errors' in result) {
                 setValidationErrors(result.errors)
+              } else if (emailTemplate.id) {
+                close()
               } else {
                 navigate('/my-library')
               }

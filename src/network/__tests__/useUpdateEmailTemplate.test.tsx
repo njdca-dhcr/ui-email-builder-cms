@@ -70,7 +70,10 @@ describe('useUpdateEmailTemplate', () => {
     await result.current.mutateAsync(attributes)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseEmailTemplateQueryKey(emailTemplate.id!), QUERY_KEY],
+      queryKey: [buildUseEmailTemplateQueryKey(emailTemplate.id!)],
+    })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({
+      queryKey: [QUERY_KEY],
     })
   })
 })

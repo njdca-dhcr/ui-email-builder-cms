@@ -11,14 +11,15 @@ import {
 } from 'src/factories'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
-import { useCreateEmailTemplate } from 'src/network/useCreateEmailTemplate'
 import { asMock, userIsSignedIn } from 'src/testHelpers'
 import { navigate } from 'gatsby'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
+import { useCreateOrUpdateEmailTemplate } from 'src/network/useCreateOrUpdateEmailTemplate'
+import { randomUUID } from 'crypto'
 
-jest.mock('src/network/useCreateEmailTemplate', () => {
-  return { useCreateEmailTemplate: jest.fn() }
+jest.mock('src/network/useCreateOrUpdateEmailTemplate', () => {
+  return { useCreateOrUpdateEmailTemplate: jest.fn() }
 })
 
 describe('SaveEmailTemplate', () => {
@@ -42,8 +43,9 @@ describe('SaveEmailTemplate', () => {
 
   describe('when closed', () => {
     beforeEach(() => {
-      const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateEmailTemplate>>()
-      asMock(useCreateEmailTemplate).mockReturnValue(mutationResult)
+      const mutationResult =
+        buildUseMutationResult<ReturnType<typeof useCreateOrUpdateEmailTemplate>>()
+      asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
     })
 
     it('can be opened', async () => {
@@ -83,8 +85,9 @@ describe('SaveEmailTemplate', () => {
 
     describe('form fields', () => {
       beforeEach(() => {
-        const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateEmailTemplate>>()
-        asMock(useCreateEmailTemplate).mockReturnValue(mutationResult)
+        const mutationResult =
+          buildUseMutationResult<ReturnType<typeof useCreateOrUpdateEmailTemplate>>()
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
       })
 
       it("uses the email template's name as the default value for name", async () => {
@@ -100,13 +103,15 @@ describe('SaveEmailTemplate', () => {
       })
     })
 
-    describe('successful creation', () => {
-      it('creates an email template', async () => {
+    describe('successful mutation', () => {
+      it('creates/updates an email template', async () => {
         const mutate = jest.fn()
-        const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateEmailTemplate>>({
+        const mutationResult = buildUseMutationResult<
+          ReturnType<typeof useCreateOrUpdateEmailTemplate>
+        >({
           mutateAsync: mutate,
         })
-        asMock(useCreateEmailTemplate).mockReturnValue(mutationResult)
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
         const { getByRole, getByLabelText } = await renderAndOpen()
 
         expect(mutate).not.toHaveBeenCalled()
@@ -128,12 +133,51 @@ describe('SaveEmailTemplate', () => {
           ],
         })
       })
+    })
 
-      it('navigates to the my library page', async () => {
-        const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateEmailTemplate>>({
+    describe('successful update', () => {
+      beforeEach(() => {
+        emailTemplateConfig.id = randomUUID()
+      })
+
+      it('does not navigate away', async () => {
+        const mutationResult = buildUseMutationResult<
+          ReturnType<typeof useCreateOrUpdateEmailTemplate>
+        >({
           mutateAsync: jest.fn().mockResolvedValue({ id: '123' }),
         })
-        asMock(useCreateEmailTemplate).mockReturnValue(mutationResult)
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
+
+        const { getByRole } = await renderAndOpen()
+
+        expect(navigate).not.toHaveBeenCalled()
+        await user.click(getByRole('button', { name: 'Save' }))
+        expect(navigate).not.toHaveBeenCalled()
+      })
+
+      it('closes the dialog', async () => {
+        const mutationResult = buildUseMutationResult<
+          ReturnType<typeof useCreateOrUpdateEmailTemplate>
+        >({
+          mutateAsync: jest.fn().mockResolvedValue({ id: '123' }),
+        })
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
+
+        const { getByRole, queryByRole } = await renderAndOpen()
+        expect(queryByRole('dialog')).not.toBeNull()
+        await user.click(getByRole('button', { name: 'Save' }))
+        expect(queryByRole('dialog')).toBeNull()
+      })
+    })
+
+    describe('successful creation', () => {
+      it('navigates to the my library page', async () => {
+        const mutationResult = buildUseMutationResult<
+          ReturnType<typeof useCreateOrUpdateEmailTemplate>
+        >({
+          mutateAsync: jest.fn().mockResolvedValue({ id: '123' }),
+        })
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
         const { getByRole } = await renderAndOpen()
 
         expect(navigate).not.toHaveBeenCalled()
@@ -142,13 +186,15 @@ describe('SaveEmailTemplate', () => {
       })
     })
 
-    describe('unsuccessful creation', () => {
+    describe('unsuccessful mutation', () => {
       it('displays an error message when the request goes wrong', async () => {
         const error = new Error(faker.lorem.sentence())
-        const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateEmailTemplate>>({
+        const mutationResult = buildUseMutationResult<
+          ReturnType<typeof useCreateOrUpdateEmailTemplate>
+        >({
           error,
         })
-        asMock(useCreateEmailTemplate).mockReturnValue(mutationResult)
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
         const { baseElement } = await renderAndOpen()
 
         expect(baseElement).toHaveTextContent(error.message)
@@ -157,10 +203,12 @@ describe('SaveEmailTemplate', () => {
       it('displays an error message when there are validation errors', async () => {
         const errorsResponse = { errors: { name: faker.lorem.sentence() } }
         const mutateAsync = jest.fn().mockResolvedValue(errorsResponse)
-        const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateEmailTemplate>>({
+        const mutationResult = buildUseMutationResult<
+          ReturnType<typeof useCreateOrUpdateEmailTemplate>
+        >({
           mutateAsync,
         })
-        asMock(useCreateEmailTemplate).mockReturnValue(mutationResult)
+        asMock(useCreateOrUpdateEmailTemplate).mockReturnValue(mutationResult)
         const { baseElement, getByRole } = await renderAndOpen()
         await user.click(getByRole('button', { name: 'Save' }))
 

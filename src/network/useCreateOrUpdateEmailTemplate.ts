@@ -2,7 +2,7 @@ import { useCreateEmailTemplate } from './useCreateEmailTemplate'
 import { useUpdateEmailTemplate } from './useUpdateEmailTemplate'
 
 export function useCreateOrUpdateEmailTemplate(
-  id: undefined,
+  id: undefined | string,
 ): ReturnType<typeof useCreateEmailTemplate>
 export function useCreateOrUpdateEmailTemplate(
   id: string,
