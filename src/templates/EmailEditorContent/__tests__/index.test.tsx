@@ -2,23 +2,35 @@ import React from 'react'
 import userEvent from '@testing-library/user-event'
 import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
+import { base, faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EmailTemplate } from 'src/appTypes'
 import {
+  asMock,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
+  buildUseQueryResult,
   mockAppMode,
+  randomBannerValue,
+  userIsNotSignedIn,
+  userIsSignedIn,
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
+import { UserShow, useUser } from 'src/network/useUser'
 
 jest.mock('src/utils/download', () => {
   return {
     download: jest.fn(),
+  }
+})
+
+jest.mock('src/network/useUser', () => {
+  return {
+    useUser: jest.fn(),
   }
 })
 
@@ -31,6 +43,7 @@ describe('EmailEditorContent', () => {
     client = new QueryClient()
     emailTemplate = buildUniqueEmailConfig({
       components: [
+        buildUniqueEmailComponent('Banner'),
         buildUniqueEmailComponent('Header', {
           subComponents: [
             buildUniqueEmailSubComponent('Header', { kind: 'Title' }),
@@ -41,6 +54,9 @@ describe('EmailEditorContent', () => {
     })
     alertSpy = jest.spyOn(window, 'alert')
     alertSpy.mockReturnValue(false)
+    userIsNotSignedIn()
+    const query = { ...buildUseQueryResult<UserShow>({ data: undefined }), enabled: false }
+    asMock(useUser).mockReturnValue(query)
   })
 
   afterEach(() => {
@@ -195,6 +211,53 @@ describe('EmailEditorContent', () => {
         </QueryClientProvider>,
       )
       expect(queryByText('Copy HTML')).toBeNull()
+    })
+  })
+
+  describe('when signed in', () => {
+    beforeEach(() => {
+      userIsSignedIn()
+    })
+
+    it('integrates user info once it has loaded', () => {
+      const banner = randomBannerValue()
+      const query = { ...buildUseQueryResult<UserShow>({ data: { banner } }), enabled: true }
+      asMock(useUser).mockReturnValue(query)
+
+      const { baseElement } = render(
+        <QueryClientProvider client={client}>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </QueryClientProvider>,
+      )
+
+      expect(baseElement).toHaveTextContent(banner.primaryText)
+    })
+
+    it('displays a spinner when the user info is loading', () => {
+      const query = {
+        ...buildUseQueryResult<UserShow>({ isLoading: true, data: undefined }),
+        enabled: true,
+      }
+      asMock(useUser).mockReturnValue(query)
+
+      const { baseElement } = render(
+        <QueryClientProvider client={client}>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </QueryClientProvider>,
+      )
+      expect(baseElement).toHaveTextContent('Loading your settings')
+    })
+
+    it('displays an error when the user info fails to load', () => {
+      const error = new Error(faker.lorem.sentence())
+      const query = { ...buildUseQueryResult<UserShow>({ error, isError: true }), enabled: true }
+      asMock(useUser).mockReturnValue(query)
+      const { queryByText } = render(
+        <QueryClientProvider client={client}>
+          <EmailEditorContent emailTemplate={emailTemplate} />
+        </QueryClientProvider>,
+      )
+      expect(queryByText(error.message)).not.toBeNull()
     })
   })
 })

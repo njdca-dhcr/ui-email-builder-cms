@@ -1,7 +1,15 @@
 import React, { FC, Fragment, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
-import { CopyToClipboardButton, DownloadButton, EmailTable, ExportImageButton, Radio } from 'src/ui'
+import {
+  Alert,
+  CopyToClipboardButton,
+  DownloadButton,
+  EmailTable,
+  ExportImageButton,
+  LoadingOverlay,
+  Radio,
+} from 'src/ui'
 import { EditEmailComponent } from './EditEmailComponent'
 import { EditEmailSubComponent } from './EditEmailSubComponent'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
@@ -19,13 +27,16 @@ import { usePreviewText } from '../PreviewText'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
+import { useUser } from 'src/network/useUser'
 import './EmailEditorContent.css'
+import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
 }
 
 export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
+  const { data: user, isLoading, error, enabled } = useUser()
   const [previewType, setPreviewType] = useState<'desktop' | 'mobile'>('desktop')
   const isPreviewDesktop = previewType === 'desktop'
   const isPreviewMobile = !isPreviewDesktop
@@ -44,7 +55,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
     return readyToCopy
   }
 
-  return (
+  const content = (
     <>
       <VisuallyHidden>
         <h2>Email Preview</h2>
@@ -135,6 +146,14 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           </EmailTable>
         </div>
       </Root.div>
+    </>
+  )
+
+  return (
+    <>
+      {error && <Alert>{error.message}</Alert>}
+      {enabled && user ? <UserInfoProvider userInfo={user}>{content}</UserInfoProvider> : content}
+      {isLoading && <LoadingOverlay description="Loading your settings" />}
     </>
   )
 }
