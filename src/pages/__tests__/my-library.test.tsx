@@ -6,6 +6,7 @@ import { asMock, buildEmailTemplateIndex, buildUseQueryResult, urlFor } from 'sr
 import { useEmailTemplates } from 'src/network/useEmailTemplates'
 import { EmailTemplateIndex } from 'src/network/useEmailTemplates'
 import { faker } from '@faker-js/faker'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 jest.mock('src/network/useEmailTemplates', () => {
   return {
@@ -14,17 +15,25 @@ jest.mock('src/network/useEmailTemplates', () => {
 })
 
 describe('My Library page', () => {
+  const renderMyLibraryPage = () => {
+    return render(
+      <QueryClientProvider client={new QueryClient()}>
+        <MyLibraryPage />
+      </QueryClientProvider>,
+    )
+  }
+
   it('is displayed in a layout', () => {
     const query = buildUseQueryResult<EmailTemplateIndex[]>({ isLoading: true, data: undefined })
     asMock(useEmailTemplates).mockReturnValue(query)
-    const { baseElement } = render(<MyLibraryPage />)
+    const { baseElement } = renderMyLibraryPage()
     expect(baseElement.querySelector('.layout')).not.toBeNull()
   })
 
   it('displays the sidebar navigation', () => {
     const query = buildUseQueryResult<EmailTemplateIndex[]>({ isLoading: true, data: undefined })
     asMock(useEmailTemplates).mockReturnValue(query)
-    const { queryByTestId } = render(<MyLibraryPage />)
+    const { queryByTestId } = renderMyLibraryPage()
     expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
   })
 
@@ -32,7 +41,7 @@ describe('My Library page', () => {
     it('displays an loading spinner', () => {
       const query = buildUseQueryResult<EmailTemplateIndex[]>({ isLoading: true, data: undefined })
       asMock(useEmailTemplates).mockReturnValue(query)
-      const { queryByText } = render(<MyLibraryPage />)
+      const { queryByText } = renderMyLibraryPage()
       expect(queryByText('Loading your email templates')).not.toBeNull()
     })
   })
@@ -44,7 +53,7 @@ describe('My Library page', () => {
       const query = buildUseQueryResult({ data: emailTemplates })
       asMock(useEmailTemplates).mockReturnValue(query)
 
-      const { queryByText } = render(<MyLibraryPage />)
+      const { queryByText } = renderMyLibraryPage()
 
       const firstLink: HTMLAnchorElement | null = queryByText(emailTemplate1.name) as any
       expect(firstLink).not.toBeNull()
@@ -60,7 +69,7 @@ describe('My Library page', () => {
     it('displays an empty message', () => {
       const query = buildUseQueryResult<EmailTemplateIndex[]>({ data: [] })
       asMock(useEmailTemplates).mockReturnValue(query)
-      const { baseElement } = render(<MyLibraryPage />)
+      const { baseElement } = renderMyLibraryPage()
       expect(baseElement).toHaveTextContent("Looks like you don't have any saved templates yet")
     })
   })
@@ -70,7 +79,7 @@ describe('My Library page', () => {
       const error = new Error(faker.lorem.sentence())
       const query = buildUseQueryResult<EmailTemplateIndex[]>({ error, isError: true })
       asMock(useEmailTemplates).mockReturnValue(query)
-      const { queryByText } = render(<MyLibraryPage />)
+      const { queryByText } = renderMyLibraryPage()
       expect(queryByText(error.message)).not.toBeNull()
     })
   })

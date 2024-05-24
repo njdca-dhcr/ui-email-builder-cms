@@ -11,3 +11,7 @@ export interface Props
 export const Button = forwardRef<HTMLButtonElement, Props>(({ className, ...props }, ref) => {
   return <button ref={ref} className={classNames('button', className)} {...props} />
 })
+
+export const ButtonLike = forwardRef<HTMLButtonElement, Props>(({ className, ...props }, ref) => {
+  return <button ref={ref} className={classNames('button-like', className)} {...props} />
+})

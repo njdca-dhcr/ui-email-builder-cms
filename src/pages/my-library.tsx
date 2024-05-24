@@ -14,6 +14,7 @@ import {
   SpacedContainer,
 } from 'src/ui'
 import { useEmailTemplates } from 'src/network/useEmailTemplates'
+import { DestroyEmailTemplate } from 'src/ui/MyLibrary/DestroyEmailTemplate'
 
 const MyLibraryPage: FC = () => {
   const { data: emailTemplates, isLoading, error } = useEmailTemplates()
@@ -31,12 +32,15 @@ const MyLibraryPage: FC = () => {
           {error && <Paragraph>{error.message}</Paragraph>}
           {emailTemplates && emailTemplates.length > 0 && (
             <List className="library-list">
-              {emailTemplates.map(({ id, name, description }) => (
-                <li key={id} className="library-item">
-                  <Link to={`/email-templates/${id}`} className="library-name">
-                    {name}
-                  </Link>
-                  <p className="library-description">{description}</p>
+              {emailTemplates.map((emailTemplate) => (
+                <li key={emailTemplate.id} className="library-item">
+                  <div className="library-name-container">
+                    <Link to={`/email-templates/${emailTemplate.id}`} className="library-name">
+                      {emailTemplate.name}
+                    </Link>
+                    <DestroyEmailTemplate emailTemplate={emailTemplate} />
+                  </div>
+                  <p className="library-description">{emailTemplate.description}</p>
                 </li>
               ))}
             </List>

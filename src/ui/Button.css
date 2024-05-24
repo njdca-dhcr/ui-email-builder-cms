@@ -15,3 +15,9 @@
   background-color: var(--gray-medium-dark);
   cursor: unset;
 }
+
+.button-like {
+  background-color: transparent;
+  border: 0;
+  font-size: 1rem;
+}

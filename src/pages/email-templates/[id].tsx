@@ -36,7 +36,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                 <EmailEditorSidebar
                   emailTemplate={emailTemplate}
                   heading={
-                    <h1 style={{ fontSize: '1.5rem' }}>
+                    <h1 style={{ fontSize: '1.5rem', paddingLeft: '0.5rem' }}>
                       {byQueryState(query, {
                         data: ({ name }) => name,
                         loading: () => 'Loading...',
