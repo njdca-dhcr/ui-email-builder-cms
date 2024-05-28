@@ -14,7 +14,7 @@ import {
   FormField,
   Button,
 } from 'src/ui'
-import { backendUrl } from 'src/utils/backendUrl'
+import { backendFlag, backendUrl } from 'src/utils/backendUrl'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { signIn } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
@@ -27,7 +27,7 @@ const SignInPage: FC = () => {
   const [_auth, setAuth] = useAuth()
 
   useEffect(() => {
-    if (!backendUrl()) {
+    if (!(backendFlag() && backendUrl())) {
       navigate('/')
     }
   }, [])

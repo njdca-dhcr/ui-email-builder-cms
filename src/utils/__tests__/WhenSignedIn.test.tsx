@@ -3,11 +3,12 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { WhenSignedIn } from '../WhenSignedIn'
 import { AuthProvider } from '../AuthContext'
-import { mockBackendUrl, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
+import { mockBackendFlag, mockBackendUrl, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
 
 describe('WhenSignedIn', () => {
   beforeEach(() => {
     userIsSignedIn()
+    mockBackendFlag(true)
     mockBackendUrl(faker.internet.url())
   })
 
@@ -50,6 +51,7 @@ describe('WhenSignedIn', () => {
   describe('when signed in but without a backend url', () => {
     beforeEach(() => {
       userIsSignedIn()
+      mockBackendFlag(false)
       mockBackendUrl(undefined)
     })
 

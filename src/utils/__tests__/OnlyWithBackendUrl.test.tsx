@@ -1,21 +1,22 @@
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import React from 'react'
-import { OnlyWithBackendUrl } from '../OnlyWithBackendUrl'
-import { mockBackendUrl } from 'src/testHelpers'
+import { OnlyWithBackendFlagAndUrl } from '../OnlyWithBackendUrl'
+import { mockBackendFlag, mockBackendUrl } from 'src/testHelpers'
 
-describe('OnlyWithBackendUrl', () => {
+describe('OnlyWithBackendFlagAndUrl', () => {
   describe('when there is a backend url', () => {
     beforeEach(() => {
+      mockBackendFlag(true)
       mockBackendUrl(faker.internet.url())
     })
 
     it('displays its children', () => {
       const text = faker.lorem.paragraph()
       const { baseElement } = render(
-        <OnlyWithBackendUrl>
+        <OnlyWithBackendFlagAndUrl>
           <p>{text}</p>
-        </OnlyWithBackendUrl>,
+        </OnlyWithBackendFlagAndUrl>,
       )
       expect(baseElement).toContainHTML(`<p>${text}</p>`)
     })
@@ -23,15 +24,16 @@ describe('OnlyWithBackendUrl', () => {
 
   describe('when there is no backend url', () => {
     beforeEach(() => {
+      mockBackendFlag(false)
       mockBackendUrl(undefined)
     })
 
     it('renders nothing', () => {
       const text = faker.lorem.paragraph()
       const { baseElement } = render(
-        <OnlyWithBackendUrl>
+        <OnlyWithBackendFlagAndUrl>
           <p>{text}</p>
-        </OnlyWithBackendUrl>,
+        </OnlyWithBackendFlagAndUrl>,
       )
       expect(baseElement).not.toContainHTML(`<p>${text}</p>`)
     })

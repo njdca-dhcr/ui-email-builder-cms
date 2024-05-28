@@ -20,6 +20,7 @@ import {
 import {
   currentAuthCredentials,
   mockAppMode,
+  mockBackendFlag,
   mockBackendUrl,
   userIsNotSignedIn,
   userIsSignedIn,
@@ -425,6 +426,7 @@ describe('SignOutButton', () => {
 
 describe('AuthButtons', () => {
   beforeEach(() => {
+    mockBackendFlag(true)
     mockBackendUrl(faker.internet.url())
   })
 
@@ -478,6 +480,7 @@ describe('AuthButtons', () => {
 
   describe('without a backend url', () => {
     beforeEach(() => {
+      mockBackendFlag(false)
       mockBackendUrl(undefined)
     })
 
