@@ -1,4 +1,4 @@
-name: eMonetary - Final Reminder (Dependency Only)
+name: eMonetary - Final Reminder (Wage & Dependency)
 description: When sending a final reminder (24 hours before expiration date) that their form will expire
 appModes: ["ALL", "NJ"]
 components:
@@ -16,9 +16,9 @@ components:
       - kind: ProgramName
         required: true
         defaultValue:
-          preset: Unemployment Insurance (UI) Monetary Eligibility
-          name: Unemployment Insurance (UI) Monetary Eligibility
-          backgroundColor: '#F3B9C3'
+          preset: Unemployment Insurance (UI)
+          name: Unemployment Insurance (UI)
+          backgroundColor: '#B9D8F3'
   - kind: Name
     required: true
     defaultValue:
