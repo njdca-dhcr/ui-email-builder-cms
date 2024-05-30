@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { render, renderHook } from '@testing-library/react'
-import React, { ReactElement } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { buildUniqueEmailConfig } from 'src/testHelpers'
 import { EmailTemplateConfig, useEmailTemplateConfig } from '../EmailTemplateConfig'
 
@@ -19,7 +19,7 @@ describe('EmailTemplateConfig', () => {
 describe('useEmailTemplateConfig', () => {
   it('provides the email template config provided to the larger context', () => {
     const emailTemplateConfig = buildUniqueEmailConfig()
-    const wrapper = ({ children }: { children: ReactElement }) => {
+    const wrapper: FC<{ children: ReactNode }> = ({ children }) => {
       return (
         <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
           {children}

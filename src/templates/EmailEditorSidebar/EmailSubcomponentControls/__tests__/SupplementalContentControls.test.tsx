@@ -66,7 +66,7 @@ describe('SupplementalContentControls', () => {
             <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByText('Single', { selector: 'Span' }))
+        await user.click(rendered.getByText('Single', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Single' }))
       })
 
@@ -87,7 +87,7 @@ describe('SupplementalContentControls', () => {
             <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByText('Single', { selector: 'Span' }))
+        await user.click(rendered.getByText('Single', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Double' }))
       })
 
@@ -108,7 +108,7 @@ describe('SupplementalContentControls', () => {
             <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByText('Single', { selector: 'Span' }))
+        await user.click(rendered.getByText('Single', { selector: 'span' }))
         await user.click(rendered.getByRole('option', { name: 'Benefit Amount' }))
       })
 
