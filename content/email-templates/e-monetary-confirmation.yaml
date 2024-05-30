@@ -18,7 +18,7 @@ components:
         defaultValue:
           preset: Unemployment Insurance (UI) Monetary Eligibility
           name: Unemployment Insurance (UI) Monetary Eligibility
-          backgroundColor: '#F3B9C3'
+          backgroundColor: "#F3B9C3"
   - kind: Name
     required: true
     defaultValue:
@@ -67,18 +67,18 @@ components:
           secondDescription:
             - type: paragraph
               children:
-                - text: 'Your designated certification day is: '
-                - text: 'Sunday, 8am-9pm'
+                - text: "Your designated certification day is: "
+                - text: "Sunday, 8am-9pm"
                   bold: true
             - type: paragraph
               children:
-                - text: ' '
+                - text: " "
             - type: paragraph
               children:
                 - text: >-
                     Add this to your calendar, refrigerator, or anywhere that will help
                     you not forget. Additional details on our certification hours can be
-                    found 
+                    found
                 - type: link
                   url: >-
                     https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
@@ -87,7 +87,7 @@ components:
                 - text: .
             - type: paragraph
               children:
-                - text: ' '
+                - text: " "
             - type: paragraph
               children:
                 - text: >-
@@ -117,13 +117,13 @@ components:
           benefitAmountMainBoxCopy:
             - type: paragraph
               children:
-                - text: 'Weekly Rate:   '
+                - text: "Weekly Rate:   "
                   bold: true
                 - text: $400
                   bold: true
             - type: paragraph
               children:
-                - text: 'Partial Weekly Rate:   '
+                - text: "Partial Weekly Rate:   "
                   bold: true
                 - text: $200
                   bold: true
@@ -135,7 +135,7 @@ components:
                   italic: true
             - type: paragraph
               children:
-                - text: ' '
+                - text: " "
             - type: paragraph
               children:
                 - text: >-
