@@ -1,4 +1,4 @@
-name: eMonetary - Reminder (Dependency Only)
+name: eMonetary - Reminder (Wage & Dependency)
 description: When asking those who started their form to finish it
 appModes: ["ALL", "NJ"]
 components:
@@ -18,9 +18,9 @@ components:
       - kind: ProgramName
         required: true
         defaultValue:
-          preset: Dependency Benefits
-          name: Dependency Benefits
-          backgroundColor: '#F1DEA0'
+          preset: Unemployment Insurance (UI)
+          name: Unemployment Insurance (UI)
+          backgroundColor: '#B9D8F3'
   - kind: Name
     required: true
     defaultValue:
@@ -34,7 +34,7 @@ components:
           intro:
             - type: paragraph
               children:
-                - text: Your Dependency Benefits application needs some additional information.
+                - text: Your unemployment claim as well as your Dependency Benefits application needs some additional information.
       - kind: Directive
         required: true
         defaultValue:
