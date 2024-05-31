@@ -60,6 +60,17 @@ you can run `npm run validate` which will typecheck (`npm run typecheck`), lint 
 
 ### Config
 
+There are several environment variables that are required in order to use the application
+
+- GATSBY_APP_MODE: ['NJ' | 'All'] - controls which email templates are visible in the app.
+- GATSBY_BACKEND_FLAG: boolean - controls whether backend-specific features such as logging in and saving templates are accessible to users.
+- GATSBY_BACKEND_URL: string - the url for the serverless application allowing access to log in, save templates, and export .png images
+- NODE_ENV: ['development' | 'production'] - determines whether the frontend application is running locally or at a specified url. Used mostly for local links and images.
+
+And one optional environoment variable
+
+- GATSBY_LOG_EDITS: boolean - when true, it logs a json object to the browser console describing the component being edited, which (once converted to yaml) can be used as the `defaultValue` for that component in an email template
+
 #### Decap
 
 The Decap CMS config is located at `static/admin/config.yml`. However, the `src/cms/cms.tsx` file initializes the application with an override that sets `local_backend: true` in development environments. This takes precedence over anything in `static/admin/config.yml`.
