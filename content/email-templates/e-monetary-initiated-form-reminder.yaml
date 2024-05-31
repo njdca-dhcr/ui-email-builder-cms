@@ -1,0 +1,174 @@
+name: eMonetary - Initiated Form Reminder (Wage Only)
+description: When askiing those who started their form to finish it
+appModes: ["ALL", "NJ"]
+components:
+  - kind: Banner
+    required: true
+  - kind: Header
+    required: true
+    subComponents:
+      - kind: DepartmentSeal
+        required: true
+      - kind: DateRange
+        range: "[Reminder]"
+      - kind: Title
+        required: true
+        defaultValue:
+          title: Submit your form
+      - kind: ProgramName
+        required: true
+        defaultValue:
+          preset: Unemployment Insurance (UI) Monetary Eligibility
+          name: Unemployment Insurance (UI) Monetary Eligibility
+          backgroundColor: "#F3B9C3"
+  - kind: Name
+    required: true
+    defaultValue:
+      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+  - kind: Body
+    required: true
+    subComponents:
+      - kind: Intro
+        required: true
+        defaultValue:
+          intro:
+            - type: paragraph
+              children:
+                - text: Your Unemployment Insurace (UI) claim is
+      - kind: Status
+        required: true
+        defaultValue:
+          variant: Overview
+          icon: Warning
+          status: On hold
+          statusDueTo: because...
+          showSupportiveInformation: true
+          spaceAfter: true
+          showDescription: true
+          description:
+            - type: paragraph
+              children:
+                - text: because...
+            - type: paragraph
+              children:
+                - text: you did not submit your form
+                  bold: true
+          supportiveInformation:
+            - type: paragraph
+              children:
+                - italic: true
+                  text: 'If you fail to submit your form, your claim may remain invalid.'
+          documentsNeededLabel: 'We need the following:'
+          documentsNeededValue: '{Name_of_document(s)}'
+          emailToLabel: 'Email this to:'
+          emailToValue: DUA@unemployment.gov
+          subjectLineLabel: 'Subject Line:'
+          subjectLineValue: 'Eligible Pending Review Documents<br/>{Name_of_claimant}'
+          showMissingDocumentDeadline: true
+          missingDocumentDeadline: >-
+            If you do not submit your documents by 00/00/0000, you will be denied your
+            claim and will be required to pay back any DUA funds released to you.
+          boxColor: Yielding Yellow
+          amountLabel: You owe $200
+          amountLineItems:
+            - label: Overpayment Total
+              value: $200
+            - label: Amount waived
+              value: $50
+              bold: true
+              italic: true
+          amountTotal:
+            label: You must pay
+            value: $150
+            bold: true
+      - kind: Directive
+        required: true
+        defaultValue:
+          variant: Three Steps
+          title: Directive Title
+          showTitle: false
+          showLabel: true
+          label:
+            - type: paragraph
+              children:
+                - text: 'To help resolve this issue, '
+                - text: 'complete the following steps:'
+                  bold: true
+          linkHref: 'https://hosted-pages.id.me/njdol'
+          buttonLabel: Get Started
+          buttonColor: '#1b1b1b'
+          step1Label:
+            - type: paragraph
+              children:
+                - text: Sign in & Answer
+                  bold: true
+                - text: ' the questions'
+          showStep1AdditionalContent: true
+          step1Additional:
+            - type: paragraph
+              children:
+                - text: 'This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}'
+          oneStepSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    Supportive information around how the status above was informed and
+                    how a claimant will receive more detailed information and/or a
+                    determination.
+                  italic: true
+          step2Label:
+            - type: paragraph
+              children:
+                - text: Certify
+                  bold: true
+                - text: ' your answers'
+          showStep2AdditionalContent: true
+          step2Additional:
+            - type: paragraph
+              children:
+                - text: Check the "Certify" box!
+          step2Tertiary:
+            - type: paragraph
+              children:
+                - text: >-
+                    Tertiary information around Step 2, (usually involving an alternate
+                    way to complete the second step).
+          step2CaseNumber:
+            - type: paragraph
+              children:
+                - text: 'Case #: [000000]'
+          step3Label:
+            - type: paragraph
+              children:
+                - text: Submit
+                  bold: true
+                - text: ' your form. '
+                - text: Don't wait.
+                  bold: true
+          showStep3AdditionalContent: false
+          step3Additional:
+            - type: paragraph
+              children:
+                - text: Look for a confirmation
+          showMultipleStepsSupportiveText: false
+          multipleStepsSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    A written decision will be mailed to your address to notify you of
+                    your results.
+                  italic: true
+          alternativePaymentLabel: >-
+            Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
+            Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
+          payOnlineSupportiveText:
+            - type: paragraph
+              children:
+                - text: >-
+                    Make the check or money order payable to NJ Dept. of Labor and
+                    Workforce Development. Be sure to write your name and social security
+                    number on the payment.
+  - kind: StateSeal
+    required: true
+  - kind: Disclaimer
+    required: true
