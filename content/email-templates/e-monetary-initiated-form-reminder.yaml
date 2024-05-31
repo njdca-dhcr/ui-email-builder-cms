@@ -1,5 +1,5 @@
 name: eMonetary - Initiated Form Reminder (Wage Only)
-description: When askiing those who started their form to finish it
+description: When asking those who started their form to finish it
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
