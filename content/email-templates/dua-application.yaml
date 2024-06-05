@@ -95,7 +95,7 @@ components:
                   bold: true
                 - text: " your form."
                 - bold: true
-                  text: Don't wait.
+                  text: " Don't wait."
           showStep3AdditionalContent: false
           step3Additional:
             - type: paragraph
