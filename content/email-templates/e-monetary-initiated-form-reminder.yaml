@@ -57,13 +57,13 @@ components:
             - type: paragraph
               children:
                 - italic: true
-                  text: 'If you fail to submit your form, your claim may remain invalid.'
-          documentsNeededLabel: 'We need the following:'
-          documentsNeededValue: '{Name_of_document(s)}'
-          emailToLabel: 'Email this to:'
+                  text: "If you fail to submit your form, your claim may remain invalid."
+          documentsNeededLabel: "We need the following:"
+          documentsNeededValue: "{Name_of_document(s)}"
+          emailToLabel: "Email this to:"
           emailToValue: DUA@unemployment.gov
-          subjectLineLabel: 'Subject Line:'
-          subjectLineValue: 'Eligible Pending Review Documents<br/>{Name_of_claimant}'
+          subjectLineLabel: "Subject Line:"
+          subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
           showMissingDocumentDeadline: true
           missingDocumentDeadline: >-
             If you do not submit your documents by 00/00/0000, you will be denied your
@@ -91,23 +91,23 @@ components:
           label:
             - type: paragraph
               children:
-                - text: 'To help resolve this issue, '
-                - text: 'complete the following steps:'
+                - text: "To help resolve this issue, "
+                - text: "complete the following steps:"
                   bold: true
-          linkHref: 'https://hosted-pages.id.me/njdol'
+          linkHref: "https://hosted-pages.id.me/njdol"
           buttonLabel: Get Started
-          buttonColor: '#1b1b1b'
+          buttonColor: "#1b1b1b"
           step1Label:
             - type: paragraph
               children:
                 - text: Sign in & Answer
                   bold: true
-                - text: ' the questions'
+                - text: " the questions"
           showStep1AdditionalContent: true
           step1Additional:
             - type: paragraph
               children:
-                - text: 'This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}'
+                - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
           oneStepSupportiveText:
             - type: paragraph
               children:
@@ -121,7 +121,7 @@ components:
               children:
                 - text: Certify
                   bold: true
-                - text: ' your answers'
+                - text: " your answers"
           showStep2AdditionalContent: true
           step2Additional:
             - type: paragraph
@@ -136,13 +136,13 @@ components:
           step2CaseNumber:
             - type: paragraph
               children:
-                - text: 'Case #: [000000]'
+                - text: "Case #: [000000]"
           step3Label:
             - type: paragraph
               children:
                 - text: Submit
                   bold: true
-                - text: ' your form. '
+                - text: " your form. "
                 - text: Don't wait.
                   bold: true
           showStep3AdditionalContent: false

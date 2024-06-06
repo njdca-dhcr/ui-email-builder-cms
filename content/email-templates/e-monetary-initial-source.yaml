@@ -46,7 +46,7 @@ components:
           description:
             - type: paragraph
               children:
-                - text: '{Data Reference} or a sentence that colors more of the status of claim'
+                - text: "{Data Reference} or a sentence that colors more of the status of claim"
                   bold: true
           supportiveInformation:
             - type: paragraph
@@ -56,12 +56,12 @@ components:
                     how a claimant will receive more detailed information and/or a
                     determination.
                   italic: true
-          documentsNeededLabel: 'We need the following:'
-          documentsNeededValue: '{Name_of_document(s)}'
-          emailToLabel: 'Email this to:'
+          documentsNeededLabel: "We need the following:"
+          documentsNeededValue: "{Name_of_document(s)}"
+          emailToLabel: "Email this to:"
           emailToValue: DUA@unemployment.gov
-          subjectLineLabel: 'Subject Line:'
-          subjectLineValue: 'Eligible Pending Review Documents<br/>{Name_of_claimant}'
+          subjectLineLabel: "Subject Line:"
+          subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
           showMissingDocumentDeadline: true
           missingDocumentDeadline: >-
             If you do not submit your documents by 00/00/0000, you will be denied your
@@ -84,28 +84,28 @@ components:
         defaultValue:
           variant: Three Steps
           title: Directive Title
-          showTitle: false  
+          showTitle: false
           showLabel: true
           label:
             - type: paragraph
               children:
-                - text: 'To help resolve this issue, '
-                - text: 'complete the following steps:'
+                - text: "To help resolve this issue, "
+                - text: "complete the following steps:"
                   bold: true
-          linkHref: 'https://hosted-pages.id.me/njdol'
+          linkHref: "https://hosted-pages.id.me/njdol"
           buttonLabel: Get Started
-          buttonColor: '#1b1b1b'
+          buttonColor: "#1b1b1b"
           step1Label:
             - type: paragraph
               children:
                 - text: Sign in & Answer
                   bold: true
-                - text: ' the questions'
+                - text: " the questions"
           showStep1AdditionalContent: true
           step1Additional:
             - type: paragraph
               children:
-                - text: 'This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}'
+                - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
           oneStepSupportiveText:
             - type: paragraph
               children:
@@ -119,7 +119,7 @@ components:
               children:
                 - text: Upload
                   bold: true
-                - text: ' documentation'
+                - text: " documentation"
           showStep2AdditionalContent: true
           step2Additional:
             - type: paragraph
@@ -136,13 +136,13 @@ components:
           step2CaseNumber:
             - type: paragraph
               children:
-                - text: 'Case #: [000000]'
+                - text: "Case #: [000000]"
           step3Label:
             - type: paragraph
               children:
                 - text: Submit
                   bold: true
-                - text: ' your form. '
+                - text: " your form. "
                 - text: Don't wait.
                   bold: true
           showStep3AdditionalContent: true
@@ -209,13 +209,13 @@ components:
           benefitAmountMainBoxCopy:
             - type: paragraph
               children:
-                - text: 'Weekly Rate:   '
+                - text: "Weekly Rate:   "
                   bold: true
                 - text: $400
                   bold: true
             - type: paragraph
               children:
-                - text: 'Partial Weekly Rate:   '
+                - text: "Partial Weekly Rate:   "
                   bold: true
                 - text: $200
                   bold: true
@@ -227,7 +227,7 @@ components:
                   italic: true
             - type: paragraph
               children:
-                - text: ' '
+                - text: " "
             - type: paragraph
               children:
                 - text: >-
@@ -257,7 +257,7 @@ components:
             - type: paragraph
               children:
                 - bold: true
-                  text: ''
+                  text: ""
             - type: numbered-list
               children:
                 - type: list-item
@@ -271,7 +271,7 @@ components:
             - type: paragraph
               children:
                 - bold: true
-                  text: ''
+                  text: ""
             - type: paragraph
               children:
                 - text: >-
@@ -282,7 +282,7 @@ components:
                   italic: true
             - type: paragraph
               children:
-                - text: ''
+                - text: ""
             - type: paragraph
               children:
                 - text: >-
@@ -301,35 +301,35 @@ components:
           appealRightsInstruction:
             - type: paragraph
               children:
-                - text: 'To begin an appeal online, get started below:'
+                - text: "To begin an appeal online, get started below:"
           appealRightsButton: Get Started
           appealRightsHref: >-
             https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link
           appealRightsShowInfoLabel: true
-          appealRightsInfoLabel: 'For your appeal:'
+          appealRightsInfoLabel: "For your appeal:"
           appealRightsShowInfo: true
           appealRightsInfo:
             - type: paragraph
               children:
-                - text: 'Program Code:'
+                - text: "Program Code:"
                   bold: true
-                - text: '  ###'
+                - text: "  ###"
             - type: paragraph
               children:
-                - text: 'Date of Claim:'
+                - text: "Date of Claim:"
                   bold: true
-                - text: '  00/00/0000'
+                - text: "  00/00/0000"
             - type: paragraph
               children:
-                - text: 'Date of Determination:'
+                - text: "Date of Determination:"
                   bold: true
-                - text: '  00/00/0000'
-          yourRightsTitle: 'Your Rights:'
+                - text: "  00/00/0000"
+          yourRightsTitle: "Your Rights:"
           showYourRightsDescription: false
           yourRightsDescription:
             - type: paragraph
               children:
-                - text: ''
+                - text: ""
                   italic: true
           yourRightsList:
             - type: bulleted-list
@@ -374,7 +374,7 @@ components:
         defaultValue:
           variant: Information
           loginDetailsTitle: Login Details
-          usernameLabel: 'Your username is:'
+          usernameLabel: "Your username is:"
           usernameValue: CAPTAIN AMERICA
           resetPasswordMessage:
             - type: paragraph

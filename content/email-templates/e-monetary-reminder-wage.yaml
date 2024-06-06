@@ -20,7 +20,7 @@ components:
         defaultValue:
           preset: Unemployment Insurance (UI) Monetary Eligibility
           name: Unemployment Insurance (UI) Monetary Eligibility
-          backgroundColor: '#F3B9C3'
+          backgroundColor: "#F3B9C3"
   - kind: Name
     required: true
     defaultValue:
@@ -47,23 +47,23 @@ components:
           label:
             - type: paragraph
               children:
-                - text: 'To help resolve this issue, '
-                - text: 'complete the following steps:'
+                - text: "To help resolve this issue, "
+                - text: "complete the following steps:"
                   bold: true
-          linkHref: '{!eadj_UI_Case__c.eadj_Custom_Link__c}'
+          linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
           buttonLabel: Get Started
-          buttonColor: '#1b1b1b'
+          buttonColor: "#1b1b1b"
           step1Label:
             - type: paragraph
               children:
                 - text: Sign in & Answer
                   bold: true
-                - text: ' the questions'
+                - text: " the questions"
           showStep1AdditionalContent: true
           step1Additional:
             - type: paragraph
               children:
-                - text: 'This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}'
+                - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
           oneStepSupportiveText:
             - type: paragraph
               children:
@@ -76,7 +76,7 @@ components:
               children:
                 - text: Certify
                   bold: true
-                - text: ' your answers'
+                - text: " your answers"
           showStep2AdditionalContent: true
           step2Additional:
             - type: paragraph
@@ -91,13 +91,13 @@ components:
           step2CaseNumber:
             - type: paragraph
               children:
-                - text: 'Case #: [000000]'
+                - text: "Case #: [000000]"
           step3Label:
             - type: paragraph
               children:
                 - text: Submit
                   bold: true
-                - text: ' your form. '
+                - text: " your form. "
                 - text: Don't wait.
                   bold: true
           showStep3AdditionalContent: false
@@ -140,10 +140,10 @@ components:
               children:
                 - text: >-
                     You may receive multiple emails with a link to a questionnaire that
-                    needs to be completed. 
+                    needs to be completed.
                 - text: It is important to follow the link in each email
                   bold: true
-                - text: ' and complete all of the questionnaires that are sent to you.'
+                - text: " and complete all of the questionnaires that are sent to you."
           thirdTitle: Supplemental Content Title 3
           thirdDescription:
             - type: paragraph
@@ -166,13 +166,13 @@ components:
           benefitAmountMainBoxCopy:
             - type: paragraph
               children:
-                - text: 'Weekly Rate:   '
+                - text: "Weekly Rate:   "
                   bold: true
                 - text: $400
                   bold: true
             - type: paragraph
               children:
-                - text: 'Partial Weekly Rate:   '
+                - text: "Partial Weekly Rate:   "
                   bold: true
                 - text: $200
                   bold: true
@@ -184,7 +184,7 @@ components:
                   italic: true
             - type: paragraph
               children:
-                - text: ' '
+                - text: " "
             - type: paragraph
               children:
                 - text: >-
