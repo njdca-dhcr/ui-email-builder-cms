@@ -9,13 +9,11 @@ import { signIn } from 'src/network/auth'
 import {
   asMock,
   currentAuthCredentials,
-  mockBackendFlag,
   mockBackendUrl,
   userIsNotSignedIn,
   userIsSignedIn,
 } from 'src/testHelpers'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { mock } from 'node:test'
 
 jest.mock('src/network/auth', () => {
   return {
@@ -33,7 +31,6 @@ describe('Sign in page', () => {
     user = userEvent.setup()
     email = faker.internet.email()
     password = faker.internet.password({ length: 10 })
-    mockBackendFlag(true)
     mockBackendUrl(faker.internet.url({ appendSlash: false }))
     userIsNotSignedIn()
   })
@@ -153,7 +150,6 @@ describe('Sign in page', () => {
 
   describe('when already signed in', () => {
     beforeEach(() => {
-      mockBackendFlag(true)
       mockBackendUrl(faker.internet.url({ appendSlash: false }))
       userIsSignedIn()
       rendered = render(
@@ -171,7 +167,6 @@ describe('Sign in page', () => {
 
   describe('when there is no backend url', () => {
     beforeEach(() => {
-      mockBackendFlag(false)
       mockBackendUrl(undefined)
       rendered = render(
         <AuthProvider>

@@ -106,10 +106,6 @@ export const mockAppMode = (appMode: AppMode | undefined) => {
   Config.siteMetadata = { ...Config.siteMetadata, appMode }
 }
 
-export const mockBackendFlag = (backendFlag: boolean) => {
-  Config.siteMetadata = { ...Config.siteMetadata, backendFlag }
-}
-
 export const mockBackendUrl = (backendUrl: string | undefined) => {
   Config.siteMetadata = { ...Config.siteMetadata, backendUrl }
 }

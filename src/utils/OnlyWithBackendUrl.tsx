@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
-import { backendFlag, backendUrl } from './backendUrl'
+import { backendUrl } from './backendUrl'
 
-export const OnlyWithBackendFlagAndUrl: FC<{ children: ReactNode }> = ({ children }) => {
-  return backendFlag() && backendUrl() ? children : null
+export const OnlyWithBackendUrl: FC<{ children: ReactNode }> = ({ children }) => {
+  return backendUrl() ? children : null
 }

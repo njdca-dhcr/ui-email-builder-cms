@@ -5,7 +5,6 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: `Email Builder`,
     appMode: process.env.GATSBY_APP_MODE,
-    backendFlag: process.env.GATSBY_BACKEND_FLAG ?? false,
     backendUrl: process.env.GATSBY_BACKEND_URL,
     env: process.env.NODE_ENV,
   },

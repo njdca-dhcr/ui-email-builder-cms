@@ -1,14 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { SidebarNavigation } from '../SidebarNavigation'
-import {
-  asMock,
-  mockBackendFlag,
-  mockBackendUrl,
-  urlFor,
-  userIsNotSignedIn,
-  userIsSignedIn,
-} from 'src/testHelpers'
+import { asMock, mockBackendUrl, urlFor, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
 import { availableFeatures, Features } from 'src/features'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { faker } from '@faker-js/faker'
@@ -45,7 +38,6 @@ describe('SidebarNavigation', () => {
 
   describe('when signed in', () => {
     beforeEach(() => {
-      mockBackendFlag(true)
       mockBackendUrl(faker.internet.url())
       userIsSignedIn()
     })
@@ -64,7 +56,6 @@ describe('SidebarNavigation', () => {
 
   describe('when signed out', () => {
     beforeEach(() => {
-      mockBackendFlag(true)
       mockBackendUrl(faker.internet.url())
       userIsNotSignedIn()
     })
