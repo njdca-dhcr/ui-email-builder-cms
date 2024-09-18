@@ -26,7 +26,8 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
   ({ element, style, ...remainingProps }, ref) => {
     const props = { ...remainingProps, ref }
     const additionalStyles = useRichTextAdditionalStyles()
-    const additionalStyle = element.type ? additionalStyles[element.type] : {}
+    const appElement: AppElement = element
+    const additionalStyle = appElement.type ? additionalStyles[appElement.type]: {}
 
     switch (element.type) {
       case 'link':
@@ -108,20 +109,21 @@ interface RichTextLeafProps {
 export const RichTextLeaf = forwardRef<any, RichTextLeafProps>(
   ({ leaf, children, ...remainingProps }, ref) => {
     const props = { ...remainingProps, ref }
+    const appLeaf: AppText = leaf
 
-    if (leaf.bold) {
+    if (appLeaf.bold) {
       children = <strong>{children}</strong>
     }
 
-    if (leaf.italic) {
+    if (appLeaf.italic) {
       children = <em>{children}</em>
     }
 
-    if (leaf.underline) {
+    if (appLeaf.underline) {
       children = <u>{children}</u>
     }
 
-    const fontSize = leaf.textSize ? sizes[leaf.textSize] : undefined
+    const fontSize = appLeaf.textSize ? sizes[appLeaf.textSize] : undefined
 
     return (
       <span {...props} style={{ ...remainingProps.style, fontSize }}>
