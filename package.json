@@ -21,9 +21,9 @@
     "validate": "run-s typecheck lint test"
   },
   "overrides": {
-    "react": "^18.2.0",
-    "@types/react": "^18.2.14",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "@types/react": "^18.3.7",
+    "react-dom": "^18.3.1"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
@@ -57,11 +57,11 @@
     "lodash.uniqueid": "^4.0.1",
     "postcss": "^8.4.30",
     "postcss-preset-env": "^9.1.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
-    "react-remove-scroll": "^2.5.9",
-    "react-shadow": "^20.4.0",
+    "react-remove-scroll": "^2.6.0",
+    "react-shadow": "^20.5.0",
     "sanitize-html": "^2.13.0",
     "slate-history": "^0.100.0",
     "slate-react": "^0.91.11",
@@ -70,9 +70,9 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.24.7",
     "@faker-js/faker": "^8.0.2",
-    "@testing-library/jest-dom": "^6.1.3",
-    "@testing-library/react": "^15.0",
-    "@testing-library/user-event": "^14.5.1",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/is-url": "^1.2.32",
     "@types/jest": "^29.5.13",
     "@types/js-yaml": "^4.0.9",
@@ -84,8 +84,8 @@
     "@types/lodash.times": "^4.3.9",
     "@types/lodash.uniqueid": "^4.0.9",
     "@types/node": "^20.3.3",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
+    "@types/react": "^18.3.7",
+    "@types/react-dom": "^18.3.0",
     "@types/sanitize-html": "^2.13.0",
     "babel-jest": "^29.7.0",
     "babel-preset-gatsby": "^3.12.0",
