@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import type { PreviewTemplateComponentProps } from 'netlify-cms-core'
+import type { PreviewTemplateComponentProps } from 'decap-cms-core'
 import 'src/styles/app.css'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailEditorContent } from 'src/templates/EmailEditorContent'

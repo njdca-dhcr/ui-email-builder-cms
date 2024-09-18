@@ -23,7 +23,8 @@
   "overrides": {
     "react": "^18.3.1",
     "@types/react": "^18.3.7",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "slate": "^0.103.0"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
@@ -35,8 +36,10 @@
     "autoprefixer": "^10.4.20",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
+    "decap-cms-app": "^3.3.3",
     "gatsby": "^5.13.7",
     "gatsby-omni-font-loader": "^2.0.2",
+    "gatsby-plugin-decap-cms": "^4.0.4",
     "gatsby-plugin-html-attributes": "^1.0.5",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
@@ -56,15 +59,15 @@
     "lodash.times": "^4.3.2",
     "lodash.uniqueid": "^4.0.1",
     "postcss": "^8.4.47",
-    "postcss-preset-env": "^9.1.4",
+    "postcss-preset-env": "^10.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet": "^6.1.0",
     "react-remove-scroll": "^2.6.0",
     "react-shadow": "^20.5.0",
     "sanitize-html": "^2.13.0",
-    "slate-history": "^0.100.0",
-    "slate-react": "^0.91.11",
+    "slate-history": "^0.109.0",
+    "slate-react": "^0.110.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {

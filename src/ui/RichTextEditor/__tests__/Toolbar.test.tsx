@@ -6,7 +6,7 @@ import { createEditor } from 'slate'
 
 describe('Toolbar', () => {
   const wrapper = (props: any) => {
-    return <Slate {...props} editor={withReact(createEditor())} value={[]} />
+    return <Slate {...props} editor={withReact(createEditor())} initialValue={[]} />
   }
 
   it('renders mark, block, and link buttons', () => {

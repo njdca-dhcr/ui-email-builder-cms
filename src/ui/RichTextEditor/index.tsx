@@ -51,7 +51,7 @@ export const RichTextEditor: FC<RichTextEditorProps> = ({
 
   return (
     <RichTextAdditionalStylesContext.Provider value={memoizedAdditionalStyles}>
-      <Slate editor={editor} value={value} onChange={onValueChange}>
+      <Slate editor={editor} initialValue={value} onChange={onValueChange}>
         <Toolbar />
         <Editable
           aria-label={label}

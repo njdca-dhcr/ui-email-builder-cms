@@ -1,5 +1,5 @@
-import CMS from 'netlify-cms-app'
-import type { CmsConfig } from 'netlify-cms-core'
+import CMS from 'decap-cms-app'
+import type { CmsConfig } from 'decap-cms-core'
 import { InnovationWidget, InnovationWidgetPreview } from './InnovationWidget'
 import { CmsEmailTemplatePreviewTemplate } from './CmsEmailTemplatePreviewTemplate'
 

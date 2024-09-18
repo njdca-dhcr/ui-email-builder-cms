@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import type { CmsWidgetControlProps, CmsWidgetPreviewProps } from 'netlify-cms-core'
+import type { CmsWidgetControlProps, CmsWidgetPreviewProps } from 'decap-cms-core'
 
 export const InnovationWidget: FC<CmsWidgetControlProps<string>> = ({
   classNameWrapper,
