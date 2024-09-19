@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import { download } from 'src/utils/download'
-import { useAuthedFetch } from 'src/network/useAuthedFetch'
 import { useExportImage } from 'src/network/useExportImage'
+import { LoadingOverlay } from './LoadingOverlay'
 
 interface Props {
   children?: ReactNode
@@ -10,7 +10,6 @@ interface Props {
 }
 
 export const ExportImageButton: FC<Props> = ({ children, fileName, html }) => {
-  const authedFetch = useAuthedFetch('blob', false)
   const { mutate, isPending } = useExportImage()
 
   const buttonHandler = () => {
@@ -25,8 +24,11 @@ export const ExportImageButton: FC<Props> = ({ children, fileName, html }) => {
   }
 
   return (
-    <button disabled={isPending} onClick={buttonHandler}>
-      {children}
-    </button>
+    <>
+      <button disabled={isPending} onClick={buttonHandler}>
+        {children}
+      </button>
+      {isPending && <LoadingOverlay description="Loading your image" />}
+    </>
   )
 }
