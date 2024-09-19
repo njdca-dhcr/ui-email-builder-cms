@@ -27,7 +27,7 @@ export const RichTextElement = forwardRef<any, RichTextElementProps>(
     const props = { ...remainingProps, ref }
     const additionalStyles = useRichTextAdditionalStyles()
     const appElement: AppElement = element
-    const additionalStyle = appElement.type ? additionalStyles[appElement.type]: {}
+    const additionalStyle = appElement.type ? additionalStyles[appElement.type] : {}
 
     switch (element.type) {
       case 'link':
