@@ -1,5 +1,11 @@
 import fetchMock from 'jest-fetch-mock'
-import { AuthSuccessResponse, newPasswordRequired, refreshToken, signIn } from '../auth'
+import {
+  AuthSuccessResponse,
+  newPasswordRequired,
+  refreshToken,
+  signIn,
+  signInWithCode,
+} from '../auth'
 import { faker } from '@faker-js/faker'
 import { mockBackendUrl } from 'src/testHelpers'
 
@@ -81,6 +87,24 @@ describe('auth', () => {
     it('returns the JSON response', async () => {
       const token = faker.lorem.paragraph()
       const result = await refreshToken({ token })
+      expect(result).toEqual(authSuccessResponse)
+    })
+  })
+
+  describe('signInWithCode', () => {
+    it('posts the given email and password', async () => {
+      const code = faker.lorem.word()
+      await signInWithCode({ code })
+      expect(fetchMock).toHaveBeenCalledWith(`${mockedBackendUrl}/token-via-code`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code }),
+      })
+    })
+
+    it('returns the JSON response', async () => {
+      const code = faker.lorem.word()
+      const result = await signInWithCode({ code })
       expect(result).toEqual(authSuccessResponse)
     })
   })

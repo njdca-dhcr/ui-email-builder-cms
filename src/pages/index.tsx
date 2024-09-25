@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useEffect } from 'react'
 import { Link, type HeadFC } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
@@ -6,6 +6,7 @@ import {
   Heading,
   Layout,
   List,
+  LoadingOverlay,
   PageContent,
   Paragraph,
   Sidebar,
@@ -17,8 +18,17 @@ import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { isRestricted } from 'src/utils/appMode'
 import 'src/styles/app.css'
 import './index.css'
+import { useExchangeCodeForToken } from 'src/network/useExchangeCodeForToken'
 
 const IndexPage: FC = () => {
+  const { loading, errorMessage } = useExchangeCodeForToken()
+
+  useEffect(() => {
+    if (errorMessage) {
+      alert(errorMessage)
+    }
+  }, [errorMessage])
+
   return (
     <Layout element="div">
       <Sidebar>
@@ -100,6 +110,7 @@ const IndexPage: FC = () => {
           </section>
         </SpacedContainer>
       </PageContent>
+      {loading && <LoadingOverlay description="Signing in..." />}
     </Layout>
   )
 }

@@ -1,0 +1,6 @@
+.sign-in-or {
+  font-size: var(--font-huge);
+  font-weight: var(--weight-bold);
+  line-height: 2rem;
+  padding: 3rem 0;
+}

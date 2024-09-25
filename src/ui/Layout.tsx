@@ -7,10 +7,10 @@ import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentS
 import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 import { Link, navigate } from 'gatsby'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
-import { AuthProvider, useAuth } from 'src/utils/AuthContext'
+import { useAuth } from 'src/utils/AuthContext'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { WhenSignedOut } from 'src/utils/WhenSignedOut'
-import { OnlyWithBackendUrl } from 'src/utils/OnlyWithBackendUrl'
+import { OnlyWithBackendAndCognitoUrls } from 'src/utils/OnlyWithBackendUrl'
 
 interface LayoutProps {
   children: ReactNode
@@ -179,7 +179,7 @@ export const SignOutButton: FC = () => {
 
 export const AuthButtons: FC = () => {
   return (
-    <OnlyWithBackendUrl>
+    <OnlyWithBackendAndCognitoUrls>
       <div className="auth-buttons">
         <WhenSignedOut>
           <Link to="/sign-in" className="sign-in-link">
@@ -190,6 +190,6 @@ export const AuthButtons: FC = () => {
           <SignOutButton />
         </WhenSignedIn>
       </div>
-    </OnlyWithBackendUrl>
+    </OnlyWithBackendAndCognitoUrls>
   )
 }

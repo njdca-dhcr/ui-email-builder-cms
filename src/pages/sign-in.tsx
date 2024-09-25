@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { HeadFC, navigate } from 'gatsby'
+import { HeadFC, Link, navigate } from 'gatsby'
 import {
   Heading,
   Layout,
@@ -14,10 +14,11 @@ import {
   FormField,
   Button,
 } from 'src/ui'
-import { backendUrl } from 'src/utils/backendUrl'
+import { backendUrl, cognitoSigninUrl } from 'src/utils/backendUrl'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { signIn } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
+import './sign-in.css'
 
 const SignInPage: FC = () => {
   const [email, setEmail] = useState('')
@@ -25,6 +26,7 @@ const SignInPage: FC = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [_auth, setAuth] = useAuth()
+  const signInWithCognitoUrl = cognitoSigninUrl()
 
   useEffect(() => {
     if (!backendUrl()) {
@@ -87,6 +89,17 @@ const SignInPage: FC = () => {
             />
             <Button type="submit">Sign In</Button>
           </Form>
+
+          {signInWithCognitoUrl && (
+            <>
+              <div className="sign-in-or">--or--</div>
+              <div>
+                <Link to={signInWithCognitoUrl} className="link-button">
+                  Sign in with Microsoft
+                </Link>
+              </div>
+            </>
+          )}
         </SpacedContainer>
         {loading && <LoadingOverlay description="Signing in" />}
       </PageContent>

@@ -73,6 +73,19 @@ export const refreshToken = async ({ token }: { token: string }): Promise<Refres
   })
 }
 
+type SignInWithCodeResponse = AuthSuccessResponse | NotAuthorizedResponse
+
+export const signInWithCode = async ({
+  code,
+}: {
+  code: string
+}): Promise<SignInWithCodeResponse> => {
+  return fetchJSON({
+    path: '/token-via-code',
+    body: { code },
+  })
+}
+
 const fetchJSON = async ({ path, body }: { path: string; body: object }): Promise<any> => {
   const url = [backendUrl() ?? '', path].join('')
   const response = await fetch(url, {

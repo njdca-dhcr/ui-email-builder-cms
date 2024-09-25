@@ -21,6 +21,7 @@ import {
   currentAuthCredentials,
   mockAppMode,
   mockBackendUrl,
+  mockCognitoSigninUrl,
   userIsNotSignedIn,
   userIsSignedIn,
 } from 'src/testHelpers'
@@ -426,6 +427,7 @@ describe('SignOutButton', () => {
 describe('AuthButtons', () => {
   beforeEach(() => {
     mockBackendUrl(faker.internet.url())
+    mockCognitoSigninUrl(faker.internet.url())
   })
 
   describe('when signed in', () => {
@@ -457,22 +459,46 @@ describe('AuthButtons', () => {
       userIsNotSignedIn()
     })
 
-    it('renders a sign in link', () => {
-      const { queryByRole } = render(
-        <AuthProvider>
-          <AuthButtons />
-        </AuthProvider>,
-      )
-      expect(queryByRole('link', { name: 'Sign In' })).not.toBeNull()
+    describe('with a cognito sign in url', () => {
+      beforeEach(() => {
+        mockCognitoSigninUrl(faker.internet.url())
+      })
+
+      it('renders a sign in link', () => {
+        const { queryByRole } = render(
+          <AuthProvider>
+            <AuthButtons />
+          </AuthProvider>,
+        )
+        expect(queryByRole('link', { name: 'Sign In' })).not.toBeNull()
+      })
+
+      it('does not render a sign out button', () => {
+        const { queryByRole } = render(
+          <AuthProvider>
+            <AuthButtons />
+          </AuthProvider>,
+        )
+        expect(queryByRole('button')).toBeNull()
+      })
     })
 
-    it('does not render a sign out button', () => {
-      const { queryByRole } = render(
-        <AuthProvider>
-          <AuthButtons />
-        </AuthProvider>,
-      )
-      expect(queryByRole('button')).toBeNull()
+    describe('without a cognito sign in url', () => {
+      beforeEach(() => {
+        mockCognitoSigninUrl(undefined)
+        mockBackendUrl(undefined)
+      })
+
+      it('renders nothing', () => {
+        const { queryByRole, baseElement } = render(
+          <AuthProvider>
+            <AuthButtons />
+          </AuthProvider>,
+        )
+        expect(queryByRole('link')).toBeNull()
+        expect(queryByRole('button')).toBeNull()
+        expect(baseElement.querySelector('.auth-buttons')).toBeNull()
+      })
     })
   })
 

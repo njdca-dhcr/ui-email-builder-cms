@@ -110,6 +110,10 @@ export const mockBackendUrl = (backendUrl: string | undefined) => {
   Config.siteMetadata = { ...Config.siteMetadata, backendUrl }
 }
 
+export const mockCognitoSigninUrl = (cognitoSigninUrl: string | undefined) => {
+  Config.siteMetadata = { ...Config.siteMetadata, cognitoSigninUrl }
+}
+
 export const userIsSignedIn = (auth?: Partial<AuthInfo>) => {
   const authToPersist: AuthInfo = {
     idToken: faker.lorem.words(3),
