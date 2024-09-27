@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from 'src/utils/AuthContext'
-import { currentUrlSearchParams } from 'src/utils/currentUrlSearchParams'
+import { currentUrlSearchParamsFor } from 'src/utils/currentUrlSearchParamsFor'
 import { signInWithCode } from './auth'
 import { navigate } from 'gatsby'
 
 export const useExchangeCodeForToken = () => {
-  const code: string | null = currentUrlSearchParams().get('code')
+  const code: string | null = currentUrlSearchParamsFor('code')
   const [loading, setLoading] = useState(false)
   const [auth, setAuth] = useAuth()
   const [errorMessage, setErrorMessage] = useState('')

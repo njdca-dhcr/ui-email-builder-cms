@@ -5,7 +5,7 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, currentAuthCredentials, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import { signInWithCode } from '../auth'
-import { currentUrlSearchParams } from 'src/utils/currentUrlSearchParams'
+import { currentUrlSearchParamsFor } from 'src/utils/currentUrlSearchParamsFor'
 import { navigate } from 'gatsby'
 
 jest.mock('src/network/auth', () => {
@@ -14,9 +14,9 @@ jest.mock('src/network/auth', () => {
   }
 })
 
-jest.mock('src/utils/currentUrlSearchParams', () => {
+jest.mock('src/utils/currentUrlSearchParamsFor', () => {
   return {
-    currentUrlSearchParams: jest.fn(),
+    currentUrlSearchParamsFor: jest.fn(),
   }
 })
 
@@ -56,9 +56,9 @@ describe('useExchangeCodeForToken', () => {
           ExpiresIn: faker.number.int({ min: 1000, max: 4000 }),
         },
       })
-      asMock(currentUrlSearchParams).mockReturnValue(new URLSearchParams(`code=${code}`))
+      asMock(currentUrlSearchParamsFor).mockReturnValue(code)
       asMock(navigate).mockImplementation(async () => {
-        asMock(currentUrlSearchParams).mockReturnValue(new URLSearchParams())
+        asMock(currentUrlSearchParamsFor).mockReturnValue(null)
       })
     })
 
@@ -86,9 +86,7 @@ describe('useExchangeCodeForToken', () => {
         kind: 'NOT_AUTHORIZED',
         error: { name: 'Not authorized', message: 'not authorized' },
       })
-      asMock(currentUrlSearchParams).mockReturnValue(
-        new URLSearchParams(`code=${faker.lorem.word()}`),
-      )
+      asMock(currentUrlSearchParamsFor).mockReturnValue(faker.lorem.word())
     })
 
     it('displays the error', async () => {
@@ -106,9 +104,7 @@ describe('useExchangeCodeForToken', () => {
     beforeEach(() => {
       asMock(navigate).mockClear()
       userIsSignedIn()
-      asMock(currentUrlSearchParams).mockReturnValue(
-        new URLSearchParams(`code=${faker.lorem.word()}`),
-      )
+      asMock(currentUrlSearchParamsFor).mockReturnValue(faker.lorem.word())
     })
 
     it('does not try to sign in', async () => {
