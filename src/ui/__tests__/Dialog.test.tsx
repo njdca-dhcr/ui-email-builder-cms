@@ -11,6 +11,7 @@ describe('Dialog', () => {
       const title = faker.lorem.words(3)
       const { getByRole, baseElement } = render(
         <Dialog
+          description={faker.lorem.words(3)}
           title={title}
           contents={() => <p>{faker.lorem.sentence()}</p>}
           trigger={<button>Open</button>}
@@ -32,6 +33,7 @@ describe('Dialog', () => {
     const renderAndOpenDialog = async (props: Partial<DialogProps>) => {
       const rendered = render(
         <Dialog
+          description={faker.lorem.words(3)}
           title={faker.lorem.words(3)}
           contents={() => <p>{faker.lorem.sentence()}</p>}
           trigger={<button>Open</button>}

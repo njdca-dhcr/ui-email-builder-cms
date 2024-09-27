@@ -7,7 +7,7 @@ import './Dialog.css'
 
 export interface DialogProps {
   contents: (options: { close: () => void }) => ReactNode
-  description?: string
+  description: ReactElement | string
   descriptionClassName?: string
   title: string
   titleClassName?: string
@@ -32,11 +32,9 @@ export const Dialog: FC<DialogProps> = ({
         <Overlay className="dialog-overlay" />
         <Content className="dialog-content">
           <Title className={classNames('dialog-title', titleClassName)}>{title}</Title>
-          {description && (
-            <Description className={classNames('dialog-description', descriptionClassName)}>
-              {description}
-            </Description>
-          )}
+          <Description className={classNames('dialog-description', descriptionClassName)}>
+            {description}
+          </Description>
           {contents({ close })}
           <button className="dialog-close" onClick={close}>
             <VisuallyHidden>Close</VisuallyHidden>

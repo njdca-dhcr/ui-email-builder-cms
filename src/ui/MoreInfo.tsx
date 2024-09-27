@@ -19,6 +19,7 @@ export const MoreInfo: FC<Props> = ({ children, title }) => {
         </button>
       }
       title={title}
+      description={<VisuallyHidden>More information about {title}</VisuallyHidden>}
       contents={() => children}
     />
   )
