@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "email-builder",
-  "author": "Michael Crismali",
+  "Contributors": [
+    "Michael Crismali",
+    "Eryan Cobham"
+  ],
   "keywords": [
     "gatsby"
   ],
