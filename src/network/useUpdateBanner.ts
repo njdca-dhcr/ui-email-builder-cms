@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { QUERY_KEY as USE_USER_QUERY_KEY } from './useUser'
+import { QUERY_KEY as USE_USER_QUERY_KEY } from './useCurrentUser'
 import { useAuthedFetch } from './useAuthedFetch'
 import { BannerValue } from 'src/appTypes'
 

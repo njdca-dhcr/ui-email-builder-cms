@@ -6,7 +6,7 @@ import { EditBanner } from '../EditBanner'
 import { useUpdateBanner } from 'src/network/useUpdateBanner'
 import { asMock, buildUseMutationResult, randomBannerValue, userIsSignedIn } from 'src/testHelpers'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { UserShow } from 'src/network/useUser'
+import { CurrentUser } from 'src/network/useCurrentUser'
 import { AuthProvider } from 'src/utils/AuthContext'
 
 jest.mock('src/network/useUpdateBanner', () => {
@@ -20,7 +20,7 @@ describe('EditBanner', () => {
     user = userEvent.setup()
   })
 
-  const renderEditBanner = (userInfo: UserShow) => {
+  const renderEditBanner = (userInfo: CurrentUser) => {
     return render(
       <AuthProvider>
         <UserInfoProvider userInfo={userInfo}>

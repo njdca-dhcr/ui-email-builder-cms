@@ -20,7 +20,7 @@ import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
-import { UserShow, useUser } from 'src/network/useUser'
+import { CurrentUser, useCurrentUser } from 'src/network/useCurrentUser'
 
 jest.mock('src/utils/download', () => {
   return {
@@ -28,9 +28,9 @@ jest.mock('src/utils/download', () => {
   }
 })
 
-jest.mock('src/network/useUser', () => {
+jest.mock('src/network/useCurrentUser', () => {
   return {
-    useUser: jest.fn(),
+    useCurrentUser: jest.fn(),
   }
 })
 
@@ -55,8 +55,8 @@ describe('EmailEditorContent', () => {
     alertSpy = jest.spyOn(window, 'alert')
     alertSpy.mockReturnValue(false)
     userIsNotSignedIn()
-    const query = { ...buildUseQueryResult<UserShow>({ data: undefined }), enabled: false }
-    asMock(useUser).mockReturnValue(query)
+    const query = { ...buildUseQueryResult<CurrentUser>({ data: undefined }), enabled: false }
+    asMock(useCurrentUser).mockReturnValue(query)
   })
 
   afterEach(() => {
@@ -221,8 +221,8 @@ describe('EmailEditorContent', () => {
 
     it('integrates user info once it has loaded', () => {
       const banner = randomBannerValue()
-      const query = { ...buildUseQueryResult<UserShow>({ data: { banner } }), enabled: true }
-      asMock(useUser).mockReturnValue(query)
+      const query = { ...buildUseQueryResult<CurrentUser>({ data: { banner } }), enabled: true }
+      asMock(useCurrentUser).mockReturnValue(query)
 
       const { baseElement } = render(
         <QueryClientProvider client={client}>
@@ -235,10 +235,10 @@ describe('EmailEditorContent', () => {
 
     it('displays a spinner when the user info is loading', () => {
       const query = {
-        ...buildUseQueryResult<UserShow>({ isLoading: true, data: undefined }),
+        ...buildUseQueryResult<CurrentUser>({ isLoading: true, data: undefined }),
         enabled: true,
       }
-      asMock(useUser).mockReturnValue(query)
+      asMock(useCurrentUser).mockReturnValue(query)
 
       const { baseElement } = render(
         <QueryClientProvider client={client}>
@@ -250,8 +250,8 @@ describe('EmailEditorContent', () => {
 
     it('displays an error when the user info fails to load', () => {
       const error = new Error(faker.lorem.sentence())
-      const query = { ...buildUseQueryResult<UserShow>({ error, isError: true }), enabled: true }
-      asMock(useUser).mockReturnValue(query)
+      const query = { ...buildUseQueryResult<CurrentUser>({ error, isError: true }), enabled: true }
+      asMock(useCurrentUser).mockReturnValue(query)
       const { queryByText } = render(
         <QueryClientProvider client={client}>
           <EmailEditorContent emailTemplate={emailTemplate} />

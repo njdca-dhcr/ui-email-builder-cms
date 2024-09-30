@@ -27,7 +27,7 @@ import { usePreviewText } from '../PreviewText'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
-import { useUser } from 'src/network/useUser'
+import { useCurrentUser } from 'src/network/useCurrentUser'
 import './EmailEditorContent.css'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
@@ -36,7 +36,7 @@ interface Props {
 }
 
 export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
-  const { data: user, isLoading, error, enabled } = useUser()
+  const { data: user, isLoading, error, enabled } = useCurrentUser()
   const [previewType, setPreviewType] = useState<'desktop' | 'mobile'>('desktop')
   const isPreviewDesktop = previewType === 'desktop'
   const isPreviewMobile = !isPreviewDesktop

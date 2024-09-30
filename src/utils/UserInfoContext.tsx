@@ -11,21 +11,21 @@ import React, {
 } from 'react'
 import isEqual from 'lodash.isequal'
 import { z } from 'zod'
-import { UserShow } from 'src/network/useUser'
+import { CurrentUser } from 'src/network/useCurrentUser'
 import { useLocalStorageJSON } from './useLocalStorage'
 
-const UserInfoContext = createContext<[UserShow, Dispatch<SetStateAction<UserShow>>]>([
+const UserInfoContext = createContext<[CurrentUser, Dispatch<SetStateAction<CurrentUser>>]>([
   {},
   () => null,
 ])
 
-const OriginalUserInfoContext = createContext<UserShow>({})
+const OriginalUserInfoContext = createContext<CurrentUser>({})
 
-export const UserInfoProvider: FC<{ children: ReactNode; userInfo: UserShow }> = ({
+export const UserInfoProvider: FC<{ children: ReactNode; userInfo: CurrentUser }> = ({
   children,
   userInfo,
 }) => {
-  const value = useState<UserShow>(userInfo)
+  const value = useState<CurrentUser>(userInfo)
 
   return (
     <UserInfoContext.Provider value={value}>
@@ -39,7 +39,7 @@ export const UserInfoProvider: FC<{ children: ReactNode; userInfo: UserShow }> =
 export const useUserInfo = () => useContext(UserInfoContext)
 
 export const useUserInfoValue = <T extends object>(
-  key: keyof UserShow,
+  key: keyof CurrentUser,
   defaultValue: T,
   schema?: z.ZodObject<any>,
 ): [T, (value: T) => void, { hasChanges: boolean }] => {

@@ -11,7 +11,7 @@ import {
   userIsSignedIn,
 } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
-import { UserShow } from 'src/network/useUser'
+import { CurrentUser } from 'src/network/useCurrentUser'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
@@ -27,7 +27,7 @@ describe('EditDisclaimer', () => {
     userIsSignedIn()
   })
 
-  const renderEditDisclaimer = (userInfo: UserShow) => {
+  const renderEditDisclaimer = (userInfo: CurrentUser) => {
     return render(
       <AuthProvider>
         <UserInfoProvider userInfo={userInfo}>

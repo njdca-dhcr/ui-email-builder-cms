@@ -15,11 +15,11 @@ import { EditDisclaimer, EditBanner, EditStateSeal, EditDepartmentSeal } from 's
 import { EditingEmailCSS } from 'src/templates/emailHtmlDocument/EmailCSS'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { useUser } from 'src/network/useUser'
+import { useCurrentUser } from 'src/network/useCurrentUser'
 import './settings.css'
 
 const SettingsPage: FC = () => {
-  const { data: user, isLoading, error, enabled } = useUser()
+  const { data: user, isLoading, error, enabled } = useCurrentUser()
 
   const forms = (
     <>

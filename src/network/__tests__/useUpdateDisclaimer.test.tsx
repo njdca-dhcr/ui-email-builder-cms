@@ -5,7 +5,7 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, randomDisclaimerValue, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 import { useUpdateDisclaimer } from '../useUpdateDisclaimer'
-import { QUERY_KEY } from '../useUser'
+import { QUERY_KEY } from '../useCurrentUser'
 
 jest.mock('../useAuthedFetch')
 

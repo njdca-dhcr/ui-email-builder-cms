@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, randomObject, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
-import { UserShow, useUser } from '../useUser'
+import { CurrentUser, useCurrentUser } from '../useCurrentUser'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 
 jest.mock('../useAuthedFetch')
@@ -20,14 +20,14 @@ describe('useUser', () => {
 
     it('queries for the user', async () => {
       const client = new QueryClient()
-      const user: UserShow = {
+      const user: CurrentUser = {
         banner: randomObject(),
         departmentSeal: randomObject(),
         stateSeal: randomObject(),
         disclaimer: randomObject(),
       }
       asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { user } })
-      const { result } = renderHook(() => useUser(), {
+      const { result } = renderHook(() => useCurrentUser(), {
         wrapper: ({ children }) => {
           return (
             <QueryClientProvider client={client}>
@@ -55,7 +55,7 @@ describe('useUser', () => {
 
     it('is a disabled query', async () => {
       const client = new QueryClient()
-      const { result } = renderHook(() => useUser(), {
+      const { result } = renderHook(() => useCurrentUser(), {
         wrapper: ({ children }) => {
           return (
             <QueryClientProvider client={client}>
