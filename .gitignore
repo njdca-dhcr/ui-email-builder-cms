@@ -6,3 +6,4 @@ content/email-templates/local-email-template.yaml
 .env
 .DS_Store
 .env.development
+.vscode/
