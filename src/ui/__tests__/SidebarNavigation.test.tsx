@@ -52,6 +52,17 @@ describe('SidebarNavigation', () => {
       expect(link.tagName).toEqual('A')
       expect(link.href).toEqual(urlFor('/my-library'))
     })
+
+    it('displays a users link', () => {
+      const { getByRole } = render(
+        <AuthProvider>
+          <SidebarNavigation />
+        </AuthProvider>,
+      )
+      const link: HTMLAnchorElement = getByRole('link', { name: 'Users' }) as any
+      expect(link.tagName).toEqual('A')
+      expect(link.href).toEqual(urlFor('/users'))
+    })
   })
 
   describe('when signed out', () => {
@@ -67,6 +78,15 @@ describe('SidebarNavigation', () => {
         </AuthProvider>,
       )
       expect(queryByText('My Library')).toBeNull()
+    })
+
+    it('does not display a users link', () => {
+      const { queryByText } = render(
+        <AuthProvider>
+          <SidebarNavigation />
+        </AuthProvider>,
+      )
+      expect(queryByText('Users')).toBeNull()
     })
   })
 

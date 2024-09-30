@@ -1,0 +1,22 @@
+.user-list {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.user-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--gray-light);
+  padding: 1.5rem 0;
+}
+
+.user-email {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.user-role {
+  color: var(--gray-dark);
+  font-style: italic;
+}

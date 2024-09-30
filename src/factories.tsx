@@ -13,6 +13,7 @@ import sample from 'lodash.sample'
 import { EmailTemplateIndex } from './network/useEmailTemplates'
 import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
+import { UsersIndex } from './network/useUsers'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -132,6 +133,15 @@ export const buildEmailTemplateIndex = (
     userId: uniqueId(),
     name: faker.lorem.words(3),
     description: faker.lorem.sentence(),
+    ...options,
+  }
+}
+
+export const buildUserIndex = (options?: Partial<UsersIndex>): UsersIndex => {
+  return {
+    id: uniqueId(),
+    email: faker.internet.email(),
+    role: 'member',
     ...options,
   }
 }
