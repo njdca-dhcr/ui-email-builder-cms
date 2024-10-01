@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import capitalize from 'lodash.capitalize'
-import { HeadFC } from 'gatsby'
+import { HeadFC, Link } from 'gatsby'
 import {
   Heading,
   Layout,
@@ -29,13 +29,15 @@ const UsersPage: FC = () => {
         <SkipNavContent />
         <SpacedContainer>
           <Heading element="h1">Users</Heading>
-          <Paragraph>All of users can be found here</Paragraph>
+          <Paragraph>All of the users can be found here</Paragraph>
           {error && <Paragraph>{error.message}</Paragraph>}
           {users && users.length > 0 && (
             <List className="user-list">
               {users.map((user) => (
                 <li key={user.id} className="user-item">
-                  <span className="user-email">{user.email}</span>
+                  <Link to={`/users/${user.id}`} className="user-email">
+                    {user.email}
+                  </Link>
                   <span className="user-role">{capitalize(user.role)}</span>
                 </li>
               ))}

@@ -14,6 +14,7 @@ import { EmailTemplateIndex } from './network/useEmailTemplates'
 import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex } from './network/useUsers'
+import { UserShow } from './network/useUser'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -138,6 +139,15 @@ export const buildEmailTemplateIndex = (
 }
 
 export const buildUserIndex = (options?: Partial<UsersIndex>): UsersIndex => {
+  return {
+    id: uniqueId(),
+    email: faker.internet.email(),
+    role: 'member',
+    ...options,
+  }
+}
+
+export const buildUserShow = (options?: Partial<UserShow>): UserShow => {
   return {
     id: uniqueId(),
     email: faker.internet.email(),

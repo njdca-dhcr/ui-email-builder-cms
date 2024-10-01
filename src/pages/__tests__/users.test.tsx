@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import capitalize from 'lodash/capitalize'
 import UsersPage from '../users'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
-import { asMock, buildUserIndex, buildUseQueryResult } from 'src/testHelpers'
+import { asMock, buildUserIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
 import { useUsers } from 'src/network/useUsers'
 import { UsersIndex } from 'src/network/useUsers'
 import { faker } from '@faker-js/faker'
@@ -56,14 +56,16 @@ describe('Users page', () => {
 
       const { queryByText } = renderUsersPage()
 
-      const firstEmail = queryByText(user1.email)
-      expect(firstEmail).not.toBeNull()
+      const firstLink: HTMLAnchorElement | null = queryByText(user1.email) as any
+      expect(firstLink).not.toBeNull()
+      expect(firstLink!.href).toEqual(urlFor(`/users/${user1.id}`))
+
+      const secondLink: HTMLAnchorElement | null = queryByText(user2.email) as any
+      expect(secondLink).not.toBeNull()
+      expect(secondLink!.href).toEqual(urlFor(`/users/${user2.id}`))
 
       const firstRole = queryByText(capitalize(user1.role))
       expect(firstRole).not.toBeNull()
-
-      const secondEmail = queryByText(user2.email)
-      expect(secondEmail).not.toBeNull()
 
       const secondRole = queryByText(capitalize(user2.role))
       expect(secondRole).not.toBeNull()

@@ -11,9 +11,15 @@
   padding: 1.5rem 0;
 }
 
+.user-item:last-of-type {
+  border-bottom: 0;
+}
+
 .user-email {
+  color: var(--black);
   font-size: 1.25rem;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .user-role {

@@ -23,7 +23,7 @@ export const SidebarNavigation: FC<Props> = () => {
         <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="AccountBalance" />} />
         <WhenSignedIn>
           <SpacedLink to="/my-library" text="My Library" icon={<UswdsIcon icon="FolderOpen" />} />
-          <SpacedLink to="/users" text="Users" icon={<UswdsIcon icon="People" />} />
+          <SpacedLink to="/users" text="Users" icon={<UswdsIcon icon="People" />} partiallyActive />
         </WhenSignedIn>
         <SpacedLink
           to="/tips-and-tricks"
@@ -42,17 +42,23 @@ export const SidebarNavigation: FC<Props> = () => {
 interface SpacedLinkProps {
   bottom?: boolean
   icon: ReactElement
+  partiallyActive?: boolean
   text: string
   to: string
 }
 
-const SpacedLink: FC<SpacedLinkProps> = ({ bottom, icon, text, to }) => {
+const SpacedLink: FC<SpacedLinkProps> = ({ bottom, icon, partiallyActive, text, to }) => {
   const Comp = bottom ? SideBarListItemBottom : SideBarListItem
 
   return (
     <Comp>
       <SpacedSidebarContainer>
-        <Link activeClassName="sidebar-active-link" className={classNames({ bottom })} to={to}>
+        <Link
+          activeClassName="sidebar-active-link"
+          className={classNames({ bottom })}
+          to={to}
+          partiallyActive={partiallyActive}
+        >
           {!bottom && icon}
           <span>{text}</span>
           {bottom && icon}
