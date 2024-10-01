@@ -7,13 +7,13 @@ export interface UserShow {
   role: 'admin' | 'member'
 }
 
-const QUERY_KEY = 'useUser'
+export const buildUseUserQueryKey = (id: string): string => `useUser('${id}')`
 
 export const useUser = (id: string) => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({
-    queryKey: [QUERY_KEY, id],
+    queryKey: [buildUseUserQueryKey(id)],
     queryFn: async () => {
       const result = await authedFetch<{ user: UserShow }>({
         path: `/users/${id}`,

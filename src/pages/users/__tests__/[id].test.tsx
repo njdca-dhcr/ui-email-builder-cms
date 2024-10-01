@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import UserShowPage, { Props } from '../[id]'
-import { asMock, buildUseQueryResult, buildUserShow } from 'src/testHelpers'
+import { asMock, buildUseMutationResult, buildUseQueryResult, buildUserShow } from 'src/testHelpers'
 import { useUser } from 'src/network/useUser'
 import { UserShow } from 'src/network/useUser'
 import { faker } from '@faker-js/faker'
@@ -9,6 +9,8 @@ import { randomUUID } from 'crypto'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import capitalize from 'lodash.capitalize'
+import userEvent, { UserEvent } from '@testing-library/user-event'
+import { useUpdateUser } from 'src/network/useUpdateUser'
 
 jest.mock('src/network/useUser', () => {
   return {
@@ -16,7 +18,16 @@ jest.mock('src/network/useUser', () => {
   }
 })
 
+jest.mock('src/network/useUpdateUser', () => {
+  return { useUpdateUser: jest.fn() }
+})
+
 describe('User Show Page', () => {
+  beforeEach(() => {
+    const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({})
+    asMock(useUpdateUser).mockReturnValue(mutationResult)
+  })
+
   const renderPage = (props?: Partial<Props>) => {
     return render(
       <QueryClientProvider client={new QueryClient()}>
@@ -90,6 +101,84 @@ describe('User Show Page', () => {
       asMock(useUser).mockReturnValue(query)
       const { queryByText } = renderPage()
       expect(queryByText(error.message)).not.toBeNull()
+    })
+  })
+
+  describe("editing a user's role", () => {
+    let currentUser: UserEvent
+    let user: UserShow
+
+    beforeEach(() => {
+      currentUser = userEvent.setup()
+      user = buildUserShow({ role: 'member' })
+      const query = buildUseQueryResult({ data: user })
+      asMock(useUser).mockReturnValue(query)
+    })
+
+    it('becomes a dropdown when the edit button is clicked', async () => {
+      const { getByRole, queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Save' })).toBeNull()
+      await currentUser.click(getByRole('button', { name: 'Edit role' }))
+      expect(queryByRole('button', { name: 'Save' })).not.toBeNull()
+    })
+
+    it('can have its changes canceled', async () => {
+      const { getByRole, baseElement, queryByLabelText } = renderPage()
+
+      await currentUser.click(getByRole('button', { name: 'Edit role' }))
+
+      const select = baseElement.querySelector('select')!
+      expect(select.value).toEqual('member')
+
+      await currentUser.selectOptions(select, 'Admin')
+      await currentUser.click(getByRole('button', { name: 'Cancel' }))
+
+      expect(queryByLabelText('Role')).toBeNull()
+      expect(baseElement).toHaveTextContent('Member')
+      expect(baseElement).not.toHaveTextContent('Admin')
+    })
+
+    it('displays the loading overlay while submitting', async () => {
+      const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({
+        isPending: true,
+      })
+      asMock(useUpdateUser).mockReturnValue(mutationResult)
+      const { queryByText } = renderPage()
+
+      expect(queryByText('Updating user')).not.toBeNull()
+    })
+
+    it('can have its changes saved', async () => {
+      const mutateAsync = jest.fn()
+      const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({
+        mutateAsync,
+      })
+      asMock(useUpdateUser).mockReturnValue(mutationResult)
+
+      expect(mutateAsync).not.toHaveBeenCalled()
+
+      const { getByRole, getByLabelText, baseElement, queryByLabelText } = renderPage()
+
+      await currentUser.click(getByRole('button', { name: 'Edit role' }))
+      await currentUser.selectOptions(getByLabelText('Role'), 'Admin')
+      await currentUser.click(getByRole('button', { name: 'Save' }))
+
+      expect(queryByLabelText('Role')).toBeNull()
+      expect(mutateAsync).toHaveBeenCalledWith({ role: 'admin' })
+    })
+
+    it('can display an error', async () => {
+      const error = new Error(faker.lorem.sentence())
+      const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({
+        error,
+      })
+      asMock(useUpdateUser).mockReturnValue(mutationResult)
+
+      const { baseElement, getByRole } = renderPage()
+      await currentUser.click(getByRole('button', { name: 'Edit role' }))
+
+      expect(baseElement).toHaveTextContent(error.message)
     })
   })
 })
