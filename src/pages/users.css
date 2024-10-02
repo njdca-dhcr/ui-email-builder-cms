@@ -25,4 +25,33 @@
 .user-role {
   color: var(--gray-dark);
   font-style: italic;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  form {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  select {
+    align-self: stretch;
+    cursor: pointer;
+    padding: 0 0.75rem;
+  }
+}
+
+.cancel-edit {
+  background-color: transparent;
+  border: 1px solid var(--gray-medium-dark);
+  color: var(--gray-dark-extra);
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-light);
+  }
 }

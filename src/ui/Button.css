@@ -9,15 +9,22 @@
   font-weight: var(--weight-bold-light);
   padding: 0.75rem 2.8rem;
   width: fit-content;
-}
+  transition: background-color ease-in-out 100ms;
 
-.button:disabled {
-  background-color: var(--gray-medium-dark);
-  cursor: unset;
+  &:hover,
+  &:focus {
+    background-color: var(--blue-dark);
+  }
+
+  &:disabled {
+    background-color: var(--gray-medium-dark);
+    cursor: unset;
+  }
 }
 
 .button-like {
   background-color: transparent;
   border: 0;
   font-size: 1rem;
+  cursor: pointer;
 }

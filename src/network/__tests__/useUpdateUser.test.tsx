@@ -2,12 +2,12 @@ import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, buildUniqueEmailConfig, buildUserShow, userIsSignedIn } from 'src/testHelpers'
+import { asMock, buildUserShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 import { useUpdateUser } from '../useUpdateUser'
-import { randomUUID } from 'crypto'
 import { buildUseUserQueryKey } from '../useUser'
 import { QUERY_KEY } from '../useUsers'
+import { UserRole } from 'src/appTypes'
 
 jest.mock('../useAuthedFetch')
 
@@ -23,7 +23,7 @@ describe('useUpdateUser', () => {
   it('updates the user', async () => {
     const client = new QueryClient()
     const user = buildUserShow({ role: 'member' })
-    const attributes = { role: 'admin' }
+    const attributes = { role: 'admin' as UserRole }
     asMock(mockAuthedFetch).mockResolvedValue({
       statusCode: 200,
       json: { user: { ...user, ...attributes } },
@@ -51,8 +51,8 @@ describe('useUpdateUser', () => {
 
   it('invalidates the correct useUsers and the useUser query', async () => {
     const client = new QueryClient()
-    const user = buildUniqueEmailConfig({ id: randomUUID() })
-    const attributes = buildUniqueEmailConfig()
+    const user = buildUserShow()
+    const attributes = { role: 'admin' as UserRole }
     asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { user } })
 
     jest.spyOn(client, 'invalidateQueries')

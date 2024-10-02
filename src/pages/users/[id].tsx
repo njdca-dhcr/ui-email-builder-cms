@@ -1,9 +1,12 @@
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, PageProps } from 'gatsby'
 import capitalize from 'lodash.capitalize'
 import React, { FC, useEffect, useState } from 'react'
 import { useUpdateUser } from 'src/network/useUpdateUser'
 import { useUser } from 'src/network/useUser'
 import {
+  Button,
+  ButtonLike,
   Heading,
   Layout,
   PageContent,
@@ -14,6 +17,7 @@ import {
   SidebarNavigation,
   LoadingOverlay,
   Form,
+  UswdsIcon,
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 
@@ -65,14 +69,18 @@ const UserShowPage: FC<Props> = ({ params }) => {
                       <option value="admin">Admin</option>
                       <option value="member">Member</option>
                     </select>
-                    <input type="submit" value="Save" />
-                    <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    <Button type="submit"> Save </Button>
+                    <Button onClick={() => setIsEditing(false)} className="cancel-edit">
+                      Cancel
+                    </Button>
                   </Form>
                 ) : (
-                  <>
-                    {capitalize(user.role)}{' '}
-                    <button onClick={() => setIsEditing(true)}>Edit role</button>
-                  </>
+                  <div>
+                    {capitalize(user.role)}
+                    <ButtonLike onClick={() => setIsEditing(true)}>
+                      <UswdsIcon icon="Edit" /> <VisuallyHidden>Edit role</VisuallyHidden>
+                    </ButtonLike>
+                  </div>
                 )}
               </div>
             </div>

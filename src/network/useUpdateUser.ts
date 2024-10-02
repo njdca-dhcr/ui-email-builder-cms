@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuthedFetch } from './useAuthedFetch'
 import { UserShow, buildUseUserQueryKey } from './useUser'
 import { QUERY_KEY } from './useUsers'
+import { UserRole } from 'src/appTypes'
 
 interface UpdateUserSuccessfulResponse {
   user: UserShow
@@ -14,7 +15,7 @@ export interface UpdateUserErrorResponse {
 type UpdateUserResponse = UpdateUserSuccessfulResponse | UpdateUserErrorResponse
 
 interface UserAttributes {
-  role: 'admin' | 'member'
+  role: UserRole
 }
 
 export const useUpdateUser = (id: string) => {

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuthedFetch } from './useAuthedFetch'
+import { UserRole } from 'src/appTypes'
 
 export interface UsersIndex {
   id: string
   email: string
-  role: 'member' | 'admin'
+  role: UserRole
 }
 
 export const QUERY_KEY = 'useUsers'
