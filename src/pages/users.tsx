@@ -16,8 +16,10 @@ import {
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useUsers } from 'src/network/useUsers'
 import './users.css'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 const UsersPage: FC = () => {
+  useRedirectIfNotSignedIn()
   const { data: users, isLoading, error } = useUsers()
 
   return (

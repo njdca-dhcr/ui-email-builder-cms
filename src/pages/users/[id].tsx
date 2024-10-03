@@ -20,10 +20,12 @@ import {
   UswdsIcon,
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 export type Props = PageProps<null, null, null>
-Form
+
 const UserShowPage: FC<Props> = ({ params }) => {
+  useRedirectIfNotSignedIn()
   const [isEditing, setIsEditing] = useState(false)
   const { data: user, isLoading, error } = useUser(params.id)
   const [selectedRole, setSelectedRole] = useState(user?.role ?? 'member')

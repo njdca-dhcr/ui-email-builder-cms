@@ -15,8 +15,10 @@ import {
 } from 'src/ui'
 import { useEmailTemplates } from 'src/network/useEmailTemplates'
 import { DestroyEmailTemplate } from 'src/ui/MyLibrary/DestroyEmailTemplate'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 const MyLibraryPage: FC = () => {
+  useRedirectIfNotSignedIn()
   const { data: emailTemplates, isLoading, error } = useEmailTemplates()
 
   return (
