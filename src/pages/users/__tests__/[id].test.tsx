@@ -11,21 +11,25 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import capitalize from 'lodash.capitalize'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { useUpdateUser } from 'src/network/useUpdateUser'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 
 jest.mock('src/network/useUser', () => {
-  return {
-    useUser: jest.fn(),
-  }
+  return { useUser: jest.fn() }
 })
 
 jest.mock('src/network/useUpdateUser', () => {
   return { useUpdateUser: jest.fn() }
 })
 
+jest.mock('src/utils/useCurrentRole', () => {
+  return { useCurrentRole: jest.fn() }
+})
+
 describe('User Show Page', () => {
   beforeEach(() => {
     const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({})
     asMock(useUpdateUser).mockReturnValue(mutationResult)
+    asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -104,7 +108,25 @@ describe('User Show Page', () => {
     })
   })
 
-  describe("editing a user's role", () => {
+  describe("editing a user's role as a member", () => {
+    let user: UserShow
+
+    beforeEach(() => {
+      user = buildUserShow({ role: 'member' })
+      const query = buildUseQueryResult({ data: user })
+      asMock(useUser).mockReturnValue(query)
+      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
+    })
+
+    it('does not provide an edit button', async () => {
+      const { queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Save' })).toBeNull()
+      expect(queryByRole('button', { name: 'Edit role' })).toBeNull()
+    })
+  })
+
+  describe("editing a user's role as an admin", () => {
     let currentUser: UserEvent
     let user: UserShow
 
@@ -113,6 +135,7 @@ describe('User Show Page', () => {
       user = buildUserShow({ role: 'member' })
       const query = buildUseQueryResult({ data: user })
       asMock(useUser).mockReturnValue(query)
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true })
     })
 
     it('becomes a dropdown when the edit button is clicked', async () => {

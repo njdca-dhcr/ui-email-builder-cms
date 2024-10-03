@@ -20,12 +20,14 @@ import {
   UswdsIcon,
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 export type Props = PageProps<null, null, null>
 
 const UserShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
+  const { isAdmin } = useCurrentRole()
   const [isEditing, setIsEditing] = useState(false)
   const { data: user, isLoading, error } = useUser(params.id)
   const [selectedRole, setSelectedRole] = useState(user?.role ?? 'member')
@@ -79,9 +81,11 @@ const UserShowPage: FC<Props> = ({ params }) => {
                 ) : (
                   <div>
                     {capitalize(user.role)}
-                    <ButtonLike onClick={() => setIsEditing(true)}>
-                      <UswdsIcon icon="Edit" /> <VisuallyHidden>Edit role</VisuallyHidden>
-                    </ButtonLike>
+                    {isAdmin && (
+                      <ButtonLike onClick={() => setIsEditing(true)}>
+                        <UswdsIcon icon="Edit" /> <VisuallyHidden>Edit role</VisuallyHidden>
+                      </ButtonLike>
+                    )}
                   </div>
                 )}
               </div>

@@ -39,7 +39,7 @@ export const UserInfoProvider: FC<{ children: ReactNode; userInfo: CurrentUser }
 export const useUserInfo = () => useContext(UserInfoContext)
 
 export const useUserInfoValue = <T extends object>(
-  key: keyof CurrentUser,
+  key: keyof Omit<CurrentUser, 'role'>,
   defaultValue: T,
   schema?: z.ZodObject<any>,
 ): [T, (value: T) => void, { hasChanges: boolean }] => {

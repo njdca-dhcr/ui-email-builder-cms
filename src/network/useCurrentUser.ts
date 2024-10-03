@@ -1,12 +1,14 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { useIsSignedIn } from 'src/utils/AuthContext'
 import { useAuthedFetch } from './useAuthedFetch'
+import { UserRole } from 'src/appTypes'
 
 export interface CurrentUser {
   banner?: object
   departmentSeal?: object
   stateSeal?: object
   disclaimer?: object
+  role?: UserRole
 }
 
 export const QUERY_KEY = 'useCurrentUser'

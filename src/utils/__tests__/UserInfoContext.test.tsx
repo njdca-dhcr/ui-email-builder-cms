@@ -78,7 +78,7 @@ describe('useUserInfoValue', () => {
   }
 
   const renderUseUserInfoValue = <T extends object>(
-    key: keyof CurrentUser,
+    key: keyof Omit<CurrentUser, 'role'>,
     defaultHookValue: T,
     defaultUserInfo: CurrentUser,
   ) => {
