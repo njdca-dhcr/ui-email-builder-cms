@@ -11,7 +11,7 @@ import {
   userIsSignedIn,
 } from 'src/testHelpers'
 import { useUpdateStateSeal } from 'src/network/useUpdateStateSeal'
-import { CurrentUser } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
@@ -25,7 +25,7 @@ describe('EditStateSeal', () => {
     localStorage.removeItem('stateSeal')
   })
 
-  const renderEditStateSeal = (userInfo: CurrentUser) => {
+  const renderEditStateSeal = (userInfo: CurrentUserEmailConfig) => {
     return render(
       <AuthProvider>
         <UserInfoProvider userInfo={userInfo}>

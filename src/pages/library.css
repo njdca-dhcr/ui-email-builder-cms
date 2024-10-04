@@ -55,7 +55,6 @@
   cursor: pointer;
   margin-left: 0.75rem;
   padding-top: 0.35rem;
-  transition: filter ease-in-out 150ms;
 }
 
 .library-item .delete-trigger:focus img,

@@ -3,7 +3,7 @@ import { act, render, renderHook } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { UserInfoProvider, useUserInfo, useUserInfoValue } from '../UserInfoContext'
 import { randomBannerValue, randomObject } from 'src/testHelpers'
-import { CurrentUser } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
 import { BannerValue } from 'src/appTypes'
 
 describe('UserInfoProvider', () => {
@@ -18,7 +18,7 @@ describe('UserInfoProvider', () => {
   })
 
   it('provides access to user information', () => {
-    const givenUserInfo: CurrentUser = {
+    const givenUserInfo: CurrentUserEmailConfig = {
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),
@@ -35,13 +35,13 @@ describe('UserInfoProvider', () => {
   })
 
   it('can update the user information', () => {
-    const givenUserInfo: CurrentUser = {
+    const givenUserInfo: CurrentUserEmailConfig = {
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),
       disclaimer: randomObject(),
     }
-    const newUserInfo: CurrentUser = {
+    const newUserInfo: CurrentUserEmailConfig = {
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),
@@ -78,9 +78,9 @@ describe('useUserInfoValue', () => {
   }
 
   const renderUseUserInfoValue = <T extends object>(
-    key: keyof Omit<CurrentUser, 'role'>,
+    key: keyof CurrentUserEmailConfig,
     defaultHookValue: T,
-    defaultUserInfo: CurrentUser,
+    defaultUserInfo: CurrentUserEmailConfig,
   ) => {
     return renderHook(() => useUserInfoValue(key, defaultHookValue), {
       wrapper: ({ children }) => {

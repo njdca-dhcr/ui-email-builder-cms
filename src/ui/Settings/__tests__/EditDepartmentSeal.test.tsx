@@ -11,7 +11,7 @@ import {
 } from 'src/testHelpers'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { useUpdateDepartmentSeal } from 'src/network/useUpdateDepartmentSeal'
-import { CurrentUser } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { faker } from '@faker-js/faker'
 
@@ -25,7 +25,7 @@ describe('EditDepartmentSeal', () => {
     userIsSignedIn()
   })
 
-  const renderEditDepartmentSeal = (userInfo: CurrentUser) => {
+  const renderEditDepartmentSeal = (userInfo: CurrentUserEmailConfig) => {
     return render(
       <AuthProvider>
         <UserInfoProvider userInfo={userInfo}>

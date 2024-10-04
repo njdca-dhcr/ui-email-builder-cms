@@ -11,6 +11,7 @@ import {
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
   buildUseQueryResult,
+  buildUserShow,
   mockAppMode,
   randomBannerValue,
   userIsNotSignedIn,
@@ -221,7 +222,10 @@ describe('EmailEditorContent', () => {
 
     it('integrates user info once it has loaded', () => {
       const banner = randomBannerValue()
-      const query = { ...buildUseQueryResult<CurrentUser>({ data: { banner } }), enabled: true }
+      const query = {
+        ...buildUseQueryResult<CurrentUser>({ data: { banner, ...buildUserShow() } }),
+        enabled: true,
+      }
       asMock(useCurrentUser).mockReturnValue(query)
 
       const { baseElement } = render(

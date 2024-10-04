@@ -2,7 +2,13 @@ import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, randomObject, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
+import {
+  asMock,
+  buildUserShow,
+  randomObject,
+  userIsNotSignedIn,
+  userIsSignedIn,
+} from 'src/testHelpers'
 import { CurrentUser, useCurrentUser } from '../useCurrentUser'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 
@@ -25,6 +31,7 @@ describe('useUser', () => {
         departmentSeal: randomObject(),
         stateSeal: randomObject(),
         disclaimer: randomObject(),
+        ...buildUserShow({ role: 'admin' }),
       }
       asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { user } })
       const { result } = renderHook(() => useCurrentUser(), {

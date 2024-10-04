@@ -1,7 +1,13 @@
 import { renderHook } from '@testing-library/react'
 import React from 'react'
 import { CurrentUser, useCurrentUser } from 'src/network/useCurrentUser'
-import { asMock, buildUseQueryResult, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
+import {
+  asMock,
+  buildUseQueryResult,
+  buildUserShow,
+  userIsNotSignedIn,
+  userIsSignedIn,
+} from 'src/testHelpers'
 import { AuthProvider } from '../AuthContext'
 import { useCurrentRole } from '../useCurrentRole'
 
@@ -22,7 +28,7 @@ describe('useCurrentRole', () => {
     beforeEach(() => {
       userIsSignedIn()
       const queryResult = {
-        ...buildUseQueryResult<CurrentUser>({ data: { role: 'admin' } }),
+        ...buildUseQueryResult<CurrentUser>({ data: buildUserShow({ role: 'admin' }) }),
         enabled: true,
       }
       asMock(useCurrentUser).mockReturnValue(queryResult)
@@ -39,7 +45,7 @@ describe('useCurrentRole', () => {
     beforeEach(() => {
       userIsSignedIn()
       const queryResult = {
-        ...buildUseQueryResult<CurrentUser>({ data: { role: 'member' } }),
+        ...buildUseQueryResult<CurrentUser>({ data: buildUserShow({ role: 'member' }) }),
         enabled: true,
       }
       asMock(useCurrentUser).mockReturnValue(queryResult)

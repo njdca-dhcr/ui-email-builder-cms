@@ -12,6 +12,7 @@ import capitalize from 'lodash.capitalize'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { useUpdateUser } from 'src/network/useUpdateUser'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
+import { useCurrentUser } from 'src/network/useCurrentUser'
 
 jest.mock('src/network/useUser', () => {
   return { useUser: jest.fn() }
@@ -25,11 +26,19 @@ jest.mock('src/utils/useCurrentRole', () => {
   return { useCurrentRole: jest.fn() }
 })
 
+jest.mock('src/network/useCurrentUser', () => {
+  return { useCurrentUser: jest.fn() }
+})
+
 describe('User Show Page', () => {
   beforeEach(() => {
     const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({})
     asMock(useUpdateUser).mockReturnValue(mutationResult)
     asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
+
+    const currentUser = buildUserShow()
+    const queryForUseCurrentUser = buildUseQueryResult({ data: currentUser })
+    asMock(useCurrentUser).mockReturnValue({ ...queryForUseCurrentUser, enabled: true })
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -202,6 +211,54 @@ describe('User Show Page', () => {
       await currentUser.click(getByRole('button', { name: 'Edit role' }))
 
       expect(baseElement).toHaveTextContent(error.message)
+    })
+  })
+
+  describe('destroying a user as a member', () => {
+    let user: UserShow
+
+    beforeEach(() => {
+      user = buildUserShow({ role: 'member' })
+      const query = buildUseQueryResult({ data: user })
+      asMock(useUser).mockReturnValue(query)
+      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
+    })
+
+    it('does not provide a delete button', async () => {
+      const { queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Delete' })).toBeNull()
+    })
+  })
+
+  describe('destroying a user as an admin', () => {
+    it('provides a delete button', async () => {
+      const user = buildUserShow({ role: 'member' })
+      const query = buildUseQueryResult({ data: user })
+      asMock(useUser).mockReturnValue(query)
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true })
+      const { queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Delete' })).not.toBeNull()
+    })
+  })
+
+  describe('destroying yourself as an admin', () => {
+    let user: UserShow
+
+    beforeEach(() => {
+      user = buildUserShow({ role: 'admin' })
+      const queryForUseUser = buildUseQueryResult({ data: user })
+      const queryForUseCurrentUser = buildUseQueryResult({ data: user })
+      asMock(useUser).mockReturnValue(queryForUseUser)
+      asMock(useCurrentUser).mockReturnValue({ ...queryForUseCurrentUser, enabled: true })
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true })
+    })
+
+    it('does not provide a delete button', async () => {
+      const { queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Delete' })).toBeNull()
     })
   })
 })

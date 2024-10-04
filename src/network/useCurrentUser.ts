@@ -3,12 +3,17 @@ import { useIsSignedIn } from 'src/utils/AuthContext'
 import { useAuthedFetch } from './useAuthedFetch'
 import { UserRole } from 'src/appTypes'
 
-export interface CurrentUser {
+export interface CurrentUserEmailConfig {
   banner?: object
   departmentSeal?: object
   stateSeal?: object
   disclaimer?: object
+}
+
+export interface CurrentUser extends CurrentUserEmailConfig {
   role?: UserRole
+  id: string
+  email: string
 }
 
 export const QUERY_KEY = 'useCurrentUser'

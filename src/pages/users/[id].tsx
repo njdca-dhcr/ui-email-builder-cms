@@ -2,6 +2,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, PageProps } from 'gatsby'
 import capitalize from 'lodash.capitalize'
 import React, { FC, useEffect, useState } from 'react'
+import { useCurrentUser } from 'src/network/useCurrentUser'
 import { useUpdateUser } from 'src/network/useUpdateUser'
 import { useUser } from 'src/network/useUser'
 import {
@@ -19,6 +20,7 @@ import {
   Form,
   UswdsIcon,
 } from 'src/ui'
+import { DestroyUser } from 'src/ui/UserShow/DestroyUser'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
@@ -27,6 +29,7 @@ export type Props = PageProps<null, null, null>
 
 const UserShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
+  const { data: currentUser } = useCurrentUser()
   const { isAdmin } = useCurrentRole()
   const [isEditing, setIsEditing] = useState(false)
   const { data: user, isLoading, error } = useUser(params.id)
@@ -52,7 +55,10 @@ const UserShowPage: FC<Props> = ({ params }) => {
 
           {user && (
             <div key={user.id} className="user-item">
-              <span className="user-email">{user.email}</span>
+              <span className="user-email">
+                {user.email}
+                {isAdmin && currentUser!.id !== user.id && <DestroyUser user={user} />}
+              </span>
               <div className="user-role">
                 {isEditing ? (
                   <Form
