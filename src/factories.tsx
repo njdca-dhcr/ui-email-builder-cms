@@ -184,6 +184,7 @@ export const buildUseQueryResult = <T extends any>(
     isSuccess: true as any,
     refetch: jest.fn(),
     status: 'success',
+    promise: new Promise(() => {}),
     ...options,
   }
 }
