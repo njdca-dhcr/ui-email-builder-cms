@@ -16,12 +16,11 @@ import {
   SpacedContainer,
 } from 'src/ui'
 import { CreateGroupErrorResponse, useCreateGroup } from 'src/network/groups'
-import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import { FormFieldArea } from 'src/ui/Form'
+import { useRedirectIfNotAdmin } from 'src/utils/useRedirectIfNotAdmin'
 
 const NewGroupPage: FC = () => {
-  useRedirectIfNotSignedIn()
-  // useRedirectIfNotAdmin()
+  useRedirectIfNotAdmin()
   const [validationErrors, setValidationErrors] = useState<
     CreateGroupErrorResponse['errors'] | null
   >(null)
