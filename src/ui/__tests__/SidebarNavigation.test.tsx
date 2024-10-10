@@ -63,6 +63,17 @@ describe('SidebarNavigation', () => {
       expect(link.tagName).toEqual('A')
       expect(link.href).toEqual(urlFor('/users'))
     })
+
+    it('displays a groups link', () => {
+      const { getByRole } = render(
+        <AuthProvider>
+          <SidebarNavigation />
+        </AuthProvider>,
+      )
+      const link: HTMLAnchorElement = getByRole('link', { name: 'Groups' }) as any
+      expect(link.tagName).toEqual('A')
+      expect(link.href).toEqual(urlFor('/groups'))
+    })
   })
 
   describe('when signed out', () => {
@@ -87,6 +98,15 @@ describe('SidebarNavigation', () => {
         </AuthProvider>,
       )
       expect(queryByText('Users')).toBeNull()
+    })
+
+    it('does not display a groups link', () => {
+      const { queryByText } = render(
+        <AuthProvider>
+          <SidebarNavigation />
+        </AuthProvider>,
+      )
+      expect(queryByText('Groups')).toBeNull()
     })
   })
 

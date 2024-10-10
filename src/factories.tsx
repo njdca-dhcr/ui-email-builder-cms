@@ -15,6 +15,7 @@ import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex } from './network/useUsers'
 import { UserShow } from './network/useUser'
+import { GroupsIndex } from './network/groups'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -152,6 +153,15 @@ export const buildUserShow = (options?: Partial<UserShow>): UserShow => {
     id: uniqueId(),
     email: faker.internet.email(),
     role: 'member',
+    ...options,
+  }
+}
+
+export const buildGroupIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {
+  return {
+    id: uniqueId(),
+    name: faker.lorem.words(3),
+    description: faker.lorem.paragraph(),
     ...options,
   }
 }

@@ -23,6 +23,12 @@ export const SidebarNavigation: FC<Props> = () => {
         <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="AccountBalance" />} />
         <WhenSignedIn>
           <SpacedLink to="/my-library" text="My Library" icon={<UswdsIcon icon="FolderOpen" />} />
+          <SpacedLink
+            to="/groups"
+            text="Groups"
+            icon={<UswdsIcon icon="Groups" />}
+            partiallyActive
+          />
           <SpacedLink to="/users" text="Users" icon={<UswdsIcon icon="People" />} partiallyActive />
         </WhenSignedIn>
         <SpacedLink
