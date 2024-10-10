@@ -225,7 +225,8 @@
   font-weight: var(--weight-normal);
 }
 
-.input {
+.input,
+.textarea {
   border: 1px solid var(--black);
   font-size: var(--font-medium);
   line-height: 1.5;

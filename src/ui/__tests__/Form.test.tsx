@@ -4,6 +4,8 @@ import {
   FormErrorMessage,
   FormErrorMessageProps,
   FormField,
+  FormFieldArea,
+  FormFieldAreaProps,
   FormFieldProps,
   FormProps,
 } from '../Form'
@@ -151,6 +153,83 @@ describe('FormField', () => {
 
     it('renders does not render an error message if none is given', () => {
       const { baseElement } = renderFormField({ error: undefined })
+      expect(baseElement.querySelector('p')).toBeNull()
+    })
+  })
+})
+
+describe('FormFieldArea', () => {
+  let label: string
+
+  const renderFormFieldArea = (props?: Partial<FormFieldAreaProps>) => {
+    return render(<FormFieldArea id={faker.lorem.word()} label={label} {...props} />)
+  }
+
+  beforeEach(() => {
+    label = faker.lorem.words(3)
+  })
+
+  describe('text area', () => {
+    it('renders a labeled textarea', () => {
+      const { queryByLabelText } = renderFormFieldArea()
+      const textarea: HTMLTextAreaElement | null = queryByLabelText(label) as any
+      expect(textarea).not.toBeNull()
+      expect(textarea?.tagName).toEqual('TEXTAREA')
+    })
+
+    it('handles changes', async () => {
+      const user = userEvent.setup()
+      const handleChange = jest.fn()
+      const { getByLabelText } = renderFormFieldArea({ onTextChange: handleChange, value: '' })
+      const textarea = getByLabelText(label)
+      await user.type(textarea, 'a')
+      expect(handleChange).toHaveBeenCalledWith('a')
+    })
+
+    it('can be required', () => {
+      const { getByLabelText } = renderFormFieldArea({ required: true })
+      const textarea: HTMLTextAreaElement = getByLabelText(label) as any
+      expect(textarea.required).toEqual(true)
+    })
+
+    it('can be optional', () => {
+      const { getByLabelText } = renderFormFieldArea({ required: false })
+      const textarea: HTMLTextAreaElement = getByLabelText(label) as any
+      expect(textarea.required).toEqual(false)
+    })
+
+    it('can have a minLength', () => {
+      const minLength = faker.number.int({ min: 3, max: 20 })
+      const { getByLabelText } = renderFormFieldArea({ minLength })
+      const textarea: HTMLTextAreaElement = getByLabelText(label) as any
+      expect(textarea.minLength).toEqual(minLength)
+    })
+  })
+
+  describe('description', () => {
+    it('renders a description when given', () => {
+      const description = faker.lorem.paragraph()
+      const { getByLabelText } = renderFormFieldArea({ description })
+      const textarea: HTMLTextAreaElement = getByLabelText(label) as any
+      expect(textarea).toHaveAccessibleDescription(description)
+    })
+
+    it('renders does not render a description if none is given', () => {
+      const { baseElement } = renderFormFieldArea({ description: undefined })
+      expect(baseElement.querySelector('p')).toBeNull()
+    })
+  })
+
+  describe('error message', () => {
+    it('renders an error message when given', () => {
+      const errorMessage = faker.lorem.paragraph()
+      const { getByLabelText } = renderFormFieldArea({ error: errorMessage })
+      const textarea: HTMLTextAreaElement = getByLabelText(label) as any
+      expect(textarea).toHaveAccessibleErrorMessage(errorMessage)
+    })
+
+    it('renders does not render an error message if none is given', () => {
+      const { baseElement } = renderFormFieldArea({ error: undefined })
       expect(baseElement.querySelector('p')).toBeNull()
     })
   })

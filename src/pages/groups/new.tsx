@@ -17,6 +17,7 @@ import {
 } from 'src/ui'
 import { CreateGroupErrorResponse, useCreateGroup } from 'src/network/groups'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import { FormFieldArea } from 'src/ui/Form'
 
 const NewGroupPage: FC = () => {
   useRedirectIfNotSignedIn()
@@ -55,7 +56,7 @@ const NewGroupPage: FC = () => {
             errorMessage={error?.message}
           >
             <FormField label="Name" id="name" name="name" error={validationErrors?.name} />
-            <FormField
+            <FormFieldArea
               label="Description"
               id="description"
               name="description"
