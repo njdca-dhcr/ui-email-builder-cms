@@ -55,7 +55,7 @@ const NewGroupPage: FC = () => {
             }}
             errorMessage={error?.message}
           >
-            <FormField label="Name" id="name" name="name" error={validationErrors?.name} />
+            <FormField label="Name" id="name" name="name" error={validationErrors?.name} required />
             <FormFieldArea
               label="Description"
               id="description"
