@@ -149,6 +149,14 @@ export const SpacedContainer: FC<SpacedContainerProps> = ({ children }) => {
   return <div className="spaced-container">{children}</div>
 }
 
+interface ActionsProps {
+  children: ReactNode
+}
+
+export const Actions: FC<ActionsProps> = ({ children }) => {
+  return <div className="actions">{children}</div>
+}
+
 interface SpacedSidebarContainerProps {
   children: ReactNode
   className?: string

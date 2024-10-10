@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import {
+  Actions,
   AuthButtons,
   Heading,
   Layout,
@@ -357,6 +358,20 @@ describe('SpacedContainer', () => {
       </SpacedContainer>,
     )
     const container = baseElement.querySelector('.spaced-container')
+    expect(container).not.toBeNull()
+    expect(container).toContainHTML(`<span>${text}</span>`)
+  })
+})
+
+describe('Actions', () => {
+  it('displays its children', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Actions>
+        <span>{text}</span>
+      </Actions>,
+    )
+    const container = baseElement.querySelector('.actions')
     expect(container).not.toBeNull()
     expect(container).toContainHTML(`<span>${text}</span>`)
   })

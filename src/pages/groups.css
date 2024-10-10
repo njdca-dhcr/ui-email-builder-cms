@@ -1,0 +1,19 @@
+.heading-with-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-group-link {
+  align-items: center;
+  border-radius: 50%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  width: 3rem;
+  transition: background-color 150ms ease-in;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-light-medium);
+  }
+}

@@ -12,9 +12,13 @@ import {
   SidebarNavigation,
   SkipNavContent,
   SpacedContainer,
+  UswdsIcon,
 } from 'src/ui'
 import { useGroups } from 'src/network/groups'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import { Actions } from 'src/ui/Layout'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import './groups.css'
 
 const GroupsPage: FC = () => {
   useRedirectIfNotSignedIn()
@@ -28,8 +32,18 @@ const GroupsPage: FC = () => {
       <PageContent element="main">
         <SkipNavContent />
         <SpacedContainer>
-          <Heading element="h1">Groups</Heading>
-          <Paragraph>All of the groups can be found here</Paragraph>
+          <div className="heading-with-actions">
+            <div>
+              <Heading element="h1">Groups</Heading>
+              <Paragraph>All of the groups can be found here</Paragraph>
+            </div>
+            <Actions>
+              <Link to="/groups/new" className="new-group-link">
+                <UswdsIcon icon="GroupAdd" />
+                <VisuallyHidden>New Group</VisuallyHidden>
+              </Link>
+            </Actions>
+          </div>
           {error && <Paragraph>{error.message}</Paragraph>}
           {groups && (
             <List className="library-list">
