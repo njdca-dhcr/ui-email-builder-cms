@@ -15,6 +15,10 @@ jest.mock('src/network/groups', () => {
   return { useCreateGroup: jest.fn() }
 })
 
+jest.mock('src/utils/useRedirectIfNotAdmin', () => {
+  return { useRedirectIfNotAdmin: jest.fn() }
+})
+
 describe('New Group Page', () => {
   let user: UserEvent
 
@@ -82,7 +86,8 @@ describe('New Group Page', () => {
         mutateAsync: jest.fn().mockResolvedValue({ id: '123' }),
       })
       asMock(useCreateGroup).mockReturnValue(mutationResult)
-      const { getByRole } = await renderPage()
+      const { getByRole, getByLabelText } = await renderPage()
+      await user.type(getByLabelText('Name'), faker.lorem.word())
 
       expect(navigate).not.toHaveBeenCalled()
       await user.click(getByRole('button', { name: 'Create' }))
@@ -109,7 +114,8 @@ describe('New Group Page', () => {
         mutateAsync,
       })
       asMock(useCreateGroup).mockReturnValue(mutationResult)
-      const { baseElement, getByRole } = await renderPage()
+      const { baseElement, getByLabelText, getByRole } = await renderPage()
+      await user.type(getByLabelText('Name'), faker.lorem.word())
       await user.click(getByRole('button', { name: 'Create' }))
 
       expect(baseElement).toHaveTextContent(errorsResponse.errors.name)
