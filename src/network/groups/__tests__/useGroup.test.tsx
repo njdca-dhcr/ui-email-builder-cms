@@ -1,14 +1,14 @@
 import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
-import { UserShow, useUser } from '../useUser'
+import { GroupShow, useGroup } from '../useGroup'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, buildUserShow, userIsSignedIn } from 'src/testHelpers'
-import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
+import { asMock, buildGroupShow, userIsSignedIn } from 'src/testHelpers'
+import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 
-jest.mock('../useAuthedFetch')
+jest.mock('../../useAuthedFetch')
 
-describe('useUser', () => {
+describe('useGroup', () => {
   let mockAuthedFetch: AuthedFetch
 
   beforeEach(() => {
@@ -17,12 +17,12 @@ describe('useUser', () => {
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
   })
 
-  it('queries for the user with the given id', async () => {
+  it('queries for the group with the given id', async () => {
     const client = new QueryClient()
-    const user: UserShow = buildUserShow()
-    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { user } })
+    const group: GroupShow = buildGroupShow()
+    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { group } })
 
-    const { result } = renderHook(() => useUser(user.id), {
+    const { result } = renderHook(() => useGroup(group.id), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -34,9 +34,9 @@ describe('useUser', () => {
 
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/users/${user.id}`,
+      path: `/groups/${group.id}`,
       method: 'GET',
     })
-    expect(result.current.data).toEqual(user)
+    expect(result.current.data).toEqual(group)
   })
 })
