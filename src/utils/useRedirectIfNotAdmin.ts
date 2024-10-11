@@ -3,11 +3,11 @@ import { useCurrentRole } from './useCurrentRole'
 import { navigate } from 'gatsby'
 
 export const useRedirectIfNotAdmin = () => {
-  const { isAdmin } = useCurrentRole()
+  const { isAdmin, isLoading } = useCurrentRole()
 
   useEffect(() => {
-    if (!isAdmin) {
+    if (!isAdmin && !isLoading) {
       navigate('/')
     }
-  }, [isAdmin])
+  }, [isAdmin, isLoading])
 }

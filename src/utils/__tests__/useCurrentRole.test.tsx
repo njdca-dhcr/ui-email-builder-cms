@@ -38,6 +38,25 @@ describe('useCurrentRole', () => {
       const { result } = renderPage()
       expect(result.current.role).toEqual('admin')
       expect(result.current.isAdmin).toEqual(true)
+      expect(result.current.isLoading).toEqual(false)
+    })
+  })
+
+  describe('when current user is loading', () => {
+    beforeEach(() => {
+      userIsSignedIn()
+      const queryResult = {
+        ...buildUseQueryResult<CurrentUser>({ data: undefined, isLoading: true }),
+        enabled: true,
+      }
+      asMock(useCurrentUser).mockReturnValue(queryResult)
+    })
+
+    it('is "member"', () => {
+      const { result } = renderPage()
+      expect(result.current.role).toEqual('member')
+      expect(result.current.isAdmin).toEqual(false)
+      expect(result.current.isLoading).toEqual(true)
     })
   })
 
@@ -55,6 +74,7 @@ describe('useCurrentRole', () => {
       const { result } = renderPage()
       expect(result.current.role).toEqual('member')
       expect(result.current.isAdmin).toEqual(false)
+      expect(result.current.isLoading).toEqual(false)
     })
   })
 
@@ -62,7 +82,11 @@ describe('useCurrentRole', () => {
     beforeEach(() => {
       userIsSignedIn()
       const queryResult = {
-        ...buildUseQueryResult<CurrentUser>({ data: undefined, isLoading: true }),
+        ...buildUseQueryResult<CurrentUser>({
+          data: undefined,
+          isLoading: false,
+          error: new Error(),
+        }),
         enabled: true,
       }
       asMock(useCurrentUser).mockReturnValue(queryResult)
@@ -72,6 +96,7 @@ describe('useCurrentRole', () => {
       const { result } = renderPage()
       expect(result.current.role).toEqual('member')
       expect(result.current.isAdmin).toEqual(false)
+      expect(result.current.isLoading).toEqual(false)
     })
   })
 
@@ -89,6 +114,7 @@ describe('useCurrentRole', () => {
       const { result } = renderPage()
       expect(result.current.role).toEqual('member')
       expect(result.current.isAdmin).toEqual(false)
+      expect(result.current.isLoading).toEqual(false)
     })
   })
 })

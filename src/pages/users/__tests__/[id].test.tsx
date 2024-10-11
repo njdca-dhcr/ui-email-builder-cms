@@ -34,7 +34,7 @@ describe('User Show Page', () => {
   beforeEach(() => {
     const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({})
     asMock(useUpdateUser).mockReturnValue(mutationResult)
-    asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
+    asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
 
     const currentUser = buildUserShow()
     const queryForUseCurrentUser = buildUseQueryResult({ data: currentUser })
@@ -124,7 +124,7 @@ describe('User Show Page', () => {
       user = buildUserShow({ role: 'member' })
       const query = buildUseQueryResult({ data: user })
       asMock(useUser).mockReturnValue(query)
-      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
+      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
     })
 
     it('does not provide an edit button', async () => {
@@ -144,7 +144,7 @@ describe('User Show Page', () => {
       user = buildUserShow({ role: 'member' })
       const query = buildUseQueryResult({ data: user })
       asMock(useUser).mockReturnValue(query)
-      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true })
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
     })
 
     it('becomes a dropdown when the edit button is clicked', async () => {
@@ -221,7 +221,7 @@ describe('User Show Page', () => {
       user = buildUserShow({ role: 'member' })
       const query = buildUseQueryResult({ data: user })
       asMock(useUser).mockReturnValue(query)
-      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false })
+      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
     })
 
     it('does not provide a delete button', async () => {
@@ -236,7 +236,7 @@ describe('User Show Page', () => {
       const user = buildUserShow({ role: 'member' })
       const query = buildUseQueryResult({ data: user })
       asMock(useUser).mockReturnValue(query)
-      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true })
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
       const { queryByRole } = renderPage()
 
       expect(queryByRole('button', { name: 'Delete' })).not.toBeNull()
@@ -252,7 +252,7 @@ describe('User Show Page', () => {
       const queryForUseCurrentUser = buildUseQueryResult({ data: user })
       asMock(useUser).mockReturnValue(queryForUseUser)
       asMock(useCurrentUser).mockReturnValue({ ...queryForUseCurrentUser, enabled: true })
-      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true })
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
     })
 
     it('does not provide a delete button', async () => {

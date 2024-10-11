@@ -21,7 +21,7 @@ describe('useRedirectIfNotAdmin', () => {
 
   describe('when signed in as a member', () => {
     beforeEach(() => {
-      asMock(useCurrentRole).mockReturnValue({ isAdmin: false, role: 'member' })
+      asMock(useCurrentRole).mockReturnValue({ isAdmin: false, role: 'member', isLoading: false })
     })
 
     it('redirects to the homepage', async () => {
@@ -33,7 +33,19 @@ describe('useRedirectIfNotAdmin', () => {
 
   describe('when signed in as an admin', () => {
     beforeEach(() => {
-      asMock(useCurrentRole).mockReturnValue({ isAdmin: true, role: 'admin' })
+      asMock(useCurrentRole).mockReturnValue({ isAdmin: true, role: 'admin', isLoading: false })
+    })
+
+    it('does not redirect', async () => {
+      expect(navigate).not.toHaveBeenCalled()
+      renderPage()
+      expect(navigate).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('when loading', () => {
+    beforeEach(() => {
+      asMock(useCurrentRole).mockReturnValue({ isAdmin: false, role: 'member', isLoading: true })
     })
 
     it('does not redirect', async () => {

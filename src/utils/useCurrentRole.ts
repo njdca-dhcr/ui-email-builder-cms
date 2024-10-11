@@ -12,12 +12,12 @@ const member = {
 } as const
 
 export const useCurrentRole = () => {
-  const { data: user } = useCurrentUser()
+  const { data: user, isLoading } = useCurrentUser()
 
   switch (user?.role) {
     case 'admin':
-      return admin
+      return { ...admin, isLoading }
     default:
-      return member
+      return { ...member, isLoading }
   }
 }
