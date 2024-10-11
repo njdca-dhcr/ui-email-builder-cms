@@ -228,6 +228,7 @@
 .input,
 .textarea {
   border: 1px solid var(--black);
+  font-family: var(--sans-serif);
   font-size: var(--font-medium);
   line-height: 1.5;
   padding: 0.5rem;
