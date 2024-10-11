@@ -5,6 +5,7 @@ import { asMock, mockBackendUrl, urlFor, userIsNotSignedIn, userIsSignedIn } fro
 import { availableFeatures, Features } from 'src/features'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { faker } from '@faker-js/faker'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 
 jest.mock('src/features', () => {
   return {
@@ -14,7 +15,15 @@ jest.mock('src/features', () => {
   }
 })
 
+jest.mock('src/utils/useCurrentRole', () => {
+  return { useCurrentRole: jest.fn() }
+})
+
 describe('SidebarNavigation', () => {
+  beforeEach(() => {
+    asMock(useCurrentRole).mockReturnValue({ isAdmin: true, role: 'admin', isLoading: false })
+  })
+
   it('displays a home link', () => {
     const { getByRole } = render(<SidebarNavigation />)
     const link: HTMLAnchorElement = getByRole('link', { name: 'Home' }) as any

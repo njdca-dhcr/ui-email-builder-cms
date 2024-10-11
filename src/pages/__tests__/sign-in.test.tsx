@@ -14,11 +14,16 @@ import {
   userIsSignedIn,
 } from 'src/testHelpers'
 import { AuthProvider } from 'src/utils/AuthContext'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 
 jest.mock('src/network/auth', () => {
   return {
     signIn: jest.fn(),
   }
+})
+
+jest.mock('src/utils/useCurrentRole', () => {
+  return { useCurrentRole: jest.fn() }
 })
 
 describe('Sign in page', () => {
@@ -33,6 +38,7 @@ describe('Sign in page', () => {
     password = faker.internet.password({ length: 10 })
     mockBackendUrl(faker.internet.url({ appendSlash: false }))
     userIsNotSignedIn()
+    asMock(useCurrentRole).mockReturnValue({ isAdmin: false, role: 'member', isLoading: false })
   })
 
   const fillOutAndSubmitForm = async () => {

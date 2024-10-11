@@ -1,3 +1,4 @@
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, Link, PageProps } from 'gatsby'
 import capitalize from 'lodash.capitalize'
 import React, { FC } from 'react'
@@ -13,7 +14,9 @@ import {
   SidebarNavigation,
   LoadingOverlay,
   List,
+  UswdsIcon,
 } from 'src/ui'
+import { Actions } from 'src/ui/Layout'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
@@ -31,8 +34,18 @@ const GroupShowPage: FC<Props> = ({ params }) => {
       <PageContent element="main">
         <SkipNavContent />
         <SpacedContainer>
-          <Heading element="h1">Group</Heading>
-          {error && <Paragraph>{error.message}</Paragraph>}
+          <div className="heading-with-actions">
+            <div>
+              <Heading element="h1">Group</Heading>
+              {error && <Paragraph>{error.message}</Paragraph>}
+            </div>
+            <Actions>
+              <Link to={`/groups/${params.id}/edit`} className="new-group-link">
+                <UswdsIcon icon="Edit" />
+                <VisuallyHidden>Edit Group</VisuallyHidden>
+              </Link>
+            </Actions>
+          </div>
 
           {group && (
             <>

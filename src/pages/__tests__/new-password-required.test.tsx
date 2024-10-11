@@ -7,11 +7,16 @@ import { navigate } from 'gatsby'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { newPasswordRequired } from 'src/network/auth'
 import { AuthProvider } from 'src/utils/AuthContext'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 
 jest.mock('src/network/auth', () => {
   return {
     newPasswordRequired: jest.fn(),
   }
+})
+
+jest.mock('src/utils/useCurrentRole', () => {
+  return { useCurrentRole: jest.fn() }
 })
 
 describe('New Password Required page', () => {
@@ -45,6 +50,7 @@ describe('New Password Required page', () => {
     email = faker.internet.email()
     session = faker.lorem.paragraph()
     password = faker.lorem.word()
+    asMock(useCurrentRole).mockReturnValue({ isAdmin: false, role: 'member', isLoading: false })
   })
 
   describe('without the necessary state', () => {

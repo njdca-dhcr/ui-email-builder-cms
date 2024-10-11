@@ -10,6 +10,7 @@ import { availableFeatures } from 'src/features'
 import { UswdsIcon } from './UswdsIcon'
 import classNames from 'classnames'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
+import { WhenAdmin } from 'src/utils/WhenAdmin'
 
 interface Props {}
 
@@ -23,12 +24,14 @@ export const SidebarNavigation: FC<Props> = () => {
         <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="AccountBalance" />} />
         <WhenSignedIn>
           <SpacedLink to="/my-library" text="My Library" icon={<UswdsIcon icon="FolderOpen" />} />
-          <SpacedLink
-            to="/groups"
-            text="Groups"
-            icon={<UswdsIcon icon="Groups" />}
-            partiallyActive
-          />
+          <WhenAdmin>
+            <SpacedLink
+              to="/groups"
+              text="Groups"
+              icon={<UswdsIcon icon="Groups" />}
+              partiallyActive
+            />
+          </WhenAdmin>
           <SpacedLink to="/users" text="Users" icon={<UswdsIcon icon="People" />} partiallyActive />
         </WhenSignedIn>
         <SpacedLink
