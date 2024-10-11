@@ -18,6 +18,7 @@ import {
 import { CreateGroupErrorResponse, useCreateGroup } from 'src/network/groups'
 import { FormFieldArea } from 'src/ui/Form'
 import { useRedirectIfNotAdmin } from 'src/utils/useRedirectIfNotAdmin'
+import { stringFromFormData } from 'src/utils/stringFromFormData'
 
 const NewGroupPage: FC = () => {
   useRedirectIfNotAdmin()
@@ -68,15 +69,6 @@ const NewGroupPage: FC = () => {
       </PageContent>
     </Layout>
   )
-}
-
-const stringFromFormData = (formData: FormData, key: string): string => {
-  const result = formData.get(key) ?? ''
-  if (typeof result === 'string') {
-    return result
-  } else {
-    throw new Error(`FormData contained a file for ${key} instead of a string`)
-  }
 }
 
 export default NewGroupPage

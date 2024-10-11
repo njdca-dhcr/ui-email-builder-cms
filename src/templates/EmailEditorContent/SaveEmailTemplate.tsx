@@ -10,6 +10,7 @@ import { useEmailPartsContentData } from '../EmailPartsContent'
 import { EmailTemplate } from 'src/appTypes'
 import { usePreviewText } from '../PreviewText'
 import { useCreateOrUpdateEmailTemplate } from 'src/network/useCreateOrUpdateEmailTemplate'
+import { stringFromFormData } from 'src/utils/stringFromFormData'
 
 export const SaveEmailTemplate: FC = () => {
   const emailTemplate = useEmailTemplateConfig()
@@ -73,15 +74,6 @@ export const SaveEmailTemplate: FC = () => {
       )}
     />
   )
-}
-
-const stringFromFormData = (formData: FormData, key: string): string => {
-  const result = formData.get(key) ?? ''
-  if (typeof result === 'string') {
-    return result
-  } else {
-    throw new Error(`FormData contained a file for ${key} instead of a string`)
-  }
 }
 
 export const emailTemplateMergeDefaultValues = (

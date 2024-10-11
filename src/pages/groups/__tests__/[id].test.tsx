@@ -1,13 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import GroupShowPage, { Props } from '../[id]'
-import {
-  asMock,
-  buildGroupShow,
-  buildUseQueryResult,
-  buildUserIndex,
-  buildUserShow,
-} from 'src/testHelpers'
+import { asMock, buildGroupShow, buildUseQueryResult, buildUserIndex } from 'src/testHelpers'
 import { useGroup, GroupShow } from 'src/network/groups'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'

@@ -119,6 +119,7 @@ describe('New Group Page', () => {
       await user.click(getByRole('button', { name: 'Create' }))
 
       expect(baseElement).toHaveTextContent(errorsResponse.errors.name)
+      expect(navigate).not.toHaveBeenCalled()
     })
   })
 })
