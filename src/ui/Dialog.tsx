@@ -31,15 +31,15 @@ export const Dialog: FC<DialogProps> = ({
       <Portal>
         <Overlay className="dialog-overlay" />
         <Content className="dialog-content">
+          <button className="dialog-close" onClick={close}>
+            <VisuallyHidden>Close</VisuallyHidden>
+            <UswdsIcon icon="Close" />
+          </button>
           <Title className={classNames('dialog-title', titleClassName)}>{title}</Title>
           <Description className={classNames('dialog-description', descriptionClassName)}>
             {description}
           </Description>
           {contents({ close })}
-          <button className="dialog-close" onClick={close}>
-            <VisuallyHidden>Close</VisuallyHidden>
-            <UswdsIcon icon="Close" />
-          </button>
         </Content>
       </Portal>
     </Root>

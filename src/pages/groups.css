@@ -3,6 +3,7 @@
   justify-content: space-between;
 }
 
+.delete-group-trigger,
 .new-group-link {
   align-items: center;
   border-radius: 50%;
@@ -44,4 +45,8 @@
 
 .group-members .user-list {
   margin: 0;
+}
+
+.destroy-group-form .delete-button {
+  background-color: var(--alert-error-dark);
 }

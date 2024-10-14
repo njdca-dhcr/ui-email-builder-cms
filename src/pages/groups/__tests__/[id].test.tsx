@@ -1,19 +1,37 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import GroupShowPage, { Props } from '../[id]'
-import { asMock, buildGroupShow, buildUseQueryResult, buildUserIndex } from 'src/testHelpers'
-import { useGroup, GroupShow } from 'src/network/groups'
+import {
+  asMock,
+  buildGroupShow,
+  buildUseMutationResult,
+  buildUseQueryResult,
+  buildUserIndex,
+} from 'src/testHelpers'
+import { useGroup, GroupShow, useDestroyGroup } from 'src/network/groups'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import capitalize from 'lodash.capitalize'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 
 jest.mock('src/network/groups', () => {
-  return { useGroup: jest.fn() }
+  return { useGroup: jest.fn(), useDestroyGroup: jest.fn() }
+})
+
+jest.mock('src/utils/useCurrentRole', () => {
+  return { useCurrentRole: jest.fn() }
 })
 
 describe('Group Show Page', () => {
+  beforeEach(async () => {
+    const mutationResult = buildUseMutationResult<ReturnType<typeof useDestroyGroup>>({})
+    asMock(useDestroyGroup).mockReturnValue(mutationResult)
+
+    asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
+  })
+
   const renderPage = (props?: Partial<Props>) => {
     return render(
       <QueryClientProvider client={new QueryClient()}>
@@ -96,6 +114,33 @@ describe('Group Show Page', () => {
       asMock(useGroup).mockReturnValue(query)
       const { queryByText } = renderPage()
       expect(queryByText(error.message)).not.toBeNull()
+    })
+  })
+
+  describe('destroying a group as a member', () => {
+    beforeEach(() => {
+      const group = buildGroupShow()
+      const query = buildUseQueryResult({ data: group })
+      asMock(useGroup).mockReturnValue(query)
+      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
+    })
+
+    it('does not provide a delete button', async () => {
+      const { queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Delete' })).toBeNull()
+    })
+  })
+
+  describe('destroying a group as an admin', () => {
+    it('provides a delete button', async () => {
+      const group = buildGroupShow()
+      const query = buildUseQueryResult({ data: group })
+      asMock(useGroup).mockReturnValue(query)
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
+      const { queryByRole } = renderPage()
+
+      expect(queryByRole('button', { name: 'Delete' })).not.toBeNull()
     })
   })
 })

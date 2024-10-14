@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, Link, PageProps } from 'gatsby'
 import capitalize from 'lodash.capitalize'
 import React, { FC } from 'react'
-import { GroupShow, useGroup } from 'src/network/groups'
+import { useGroup } from 'src/network/groups'
 import {
   Heading,
   Layout,
@@ -16,8 +16,10 @@ import {
   List,
   UswdsIcon,
 } from 'src/ui'
+import { DestroyGroup } from 'src/ui/GroupShow/DestroyGroup'
 import { Actions } from 'src/ui/Layout'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { useCurrentRole } from 'src/utils/useCurrentRole'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 export type Props = PageProps<null, null, null>
@@ -25,6 +27,7 @@ export type Props = PageProps<null, null, null>
 const GroupShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
   const { data: group, isLoading, error } = useGroup(params.id)
+  const { isAdmin } = useCurrentRole()
 
   return (
     <Layout element="div">
@@ -44,6 +47,7 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                 <UswdsIcon icon="Edit" />
                 <VisuallyHidden>Edit Group</VisuallyHidden>
               </Link>
+              {group && isAdmin && <DestroyGroup group={group} />}
             </Actions>
           </div>
 

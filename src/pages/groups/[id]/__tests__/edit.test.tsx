@@ -23,7 +23,7 @@ jest.mock('src/utils/useRedirectIfNotAdmin', () => {
   return { useRedirectIfNotAdmin: jest.fn() }
 })
 
-describe('Group Show Page', () => {
+describe('Group Edit Page', () => {
   beforeEach(() => {
     const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateGroup>>()
     asMock(useUpdateGroup).mockReturnValue(mutationResult)
