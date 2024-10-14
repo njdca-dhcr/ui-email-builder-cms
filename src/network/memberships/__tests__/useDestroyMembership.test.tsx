@@ -2,16 +2,15 @@ import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, userIsSignedIn } from 'src/testHelpers'
+import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
-import { useDestroyGroup } from '../useDestroyGroup'
-import { QUERY_KEY } from '../useGroups'
-import { buildUseGroupQueryKey } from '../useGroup'
-import { randomUUID } from 'crypto'
+import { useDestroyMembership } from '../useDestroyMembership'
+import { buildUseUserQueryKey } from 'src/network/useUser'
+import { buildUseGroupQueryKey } from 'src/network/groups'
 
 jest.mock('../../useAuthedFetch')
 
-describe('useDestroyGroup', () => {
+describe('useDestroyMembership', () => {
   let mockAuthedFetch: AuthedFetch
 
   beforeEach(() => {
@@ -20,15 +19,15 @@ describe('useDestroyGroup', () => {
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
   })
 
-  it('destroys the group', async () => {
+  it('destroys the membership', async () => {
     const client = new QueryClient()
-    const id = randomUUID()
+    const membership = buildMembershipShow()
     asMock(mockAuthedFetch).mockResolvedValue({
       statusCode: 200,
-      json: { group: { id } },
+      json: { membership: { id: membership.id } },
     })
 
-    const { result } = renderHook(() => useDestroyGroup(), {
+    const { result } = renderHook(() => useDestroyMembership(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -38,23 +37,26 @@ describe('useDestroyGroup', () => {
       },
     })
     expect(mockAuthedFetch).not.toHaveBeenCalled()
-    await result.current.mutateAsync(id)
+    await result.current.mutateAsync(membership)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/groups/${id}`,
+      path: `/memberships/${membership.id}`,
       method: 'DELETE',
     })
-    expect(result.current.data).toEqual({ id })
+    expect(result.current.data).toEqual({ membership: { id: membership.id } })
   })
 
-  it('invalidates the useGroups and the useGroup queries', async () => {
+  it('invalidates the useGroup and useUser queries', async () => {
     const client = new QueryClient()
-    const id = randomUUID()
-    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { group: { id } } })
+    const membership = buildMembershipShow()
+    asMock(mockAuthedFetch).mockResolvedValue({
+      statusCode: 200,
+      json: { membership: { id: membership.id } },
+    })
 
     jest.spyOn(client, 'invalidateQueries')
 
-    const { result } = renderHook(() => useDestroyGroup(), {
+    const { result } = renderHook(() => useDestroyMembership(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -64,9 +66,13 @@ describe('useDestroyGroup', () => {
       },
     })
     expect(client.invalidateQueries).not.toHaveBeenCalled()
-    await result.current.mutateAsync(id)
+    await result.current.mutateAsync(membership)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [QUERY_KEY] })
-    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [buildUseGroupQueryKey(id)] })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({
+      queryKey: [buildUseUserQueryKey(membership.userId)],
+    })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({
+      queryKey: [buildUseGroupQueryKey(membership.groupId)],
+    })
   })
 })

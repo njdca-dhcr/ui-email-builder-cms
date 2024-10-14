@@ -166,6 +166,21 @@ export const buildGroupIndex = (options?: Partial<GroupsIndex>): GroupsIndex => 
   }
 }
 
+interface Membership {
+  id: string
+  userId: string
+  groupId: string
+}
+
+export const buildMembershipShow = (options?: Partial<Membership>): Membership => {
+  return {
+    id: uniqueId(),
+    groupId: uniqueId(),
+    userId: uniqueId(),
+    ...options,
+  }
+}
+
 export const buildGroupShow = (options?: Partial<GroupShow>): GroupShow => {
   return {
     id: uniqueId(),
