@@ -73,7 +73,12 @@ const GroupEditPage: FC<Props> = ({ params }) => {
                 error={validationErrors?.description}
                 defaultValue={group.description}
               />
-              <Button type="submit">Update</Button>
+              <div className="group-edit-action-buttons">
+                <Button type="submit">Update</Button>
+                <Button type="button" className="cancel-edit" onClick={() => navigate(`/groups/${params.id}`)}>
+                  Cancel
+                </Button>
+              </div>
             </Form>
           )}
           {isLoading && <LoadingOverlay description="Loading group" />}

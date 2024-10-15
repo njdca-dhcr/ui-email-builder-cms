@@ -47,6 +47,11 @@
   margin: 0;
 }
 
+.group-edit-action-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .destroy-group-form .delete-button {
   background-color: var(--alert-error-dark);
 }
