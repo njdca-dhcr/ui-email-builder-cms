@@ -16,7 +16,6 @@ import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex } from './network/useUsers'
 import { UserShow } from './network/useUser'
 import { GroupsIndex, GroupShow } from './network/groups'
-import { MembershipsIndex } from './network/memberships'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -140,29 +139,63 @@ export const buildEmailTemplateIndex = (
   }
 }
 
-export const buildUserIndex = (options?: Partial<UsersIndex>): UsersIndex => {
-  return {
-    id: uniqueId(),
-    email: faker.internet.email(),
-    role: 'member',
-    ...options,
-  }
-}
+const buildUser = (): UserShow => ({
+  id: uniqueId(),
+  email: faker.internet.email(),
+  role: 'member',
+})
 
 export const buildUserShow = (options?: Partial<UserShow>): UserShow => {
+  const user = buildUser()
   return {
-    id: uniqueId(),
-    email: faker.internet.email(),
-    role: 'member',
+    ...user,
     ...options,
   }
 }
 
-export const buildGroupIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {
+export const buildUserIndex = (options?: Partial<UsersIndex>): UsersIndex => {
+  const user = buildUser()
   return {
-    id: uniqueId(),
-    name: faker.lorem.words(3),
-    description: faker.lorem.paragraph(),
+    ...user,
+    ...options,
+  }
+}
+
+export const buildUserMembershipIndex = (options?: Partial<UsersIndex>): UsersIndex => {
+  const user = buildUser()
+  return {
+    ...user,
+    ...options,
+  }
+}
+
+const buildGroup = (): GroupsIndex => ({
+  id: uniqueId(),
+  name: faker.lorem.words(3),
+  description: faker.lorem.paragraph(),
+})
+
+export const buildGroupIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {
+  const group = buildGroup()
+  return {
+    ...group,
+    ...options,
+  }
+}
+
+export const buildGroupShow = (options?: Partial<GroupShow>): GroupShow => {
+  const group = buildGroup()
+  return {
+    ...group,
+    users: [],
+    ...options,
+  }
+}
+
+export const buildGroupMembershipIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {
+  const group = buildGroup()
+  return {
+    ...group,
     ...options,
   }
 }
@@ -174,25 +207,6 @@ interface Membership {
 }
 
 export const buildMembershipShow = (options?: Partial<Membership>): Membership => {
-  return {
-    id: uniqueId(),
-    groupId: uniqueId(),
-    userId: uniqueId(),
-    ...options,
-  }
-}
-
-export const buildGroupShow = (options?: Partial<GroupShow>): GroupShow => {
-  return {
-    id: uniqueId(),
-    name: faker.lorem.words(3),
-    description: faker.lorem.paragraph(),
-    users: [],
-    ...options,
-  }
-}
-
-export const buildMembershipIndex = (options?: Partial<MembershipsIndex>): MembershipsIndex => {
   return {
     id: uniqueId(),
     groupId: uniqueId(),

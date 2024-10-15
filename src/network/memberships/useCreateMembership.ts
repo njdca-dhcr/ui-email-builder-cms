@@ -1,23 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuthedFetch } from '../useAuthedFetch'
-import { buildUseUserQueryKey } from '../useUser'
-import { buildUseGroupQueryKey } from '../groups'
+import { buildUseMembershipQueryKey, MembershipShow } from '../memberships'
 
-export interface MembershipShow {
-  id: string
-  groupId: string
-  userId: string
-}
-
-interface CreateGroupSuccessfulResponse {
+interface CreateMembershipSuccessfulResponse {
   membership: MembershipShow
 }
 
-export interface CreateGroupErrorResponse {
-  errors: { name: string; description?: string }
+export interface CreateMembershipErrorResponse {
+  errors: { user: string; group?: string }
 }
 
-type CreateGroupResponse = CreateGroupSuccessfulResponse | CreateGroupErrorResponse
+type CreateMembershipResponse = CreateMembershipSuccessfulResponse | CreateMembershipErrorResponse
 
 export const useCreateMembership = () => {
   const client = useQueryClient()
@@ -27,8 +20,8 @@ export const useCreateMembership = () => {
     mutationFn: async (membership: {
       userId: string
       groupId: string
-    }): Promise<CreateGroupResponse> => {
-      const result = await authedFetch<CreateGroupResponse>({
+    }): Promise<CreateMembershipResponse> => {
+      const result = await authedFetch<CreateMembershipResponse>({
         body: { membership },
         method: 'POST',
         path: '/memberships',
@@ -38,8 +31,9 @@ export const useCreateMembership = () => {
     onSuccess: (result) => {
       if ('membership' in result) {
         const { membership } = result
-        client.invalidateQueries({ queryKey: [buildUseUserQueryKey(membership.userId)] })
-        client.invalidateQueries({ queryKey: [buildUseGroupQueryKey(membership.groupId)] })
+        client.invalidateQueries({
+          queryKey: [buildUseMembershipQueryKey(membership.id)],
+        })
       }
     },
   })

@@ -6,8 +6,7 @@ import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useCreateMembership } from '../useCreateMembership'
 import { randomUUID } from 'crypto'
-import { buildUseGroupQueryKey } from 'src/network/groups'
-import { buildUseUserQueryKey } from 'src/network/useUser'
+import { buildUseMembershipQueryKey } from '../useMembership'
 
 jest.mock('../../useAuthedFetch')
 
@@ -54,7 +53,7 @@ describe('useCreateMembership', () => {
     expect(result.current.data).toEqual({ membership: { id: 'saved id', userId, groupId } })
   })
 
-  it('invalidates the useGroup and useUser queries', async () => {
+  it('invalidates the useMembership queries', async () => {
     const client = new QueryClient()
     const membership = buildMembershipShow()
     asMock(mockAuthedFetch).mockResolvedValue({
@@ -77,10 +76,7 @@ describe('useCreateMembership', () => {
     await result.current.mutateAsync({ groupId, userId })
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseUserQueryKey(membership.userId)],
-    })
-    expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseGroupQueryKey(membership.groupId)],
+      queryKey: [buildUseMembershipQueryKey(membership.id)],
     })
   })
 })

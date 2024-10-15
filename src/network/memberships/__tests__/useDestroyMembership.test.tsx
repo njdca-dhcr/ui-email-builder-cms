@@ -5,8 +5,9 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useDestroyMembership } from '../useDestroyMembership'
-import { buildUseUserQueryKey } from 'src/network/useUser'
+import { buildUseMembershipQueryKey } from 'src/network/memberships'
 import { buildUseGroupQueryKey } from 'src/network/groups'
+import { buildUseUserQueryKey } from 'src/network/useUser'
 
 jest.mock('../../useAuthedFetch')
 
@@ -46,7 +47,7 @@ describe('useDestroyMembership', () => {
     expect(result.current.data).toEqual({ membership: { id: membership.id } })
   })
 
-  it('invalidates the useGroup and useUser queries', async () => {
+  it('invalidates the useMembership, useGroup, and useUser queries', async () => {
     const client = new QueryClient()
     const membership = buildMembershipShow()
     asMock(mockAuthedFetch).mockResolvedValue({
@@ -69,10 +70,13 @@ describe('useDestroyMembership', () => {
     await result.current.mutateAsync(membership)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseUserQueryKey(membership.userId)],
+      queryKey: [buildUseMembershipQueryKey(membership.id)],
     })
     expect(client.invalidateQueries).toHaveBeenCalledWith({
       queryKey: [buildUseGroupQueryKey(membership.groupId)],
+    })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({
+      queryKey: [buildUseUserQueryKey(membership.userId)],
     })
   })
 })
