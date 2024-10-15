@@ -16,6 +16,7 @@ import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex } from './network/useUsers'
 import { UserShow } from './network/useUser'
 import { GroupsIndex, GroupShow } from './network/groups'
+import { MembershipsIndex } from './network/memberships'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -187,6 +188,15 @@ export const buildGroupShow = (options?: Partial<GroupShow>): GroupShow => {
     name: faker.lorem.words(3),
     description: faker.lorem.paragraph(),
     users: [],
+    ...options,
+  }
+}
+
+export const buildMembershipIndex = (options?: Partial<MembershipsIndex>): MembershipsIndex => {
+  return {
+    id: uniqueId(),
+    groupId: uniqueId(),
+    userId: uniqueId(),
     ...options,
   }
 }
