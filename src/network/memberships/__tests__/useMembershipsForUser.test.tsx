@@ -1,19 +1,14 @@
 import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useUserMemberships } from '../useUserMemberships'
+import { useMembershipsForUser } from '../useMembershipsForUser'
 import { AuthProvider } from 'src/utils/AuthContext'
-import {
-  asMock,
-  buildMembershipShow,
-  buildUserMembershipIndex,
-  userIsSignedIn,
-} from 'src/testHelpers'
+import { asMock, buildGroupMembershipIndex, buildUserShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 
 jest.mock('../../useAuthedFetch')
 
-describe('useMemberships', () => {
+describe('useMembershipsForUser', () => {
   let mockAuthedFetch: AuthedFetch
 
   beforeEach(() => {
@@ -22,13 +17,13 @@ describe('useMemberships', () => {
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
   })
 
-  it('queries for user memberships', async () => {
+  it('queries for memberships', async () => {
     const client = new QueryClient()
-    const membership = buildMembershipShow()
-    const users = [buildUserMembershipIndex(), buildUserMembershipIndex()]
-    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { users } })
+    const user = buildUserShow()
+    const groups = [buildGroupMembershipIndex(), buildGroupMembershipIndex()]
+    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { groups } })
 
-    const { result } = renderHook(() => useUserMemberships(membership.id), {
+    const { result } = renderHook(() => useMembershipsForUser(user.id), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -40,9 +35,9 @@ describe('useMemberships', () => {
 
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/groups/${membership.id}/memberships`,
+      path: `/users/${user.id}/memberships`,
       method: 'GET',
     })
-    expect(result.current.data).toEqual(users)
+    expect(result.current.data).toEqual(groups)
   })
 })

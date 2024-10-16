@@ -4,7 +4,7 @@ import { UserShow } from '../useUser'
 
 export const USER_MEMBERSHIPS_QUERY_KEY = 'useUserMemberships'
 
-export const useUserMemberships = (id: string) => {
+export const useMembershipsForGroup = (id: string) => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({

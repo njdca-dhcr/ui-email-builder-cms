@@ -4,7 +4,7 @@ import { GroupsIndex } from '../groups'
 
 export const GROUP_MEMBERSHIPS_QUERY_KEY = 'useGroupMemberships'
 
-export const useGroupMemberships = (id: string) => {
+export const useMembershipsForUser = (id: string) => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({
