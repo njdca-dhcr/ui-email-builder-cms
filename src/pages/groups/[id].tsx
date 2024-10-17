@@ -1,6 +1,5 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, Link, PageProps } from 'gatsby'
-import capitalize from 'lodash.capitalize'
 import React, { FC } from 'react'
 import { useGroup } from 'src/network/groups'
 import {
@@ -15,7 +14,6 @@ import {
   LoadingOverlay,
   List,
   UswdsIcon,
-  Button,
 } from 'src/ui'
 import { DestroyGroup } from 'src/ui/GroupShow/DestroyGroup'
 import { Actions } from 'src/ui/Layout'
