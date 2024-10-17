@@ -6,7 +6,7 @@ import {
   buildGroupShow,
   buildUseMutationResult,
   buildUseQueryResult,
-  buildUserIndex,
+  buildGroupUserIndex,
 } from 'src/testHelpers'
 import { useGroup, GroupShow, useDestroyGroup } from 'src/network/groups'
 import { faker } from '@faker-js/faker'
@@ -85,7 +85,9 @@ describe('Group Show Page', () => {
     let group: GroupShow
 
     beforeEach(() => {
-      group = buildGroupShow({ users: [buildUserIndex(), buildUserIndex({ role: 'admin' })] })
+      group = buildGroupShow({
+        users: [buildGroupUserIndex(), buildGroupUserIndex({ role: 'admin' })],
+      })
       const query = buildUseQueryResult({ data: group })
       asMock(useGroup).mockReturnValue(query)
     })
@@ -138,15 +140,28 @@ describe('Group Show Page', () => {
     })
   })
 
-  describe('destroying a group as an admin', () => {
-    it('provides a delete button', async () => {
-      const group = buildGroupShow()
-      const query = buildUseQueryResult({ data: group })
-      asMock(useGroup).mockReturnValue(query)
-      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
-      const { queryByRole } = renderPage()
+  describe('as an admin', () => {
+    describe('destroying an membership', () => {
+      it('provides a delete button', async () => {
+        const group = buildGroupShow({ users: [buildGroupUserIndex()] })
+        const query = buildUseQueryResult({ data: group })
+        asMock(useGroup).mockReturnValue(query)
+        asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
+        const { queryByRole } = renderPage()
+        expect(queryByRole('button', { name: 'Remove' })).not.toBeNull()
+      })
+    })
 
-      expect(queryByRole('button', { name: 'Delete' })).not.toBeNull()
+    describe('destroying a group', () => {
+      it('provides a delete button', async () => {
+        const group = buildGroupShow()
+        const query = buildUseQueryResult({ data: group })
+        asMock(useGroup).mockReturnValue(query)
+        asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
+        const { queryByRole } = renderPage()
+
+        expect(queryByRole('button', { name: 'Delete' })).not.toBeNull()
+      })
     })
   })
 })

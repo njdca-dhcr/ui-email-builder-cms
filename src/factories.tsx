@@ -15,7 +15,7 @@ import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex } from './network/useUsers'
 import { UserShow } from './network/useUser'
-import { GroupsIndex, GroupShow } from './network/groups'
+import { GroupsIndex, GroupShow, GroupShowUser } from './network/groups'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -146,25 +146,30 @@ const buildUser = (): UserShow => ({
 })
 
 export const buildUserShow = (options?: Partial<UserShow>): UserShow => {
-  const user = buildUser()
   return {
-    ...user,
+    ...buildUser(),
     ...options,
   }
 }
 
 export const buildUserIndex = (options?: Partial<UsersIndex>): UsersIndex => {
-  const user = buildUser()
   return {
-    ...user,
+    ...buildUser(),
+    ...options,
+  }
+}
+
+export const buildGroupUserIndex = (options?: Partial<GroupShowUser>): GroupShowUser => {
+  return {
+    ...buildUser(),
+    membershipId: uniqueId(),
     ...options,
   }
 }
 
 export const buildUserMembershipIndex = (options?: Partial<UsersIndex>): UsersIndex => {
-  const user = buildUser()
   return {
-    ...user,
+    ...buildUser(),
     ...options,
   }
 }
@@ -176,26 +181,23 @@ const buildGroup = (): GroupsIndex => ({
 })
 
 export const buildGroupIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {
-  const group = buildGroup()
   return {
-    ...group,
+    ...buildGroup(),
     ...options,
   }
 }
 
 export const buildGroupShow = (options?: Partial<GroupShow>): GroupShow => {
-  const group = buildGroup()
   return {
-    ...group,
+    ...buildGroup(),
     users: [],
     ...options,
   }
 }
 
 export const buildGroupMembershipIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {
-  const group = buildGroup()
   return {
-    ...group,
+    ...buildGroup(),
     ...options,
   }
 }

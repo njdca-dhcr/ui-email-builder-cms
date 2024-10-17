@@ -45,6 +45,10 @@
 
 .group-members .user-list {
   margin: 0;
+
+  .user-item {
+    flex-direction: row;
+  }
 }
 
 .group-edit-action-buttons {

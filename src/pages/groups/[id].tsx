@@ -16,6 +16,7 @@ import {
   UswdsIcon,
 } from 'src/ui'
 import { DestroyGroup } from 'src/ui/GroupShow/DestroyGroup'
+import { DestroyMembership } from 'src/ui/Memberships/DestroyMembership'
 import { Actions } from 'src/ui/Layout'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
@@ -66,6 +67,17 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                         <Link to={`/users/${user.id}`} className="user-email">
                           {user.email}
                         </Link>
+                        {isAdmin && (
+                          <DestroyMembership
+                            group={group}
+                            membership={{
+                              id: user.membershipId,
+                              groupId: group.id,
+                              userId: user.id,
+                            }}
+                            user={user}
+                          />
+                        )}
                       </li>
                     ))}
                   </List>

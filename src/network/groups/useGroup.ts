@@ -2,15 +2,18 @@ import { useQuery } from '@tanstack/react-query'
 import { useAuthedFetch } from '../useAuthedFetch'
 import { UserRole } from 'src/appTypes'
 
+export interface GroupShowUser {
+  id: string
+  email: string
+  role: UserRole
+  membershipId: string
+}
+
 export interface GroupShow {
   id: string
   name: string
   description: string
-  users: {
-    id: string
-    email: string
-    role: UserRole
-  }[]
+  users: GroupShowUser[]
 }
 
 export const buildUseGroupQueryKey = (id: string): string => `useGroup('${id}')`
