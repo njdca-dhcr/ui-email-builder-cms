@@ -2,11 +2,10 @@ import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
+import { asMock, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useCreateMembership } from '../useCreateMembership'
 import { randomUUID } from 'crypto'
-import { buildUseMembershipQueryKey } from '../useMembership'
 
 jest.mock('../../useAuthedFetch')
 
@@ -51,32 +50,5 @@ describe('useCreateMembership', () => {
       body: { membership: { userId, groupId } },
     })
     expect(result.current.data).toEqual({ membership: { id: 'saved id', userId, groupId } })
-  })
-
-  it('invalidates the useMembership queries', async () => {
-    const client = new QueryClient()
-    const membership = buildMembershipShow()
-    asMock(mockAuthedFetch).mockResolvedValue({
-      statusCode: 200,
-      json: { membership },
-    })
-
-    jest.spyOn(client, 'invalidateQueries')
-
-    const { result } = renderHook(() => useCreateMembership(), {
-      wrapper: ({ children }) => {
-        return (
-          <QueryClientProvider client={client}>
-            <AuthProvider>{children}</AuthProvider>
-          </QueryClientProvider>
-        )
-      },
-    })
-    expect(client.invalidateQueries).not.toHaveBeenCalled()
-    await result.current.mutateAsync({ groupId, userId })
-    await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseMembershipQueryKey(membership.id)],
-    })
   })
 })

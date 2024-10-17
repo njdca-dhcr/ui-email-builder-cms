@@ -1,6 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuthedFetch } from '../useAuthedFetch'
-import { buildUseMembershipQueryKey, MembershipShow } from '../memberships'
+
+export interface MembershipShow {
+  id: string
+  groupId: string
+  userId: string
+}
 
 interface CreateMembershipSuccessfulResponse {
   membership: MembershipShow
@@ -27,14 +32,6 @@ export const useCreateMembership = () => {
         path: '/memberships',
       })
       return result.json!
-    },
-    onSuccess: (result) => {
-      if ('membership' in result) {
-        const { membership } = result
-        client.invalidateQueries({
-          queryKey: [buildUseMembershipQueryKey(membership.id)],
-        })
-      }
     },
   })
 }

@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuthedFetch } from '../useAuthedFetch'
-import { MembershipShow } from './useMembership'
+import { MembershipShow } from './useCreateMembership'
 import { useRef } from 'react'
-import { buildUseMembershipQueryKey } from '../memberships'
 import { buildUseGroupQueryKey } from '../groups'
 import { buildUseUserQueryKey } from '../useUser'
 
@@ -22,9 +21,6 @@ export const useDestroyMembership = () => {
     },
     onSuccess: () => {
       if (membershipRef.current) {
-        client.invalidateQueries({
-          queryKey: [buildUseMembershipQueryKey(membershipRef.current.id)],
-        })
         client.invalidateQueries({
           queryKey: [buildUseGroupQueryKey(membershipRef.current.groupId)],
         })

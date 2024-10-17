@@ -1,4 +1,3 @@
-export * from './useMembership'
 export * from './useCreateMembership'
 export * from './useDestroyMembership'
 export * from './useMembershipsForUser'

@@ -5,7 +5,6 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useDestroyMembership } from '../useDestroyMembership'
-import { buildUseMembershipQueryKey } from 'src/network/memberships'
 import { buildUseGroupQueryKey } from 'src/network/groups'
 import { buildUseUserQueryKey } from 'src/network/useUser'
 
@@ -69,9 +68,6 @@ describe('useDestroyMembership', () => {
     expect(client.invalidateQueries).not.toHaveBeenCalled()
     await result.current.mutateAsync(membership)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseMembershipQueryKey(membership.id)],
-    })
     expect(client.invalidateQueries).toHaveBeenCalledWith({
       queryKey: [buildUseGroupQueryKey(membership.groupId)],
     })
