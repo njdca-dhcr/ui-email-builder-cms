@@ -13,7 +13,6 @@ import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import capitalize from 'lodash.capitalize'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
 
 jest.mock('src/network/groups', () => {
@@ -102,8 +101,15 @@ describe('Group Show Page', () => {
       expect(group.users).toHaveLength(2)
       group.users.forEach((user) => {
         expect(queryByText(user.email)).not.toBeNull()
-        expect(queryByText(capitalize(user.role))).not.toBeNull()
       })
+    })
+
+    it('displays a link to the add members page', () => {
+      const { queryByRole } = renderPage({ params: { id: group.id } })
+      const addLink = queryByRole('link', { name: 'Add Members to this Group' })
+
+      expect(addLink).not.toBeNull()
+      expect(addLink).toHaveAttribute('href', `/groups/${group.id}/add-member`)
     })
   })
 

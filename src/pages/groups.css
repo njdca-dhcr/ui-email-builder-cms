@@ -55,3 +55,15 @@
 .destroy-group-form .delete-button {
   background-color: var(--alert-error-dark);
 }
+
+.add-member-form {
+  width: 30rem;
+
+  label {
+    margin-bottom: 1rem;
+  }
+
+  .select {
+    margin-bottom: 1rem;
+  }
+}

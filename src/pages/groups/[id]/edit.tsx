@@ -75,7 +75,11 @@ const GroupEditPage: FC<Props> = ({ params }) => {
               />
               <div className="group-edit-action-buttons">
                 <Button type="submit">Update</Button>
-                <Button type="button" className="cancel-edit" onClick={() => navigate(`/groups/${params.id}`)}>
+                <Button
+                  type="button"
+                  className="cancel-edit"
+                  onClick={() => navigate(`/groups/${params.id}`)}
+                >
                   Cancel
                 </Button>
               </div>

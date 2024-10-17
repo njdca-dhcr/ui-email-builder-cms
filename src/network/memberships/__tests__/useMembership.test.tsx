@@ -34,7 +34,7 @@ describe('useMembership', () => {
 
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/membership/${membership.id}`,
+      path: `/memberships/${membership.id}`,
       method: 'GET',
     })
     expect(result.current.data).toEqual(membership)

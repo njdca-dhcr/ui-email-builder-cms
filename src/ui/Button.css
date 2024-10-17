@@ -10,6 +10,7 @@
   padding: 0.75rem 2.8rem;
   width: fit-content;
   transition: background-color ease-in-out 100ms;
+  text-decoration: none;
 
   &:hover,
   &:focus {

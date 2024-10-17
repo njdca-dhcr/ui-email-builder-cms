@@ -15,6 +15,7 @@ import {
   LoadingOverlay,
   List,
   UswdsIcon,
+  Button,
 } from 'src/ui'
 import { DestroyGroup } from 'src/ui/GroupShow/DestroyGroup'
 import { Actions } from 'src/ui/Layout'
@@ -67,13 +68,15 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                         <Link to={`/users/${user.id}`} className="user-email">
                           {user.email}
                         </Link>
-                        <span className="user-role">{capitalize(user.role)}</span>
                       </li>
                     ))}
                   </List>
                 ) : (
                   <Paragraph>This group doesn't have any members yet.</Paragraph>
                 )}
+                <Link to={`/groups/${params.id}/add-member`} className="button">
+                  Add Members to this Group
+                </Link>
               </section>
             </>
           )}

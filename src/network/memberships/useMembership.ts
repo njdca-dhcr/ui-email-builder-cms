@@ -16,10 +16,12 @@ export const useMembership = (id: string) => {
     queryKey: [buildUseMembershipQueryKey(id)],
     queryFn: async () => {
       const result = await authedFetch<{ membership: MembershipShow }>({
-        path: `/membership/${id}`,
+        path: `/memberships/${id}`,
         method: 'GET',
       })
       return result.json!.membership
     },
   })
 }
+
+// Consider whether this should exist since there is no route for it yet
