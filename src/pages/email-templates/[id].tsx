@@ -1,6 +1,6 @@
 import { HeadFC, PageProps } from 'gatsby'
 import React, { FC } from 'react'
-import { useEmailTemplate } from 'src/network/useEmailTemplate'
+import { useEmailTemplate } from 'src/network/emailTemplates'
 import {
   ClearCurrentlyActiveEmailPart,
   CurrentlyActiveEmailPart,

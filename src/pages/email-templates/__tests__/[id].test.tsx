@@ -8,13 +8,12 @@ import {
   buildUniqueEmailSubComponent,
   buildUseQueryResult,
 } from 'src/testHelpers'
-import { useEmailTemplate } from 'src/network/useEmailTemplate'
-import { EmailTemplateShow } from 'src/network/useEmailTemplate'
+import { useEmailTemplate, EmailTemplateShow } from 'src/network/emailTemplates'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-jest.mock('src/network/useEmailTemplate', () => {
+jest.mock('src/network/emailTemplates', () => {
   return {
     useEmailTemplate: jest.fn(),
   }

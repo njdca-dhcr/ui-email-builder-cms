@@ -13,7 +13,7 @@ import {
   SkipNavContent,
   SpacedContainer,
 } from 'src/ui'
-import { useEmailTemplates } from 'src/network/useEmailTemplates'
+import { useEmailTemplates } from 'src/network/emailTemplates'
 import { DestroyEmailTemplate } from 'src/ui/MyLibrary/DestroyEmailTemplate'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 

@@ -3,13 +3,12 @@ import { Button, Dialog, LoadingOverlay, Form, FormField } from 'src/ui'
 import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 import {
   CreateEmailTemplateErrorResponse,
-  useCreateEmailTemplate,
-} from 'src/network/useCreateEmailTemplate'
+  useCreateOrUpdateEmailTemplate,
+} from 'src/network/emailTemplates'
 import { navigate } from 'gatsby'
 import { useEmailPartsContentData } from '../EmailPartsContent'
 import { EmailTemplate } from 'src/appTypes'
 import { usePreviewText } from '../PreviewText'
-import { useCreateOrUpdateEmailTemplate } from 'src/network/useCreateOrUpdateEmailTemplate'
 import { stringFromFormData } from 'src/utils/stringFromFormData'
 
 export const SaveEmailTemplate: FC = () => {

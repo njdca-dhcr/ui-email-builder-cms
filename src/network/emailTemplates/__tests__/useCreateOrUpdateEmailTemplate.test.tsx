@@ -1,5 +1,5 @@
 import React from 'react'
-import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
+import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { asMock, buildUniqueEmailConfig, userIsSignedIn } from 'src/testHelpers'
 import { useCreateOrUpdateEmailTemplate } from '../useCreateOrUpdateEmailTemplate'
 import { randomUUID } from 'crypto'
@@ -7,7 +7,7 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
 
-jest.mock('../useAuthedFetch')
+jest.mock('../../useAuthedFetch')
 
 describe('useCreateOrUpdateEmailTemplate', () => {
   let mockAuthedFetch: AuthedFetch

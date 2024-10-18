@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { EmailTemplate } from 'src/appTypes'
-import { useAuthedFetch } from './useAuthedFetch'
+import { useAuthedFetch } from '../useAuthedFetch'
 
 export interface EmailTemplateShow extends EmailTemplate.UniqueConfig {
   id: string

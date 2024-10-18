@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useAuthedFetch } from './useAuthedFetch'
+import { useAuthedFetch } from '../useAuthedFetch'
 
 export interface EmailTemplateIndex {
   id: string

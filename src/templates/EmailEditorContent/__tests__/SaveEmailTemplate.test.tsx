@@ -15,10 +15,10 @@ import { asMock, userIsSignedIn } from 'src/testHelpers'
 import { navigate } from 'gatsby'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
-import { useCreateOrUpdateEmailTemplate } from 'src/network/useCreateOrUpdateEmailTemplate'
+import { useCreateOrUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { randomUUID } from 'crypto'
 
-jest.mock('src/network/useCreateOrUpdateEmailTemplate', () => {
+jest.mock('src/network/emailTemplates', () => {
   return { useCreateOrUpdateEmailTemplate: jest.fn() }
 })
 

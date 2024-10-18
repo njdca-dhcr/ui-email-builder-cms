@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useAuthedFetch } from './useAuthedFetch'
+import { useAuthedFetch } from '../useAuthedFetch'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailTemplateShow, buildUseEmailTemplateQueryKey } from './useEmailTemplate'
 import { QUERY_KEY } from './useEmailTemplates'

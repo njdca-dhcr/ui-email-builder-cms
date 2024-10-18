@@ -10,7 +10,7 @@ import {
 } from './appTypes'
 import uniqueId from 'lodash.uniqueid'
 import sample from 'lodash.sample'
-import { EmailTemplateIndex } from './network/useEmailTemplates'
+import { EmailTemplateIndex } from './network/emailTemplates'
 import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex } from './network/useUsers'

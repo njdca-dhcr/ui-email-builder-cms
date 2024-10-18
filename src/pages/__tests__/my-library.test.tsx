@@ -2,19 +2,33 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import MyLibraryPage from '../my-library'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
-import { asMock, buildEmailTemplateIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
-import { useEmailTemplates } from 'src/network/useEmailTemplates'
-import { EmailTemplateIndex } from 'src/network/useEmailTemplates'
+import {
+  asMock,
+  buildEmailTemplateIndex,
+  buildUseMutationResult,
+  buildUseQueryResult,
+  urlFor,
+} from 'src/testHelpers'
+import {
+  useEmailTemplates,
+  EmailTemplateIndex,
+  useDestroyEmailTemplate,
+} from 'src/network/emailTemplates'
 import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-jest.mock('src/network/useEmailTemplates', () => {
+jest.mock('src/network/emailTemplates', () => {
   return {
     useEmailTemplates: jest.fn(),
+    useDestroyEmailTemplate: jest.fn(),
   }
 })
 
 describe('My Library page', () => {
+  beforeEach(() => {
+    asMock(useDestroyEmailTemplate).mockReturnValue(buildUseMutationResult())
+  })
+
   const renderMyLibraryPage = () => {
     return render(
       <QueryClientProvider client={new QueryClient()}>

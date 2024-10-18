@@ -3,15 +3,13 @@ import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, buildUniqueEmailConfig, userIsSignedIn } from 'src/testHelpers'
-import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
-import { useUpdateEmailTemplate } from '../useUpdateEmailTemplate'
-import { randomUUID } from 'crypto'
-import { buildUseEmailTemplateQueryKey } from '../useEmailTemplate'
+import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
+import { useCreateEmailTemplate } from '../useCreateEmailTemplate'
 import { QUERY_KEY } from '../useEmailTemplates'
 
-jest.mock('../useAuthedFetch')
+jest.mock('../../useAuthedFetch')
 
-describe('useUpdateEmailTemplate', () => {
+describe('useCreateEmailTemplate', () => {
   let mockAuthedFetch: AuthedFetch
 
   beforeEach(() => {
@@ -20,16 +18,15 @@ describe('useUpdateEmailTemplate', () => {
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
   })
 
-  it('updates the email template', async () => {
+  it('creates an email template', async () => {
     const client = new QueryClient()
-    const emailTemplate = buildUniqueEmailConfig({ id: randomUUID() })
-    const attributes = buildUniqueEmailConfig()
+    const emailTemplate = buildUniqueEmailConfig()
     asMock(mockAuthedFetch).mockResolvedValue({
       statusCode: 200,
-      json: { emailTemplate: { ...emailTemplate, ...attributes } },
+      json: { emailTemplate: { id: 'saved id' } },
     })
 
-    const { result } = renderHook(() => useUpdateEmailTemplate(emailTemplate.id!), {
+    const { result } = renderHook(() => useCreateEmailTemplate(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -39,25 +36,24 @@ describe('useUpdateEmailTemplate', () => {
       },
     })
     expect(mockAuthedFetch).not.toHaveBeenCalled()
-    await result.current.mutateAsync(attributes)
+    await result.current.mutateAsync(emailTemplate)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/email-templates/${emailTemplate.id}`,
-      method: 'PATCH',
-      body: { emailTemplate: attributes },
+      path: '/email-templates',
+      method: 'POST',
+      body: { emailTemplate },
     })
-    expect(result.current.data).toEqual({ emailTemplate: { ...emailTemplate, ...attributes } })
+    expect(result.current.data).toEqual({ emailTemplate: { id: 'saved id' } })
   })
 
-  it('invalidates the correct useEmailTemplate query', async () => {
+  it('invalidates the useEmailTemplates query', async () => {
     const client = new QueryClient()
-    const emailTemplate = buildUniqueEmailConfig({ id: randomUUID() })
-    const attributes = buildUniqueEmailConfig()
+    const emailTemplate = buildUniqueEmailConfig()
     asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { emailTemplate } })
 
     jest.spyOn(client, 'invalidateQueries')
 
-    const { result } = renderHook(() => useUpdateEmailTemplate(emailTemplate.id!), {
+    const { result } = renderHook(() => useCreateEmailTemplate(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -67,13 +63,8 @@ describe('useUpdateEmailTemplate', () => {
       },
     })
     expect(client.invalidateQueries).not.toHaveBeenCalled()
-    await result.current.mutateAsync(attributes)
+    await result.current.mutateAsync(emailTemplate)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseEmailTemplateQueryKey(emailTemplate.id!)],
-    })
-    expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [QUERY_KEY],
-    })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [QUERY_KEY] })
   })
 })

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { useDestroyEmailTemplate } from 'src/network/useDestroyEmailTemplate'
-import { EmailTemplateIndex } from 'src/network/useEmailTemplates'
+import { useDestroyEmailTemplate } from 'src/network/emailTemplates'
+import { EmailTemplateIndex } from 'src/network/emailTemplates'
 import { Dialog, Form, LoadingOverlay, ButtonLike, Button, UswdsIcon } from 'src/ui'
 
 interface DestroyEmailTemplateProps {

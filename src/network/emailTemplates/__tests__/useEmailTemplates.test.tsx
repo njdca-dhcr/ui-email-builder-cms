@@ -1,15 +1,14 @@
 import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
-import { EmailTemplateShow, useEmailTemplate } from '../useEmailTemplate'
+import { useEmailTemplates } from '../useEmailTemplates'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, buildUniqueEmailConfig, userIsSignedIn } from 'src/testHelpers'
-import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
-import { randomUUID } from 'crypto'
+import { asMock, buildEmailTemplateIndex, userIsSignedIn } from 'src/testHelpers'
+import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 
-jest.mock('../useAuthedFetch')
+jest.mock('../../useAuthedFetch')
 
-describe('useEmailTemplate', () => {
+describe('useEmailTemplates', () => {
   let mockAuthedFetch: AuthedFetch
 
   beforeEach(() => {
@@ -18,12 +17,12 @@ describe('useEmailTemplate', () => {
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
   })
 
-  it('queries for the email template with the given id', async () => {
+  it('queries for email templates', async () => {
     const client = new QueryClient()
-    const emailTemplate: EmailTemplateShow = { ...buildUniqueEmailConfig(), id: randomUUID() }
-    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { emailTemplate } })
+    const emailTemplates = [buildEmailTemplateIndex(), buildEmailTemplateIndex()]
+    asMock(mockAuthedFetch).mockResolvedValue({ statusCode: 200, json: { emailTemplates } })
 
-    const { result } = renderHook(() => useEmailTemplate(emailTemplate.id), {
+    const { result } = renderHook(() => useEmailTemplates(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -35,9 +34,9 @@ describe('useEmailTemplate', () => {
 
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/email-templates/${emailTemplate.id}`,
+      path: '/email-templates',
       method: 'GET',
     })
-    expect(result.current.data).toEqual(emailTemplate)
+    expect(result.current.data).toEqual(emailTemplates)
   })
 })
