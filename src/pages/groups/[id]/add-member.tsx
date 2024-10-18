@@ -6,8 +6,7 @@ import {
   useCreateMembership,
   CreateMembershipErrorResponse,
 } from 'src/network/memberships'
-import { UserShow } from 'src/network/useUser'
-import { UsersIndex, useUsers } from 'src/network/useUsers'
+import { UsersIndex, useUsers, UserShow } from 'src/network/users'
 import {
   Heading,
   Layout,

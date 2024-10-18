@@ -3,7 +3,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Dialog, Form, LoadingOverlay, ButtonLike, Button, UswdsIcon } from 'src/ui'
 import { MembershipShow, useDestroyMembership } from 'src/network/memberships'
 import { GroupShow } from 'src/network/groups'
-import { UsersIndex } from 'src/network/useUsers'
+import { UsersIndex } from 'src/network/users'
 
 interface DestroyMembershipProps {
   group: GroupShow

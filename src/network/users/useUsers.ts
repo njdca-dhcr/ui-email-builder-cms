@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useAuthedFetch } from './useAuthedFetch'
+import { useAuthedFetch } from '../useAuthedFetch'
 import { UserRole } from 'src/appTypes'
 
 export interface UsersIndex {
@@ -8,13 +8,13 @@ export interface UsersIndex {
   role: UserRole
 }
 
-export const QUERY_KEY = 'useUsers'
+export const USER_USERS_QUERY_KEY = 'useUsers'
 
 export const useUsers = () => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({
-    queryKey: [QUERY_KEY],
+    queryKey: [USER_USERS_QUERY_KEY],
     queryFn: async () => {
       const result = await authedFetch<{ users: UsersIndex[] }>({
         path: '/users',

@@ -5,7 +5,7 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, randomBannerValue, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 import { useUpdateBanner } from '../useUpdateBanner'
-import { QUERY_KEY } from '../useCurrentUser'
+import { USE_CURRENT_USER_QUERY_KEY } from '../users/useCurrentUser'
 
 jest.mock('../useAuthedFetch')
 
@@ -62,6 +62,8 @@ describe('useUpdateBanner', () => {
     expect(client.invalidateQueries).not.toHaveBeenCalled()
     await result.current.mutateAsync(banner)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [QUERY_KEY] })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({
+      queryKey: [USE_CURRENT_USER_QUERY_KEY],
+    })
   })
 })

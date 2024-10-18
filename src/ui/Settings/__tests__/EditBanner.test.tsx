@@ -6,7 +6,7 @@ import { EditBanner } from '../EditBanner'
 import { useUpdateBanner } from 'src/network/useUpdateBanner'
 import { asMock, buildUseMutationResult, randomBannerValue, userIsSignedIn } from 'src/testHelpers'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 
 jest.mock('src/network/useUpdateBanner', () => {

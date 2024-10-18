@@ -11,7 +11,7 @@ import {
   userIsSignedIn,
 } from 'src/testHelpers'
 import { useUpdateStateSeal } from 'src/network/useUpdateStateSeal'
-import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 

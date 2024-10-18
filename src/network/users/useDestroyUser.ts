@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useAuthedFetch } from './useAuthedFetch'
-import { QUERY_KEY as USE_USERS_QUERY_KEY } from './useUsers'
+import { useAuthedFetch } from '../useAuthedFetch'
+import { USER_USERS_QUERY_KEY as USE_USERS_QUERY_KEY } from './useUsers'
 import { buildUseUserQueryKey } from './useUser'
 
 export const useDestroyUser = () => {

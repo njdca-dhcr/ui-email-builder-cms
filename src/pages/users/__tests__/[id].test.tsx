@@ -2,36 +2,32 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import UserShowPage, { Props } from '../[id]'
 import { asMock, buildUseMutationResult, buildUseQueryResult, buildUserShow } from 'src/testHelpers'
-import { useUser } from 'src/network/useUser'
-import { UserShow } from 'src/network/useUser'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import capitalize from 'lodash.capitalize'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { useUpdateUser } from 'src/network/useUpdateUser'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
-import { useCurrentUser } from 'src/network/useCurrentUser'
-
-jest.mock('src/network/useUser', () => {
-  return { useUser: jest.fn() }
-})
-
-jest.mock('src/network/useUpdateUser', () => {
-  return { useUpdateUser: jest.fn() }
-})
+import { useCurrentUser, useUpdateUser, UserShow, useUser, useDestroyUser } from 'src/network/users'
 
 jest.mock('src/utils/useCurrentRole', () => {
   return { useCurrentRole: jest.fn() }
 })
 
-jest.mock('src/network/useCurrentUser', () => {
-  return { useCurrentUser: jest.fn() }
+jest.mock('src/network/users', () => {
+  return {
+    useCurrentUser: jest.fn(),
+    useUpdateUser: jest.fn(),
+    useUser: jest.fn(),
+    useDestroyUser: jest.fn(),
+  }
 })
 
 describe('User Show Page', () => {
   beforeEach(() => {
+    asMock(useDestroyUser).mockReturnValue(buildUseMutationResult())
+
     const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({})
     asMock(useUpdateUser).mockReturnValue(mutationResult)
     asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })

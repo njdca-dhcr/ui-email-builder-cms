@@ -3,7 +3,7 @@ import { useAuthedFetch } from '../useAuthedFetch'
 import { MembershipShow } from './useCreateMembership'
 import { useRef } from 'react'
 import { buildUseGroupQueryKey } from '../groups'
-import { buildUseUserQueryKey } from '../useUser'
+import { buildUseUserQueryKey } from '../users/useUser'
 
 export const useDestroyMembership = () => {
   const client = useQueryClient()

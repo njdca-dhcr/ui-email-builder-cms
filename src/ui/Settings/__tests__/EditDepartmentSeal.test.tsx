@@ -11,7 +11,7 @@ import {
 } from 'src/testHelpers'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { useUpdateDepartmentSeal } from 'src/network/useUpdateDepartmentSeal'
-import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { faker } from '@faker-js/faker'
 

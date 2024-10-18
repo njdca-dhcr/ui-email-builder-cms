@@ -1,16 +1,15 @@
 import React from 'react'
 import { buildUserShow, buildUseMutationResult } from 'src/factories'
-import { useDestroyUser } from 'src/network/useDestroyUser'
+import { useDestroyUser, UserShow } from 'src/network/users'
 import { asMock } from 'src/testHelpers'
 import { DestroyUser } from '../DestroyUser'
 import { render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { randomUUID } from 'crypto'
-import { UserShow } from 'src/network/useUser'
 import { faker } from '@faker-js/faker'
 import { navigate } from 'gatsby'
 
-jest.mock('src/network/useDestroyUser', () => {
+jest.mock('src/network/users', () => {
   return { useDestroyUser: jest.fn() }
 })
 

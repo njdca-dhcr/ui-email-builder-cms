@@ -11,7 +11,7 @@ import React, {
 } from 'react'
 import isEqual from 'lodash.isequal'
 import { z } from 'zod'
-import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/users'
 import { useLocalStorageJSON } from './useLocalStorage'
 
 const UserInfoContext = createContext<

@@ -3,7 +3,7 @@ import { act, render, renderHook } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { UserInfoProvider, useUserInfo, useUserInfoValue } from '../UserInfoContext'
 import { randomBannerValue, randomObject } from 'src/testHelpers'
-import { CurrentUserEmailConfig } from 'src/network/useCurrentUser'
+import { CurrentUserEmailConfig } from 'src/network/users'
 import { BannerValue } from 'src/appTypes'
 
 describe('UserInfoProvider', () => {

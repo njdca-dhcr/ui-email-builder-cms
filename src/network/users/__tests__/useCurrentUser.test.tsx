@@ -10,9 +10,9 @@ import {
   userIsSignedIn,
 } from 'src/testHelpers'
 import { CurrentUser, useCurrentUser } from '../useCurrentUser'
-import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
+import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 
-jest.mock('../useAuthedFetch')
+jest.mock('../../useAuthedFetch')
 
 describe('useUser', () => {
   let mockAuthedFetch: AuthedFetch

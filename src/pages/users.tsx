@@ -14,7 +14,7 @@ import {
   LoadingOverlay,
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { useUsers } from 'src/network/useUsers'
+import { useUsers } from 'src/network/users'
 import './users.css'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 

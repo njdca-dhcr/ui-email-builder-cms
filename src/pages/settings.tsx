@@ -15,7 +15,7 @@ import { EditDisclaimer, EditBanner, EditStateSeal, EditDepartmentSeal } from 's
 import { EditingEmailCSS } from 'src/templates/emailHtmlDocument/EmailCSS'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { useCurrentUser } from 'src/network/useCurrentUser'
+import { useCurrentUser } from 'src/network/users'
 import './settings.css'
 
 const SettingsPage: FC = () => {

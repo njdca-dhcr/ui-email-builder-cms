@@ -4,12 +4,11 @@ import capitalize from 'lodash/capitalize'
 import UsersPage from '../users'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { asMock, buildUserIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
-import { useUsers } from 'src/network/useUsers'
-import { UsersIndex } from 'src/network/useUsers'
+import { useUsers, UsersIndex } from 'src/network/users'
 import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-jest.mock('src/network/useUsers', () => {
+jest.mock('src/network/users', () => {
   return {
     useUsers: jest.fn(),
   }

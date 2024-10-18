@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useAuthedFetch } from '../useAuthedFetch'
-import { UsersIndex } from '../useUsers'
+import { UsersIndex } from '../users/useUsers'
 
 export const USER_MEMBERSHIPS_QUERY_KEY = 'useUserMemberships'
 

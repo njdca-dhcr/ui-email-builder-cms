@@ -13,7 +13,7 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import { navigate } from 'gatsby'
 import { GroupShow } from 'src/network/groups'
-import { UsersIndex } from 'src/network/useUsers'
+import { UsersIndex } from 'src/network/users'
 
 jest.mock('src/network/memberships', () => {
   return { useDestroyMembership: jest.fn() }

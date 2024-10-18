@@ -21,7 +21,7 @@ import { EmailEditorContent } from '..'
 import { download } from 'src/utils/download'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
-import { CurrentUser, useCurrentUser } from 'src/network/useCurrentUser'
+import { CurrentUser, useCurrentUser } from 'src/network/users'
 
 jest.mock('src/utils/download', () => {
   return {
@@ -29,7 +29,7 @@ jest.mock('src/utils/download', () => {
   }
 })
 
-jest.mock('src/network/useCurrentUser', () => {
+jest.mock('src/network/users', () => {
   return {
     useCurrentUser: jest.fn(),
   }

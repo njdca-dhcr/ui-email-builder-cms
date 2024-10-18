@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { useDestroyUser } from 'src/network/useDestroyUser'
-import { UserShow } from 'src/network/useUser'
+import { useDestroyUser, UserShow } from 'src/network/users'
 import { Dialog, Form, LoadingOverlay, ButtonLike, Button, UswdsIcon } from 'src/ui'
 import { navigate } from 'gatsby'
 

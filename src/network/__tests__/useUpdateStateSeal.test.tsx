@@ -5,7 +5,7 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, randomStateSealValue, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 import { useUpdateStateSeal } from '../useUpdateStateSeal'
-import { QUERY_KEY } from '../useCurrentUser'
+import { USE_CURRENT_USER_QUERY_KEY } from '../users/useCurrentUser'
 
 jest.mock('../useAuthedFetch')
 
@@ -62,6 +62,8 @@ describe('useUpdateStateSeal', () => {
     expect(client.invalidateQueries).not.toHaveBeenCalled()
     await result.current.mutateAsync(stateSeal)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [QUERY_KEY] })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({
+      queryKey: [USE_CURRENT_USER_QUERY_KEY],
+    })
   })
 })

@@ -2,12 +2,12 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import Settings from '../settings'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
-import { useCurrentUser, CurrentUser, CurrentUserEmailConfig } from 'src/network/useCurrentUser'
+import { useCurrentUser, CurrentUser } from 'src/network/users'
 import { asMock, buildUseQueryResult, buildUserShow } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-jest.mock('src/network/useCurrentUser', () => {
+jest.mock('src/network/users', () => {
   return {
     useCurrentUser: jest.fn(),
   }

@@ -13,8 +13,7 @@ import sample from 'lodash.sample'
 import { EmailTemplateIndex } from './network/emailTemplates'
 import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
-import { UsersIndex } from './network/useUsers'
-import { UserShow } from './network/useUser'
+import { UsersIndex, UserShow } from './network/users'
 import { GroupsIndex, GroupShow, GroupShowUser } from './network/groups'
 
 export const randomObject = () => {

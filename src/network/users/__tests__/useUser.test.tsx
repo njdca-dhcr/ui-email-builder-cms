@@ -4,9 +4,9 @@ import { UserShow, useUser } from '../useUser'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, buildUserShow, userIsSignedIn } from 'src/testHelpers'
-import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
+import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 
-jest.mock('../useAuthedFetch')
+jest.mock('../../useAuthedFetch')
 
 describe('useUser', () => {
   let mockAuthedFetch: AuthedFetch

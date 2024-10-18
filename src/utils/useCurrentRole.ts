@@ -1,5 +1,5 @@
 import { UserRole } from 'src/appTypes'
-import { useCurrentUser } from 'src/network/useCurrentUser'
+import { useCurrentUser } from 'src/network/users'
 
 const admin = {
   isAdmin: true,

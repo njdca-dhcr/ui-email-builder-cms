@@ -6,7 +6,7 @@ import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useDestroyMembership } from '../useDestroyMembership'
 import { buildUseGroupQueryKey } from 'src/network/groups'
-import { buildUseUserQueryKey } from 'src/network/useUser'
+import { buildUseUserQueryKey } from 'src/network/users'
 
 jest.mock('../../useAuthedFetch')
 

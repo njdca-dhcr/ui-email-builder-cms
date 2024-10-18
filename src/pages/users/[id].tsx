@@ -2,9 +2,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, PageProps } from 'gatsby'
 import capitalize from 'lodash.capitalize'
 import React, { FC, useEffect, useState } from 'react'
-import { useCurrentUser } from 'src/network/useCurrentUser'
-import { useUpdateUser } from 'src/network/useUpdateUser'
-import { useUser } from 'src/network/useUser'
+import { useCurrentUser, useUpdateUser, useUser } from 'src/network/users'
 import {
   Button,
   ButtonLike,

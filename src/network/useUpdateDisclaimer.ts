@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { QUERY_KEY as USE_USER_QUERY_KEY } from './useCurrentUser'
+import { USE_CURRENT_USER_QUERY_KEY as USE_USER_QUERY_KEY } from './users/useCurrentUser'
 import { useAuthedFetch } from './useAuthedFetch'
 import { DisclaimerValue } from 'src/appTypes'
 

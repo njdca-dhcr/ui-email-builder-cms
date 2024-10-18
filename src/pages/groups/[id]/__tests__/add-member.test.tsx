@@ -10,16 +10,15 @@ import {
 } from 'src/testHelpers'
 import { useGroup, GroupShow } from 'src/network/groups'
 import { useCreateMembership, useMembershipsForGroup } from 'src/network/memberships'
-import { UsersIndex, useUsers } from 'src/network/useUsers'
+import { UsersIndex, useUsers } from 'src/network/users'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { navigate } from 'gatsby'
-import { UserShow } from 'src/network/useUser'
 
-jest.mock('src/network/useUsers', () => {
+jest.mock('src/network/users', () => {
   return { useUsers: jest.fn() }
 })
 

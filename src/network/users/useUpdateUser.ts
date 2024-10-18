@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useAuthedFetch } from './useAuthedFetch'
+import { useAuthedFetch } from '../useAuthedFetch'
 import { UserShow, buildUseUserQueryKey } from './useUser'
-import { QUERY_KEY } from './useUsers'
+import { USER_USERS_QUERY_KEY } from './useUsers'
 import { UserRole } from 'src/appTypes'
 
 interface UpdateUserSuccessfulResponse {
@@ -33,7 +33,7 @@ export const useUpdateUser = (id: string) => {
     },
     onSuccess: () => {
       client.invalidateQueries({ queryKey: [buildUseUserQueryKey(id)] })
-      client.invalidateQueries({ queryKey: [QUERY_KEY] })
+      client.invalidateQueries({ queryKey: [USER_USERS_QUERY_KEY] })
     },
   })
 }

@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react'
 import React from 'react'
-import { CurrentUser, useCurrentUser } from 'src/network/useCurrentUser'
+import { CurrentUser, useCurrentUser } from 'src/network/users'
 import {
   asMock,
   buildUseQueryResult,
@@ -11,7 +11,7 @@ import {
 import { AuthProvider } from '../AuthContext'
 import { useCurrentRole } from '../useCurrentRole'
 
-jest.mock('src/network/useCurrentUser', () => {
+jest.mock('src/network/users', () => {
   return { useCurrentUser: jest.fn() }
 })
 
