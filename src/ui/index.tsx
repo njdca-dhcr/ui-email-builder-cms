@@ -17,7 +17,7 @@ export {
   SkipNavContent,
   SpacedSidebarContainer,
 } from './Layout'
-export { List } from './List'
+export { List, ListItem } from './List'
 export { LoadingOverlay } from './LoadingOverlay'
 export { RightPointer } from './RightPointer'
 export { Select } from './Select'

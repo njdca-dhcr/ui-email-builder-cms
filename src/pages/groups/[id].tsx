@@ -14,6 +14,7 @@ import {
   LoadingOverlay,
   List,
   UswdsIcon,
+  ListItem,
 } from 'src/ui'
 import { DestroyGroup } from 'src/ui/GroupShow/DestroyGroup'
 import { DestroyMembership } from 'src/ui/Memberships/DestroyMembership'
@@ -63,7 +64,7 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                 {group.users.length !== 0 ? (
                   <List className="user-list">
                     {group.users.map((user) => (
-                      <li key={user.id} className="user-item">
+                      <ListItem key={user.id} className="user-item">
                         <Link to={`/users/${user.id}`} className="user-email">
                           {user.email}
                         </Link>
@@ -78,7 +79,7 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                             user={user}
                           />
                         )}
-                      </li>
+                      </ListItem>
                     ))}
                   </List>
                 ) : (

@@ -39,18 +39,6 @@
   margin-bottom: 6rem;
 }
 
-.library-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--gray-light);
-  padding: 1.5rem 0;
-}
-
-.library-item:last-of-type {
-  border-bottom: 0;
-}
-
 .library-item .delete-trigger {
   cursor: pointer;
   margin-left: 0.75rem;

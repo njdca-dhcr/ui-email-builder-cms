@@ -12,6 +12,7 @@ import {
   SpacedContainer,
   SidebarNavigation,
   LoadingOverlay,
+  ListItem,
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useUsers } from 'src/network/users'
@@ -36,12 +37,12 @@ const UsersPage: FC = () => {
           {users && users.length > 0 && (
             <List className="user-list">
               {users.map((user) => (
-                <li key={user.id} className="user-item">
+                <ListItem key={user.id}>
                   <Link to={`/users/${user.id}`} className="user-email">
                     {user.email}
                   </Link>
                   <span className="user-role">{capitalize(user.role)}</span>
-                </li>
+                </ListItem>
               ))}
             </List>
           )}

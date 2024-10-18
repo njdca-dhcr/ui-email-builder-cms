@@ -5,6 +5,7 @@ import {
   Heading,
   Layout,
   List,
+  ListItem,
   LoadingOverlay,
   PageContent,
   Paragraph,
@@ -48,14 +49,14 @@ const GroupsPage: FC = () => {
           {groups && (
             <List className="library-list">
               {groups.map((group) => (
-                <li key={group.id} className="library-item">
+                <ListItem key={group.id} className="library-item">
                   <div className="library-name-container">
                     <Link to={`/groups/${group.id}`} className="library-name">
                       {group.name}
                     </Link>
                   </div>
                   <p className="library-description">{group.description}</p>
-                </li>
+                </ListItem>
               ))}
             </List>
           )}

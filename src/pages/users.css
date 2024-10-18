@@ -3,18 +3,6 @@
   margin-bottom: 3rem;
 }
 
-.user-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  border-bottom: 1px solid var(--gray-light);
-  padding: 1.5rem 0;
-}
-
-.user-item:last-of-type {
-  border-bottom: 0;
-}
-
 .user-email {
   align-items: center;
   color: var(--black);

@@ -27,14 +27,14 @@ jest.mock('src/network/users', () => {
 describe('User Show Page', () => {
   beforeEach(() => {
     asMock(useDestroyUser).mockReturnValue(buildUseMutationResult())
-
-    const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateUser>>({})
-    asMock(useUpdateUser).mockReturnValue(mutationResult)
+    asMock(useUpdateUser).mockReturnValue(buildUseMutationResult())
     asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
 
     const currentUser = buildUserShow()
-    const queryForUseCurrentUser = buildUseQueryResult({ data: currentUser })
-    asMock(useCurrentUser).mockReturnValue({ ...queryForUseCurrentUser, enabled: true })
+    asMock(useCurrentUser).mockReturnValue({
+      ...buildUseQueryResult({ data: currentUser }),
+      enabled: true,
+    })
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -186,7 +186,7 @@ describe('User Show Page', () => {
 
       expect(mutateAsync).not.toHaveBeenCalled()
 
-      const { getByRole, getByLabelText, baseElement, queryByLabelText } = renderPage()
+      const { getByRole, getByLabelText, queryByLabelText } = renderPage()
 
       await currentUser.click(getByRole('button', { name: 'Edit role' }))
       await currentUser.selectOptions(getByLabelText('Role'), 'Admin')

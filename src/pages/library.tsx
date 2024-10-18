@@ -11,6 +11,7 @@ import {
   SidebarNavigation,
   List,
   Input,
+  ListItem,
 } from 'src/ui'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
@@ -60,12 +61,12 @@ const LibaryPage: FC = () => {
           {filteredEmailTemplates.length > 0 ? (
             <List className="library-list">
               {filteredEmailTemplates.map(({ id, name, description, path }) => (
-                <li key={id} className="library-item">
+                <ListItem key={id} className="library-item">
                   <Link to={path} className="library-name">
                     {name}
                   </Link>
                   <p className="library-description">{description}</p>
-                </li>
+                </ListItem>
               ))}
             </List>
           ) : (

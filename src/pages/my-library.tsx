@@ -5,6 +5,7 @@ import {
   Heading,
   Layout,
   List,
+  ListItem,
   LoadingOverlay,
   PageContent,
   Paragraph,
@@ -35,7 +36,7 @@ const MyLibraryPage: FC = () => {
           {emailTemplates && emailTemplates.length > 0 && (
             <List className="library-list">
               {emailTemplates.map((emailTemplate) => (
-                <li key={emailTemplate.id} className="library-item">
+                <ListItem key={emailTemplate.id} className="library-item">
                   <div className="library-name-container">
                     <Link to={`/email-templates/${emailTemplate.id}`} className="library-name">
                       {emailTemplate.name}
@@ -43,7 +44,7 @@ const MyLibraryPage: FC = () => {
                     <DestroyEmailTemplate emailTemplate={emailTemplate} />
                   </div>
                   <p className="library-description">{emailTemplate.description}</p>
-                </li>
+                </ListItem>
               ))}
             </List>
           )}
