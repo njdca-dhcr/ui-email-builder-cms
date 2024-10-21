@@ -17,14 +17,15 @@
 }
 
 .group-attributes {
-  padding-top: 1rem;
+  padding-top: 3rem;
+  border-bottom: 1px solid var(--gray-light);
 }
 
 .group-name {
   align-items: center;
   color: var(--black);
   display: flex;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   margin: 0;
   text-decoration: none;
@@ -32,16 +33,18 @@
 
 .group-description {
   color: var(--black);
+  padding-top: 0.5rem;
 }
 
 .members-heading {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin: 0;
-  padding-top: 1rem;
+  padding-top: 2rem;
 }
 
-.group-members .user-list {
-  margin: 0;
+.group-members ul {
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
 
   .user-item {
     flex-direction: row;
