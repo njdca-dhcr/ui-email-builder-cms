@@ -85,7 +85,7 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                   <Paragraph>This group doesn't have any members yet.</Paragraph>
                 )}
                 <Link to={`/groups/${params.id}/add-member`} className="button">
-                  Add Members to this Group
+                  Add a Member to this Group
                 </Link>
               </section>
             </>

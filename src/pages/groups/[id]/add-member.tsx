@@ -68,7 +68,11 @@ const AddGroupMemberPage: FC<Props> = ({ params }) => {
           {group && users && members && (
             <Form
               className="add-member-form"
-              onSubmit={async (event) => {
+              onSubmit={async () => {
+                if (!selectedUser) {
+                  setValidationErrors({ user: 'is required' })
+                  return
+                }
                 setValidationErrors(null)
                 const result = await mutateAsync({
                   groupId: params.id,
@@ -93,7 +97,7 @@ const AddGroupMemberPage: FC<Props> = ({ params }) => {
                 options={nonMemberUsers.map((user) => ({ label: user.email, value: user.id }))}
               />
               {validationErrors && (
-                <div className="error-message">
+                <div className="error-messages">
                   {validationErrors?.user && <p id="user-error">{validationErrors.user}</p>}
                   {validationErrors?.group && <p id="group-error">{validationErrors.group}</p>}
                 </div>

@@ -108,7 +108,7 @@ describe('Group Show Page', () => {
 
     it('displays a link to the add members page', () => {
       const { queryByRole } = renderPage({ params: { id: group.id } })
-      const addLink = queryByRole('link', { name: 'Add Members to this Group' })
+      const addLink = queryByRole('link', { name: 'Add a Member to this Group' })
 
       expect(addLink).not.toBeNull()
       expect(addLink).toHaveAttribute('href', `/groups/${group.id}/add-member`)

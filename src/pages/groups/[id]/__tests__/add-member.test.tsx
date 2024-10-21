@@ -150,6 +150,44 @@ describe('Add Member Page', () => {
     })
   })
 
+  describe('when no member has been selected', () => {
+    let user: UserEvent
+    let users: UsersIndex[]
+    let group: GroupShow
+    let members: UsersIndex[]
+
+    beforeEach(() => {
+      user = userEvent.setup()
+      users = [buildUserIndex(), buildUserIndex()]
+      group = buildGroupShow()
+      members = []
+
+      const query = buildUseQueryResult<GroupShow>({ isLoading: false, data: group })
+      const usersQuery = buildUseQueryResult<UsersIndex[]>({ isLoading: false, data: users })
+      const membersQuery = buildUseQueryResult<UsersIndex[]>({ isLoading: false, data: members })
+      asMock(useGroup).mockReturnValue(query)
+      asMock(useUsers).mockReturnValue(usersQuery)
+      asMock(useMembershipsForGroup).mockReturnValue(membersQuery)
+    })
+
+    it('does not mutate and displays an error after submission', async () => {
+      const mutate = jest.fn()
+      const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateMembership>>({
+        mutateAsync: mutate,
+      })
+      asMock(useCreateMembership).mockReturnValue(mutationResult)
+      const { getByRole, baseElement } = await renderPage({ params: { id: group.id } })
+
+      expect(mutate).not.toHaveBeenCalled()
+      expect(baseElement).not.toHaveTextContent('is required')
+
+      await user.click(getByRole('button', { name: 'Add Member' }))
+
+      expect(mutate).not.toHaveBeenCalled()
+      expect(baseElement).toHaveTextContent('is required')
+    })
+  })
+
   describe('successful mutation', () => {
     let user: UserEvent
     let users: UsersIndex[]
@@ -200,6 +238,8 @@ describe('Add Member Page', () => {
       const { getByRole } = await renderPage({ params: { id: group.id } })
 
       expect(navigate).not.toHaveBeenCalled()
+      await user.click(getByRole('button', { name: 'Select member to add' }))
+      await user.click(getByRole('option', { name: users[1].email }))
       await user.click(getByRole('button', { name: 'Add Member' }))
       expect(navigate).toHaveBeenCalledWith(`/groups/${group.id}`)
     })

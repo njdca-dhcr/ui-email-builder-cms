@@ -57,13 +57,31 @@
 }
 
 .add-member-form {
-  width: 30rem;
+  max-width: 30rem;
 
   label {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
   }
 
   .select {
+    margin-bottom: 0.5rem;
+  }
+
+  .error-messages {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
     margin-bottom: 1rem;
+  }
+
+  .error-messages p {
+    background-color: var(--alert-error-light);
+    border-radius: 3px;
+    font-size: var(--font-small);
+    font-style: italic;
+    margin: 0;
+    padding: 0 0.25rem;
   }
 }
