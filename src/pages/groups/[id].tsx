@@ -16,8 +16,7 @@ import {
   UswdsIcon,
   ListItem,
 } from 'src/ui'
-import { DestroyGroup } from 'src/ui/GroupShow/DestroyGroup'
-import { DestroyMembership } from 'src/ui/Memberships/DestroyMembership'
+import { DestroyGroup, DestroyMembership } from 'src/ui/DestroyDialog'
 import { Actions } from 'src/ui/Layout'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useCurrentRole } from 'src/utils/useCurrentRole'

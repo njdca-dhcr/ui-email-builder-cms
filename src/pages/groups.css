@@ -3,19 +3,16 @@
   justify-content: space-between;
 }
 
-.delete-group-trigger,
 .new-group-link {
   align-items: center;
-  border-radius: 50%;
   height: 3rem;
   display: flex;
   justify-content: center;
   width: 3rem;
-  transition: background-color 150ms ease-in;
 
   &:hover,
   &:focus {
-    background-color: var(--gray-light-medium);
+    filter: invert(31%) sepia(4%) saturate(6370%) hue-rotate(153deg) brightness(99%) contrast(86%);
   }
 }
 
@@ -54,10 +51,6 @@
 .group-edit-action-buttons {
   display: flex;
   justify-content: space-between;
-}
-
-.destroy-group-form .delete-button {
-  background-color: var(--alert-error-dark);
 }
 
 .add-member-form {

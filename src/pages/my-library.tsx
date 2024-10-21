@@ -15,7 +15,7 @@ import {
   SpacedContainer,
 } from 'src/ui'
 import { useEmailTemplates } from 'src/network/emailTemplates'
-import { DestroyEmailTemplate } from 'src/ui/MyLibrary/DestroyEmailTemplate'
+import { DestroyEmailTemplate } from 'src/ui/DestroyDialog'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 const MyLibraryPage: FC = () => {

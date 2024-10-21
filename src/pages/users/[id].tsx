@@ -18,7 +18,7 @@ import {
   Form,
   UswdsIcon,
 } from 'src/ui'
-import { DestroyUser } from 'src/ui/UserShow/DestroyUser'
+import { DestroyUser } from 'src/ui/DestroyDialog'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'

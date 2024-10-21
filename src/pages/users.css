@@ -45,18 +45,3 @@
     background-color: var(--gray-light);
   }
 }
-
-.user-item .delete-trigger {
-  cursor: pointer;
-  margin-left: 0.75rem;
-  padding-top: 0.35rem;
-}
-
-.user-item .delete-trigger:focus img,
-.user-item .delete-trigger:hover img {
-  filter: invert(13%) sepia(80%) saturate(4782%) hue-rotate(354deg) brightness(80%) contrast(105%);
-}
-
-.destroy-user-form .delete-button {
-  background-color: var(--alert-error-dark);
-}
