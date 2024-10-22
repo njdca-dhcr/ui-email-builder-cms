@@ -35,6 +35,7 @@ const config: GatsbyConfig = {
         theme_color: `#285f77`,
         display: `standalone`,
         icon: `src/images/favicon.png`,
+        crossOrigin: `use-credentials`,
       },
     },
     {
