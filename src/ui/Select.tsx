@@ -9,6 +9,7 @@ import {
 import '@reach/listbox/styles.css'
 import { ChevronDownIcon } from './ChevronDownIcon'
 import classNames from 'classnames'
+import './Select.css'
 
 interface Props {
   className?: string
