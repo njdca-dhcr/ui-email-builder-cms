@@ -14,18 +14,18 @@ jest.mock('src/ui/UswdsIconSelect', () => {
 describe('StatusControls', () => {
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
-    const { getByRole, queryByRole } = render(
+    const { getByRole, queryByRole, getByLabelText } = render(
       <EmailPartsContent>
         <StatusControls
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
         />
       </EmailPartsContent>,
     )
-    let button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Overview')
 
-    await user.click(button!)
+    let element = getByLabelText('Status variant')
+    expect(element).toHaveTextContent('Overview')
+
+    await user.click(element!)
     expect(queryByRole('option', { name: 'Overview' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Overview w/ Reason' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Missing Document Specifics' })).not.toBeNull()
@@ -33,9 +33,8 @@ describe('StatusControls', () => {
     expect(queryByRole('option', { name: 'Overview w/ Reason + Amount Breakdown' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'Overview w/ Reason' }))
 
-    button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Overview w/ Reason')
+    element = getByLabelText('Status variant')
+    expect(element).toHaveTextContent('Overview w/ Reason')
   })
 
   it('provides a toggle for supportive information', async () => {
@@ -101,7 +100,7 @@ describe('StatusControls', () => {
       })
 
       it('does not have a box color select', () => {
-        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+        expect(rendered.queryAllByRole('combobox')).toHaveLength(1)
       })
 
       it('does not provide a dropdown for selecting an icon', () => {
@@ -123,12 +122,12 @@ describe('StatusControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByLabelText('Status variant'))
         await user.click(rendered.getByRole('option', { name: 'Overview w/ Reason' }))
       })
 
       it('does not have a box color select', () => {
-        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+        expect(rendered.queryAllByRole('combobox')).toHaveLength(1)
       })
 
       it('does not provide a dropdown for selecting an icon', () => {
@@ -150,12 +149,12 @@ describe('StatusControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByLabelText('Status variant'))
         await user.click(rendered.getByRole('option', { name: 'Missing Document Specifics' }))
       })
 
       it('does not have a box color select', () => {
-        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+        expect(rendered.queryAllByRole('combobox')).toHaveLength(1)
       })
 
       it('does not provide a dropdown for selecting an icon', () => {
@@ -177,16 +176,14 @@ describe('StatusControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByLabelText('Status variant'))
         await user.click(rendered.getByRole('option', { name: 'Overview w/ Reason + Amount Due' }))
       })
 
       it('has a box color select', async () => {
-        const button = rendered.queryByRole('button', { name: 'Box Color Yielding Yellow' })
-        expect(button).not.toBeNull()
-        await user.click(button!)
+        await user.click(rendered.getByLabelText('Box Color'))
         await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
-        expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
+        expect(rendered.getByLabelText('Box Color')).not.toBeNull()
       })
 
       it('provides a dropdown for selecting an icon', () => {
@@ -208,18 +205,16 @@ describe('StatusControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Status variant Overview' }))
+        await user.click(rendered.getByLabelText('Status variant'))
         await user.click(
           rendered.getByRole('option', { name: 'Overview w/ Reason + Amount Breakdown' }),
         )
       })
 
       it('has a box color select', async () => {
-        const button = rendered.queryByRole('button', { name: 'Box Color Yielding Yellow' })
-        expect(button).not.toBeNull()
-        await user.click(button!)
+        await user.click(rendered.getByLabelText('Box Color'))
         await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
-        expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
+        expect(rendered.getByLabelText('Box Color')).not.toBeNull()
       })
 
       it('provides a dropdown for selecting an icon', () => {

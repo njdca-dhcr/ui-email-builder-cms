@@ -32,19 +32,17 @@ describe('InformationalBoxControls', () => {
   })
 
   it('displays a dropdown for selecting an box color', async () => {
-    const { getByRole, queryByRole } = rendered
-    let button: HTMLElement | null = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Benefit Blue')
+    const { getByRole, queryByRole, getByLabelText } = rendered
+    let element = getByLabelText('Box Color')
+    expect(element).toHaveTextContent('Benefit Blue')
 
-    await user.click(button!)
+    await user.click(element!)
     expect(queryByRole('option', { name: 'Benefit Blue' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Yielding Yellow' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'Yielding Yellow' }))
 
-    button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Yielding Yellow')
+    element = getByLabelText('Box Color')
+    expect(element).toHaveTextContent('Yielding Yellow')
   })
 
   it('provides a toggle for supportive information', async () => {

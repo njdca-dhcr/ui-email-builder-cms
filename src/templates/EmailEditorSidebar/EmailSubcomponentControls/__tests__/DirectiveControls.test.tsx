@@ -10,24 +10,22 @@ import { DirectiveVariant } from 'src/appTypes'
 describe('DirectiveControls', () => {
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
-    const { getByRole, queryByRole } = render(
+    const { getByRole, queryByRole, getByLabelText } = render(
       <EmailPartsContent>
         <DirectiveControls
           emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
         />
-        ,
       </EmailPartsContent>,
     )
-    let button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('One Step')
 
-    await user.click(button!)
+    let element = getByLabelText('Directive variant')
+    expect(element).toHaveTextContent('One Step')
+
+    await user.click(element!)
     await user.click(getByRole('option', { name: 'Pay Online' }))
 
-    button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Pay Online')
+    element = getByLabelText('Directive variant')
+    expect(element).toHaveTextContent('Pay Online')
   })
 
   it('provides a color picker for the background color', async () => {
@@ -97,7 +95,7 @@ describe('DirectiveControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Directive variant One Step' }))
+        await user.click(rendered.getByLabelText('Directive variant'))
         await user.click(rendered.getByRole('option', { name: 'Three Steps' }))
       })
 
@@ -123,7 +121,7 @@ describe('DirectiveControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Directive variant One Step' }))
+        await user.click(rendered.getByLabelText('Directive variant'))
         await user.click(rendered.getByRole('option', { name: 'Three Steps w/ Step 2 Expansion' }))
       })
 
@@ -149,7 +147,7 @@ describe('DirectiveControls', () => {
             />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByRole('button', { name: 'Directive variant One Step' }))
+        await user.click(rendered.getByLabelText('Directive variant'))
         await user.click(rendered.getByRole('option', { name: 'Pay Online' }))
       })
 

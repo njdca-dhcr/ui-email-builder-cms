@@ -14,10 +14,10 @@ describe('SelectBoxColor', () => {
         onChange={jest.fn()}
       />,
     )
-    const button = getByRole('button')
-    expect(button).toHaveTextContent('Governing Gray')
+    const combobox = getByRole('combobox')
+    expect(combobox).toHaveTextContent('Governing Gray')
 
-    await user.click(button)
+    await user.click(combobox)
 
     expect(queryByRole('option', { name: 'Benefit Blue' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Granted Green' })).not.toBeNull()
@@ -36,7 +36,7 @@ describe('SelectBoxColor', () => {
       />,
     )
 
-    await user.click(getByRole('button'))
+    await user.click(getByRole('combobox'))
 
     expect(handleChange).not.toHaveBeenCalled()
     await user.click(getByRole('option', { name: 'Benefit Blue' }))

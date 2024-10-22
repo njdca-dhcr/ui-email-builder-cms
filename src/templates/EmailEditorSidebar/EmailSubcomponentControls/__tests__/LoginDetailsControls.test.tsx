@@ -36,23 +36,23 @@ describe('LoginDetailsControls', () => {
   })
 
   it('provides a dropdown for selecting a variant', async () => {
-    const { getByRole, queryByRole, queryByText } = rendered
-    let button = queryByText('Details', { selector: 'span' })
-    expect(button).not.toBeNull()
+    const { getByRole, getByLabelText, queryByRole } = rendered
+    let element = getByLabelText('Login Details variant')
+    expect(element).toHaveTextContent('Details')
 
-    await user.click(button!)
+    await user.click(element!)
     expect(queryByRole('option', { name: 'Details' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Information' })).not.toBeNull()
-    await user.click(getByRole('option', { name: 'Information' }))
 
-    button = queryByText('Information', { selector: 'span' })
-    expect(button).not.toBeNull()
+    await user.click(getByRole('option', { name: 'Information' }))
+    element = getByLabelText('Login Details variant')
+    expect(element).toHaveTextContent('Information')
   })
 
   describe('variants', () => {
     describe('Login Details', () => {
       beforeEach(async () => {
-        await user.click(rendered.getAllByRole('button')[0])
+        await user.click(rendered.getAllByRole('combobox')[0])
         await user.click(rendered.getByRole('option', { name: 'Details' }))
       })
 
@@ -70,7 +70,7 @@ describe('LoginDetailsControls', () => {
 
     describe('Login Information', () => {
       beforeEach(async () => {
-        await user.click(rendered.getAllByRole('button')[0])
+        await user.click(rendered.getAllByRole('combobox')[0])
         await user.click(rendered.getByRole('option', { name: 'Information' }))
       })
 

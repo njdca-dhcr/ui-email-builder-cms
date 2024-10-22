@@ -85,7 +85,7 @@ describe('RulesRightsRegulations', () => {
           <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
           <RulesRightsRegulationsControls emailSubComponent={emailSubComponent} />,
         )
-        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Rules, Rights, and Regulations variant'))
         await user.click(rendered.getByRole('option', { name: 'Reminder' }))
       })
 
@@ -110,7 +110,7 @@ describe('RulesRightsRegulations', () => {
           <RulesRightsRegulations emailSubComponent={emailSubComponent} />,
           <RulesRightsRegulationsControls emailSubComponent={emailSubComponent} />,
         )
-        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Rules, Rights, and Regulations variant'))
         await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))
       })
 

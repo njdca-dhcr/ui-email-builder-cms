@@ -1,12 +1,6 @@
 import React, { FC, ReactElement } from 'react'
-import {
-  ListboxInput,
-  ListboxButton,
-  ListboxPopover,
-  ListboxList,
-  ListboxOption,
-} from '@reach/listbox'
-import '@reach/listbox/styles.css'
+import * as BaseSelect from '@radix-ui/react-select'
+import { CheckIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import { ChevronDownIcon } from './ChevronDownIcon'
 import classNames from 'classnames'
 import './Select.css'
@@ -32,32 +26,57 @@ export const Select: FC<Props> = ({
   value,
   ...props
 }) => {
+  const valueLabel: string | null =
+    options.find((option) => option.value === value)?.label ?? (null as any)
+
   return (
-    <ListboxInput
-      aria-labelledby={labelId}
-      className={classNames('select', size, className)}
-      data-testid={props['data-testid']}
-      value={value}
-      onChange={onChange}
-    >
-      {({ value, valueLabel }) => (
-        <>
-          <ListboxButton arrow={<ChevronDownIcon />} className="select-button">
-            <span data-value={value}>
-              {renderValue ? renderValue({ value, valueLabel }) : valueLabel}
-            </span>
-          </ListboxButton>
-          <ListboxPopover className={classNames('select-options-popover', size)}>
-            <ListboxList>
+    <div className={classNames('SelectContainer', size, className)}>
+      <BaseSelect.Root value={value} onValueChange={onChange}>
+        <BaseSelect.Trigger
+          className="SelectTrigger"
+          aria-labelledby={labelId}
+          data-testid={props['data-testid']}
+        >
+          <BaseSelect.Value>
+            {renderValue ? renderValue({ value, valueLabel }) : valueLabel}
+          </BaseSelect.Value>
+          <BaseSelect.Icon className="SelectIcon">
+            <ChevronDownIcon />
+          </BaseSelect.Icon>
+        </BaseSelect.Trigger>
+        <BaseSelect.Portal>
+          <BaseSelect.Content className={classNames('SelectContent', size)} position="popper">
+            <BaseSelect.ScrollUpButton className="SelectScrollButton">
+              <ChevronUpIcon />
+            </BaseSelect.ScrollUpButton>
+            <BaseSelect.Viewport className="SelectViewport">
               {options.map((option) => (
-                <ListboxOption key={option.value} value={option.value} className="select-option">
+                <SelectItem key={option.value} value={option.value}>
                   {option.label}
-                </ListboxOption>
+                </SelectItem>
               ))}
-            </ListboxList>
-          </ListboxPopover>
-        </>
-      )}
-    </ListboxInput>
+            </BaseSelect.Viewport>
+            <BaseSelect.ScrollDownButton className="SelectScrollButton">
+              <ChevronDownIcon />
+            </BaseSelect.ScrollDownButton>
+          </BaseSelect.Content>
+        </BaseSelect.Portal>
+      </BaseSelect.Root>
+    </div>
   )
 }
+
+const SelectItem = React.forwardRef<any, any>(({ children, className, ...props }, forwardedRef) => {
+  return (
+    <BaseSelect.Item
+      className={classNames('SelectItem', className)}
+      {...(props as any)}
+      ref={forwardedRef}
+    >
+      <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
+      <BaseSelect.ItemIndicator className="SelectItemIndicator">
+        <CheckIcon />
+      </BaseSelect.ItemIndicator>
+    </BaseSelect.Item>
+  )
+})

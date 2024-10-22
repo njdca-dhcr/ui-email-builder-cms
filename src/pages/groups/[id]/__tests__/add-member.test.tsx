@@ -214,11 +214,11 @@ describe('Add Member Page', () => {
         mutateAsync: mutate,
       })
       asMock(useCreateMembership).mockReturnValue(mutationResult)
-      const { getByRole } = await renderPage({ params: { id: group.id } })
+      const { getByRole, getByLabelText } = await renderPage({ params: { id: group.id } })
 
       expect(mutate).not.toHaveBeenCalled()
 
-      await user.click(getByRole('button', { name: 'Select member to add' }))
+      await user.click(getByLabelText('Select member to add'))
       await user.click(getByRole('option', { name: users[1].email }))
       await user.click(getByRole('button', { name: 'Add Member' }))
 
@@ -235,10 +235,10 @@ describe('Add Member Page', () => {
           .mockResolvedValue({ id: 'newMembership', groupId: group.id, userId: users[1].id }),
       })
       asMock(useCreateMembership).mockReturnValue(mutationResult)
-      const { getByRole } = await renderPage({ params: { id: group.id } })
+      const { getByRole, getByLabelText } = await renderPage({ params: { id: group.id } })
 
       expect(navigate).not.toHaveBeenCalled()
-      await user.click(getByRole('button', { name: 'Select member to add' }))
+      await user.click(getByLabelText('Select member to add'))
       await user.click(getByRole('option', { name: users[1].email }))
       await user.click(getByRole('button', { name: 'Add Member' }))
       expect(navigate).toHaveBeenCalledWith(`/groups/${group.id}`)
@@ -285,9 +285,9 @@ describe('Add Member Page', () => {
         mutateAsync,
       })
       asMock(useCreateMembership).mockReturnValue(mutationResult)
-      const { baseElement, getByRole } = await renderPage()
+      const { baseElement, getByRole, getByLabelText } = await renderPage()
 
-      await user.click(getByRole('button', { name: 'Select member to add' }))
+      await user.click(getByLabelText('Select member to add'))
       await user.click(getByRole('option', { name: users[1].email }))
       await user.click(getByRole('button', { name: 'Add Member' }))
 

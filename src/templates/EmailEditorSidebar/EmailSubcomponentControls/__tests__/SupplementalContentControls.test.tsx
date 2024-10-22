@@ -35,19 +35,19 @@ describe('SupplementalContentControls', () => {
 
     it('provides a dropdown for selecting a variant', async () => {
       const user = userEvent.setup()
-      const { getByRole, queryByRole, queryByText } = rendered
-      let button = queryByText('Single', { selector: 'span' })
-      expect(button).not.toBeNull()
+      const { getByRole, queryByRole, getByLabelText } = rendered
+      let element = getByLabelText('Supplemental Content variant')
+      expect(element).toHaveTextContent('Single')
 
-      await user.click(button!)
+      await user.click(element)
       expect(queryByRole('option', { name: 'Single' })).not.toBeNull()
       expect(queryByRole('option', { name: 'Double' })).not.toBeNull()
       expect(queryByRole('option', { name: 'Triple' })).not.toBeNull()
       expect(queryByRole('option', { name: 'Benefit Amount' })).not.toBeNull()
       await user.click(getByRole('option', { name: 'Double' }))
 
-      button = queryByText('Double', { selector: 'span' })
-      expect(button).not.toBeNull()
+      element = getByLabelText('Supplemental Content variant')
+      expect(element).toHaveTextContent('Double')
     })
   })
 
@@ -66,12 +66,12 @@ describe('SupplementalContentControls', () => {
             <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByText('Single', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Supplemental Content variant'))
         await user.click(rendered.getByRole('option', { name: 'Single' }))
       })
 
       it('does not have a box color select', () => {
-        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+        expect(rendered.queryAllByRole('combobox')).toHaveLength(1)
       })
 
       it('does not provide a dropdown for selecting an icon', () => {
@@ -87,12 +87,12 @@ describe('SupplementalContentControls', () => {
             <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByText('Single', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Supplemental Content variant'))
         await user.click(rendered.getByRole('option', { name: 'Double' }))
       })
 
       it('does not have a box color select', () => {
-        expect(rendered.queryAllByRole('button')).toHaveLength(1)
+        expect(rendered.queryAllByRole('combobox')).toHaveLength(1)
       })
 
       it('does not provide a dropdown for selecting an icon', () => {
@@ -108,16 +108,17 @@ describe('SupplementalContentControls', () => {
             <SupplementalContentControls emailSubComponent={emailSubComponent} />
           </EmailPartsContent>,
         )
-        await user.click(rendered.getByText('Single', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Supplemental Content variant'))
         await user.click(rendered.getByRole('option', { name: 'Benefit Amount' }))
       })
 
       it('has a box color select', async () => {
-        const button = rendered.queryByRole('button', { name: 'Box Color Granted Green' })
-        expect(button).not.toBeNull()
-        await user.click(button!)
+        const element = rendered.getByLabelText('Box Color')
+        expect(element).toHaveTextContent('Granted Green')
+
+        await user.click(element)
         await user.click(rendered.getByRole('option', { name: 'Benefit Blue' }))
-        expect(rendered.queryByRole('button', { name: 'Box Color Benefit Blue' })).not.toBeNull()
+        expect(rendered.getByLabelText('Box Color')).toHaveTextContent('Benefit Blue')
       })
 
       it('provides a dropdown for selecting an icon', () => {

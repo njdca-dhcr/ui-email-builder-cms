@@ -58,7 +58,7 @@ describe('EditStateSeal', () => {
         mockAppMode('ALL')
         const user = userEvent.setup()
         const { getByRole, baseElement } = renderEditStateSeal({})
-        const stateSealSelect = () => baseElement.querySelector('.select span[data-value]')!
+        const stateSealSelect = () => baseElement.querySelector('[role="combobox"]')!
         expect(stateSealSelect()).toHaveTextContent('US')
 
         await user.click(stateSealSelect())
@@ -72,7 +72,7 @@ describe('EditStateSeal', () => {
       it('lacks an editable state seal dropdown', () => {
         mockAppMode('NJ')
         const { baseElement } = renderEditStateSeal({})
-        expect(baseElement.querySelector('.select span[data-value]')).toBeNull()
+        expect(baseElement.querySelector('[role="combobox"]')).toBeNull()
       })
     })
   })

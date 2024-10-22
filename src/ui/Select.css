@@ -1,75 +1,101 @@
-.select {
+.SelectContainer {
   --border-radius: 0;
   border: 3px solid transparent;
-  border-radius: calc(2 * var(--border-radius));
-  font-size: var(--font-medium);
   margin: -3px;
+  width: 100%;
+
+  &:has([aria-expanded='true']) {
+    border: 3px solid #00475d;
+  }
+
+  &.small {
+    --border-radius: 3px;
+    font-size: var(--font-small);
+    min-width: 16.125rem;
+    width: fit-content;
+  }
 }
 
-.select.small {
-  --border-radius: 3px;
+.small .SelectTrigger {
   font-size: var(--font-small);
-  min-width: 16.125rem;
-  width: fit-content;
-}
-
-.select[data-state='expanded'] {
-  border: 3px solid #00475d;
-}
-
-.select .select-button {
-  align-items: center;
-  background-color: var(--white);
-  border: 1px solid var(--black);
-  border-radius: var(--border-radius);
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-}
-
-.select.small .select-button {
   padding: 0.375rem 0.5rem;
 }
 
-.select [data-reach-listbox-arrow] {
+.SelectTrigger {
   align-items: center;
-  border-left: 1px solid var(--blue-gray-light);
+  background-color: var(--white);
+  border-radius: calc(2 * var(--border-radius));
+  border: 1px solid var(--black);
+  display: flex;
   font-size: var(--font-medium);
+  justify-content: space-between;
+  padding: 0.5rem;
+  width: 100%;
+
+  &[aria-expanded='true'] {
+    border: 1px solid transparent;
+  }
+}
+
+.SelectIcon {
+  align-items: center;
   display: flex;
   justify-content: center;
+  border-left: 1px solid var(--blue-gray-light);
+  font-size: var(--font-medium);
   margin: 0;
   margin-left: 0.5rem;
   padding-left: 0.25rem;
 }
 
-.select-options-popover[data-reach-listbox-popover] {
+.SelectContent {
+  background-color: var(--white);
   border: 1px solid var(--black);
-  padding: 0;
   max-height: 25vh;
+  min-width: 10rem;
   overflow: auto;
+
+  &.small {
+    font-size: var(--font-small);
+  }
 }
 
-.select-options-popover.small[data-reach-listbox-popover] {
-  font-size: var(--font-small);
-}
-
-.select-option[data-reach-listbox-option] {
+.SelectItem {
+  align-items: center;
   border-bottom: 1px solid var(--gray-light);
+  color: var(--black);
+  display: flex;
+  font-size: 1rem;
+  height: 25px;
   padding: 0.5rem 1rem;
-}
-.select-options-popover.small .select-option[data-reach-listbox-option] {
-  padding: 0.375rem 0.5rem;
+  position: relative;
+  user-select: none;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
 }
 
-.select-option[data-reach-listbox-option]:last-of-type {
-  border-bottom: 0;
+.SelectItem[data-disabled] {
+  color: var(--gray-dark);
+  pointer-events: none;
 }
 
-.select-option[data-reach-listbox-option][data-current-nav] {
+.SelectItem[data-highlighted] {
+  outline: none;
   background-color: var(--blue);
   color: var(--white);
 }
 
-.select-option[data-reach-listbox-option][data-current-selected] {
-  font-weight: var(--weight-normal);
+.SelectContent.small .SelectItem {
+  padding: 0.375rem 0.5rem;
+}
+
+.SelectScrollButton {
+  align-items: center;
+  background-color: white;
+  cursor: default;
+  display: flex;
+  height: 25px;
+  justify-content: center;
 }

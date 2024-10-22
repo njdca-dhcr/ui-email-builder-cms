@@ -43,8 +43,9 @@ describe('ProgramNameControls', () => {
     })
 
     it('provides a dropdown that allows users to choose from a curated set of colors and texts', async () => {
-      const { getByRole, queryByRole } = rendered
-      await user.click(getByRole('button', { name: 'Background Color Preset Dependency Benefits' }))
+      const { queryByRole, getByLabelText } = rendered
+
+      await user.click(getByLabelText('Background Color Preset'))
       ;[
         'Dependency Benefits',
         'Disaster Unemployment Assistance (DUA)',
@@ -67,21 +68,17 @@ describe('ProgramNameControls', () => {
 
     describe('when selecting a preset (except custom)', () => {
       it('changes the color when a new preset is selected', async () => {
-        const { getByRole } = rendered
+        const { getByRole, getByLabelText } = rendered
         expect(currentBackgroundColor()).toHaveTextContent('#E1E291')
-        await user.click(
-          getByRole('button', { name: 'Background Color Preset Dependency Benefits' }),
-        )
+        await user.click(getByLabelText('Background Color Preset'))
         await user.click(getByRole('option', { name: 'Pandemic Unemployment Overpayment' }))
         expect(currentBackgroundColor()).toHaveTextContent('#F1DEA0')
       })
 
       it('changes the text when a new preset is selected', async () => {
-        const { getByRole } = rendered
+        const { getByRole, getByLabelText } = rendered
         expect(currentName()).toHaveTextContent('Dependency Benefits')
-        await user.click(
-          getByRole('button', { name: 'Background Color Preset Dependency Benefits' }),
-        )
+        await user.click(getByLabelText('Background Color Preset'))
         await user.click(getByRole('option', { name: 'Pandemic Unemployment Overpayment' }))
         expect(currentName()).toHaveTextContent('Pandemic Unemployment Overpayment')
       })
@@ -89,31 +86,25 @@ describe('ProgramNameControls', () => {
 
     describe('when selecting custom', () => {
       it('displays the a general color selector', async () => {
-        const { getByRole, queryByLabelText } = rendered
+        const { getByRole, queryByLabelText, getByLabelText } = rendered
         expect(queryByLabelText('Background Color Hex Code')).toBeNull()
-        await user.click(
-          getByRole('button', { name: 'Background Color Preset Dependency Benefits' }),
-        )
+        await user.click(getByLabelText('Background Color Preset'))
         await user.click(getByRole('option', { name: 'Custom' }))
         expect(queryByLabelText('Background Color Hex Code')).not.toBeNull()
       })
 
       it('does not change the color', async () => {
-        const { getByRole } = rendered
+        const { getByRole, getByLabelText } = rendered
         expect(currentBackgroundColor()).toHaveTextContent('#E1E291')
-        await user.click(
-          getByRole('button', { name: 'Background Color Preset Dependency Benefits' }),
-        )
+        await user.click(getByLabelText('Background Color Preset'))
         await user.click(getByRole('option', { name: 'Custom' }))
         expect(currentBackgroundColor()).toHaveTextContent('#E1E291')
       })
 
       it('does not change the text', async () => {
-        const { baseElement, getByRole } = rendered
+        const { getByRole, getByLabelText } = rendered
         expect(currentName()).toHaveTextContent('Dependency Benefits')
-        await user.click(
-          getByRole('button', { name: 'Background Color Preset Dependency Benefits' }),
-        )
+        await user.click(getByLabelText('Background Color Preset'))
         await user.click(getByRole('option', { name: 'Custom' }))
         expect(currentName()).toHaveTextContent('Dependency Benefits')
       })

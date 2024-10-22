@@ -25,7 +25,7 @@ describe('EmailEditorSidebar', () => {
     const { getByRole } = render(<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />)
 
     expect(navigate).not.toHaveBeenCalled()
-    await user.click(getByRole('button'))
+    await user.click(getByRole('combobox'))
     await user.click(getByRole('option', { name: 'Another Email Template' }))
     expect(navigate).toHaveBeenCalledWith('/email-templates/another-email-template', {
       replace: true,
@@ -38,7 +38,7 @@ describe('EmailEditorSidebar', () => {
       <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />,
     )
 
-    await user.click(getByRole('button'))
+    await user.click(getByRole('combobox'))
 
     expect(queryAllByRole('option').length).toEqual(1)
   })

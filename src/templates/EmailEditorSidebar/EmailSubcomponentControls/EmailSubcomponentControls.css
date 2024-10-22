@@ -90,6 +90,6 @@ label.control-label.small {
   border: 0;
 }
 
-.select.select-variant {
+.SelectTrigger.select-variant {
   min-width: 18.5rem;
 }

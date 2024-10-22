@@ -14,16 +14,16 @@ jest.mock('src/ui/UswdsIcon', () => {
 describe('UswdsIconSelect', () => {
   it('displays the icons in the button and list options', async () => {
     const user = userEvent.setup()
-    const { getByRole, queryByRole } = render(
+    const { getByRole, queryByRole, debug } = render(
       <UswdsIconSelect
         onChange={jest.fn()}
         value="AccessibilityNew"
         labelId={faker.lorem.word()}
       />,
     )
-    const button = getByRole('button')
-    expect(button).toHaveTextContent(/Image Placeholder/)
-    await user.click(button)
+    const combobox = getByRole('combobox')
+    expect(combobox).toHaveTextContent(/Image Placeholder/)
+    await user.click(combobox)
     const option = queryByRole('option', { name: 'Image Placeholder Zoom Out' })
     expect(option).not.toBeNull()
   })

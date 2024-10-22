@@ -45,7 +45,7 @@ describe('EditDepartmentSeal', () => {
       mockAppMode('NJ')
       const user = userEvent.setup()
       const { getByRole, queryByRole, baseElement } = renderEditDepartmentSeal({})
-      const button = (): Element => baseElement.querySelector('[role="button"] span[data-value]')!
+      const button = (): Element => baseElement.querySelector('[role="combobox"]')!
       expect(button()).toHaveTextContent('New Jersey Department of Labor Logo')
 
       await user.click(button())
@@ -68,7 +68,7 @@ describe('EditDepartmentSeal', () => {
       mockAppMode('ALL')
       const user = userEvent.setup()
       const { getByRole, queryByRole, baseElement } = renderEditDepartmentSeal({})
-      const button = (): Element => baseElement.querySelector('[role="button"] span[data-value]')!
+      const button = (): Element => baseElement.querySelector('[role="combobox"]')!
       expect(button()).toHaveTextContent('US Department of Labor Color Logo')
 
       await user.click(button())
@@ -102,7 +102,7 @@ describe('EditDepartmentSeal', () => {
       const { getByRole, baseElement } = renderEditDepartmentSeal({
         departmentSeal: originalDepartmentSeal,
       })
-      const button = (): Element => baseElement.querySelector('[role="button"] span[data-value]')!
+      const button = (): Element => baseElement.querySelector('[role="combobox"]')!
       await user.click(button())
       await user.click(getByRole('option', { name: 'Wyoming Workforce Services' }))
       await user.click(getByRole('button', { name: 'Save' }))

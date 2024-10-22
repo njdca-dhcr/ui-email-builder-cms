@@ -60,19 +60,19 @@
   border-bottom: 0;
 }
 
-.accordion-email-component button {
+.accordion-email-component h3 > button {
   cursor: pointer;
 }
 
-.accordion-email-component button[aria-expanded='false'] + .pointer-container {
+.accordion-email-component h3 > button[aria-expanded='false'] + .pointer-container {
   transform: rotate(90deg);
 }
 
-.accordion-email-component button[aria-expanded='true'] + .pointer-container {
+.accordion-email-component h3 > button[aria-expanded='true'] + .pointer-container {
   transform: rotate(0deg);
 }
 
-.accordion-email-component button[disabled] + .pointer-container {
+.accordion-email-component h3 > button[disabled] + .pointer-container {
   display: none;
 }
 
@@ -94,7 +94,7 @@
   width: 100%;
 }
 
-.accordion-email-component button {
+.accordion-email-component h3 > button {
   border: 0;
   background-color: transparent;
   font-size: var(--font-large);
@@ -104,7 +104,7 @@
   width: 100%;
 }
 
-.accordion-email-component button[disabled] {
+.accordion-email-component h3 > button[disabled] {
   color: var(--black);
   cursor: default;
 }

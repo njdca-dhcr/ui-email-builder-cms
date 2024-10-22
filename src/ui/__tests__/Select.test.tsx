@@ -19,9 +19,9 @@ describe('Select', () => {
         options={options}
       />,
     )
-    const button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('A')
+    const combobox = queryByRole('combobox')
+    expect(combobox).not.toBeNull()
+    expect(combobox).toHaveTextContent('A')
   })
 
   it('is labeled by the given label id', () => {
@@ -52,7 +52,7 @@ describe('Select', () => {
       />,
     )
 
-    await user.click(getByRole('button'))
+    await user.click(getByRole('combobox'))
     expect(baseElement).toContainHTML('<div class="my-option">B</div>')
   })
 
@@ -72,7 +72,7 @@ describe('Select', () => {
         options={options}
       />,
     )
-    await user.click(getByRole('button', { name: 'A' }))
+    await user.click(getByRole('combobox'))
     await user.click(getByRole('option', { name: 'B' }))
 
     expect(handleChange).toHaveBeenCalledWith('2')
@@ -96,7 +96,6 @@ describe('Select', () => {
         )}
       />,
     )
-    const button = getByRole('button')
-    expect(button).toContainHTML('<span class="custom-class">1 - A</span>')
+    expect(getByRole('combobox')).toContainHTML('<span class="custom-class">1 - A</span>')
   })
 })

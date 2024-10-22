@@ -12,4 +12,6 @@ jest.mock('./src/utils/useEmailTemplatesData')
 beforeEach(() => {
   jest.clearAllMocks()
   fetchMock.resetMocks()
+  window.HTMLElement.prototype.hasPointerCapture = jest.fn()
+  window.HTMLElement.prototype.scrollIntoView = jest.fn()
 })

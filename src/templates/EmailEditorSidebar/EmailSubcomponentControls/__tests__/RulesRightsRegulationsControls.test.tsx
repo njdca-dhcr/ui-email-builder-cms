@@ -30,25 +30,25 @@ describe('RulesRightsRegulationsControls', () => {
 
   it('provides a dropdown for selecting a variant', async () => {
     const user = userEvent.setup()
-    const { getByRole, queryByRole, queryByText } = rendered
-    let button = queryByText('Reminder', { selector: 'span' })
-    expect(button).not.toBeNull()
-    expect(button).toHaveTextContent('Reminder')
+    const { getByRole, queryByRole, getByLabelText } = rendered
+    let element = getByLabelText('Rules, Rights, and Regulations variant')
+    expect(element).not.toBeNull()
+    expect(element).toHaveTextContent('Reminder')
 
-    await user.click(button!)
+    await user.click(element!)
     expect(queryByRole('option', { name: 'Reminder' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Appeal Rights' })).not.toBeNull()
     expect(queryByRole('option', { name: 'Your Rights' })).not.toBeNull()
     await user.click(getByRole('option', { name: 'Appeal Rights' }))
 
-    button = queryByText('Appeal Rights', { selector: 'span' })
-    expect(button).not.toBeNull()
+    element = getByLabelText('Rules, Rights, and Regulations variant')
+    expect(element).not.toBeNull()
   })
 
   describe('variants', () => {
     describe('Reminder', () => {
       beforeEach(async () => {
-        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Rules, Rights, and Regulations variant'))
         await user.click(rendered.getByRole('option', { name: 'Reminder' }))
       })
 
@@ -60,7 +60,7 @@ describe('RulesRightsRegulationsControls', () => {
 
     describe('Appeal Rights', () => {
       beforeEach(async () => {
-        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Rules, Rights, and Regulations variant'))
         await user.click(rendered.getByRole('option', { name: 'Appeal Rights' }))
       })
 
@@ -113,7 +113,7 @@ describe('RulesRightsRegulationsControls', () => {
 
     describe('Your Rights', () => {
       beforeEach(async () => {
-        await user.click(rendered.getByText('Reminder', { selector: 'span' }))
+        await user.click(rendered.getByLabelText('Rules, Rights, and Regulations variant'))
         await user.click(rendered.getByRole('option', { name: 'Your Rights' }))
       })
 
