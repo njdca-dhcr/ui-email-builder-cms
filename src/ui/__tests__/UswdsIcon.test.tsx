@@ -5,7 +5,7 @@ import { buildIconUrl } from 'src/utils/siteUrl'
 
 describe('UswdsIcon', () => {
   it('displays the icon for the given key', () => {
-    const { queryByRole, baseElement } = render(<UswdsIcon icon="AccountBalance" />)
+    const { baseElement } = render(<UswdsIcon icon="AccountBalance" />)
     const img: HTMLImageElement | null = baseElement.querySelector('img')
     expect(img).not.toBeNull()
     expect(img?.alt).toEqual('')

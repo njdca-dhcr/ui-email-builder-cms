@@ -30,12 +30,12 @@ export const UswdsIconSelect: FC<UswdsIconSelectProps> = ({ onChange, value, lab
       options={iconOptions}
       onChange={(value) => onChange(value as UswdsIconVariantKey)}
       value={value}
-      renderValue={({ valueLabel, value }) => {
+      renderValue={({ value }) => {
         const icon: UswdsIconVariantKey = value as any
         return (
           <span className="uswds-icon-value">
             <UswdsIcon icon={icon} />
-            <span className="uswds-icon-label">{valueLabel}</span>
+            <span className="uswds-icon-label">{startCase(value ?? '')}</span>
           </span>
         )
       }}
