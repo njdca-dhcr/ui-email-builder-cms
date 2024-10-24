@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { ReactNode, forwardRef } from 'react'
 import copy from 'copy-to-clipboard'
 
 interface Props {
@@ -7,12 +7,18 @@ interface Props {
   fieldsCompleted: () => boolean
 }
 
-export const CopyToClipboardButton: FC<Props> = ({ children, textToCopy, fieldsCompleted }) => {
-  const clickHandler = () => {
-    if (fieldsCompleted()) {
-      copy(textToCopy())
+export const CopyToClipboardButton = forwardRef<HTMLButtonElement, Props>(
+  ({ children, textToCopy, fieldsCompleted, ...props }, ref) => {
+    const clickHandler = () => {
+      if (fieldsCompleted()) {
+        copy(textToCopy())
+      }
     }
-  }
 
-  return <button onClick={clickHandler}>{children}</button>
-}
+    return (
+      <button ref={ref} {...props} onClick={clickHandler}>
+        {children}
+      </button>
+    )
+  },
+)

@@ -30,6 +30,7 @@ import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { useCurrentUser } from 'src/network/users'
 import './EmailEditorContent.css'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { ShareEmailContent } from './ShareEmailContent'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -80,7 +81,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
           />
         </Radio.Fieldset>
         {!isRestricted() && (
-          <div className="button-group">
+          <ShareEmailContent>
             <ExportImageButton html={toEmailText(titleValue.title)} fileName={emailTemplate.name}>
               Export Image
             </ExportImageButton>
@@ -97,10 +98,28 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             >
               Download HTML
             </DownloadButton>
-            <WhenSignedIn>
-              <SaveEmailTemplate />
-            </WhenSignedIn>
-          </div>
+          </ShareEmailContent>
+          // <div className="button-group">
+          //   <ExportImageButton html={toEmailText(titleValue.title)} fileName={emailTemplate.name}>
+          //     Export Image
+          //   </ExportImageButton>
+          //   <CopyToClipboardButton
+          //     fieldsCompleted={hasPreviewText}
+          //     textToCopy={() => toEmailText(titleValue.title)}
+          //   >
+          //     Copy HTML
+          //   </CopyToClipboardButton>
+          //   <DownloadButton
+          //     textToDownload={() => toEmailText(titleValue.title)}
+          //     fileName={`${emailTemplate.name}.html`}
+          //     fieldsCompleted={hasPreviewText}
+          //   >
+          //     Download HTML
+          //   </DownloadButton>
+          //   <WhenSignedIn>
+          //     <SaveEmailTemplate />
+          //   </WhenSignedIn>
+          // </div>
         )}
       </div>
       <Root.div

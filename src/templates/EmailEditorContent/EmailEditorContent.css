@@ -17,25 +17,33 @@
   padding: 0.5rem 1rem;
 }
 
-.button-group {
+.share-buttons {
+  background-color: var(--white);
+  border: 1px var(--black) solid;
+  border-radius: 3px;
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.button-group > button {
+.share-buttons > button {
   background-color: var(--white);
-  border: 1px solid var(--black);
-  border-radius: 3px;
-  color: var(--black);
+  border: 0;
   cursor: pointer;
   font-size: var(--font-small);
   font-weight: var(--weight-normal);
   padding: 0.5rem 0.75rem;
   transition: background-color 50ms ease-in;
+  text-align: left;
 }
 
-.button-group > button:active {
-  background-color: var(--gray-light);
+.share-buttons > button:hover,
+.share-buttons > button:focus {
+  background-color: var(--gray-light-medium);
+}
+
+.share-buttons > button:active {
+  background-color: var(--gray-medium);
 }
 
 .email-preview {

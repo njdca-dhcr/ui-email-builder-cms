@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { ReactNode, forwardRef } from 'react'
 import { download } from 'src/utils/download'
 
 interface Props {
@@ -8,17 +8,18 @@ interface Props {
   fieldsCompleted: () => boolean
 }
 
-export const DownloadButton: FC<Props> = ({
-  children,
-  textToDownload,
-  fileName,
-  fieldsCompleted,
-}) => {
-  const clickHandler = () => {
-    if (fieldsCompleted()) {
-      download({ fileData: textToDownload(), fileName, fileType: 'text/html' })
+export const DownloadButton = forwardRef<HTMLButtonElement, Props>(
+  ({ children, textToDownload, fileName, fieldsCompleted, ...props }, ref) => {
+    const clickHandler = () => {
+      if (fieldsCompleted()) {
+        download({ fileData: textToDownload(), fileName, fileType: 'text/html' })
+      }
     }
-  }
 
-  return <button onClick={clickHandler}>{children}</button>
-}
+    return (
+      <button {...props} ref={ref} onClick={clickHandler}>
+        {children}
+      </button>
+    )
+  },
+)

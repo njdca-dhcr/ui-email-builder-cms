@@ -1,5 +1,5 @@
 import React from 'react'
-import userEvent from '@testing-library/user-event'
+import userEvent, { UserEvent } from '@testing-library/user-event'
 import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
 import { base, faker } from '@faker-js/faker'
@@ -39,8 +39,10 @@ describe('EmailEditorContent', () => {
   let emailTemplate: EmailTemplate.UniqueConfig
   let alertSpy: jest.SpyInstance
   let client: QueryClient
+  let user: UserEvent
 
   beforeEach(() => {
+    user = userEvent.setup()
     client = new QueryClient()
     emailTemplate = buildUniqueEmailConfig({
       components: [
@@ -65,7 +67,6 @@ describe('EmailEditorContent', () => {
   })
 
   it('can display the email in desktop or mobile', async () => {
-    const user = userEvent.setup()
     const { baseElement, getByLabelText } = render(
       <QueryClientProvider client={client}>
         <EmailEditorContent emailTemplate={emailTemplate} />
@@ -96,8 +97,7 @@ describe('EmailEditorContent', () => {
   })
 
   it('raises an alert if the user tries to export the email without preview text', async () => {
-    const user = userEvent.setup()
-    const { getByText } = render(
+    const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <EmailPartsContent>
           <EmailEditorContent emailTemplate={emailTemplate} />
@@ -106,6 +106,7 @@ describe('EmailEditorContent', () => {
     )
     const value = faker.lorem.words(4)
     await user.type(getByText('Title'), value)
+    await user.click(getByRole('button', { name: 'Share' }))
     await user.click(getByText('Copy HTML'))
     expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
     expect(alertSpy).toHaveBeenCalledTimes(1)
@@ -118,9 +119,7 @@ describe('EmailEditorContent', () => {
   })
 
   it('allows users to copy the current preview into their clipboard', async () => {
-    const user = userEvent.setup()
-
-    const { getByText } = render(
+    const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <PreviewText initialValue="Some preview text">
           <EmailPartsContent>
@@ -134,6 +133,7 @@ describe('EmailEditorContent', () => {
     await user.type(getByText('Title'), value)
 
     expect(copy).not.toHaveBeenCalled()
+    await user.click(getByRole('button', { name: 'Share' }))
     await user.click(getByText('Copy HTML'))
     expect(copy).toHaveBeenCalled()
 
@@ -143,9 +143,7 @@ describe('EmailEditorContent', () => {
   })
 
   it('allows users to download the current preview', async () => {
-    const user = userEvent.setup()
-
-    const { getByText } = render(
+    const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <PreviewText initialValue="Some preview text">
           <EmailPartsContent>
@@ -159,6 +157,7 @@ describe('EmailEditorContent', () => {
     await user.type(getByText('Title'), value)
 
     expect(download).not.toHaveBeenCalled()
+    await user.click(getByRole('button', { name: 'Share' }))
     await user.click(getByText('Download HTML'))
     expect(download).toHaveBeenCalled()
 
@@ -196,22 +195,14 @@ describe('EmailEditorContent', () => {
       mockAppMode('KY')
     })
 
-    it('does not have a download HTML button', () => {
-      const { queryByText } = render(
+    it('does not have a share dropdown', () => {
+      const { queryByRole } = render(
         <QueryClientProvider client={client}>
           <EmailEditorContent emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
-      expect(queryByText('Download HTML')).toBeNull()
-    })
 
-    it('does not have a copy HTML button', () => {
-      const { queryByText } = render(
-        <QueryClientProvider client={client}>
-          <EmailEditorContent emailTemplate={emailTemplate} />
-        </QueryClientProvider>,
-      )
-      expect(queryByText('Copy HTML')).toBeNull()
+      expect(queryByRole('menu', { name: 'Share' })).toBeNull()
     })
   })
 

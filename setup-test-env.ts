@@ -9,6 +9,14 @@ fetchMock.enableMocks()
 
 jest.mock('./src/utils/useEmailTemplatesData')
 
+class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+;(global as any).ResizeObserver = ResizeObserver
+
 beforeEach(() => {
   jest.clearAllMocks()
   fetchMock.resetMocks()
