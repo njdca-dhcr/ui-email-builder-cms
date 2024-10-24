@@ -22,7 +22,7 @@ export const SaveEmailTemplate: FC = () => {
 
   return (
     <Dialog
-      trigger={<Button>Save</Button>}
+      trigger={<Button className="save-email-template-trigger">Save</Button>}
       title="Save Email Template"
       description={
         emailTemplate.id

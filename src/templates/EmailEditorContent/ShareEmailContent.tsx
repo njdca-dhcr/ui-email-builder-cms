@@ -10,7 +10,7 @@ export const ShareEmailContent: FC<Props> = ({ children }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <ButtonLike aria-label="Share">
+        <ButtonLike aria-label="Share" className="share-trigger">
           <UswdsIcon icon="SaveAlt" />
         </ButtonLike>
       </DropdownMenu.Trigger>

@@ -17,6 +17,23 @@
   padding: 0.5rem 1rem;
 }
 
+.share-and-save-buttons {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.share-trigger {
+  border-radius: 50%;
+  padding: 0.25rem;
+  transition: background-color 50ms ease-in;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-light);
+  }
+}
+
 .share-buttons {
   background-color: var(--white);
   border: 1px var(--black) solid;
@@ -44,6 +61,22 @@
 
 .share-buttons > button:active {
   background-color: var(--gray-medium);
+}
+
+.save-email-template-trigger {
+  background-color: transparent;
+  border: 1px solid var(--black);
+  color: var(--black);
+  padding: 0.5rem 1rem;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-light);
+  }
+
+  &:active {
+    background-color: var(--gray-light-medium);
+  }
 }
 
 .email-preview {
