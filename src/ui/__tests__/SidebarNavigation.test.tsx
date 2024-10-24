@@ -2,18 +2,9 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { SidebarNavigation } from '../SidebarNavigation'
 import { asMock, mockBackendUrl, urlFor, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
-import { availableFeatures, Features } from 'src/features'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { faker } from '@faker-js/faker'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
-
-jest.mock('src/features', () => {
-  return {
-    availableFeatures: {
-      settings: jest.fn().mockReturnValue(true),
-    } as Features,
-  }
-})
 
 jest.mock('src/utils/useCurrentRole', () => {
   return { useCurrentRole: jest.fn() }
@@ -119,27 +110,10 @@ describe('SidebarNavigation', () => {
     })
   })
 
-  describe('settings is available', () => {
-    beforeEach(() => {
-      asMock(availableFeatures.settings).mockReturnValue(true)
-    })
-
-    it('displays a settings link', () => {
-      const { getByRole } = render(<SidebarNavigation />)
-      const link: HTMLAnchorElement = getByRole('link', { name: 'Settings' }) as any
-      expect(link.tagName).toEqual('A')
-      expect(link.href).toEqual(urlFor('/settings'))
-    })
-  })
-
-  describe('settings is not available', () => {
-    beforeEach(() => {
-      asMock(availableFeatures.settings).mockReturnValue(false)
-    })
-
-    it('does not display a settings link', () => {
-      const { queryByText } = render(<SidebarNavigation />)
-      expect(queryByText('Settings')).toBeNull()
-    })
+  it('displays a settings link', () => {
+    const { getByRole } = render(<SidebarNavigation />)
+    const link: HTMLAnchorElement = getByRole('link', { name: 'Settings' }) as any
+    expect(link.tagName).toEqual('A')
+    expect(link.href).toEqual(urlFor('/settings'))
   })
 })

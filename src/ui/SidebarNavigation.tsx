@@ -6,7 +6,6 @@ import {
   SpacedSidebarContainer,
 } from './Layout'
 import { Link } from 'gatsby'
-import { availableFeatures } from 'src/features'
 import { UswdsIcon } from './UswdsIcon'
 import classNames from 'classnames'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
@@ -37,9 +36,7 @@ export const SidebarNavigation: FC<Props> = () => {
           icon={<UswdsIcon icon="Support" />}
         />
         <li aria-hidden className="sidebar-spacer" />
-        {availableFeatures.settings() && (
-          <SpacedLink bottom to="/settings" text="Settings" icon={<UswdsIcon icon="Settings" />} />
-        )}
+        <SpacedLink bottom to="/settings" text="Settings" icon={<UswdsIcon icon="Settings" />} />
       </SideBarList>
     </nav>
   )
