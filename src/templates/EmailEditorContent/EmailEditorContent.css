@@ -63,19 +63,27 @@
   background-color: var(--gray-medium);
 }
 
-.save-email-template-trigger {
-  background-color: transparent;
+.save-and-update-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.save-and-update-buttons > button {
   border: 1px solid var(--black);
-  color: var(--black);
-  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: var(--font-small);
+  padding: 0.5rem 0.75rem;
+  transition: background-color 50ms ease-in;
+  font-weight: var(--weight-bold-light);
+  color: var(--gray-dark-extra);
 
   &:hover,
   &:focus {
-    background-color: var(--gray-light);
+    background-color: var(--gray-light-medium);
   }
 
   &:active {
-    background-color: var(--gray-light-medium);
+    background-color: var(--gray-medium);
   }
 }
 

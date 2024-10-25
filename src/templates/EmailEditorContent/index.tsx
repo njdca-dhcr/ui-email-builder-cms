@@ -20,7 +20,6 @@ import { EmailTemplate } from 'src/appTypes'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { isRestricted } from 'src/utils/appMode'
 import { PreviewTextHtml } from './PreviewTextHtml'
-import { SaveEmailTemplate } from './SaveEmailTemplate'
 import { Spacing } from '../styles'
 import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmailString'
 import { usePreviewText } from '../PreviewText'
@@ -31,6 +30,7 @@ import { useCurrentUser } from 'src/network/users'
 import './EmailEditorContent.css'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { ShareEmailContent } from './ShareEmailContent'
+import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 
 interface Props {
   emailTemplate: EmailTemplate.UniqueConfig
@@ -101,7 +101,10 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
               </DownloadButton>
             </ShareEmailContent>
             <WhenSignedIn>
-              <SaveEmailTemplate />
+              <div className="save-and-update-buttons">
+                {emailTemplate.id && <EmailTemplateUpdateDialog />}
+                <EmailTemplateSaveAsDialog />
+              </div>
             </WhenSignedIn>
           </div>
         )}

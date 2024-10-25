@@ -13,6 +13,7 @@ import {
   buildUseQueryResult,
   buildUserShow,
   mockAppMode,
+  mockBackendUrl,
   randomBannerValue,
   userIsNotSignedIn,
   userIsSignedIn,
@@ -22,6 +23,8 @@ import { download } from 'src/utils/download'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
 import { CurrentUser, useCurrentUser } from 'src/network/users'
+import { randomUUID } from 'crypto'
+import { AuthProvider } from 'src/utils/AuthContext'
 
 jest.mock('src/utils/download', () => {
   return {
@@ -253,6 +256,70 @@ describe('EmailEditorContent', () => {
         </QueryClientProvider>,
       )
       expect(queryByText(error.message)).not.toBeNull()
+    })
+  })
+
+  describe('when the email template has an id', () => {
+    beforeEach(() => {
+      mockBackendUrl(faker.internet.url())
+      userIsSignedIn()
+      mockAppMode('NJ')
+    })
+
+    it('allows users to update the email template', async () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <QueryClientProvider client={client}>
+            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: randomUUID() }} />
+          </QueryClientProvider>
+        </AuthProvider>,
+      )
+
+      expect(queryByRole('button', { name: 'Update' })).not.toBeNull()
+    })
+
+    it('allows users to save the email template as a new email template', async () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <QueryClientProvider client={client}>
+            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: randomUUID() }} />
+          </QueryClientProvider>
+        </AuthProvider>,
+      )
+
+      expect(queryByRole('button', { name: 'Save As' })).not.toBeNull()
+    })
+  })
+
+  describe('when the email template lacks an id', () => {
+    beforeEach(() => {
+      mockBackendUrl(faker.internet.url())
+      userIsSignedIn()
+      mockAppMode('NJ')
+    })
+
+    it('does not have a way to update the email template', async () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <QueryClientProvider client={client}>
+            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: undefined }} />
+          </QueryClientProvider>
+        </AuthProvider>,
+      )
+
+      expect(queryByRole('button', { name: 'Update' })).toBeNull()
+    })
+
+    it('allows users to save the email template as a new email template', async () => {
+      const { queryByRole } = render(
+        <AuthProvider>
+          <QueryClientProvider client={client}>
+            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: undefined }} />
+          </QueryClientProvider>
+        </AuthProvider>,
+      )
+
+      expect(queryByRole('button', { name: 'Save As' })).not.toBeNull()
     })
   })
 })
