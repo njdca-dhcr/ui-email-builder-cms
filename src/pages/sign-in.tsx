@@ -94,9 +94,9 @@ const SignInPage: FC = () => {
             <>
               <div className="sign-in-or">--or--</div>
               <div>
-                <Link to={signInWithCognitoUrl} className="link-button">
+                <a href={signInWithCognitoUrl} className="link-button">
                   Sign in with Microsoft
-                </Link>
+                </a>
               </div>
             </>
           )}
