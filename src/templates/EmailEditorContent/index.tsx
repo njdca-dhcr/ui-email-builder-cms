@@ -25,7 +25,7 @@ import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmai
 import { usePreviewText } from '../PreviewText'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { WhenSignedIn } from 'src/utils/WhenSignedIn'
+import WhenSignedIn from 'src/utils/WhenSignedIn'
 import { useCurrentUser } from 'src/network/users'
 import './EmailEditorContent.css'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'

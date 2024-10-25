@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import React from 'react'
-import { OnlyWithBackendUrl } from '../OnlyWithBackendUrl'
+import OnlyWithBackendUrl from '../OnlyWithBackendUrl'
 import { mockBackendUrl } from 'src/testHelpers'
 
 describe('OnlyWithBackendUrl', () => {
