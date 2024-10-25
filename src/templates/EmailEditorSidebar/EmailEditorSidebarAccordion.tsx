@@ -22,6 +22,7 @@ import {
 import { EmailSubComponentFloatingControls } from './EmailSubcomponentControls/EmailSubcomponentFloatingControls'
 import { EmailComponentDescription } from './EmailComponentDescription'
 import { EmailSubComponentDescription } from './EmailSubComponentDescription'
+import { useDidMount } from 'src/utils/useDidMount'
 
 interface ContainerProps {
   children: ReactNode
@@ -29,6 +30,10 @@ interface ContainerProps {
 
 const Container: FC<ContainerProps> = ({ children }) => {
   const [openAccordionItems, setOpenAccordionItems] = useState<number[]>([])
+  const mounted = useDidMount()
+
+  if (!mounted) return null
+
   return (
     <div className="sidebar-accordion-container">
       <div className="header">

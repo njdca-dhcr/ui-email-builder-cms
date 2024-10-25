@@ -4,6 +4,7 @@ import { CheckIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import { ChevronDownIcon } from './ChevronDownIcon'
 import classNames from 'classnames'
 import './Select.css'
+import { useDidMount } from 'src/utils/useDidMount'
 
 interface Props {
   className?: string
@@ -26,6 +27,10 @@ export const Select: FC<Props> = ({
   value,
   ...props
 }) => {
+  const mounted = useDidMount()
+
+  if (!mounted) return null
+
   const valueLabel: string | null =
     options.find((option) => option.value === value)?.label ?? (null as any)
 

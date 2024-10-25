@@ -1,12 +1,17 @@
 import React, { FC, ReactElement, Children } from 'react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { ButtonLike, UswdsIcon } from 'src/ui'
+import { useDidMount } from 'src/utils/useDidMount'
 
 interface Props {
   children: ReactElement[]
 }
 
 export const ShareEmailContent: FC<Props> = ({ children }) => {
+  const mounted = useDidMount()
+
+  if (!mounted) return null
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
