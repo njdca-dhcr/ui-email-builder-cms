@@ -1,3 +1,4 @@
+'use client'
 import React, { FC, ReactNode } from 'react'
 import { useAuth } from './AuthContext'
 import { OnlyWithBackendUrl } from './OnlyWithBackendUrl'
