@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 import React from 'react'
-import WhenSignedIn from '../WhenSignedIn'
+import { WhenSignedIn } from '../WhenSignedIn'
 import { AuthProvider } from '../AuthContext'
 import { mockBackendUrl, userIsNotSignedIn, userIsSignedIn } from 'src/testHelpers'
 

@@ -8,7 +8,7 @@ import {
 import { Link } from 'gatsby'
 import { UswdsIcon } from './UswdsIcon'
 import classNames from 'classnames'
-import WhenSignedIn from 'src/utils/WhenSignedIn'
+import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 
 interface Props {}
 
