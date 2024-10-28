@@ -10,7 +10,7 @@ import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
 import { useAuth } from 'src/utils/AuthContext'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { WhenSignedOut } from 'src/utils/WhenSignedOut'
-import { OnlyWithBackendAndCognitoUrls } from 'src/utils/OnlyWithBackendAndCognitoUrls'
+import { OnlyWithBackendUrl } from 'src/utils/OnlyWithBackendUrl'
 
 interface LayoutProps {
   children: ReactNode
@@ -187,7 +187,7 @@ export const SignOutButton: FC = () => {
 
 export const AuthButtons: FC = () => {
   return (
-    <OnlyWithBackendAndCognitoUrls>
+    <OnlyWithBackendUrl>
       <div className="auth-buttons">
         <WhenSignedOut>
           <Link to="/sign-in" className="sign-in-link">
@@ -198,6 +198,6 @@ export const AuthButtons: FC = () => {
           <SignOutButton />
         </WhenSignedIn>
       </div>
-    </OnlyWithBackendAndCognitoUrls>
+    </OnlyWithBackendUrl>
   )
 }
