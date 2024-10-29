@@ -8,15 +8,19 @@ export type {
   DisclaimerValue,
 } from 'src/utils/userInfoSchemas'
 
-export interface NameValue {
+export interface BaseValue {
+  visible?: boolean
+}
+
+export interface NameValue extends BaseValue {
   name: string
 }
 
-export interface AdditionalContentValue {
+export interface AdditionalContentValue extends BaseValue {
   content: RichTextValue
 }
 
-export interface DateRangeValue {
+export interface DateRangeValue extends BaseValue {
   range: string
 }
 
@@ -27,7 +31,7 @@ export const enum DirectiveVariant {
   PayOnline = 'Pay Online',
 }
 
-export interface DirectiveValue {
+export interface DirectiveValue extends BaseValue {
   variant: DirectiveVariant
 
   // Always Used
@@ -66,7 +70,7 @@ export interface DirectiveValue {
   payOnlineSupportiveText: RichTextValue
 }
 
-export interface InformationalBoxValue {
+export interface InformationalBoxValue extends BaseValue {
   boxColor: BoxColor
   icon: UswdsIconVariantKey
   title: string
@@ -75,7 +79,7 @@ export interface InformationalBoxValue {
   supportiveInformation: RichTextValue
 }
 
-export interface IntroValue {
+export interface IntroValue extends BaseValue {
   intro: RichTextValue
 }
 
@@ -84,7 +88,7 @@ export const enum LoginDetailsVariant {
   Information = 'Information',
 }
 
-export interface LoginDetailsValue {
+export interface LoginDetailsValue extends BaseValue {
   variant: LoginDetailsVariant
   loginDetailsTitle: string
   usernameLabel: string
@@ -113,7 +117,7 @@ export enum ProgramNameNJPreset {
   Custom = 'Custom',
 }
 
-export interface ProgramNameValue {
+export interface ProgramNameValue extends BaseValue {
   preset: ProgramNameNJPreset
   name: string
   backgroundColor: string
@@ -125,7 +129,7 @@ export const enum RulesRightsRegulationsVariant {
   YourRights = 'Your Rights',
 }
 
-export interface RulesRightsRegulationsValue {
+export interface RulesRightsRegulationsValue extends BaseValue {
   variant: RulesRightsRegulationsVariant
   icon: UswdsIconVariantKey
   boxColor: BoxColor
@@ -165,7 +169,7 @@ export interface ReceiptLineItem {
   value: string
 }
 
-export interface StatusValue {
+export interface StatusValue extends BaseValue {
   variant: StatusVariant
   icon: UswdsIconVariantKey
   // Always used
@@ -200,7 +204,7 @@ export const enum SupplementalContentVariant {
   TripleSupplementalContent = 'Triple Supplemental Content',
 }
 
-export interface SupplementalContentValue {
+export interface SupplementalContentValue extends BaseValue {
   variant: SupplementalContentVariant
   // All
   title: string
@@ -222,6 +226,6 @@ export interface SupplementalContentValue {
   benefitAmountSupportiveInformation: RichTextValue
 }
 
-export interface TitleValue {
+export interface TitleValue extends BaseValue {
   title: string
 }

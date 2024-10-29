@@ -10,37 +10,50 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: Title
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: ProgramName
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: DirectiveButton
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Name
-    visibleByDefault: false
+    defaultValue:
+      visible: false
   - kind: Body
     required: true
     subComponents:
       - kind: Intro
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: Status
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: Directive
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: SupplementalContent
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: RulesRightsRegulations
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: InformationalBox
-        visibleByDefault: false
+        defaultValue:
+          visible: false
       - kind: LoginDetails
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Footer
     required: true
     subComponents:
       - kind: AdditionalContent
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: StateSeal
     required: true
   - kind: Disclaimer

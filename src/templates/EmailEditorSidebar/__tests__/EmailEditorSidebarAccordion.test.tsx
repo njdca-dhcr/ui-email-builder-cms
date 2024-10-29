@@ -128,7 +128,7 @@ describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
 })
 
 describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
-  let emailComponent: EmailTemplate.UniqueComponent
+  let emailComponent: EmailTemplate.Unique.Component
 
   const wrapper: WrapperComponent = ({ children }) => {
     return (
@@ -238,7 +238,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   }
 
   describe('all', () => {
-    const allKinds: EmailTemplate.ComponentKind[] = [
+    const allKinds: EmailTemplate.Kinds.Component[] = [
       'Banner',
       'Body',
       'Disclaimer',
@@ -318,7 +318,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   })
 
   describe('subcomponent containers', () => {
-    const kinds: EmailTemplate.ComponentKind[] = ['Body', 'Footer', 'Header']
+    const kinds: EmailTemplate.Kinds.Component[] = ['Body', 'Footer', 'Header']
 
     kinds.forEach((kind) => {
       describe(`when ${kind}`, () => {
@@ -390,7 +390,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   })
 
   describe('when edited in settings', () => {
-    const kinds: EmailTemplate.ComponentKind[] = ['Banner', 'StateSeal', 'Disclaimer']
+    const kinds: EmailTemplate.Kinds.Component[] = ['Banner', 'StateSeal', 'Disclaimer']
 
     kinds.forEach((kind) => {
       describe(`when ${kind}`, () => {
@@ -421,7 +421,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 })
 
 describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.Unique.SubComponent
 
   const wrapper: WrapperComponent = ({ children }) => {
     return <ShouldShowEmailPart>{children}</ShouldShowEmailPart>

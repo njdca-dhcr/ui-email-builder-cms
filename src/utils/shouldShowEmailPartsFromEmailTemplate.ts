@@ -2,7 +2,7 @@ import { EmailTemplate } from 'src/appTypes'
 import { ShouldShowEmailPartContextData } from 'src/templates/ShouldShowEmailPart'
 
 export const shouldShowEmailPartsFromEmailTemplate = (
-  config: EmailTemplate.UniqueConfig,
+  config: EmailTemplate.Unique.Config,
 ): ShouldShowEmailPartContextData => {
   let data: ShouldShowEmailPartContextData = {}
 

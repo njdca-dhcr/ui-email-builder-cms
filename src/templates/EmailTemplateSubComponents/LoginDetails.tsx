@@ -12,7 +12,7 @@ const DISPLAYED_HREF_MAX_WIDTH = 297
 
 const { Row, Cell, Link } = EmailBlock
 
-const defaultValue: LoginDetailsValue = {
+export const defaultLoginDetailsValue: LoginDetailsValue = {
   variant: LoginDetailsVariant.Details,
   // Details
   loginDetailsTitle: 'Login Details',
@@ -86,7 +86,7 @@ const defaultValue: LoginDetailsValue = {
 }
 
 export const useLoginDetailsValue = (emailSubComponent: EmailTemplate.LoginDetails) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultLoginDetailsValue)
 }
 
 export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ emailSubComponent }) => {

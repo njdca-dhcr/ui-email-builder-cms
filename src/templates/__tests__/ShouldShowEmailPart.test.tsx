@@ -1,8 +1,18 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { act, render, renderHook } from '@testing-library/react'
 import React, { FC } from 'react'
-import { ShouldShowEmailPart, useShouldShowEmailPart } from '../ShouldShowEmailPart'
+import {
+  ShouldShowEmailPart,
+  useShouldShowEmailPart,
+  useShouldShowEmailPart2,
+} from '../ShouldShowEmailPart'
 import userEvent from '@testing-library/user-event'
+import {
+  buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
+  buildUniqueEmailSubComponent,
+} from 'src/factories'
+import { EmailPartsContent } from '../EmailPartsContent'
 
 describe('ShouldShowEmailPart', () => {
   it('displays its children', () => {
@@ -25,7 +35,7 @@ describe('ShouldShowEmailPart', () => {
     )
   }
 
-  it('toggle parts on and off', async () => {
+  it('toggles parts on and off', async () => {
     const user = userEvent.setup()
     const { getByRole, baseElement } = render(
       <ShouldShowEmailPart>
@@ -55,5 +65,85 @@ describe('ShouldShowEmailPart', () => {
 
     expect(baseElement).not.toHaveTextContent('on')
     expect(baseElement).toHaveTextContent('off')
+  })
+})
+
+describe('useShouldShowEmailPart', () => {
+  xit('toggles parts on and off', async () => {
+    const dateRange = buildUniqueEmailSubComponent('Header', { kind: 'DateRange' })
+    const title = buildUniqueEmailSubComponent('Header', {
+      kind: 'Title',
+      defaultValue: { visible: true, title: faker.lorem.word() },
+    })
+    const programName = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    const header = buildUniqueEmailComponent('Header', {
+      subComponents: [dateRange, title, programName],
+    })
+    const emailTemplate = buildUniqueEmailConfig({ components: [header] })
+
+    const { result } = renderHook(() => useShouldShowEmailPart2(title.id), {
+      wrapper: ({ children }) => {
+        return <EmailPartsContent>{children}</EmailPartsContent>
+      },
+    })
+
+    expect(result.current.on).toEqual(true)
+    expect(result.current.off).toEqual(false)
+
+    act(() => {
+      result.current.toggle()
+    })
+    expect(result.current.on).toEqual(false)
+    expect(result.current.off).toEqual(true)
+
+    act(() => {
+      result.current.toggle()
+    })
+    expect(result.current.on).toEqual(true)
+    expect(result.current.off).toEqual(false)
+  })
+
+  it('if a component/subcomponent lacks a `visible` value it defaults to true and should show', async () => {
+    const dateRange = buildUniqueEmailSubComponent('Header', { kind: 'DateRange' })
+    const title = buildUniqueEmailSubComponent('Header', {
+      kind: 'Title',
+      defaultValue: { visible: undefined, title: faker.lorem.word() },
+    })
+    const programName = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    const header = buildUniqueEmailComponent('Header', {
+      subComponents: [dateRange, title, programName],
+    })
+    const emailTemplate = buildUniqueEmailConfig({ components: [header] })
+
+    const { result } = renderHook(() => useShouldShowEmailPart2(title.id), {
+      wrapper: ({ children }) => {
+        return <EmailPartsContent>{children}</EmailPartsContent>
+      },
+    })
+
+    expect(result.current.on).toEqual(true)
+    expect(result.current.off).toEqual(false)
+  })
+
+  fit('if a component/subcomponent has visible false, it should now show', async () => {
+    const dateRange = buildUniqueEmailSubComponent('Header', { kind: 'DateRange' })
+    const title = buildUniqueEmailSubComponent('Header', {
+      kind: 'Title',
+      defaultValue: { visible: false, title: faker.lorem.word() },
+    })
+    const programName = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    const header = buildUniqueEmailComponent('Header', {
+      subComponents: [dateRange, title, programName],
+    })
+    const emailTemplate = buildUniqueEmailConfig({ components: [header] })
+
+    const { result } = renderHook(() => useShouldShowEmailPart2(title.id), {
+      wrapper: ({ children }) => {
+        return <EmailPartsContent>{children}</EmailPartsContent>
+      },
+    })
+
+    expect(result.current.on).toEqual(false)
+    expect(result.current.off).toEqual(true)
   })
 })

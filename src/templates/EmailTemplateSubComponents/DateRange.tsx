@@ -6,12 +6,12 @@ import { EmailBlock, EditableElement } from 'src/ui'
 import { EmailSubComponentProps } from './shared'
 import { DateRangeValue, EmailTemplate } from 'src/appTypes'
 
-const defaultValue: DateRangeValue = { range: '[00/00/0000] - [00/00/0000]' }
+export const defaultDateRangeValue: DateRangeValue = { range: '[00/00/0000] - [00/00/0000]' }
 
 const { Row } = EmailBlock
 
 export const useDateRangeValue = (emailSubComponent: EmailTemplate.DateRange) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultDateRangeValue)
 }
 
 export const DateRange: FC<EmailSubComponentProps<'DateRange'>> = ({ emailSubComponent }) => {

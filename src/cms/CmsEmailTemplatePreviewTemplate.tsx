@@ -18,7 +18,7 @@ import uniqueId from 'lodash.uniqueid'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
-const entryToEmailTemplate = (entry: Entry): EmailTemplate.UniqueConfig => {
+const entryToEmailTemplate = (entry: Entry): EmailTemplate.Unique.Config => {
   const data: Entry = entry.get('data')
   const componentEntries: Entry[] = data.get('components').toArray()
 
@@ -32,13 +32,11 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.UniqueConfig => {
         id: uniqueId(),
         kind: componentEntry.get('kind') ?? '',
         required: componentEntry.get('required') ?? false,
-        visibleByDefault: componentEntry.get('visibleByDefault') ?? true,
         subComponents: subComponentEntries.map((subComponent) => ({
           id: uniqueId(),
           kind: subComponent.get('kind'),
           description: subComponent.get('description'),
           required: subComponent.get('required'),
-          visibleByDefault: subComponent.get('visibleByDefault') ?? true,
         })),
       }
     }),

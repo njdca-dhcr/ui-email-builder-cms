@@ -20,7 +20,8 @@ components:
           name: Unemployment Insurance (UI)
           backgroundColor: "#B9D8F3"
       - kind: DirectiveButton
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Name
     required: true
     defaultValue:

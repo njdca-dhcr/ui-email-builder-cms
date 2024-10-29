@@ -5,8 +5,8 @@ import { SpacingCell } from '../styles'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 
 interface Props {
-  currentComponent: EmailTemplate.UniqueComponent
-  nextComponent: EmailTemplate.UniqueComponent | undefined
+  currentComponent: EmailTemplate.Unique.Component
+  nextComponent: EmailTemplate.Unique.Component | undefined
 }
 
 export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
@@ -26,7 +26,7 @@ export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
 }
 
 const sizeForComponent = (
-  componentKind: EmailTemplate.ComponentKind,
+  componentKind: EmailTemplate.Kinds.Component,
 ): 'medium' | 'extraLarge' | undefined => {
   switch (componentKind) {
     case 'Banner':

@@ -11,8 +11,8 @@ describe('EmailComponentSpacer', () => {
     currentComponent,
     nextComponent,
   }: {
-    currentComponent: EmailTemplate.ComponentKind
-    nextComponent: EmailTemplate.ComponentKind | undefined
+    currentComponent: EmailTemplate.Kinds.Component
+    nextComponent: EmailTemplate.Kinds.Component | undefined
   }) => {
     const { baseElement } = render(
       <EmailComponentSpacer

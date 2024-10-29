@@ -1,4 +1,6 @@
 import React, { FC, ReactNode, createContext, useCallback, useContext, useState } from 'react'
+import { useEmailPartsContentFor } from './EmailPartsContent'
+import { BaseValue } from 'src/appTypes'
 
 export interface ShouldShowEmailPartContextData {
   [key: string]: boolean | undefined
@@ -35,4 +37,18 @@ export const useShouldShowEmailPart = (
   }, [data, update, id, isOn])
 
   return { on: isOn, off: !isOn, toggle }
+}
+
+export const useShouldShowEmailPart2 = (
+  id: string,
+): { on: boolean; off: boolean; toggle: () => void } => {
+  const [value, setValue] = useEmailPartsContentFor<BaseValue>(id, {})
+  console.log({ value })
+  const visible = value.visible ?? true
+
+  return {
+    on: visible,
+    off: !visible,
+    toggle: () => null,
+  }
 }

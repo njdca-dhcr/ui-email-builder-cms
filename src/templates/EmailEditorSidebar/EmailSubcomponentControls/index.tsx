@@ -11,7 +11,7 @@ import { ProgramNameControls } from './ProgramNameControls'
 import { InformationalBoxControls } from './InformationalBoxControls'
 import { SupplementalContentControls } from './SupplementalContentControls'
 
-interface Props extends EmailSubComponentControlsProps<EmailTemplate.SubComponentKind> {
+interface Props extends EmailSubComponentControlsProps<EmailTemplate.Kinds.SubComponent> {
   componentId: string
 }
 
@@ -63,7 +63,7 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
 }
 
 export const useSubComponentControlOptions = (
-  emailSubComponent: EmailTemplate.UniqueSubComponent,
+  emailSubComponent: EmailTemplate.Unique.SubComponent,
   value: any,
   setValue: (newValues: any) => void,
 ) => {

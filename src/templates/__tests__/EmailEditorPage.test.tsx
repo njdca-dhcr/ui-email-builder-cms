@@ -12,7 +12,7 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 
 describe('EmailEditorPage', () => {
-  let emailTemplate: EmailTemplate.Config
+  let emailTemplate: EmailTemplate.Base.Config
   let rendered: RenderResult
   let user: UserEvent
   let defaultPreviewText: string

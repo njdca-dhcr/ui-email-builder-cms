@@ -48,10 +48,10 @@ export const randomDisclaimerValue = (text?: string): DisclaimerValue => {
   }
 }
 
-export const buildEmailTemplateSubComponent = <T extends EmailTemplate.ComponentKind>(
+export const buildEmailTemplateSubComponent = <T extends EmailTemplate.Kinds.Component>(
   component: T,
-  options?: Partial<EmailTemplate.SubComponent<T, any>>,
-): EmailTemplate.SubComponent<T, any> => {
+  options?: Partial<EmailTemplate.Base.SubComponent<T, any>>,
+): EmailTemplate.Base.SubComponent<T, any> => {
   const possibleSubComponents = EmailTemplateComponentsMapping[component]
 
   if (possibleSubComponents.length === 0) {
@@ -61,18 +61,17 @@ export const buildEmailTemplateSubComponent = <T extends EmailTemplate.Component
   return {
     kind: sample(possibleSubComponents)!,
     required: false,
-    visibleByDefault: true,
     ...options,
   }
 }
 
 export const buildUniqueEmailSubComponent = <
-  T extends EmailTemplate.ComponentKind,
-  K extends EmailTemplate.SubComponentKind<T>,
+  T extends EmailTemplate.Kinds.Component,
+  K extends EmailTemplate.Kinds.SubComponent<T>,
 >(
   component: T,
-  options?: Partial<EmailTemplate.UniqueSubComponent<T, K>>,
-): EmailTemplate.UniqueSubComponent<T, K> => {
+  options?: Partial<EmailTemplate.Unique.SubComponent<T, K>>,
+): EmailTemplate.Unique.SubComponent<T, K> => {
   return {
     ...buildEmailTemplateSubComponent(component, options),
     id: uniqueId(),
@@ -80,22 +79,21 @@ export const buildUniqueEmailSubComponent = <
   }
 }
 
-export const buildEmailTemplateComponent = <T extends EmailTemplate.ComponentKind>(
+export const buildEmailTemplateComponent = <T extends EmailTemplate.Kinds.Component>(
   kind: T,
-  options?: Partial<EmailTemplate.Component<T>>,
-): EmailTemplate.Component<T> => {
+  options?: Partial<EmailTemplate.Base.Component<T>>,
+): EmailTemplate.Base.Component<T> => {
   return {
     kind,
     required: false,
-    visibleByDefault: true,
     ...options,
   }
 }
 
-export const buildUniqueEmailComponent = <T extends EmailTemplate.ComponentKind>(
+export const buildUniqueEmailComponent = <T extends EmailTemplate.Kinds.Component>(
   kind: T,
-  options?: Partial<EmailTemplate.UniqueComponent<T>>,
-): EmailTemplate.UniqueComponent<T> => {
+  options?: Partial<EmailTemplate.Unique.Component<T>>,
+): EmailTemplate.Unique.Component<T> => {
   const { subComponents, ...emailComponent } = buildEmailTemplateComponent(kind, options)
   return {
     ...emailComponent,
@@ -105,8 +103,8 @@ export const buildUniqueEmailComponent = <T extends EmailTemplate.ComponentKind>
 }
 
 export const buildEmailTemplateConfig = (
-  options?: Partial<EmailTemplate.Config>,
-): EmailTemplate.Config => {
+  options?: Partial<EmailTemplate.Base.Config>,
+): EmailTemplate.Base.Config => {
   return {
     name: faker.lorem.word(),
     description: faker.lorem.paragraph(),
@@ -116,8 +114,8 @@ export const buildEmailTemplateConfig = (
 }
 
 export const buildUniqueEmailConfig = (
-  options?: Partial<EmailTemplate.UniqueConfig>,
-): EmailTemplate.UniqueConfig => {
+  options?: Partial<EmailTemplate.Unique.Config>,
+): EmailTemplate.Unique.Config => {
   return {
     name: faker.lorem.word(),
     description: faker.lorem.paragraph(),

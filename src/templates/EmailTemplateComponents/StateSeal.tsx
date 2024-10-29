@@ -11,7 +11,7 @@ import capitalize from 'lodash.capitalize'
 import { useUserInfoValue } from 'src/utils/UserInfoContext'
 import { stateSealSchema } from 'src/utils/userInfoSchemas'
 
-const defaultValue = (): StateSealValue => {
+export const defaultStateSealValue = (): StateSealValue => {
   const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
   const state = stateById(stateAbbreviation)
   const stateName = state.id === 'US' ? '[Insert State]' : state.name
@@ -22,7 +22,7 @@ const defaultValue = (): StateSealValue => {
 }
 
 export const useStateSealValue = () =>
-  useUserInfoValue('stateSeal', defaultValue(), stateSealSchema)
+  useUserInfoValue('stateSeal', defaultStateSealValue(), stateSealSchema)
 
 const { Row, Cell } = EmailBlock
 

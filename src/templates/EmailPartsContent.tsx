@@ -37,7 +37,7 @@ export const EmailPartsContent: FC<{
 export const useEmailPartsContentData = () => useContext(EmailPartsContentContext)
 
 export const useEmailPartsContentFor = <T extends object>(
-  emailPart: string | EmailTemplate.UniquePart,
+  emailPart: string | EmailTemplate.Unique.Part,
   defaultValue: T,
 ): [T, (value: T | ((previous: T) => T)) => void] => {
   const [data, update] = useEmailPartsContentData()

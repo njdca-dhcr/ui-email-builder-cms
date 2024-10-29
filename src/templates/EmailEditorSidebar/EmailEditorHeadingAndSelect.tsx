@@ -7,7 +7,7 @@ import { ChevronDownIcon, Select } from 'src/ui'
 import './EmailEditorHeadingAndSelect.css'
 
 interface Props {
-  emailTemplate: EmailTemplate.Config
+  emailTemplate: EmailTemplate.Base.Config
 }
 
 export const EmailEditorHeadingAndSelect: FC<Props> = ({ emailTemplate }) => {

@@ -13,7 +13,7 @@ import {
 } from 'src/guides/MoreInfoAboutSubComponent'
 
 interface Props {
-  emailSubComponent: EmailTemplate.SubComponent
+  emailSubComponent: EmailTemplate.Base.SubComponent
 }
 
 export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) => {

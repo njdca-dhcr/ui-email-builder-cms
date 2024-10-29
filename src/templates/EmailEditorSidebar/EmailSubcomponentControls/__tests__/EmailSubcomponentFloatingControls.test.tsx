@@ -6,9 +6,9 @@ import { EmailTemplate } from 'src/appTypes'
 import { EmailSubComponentFloatingControls } from '../EmailSubcomponentFloatingControls'
 
 describe('EmailSubcomponentFloatingControls', () => {
-  const itRendersNothing = <T extends EmailTemplate.ComponentKind>(
+  const itRendersNothing = <T extends EmailTemplate.Kinds.Component>(
     componentKind: T,
-    subcomponentKind: EmailTemplate.SubComponentKind<T>,
+    subcomponentKind: EmailTemplate.Kinds.SubComponent<T>,
   ) => {
     it(`renders nothing for ${subcomponentKind}`, () => {
       const { baseElement } = render(
@@ -36,8 +36,8 @@ describe('EmailSubcomponentFloatingControls', () => {
   itRendersNothing('Footer', 'AdditionalContent')
 
   describe('Status', () => {
-    let status: EmailTemplate.UniqueSubComponent
-    let directive: EmailTemplate.UniqueSubComponent
+    let status: EmailTemplate.Unique.SubComponent
+    let directive: EmailTemplate.Unique.SubComponent
 
     beforeEach(() => {
       status = buildUniqueEmailSubComponent('Body', {

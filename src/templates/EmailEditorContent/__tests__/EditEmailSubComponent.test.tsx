@@ -6,7 +6,7 @@ import { render } from '@testing-library/react'
 import { buildUniqueEmailSubComponent, emailPartWrapper } from 'src/testHelpers'
 
 describe('EditEmailSubComponent', () => {
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailSubComponent: EmailTemplate.Unique.SubComponent
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'Title' })

@@ -70,7 +70,7 @@ describe('useEmailPartsContentFor', () => {
   })
 
   describe('with an email part', () => {
-    let emailPart: EmailTemplate.UniquePart
+    let emailPart: EmailTemplate.Unique.Part
     let defaultValue: ProgramNameValue
 
     beforeEach(() => {

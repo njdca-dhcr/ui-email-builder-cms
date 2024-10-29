@@ -7,7 +7,7 @@ import { render } from '@testing-library/react'
 import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 
 describe('EditEmailComponent', () => {
-  let emailComponent: EmailTemplate.UniqueComponent
+  let emailComponent: EmailTemplate.Unique.Component
 
   beforeEach(() => {
     emailComponent = buildUniqueEmailComponent('Header')

@@ -29,12 +29,6 @@ collections:
             widget: 'select'
             options: ['Banner', 'Header', 'Name', 'Body', 'Footer', 'StateSeal', 'Disclaimer']
           - { label: 'Required', name: 'required', widget: 'boolean' }
-          - {
-              label: 'Visible By Default',
-              name: 'visibleByDefault',
-              widget: 'boolean',
-              default: true,
-            }
           - label: Sub-Components
             name: subComponents
             widget: list
@@ -59,9 +53,3 @@ collections:
                   - { label: 'Body - Informational Box', value: 'InformationalBox' }
                   - { label: 'Footer - Additional Content', value: 'AdditionalContent' }
               - { label: 'Required', name: 'required', widget: 'boolean' }
-              - {
-                  label: 'Visible By Default',
-                  name: 'visibleByDefault',
-                  widget: 'boolean',
-                  default: true,
-                }

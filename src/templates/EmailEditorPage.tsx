@@ -17,7 +17,7 @@ import uniqueId from 'lodash.uniqueid'
 import './EmailEditorPage.css'
 
 interface PageContext {
-  emailTemplate: EmailTemplate.Config
+  emailTemplate: EmailTemplate.Base.Config
 }
 
 interface Props {
@@ -25,7 +25,7 @@ interface Props {
 }
 
 const EmailEditorPage: FC<Props> = ({ pageContext }) => {
-  const [emailTemplate] = useState<EmailTemplate.UniqueConfig>(() => ({
+  const [emailTemplate] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
     components: addIds(pageContext.emailTemplate.components ?? []),
   }))
@@ -63,7 +63,7 @@ export const Head: HeadFC<object, PageContext> = ({ pageContext }) => {
   return <title>{formatPageTitle(name)}</title>
 }
 
-const addIds = (components: EmailTemplate.Component[]): EmailTemplate.UniqueComponent[] => {
+const addIds = (components: EmailTemplate.Base.Component[]): EmailTemplate.Unique.Component[] => {
   return components.map(({ subComponents, ...emailComponent }) => {
     return {
       ...emailComponent,
@@ -74,8 +74,8 @@ const addIds = (components: EmailTemplate.Component[]): EmailTemplate.UniqueComp
 }
 
 const addIdsToSubComponents = (
-  subComponents: EmailTemplate.SubComponent[],
-): EmailTemplate.UniqueSubComponent[] => {
+  subComponents: EmailTemplate.Base.SubComponent[],
+): EmailTemplate.Unique.SubComponent[] => {
   return subComponents.map((subComponent) => {
     return {
       ...subComponent,

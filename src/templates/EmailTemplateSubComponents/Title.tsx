@@ -9,11 +9,11 @@ import { EmailTemplate, TitleValue } from 'src/appTypes'
 
 const { Row } = EmailBlock
 
-const defaultValue: TitleValue = { title: 'Title' }
+export const defaultTitleValue: TitleValue = { title: 'Title' }
 
 export const useTitleValue = (emailSubComponent: EmailTemplate.Title | null) => {
   const title: EmailTemplate.Title = emailSubComponent ?? { id: '', kind: 'Title' }
-  return useEmailPartsContentFor(title, defaultValue)
+  return useEmailPartsContentFor(title, defaultTitleValue)
 }
 
 export const Title: FC<EmailSubComponentProps<'Title'>> = ({ emailSubComponent }) => {

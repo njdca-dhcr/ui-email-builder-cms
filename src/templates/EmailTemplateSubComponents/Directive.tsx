@@ -10,7 +10,7 @@ import { textColorForBackground } from 'src/utils/textColorForBackground'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
-export const defaultValue: DirectiveValue = {
+export const defaultDirectiveValue: DirectiveValue = {
   variant: DirectiveVariant.OneStep,
   title: 'Directive Title',
   showTitle: true,
@@ -98,7 +98,7 @@ export const defaultValue: DirectiveValue = {
 }
 
 export const useDirectiveValue = (emailSubComponent: EmailTemplate.Directive) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultDirectiveValue)
 }
 
 const { Table, Row, Cell, Link } = EmailBlock

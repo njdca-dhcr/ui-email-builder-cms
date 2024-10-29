@@ -10,7 +10,7 @@ import { EmailEditorSidebar } from '..'
 import { faker } from '@faker-js/faker'
 
 describe('EmailEditorSidebar', () => {
-  let emailTemplate: EmailTemplate.UniqueConfig
+  let emailTemplate: EmailTemplate.Unique.Config
 
   beforeEach(() => {
     emailTemplate = buildUniqueEmailConfig()

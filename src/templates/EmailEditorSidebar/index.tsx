@@ -5,7 +5,7 @@ import { BackLink } from './BackLink'
 import { EmailEditorSidebarAccordion } from './EmailEditorSidebarAccordion'
 
 interface Props {
-  emailTemplate?: EmailTemplate.UniqueConfig
+  emailTemplate?: EmailTemplate.Unique.Config
   heading: ReactElement
 }
 

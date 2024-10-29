@@ -14,7 +14,7 @@ import { Borders, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { EmailTemplate, SupplementalContentValue, SupplementalContentVariant } from 'src/appTypes'
 
-const defaultValue: SupplementalContentValue = {
+export const defaultSupplementalContentValue: SupplementalContentValue = {
   variant: SupplementalContentVariant.SingleSupplementalContent,
   title: 'Supplemental Content Title 1',
   description: [
@@ -128,7 +128,7 @@ const { Row, Cell } = EmailBlock
 export const useSupplementalContentValue = (
   emailSubComponent: EmailTemplate.SupplementalContent,
 ) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultSupplementalContentValue)
 }
 
 export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent'>> = ({

@@ -15,7 +15,8 @@ components:
         defaultValue:
           title: Employer Response Portal Access
       - kind: DirectiveButton
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Name
     required: true
     defaultValue:

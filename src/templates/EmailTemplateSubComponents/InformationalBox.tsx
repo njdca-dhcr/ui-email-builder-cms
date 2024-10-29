@@ -14,7 +14,7 @@ import { Borders, Spacing, StyleDefaults, Text, Font, SpacingCell } from '../sty
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { EmailTemplate, InformationalBoxValue } from 'src/appTypes'
 
-const defaultValue: InformationalBoxValue = {
+export const defaultInformationalBoxValue: InformationalBoxValue = {
   boxColor: BoxColor.BenefitBlue,
   icon: 'LockOpen',
   title: 'Application confirmation number',
@@ -34,7 +34,7 @@ const defaultValue: InformationalBoxValue = {
 }
 
 export const useInformationalBoxValue = (emailSubComponent: EmailTemplate.InformationalBox) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultInformationalBoxValue)
 }
 
 const { Row, Cell } = EmailBlock

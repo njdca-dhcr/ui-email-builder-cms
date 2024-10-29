@@ -22,8 +22,8 @@ describe('SaveEmailTemplateDialog', () => {
   let title: string
   let trigger: string
   let previewText: string
-  let emailTemplate: EmailTemplate.UniqueConfig
-  let emailTemplateChanges: EmailTemplate.Config
+  let emailTemplate: EmailTemplate.Unique.Config
+  let emailTemplateChanges: EmailTemplate.Base.Config
   let user: UserEvent
 
   beforeEach(async () => {

@@ -10,8 +10,8 @@ components:
       - kind: DepartmentSeal
         required: true
       - kind: DateRange
-        visibleByDefault: false
         defaultValue:
+          visible: false
           range: "[00/00/0000 - 00/00/0000]"
       - kind: Title
         required: true
@@ -24,7 +24,8 @@ components:
           name: Unemployment Insurance (UI)
           backgroundColor: "#B9D8F3"
       - kind: DirectiveButton
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Name
     required: true
     defaultValue:

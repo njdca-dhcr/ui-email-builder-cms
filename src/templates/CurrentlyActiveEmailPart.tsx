@@ -74,7 +74,7 @@ export const useIsCurrentlyActiveEmailPart = (
 }
 
 export const useIsCurrentlyActiveEmailComponent = (
-  emailComponent: EmailTemplate.UniqueComponent,
+  emailComponent: EmailTemplate.Unique.Component,
 ): {
   isActive: boolean
   isComponentActive: boolean

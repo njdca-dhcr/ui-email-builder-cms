@@ -74,11 +74,11 @@ Container.displayName = 'EmailEditorSidebarAccordion.Container'
 
 interface EmailComponentProps {
   children: ReactNode
-  emailComponent: EmailTemplate.UniqueComponent
+  emailComponent: EmailTemplate.Unique.Component
 }
 
-const EDITABLE_IN_SETTINGS: EmailTemplate.ComponentKind[] = ['Banner', 'Disclaimer', 'StateSeal']
-const SUBCOMPONENT_CONTAINERS: EmailTemplate.ComponentKind[] = ['Body', 'Footer', 'Header']
+const EDITABLE_IN_SETTINGS: EmailTemplate.Kinds.Component[] = ['Banner', 'Disclaimer', 'StateSeal']
+const SUBCOMPONENT_CONTAINERS: EmailTemplate.Kinds.Component[] = ['Body', 'Footer', 'Header']
 
 const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) => {
   const shouldShow = useShouldShowEmailPart(emailComponent.id)
@@ -124,8 +124,8 @@ EmailComponent.displayName = 'EmailEditorSidebarAccordion.EmailComponent'
 
 interface EmailSubComponentProps {
   componentId: string
-  emailSubComponent: EmailTemplate.UniqueSubComponent
-  nextEmailSubComponent: EmailTemplate.UniqueSubComponent | undefined
+  emailSubComponent: EmailTemplate.Unique.SubComponent
+  nextEmailSubComponent: EmailTemplate.Unique.SubComponent | undefined
 }
 
 const EmailSubComponent: FC<EmailSubComponentProps> = ({
@@ -137,7 +137,6 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({
   const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
   const { isActive } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
-  const isEditableInSettings = emailSubComponent.kind === 'DepartmentSeal'
 
   return (
     <>

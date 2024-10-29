@@ -9,7 +9,7 @@ import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { isAppMode } from 'src/utils/appMode'
 import { EmailTemplate, ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
 
-const defaultValue = (): ProgramNameValue => {
+export const defaultProgramNameValue = (): ProgramNameValue => {
   if (isAppMode('NJ')) {
     return {
       preset: ProgramNameNJPreset.DependencyBenefits,
@@ -28,7 +28,7 @@ const defaultValue = (): ProgramNameValue => {
 const { Table, Row } = EmailBlock
 
 export const useProgramNameValue = (emailSubComponent: EmailTemplate.ProgramName) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue())
+  return useEmailPartsContentFor(emailSubComponent, defaultProgramNameValue())
 }
 
 export const ProgramName: FC<EmailSubComponentProps<'ProgramName'>> = ({ emailSubComponent }) => {

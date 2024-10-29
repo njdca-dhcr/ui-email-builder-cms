@@ -15,7 +15,7 @@ import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../s
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { EmailTemplate, StatusValue, StatusVariant } from 'src/appTypes'
 
-const defaultValue: StatusValue = {
+export const defaultStatusValue: StatusValue = {
   variant: StatusVariant.Overview,
   icon: 'Warning',
   status: 'Status of Claim',
@@ -65,7 +65,7 @@ const defaultValue: StatusValue = {
 }
 
 export const useStatusValue = (emailSubComponent: EmailTemplate.Status) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultStatusValue)
 }
 
 const { Table, Row, Cell } = EmailBlock

@@ -20,7 +20,8 @@ components:
           name: Dependency Benefits
           backgroundColor: "#F1DEA0"
       - kind: DirectiveButton
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Name
     required: true
     defaultValue:

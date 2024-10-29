@@ -7,7 +7,7 @@ import { EmailBlock, RichTextEditableElement } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { EmailTemplate, IntroValue } from 'src/appTypes'
 
-const defaultValue: IntroValue = {
+export const defaultIntroValue: IntroValue = {
   intro: [
     {
       type: 'paragraph',
@@ -21,7 +21,7 @@ const defaultValue: IntroValue = {
 const { Row } = EmailBlock
 
 export const useIntroValue = (emailSubComponent: EmailTemplate.Intro) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultIntroValue)
 }
 
 export const Intro: FC<EmailSubComponentProps<'Intro'>> = ({ emailSubComponent }) => {

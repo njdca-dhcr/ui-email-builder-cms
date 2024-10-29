@@ -13,14 +13,14 @@ import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 
 describe('EmailSubComponentSpacer', () => {
-  const renderWithSubComponents = <T extends EmailTemplate.ComponentKind>({
+  const renderWithSubComponents = <T extends EmailTemplate.Kinds.Component>({
     currentSubComponent,
     nextSubComponent,
     parentComponent,
     shouldShowNextComponent,
   }: {
-    currentSubComponent: EmailTemplate.SubComponentKind<T>
-    nextSubComponent: EmailTemplate.SubComponentKind<T> | undefined
+    currentSubComponent: EmailTemplate.Kinds.SubComponent<T>
+    nextSubComponent: EmailTemplate.Kinds.SubComponent<T> | undefined
     parentComponent: T
     shouldShowNextComponent?: boolean
   }) => {

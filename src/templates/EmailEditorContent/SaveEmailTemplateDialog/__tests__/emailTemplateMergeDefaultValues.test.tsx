@@ -9,7 +9,7 @@ import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultVal
 
 describe('emailTemplateMergeDefaultValues', () => {
   describe('components', () => {
-    let emailTemplate: EmailTemplate.UniqueConfig
+    let emailTemplate: EmailTemplate.Unique.Config
     let nameComponent: EmailTemplate.Name
 
     beforeEach(() => {
@@ -36,7 +36,7 @@ describe('emailTemplateMergeDefaultValues', () => {
   })
 
   describe('subcomponents', () => {
-    let emailTemplate: EmailTemplate.UniqueConfig
+    let emailTemplate: EmailTemplate.Unique.Config
     let headerComponent: EmailTemplate.Header
     let dateRangeSubComponent: EmailTemplate.DateRange
 

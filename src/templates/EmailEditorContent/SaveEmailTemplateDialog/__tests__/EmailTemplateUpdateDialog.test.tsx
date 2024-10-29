@@ -24,8 +24,8 @@ jest.mock('src/network/emailTemplates', () => {
 
 describe('EmailTemplateUpdateDialog', () => {
   let previewText: string
-  let emailTemplate: EmailTemplate.UniqueConfig
-  let emailTemplateChanges: EmailTemplate.Config
+  let emailTemplate: EmailTemplate.Unique.Config
+  let emailTemplateChanges: EmailTemplate.Base.Config
   let user: UserEvent
 
   beforeEach(async () => {

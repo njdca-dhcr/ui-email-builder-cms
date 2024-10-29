@@ -21,7 +21,8 @@ components:
           name: Appeal Tribunal
           backgroundColor: "#0076d6"
       - kind: DirectiveButton
-        visibleByDefault: false
+        defaultValue:
+          visible: false
   - kind: Name
     required: true
     defaultValue:

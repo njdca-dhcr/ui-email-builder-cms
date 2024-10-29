@@ -21,7 +21,7 @@ export const useUpdateEmailTemplate = (id: string) => {
   const authedFetch = useAuthedFetch()
 
   return useMutation({
-    mutationFn: async (emailTemplate: EmailTemplate.UniqueConfig) => {
+    mutationFn: async (emailTemplate: EmailTemplate.Unique.Config) => {
       const result = await authedFetch<UpdateEmailTemplateResponse>({
         body: { emailTemplate },
         method: 'PATCH',

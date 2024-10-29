@@ -80,7 +80,7 @@ const getHostName = (url: string): string => {
   return url.replace(/^https?:\/\//, '').replace(/\/$/, '')
 }
 
-const defaultValue = (): BannerValue => {
+export const defaultBannerValue = (): BannerValue => {
   const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
   const state = stateById(stateAbbreviation)
   const lowercasedAbbreviation = stateAbbreviation.toLowerCase()
@@ -93,7 +93,7 @@ const defaultValue = (): BannerValue => {
   }
 }
 
-export const useBannerValue = () => useUserInfoValue('banner', defaultValue(), bannerSchema)
+export const useBannerValue = () => useUserInfoValue('banner', defaultBannerValue(), bannerSchema)
 
 export const Banner: FC<EmailComponentProps<'Banner'>> = ({}) => {
   const [value] = useBannerValue()

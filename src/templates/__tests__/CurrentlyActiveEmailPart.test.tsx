@@ -127,8 +127,8 @@ describe('useClearCurrentlyActiveEmailPart', () => {
 })
 
 describe('useIsCurrentlyActiveEmailComponent', () => {
-  let emailComponent: EmailTemplate.UniqueComponent
-  let emailSubComponent: EmailTemplate.UniqueSubComponent
+  let emailComponent: EmailTemplate.Unique.Component
+  let emailSubComponent: EmailTemplate.Unique.SubComponent
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'Title' })

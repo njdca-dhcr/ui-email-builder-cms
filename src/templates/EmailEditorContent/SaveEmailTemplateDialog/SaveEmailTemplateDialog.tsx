@@ -24,7 +24,7 @@ interface Props {
   mutate: UseMutateAsyncFunction<
     SuccessJSON | ErrorJSON | null | undefined,
     DefaultError,
-    EmailTemplate.UniqueConfig
+    EmailTemplate.Unique.Config
   >
   onSuccess?: (emailTemplate: { id: string }) => void
   submitButtonText: string

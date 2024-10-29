@@ -1,9 +1,9 @@
 import { EmailTemplate } from 'src/appTypes'
 
 export const emailTemplateMergeDefaultValues = (
-  emailTemplate: EmailTemplate.UniqueConfig,
+  emailTemplate: EmailTemplate.Unique.Config,
   emailPartsContentData: Record<string, any>,
-): EmailTemplate.UniqueConfig => {
+): EmailTemplate.Unique.Config => {
   return {
     ...emailTemplate,
     components: emailTemplate.components?.map((component) => ({

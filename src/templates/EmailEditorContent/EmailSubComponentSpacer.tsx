@@ -7,8 +7,8 @@ import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 
 interface Props {
-  currentSubComponent: EmailTemplate.UniqueSubComponent
-  nextSubComponent: EmailTemplate.UniqueSubComponent | undefined
+  currentSubComponent: EmailTemplate.Unique.SubComponent
+  nextSubComponent: EmailTemplate.Unique.SubComponent | undefined
 }
 
 export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSubComponent }) => {
@@ -38,8 +38,8 @@ export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSu
 }
 
 const sizeForSubComponentKind = (
-  subComponentKind: EmailTemplate.SubComponentKind,
-  nextSubComponentKind: EmailTemplate.SubComponentKind | undefined,
+  subComponentKind: EmailTemplate.Kinds.SubComponent,
+  nextSubComponentKind: EmailTemplate.Kinds.SubComponent | undefined,
   shouldShowNext: boolean,
   shouldShowDirective: boolean,
 ): 'medium' | 'large' | 'extraLarge' | undefined => {

@@ -33,7 +33,7 @@ import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 
 interface Props {
-  emailTemplate: EmailTemplate.UniqueConfig
+  emailTemplate: EmailTemplate.Unique.Config
 }
 
 export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {

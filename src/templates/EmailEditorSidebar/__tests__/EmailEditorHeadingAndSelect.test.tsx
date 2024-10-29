@@ -7,7 +7,7 @@ import { EmailEditorHeadingAndSelect } from '../EmailEditorHeadingAndSelect'
 import { buildEmailTemplateConfig } from 'src/testHelpers'
 
 describe('EmailEditorSidebar', () => {
-  let emailTemplate: EmailTemplate.Config
+  let emailTemplate: EmailTemplate.Base.Config
 
   beforeEach(() => {
     emailTemplate = buildEmailTemplateConfig({ name: 'Email Template' })

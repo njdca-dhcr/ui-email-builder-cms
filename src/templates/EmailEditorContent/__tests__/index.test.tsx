@@ -39,7 +39,7 @@ jest.mock('src/network/users', () => {
 })
 
 describe('EmailEditorContent', () => {
-  let emailTemplate: EmailTemplate.UniqueConfig
+  let emailTemplate: EmailTemplate.Unique.Config
   let alertSpy: jest.SpyInstance
   let client: QueryClient
   let user: UserEvent

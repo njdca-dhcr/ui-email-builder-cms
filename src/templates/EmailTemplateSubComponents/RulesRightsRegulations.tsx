@@ -21,7 +21,7 @@ import {
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
-const defaultValue: RulesRightsRegulationsValue = {
+export const defaultRulesRightsRegulationsValue: RulesRightsRegulationsValue = {
   variant: RulesRightsRegulationsVariant.Reminder,
   icon: 'Flag',
   boxColor: BoxColor.GoverningGray,
@@ -212,7 +212,7 @@ const defaultValue: RulesRightsRegulationsValue = {
 export const useRulesRightsRegulationsValue = (
   emailSubComponent: EmailTemplate.RulesRightsRegulations,
 ) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultValue)
+  return useEmailPartsContentFor(emailSubComponent, defaultRulesRightsRegulationsValue)
 }
 
 const { Row, Cell, Link, Table } = EmailBlock

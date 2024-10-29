@@ -4,8 +4,8 @@ import { useShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { StatusFloatingControls } from './StatusFloatingControls'
 
 interface Props {
-  emailSubComponent: EmailTemplate.UniqueSubComponent
-  nextEmailSubComponent: EmailTemplate.UniqueSubComponent | undefined
+  emailSubComponent: EmailTemplate.Unique.SubComponent
+  nextEmailSubComponent: EmailTemplate.Unique.SubComponent | undefined
 }
 
 export const EmailSubComponentFloatingControls: FC<Props> = ({
