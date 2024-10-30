@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
-import { Select, UswdsIconSelect } from 'src/ui'
+import { Select, UswdsIconSelect, UswdsIconVariantKey } from 'src/ui'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { LoginDetailsVariant } from 'src/appTypes'
@@ -17,6 +17,11 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps<'LoginDetai
   const isInformation = value.variant === LoginDetailsVariant.Information
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
+
+  const selectIcon = useCallback(
+    (loginDetailsIcon: UswdsIconVariantKey) => setValue({ ...value, loginDetailsIcon }),
+    [setValue, value],
+  )
 
   return (
     <Control.Group>
@@ -44,7 +49,7 @@ export const LoginDetailsControls: FC<EmailSubComponentControlsProps<'LoginDetai
           </Control.Label>
           <UswdsIconSelect
             labelId={iconHtmlId}
-            onChange={(loginDetailsIcon) => setValue({ ...value, loginDetailsIcon })}
+            onChange={selectIcon}
             value={value.loginDetailsIcon}
           />
         </Control.Container>

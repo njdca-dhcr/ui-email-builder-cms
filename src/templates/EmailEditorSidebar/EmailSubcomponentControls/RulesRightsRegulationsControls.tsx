@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { useSubComponentControlOptions } from '.'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useRulesRightsRegulationsValue } from 'src/templates/EmailTemplateSubComponents/RulesRightsRegulations'
-import { Select, SelectBoxColor, UswdsIconSelect } from 'src/ui'
+import { Select, SelectBoxColor, UswdsIconSelect, UswdsIconVariantKey } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { RulesRightsRegulationsVariant } from 'src/appTypes'
 
@@ -19,6 +19,11 @@ export const RulesRightsRegulationsControls: FC<
   const isYourRights = value.variant === RulesRightsRegulationsVariant.YourRights
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
+
+  const selectIcon = useCallback(
+    (icon: UswdsIconVariantKey) => setValue({ ...value, icon }),
+    [setValue, value],
+  )
 
   return (
     <Control.Group>
@@ -56,11 +61,7 @@ export const RulesRightsRegulationsControls: FC<
           <Control.Label id={iconHtmlId} size="small">
             Icon
           </Control.Label>
-          <UswdsIconSelect
-            labelId={iconHtmlId}
-            onChange={(icon) => setValue({ ...value, icon })}
-            value={value.icon}
-          />
+          <UswdsIconSelect labelId={iconHtmlId} onChange={selectIcon} value={value.icon} />
         </Control.Container>
       )}
 

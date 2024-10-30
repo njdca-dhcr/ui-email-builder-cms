@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Control, EmailSubComponentControlsProps } from './shared'
 import { useSubComponentControlOptions } from '.'
-import { SelectBoxColor, UswdsIconSelect } from 'src/ui'
+import { SelectBoxColor, UswdsIconSelect, UswdsIconVariantKey } from 'src/ui'
 import { useInformationalBoxValue } from 'src/templates/EmailTemplateSubComponents/InformationalBox'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 
@@ -14,15 +14,16 @@ export const InformationalBoxControls: FC<EmailSubComponentControlsProps<'Inform
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
 
+  const selectIcon = useCallback(
+    (icon: UswdsIconVariantKey) => setValue({ ...value, icon }),
+    [setValue, value],
+  )
+
   return (
     <Control.Group>
       <Control.Container layout="column">
         <Control.Label id={iconHtmlId}>Icon</Control.Label>
-        <UswdsIconSelect
-          labelId={iconHtmlId}
-          onChange={(icon) => setValue({ ...value, icon })}
-          value={value.icon}
-        />
+        <UswdsIconSelect labelId={iconHtmlId} onChange={selectIcon} value={value.icon} />
       </Control.Container>
       <Control.Container layout="column">
         <Control.Label id={boxColorHtmlId}>Box Color</Control.Label>

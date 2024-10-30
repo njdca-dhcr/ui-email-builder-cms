@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import startCase from 'lodash.startcase'
 import { Select, UswdsIcon, UswdsIconVariantKey, UswdsIconVariants } from 'src/ui'
 
@@ -21,7 +21,7 @@ const iconOptions = Object.keys(UswdsIconVariants).map((key) => {
   }
 })
 
-export const UswdsIconSelect: FC<UswdsIconSelectProps> = ({ onChange, value, labelId }) => {
+export const UswdsIconSelect: FC<UswdsIconSelectProps> = memo(({ onChange, value, labelId }) => {
   return (
     <Select
       data-testid="uswds-icon-select"
@@ -41,4 +41,4 @@ export const UswdsIconSelect: FC<UswdsIconSelectProps> = ({ onChange, value, lab
       }}
     />
   )
-}
+})

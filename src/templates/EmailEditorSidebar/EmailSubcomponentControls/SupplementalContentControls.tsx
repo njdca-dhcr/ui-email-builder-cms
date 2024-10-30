@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { Select, SelectBoxColor, UswdsIconSelect } from 'src/ui'
+import { Select, SelectBoxColor, UswdsIconSelect, UswdsIconVariantKey } from 'src/ui'
 import { useSupplementalContentValue } from 'src/templates/EmailTemplateSubComponents/SupplementalContent'
 import { SupplementalContentVariant } from 'src/appTypes'
 
@@ -12,6 +12,11 @@ export const SupplementalContentControls: FC<
   const boxColorHtmlId = `select-box-color-${emailSubComponent.id}`
   const iconHtmlId = `select-icon-${emailSubComponent.id}`
   const [value, setValue] = useSupplementalContentValue(emailSubComponent)
+
+  const selectBenefitAmountIcon = useCallback(
+    (benefitAmountIcon: UswdsIconVariantKey) => setValue({ ...value, benefitAmountIcon }),
+    [setValue, value],
+  )
 
   return (
     <Control.Group>
@@ -53,7 +58,7 @@ export const SupplementalContentControls: FC<
             </Control.Label>
             <UswdsIconSelect
               labelId={iconHtmlId}
-              onChange={(benefitAmountIcon) => setValue({ ...value, benefitAmountIcon })}
+              onChange={selectBenefitAmountIcon}
               value={value.benefitAmountIcon}
             />
           </Control.Container>

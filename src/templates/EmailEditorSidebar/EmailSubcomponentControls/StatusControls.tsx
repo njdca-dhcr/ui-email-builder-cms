@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { Control, EmailSubComponentControlsProps, SELECT_VARIANT_CLASSNAME } from './shared'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useSubComponentControlOptions } from '.'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
-import { Select, SelectBoxColor, UswdsIconSelect } from 'src/ui'
+import { Select, SelectBoxColor, UswdsIconSelect, UswdsIconVariantKey } from 'src/ui'
 import { SubComponentControlToggle } from './SubComponentControlToggle'
 import { StatusVariant } from 'src/appTypes'
 
@@ -16,6 +16,11 @@ export const StatusControls: FC<EmailSubComponentControlsProps<'Status'>> = ({
   const [value, setValue] = useStatusValue(emailSubComponent)
 
   useSubComponentControlOptions(emailSubComponent, value, setValue)
+
+  const selectIcon = useCallback(
+    (icon: UswdsIconVariantKey) => setValue({ ...value, icon }),
+    [setValue, value],
+  )
 
   return (
     <Control.Group className="status-control-group">
@@ -61,11 +66,7 @@ export const StatusControls: FC<EmailSubComponentControlsProps<'Status'>> = ({
             <Control.Label id={iconHtmlId} size="small">
               Icon
             </Control.Label>
-            <UswdsIconSelect
-              labelId={iconHtmlId}
-              onChange={(icon) => setValue({ ...value, icon })}
-              value={value.icon}
-            />
+            <UswdsIconSelect labelId={iconHtmlId} onChange={selectIcon} value={value.icon} />
           </Control.Container>
         </>
       )}
