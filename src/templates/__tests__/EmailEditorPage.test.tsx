@@ -26,20 +26,20 @@ describe('EmailEditorPage', () => {
       components: [
         buildEmailTemplateComponent('Header', {
           subComponents: [
-            buildEmailTemplateSubComponent('Header', { kind: 'Title' }),
-            buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' }),
+            buildEmailTemplateSubComponent({ kind: 'Title' }),
+            buildEmailTemplateSubComponent({ kind: 'ProgramName' }),
           ],
         }),
         buildEmailTemplateComponent('Name'),
         buildEmailTemplateComponent('Body', {
           subComponents: [
-            buildEmailTemplateSubComponent('Body', { kind: 'Intro' }),
-            buildEmailTemplateSubComponent('Body', { kind: 'Status' }),
-            buildEmailTemplateSubComponent('Body', { kind: 'SupplementalContent' }),
+            buildEmailTemplateSubComponent({ kind: 'Intro' }),
+            buildEmailTemplateSubComponent({ kind: 'Status' }),
+            buildEmailTemplateSubComponent({ kind: 'SupplementalContent' }),
           ],
         }),
         buildEmailTemplateComponent('Footer', {
-          subComponents: [buildEmailTemplateSubComponent('Footer', { kind: 'AdditionalContent' })],
+          subComponents: [buildEmailTemplateSubComponent({ kind: 'AdditionalContent' })],
         }),
         buildEmailTemplateComponent('Disclaimer'),
       ],

@@ -19,7 +19,7 @@ import { DirectiveButton } from '../EmailTemplateSubComponents/DirectiveButton'
 export const EditEmailSubComponent: FC<
   EmailSubComponentProps<EmailTemplate.Kinds.SubComponent>
 > = ({ emailSubComponent, ...props }) => {
-  const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
+  const shouldShow = useShouldShowEmailPart(emailSubComponent)
 
   if (shouldShow.off) return null
 

@@ -78,7 +78,7 @@ describe('Email Template Show Page', () => {
           components: [
             buildUniqueEmailComponent('Header', {
               subComponents: [
-                buildUniqueEmailSubComponent('Header', {
+                buildUniqueEmailSubComponent({
                   kind: 'Title',
                   defaultValue: { title },
                 }),

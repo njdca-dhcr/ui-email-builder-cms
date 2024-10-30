@@ -20,7 +20,7 @@ describe('InformationalBoxControls', () => {
     rendered = render(
       <EmailPartsContent>
         <InformationalBoxControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
+          emailSubComponent={buildUniqueEmailSubComponent({ kind: 'InformationalBox' })}
         />
       </EmailPartsContent>,
     )

@@ -16,7 +16,7 @@ describe('Date Range', () => {
   let emailSubComponent: EmailTemplate.DateRange
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DateRange' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DateRange' })
   })
 
   it('is editable', async () => {

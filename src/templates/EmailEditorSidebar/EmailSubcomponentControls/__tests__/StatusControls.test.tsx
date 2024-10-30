@@ -16,9 +16,7 @@ describe('StatusControls', () => {
     const user = userEvent.setup()
     const { getByRole, queryByRole, getByLabelText } = render(
       <EmailPartsContent>
-        <StatusControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-        />
+        <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
       </EmailPartsContent>,
     )
 
@@ -41,9 +39,7 @@ describe('StatusControls', () => {
     const user = userEvent.setup()
     const { queryByLabelText } = render(
       <EmailPartsContent>
-        <StatusControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-        />
+        <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
       </EmailPartsContent>,
     )
     const toggle = queryByLabelText('+ Supportive Information')
@@ -92,9 +88,7 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-            />
+            <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
           </EmailPartsContent>,
         )
       })
@@ -117,9 +111,7 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-            />
+            <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByLabelText('Status variant'))
@@ -144,9 +136,7 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-            />
+            <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByLabelText('Status variant'))
@@ -171,9 +161,7 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-            />
+            <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByLabelText('Status variant'))
@@ -200,9 +188,7 @@ describe('StatusControls', () => {
       beforeEach(async () => {
         rendered = render(
           <EmailPartsContent>
-            <StatusControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-            />
+            <StatusControls emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })} />
           </EmailPartsContent>,
         )
         await user.click(rendered.getByLabelText('Status variant'))

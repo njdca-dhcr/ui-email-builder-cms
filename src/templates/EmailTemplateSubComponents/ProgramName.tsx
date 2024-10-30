@@ -6,29 +6,12 @@ import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock, EditableElement } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { isAppMode } from 'src/utils/appMode'
-import { EmailTemplate, ProgramNameNJPreset, ProgramNameValue } from 'src/appTypes'
-
-export const defaultProgramNameValue = (): ProgramNameValue => {
-  if (isAppMode('NJ')) {
-    return {
-      preset: ProgramNameNJPreset.DependencyBenefits,
-      name: 'Dependency Benefits',
-      backgroundColor: '#E1E291',
-    }
-  } else {
-    return {
-      preset: ProgramNameNJPreset.DependencyBenefits,
-      name: 'Program Name',
-      backgroundColor: '#CCBDDF',
-    }
-  }
-}
+import { EmailTemplate } from 'src/appTypes'
 
 const { Table, Row } = EmailBlock
 
 export const useProgramNameValue = (emailSubComponent: EmailTemplate.ProgramName) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultProgramNameValue())
+  return useEmailPartsContentFor(emailSubComponent)
 }
 
 export const ProgramName: FC<EmailSubComponentProps<'ProgramName'>> = ({ emailSubComponent }) => {

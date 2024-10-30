@@ -4,7 +4,7 @@ import { DisclaimerValue, EmailTemplate } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { render } from '@testing-library/react'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EditEmailComponent', () => {
   let emailComponent: EmailTemplate.Unique.Component
@@ -15,13 +15,13 @@ describe('EditEmailComponent', () => {
 
   it('displays nothing when the component should not be shown', () => {
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [emailComponent.id]: false }}>
+      <EmailPartsContent initialData={{ [emailComponent.id]: { visible: false } }}>
         <EditEmailComponent emailComponent={emailComponent}>
           <tr>
             <td>{faker.lorem.paragraph()}</td>
           </tr>
         </EditEmailComponent>
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
       { wrapper: emailPartWrapper },
     )
     const tbody = baseElement.querySelector('tbody')

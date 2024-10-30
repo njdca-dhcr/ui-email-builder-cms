@@ -52,8 +52,8 @@ describe('EmailEditorContent', () => {
         buildUniqueEmailComponent('Banner'),
         buildUniqueEmailComponent('Header', {
           subComponents: [
-            buildUniqueEmailSubComponent('Header', { kind: 'Title' }),
-            buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' }),
+            buildUniqueEmailSubComponent({ kind: 'Title' }),
+            buildUniqueEmailSubComponent({ kind: 'ProgramName' }),
           ],
         }),
       ],

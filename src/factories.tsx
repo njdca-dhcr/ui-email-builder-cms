@@ -5,8 +5,8 @@ import {
   DepartmentSealValue,
   DisclaimerValue,
   EmailTemplate,
-  EmailTemplateComponentsMapping,
   StateSealValue,
+  SUBCOMPONENTS,
 } from './appTypes'
 import uniqueId from 'lodash.uniqueid'
 import sample from 'lodash.sample'
@@ -48,32 +48,20 @@ export const randomDisclaimerValue = (text?: string): DisclaimerValue => {
   }
 }
 
-export const buildEmailTemplateSubComponent = <T extends EmailTemplate.Kinds.Component>(
-  component: T,
-  options?: Partial<EmailTemplate.Base.SubComponent<T, any>>,
-): EmailTemplate.Base.SubComponent<T, any> => {
-  const possibleSubComponents = EmailTemplateComponentsMapping[component]
-
-  if (possibleSubComponents.length === 0) {
-    throw new Error(`Component ${component} does not have SubComponents`)
-  }
-
+export const buildEmailTemplateSubComponent = <K extends EmailTemplate.Kinds.SubComponent>(
+  options: { kind: K } & Partial<EmailTemplate.Base.SubComponent<K>>,
+): EmailTemplate.Base.SubComponent => {
   return {
-    kind: sample(possibleSubComponents)!,
     required: false,
     ...options,
   }
 }
 
-export const buildUniqueEmailSubComponent = <
-  T extends EmailTemplate.Kinds.Component,
-  K extends EmailTemplate.Kinds.SubComponent<T>,
->(
-  component: T,
-  options?: Partial<EmailTemplate.Unique.SubComponent<T, K>>,
-): EmailTemplate.Unique.SubComponent<T, K> => {
+export const buildUniqueEmailSubComponent = <T extends EmailTemplate.Kinds.SubComponent>(
+  options: { kind: T } & Partial<EmailTemplate.Unique.SubComponent<T>>,
+): EmailTemplate.Unique.SubComponent<T> => {
   return {
-    ...buildEmailTemplateSubComponent(component, options),
+    required: false,
     id: uniqueId(),
     ...options,
   }

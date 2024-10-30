@@ -1,19 +1,16 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailSubComponentFloatingControls } from '../EmailSubcomponentFloatingControls'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailSubcomponentFloatingControls', () => {
-  const itRendersNothing = <T extends EmailTemplate.Kinds.Component>(
-    componentKind: T,
-    subcomponentKind: EmailTemplate.Kinds.SubComponent<T>,
-  ) => {
+  const itRendersNothing = (subcomponentKind: EmailTemplate.Kinds.SubComponent) => {
     it(`renders nothing for ${subcomponentKind}`, () => {
       const { baseElement } = render(
         <EmailSubComponentFloatingControls
-          emailSubComponent={buildUniqueEmailSubComponent(componentKind, {
+          emailSubComponent={buildUniqueEmailSubComponent({
             kind: subcomponentKind,
           })}
           nextEmailSubComponent={undefined}
@@ -23,37 +20,39 @@ describe('EmailSubcomponentFloatingControls', () => {
     })
   }
 
-  itRendersNothing('Header', 'Title')
-  itRendersNothing('Header', 'ProgramName')
-  itRendersNothing('Header', 'DateRange')
-  itRendersNothing('Header', 'DepartmentSeal')
-  itRendersNothing('Body', 'Intro')
-  itRendersNothing('Body', 'RulesRightsRegulations')
-  itRendersNothing('Body', 'SupplementalContent')
-  itRendersNothing('Body', 'Directive')
-  itRendersNothing('Body', 'LoginDetails')
-  itRendersNothing('Body', 'InformationalBox')
-  itRendersNothing('Footer', 'AdditionalContent')
+  itRendersNothing('Title')
+  itRendersNothing('ProgramName')
+  itRendersNothing('DateRange')
+  itRendersNothing('DepartmentSeal')
+  itRendersNothing('Intro')
+  itRendersNothing('RulesRightsRegulations')
+  itRendersNothing('SupplementalContent')
+  itRendersNothing('Directive')
+  itRendersNothing('LoginDetails')
+  itRendersNothing('InformationalBox')
+  itRendersNothing('AdditionalContent')
 
   describe('Status', () => {
     let status: EmailTemplate.Unique.SubComponent
     let directive: EmailTemplate.Unique.SubComponent
 
     beforeEach(() => {
-      status = buildUniqueEmailSubComponent('Body', {
+      status = buildUniqueEmailSubComponent({
         kind: 'Status',
       })
-      directive = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+      directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
     })
 
     it('renders the StatusFloatingControls when the Status is followed by Directive and both are visible', () => {
       const { queryByText, queryByRole } = render(
-        <ShouldShowEmailPart initialData={{ [status.id]: true, [directive.id]: true }}>
+        <EmailPartsContent
+          initialData={{ [status.id]: { visible: true }, [directive.id]: { visible: true } }}
+        >
           <EmailSubComponentFloatingControls
             emailSubComponent={status}
             nextEmailSubComponent={directive}
           />
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(queryByText('Spacing')).not.toBeNull()
       expect(queryByRole('radio', { name: 'Small' })).not.toBeNull()
@@ -62,37 +61,41 @@ describe('EmailSubcomponentFloatingControls', () => {
 
     it('does not render the StatusFloatingControls when the Status is followed by Directive but the Directive is hidden', () => {
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [status.id]: true, [directive.id]: false }}>
+        <EmailPartsContent
+          initialData={{ [status.id]: { visible: true }, [directive.id]: { visible: false } }}
+        >
           <EmailSubComponentFloatingControls
             emailSubComponent={status}
             nextEmailSubComponent={directive}
           />
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')
     })
 
     it('does not render the StatusFloatingControls when the Status is followed by a subcomponent other than Directive', () => {
-      const loginDetails = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
+      const loginDetails = buildUniqueEmailSubComponent({ kind: 'LoginDetails' })
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [status.id]: true, [loginDetails.id]: true }}>
+        <EmailPartsContent
+          initialData={{ [status.id]: { visible: true }, [loginDetails.id]: { visible: true } }}
+        >
           <EmailSubComponentFloatingControls
             emailSubComponent={status}
             nextEmailSubComponent={loginDetails}
           />
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')
     })
 
     it('does not render the StatusFloatingControls when the Status is followed by nothing', () => {
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [status.id]: true }}>
+        <EmailPartsContent initialData={{ [status.id]: { visible: true } }}>
           <EmailSubComponentFloatingControls
             emailSubComponent={status}
             nextEmailSubComponent={undefined}
           />
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')
     })
@@ -100,16 +103,16 @@ describe('EmailSubcomponentFloatingControls', () => {
 
   describe('when the subcomponent is not being shown', () => {
     it('renders nothing', () => {
-      const emailSubComponent = buildUniqueEmailSubComponent('Body', {
+      const emailSubComponent = buildUniqueEmailSubComponent({
         kind: 'Status',
       })
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [emailSubComponent.id]: false }}>
+        <EmailPartsContent initialData={{ [emailSubComponent.id]: { visible: false } }}>
           <EmailSubComponentFloatingControls
             emailSubComponent={emailSubComponent}
             nextEmailSubComponent={undefined}
           />
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')
     })

@@ -1,22 +1,22 @@
 import React from 'react'
 import { EditEmailSubComponent } from '../EditEmailSubComponent'
 import { EmailTemplate } from 'src/appTypes'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { render } from '@testing-library/react'
 import { buildUniqueEmailSubComponent, emailPartWrapper } from 'src/testHelpers'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EditEmailSubComponent', () => {
   let emailSubComponent: EmailTemplate.Unique.SubComponent
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'Title' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })
   })
 
   it('does not display anything when the subcomponent is toggled off', () => {
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [emailSubComponent.id]: false }}>
+      <EmailPartsContent initialData={{ [emailSubComponent.id]: { visible: false } }}>
         <EditEmailSubComponent emailSubComponent={emailSubComponent} />
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
       { wrapper: emailPartWrapper },
     )
     const tbody = baseElement.querySelector('tbody')
@@ -25,7 +25,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render Title', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'Title' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -34,7 +34,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render ProgramName', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -43,7 +43,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render DirectiveButton', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
     const { queryByRole } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -52,7 +52,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render AdditionalContent', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -61,7 +61,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render Intro', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Intro' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Intro' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -70,7 +70,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render Status', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Status' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -79,7 +79,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render SupplementalContent', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'SupplementalContent' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -88,7 +88,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render RulesRightsRegulations', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'RulesRightsRegulations' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'RulesRightsRegulations' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -97,7 +97,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render LoginDetails', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'LoginDetails' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -106,7 +106,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render DepartmentSeal', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DepartmentSeal' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DepartmentSeal' })
     const { queryByTestId } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },
@@ -115,7 +115,7 @@ describe('EditEmailSubComponent', () => {
   })
 
   it('can render InformationalBox', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'InformationalBox' })
     const { queryByLabelText } = render(
       <EditEmailSubComponent emailSubComponent={emailSubComponent} />,
       { wrapper: emailPartWrapper },

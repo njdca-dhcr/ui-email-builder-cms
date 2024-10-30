@@ -23,7 +23,7 @@ export const DirectiveButton: FC<EmailSubComponentProps<'DirectiveButton'>> = ()
 
   const [value] = useDirectiveValue(directive)
 
-  const shouldShowDirective = useShouldShowEmailPart(directive.id)
+  const shouldShowDirective = useShouldShowEmailPart(directive)
   const buttonTextColor = textColorForBackground(value.buttonColor, {
     dark: Colors.black,
     light: Colors.white,

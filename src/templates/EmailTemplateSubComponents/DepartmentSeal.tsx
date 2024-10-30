@@ -3,23 +3,15 @@ import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui'
 import { StyleDefaults } from '../styles'
 import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
-import { appModeAsStateAbbreviation } from 'src/utils/appMode'
-import { departmentSealByImageName, departmentSealsForState } from 'src/utils/departmentSeals'
-import { DepartmentSealValue } from 'src/appTypes'
+import { departmentSealByImageName } from 'src/utils/departmentSeals'
 import { useUserInfoValue } from 'src/utils/UserInfoContext'
 import { departmentSealSchema } from 'src/utils/userInfoSchemas'
+import { defaultDepartmentSealValue } from './Values/DepartmentSealValue'
 
 const { Row } = EmailBlock
 
-const defaultValue = (): DepartmentSealValue => {
-  const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
-  const [departmentSeal] = departmentSealsForState(stateAbbreviation)
-
-  return { seal: departmentSeal?.imageName ?? 'US-DOL.png' }
-}
-
 export const useDepartmentSealValue = () =>
-  useUserInfoValue('departmentSeal', defaultValue(), departmentSealSchema)
+  useUserInfoValue('departmentSeal', defaultDepartmentSealValue(), departmentSealSchema)
 
 export const DepartmentSealMarkup: FC<{ departmentSealImageName: string }> = ({
   departmentSealImageName,

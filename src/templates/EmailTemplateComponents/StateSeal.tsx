@@ -4,22 +4,11 @@ import { EmailBlock } from 'src/ui'
 import { stateSealFor } from 'src/utils/StateSeal'
 import { SpacingCell, StyleDefaults, Text } from '../styles'
 import { buildStateSealUrl } from 'src/utils/siteUrl'
-import { appModeAsStateAbbreviation, isAllStatesMode } from 'src/utils/appMode'
-import { StateSealValue } from 'src/appTypes'
 import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
 import capitalize from 'lodash.capitalize'
 import { useUserInfoValue } from 'src/utils/UserInfoContext'
 import { stateSealSchema } from 'src/utils/userInfoSchemas'
-
-export const defaultStateSealValue = (): StateSealValue => {
-  const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
-  const state = stateById(stateAbbreviation)
-  const stateName = state.id === 'US' ? '[Insert State]' : state.name
-  return {
-    additionalDisclaimer: `The ${stateName} Department of Labor and Workforce Development is an equal opportunity employer and provides equal opportunity programs. Auxiliary aids and services are available upon request to assist individuals with disabilities.`,
-    stateAbbreviation: stateAbbreviation ?? 'US',
-  }
-}
+import { defaultStateSealValue } from './Values/StateSealValue'
 
 export const useStateSealValue = () =>
   useUserInfoValue('stateSeal', defaultStateSealValue(), stateSealSchema)

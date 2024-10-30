@@ -24,7 +24,7 @@ describe('InformationalBox', () => {
   }
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'InformationalBox' })
     user = userEvent.setup()
     value = faker.lorem.words(4)
   })

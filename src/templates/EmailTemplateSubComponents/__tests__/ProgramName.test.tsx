@@ -16,7 +16,7 @@ describe('ProgramName', () => {
   let emailSubComponent: EmailTemplate.ProgramName
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
   })
 
   it('is editable', async () => {

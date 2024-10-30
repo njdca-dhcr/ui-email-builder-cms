@@ -61,7 +61,7 @@ describe('Status', () => {
   }
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Status' })
     key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)

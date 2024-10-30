@@ -5,23 +5,12 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { StyleDefaults, Text } from '../styles'
 import { EmailBlock, RichTextEditableElement } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate, IntroValue } from 'src/appTypes'
-
-export const defaultIntroValue: IntroValue = {
-  intro: [
-    {
-      type: 'paragraph',
-      children: [
-        { text: 'You requested a waiver application for your Pandemic Unemployment Overpayment.' },
-      ],
-    },
-  ],
-}
+import { EmailTemplate } from 'src/appTypes'
 
 const { Row } = EmailBlock
 
 export const useIntroValue = (emailSubComponent: EmailTemplate.Intro) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultIntroValue)
+  return useEmailPartsContentFor(emailSubComponent)
 }
 
 export const Intro: FC<EmailSubComponentProps<'Intro'>> = ({ emailSubComponent }) => {

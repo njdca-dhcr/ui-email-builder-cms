@@ -13,7 +13,7 @@ describe('StatusFloatingControls', () => {
     const { getByLabelText } = render(
       <EmailPartsContent>
         <StatusFloatingControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+          emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })}
         />
       </EmailPartsContent>,
     )
@@ -37,7 +37,7 @@ describe('StatusFloatingControls', () => {
   }
 
   it('sets the spacing after to be true when the component unmounts', async () => {
-    const subComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    const subComponent = buildUniqueEmailSubComponent({ kind: 'Status' })
     const user = userEvent.setup()
     const { getByLabelText, baseElement, rerender } = render(
       <EmailPartsContent>

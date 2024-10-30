@@ -4,7 +4,9 @@ import {
   BannerValue,
   BaseValue,
   DateRangeValue,
+  DepartmentSealValue,
   DirectiveValue,
+  DisclaimerValue,
   InformationalBoxValue,
   IntroValue,
   LoginDetailsValue,
@@ -19,25 +21,39 @@ import {
 
 export type ID = string | number
 
-export const EmailTemplateComponentsMapping = {
-  Banner: [],
-  Body: [
-    'Intro',
-    'RulesRightsRegulations',
-    'Status',
-    'SupplementalContent',
-    'Directive',
-    'LoginDetails',
-    'InformationalBox',
-  ],
-  Footer: ['AdditionalContent'],
-  Header: ['DateRange', 'Title', 'ProgramName', 'DepartmentSeal', 'DirectiveButton'],
-  Name: [],
-  Disclaimer: [],
-  StateSeal: [],
-} as const
+export const COMPONENTS = [
+  'Banner',
+  'Body',
+  'Footer',
+  'Header',
+  'Name',
+  'Disclaimer',
+  'StateSeal',
+] as const
+
+export const SUBCOMPONENTS = [
+  'Intro',
+  'RulesRightsRegulations',
+  'Status',
+  'SupplementalContent',
+  'Directive',
+  'LoginDetails',
+  'InformationalBox',
+  'AdditionalContent',
+  'DateRange',
+  'Title',
+  'ProgramName',
+  'DepartmentSeal',
+  'DirectiveButton',
+] as const
 
 export namespace EmailTemplate {
+  export namespace Kinds {
+    export type Component = (typeof COMPONENTS)[number]
+    export type SubComponent = (typeof SUBCOMPONENTS)[number]
+    export type Part = Component | SubComponent
+  }
+
   export namespace DefaultValues {
     export interface Component {
       Banner: BannerValue
@@ -45,7 +61,7 @@ export namespace EmailTemplate {
       Footer: BaseValue
       Header: BaseValue
       Name: NameValue
-      Disclaimer: BaseValue
+      Disclaimer: DisclaimerValue
       StateSeal: StateSealValue
     }
 
@@ -61,42 +77,25 @@ export namespace EmailTemplate {
       DateRange: DateRangeValue
       Title: TitleValue
       ProgramName: ProgramNameValue
-      DepartmentSeal: BaseValue
+      DepartmentSeal: DepartmentSealValue
       DirectiveButton: BaseValue
     }
 
     export interface Part extends Component, SubComponent {}
   }
 
-  export namespace Kinds {
-    type Structure = typeof EmailTemplateComponentsMapping
-    export type Component = keyof Structure
-    export type SubComponent<T extends Component = Component> = Structure[T][number]
-    export type Part = Component | SubComponent
-  }
-
   export namespace Base {
     export interface Part<K extends Kinds.Part = Kinds.Part> {
-      defaultValue?: Partial<DefaultValues.Part[K]>
-    }
-
-    export interface SubComponent<
-      T extends Kinds.Component = Kinds.Component,
-      K extends Kinds.SubComponent = Kinds.SubComponent<T>,
-    > {
       kind: K
-      defaultValue?: Partial<DefaultValues.SubComponent[K]>
+      defaultValue?: Partial<DefaultValues.Part[K]>
       required?: boolean
-      variant?: number
-      icon?: string
-      boxColor?: string
     }
 
-    export interface Component<T extends Kinds.Component = Kinds.Component> {
-      kind: T
-      defaultValue?: Partial<DefaultValues.Component[T]>
-      required?: boolean
-      subComponents?: Kinds.SubComponent<T> extends any ? SubComponent<T>[] : never
+    export interface SubComponent<K extends Kinds.SubComponent = Kinds.SubComponent>
+      extends Part<K> {}
+
+    export interface Component<T extends Kinds.Component = Kinds.Component> extends Part<T> {
+      subComponents?: SubComponent[]
     }
 
     export interface Config {
@@ -109,21 +108,22 @@ export namespace EmailTemplate {
   }
 
   export namespace Unique {
-    export interface SubComponent<
-      T extends Kinds.Component = Kinds.Component,
-      K extends Kinds.SubComponent = Kinds.SubComponent<T>,
-    > extends Base.SubComponent<T, K> {
+    export interface Part<K extends Kinds.Part = Kinds.Part> extends Base.Part<K> {
       id: string
+      required?: boolean
+    }
+
+    export interface SubComponent<K extends Kinds.SubComponent = Kinds.SubComponent>
+      extends Base.SubComponent<K> {
+      id: string
+      required?: boolean
     }
 
     export interface Component<T extends Kinds.Component = Kinds.Component>
       extends Omit<Base.Component<T>, 'subComponents'> {
       id: string
-      subComponents?: SubComponent<T>[]
-    }
-
-    export interface Part<K extends Kinds.Part = Kinds.Part> extends Base.Part<K> {
-      id: string
+      required?: boolean
+      subComponents?: SubComponent[]
     }
 
     export interface Config {
@@ -135,25 +135,25 @@ export namespace EmailTemplate {
     }
   }
 
-  export type Banner = Unique.Component<'Banner'>
-  export type Body = Unique.Component<'Body'>
-  export type Footer = Unique.Component<'Footer'>
-  export type Header = Unique.Component<'Header'>
-  export type Name = Unique.Component<'Name'>
-  export type Disclaimer = Unique.Component<'Disclaimer'>
-  export type StateSeal = Unique.Component<'StateSeal'>
+  export type Banner = Unique.Part<'Banner'>
+  export type Body = Unique.Part<'Body'>
+  export type Footer = Unique.Part<'Footer'>
+  export type Header = Unique.Part<'Header'>
+  export type Name = Unique.Part<'Name'>
+  export type Disclaimer = Unique.Part<'Disclaimer'>
+  export type StateSeal = Unique.Part<'StateSeal'>
 
-  export type DateRange = Unique.SubComponent<'Header', 'DateRange'>
-  export type Title = Unique.SubComponent<'Header', 'Title'>
-  export type ProgramName = Unique.SubComponent<'Header', 'ProgramName'>
-  export type DepartmentSeal = Unique.SubComponent<'Header', 'DepartmentSeal'>
-  export type Intro = Unique.SubComponent<'Body', 'Intro'>
-  export type RulesRightsRegulations = Unique.SubComponent<'Body', 'RulesRightsRegulations'>
-  export type Status = Unique.SubComponent<'Body', 'Status'>
-  export type SupplementalContent = Unique.SubComponent<'Body', 'SupplementalContent'>
-  export type Directive = Unique.SubComponent<'Body', 'Directive'>
-  export type DirectiveButton = Unique.SubComponent<'Body', 'DirectiveButton'>
-  export type LoginDetails = Unique.SubComponent<'Body', 'LoginDetails'>
-  export type InformationalBox = Unique.SubComponent<'Body', 'InformationalBox'>
-  export type AdditionalContent = Unique.SubComponent<'Footer', 'AdditionalContent'>
+  export type DateRange = Unique.Part<'DateRange'>
+  export type Title = Unique.Part<'Title'>
+  export type ProgramName = Unique.Part<'ProgramName'>
+  export type DepartmentSeal = Unique.Part<'DepartmentSeal'>
+  export type Intro = Unique.Part<'Intro'>
+  export type RulesRightsRegulations = Unique.Part<'RulesRightsRegulations'>
+  export type Status = Unique.Part<'Status'>
+  export type SupplementalContent = Unique.Part<'SupplementalContent'>
+  export type Directive = Unique.Part<'Directive'>
+  export type DirectiveButton = Unique.Part<'DirectiveButton'>
+  export type LoginDetails = Unique.Part<'LoginDetails'>
+  export type InformationalBox = Unique.Part<'InformationalBox'>
+  export type AdditionalContent = Unique.Part<'AdditionalContent'>
 }

@@ -8,7 +8,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'DateRange' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'DateRange' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -24,7 +24,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'Title' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'Title' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -37,7 +37,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'ProgramName' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'ProgramName' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -51,7 +51,7 @@ describe('EmailSubComponentDescription', () => {
     it('is informs the user it can be edited on the Settings page', () => {
       const { baseElement } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'DepartmentSeal' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'DepartmentSeal' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -65,7 +65,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Intro' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'Intro' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -80,7 +80,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          emailSubComponent={buildEmailTemplateSubComponent({
             kind: 'RulesRightsRegulations',
           })}
         />,
@@ -100,7 +100,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description with a more info button', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Status' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'Status' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -114,7 +114,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          emailSubComponent={buildEmailTemplateSubComponent({
             kind: 'SupplementalContent',
           })}
         />,
@@ -131,7 +131,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', { kind: 'Directive' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'Directive' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -145,7 +145,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Header', { kind: 'DirectiveButton' })}
+          emailSubComponent={buildEmailTemplateSubComponent({ kind: 'DirectiveButton' })}
         />,
       )
       const result = baseElement.querySelector('.description')
@@ -163,7 +163,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          emailSubComponent={buildEmailTemplateSubComponent({
             kind: 'LoginDetails',
           })}
         />,
@@ -178,7 +178,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          emailSubComponent={buildEmailTemplateSubComponent({
             kind: 'InformationalBox',
           })}
         />,
@@ -196,7 +196,7 @@ describe('EmailSubComponentDescription', () => {
     it('is a simple description', () => {
       const { baseElement, queryByRole } = render(
         <EmailSubComponentDescription
-          emailSubComponent={buildEmailTemplateSubComponent('Body', {
+          emailSubComponent={buildEmailTemplateSubComponent({
             kind: 'AdditionalContent',
           })}
         />,

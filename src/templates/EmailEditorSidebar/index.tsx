@@ -27,7 +27,7 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate, heading }) => {
               {(emailComponent.subComponents ?? []).map((emailSubComponent, i) => (
                 <EmailEditorSidebarAccordion.EmailSubComponent
                   key={emailSubComponent.id}
-                  componentId={emailComponent.id}
+                  component={emailComponent}
                   emailSubComponent={emailSubComponent}
                   nextEmailSubComponent={(emailComponent.subComponents ?? [])[i + 1]}
                 />

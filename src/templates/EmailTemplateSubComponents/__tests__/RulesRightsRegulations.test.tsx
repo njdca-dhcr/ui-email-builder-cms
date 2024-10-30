@@ -29,7 +29,7 @@ describe('RulesRightsRegulations', () => {
   }
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'RulesRightsRegulations' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'RulesRightsRegulations' })
     key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)

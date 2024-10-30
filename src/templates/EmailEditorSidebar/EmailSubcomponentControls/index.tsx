@@ -4,15 +4,15 @@ import { EmailTemplate } from 'src/appTypes'
 import { StatusControls } from './StatusControls'
 import { DirectiveControls } from './DirectiveControls'
 import { RulesRightsRegulationsControls } from './RulesRightsRegulationsControls'
-import './EmailSubcomponentControls.css'
 import { useShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { LoginDetailsControls } from './LoginDetailsControls'
 import { ProgramNameControls } from './ProgramNameControls'
 import { InformationalBoxControls } from './InformationalBoxControls'
 import { SupplementalContentControls } from './SupplementalContentControls'
+import './EmailSubcomponentControls.css'
 
 interface Props extends EmailSubComponentControlsProps<EmailTemplate.Kinds.SubComponent> {
-  componentId: string
+  component: EmailTemplate.Unique.Component
 }
 
 interface WrapperProps {
@@ -22,9 +22,9 @@ interface WrapperProps {
 const ControlWrapper: FC<WrapperProps> = ({ children }) => <div>{children}</div>
 
 export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...props }) => {
-  const { componentId } = props
-  const shouldShowComponent = useShouldShowEmailPart(componentId)
-  const shouldShowSubComponent = useShouldShowEmailPart(emailSubComponent.id)
+  const { component } = props
+  const shouldShowComponent = useShouldShowEmailPart(component)
+  const shouldShowSubComponent = useShouldShowEmailPart(emailSubComponent)
   let ComponentControl: FC<any> | null = null
 
   if (shouldShowComponent.off || shouldShowSubComponent.off) return null
@@ -68,17 +68,17 @@ export const useSubComponentControlOptions = (
   setValue: (newValues: any) => void,
 ) => {
   useEffect(() => {
+    const defaultValue = emailSubComponent.defaultValue ?? {}
     let options: any = {}
-    if (emailSubComponent?.variant) {
-      options.variant = emailSubComponent.variant
-    }
 
-    if (emailSubComponent?.boxColor) {
-      options.boxColor = emailSubComponent.boxColor
+    if ('variant' in defaultValue) {
+      options.variant = defaultValue.variant
     }
-
-    if (emailSubComponent?.icon) {
-      options.icon = emailSubComponent.icon
+    if ('boxColor' in defaultValue) {
+      options.boxColor = defaultValue.boxColor
+    }
+    if ('icon' in defaultValue) {
+      options.icon = defaultValue.icon
     }
 
     setValue({ ...value, ...options })

@@ -13,7 +13,7 @@ describe('DirectiveControls', () => {
     const { getByRole, queryByRole, getByLabelText } = render(
       <EmailPartsContent>
         <DirectiveControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+          emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
         />
       </EmailPartsContent>,
     )
@@ -33,7 +33,7 @@ describe('DirectiveControls', () => {
     const { getByLabelText } = render(
       <EmailPartsContent>
         <DirectiveControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+          emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
         />
         ,
       </EmailPartsContent>,
@@ -75,7 +75,7 @@ describe('DirectiveControls', () => {
         rendered = render(
           <EmailPartsContent>
             <DirectiveControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+              emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
             />
           </EmailPartsContent>,
         )
@@ -91,7 +91,7 @@ describe('DirectiveControls', () => {
         rendered = render(
           <EmailPartsContent>
             <DirectiveControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+              emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
             />
           </EmailPartsContent>,
         )
@@ -117,7 +117,7 @@ describe('DirectiveControls', () => {
         rendered = render(
           <EmailPartsContent>
             <DirectiveControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+              emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
             />
           </EmailPartsContent>,
         )
@@ -143,7 +143,7 @@ describe('DirectiveControls', () => {
         rendered = render(
           <EmailPartsContent>
             <DirectiveControls
-              emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+              emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
             />
           </EmailPartsContent>,
         )

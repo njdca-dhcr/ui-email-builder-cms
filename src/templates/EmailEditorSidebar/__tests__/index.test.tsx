@@ -40,10 +40,10 @@ describe('EmailEditorSidebar', () => {
       components: [
         buildUniqueEmailComponent('Banner'),
         buildUniqueEmailComponent('Header', {
-          subComponents: [buildUniqueEmailSubComponent('Header', { kind: 'Title' })],
+          subComponents: [buildUniqueEmailSubComponent({ kind: 'Title' })],
         }),
         buildUniqueEmailComponent('Footer', {
-          subComponents: [buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })],
+          subComponents: [buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })],
         }),
       ],
     })

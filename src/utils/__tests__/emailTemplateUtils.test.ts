@@ -7,8 +7,8 @@ import { getSubComponentByKind } from '../emailTemplateUtils'
 
 describe('useEmailTemplateSubComponent', () => {
   it('is the sub component of the right kind in the email template config', () => {
-    const directiveButton = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
-    const directive = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+    const directiveButton = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
+    const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
 
     const emailTemplateConfig = buildUniqueEmailConfig({
       components: [

@@ -15,7 +15,7 @@ describe('Intro', () => {
   let emailSubComponent: EmailTemplate.Intro
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Intro' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Intro' })
   })
 
   it('is editable', async () => {

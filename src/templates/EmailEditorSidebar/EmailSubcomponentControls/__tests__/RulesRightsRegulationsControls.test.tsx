@@ -20,7 +20,7 @@ describe('RulesRightsRegulationsControls', () => {
     rendered = render(
       <EmailPartsContent>
         <RulesRightsRegulationsControls
-          emailSubComponent={buildUniqueEmailSubComponent('Body', {
+          emailSubComponent={buildUniqueEmailSubComponent({
             kind: 'RulesRightsRegulations',
           })}
         />

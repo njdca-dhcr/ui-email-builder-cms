@@ -7,13 +7,11 @@ import { Font, StyleDefaults, Text } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 import { NameValue } from 'src/appTypes'
 
-export const defaultNameValue: NameValue = { name: 'FIRST LAST NAME:' }
-
 const { Row } = EmailBlock
 
 export const Name: FC<EmailComponentProps<'Name'>> = ({ emailComponent }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(emailComponent)
-  const [value, setValue] = useEmailPartsContentFor(emailComponent, defaultNameValue)
+  const [value, setValue] = useEmailPartsContentFor(emailComponent)
   const { scrollSidebar, previewRef } = useSyncSidebarAndPreviewScroll(emailComponent.id)
   return (
     <Row className="name">

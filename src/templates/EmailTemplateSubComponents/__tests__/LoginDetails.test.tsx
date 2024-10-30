@@ -18,7 +18,7 @@ describe('LoginDetails', () => {
   let emailSubComponent: EmailTemplate.LoginDetails
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'LoginDetails' })
   })
 
   it('activates when clicked', async () => {

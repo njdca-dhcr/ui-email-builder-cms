@@ -1,7 +1,6 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from '../EmailTemplateSubComponents/shared'
 import {
-  BoxColor,
   BoxColorConfigs,
   EditableElement,
   EmailBlock,
@@ -12,29 +11,10 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, StyleDefaults, Text, Font, SpacingCell } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate, InformationalBoxValue } from 'src/appTypes'
-
-export const defaultInformationalBoxValue: InformationalBoxValue = {
-  boxColor: BoxColor.BenefitBlue,
-  icon: 'LockOpen',
-  title: 'Application confirmation number',
-  description: [{ type: 'paragraph', children: [{ text: 'Confirmation number: 123456789' }] }],
-  showSupportiveInformation: true,
-  supportiveInformation: [
-    {
-      type: 'paragraph',
-      children: [
-        {
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor quis congue eget, commodo eu urna. Donec laoreet a dui consequat sollicitudin. Aliquam et dapibus ex, at malesuada tellus.',
-          italic: true,
-        },
-      ],
-    },
-  ],
-}
+import { EmailTemplate } from 'src/appTypes'
 
 export const useInformationalBoxValue = (emailSubComponent: EmailTemplate.InformationalBox) => {
-  return useEmailPartsContentFor(emailSubComponent, defaultInformationalBoxValue)
+  return useEmailPartsContentFor(emailSubComponent)
 }
 
 const { Row, Cell } = EmailBlock

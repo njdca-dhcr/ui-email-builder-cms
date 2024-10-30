@@ -81,7 +81,7 @@ const EDITABLE_IN_SETTINGS: EmailTemplate.Kinds.Component[] = ['Banner', 'Discla
 const SUBCOMPONENT_CONTAINERS: EmailTemplate.Kinds.Component[] = ['Body', 'Footer', 'Header']
 
 const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) => {
-  const shouldShow = useShouldShowEmailPart(emailComponent.id)
+  const shouldShow = useShouldShowEmailPart(emailComponent)
   const toggleId = `toggle-${emailComponent.id}`
   const lacksSubComponents = (emailComponent.subComponents ?? []).length === 0
   const { isActive } = useIsCurrentlyActiveEmailComponent(emailComponent)
@@ -123,18 +123,18 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
 EmailComponent.displayName = 'EmailEditorSidebarAccordion.EmailComponent'
 
 interface EmailSubComponentProps {
-  componentId: string
-  emailSubComponent: EmailTemplate.Unique.SubComponent
-  nextEmailSubComponent: EmailTemplate.Unique.SubComponent | undefined
+  component: EmailTemplate.Unique.Component
+  emailSubComponent: EmailTemplate.Unique.Part<EmailTemplate.Kinds.SubComponent>
+  nextEmailSubComponent: EmailTemplate.Unique.Part<EmailTemplate.Kinds.SubComponent> | undefined
 }
 
 const EmailSubComponent: FC<EmailSubComponentProps> = ({
-  componentId,
+  component,
   emailSubComponent,
   nextEmailSubComponent,
 }) => {
   const toggleId = `toggle-${emailSubComponent.id}`
-  const shouldShow = useShouldShowEmailPart(emailSubComponent.id)
+  const shouldShow = useShouldShowEmailPart(emailSubComponent)
   const { isActive } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const { scrollPreview } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
 
@@ -164,10 +164,7 @@ const EmailSubComponent: FC<EmailSubComponentProps> = ({
           />
         </div>
         <EmailSubComponentDescription emailSubComponent={emailSubComponent} />
-        <EmailSubComponentControls
-          componentId={componentId}
-          emailSubComponent={emailSubComponent}
-        />
+        <EmailSubComponentControls component={component} emailSubComponent={emailSubComponent} />
       </div>
       <EmailSubComponentFloatingControls
         emailSubComponent={emailSubComponent}

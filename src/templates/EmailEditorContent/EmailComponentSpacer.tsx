@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
-  const shouldShow = useShouldShowEmailPart(currentComponent.id)
+  const shouldShow = useShouldShowEmailPart(currentComponent)
 
   if (shouldShow.off) return null
 

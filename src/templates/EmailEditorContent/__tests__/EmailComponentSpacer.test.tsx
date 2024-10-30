@@ -4,7 +4,7 @@ import { EmailComponentSpacer } from '../EmailComponentSpacer'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailTemplate } from 'src/appTypes'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailComponentSpacer', () => {
   const renderWithComponents = ({
@@ -31,12 +31,12 @@ describe('EmailComponentSpacer', () => {
   it('is nothing when the component should not be shown', () => {
     const currentComponent = buildUniqueEmailComponent('Banner')
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [currentComponent.id]: false }}>
+      <EmailPartsContent initialData={{ [currentComponent.id]: { visible: false } }}>
         <EmailComponentSpacer
           currentComponent={currentComponent}
           nextComponent={buildUniqueEmailComponent('Header')}
         />
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
       {
         wrapper: emailPartWrapper,
       },

@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from 'react'
 import { EmailTemplate } from 'src/appTypes'
 
 export interface EmailSubComponentControlsProps<T extends EmailTemplate.Kinds.SubComponent> {
-  emailSubComponent: EmailTemplate.Unique.SubComponent<any, T>
+  emailSubComponent: EmailTemplate.Unique.SubComponent<T>
 }
 
 interface ContainerProps {

@@ -26,7 +26,7 @@ describe('LoginDetailsControls', () => {
 
   beforeEach(() => {
     user = userEvent.setup()
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'LoginDetails' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'LoginDetails' })
     rendered = render(
       <EmailPartsContent>
         <LoginDetailsControls emailSubComponent={emailSubComponent} />

@@ -14,7 +14,7 @@ describe('ProgramNameControls', () => {
   let subComponent: EmailTemplate.ProgramName
 
   beforeEach(() => {
-    subComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    subComponent = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
   })
 
   describe('when in NJ mode', () => {

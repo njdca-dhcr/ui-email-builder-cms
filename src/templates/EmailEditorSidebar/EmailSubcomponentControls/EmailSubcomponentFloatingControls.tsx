@@ -12,8 +12,8 @@ export const EmailSubComponentFloatingControls: FC<Props> = ({
   emailSubComponent,
   nextEmailSubComponent,
 }) => {
-  const shouldShowSubComponent = useShouldShowEmailPart(emailSubComponent.id)
-  const shouldShowNextSubComponent = useShouldShowEmailPart(nextEmailSubComponent?.id ?? '')
+  const shouldShowSubComponent = useShouldShowEmailPart(emailSubComponent)
+  const shouldShowNextSubComponent = useShouldShowEmailPart(nextEmailSubComponent)
 
   if (shouldShowSubComponent.off) return null
 

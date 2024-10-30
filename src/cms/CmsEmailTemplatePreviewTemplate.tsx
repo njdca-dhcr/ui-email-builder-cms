@@ -3,7 +3,6 @@ import type { PreviewTemplateComponentProps } from 'decap-cms-core'
 import 'src/styles/app.css'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailEditorContent } from 'src/templates/EmailEditorContent'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import {
   ClearCurrentlyActiveEmailPart,
   CurrentlyActiveEmailPart,
@@ -48,38 +47,36 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
 
   return (
     <Layout element="main">
-      <ShouldShowEmailPart>
-        <CurrentlyActiveEmailPart>
-          <ClearCurrentlyActiveEmailPart />
-          <PreviewText>
-            <EmailPartsContent>
-              <Sidebar>
-                <EditPreviewText />
-                <EmailEditorSidebarAccordion.Container>
-                  {(emailTemplate.components ?? []).map((emailComponent) => (
-                    <EmailEditorSidebarAccordion.EmailComponent
-                      key={emailComponent.id}
-                      emailComponent={emailComponent}
-                    >
-                      {(emailComponent.subComponents ?? []).map((emailSubComponent, i) => (
-                        <EmailEditorSidebarAccordion.EmailSubComponent
-                          key={emailSubComponent.id}
-                          componentId={emailComponent.id}
-                          emailSubComponent={emailSubComponent}
-                          nextEmailSubComponent={(emailComponent.subComponents ?? [])[i + 1]}
-                        />
-                      ))}
-                    </EmailEditorSidebarAccordion.EmailComponent>
-                  ))}
-                </EmailEditorSidebarAccordion.Container>
-              </Sidebar>
-              <PageContent element="div" className="email-editor-page-content">
-                <EmailEditorContent emailTemplate={emailTemplate} />
-              </PageContent>
-            </EmailPartsContent>
-          </PreviewText>
-        </CurrentlyActiveEmailPart>
-      </ShouldShowEmailPart>
+      <CurrentlyActiveEmailPart>
+        <ClearCurrentlyActiveEmailPart />
+        <PreviewText>
+          <EmailPartsContent>
+            <Sidebar>
+              <EditPreviewText />
+              <EmailEditorSidebarAccordion.Container>
+                {(emailTemplate.components ?? []).map((emailComponent) => (
+                  <EmailEditorSidebarAccordion.EmailComponent
+                    key={emailComponent.id}
+                    emailComponent={emailComponent}
+                  >
+                    {(emailComponent.subComponents ?? []).map((emailSubComponent, i) => (
+                      <EmailEditorSidebarAccordion.EmailSubComponent
+                        key={emailSubComponent.id}
+                        component={emailComponent}
+                        emailSubComponent={emailSubComponent}
+                        nextEmailSubComponent={(emailComponent.subComponents ?? [])[i + 1]}
+                      />
+                    ))}
+                  </EmailEditorSidebarAccordion.EmailComponent>
+                ))}
+              </EmailEditorSidebarAccordion.Container>
+            </Sidebar>
+            <PageContent element="div" className="email-editor-page-content">
+              <EmailEditorContent emailTemplate={emailTemplate} />
+            </PageContent>
+          </EmailPartsContent>
+        </PreviewText>
+      </CurrentlyActiveEmailPart>
     </Layout>
   )
 }

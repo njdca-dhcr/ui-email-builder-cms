@@ -11,6 +11,7 @@ import React, {
   useState,
 } from 'react'
 import { EmailTemplate } from 'src/appTypes'
+import { AllDefaultValues } from './defaultValues'
 
 interface EmailPartsContentData<T extends any> {
   [key: string]: undefined | T
@@ -36,17 +37,18 @@ export const EmailPartsContent: FC<{
 
 export const useEmailPartsContentData = () => useContext(EmailPartsContentContext)
 
-export const useEmailPartsContentFor = <T extends object>(
-  emailPart: string | EmailTemplate.Unique.Part,
-  defaultValue: T,
+export const useEmailPartsContentFor = <
+  K extends EmailTemplate.Unique.Part['kind'],
+  T extends EmailTemplate.DefaultValues.Part[K],
+>(
+  emailPart?: EmailTemplate.Unique.Part<K>,
 ): [T, (value: T | ((previous: T) => T)) => void] => {
   const [data, update] = useEmailPartsContentData()
 
-  const id = typeof emailPart === 'string' ? emailPart : emailPart.id
+  const id = emailPart?.id ?? ''
+  const defaultValue = emailPart ? AllDefaultValues[emailPart.kind] : {}
   const mergedDefaultValue = useMemo(() => {
-    return typeof emailPart === 'string'
-      ? defaultValue
-      : { ...defaultValue, ...emailPart.defaultValue }
+    return { ...defaultValue, ...emailPart?.defaultValue }
   }, [])
 
   const value: T = data[id] ?? mergedDefaultValue
@@ -84,5 +86,9 @@ export const useEmailPartsContentFor = <T extends object>(
     }
   }, [id, value])
 
-  return [value, updateValue]
+  if (emailPart) {
+    return [value, updateValue]
+  } else {
+    return [{} as any, () => null]
+  }
 }

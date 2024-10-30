@@ -41,7 +41,7 @@ describe('emailTemplateMergeDefaultValues', () => {
     let dateRangeSubComponent: EmailTemplate.DateRange
 
     beforeEach(() => {
-      dateRangeSubComponent = buildUniqueEmailSubComponent('Header', {
+      dateRangeSubComponent = buildUniqueEmailSubComponent({
         kind: 'DateRange',
         defaultValue: { range: faker.lorem.word() },
       })

@@ -9,34 +9,31 @@ import {
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailTemplate } from 'src/appTypes'
 import { EmailSubComponentSpacer } from '../EmailSubComponentSpacer'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailSubComponentSpacer', () => {
-  const renderWithSubComponents = <T extends EmailTemplate.Kinds.Component>({
+  const renderWithSubComponents = ({
     currentSubComponent,
     nextSubComponent,
-    parentComponent,
     shouldShowNextComponent,
   }: {
-    currentSubComponent: EmailTemplate.Kinds.SubComponent<T>
-    nextSubComponent: EmailTemplate.Kinds.SubComponent<T> | undefined
-    parentComponent: T
+    currentSubComponent: EmailTemplate.Kinds.SubComponent
+    nextSubComponent: EmailTemplate.Kinds.SubComponent | undefined
     shouldShowNextComponent?: boolean
   }) => {
-    const nextOne =
-      nextSubComponent && buildUniqueEmailSubComponent(parentComponent, { kind: nextSubComponent })
+    const nextOne = nextSubComponent && buildUniqueEmailSubComponent({ kind: nextSubComponent })
     const { baseElement } = render(
-      <ShouldShowEmailPart
-        initialData={nextOne ? { [nextOne.id]: shouldShowNextComponent ?? true } : {}}
+      <EmailPartsContent
+        initialData={nextOne ? { [nextOne.id]: { visible: shouldShowNextComponent ?? true } } : {}}
       >
         <EmailSubComponentSpacer
-          currentSubComponent={buildUniqueEmailSubComponent(parentComponent, {
+          currentSubComponent={buildUniqueEmailSubComponent({
             kind: currentSubComponent,
           })}
           nextSubComponent={nextOne}
         />
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
       {
         wrapper: emailPartWrapper,
       },
@@ -47,14 +44,14 @@ describe('EmailSubComponentSpacer', () => {
   }
 
   it('is nothing when the component should not be shown', () => {
-    const currentSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Intro' })
+    const currentSubComponent = buildUniqueEmailSubComponent({ kind: 'Intro' })
     const { baseElement } = render(
-      <ShouldShowEmailPart initialData={{ [currentSubComponent.id]: false }}>
+      <EmailPartsContent initialData={{ [currentSubComponent.id]: { visible: false } }}>
         <EmailSubComponentSpacer
           currentSubComponent={currentSubComponent}
-          nextSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
+          nextSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })}
         />
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
       {
         wrapper: emailPartWrapper,
       },
@@ -66,7 +63,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'DepartmentSeal',
       nextSubComponent: 'Title',
-      parentComponent: 'Header',
     })
     expect(size).toEqual(`${spacingCellSizes.large}px`)
   })
@@ -76,7 +72,6 @@ describe('EmailSubComponentSpacer', () => {
       const size = renderWithSubComponents({
         currentSubComponent: 'Title',
         nextSubComponent: 'ProgramName',
-        parentComponent: 'Header',
       })
       expect(size).toEqual(`${spacingCellSizes.medium}px`)
     })
@@ -85,7 +80,6 @@ describe('EmailSubComponentSpacer', () => {
       const size = renderWithSubComponents({
         currentSubComponent: 'Title',
         nextSubComponent: 'ProgramName',
-        parentComponent: 'Header',
         shouldShowNextComponent: false,
       })
       expect(size).toBeUndefined()
@@ -97,7 +91,6 @@ describe('EmailSubComponentSpacer', () => {
       const size = renderWithSubComponents({
         currentSubComponent: 'ProgramName',
         nextSubComponent: 'DirectiveButton',
-        parentComponent: 'Header',
         shouldShowNextComponent: false,
       })
       expect(size).toBeUndefined()
@@ -107,7 +100,6 @@ describe('EmailSubComponentSpacer', () => {
       const size = renderWithSubComponents({
         currentSubComponent: 'ProgramName',
         nextSubComponent: undefined,
-        parentComponent: 'Header',
         shouldShowNextComponent: true,
       })
       expect(size).toBeUndefined()
@@ -117,16 +109,15 @@ describe('EmailSubComponentSpacer', () => {
       const size = renderWithSubComponents({
         currentSubComponent: 'ProgramName',
         nextSubComponent: 'DirectiveButton',
-        parentComponent: 'Header',
         shouldShowNextComponent: true,
       })
       expect(size).toEqual(`${spacingCellSizes.medium}px`)
     })
 
     it('is nothing when the next component should that should be shown is DirectiveButton but the Directive is hidden', () => {
-      const directive = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
-      const directiveButton = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
-      const programName = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+      const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
+      const directiveButton = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
+      const programName = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
 
       const emailTemplateConfig = buildUniqueEmailConfig({
         components: [
@@ -137,12 +128,17 @@ describe('EmailSubComponentSpacer', () => {
 
       const { baseElement } = render(
         <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-          <ShouldShowEmailPart initialData={{ [directive.id]: false, [directiveButton.id]: true }}>
+          <EmailPartsContent
+            initialData={{
+              [directive.id]: { visible: false },
+              [directiveButton.id]: { visible: true },
+            }}
+          >
             <EmailSubComponentSpacer
               currentSubComponent={programName}
               nextSubComponent={directiveButton}
             />
-          </ShouldShowEmailPart>
+          </EmailPartsContent>
         </EmailTemplateConfig>,
         {
           wrapper: emailPartWrapper,
@@ -157,7 +153,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'Intro',
       nextSubComponent: 'Status',
-      parentComponent: 'Body',
     })
     expect(size).toEqual(`${spacingCellSizes.medium}px`)
   })
@@ -166,7 +161,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'RulesRightsRegulations',
       nextSubComponent: 'Status',
-      parentComponent: 'Body',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
@@ -175,7 +169,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'Status',
       nextSubComponent: 'RulesRightsRegulations',
-      parentComponent: 'Body',
     })
     expect(size).toBeUndefined()
   })
@@ -184,7 +177,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'SupplementalContent',
       nextSubComponent: 'LoginDetails',
-      parentComponent: 'Body',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
@@ -193,7 +185,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'Directive',
       nextSubComponent: 'LoginDetails',
-      parentComponent: 'Body',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
@@ -202,7 +193,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'LoginDetails',
       nextSubComponent: undefined,
-      parentComponent: 'Body',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
@@ -211,7 +201,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'InformationalBox',
       nextSubComponent: 'LoginDetails',
-      parentComponent: 'Body',
     })
     expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
   })
@@ -220,7 +209,6 @@ describe('EmailSubComponentSpacer', () => {
     const size = renderWithSubComponents({
       currentSubComponent: 'AdditionalContent',
       nextSubComponent: undefined,
-      parentComponent: 'Footer',
     })
     expect(size).toBeUndefined()
   })

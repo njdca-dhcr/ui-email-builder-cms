@@ -131,12 +131,12 @@ describe('useIsCurrentlyActiveEmailComponent', () => {
   let emailSubComponent: EmailTemplate.Unique.SubComponent
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'Title' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })
     emailComponent = buildUniqueEmailComponent('Header', {
       subComponents: [
-        buildUniqueEmailSubComponent('Header', { kind: 'DepartmentSeal' }),
+        buildUniqueEmailSubComponent({ kind: 'DepartmentSeal' }),
         emailSubComponent,
-        buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' }),
+        buildUniqueEmailSubComponent({ kind: 'ProgramName' }),
       ],
     })
   })

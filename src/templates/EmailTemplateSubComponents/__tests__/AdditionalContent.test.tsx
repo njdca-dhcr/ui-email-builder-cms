@@ -15,7 +15,7 @@ describe('AdditionalContent', () => {
   let emailSubComponent: EmailTemplate.AdditionalContent
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })
   })
 
   it('is editable', async () => {

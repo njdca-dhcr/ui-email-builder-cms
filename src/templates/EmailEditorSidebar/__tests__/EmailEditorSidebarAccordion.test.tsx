@@ -3,17 +3,16 @@ import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@reach/accordion'
-import { ShouldShowEmailPart } from '../../ShouldShowEmailPart'
 import { EmailEditorSidebarAccordion } from '../EmailEditorSidebarAccordion'
 import { EmailTemplate } from 'src/appTypes'
 import {
   WrapperComponent,
   buildUniqueEmailComponent,
   buildUniqueEmailSubComponent,
-  urlFor,
 } from 'src/testHelpers'
 import { CurrentlyActiveEmailPart } from 'src/templates/CurrentlyActiveEmailPart'
 import { SYNC_SIDEBAR_AND_PREVIEW_SCROLL } from 'src/templates/SyncSidebarAndPreviewScroll'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
   it('displays its children', () => {
@@ -132,18 +131,18 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 
   const wrapper: WrapperComponent = ({ children }) => {
     return (
-      <ShouldShowEmailPart>
+      <EmailPartsContent>
         <Accordion>
           <AccordionItem>{children}</AccordionItem>
         </Accordion>
-      </ShouldShowEmailPart>
+      </EmailPartsContent>
     )
   }
 
   const itIsHighlightedWhenTheComponentIsActive = () => {
     it('is highlighted when the component is active', () => {
       const { baseElement } = render(
-        <ShouldShowEmailPart>
+        <EmailPartsContent>
           <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailComponent.id}>
             <Accordion>
               <AccordionItem>
@@ -153,7 +152,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
               </AccordionItem>
             </Accordion>
           </CurrentlyActiveEmailPart>
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(
         baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
@@ -163,11 +162,11 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 
   const itIsHighlightedWhenAnyOfItsSubcomponentsAreActive = () => {
     it('is highlighted when any of its subcomponents are active', () => {
-      const emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+      const emailSubComponent = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
       emailComponent.subComponents = [emailSubComponent]
 
       const { baseElement } = render(
-        <ShouldShowEmailPart>
+        <EmailPartsContent>
           <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailSubComponent.id}>
             <Accordion>
               <AccordionItem>
@@ -177,7 +176,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
               </AccordionItem>
             </Accordion>
           </CurrentlyActiveEmailPart>
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(
         baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
@@ -188,7 +187,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   const itIsNotHightlightedWhenTheComponentIsInactive = () => {
     it('is not hightlighted when the component is inactive', () => {
       const { baseElement } = render(
-        <ShouldShowEmailPart>
+        <EmailPartsContent>
           <CurrentlyActiveEmailPart initiallyActiveEmailPartId={faker.lorem.words(3)}>
             <Accordion>
               <AccordionItem>
@@ -198,7 +197,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
               </AccordionItem>
             </Accordion>
           </CurrentlyActiveEmailPart>
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(
         baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailComponentClass}`),
@@ -359,7 +358,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
         })
 
         it('has an enabled accordion item when the email component has subcomponents', () => {
-          emailComponent.subComponents = [buildUniqueEmailSubComponent('Header', { kind: 'Title' })]
+          emailComponent.subComponents = [buildUniqueEmailSubComponent({ kind: 'Title' })]
           const { baseElement } = render(
             <EmailEditorSidebarAccordion.EmailComponent emailComponent={emailComponent}>
               <span />
@@ -422,19 +421,21 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 
 describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
   let emailSubComponent: EmailTemplate.Unique.SubComponent
+  let emailComponent: EmailTemplate.Unique.Component
 
   const wrapper: WrapperComponent = ({ children }) => {
-    return <ShouldShowEmailPart>{children}</ShouldShowEmailPart>
+    return <EmailPartsContent>{children}</EmailPartsContent>
   }
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
+    emailComponent = buildUniqueEmailComponent('Body')
   })
 
   it('displays a label', () => {
     const { queryByText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
+        component={emailComponent}
         emailSubComponent={emailSubComponent}
         nextEmailSubComponent={undefined}
       />,
@@ -449,7 +450,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     emailSubComponent.required = false
     const { queryByLabelText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
+        component={emailComponent}
         emailSubComponent={emailSubComponent}
         nextEmailSubComponent={undefined}
       />,
@@ -468,7 +469,7 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
     emailSubComponent.required = true
     const { queryByLabelText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
+        component={emailComponent}
         emailSubComponent={emailSubComponent}
         nextEmailSubComponent={undefined}
       />,
@@ -481,10 +482,10 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
   })
 
   it('displays subcomponent controls', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Status' })
     const { queryByText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
+        component={emailComponent}
         emailSubComponent={emailSubComponent}
         nextEmailSubComponent={undefined}
       />,
@@ -494,12 +495,12 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
   })
 
   it('displays subcomponent floating controls', () => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Status' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Status' })
     const { queryByText } = render(
       <EmailEditorSidebarAccordion.EmailSubComponent
-        componentId={faker.lorem.word()}
+        component={emailComponent}
         emailSubComponent={emailSubComponent}
-        nextEmailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Directive' })}
+        nextEmailSubComponent={buildUniqueEmailSubComponent({ kind: 'Directive' })}
       />,
       { wrapper },
     )
@@ -508,15 +509,15 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
 
   it('is highlighted when the subcomponent is active', () => {
     const { baseElement } = render(
-      <ShouldShowEmailPart>
+      <EmailPartsContent>
         <CurrentlyActiveEmailPart initiallyActiveEmailPartId={emailSubComponent.id}>
           <EmailEditorSidebarAccordion.EmailSubComponent
-            componentId={faker.lorem.word()}
+            component={emailComponent}
             emailSubComponent={emailSubComponent}
             nextEmailSubComponent={undefined}
           />
         </CurrentlyActiveEmailPart>
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
     )
     expect(
       baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass}`),
@@ -525,15 +526,15 @@ describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
 
   it('is not hightlighted when the subcomponent is inactive', () => {
     const { baseElement } = render(
-      <ShouldShowEmailPart>
+      <EmailPartsContent>
         <CurrentlyActiveEmailPart initiallyActiveEmailPartId={faker.lorem.words(3)}>
           <EmailEditorSidebarAccordion.EmailSubComponent
-            componentId={faker.lorem.word()}
+            component={emailComponent}
             emailSubComponent={emailSubComponent}
             nextEmailSubComponent={undefined}
           />
         </CurrentlyActiveEmailPart>
-      </ShouldShowEmailPart>,
+      </EmailPartsContent>,
     )
     expect(
       baseElement.querySelector(`.${SYNC_SIDEBAR_AND_PREVIEW_SCROLL.activeEmailSubcomponentClass}`),

@@ -3,11 +3,9 @@ import { EmailComponentProps } from './shared'
 import { Colors, Font, Spacing, Text } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
-import { BannerValue } from 'src/appTypes'
-import { appModeAsStateAbbreviation } from 'src/utils/appMode'
-import { stateById } from 'src/utils/statesAndTerritories'
 import { useUserInfoValue } from 'src/utils/UserInfoContext'
 import { bannerSchema } from 'src/utils/userInfoSchemas'
+import { defaultBannerValue } from './Values/BannerValue'
 
 interface BannerMarkupProps {
   backgroundColor: string
@@ -78,19 +76,6 @@ const secondaryLinkContainerStyles: CSSProperties = {
 
 const getHostName = (url: string): string => {
   return url.replace(/^https?:\/\//, '').replace(/\/$/, '')
-}
-
-export const defaultBannerValue = (): BannerValue => {
-  const stateAbbreviation = appModeAsStateAbbreviation() ?? 'US'
-  const state = stateById(stateAbbreviation)
-  const lowercasedAbbreviation = stateAbbreviation.toLowerCase()
-
-  return {
-    backgroundColor: Colors.black,
-    primaryText: `${state.name} Department of Labor and Workforce Development`,
-    primaryLink: `https://www.${lowercasedAbbreviation}.gov/labor/`,
-    secondaryLink: `https://myunemployment.${lowercasedAbbreviation}.gov/`,
-  }
 }
 
 export const useBannerValue = () => useUserInfoValue('banner', defaultBannerValue(), bannerSchema)

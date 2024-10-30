@@ -13,10 +13,10 @@ interface Props {
 
 export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSubComponent }) => {
   const emailTemplate = useEmailTemplateConfig()
-  const shouldShow = useShouldShowEmailPart(currentSubComponent.id)
-  const shouldShowNext = useShouldShowEmailPart(nextSubComponent?.id ?? '')
+  const shouldShow = useShouldShowEmailPart(currentSubComponent)
+  const shouldShowNext = useShouldShowEmailPart(nextSubComponent ?? { kind: 'Banner', id: '' })
   const shouldShowDirective = useShouldShowEmailPart(
-    getSubComponentByKind(emailTemplate, 'Directive')?.id ?? '',
+    getSubComponentByKind(emailTemplate, 'Directive') ?? { kind: 'Directive', id: '' },
   )
 
   if (shouldShow.off) return null

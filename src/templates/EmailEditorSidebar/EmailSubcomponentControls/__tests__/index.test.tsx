@@ -1,22 +1,22 @@
 import React from 'react'
-import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
-import { buildUniqueEmailSubComponent } from 'src/testHelpers'
+import { buildUniqueEmailComponent, buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { EmailSubComponentControls } from '..'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
+import { EmailTemplate } from 'src/appTypes'
+import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailSubComponentControls', () => {
-  let componentId: string
+  let component: EmailTemplate.Unique.Component
 
   beforeEach(() => {
-    componentId = faker.lorem.words(2)
+    component = buildUniqueEmailComponent('Body')
   })
 
   it('renders nothing for Title', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Header', { kind: 'Title' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Title' })}
+        component={component}
       />,
     )
     expect(baseElement.innerHTML).toEqual('<div></div>')
@@ -25,8 +25,8 @@ describe('EmailSubComponentControls', () => {
   it('renders the ProgramNameControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Header', { kind: 'ProgramName' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'ProgramName' })}
+        component={component}
       />,
     )
     expect(queryByText('Background Color Preset')).not.toBeNull()
@@ -35,8 +35,8 @@ describe('EmailSubComponentControls', () => {
   it('renders nothing for AdditionalContent', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Footer', { kind: 'AdditionalContent' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })}
+        component={component}
       />,
     )
     expect(baseElement.innerHTML).toEqual('<div></div>')
@@ -45,8 +45,8 @@ describe('EmailSubComponentControls', () => {
   it('renders nothing for Intro', () => {
     const { baseElement } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Intro' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Intro' })}
+        component={component}
       />,
     )
     expect(baseElement.innerHTML).toEqual('<div></div>')
@@ -55,8 +55,8 @@ describe('EmailSubComponentControls', () => {
   it('renders the SupplementalContentControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'SupplementalContent' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'SupplementalContent' })}
+        component={component}
       />,
     )
     expect(queryByText('Supplemental Content variant')).not.toBeNull()
@@ -65,8 +65,8 @@ describe('EmailSubComponentControls', () => {
   it('renders the StatusControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'Status' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'Status' })}
+        component={component}
       />,
     )
     expect(queryByText('Status variant')).not.toBeNull()
@@ -75,10 +75,10 @@ describe('EmailSubComponentControls', () => {
   it('renders the RulesRightsRegulationsControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Body', {
+        emailSubComponent={buildUniqueEmailSubComponent({
           kind: 'RulesRightsRegulations',
         })}
-        componentId={componentId}
+        component={component}
       />,
     )
     expect(queryByText('Rules, Rights, and Regulations variant')).not.toBeNull()
@@ -87,10 +87,10 @@ describe('EmailSubComponentControls', () => {
   it('renders the LoginDetailsControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Body', {
+        emailSubComponent={buildUniqueEmailSubComponent({
           kind: 'LoginDetails',
         })}
-        componentId={componentId}
+        component={component}
       />,
     )
     expect(queryByText('Icon')).not.toBeNull()
@@ -99,8 +99,8 @@ describe('EmailSubComponentControls', () => {
   it('renders the InformationalBoxControls', () => {
     const { queryByText } = render(
       <EmailSubComponentControls
-        emailSubComponent={buildUniqueEmailSubComponent('Body', { kind: 'InformationalBox' })}
-        componentId={componentId}
+        emailSubComponent={buildUniqueEmailSubComponent({ kind: 'InformationalBox' })}
+        component={component}
       />,
     )
     expect(queryByText('Box Color')).not.toBeNull()
@@ -109,14 +109,14 @@ describe('EmailSubComponentControls', () => {
   describe('when the component is not being shown', () => {
     it('renders nothing', () => {
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [componentId]: false }}>
+        <EmailPartsContent initialData={{ [component.id]: { visible: false } }}>
           <EmailSubComponentControls
-            emailSubComponent={buildUniqueEmailSubComponent('Body', {
+            emailSubComponent={buildUniqueEmailSubComponent({
               kind: 'RulesRightsRegulations',
             })}
-            componentId={componentId}
+            component={component}
           />
-        </ShouldShowEmailPart>,
+        </EmailPartsContent>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')
     })
@@ -124,13 +124,13 @@ describe('EmailSubComponentControls', () => {
 
   describe('when the subcomponent is not being shown', () => {
     it('renders nothing', () => {
-      const subcomponent = buildUniqueEmailSubComponent('Body', {
+      const subcomponent = buildUniqueEmailSubComponent({
         kind: 'RulesRightsRegulations',
       })
       const { baseElement } = render(
-        <ShouldShowEmailPart initialData={{ [subcomponent.id]: false }}>
-          <EmailSubComponentControls emailSubComponent={subcomponent} componentId={componentId} />
-        </ShouldShowEmailPart>,
+        <EmailPartsContent initialData={{ [subcomponent.id]: { visible: false } }}>
+          <EmailSubComponentControls emailSubComponent={subcomponent} component={component} />
+        </EmailPartsContent>,
       )
       expect(baseElement.innerHTML).toEqual('<div></div>')
     })

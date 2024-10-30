@@ -28,7 +28,7 @@ describe('Directive', () => {
   }
 
   beforeEach(() => {
-    emailSubComponent = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Directive' })
     key = emailSubComponent.id
     user = userEvent.setup()
     value = faker.lorem.words(4)

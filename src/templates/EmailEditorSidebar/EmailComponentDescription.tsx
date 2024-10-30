@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { EmailTemplate } from 'src/appTypes'
 
 interface Props {
-  emailComponent: EmailTemplate.Base.Component
+  emailComponent: EmailTemplate.Base.Part<EmailTemplate.Kinds.Component>
 }
 
 export const EmailComponentDescription: FC<Props> = ({ emailComponent }) => {

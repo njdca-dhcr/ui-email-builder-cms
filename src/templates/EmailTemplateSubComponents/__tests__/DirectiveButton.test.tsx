@@ -10,12 +10,11 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { DirectiveValue } from 'src/appTypes'
 import { DirectiveButton } from '../DirectiveButton'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 
 describe('DirectiveButton', () => {
   it('displays the directive button', () => {
-    const emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
-    const directive = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+    const emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
+    const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
     const emailTemplateConfig = buildUniqueEmailConfig({
       components: [
         buildUniqueEmailComponent('Header', { subComponents: [emailSubComponent] }),
@@ -49,8 +48,8 @@ describe('DirectiveButton', () => {
   })
 
   it('does not render if the directive is not rendering', () => {
-    const emailSubComponent = buildUniqueEmailSubComponent('Header', { kind: 'DirectiveButton' })
-    const directive = buildUniqueEmailSubComponent('Body', { kind: 'Directive' })
+    const emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
+    const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
     const emailTemplateConfig = buildUniqueEmailConfig({
       components: [
         buildUniqueEmailComponent('Header', { subComponents: [emailSubComponent] }),
@@ -60,13 +59,13 @@ describe('DirectiveButton', () => {
 
     const { queryByRole } = render(
       <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-        <ShouldShowEmailPart initialData={{ [directive.id]: false }}>
+        <EmailPartsContent initialData={{ [directive.id]: { visible: false } }}>
           <table>
             <tbody>
               <DirectiveButton emailSubComponent={emailSubComponent} />
             </tbody>
           </table>
-        </ShouldShowEmailPart>
+        </EmailPartsContent>
       </EmailTemplateConfig>,
     )
     expect(queryByRole('link')).toBeNull()

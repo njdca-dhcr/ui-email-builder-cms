@@ -4,7 +4,6 @@ import {
   CurrentlyActiveEmailPart,
   useCurrentlyActiveEmailPartData,
 } from './templates/CurrentlyActiveEmailPart'
-import { ShouldShowEmailPart } from './templates/ShouldShowEmailPart'
 import { EmailPartsContent, useEmailPartsContentData } from './templates/EmailPartsContent'
 import { render } from '@testing-library/react'
 import { AppMode } from './utils/appMode'
@@ -19,18 +18,16 @@ export type WrapperComponent = FC<{ children: ReactNode; additional?: ReactNode 
 
 export const emailPartWrapper: WrapperComponent = ({ additional, children }) => {
   return (
-    <ShouldShowEmailPart>
-      <CurrentlyActiveEmailPart>
-        <EmailPartsContent>
-          {additional}
-          <table>
-            <tbody>{children}</tbody>
-          </table>
-          <ShowActiveEmailPart />
-          <ShowEmailPartsContentKeys />
-        </EmailPartsContent>
-      </CurrentlyActiveEmailPart>
-    </ShouldShowEmailPart>
+    <CurrentlyActiveEmailPart>
+      <EmailPartsContent>
+        {additional}
+        <table>
+          <tbody>{children}</tbody>
+        </table>
+        <ShowActiveEmailPart />
+        <ShowEmailPartsContentKeys />
+      </EmailPartsContent>
+    </CurrentlyActiveEmailPart>
   )
 }
 

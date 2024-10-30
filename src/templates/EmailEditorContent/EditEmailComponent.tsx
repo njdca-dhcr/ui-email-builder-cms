@@ -14,7 +14,7 @@ export const EditEmailComponent: FC<EmailComponentProps<EmailTemplate.Kinds.Comp
   emailComponent,
   ...props
 }) => {
-  const shouldShow = useShouldShowEmailPart(emailComponent.id)
+  const shouldShow = useShouldShowEmailPart(emailComponent)
 
   if (shouldShow.off) return null
 

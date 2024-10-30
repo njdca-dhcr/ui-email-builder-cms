@@ -19,7 +19,7 @@ describe('SupplementalContentControls', () => {
 
   beforeEach(() => {
     user = userEvent.setup()
-    emailSubComponent = buildUniqueEmailSubComponent('Body', {
+    emailSubComponent = buildUniqueEmailSubComponent({
       kind: 'SupplementalContent',
     })
   })

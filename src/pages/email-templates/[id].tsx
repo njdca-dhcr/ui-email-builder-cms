@@ -11,8 +11,6 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
-import { ShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
-import { shouldShowEmailPartsFromEmailTemplate } from 'src/utils/shouldShowEmailPartsFromEmailTemplate'
 import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
 import { PreviewText } from 'src/templates/PreviewText'
 
@@ -25,37 +23,32 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   return (
     <Layout element="main">
       <EmailTemplateConfig emailTemplateConfig={emailTemplate ?? { name: '' }}>
-        <ShouldShowEmailPart
-          key={emailTemplate?.id}
-          initialData={emailTemplate && shouldShowEmailPartsFromEmailTemplate(emailTemplate)}
-        >
-          <CurrentlyActiveEmailPart>
-            <SyncSidebarAndPreviewScroll>
-              <ClearCurrentlyActiveEmailPart />
-              <EmailPartsContent>
-                <EmailEditorSidebar
-                  emailTemplate={emailTemplate}
-                  heading={
-                    <h1 style={{ fontSize: '1.5rem', paddingLeft: '0.5rem' }}>
-                      {byQueryState(query, {
-                        data: ({ name }) => name,
-                        loading: () => 'Loading...',
-                        error: () => 'Something went wrong',
-                      })}
-                    </h1>
-                  }
-                />
-                <PreviewText initialValue={emailTemplate?.previewText}>
-                  <PageContent element="div" className="email-editor-page-content">
-                    {error && <Alert>{error.message}</Alert>}
-                    {emailTemplate && <EmailEditorContent emailTemplate={emailTemplate} />}
-                  </PageContent>
-                </PreviewText>
-                {isLoading && <LoadingOverlay description="Loading your email template" />}
-              </EmailPartsContent>
-            </SyncSidebarAndPreviewScroll>
-          </CurrentlyActiveEmailPart>
-        </ShouldShowEmailPart>
+        <CurrentlyActiveEmailPart>
+          <SyncSidebarAndPreviewScroll>
+            <ClearCurrentlyActiveEmailPart />
+            <EmailPartsContent>
+              <EmailEditorSidebar
+                emailTemplate={emailTemplate}
+                heading={
+                  <h1 style={{ fontSize: '1.5rem', paddingLeft: '0.5rem' }}>
+                    {byQueryState(query, {
+                      data: ({ name }) => name,
+                      loading: () => 'Loading...',
+                      error: () => 'Something went wrong',
+                    })}
+                  </h1>
+                }
+              />
+              <PreviewText initialValue={emailTemplate?.previewText}>
+                <PageContent element="div" className="email-editor-page-content">
+                  {error && <Alert>{error.message}</Alert>}
+                  {emailTemplate && <EmailEditorContent emailTemplate={emailTemplate} />}
+                </PageContent>
+              </PreviewText>
+              {isLoading && <LoadingOverlay description="Loading your email template" />}
+            </EmailPartsContent>
+          </SyncSidebarAndPreviewScroll>
+        </CurrentlyActiveEmailPart>
       </EmailTemplateConfig>
     </Layout>
   )
