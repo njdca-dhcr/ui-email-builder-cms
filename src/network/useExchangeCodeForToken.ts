@@ -6,7 +6,7 @@ import { navigate } from 'gatsby'
 
 export const useExchangeCodeForToken = () => {
   const code: string | null = currentUrlSearchParamsFor('code')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(!!code)
   const [auth, setAuth] = useAuth()
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -38,6 +38,8 @@ export const useExchangeCodeForToken = () => {
       fetchToken()
     } else if (code && auth) {
       navigate(window.location.pathname, { replace: true })
+    } else {
+      setLoading(false)
     }
   }, [code, auth])
 

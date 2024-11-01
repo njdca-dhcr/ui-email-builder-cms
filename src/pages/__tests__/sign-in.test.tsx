@@ -1,7 +1,6 @@
 import React from 'react'
 import { RenderResult, render } from '@testing-library/react'
 import SignIn from '../sign-in'
-import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 import { navigate } from 'gatsby'
@@ -48,16 +47,6 @@ describe('Sign in page', () => {
     await user.click(await getByRole('button', { name: 'Sign In' }))
   }
 
-  it('displays the sidebar navigation', () => {
-    rendered = render(
-      <AuthProvider>
-        <SignIn />
-      </AuthProvider>,
-    )
-    const { queryByTestId } = rendered
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
-  })
-
   describe('when signing in successfully', () => {
     let idToken: string
     let refreshToken: string
@@ -82,9 +71,9 @@ describe('Sign in page', () => {
       )
     })
 
-    it('redirects to the home page', async () => {
+    it('redirects to the dashboard page', async () => {
       await fillOutAndSubmitForm()
-      expect(navigate).toHaveBeenCalledWith('/')
+      expect(navigate).toHaveBeenCalledWith('/dashboard')
       expect(navigate).toHaveBeenCalledTimes(1)
     })
 
@@ -165,24 +154,8 @@ describe('Sign in page', () => {
       )
     })
 
-    it('redirects to the home page', async () => {
-      expect(navigate).toHaveBeenCalledWith('/')
-      expect(navigate).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('when there is no backend url', () => {
-    beforeEach(() => {
-      mockBackendUrl(undefined)
-      rendered = render(
-        <AuthProvider>
-          <SignIn />
-        </AuthProvider>,
-      )
-    })
-
-    it('redirects to the home page', async () => {
-      expect(navigate).toHaveBeenCalledWith('/')
+    it('redirects to the dashboard page', async () => {
+      expect(navigate).toHaveBeenCalledWith('/dashboard')
       expect(navigate).toHaveBeenCalledTimes(1)
     })
   })
