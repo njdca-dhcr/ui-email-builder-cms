@@ -1,16 +1,9 @@
 import React, { FC, ReactNode } from 'react'
+import classNames from 'classnames'
+import { Header } from './Header'
 import { List } from './List'
 import './Layout.css'
-import classNames from 'classnames'
-import { appModeAsStateAbbreviation } from 'src/utils/appMode'
-import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
-import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
-import { Link, navigate } from 'gatsby'
-import { StateAbbreviation, stateById } from 'src/utils/statesAndTerritories'
-import { useAuth } from 'src/utils/AuthContext'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
-import { WhenSignedOut } from 'src/utils/WhenSignedOut'
-import { OnlyWithBackendUrl } from 'src/utils/OnlyWithBackendUrl'
 
 interface LayoutProps {
   children: ReactNode
@@ -21,10 +14,12 @@ export const Layout: FC<LayoutProps> = ({ children, element }) => {
   const Element = element ?? 'div'
 
   return (
-    <Element className="layout">
-      <SkipNavLink />
-      {children}
-    </Element>
+    <>
+      <WhenSignedIn>
+        <Header />
+      </WhenSignedIn>
+      <Element className="layout">{children}</Element>
+    </>
   )
 }
 
@@ -46,12 +41,7 @@ interface PageContentProps {
 
 export const PageContent: FC<PageContentProps> = ({ children, className, element }) => {
   const Element = element ?? 'div'
-  return (
-    <Element className={classNames('page-content', className)}>
-      <AuthButtons />
-      {children}
-    </Element>
-  )
+  return <Element className={classNames('page-content', className)}>{children}</Element>
 }
 
 interface SidebarProps {
@@ -61,39 +51,11 @@ interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
-  const stateAbbreviation = appModeAsStateAbbreviation()
-  const state = stateById(appModeAsStateAbbreviation() ?? 'US')
-  const departmentSeal = departmentSealForState(stateAbbreviation)
-
   return (
     <div id={id} className={classNames('sidebar', className)}>
-      <SpacedSidebarContainer>
-        {departmentSeal && (
-          <Link to="/" className="department-seal-container">
-            <img
-              alt={departmentSeal.label}
-              src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
-            />
-          </Link>
-        )}
-        <span className="sidebar-title">
-          {state && `${state.name} `}
-          Email Builder (Beta)
-        </span>
-      </SpacedSidebarContainer>
       {children}
     </div>
   )
-}
-
-export const departmentSealForState = (
-  state: StateAbbreviation | null,
-): (typeof DEPARTMENT_SEALS)[number] | null => {
-  if (!state) return null
-
-  const [firstDepartment] = departmentSealsForState(state)
-
-  return firstDepartment ?? null
 }
 
 interface SidebarListProps {
@@ -167,37 +129,4 @@ export const SpacedSidebarContainer: FC<SpacedSidebarContainerProps> = ({
   className,
 }) => {
   return <div className={classNames('spaced-sidebar-container', className)}>{children}</div>
-}
-
-export const SignOutButton: FC = () => {
-  const [_auth, setAuth] = useAuth()
-
-  return (
-    <button
-      className="sign-out-button"
-      onClick={() => {
-        setAuth(null)
-        navigate('/')
-      }}
-    >
-      Sign Out
-    </button>
-  )
-}
-
-export const AuthButtons: FC = () => {
-  return (
-    <OnlyWithBackendUrl>
-      <div className="auth-buttons">
-        <WhenSignedOut>
-          <Link to="/sign-in" className="sign-in-link">
-            Sign In
-          </Link>
-        </WhenSignedOut>
-        <WhenSignedIn>
-          <SignOutButton />
-        </WhenSignedIn>
-      </div>
-    </OnlyWithBackendUrl>
-  )
 }

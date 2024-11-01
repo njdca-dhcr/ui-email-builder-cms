@@ -18,7 +18,7 @@ import { useAuth } from 'src/utils/AuthContext'
 import { appModeAsStateAbbreviation } from 'src/utils/appMode'
 import { stateById } from 'src/utils/statesAndTerritories'
 import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
-import { departmentSealForState } from 'src/ui/Layout'
+import { departmentSealForState } from 'src/ui/Header'
 
 import './index.css'
 

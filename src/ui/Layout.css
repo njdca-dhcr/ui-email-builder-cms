@@ -4,6 +4,54 @@
   height: 100vh;
 }
 
+.global-header {
+  background-color: var(--black);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem .5rem;
+  justify-content: space-between;
+
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    filter: invert(100%);
+  }
+
+  span {
+    margin-left: 1.5rem;
+  }
+
+  .header-title {
+    display: block;
+    font-size: 1.35rem;
+    font-weight: var(--weight-bold);
+    line-height: 2rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .log-out-button {
+    background-color: transparent;
+    border: 1px solid var(--gray-medium-dark);
+    border-radius: 3px;
+    color: var(--white);
+    cursor: pointer;
+    font-family: var(--sans-serif);
+    font-size: 1rem;
+    font-weight: var(--weight-bold-light);
+    padding: 0.75rem 1.5rem;
+    transition: background-color ease-in-out 100ms;
+  }
+
+  .log-out-button:hover,
+  .log-out-button:focus {
+    background-color: var(--gray-dark-extra);
+  }
+}
+
 [href='#skip-to-content'] {
   border: 0;
   clip: rect(0 0 0 0);
@@ -49,14 +97,6 @@
   display: flex;
   flex: 1;
   padding-top: 2.5rem;
-}
-
-.sidebar-title {
-  display: block;
-  font-size: 1.35rem;
-  font-weight: var(--weight-bold);
-  line-height: 2rem;
-  padding-bottom: 0.5rem;
 }
 
 .sidebar-list {
@@ -167,36 +207,6 @@
 .uswds-icon-label {
   display: flex;
   padding-left: 0.25rem;
-}
-
-.auth-buttons {
-  position: absolute;
-  top: 0.75rem;
-  right: 1.5rem;
-}
-
-.sign-in-link,
-.sign-out-button {
-  background-color: transparent;
-  border: 1px solid var(--gray-medium-dark);
-  border-radius: 3px;
-  color: var(--gray-dark-extra);
-  cursor: pointer;
-  font-family: var(--sans-serif);
-  font-size: 1rem;
-  font-weight: var(--weight-bold-light);
-  padding: 0.75rem 1.5rem;
-  transition: background-color ease-in-out 100ms;
-}
-
-.sign-out-button:hover,
-.sign-out-button:focus {
-  background-color: var(--gray-light);
-}
-
-.sign-in-link {
-  display: block;
-  text-decoration: none;
 }
 
 .actions {
