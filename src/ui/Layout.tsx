@@ -86,7 +86,7 @@ export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
   )
 }
 
-const departmentSealForState = (
+export const departmentSealForState = (
   state: StateAbbreviation | null,
 ): (typeof DEPARTMENT_SEALS)[number] | null => {
   if (!state) return null
