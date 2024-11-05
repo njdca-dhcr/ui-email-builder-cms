@@ -18,6 +18,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Run timeout tests
+        run: npm run test src/templates/__tests__/EmailEditorPage.test.tsx
       - name: Run tests
         run: npm run test
       - name: Run build
