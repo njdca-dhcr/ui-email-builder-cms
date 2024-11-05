@@ -1,5 +1,7 @@
 name: Certification - Payment Modified to 0
-description: When someone will not receive Unemployment Insurance benefits this week due to modifications.
+description: >-
+  To confirm that we received a claimant's weekly certification submission but 
+  that their payment was deducted entirely. They will receive $0.
 appModes: ["ALL", "NJ"]
 previewText: You will not receive funds this week—your payment was reduced to $0.00 because of deductions. Continue to certify weekly.
 components:

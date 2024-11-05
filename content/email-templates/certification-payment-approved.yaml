@@ -1,5 +1,8 @@
 name: Certification - Payment Approved
-description: When someone's Unemployment Insurance benefits are processing.
+description: >-
+  To confirm that we received a claimant's weekly certification submission and 
+  that a payment has been approved. This will tell them how much they will 
+  receive for that week.
 appModes: ["ALL", "NJ"]
 previewText: We are processing your payment of $100. It may take 2-3 business days for funds to appear in your account/debit card.
 components:
