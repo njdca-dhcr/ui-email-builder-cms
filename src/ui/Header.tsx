@@ -15,24 +15,26 @@ export const Header: FC<Props> = () => {
   const departmentSeal = departmentSealForState(stateAbbreviation)
 
   return (
-    <header className="global-header">
-      <SkipNavLink />
-      <div>
-        {departmentSeal && (
-          <Link to="/" className="department-seal-container">
-            <img
-              alt={departmentSeal.label}
-              src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
-            />
-          </Link>
-        )}
-        <span className="header-title">
-          {state && `${state.name} `}
-          Email Builder (Beta)
-        </span>
-      </div>
-      <LogOutButton />
-    </header>
+    <div className="header-wrapper">
+      <header className="global-header">
+        <SkipNavLink />
+        <div>
+          {departmentSeal && (
+            <Link to="/" className="department-seal-container">
+              <img
+                alt={departmentSeal.label}
+                src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
+              />
+            </Link>
+          )}
+          <span className="header-title">
+            {state && `${state.name} `}
+            Email Builder (Beta)
+          </span>
+        </div>
+        <LogOutButton />
+      </header>
+    </div>
   )
 }
 

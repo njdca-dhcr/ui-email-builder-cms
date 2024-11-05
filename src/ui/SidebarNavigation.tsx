@@ -35,8 +35,13 @@ export const SidebarNavigation: FC<Props> = () => {
           text="Tips & Tricks"
           icon={<UswdsIcon icon="Support" />}
         />
-        <li aria-hidden className="sidebar-spacer" />
-        <SpacedLink bottom to="/settings" text="Settings" icon={<UswdsIcon icon="Settings" />} />
+        <SpacedLink
+          className="sidebar-settings"
+          bottom
+          to="/settings"
+          text="Settings"
+          icon={<UswdsIcon icon="Settings" />}
+        />
       </SideBarList>
     </nav>
   )
@@ -48,17 +53,23 @@ interface SpacedLinkProps {
   partiallyActive?: boolean
   text: string
   to: string
+  className?: string
 }
 
-const SpacedLink: FC<SpacedLinkProps> = ({ bottom, icon, partiallyActive, text, to }) => {
-  const Comp = bottom ? SideBarListItemBottom : SideBarListItem
-
+const SpacedLink: FC<SpacedLinkProps> = ({
+  bottom,
+  icon,
+  partiallyActive,
+  text,
+  to,
+  className,
+}) => {
   return (
-    <Comp>
+    <SideBarListItem>
       <SpacedSidebarContainer>
         <Link
           activeClassName="sidebar-active-link"
-          className={classNames({ bottom })}
+          className={classNames(className)}
           to={to}
           partiallyActive={partiallyActive}
         >
@@ -67,6 +78,6 @@ const SpacedLink: FC<SpacedLinkProps> = ({ bottom, icon, partiallyActive, text, 
           {bottom && icon}
         </Link>
       </SpacedSidebarContainer>
-    </Comp>
+    </SideBarListItem>
   )
 }

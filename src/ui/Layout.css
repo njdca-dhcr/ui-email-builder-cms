@@ -1,7 +1,21 @@
+.page-wrapper {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .layout {
   align-items: stretch;
   display: flex;
-  height: 100vh;
+  overflow-y: auto;
+  margin-top: calc(5.375rem + 1px);
+  height: calc(100% - 5.375rem - 1px);
+}
+
+.header-wrapper {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .global-header {
@@ -9,7 +23,7 @@
   color: var(--white);
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem .5rem;
+  padding: 0.75rem 1rem 0.5rem;
   justify-content: space-between;
 
   & > div {
@@ -96,7 +110,6 @@
 .sidebar nav {
   display: flex;
   flex: 1;
-  padding-top: 2.5rem;
 }
 
 .sidebar-list {
@@ -125,34 +138,41 @@
   text-decoration: underline;
 }
 
-.sidebar-list-item-bottom {
-  background-color: var(--gray-medium);
-  padding: 1.5rem 0;
+.sidebar-list-item:last-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.sidebar-list-item-bottom:has(a.sidebar-active-link) {
+.sidebar-list-item:last-child > div {
+  background-color: var(--gray-medium);
+  padding: 1.5rem 2rem;
+}
+
+.sidebar-list-item:last-child > div:has(a.sidebar-active-link) {
   background-color: var(--blue);
 }
 
-.sidebar-list a.bottom {
+.sidebar-list-item:last-child a {
   justify-content: space-between;
 }
 
-.sidebar-list a.bottom img {
+.sidebar-list-item:last-child a img {
   height: 1.75rem;
   width: 1.75rem;
 }
 
-.sidebar-list-item-bottom a.sidebar-active-link {
+.sidebar-list-item:last-child a.sidebar-active-link {
   text-decoration: none;
 }
 
-.sidebar-list-item-bottom a.sidebar-active-link span {
+.sidebar-list-item:last-child a.sidebar-active-link span {
   border-bottom: 2px solid var(--white);
   color: var(--white);
 }
 
-.sidebar-list-item-bottom a.sidebar-active-link img {
+.sidebar-list-item:last-child a.sidebar-active-link img {
   filter: invert(100%);
 }
 

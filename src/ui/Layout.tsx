@@ -14,12 +14,12 @@ export const Layout: FC<LayoutProps> = ({ children, element }) => {
   const Element = element ?? 'div'
 
   return (
-    <>
+    <div className="page-wrapper">
       <WhenSignedIn>
         <Header />
       </WhenSignedIn>
       <Element className="layout">{children}</Element>
-    </>
+    </div>
   )
 }
 
