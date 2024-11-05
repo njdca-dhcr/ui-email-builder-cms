@@ -1,5 +1,5 @@
 name: DUA - Denial
-description: When someone is not eligible and their application has been denied.
+description: To tell the claimant that their DUA application was denied
 appModes: ["ALL", "NJ"]
 previewText: You are not eligible for Disaster Unemployment Assistance. If you disagree with this decision, you can file an appeal.
 components:

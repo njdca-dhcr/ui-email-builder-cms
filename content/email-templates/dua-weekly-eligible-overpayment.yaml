@@ -1,5 +1,8 @@
 name: DUA - Weekly Eligible (Overpayment)
-description: When someone's benefits are on the way and there's been an overpayment.
+description: >-
+  To tell the claimant that benefits will be dispersed and they will receive 
+  funds (a breakdown of what is deducted is included). This will also tell the 
+  claimant what their overpayment balance is.
 appModes: ["ALL", "NJ"]
 previewText: We are processing your payment of $165 for May 12 - May 19. See details of your benefit breakdown.
 components:

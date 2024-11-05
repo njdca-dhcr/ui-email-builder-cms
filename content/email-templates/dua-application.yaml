@@ -1,5 +1,5 @@
 name: DUA - Application
-description: When someone is ready to apply.
+description: To invite people to apply to the Disaster Unemployment Assistance program
 appModes: ["ALL", "NJ"]
 previewText: We see that you may be applying for unemployment because of the recent disaster that took place. Apply today for Disaster Unemployment Assistance.
 components:

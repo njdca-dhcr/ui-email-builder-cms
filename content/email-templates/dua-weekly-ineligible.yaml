@@ -1,5 +1,5 @@
 name: DUA - Weekly Ineligible
-description: When someone's benefits will not be sent.
+description: To tell the claimant that no funds would be dispersed.
 appModes: ["ALL", "NJ"]
 previewText: You will not receive DUA benefits for May 12-May19. Calculation breakdown and appeal rights can be found within this email.
 components:

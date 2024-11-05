@@ -1,5 +1,5 @@
 name: DUA - Certification Confirmation
-description: When someone's weekly certification has been received is under review.
+description: Confirmation that NJ received their certification submission
 appModes: ["ALL", "NJ"]
 previewText: We received your weekly DUA certification and it is under review. It may take up to 2 weeks to process—continue to look out for additional emails.
 components:

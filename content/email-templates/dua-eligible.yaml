@@ -1,5 +1,5 @@
 name: DUA - Eligible
-description: When someone's application has been received and they're eligible.
+description: To tell the claimant that their DUA application was approved
 appModes: ["ALL", "NJ"]
 previewText: Congratulations, you are eligible to receive Disaster Unemployment Assistance until March 5, 2023. See details of your benefit breakdown.
 components:

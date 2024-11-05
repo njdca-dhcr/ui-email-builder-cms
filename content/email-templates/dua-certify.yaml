@@ -1,5 +1,5 @@
 name: DUA - Certify
-description: When someone needs to certify to receive benefits.
+description: To instruct claimants to certify (this can be weekly or a range of weeks)
 appModes: ["ALL", "NJ"]
 previewText: Your weekly DUA certification is now available. Complete your questionnaire today, don’t wait. Link expires on 00/00/0000.
 components:
