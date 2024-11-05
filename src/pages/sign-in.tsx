@@ -132,7 +132,7 @@ const SignInPage: FC = () => {
   )
 }
 
-const RedirectIfSignedIn: FC = () => {
+export const RedirectIfSignedIn: FC = () => {
   const [auth] = useAuth()
   useEffect(() => {
     if (auth) navigate('/dashboard')

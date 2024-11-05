@@ -224,9 +224,9 @@ describe('New Password Required page', () => {
       expect(newPasswordRequired).toHaveBeenCalledWith({ email, password, session })
     })
 
-    it('redirects to the home page', async () => {
+    it('redirects to the dashboard', async () => {
       await fillOutAndSubmitForm()
-      expect(navigate).toHaveBeenCalledWith('/')
+      expect(navigate).toHaveBeenCalledWith('/dashboard')
       expect(navigate).toHaveBeenCalledTimes(1)
     })
   })
