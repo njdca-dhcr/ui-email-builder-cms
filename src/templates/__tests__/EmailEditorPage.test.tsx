@@ -99,35 +99,39 @@ describe('EmailEditorPage', () => {
       const { getAllByLabelText } = rendered
       const input = () => getAllByLabelText('Title')[1]
       const subComponentToggle = () => getAllByLabelText('Title')[0]
+      const initialInput = input()
 
-      await user.clear(input()!)
-      await user.type(input()!, value)
+      await user.clear(initialInput!)
+      await user.type(initialInput!, value)
       expect(input()).toHaveTextContent(value)
 
       await user.click(subComponentToggle())
       expect(input()).toBeUndefined()
 
       await user.click(subComponentToggle())
-      expect(input()).toBeDefined()
-      expect(input()).toHaveTextContent(value)
+      const newInput = input()
+      expect(newInput).toBeDefined()
+      expect(newInput).toHaveTextContent(value)
     })
 
     it('preserves entered component text after toggling a component off and then on again', async () => {
       const value = faker.lorem.paragraph()
       const { queryByLabelText, getAllByLabelText } = rendered
       const input = () => queryByLabelText("Recipient's name")
-      const componentToggle = () => getAllByLabelText('Name')[0]
+      const componentToggle = getAllByLabelText('Name')[0]
+      const initialInput = input()
 
-      await user.clear(input()!)
-      await user.type(input()!, value)
+      await user.clear(initialInput!)
+      await user.type(initialInput!, value)
       expect(input()).toHaveTextContent(value)
 
-      await user.click(componentToggle())
+      await user.click(componentToggle)
       expect(input()).toBeNull()
 
-      await user.click(componentToggle())
-      expect(input()).not.toBeNull()
-      expect(input()).toHaveTextContent(value)
+      await user.click(componentToggle)
+      const newInput = input()
+      expect(newInput).not.toBeNull()
+      expect(newInput).toHaveTextContent(value)
     })
   })
 })
