@@ -1,5 +1,5 @@
 name: Overpayment - Reminder
-description: Reminder to claimant to fill out the application
+description: Reminder to claimant to fill out application
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

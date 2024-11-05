@@ -1,5 +1,5 @@
 name: Overpayment - No Issue
-description: To tell the claimant they did not have an overpayment issue
+description: To tell the claimant they did not have an overpayment to process
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

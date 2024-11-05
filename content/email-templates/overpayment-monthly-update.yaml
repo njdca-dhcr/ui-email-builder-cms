@@ -1,5 +1,5 @@
 name: Overpayment - Monthly Update
-description: To tell the claimant their waiver application was denied
+description: To update the claimant that we are still working through their application (sent once a month)
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
