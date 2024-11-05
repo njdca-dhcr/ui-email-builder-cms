@@ -7,8 +7,13 @@
   align-items: stretch;
   display: flex;
   overflow-y: auto;
-  margin-top: calc(5.375rem + 1px);
-  height: calc(100% - 5.375rem - 1px);
+  height: 100%;
+}
+
+.page-wrapper:has(.global-header) .layout {
+  --spacing: 5.375rem;
+  margin-top: calc(var(--spacing) + 1px);
+  height: calc(100% - var(--spacing) - 1px);
 }
 
 .header-wrapper {
