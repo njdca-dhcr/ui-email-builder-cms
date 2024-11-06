@@ -1,5 +1,5 @@
 name: Appeal Tribunal - Confirmation Success
-description: When someone's registration is complete and confirmed.
+description: To confirm receipt of registering/confirming for their hearing
 appModes: ["ALL", "NJ"]
 previewText: Your registration is received and confirmed for your hearing on March 22, 2024 @ 11am. Details included on how to prepare for your hearing.
 components:
