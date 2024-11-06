@@ -1,5 +1,5 @@
 name: eMonetary - Resend (Dependency Only)
-description: When resending an email if it wasn't "received" (Dependency specific)
+description: To resend an email if it wasn't "received" (Dependency specific)
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

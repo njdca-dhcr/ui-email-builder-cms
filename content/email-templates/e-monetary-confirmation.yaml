@@ -1,5 +1,5 @@
 name: eMonetary - Confirmation
-description: When confirming receipt of responses
+description: To confirm receipt of reponses
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

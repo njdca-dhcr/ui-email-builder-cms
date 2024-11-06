@@ -1,5 +1,5 @@
 name: eMonetary - Resend (Wage Only)
-description: When resending an email if it wasn't "received" (Wage specific)
+description: To resend an email if it wasn't "received" (Wage specific)
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
