@@ -1,5 +1,7 @@
 name: eAdjudication - Confirmation Weekly
-description: When someone's questionnaire has been received and is under review.
+description: >-
+  To confirm to claimant (for continued claims) that NJ received their response 
+  to the questionnaire we asked them to fill out
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

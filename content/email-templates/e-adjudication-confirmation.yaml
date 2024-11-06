@@ -1,5 +1,5 @@
 name: eAdjudication - Confirmation
-description: When someone's response has been received and is under review.
+description: To confirm to claimant that NJ received their response to the questionnaire we asked them to fill out
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

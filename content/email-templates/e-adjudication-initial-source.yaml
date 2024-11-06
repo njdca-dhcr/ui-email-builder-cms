@@ -1,5 +1,9 @@
 name: eAdjudication - Initial Source
-description: When there's an issue with someone's UI claim.
+description: >-
+  To tell a claimant that there is an issue with their claim and that more 
+  information is needed. The reasons why (issues) are listed.
+
+  They will need to fill out a customized questionnaire.
 appModes: ["ALL", "NJ"]
 previewText: Your claim has an issue that needs attention. Login, answer the questions, and submit your answers today. Don’t wait.
 components:

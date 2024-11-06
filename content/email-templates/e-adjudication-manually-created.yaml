@@ -1,5 +1,9 @@
 name: eAdjudication - Manually Created
-description: When there's a new issue with someone's UI claim.
+description: >-
+  To tell a claimant that there is an issue with their claim and that more 
+  information is needed. (This is sent manually by an agent so time sent varies)
+
+  They will need to fill out a customized questionnaire.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

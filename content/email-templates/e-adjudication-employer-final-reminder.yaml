@@ -1,5 +1,7 @@
 name: eAdjudication - Employer (Final Reminder)
-description: When there's an issue with someone's UI claim that's related to their employer and it expires soon.
+description: >-
+  Sent 24 hours before a claimant's deadline (when the form link expires) if 
+  they have not yet submitted their form
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
