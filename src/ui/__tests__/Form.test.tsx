@@ -98,15 +98,17 @@ describe('FormField', () => {
     })
 
     it('can be an email type', () => {
-      const { getByLabelText } = renderFormField({ type: 'email' })
+      const { getByLabelText, queryByRole } = renderFormField({ type: 'email' })
       const input: HTMLInputElement = getByLabelText(label) as any
       expect(input.type).toEqual('email')
+      expect(queryByRole('switch')).toBeNull()
     })
 
     it('can be a password type', () => {
-      const { getByLabelText } = renderFormField({ type: 'password' })
+      const { getByLabelText, queryByRole } = renderFormField({ type: 'password' })
       const input: HTMLInputElement = getByLabelText(label) as any
       expect(input.type).toEqual('password')
+      expect(queryByRole('switch')).not.toBeNull()
     })
 
     it('can be required', () => {

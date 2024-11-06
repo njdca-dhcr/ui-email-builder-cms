@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { Alert } from './Alert'
 import './Form.css'
 import { Textarea, TextareaProps } from './Textarea'
+import { PasswordInput } from './PasswordInput'
 
 export interface FormProps extends HTMLProps<HTMLFormElement> {
   onSubmit: FormEventHandler<HTMLFormElement>
@@ -41,9 +42,17 @@ export interface FormFieldProps extends InputProps {
   error?: string
 }
 
-export const FormField: FC<FormFieldProps> = ({ label, id, description, error, ...props }) => {
+export const FormField: FC<FormFieldProps> = ({
+  label,
+  id,
+  description,
+  error,
+  type,
+  ...props
+}) => {
   const errorId = `${id}-error`
   const descriptionId = `${id}-description`
+  const InputKind = type === 'password' ? PasswordInput : Input
 
   return (
     <div className="form-field">
@@ -51,11 +60,12 @@ export const FormField: FC<FormFieldProps> = ({ label, id, description, error, .
         <label htmlFor={id}>{label}</label>
         {error && <p id={errorId}>{error}</p>}
       </div>
-      <Input
+      <InputKind
         id={id}
         aria-invalid={!!error}
         aria-errormessage={error && errorId}
         aria-describedby={description && descriptionId}
+        type={type}
         {...props}
       />
       {description && (
