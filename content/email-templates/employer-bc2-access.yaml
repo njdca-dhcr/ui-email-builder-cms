@@ -1,5 +1,8 @@
 name: Employer - BC2 Access
-description: When an employer requests to reset their password to access BC2 related inquiries.
+description: >-
+  To instruct employers on how to respond to BC2 forms that they may need to 
+  fill out for their previous employee. It encourages them to create set their 
+  password so that they can access it more readily in the future.
 appModes: ["ALL", "NJ"]
 previewText: Set your password and finish creating your account. This login will help you respond to form BC2 (Request for Monetary Information).
 components:
