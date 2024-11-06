@@ -1,5 +1,6 @@
 name: Dependency - Confirmation Application Received
-description: When someone's application has been received and you want them to know you're on it.
+description: >-
+  To confirm to the claimant that we received their application for dependency benefits
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

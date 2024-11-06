@@ -1,5 +1,9 @@
 name: Dependency - Benefits Rules & Regulations
-description: When someone has requested information on dependency benefits.
+description: >-
+  To offer information to a claimant on how dependency benefits work and what 
+  rules and regulations they should look out for.
+
+  Date of claim and the proof submission deadline is displayed.
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

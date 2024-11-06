@@ -1,5 +1,7 @@
 name: Dependency - Missing Documents
-description: When someone is missing documents.
+description: >-
+  To ask for missing documents from the claimant in order to process their 
+  request for dependency benefits
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

@@ -1,5 +1,7 @@
 name: Dependency - Inconclusive
-description: When someone's benefits cannot be determined.
+description: >-
+  To tell the claimant that their application can't be reviewed because they 
+  don't have a valid UI claim to refer to
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

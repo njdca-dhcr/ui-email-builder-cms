@@ -1,5 +1,7 @@
 name: Dependency - Ineligible
-description: When someone is not eligible for benefits.
+description: >-
+  To tell the claimant that they are ineligible to receive dependency benefits 
+  (dynamic reason is included)
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner

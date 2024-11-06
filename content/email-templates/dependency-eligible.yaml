@@ -1,5 +1,5 @@
 name: Dependency - Eligible
-description: When someone's weekly benefit can be raised.
+description: To tell the claimant that they are eligible to receive dependency benefits
 appModes: ["ALL", "NJ"]
 components:
   - kind: Banner
