@@ -2,7 +2,7 @@ name: Certification - Action Needed
 description: >-
   To confirm that we received a claimant's weekly certification submission but 
   that they need to clarify why they reported one week with earnings and another 
-  week without earnings in order to receive funds. 
+  week without earnings in order to receive funds.
 appModes: ["ALL", "NJ"]
 previewText: We need more information from you regarding your recent work with earnings. Take action today. Don’t wait.
 components:

@@ -2,7 +2,7 @@ name: DUA - Preliminary Eligible
 description: >-
   To confirm that a claimant's application for DUA benefits was received and to 
   request missing documents by a certain date. 
-  
+
   Benefit amount according to claimant's circumstances are included.
 appModes: ["ALL", "NJ"]
 previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
