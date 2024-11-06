@@ -48,7 +48,7 @@
 }
 
 .password-input-switch.password-input-switch {
-  bottom: 1.5rem;
+  top: calc(2.25rem + 1px);
   color: var(--gray-dark);
   cursor: pointer;
   font-weight: var(--weight-normal);
