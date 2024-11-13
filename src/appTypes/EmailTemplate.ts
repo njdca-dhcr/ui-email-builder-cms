@@ -18,6 +18,7 @@ import {
   SupplementalContentValue,
   TitleValue,
 } from './EmailTemplateValues'
+import { Tag } from './Tag'
 
 export type ID = string | number
 
@@ -132,6 +133,8 @@ export namespace EmailTemplate {
       description?: string
       previewText?: string
       components?: Component[]
+      tags?: Tag[]
+      tagNames?: string[]
     }
   }
 

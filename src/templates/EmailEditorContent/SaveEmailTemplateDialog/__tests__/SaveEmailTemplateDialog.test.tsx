@@ -136,6 +136,7 @@ describe('SaveEmailTemplateDialog', () => {
       await user.type(getByLabelText('Name'), emailTemplateChanges.name)
       await user.clear(getByLabelText('Description'))
       await user.type(getByLabelText('Description'), emailTemplateChanges.description!)
+      await user.type(getByLabelText('Tags'), 'tag')
 
       const form = baseElement.querySelector('form')
       expect(form).not.toBeNull()
@@ -149,6 +150,7 @@ describe('SaveEmailTemplateDialog', () => {
       expect(mutate).toHaveBeenCalledWith({
         ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges),
         previewText,
+        tagNames: ['tag']
       })
     })
 

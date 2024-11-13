@@ -130,6 +130,13 @@ const buildUser = (): UserShow => ({
   role: 'member',
 })
 
+export const buildTag = () => {
+  return {
+    id: uniqueId(),
+    name: faker.lorem.word(),
+  }
+}
+
 export const buildUserShow = (options?: Partial<UserShow>): UserShow => {
   return {
     ...buildUser(),

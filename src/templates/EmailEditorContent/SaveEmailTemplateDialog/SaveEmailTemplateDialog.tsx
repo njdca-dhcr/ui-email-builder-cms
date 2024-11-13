@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import uniq from 'lodash.uniq'
 import { EmailTemplate } from 'src/appTypes'
 import { Button, ButtonLike, Dialog, Form, FormField, LoadingOverlay } from 'src/ui'
 import { emailTemplateMergeDefaultValues } from './emailTemplateMergeDefaultValues'
@@ -7,6 +8,7 @@ import { useEmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { useEmailPartsContentData } from 'src/templates/EmailPartsContent'
 import { usePreviewText } from 'src/templates/PreviewText'
 import { DefaultError, UseMutateAsyncFunction } from '@tanstack/react-query'
+import { FormFieldArea } from 'src/ui/Form'
 
 interface ErrorJSON {
   errors: { name: string }
@@ -65,6 +67,12 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
                 previewText,
                 name: stringFromFormData(formData, 'name'),
                 description: stringFromFormData(formData, 'description'),
+                tagNames: uniq(
+                  stringFromFormData(formData, 'tagNames')
+                    .split(',')
+                    .map((name) => name.trim())
+                    .filter(Boolean),
+                ),
               })
 
               if (result && 'errors' in result) {
@@ -83,12 +91,20 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
               defaultValue={emailTemplate.name}
               error={validationErrors?.name}
             />
-            <FormField
+            <FormFieldArea
               id="description"
               name="description"
               label="Description"
               defaultValue={emailTemplate.description}
             />
+            <FormField
+              id="tag-names"
+              name="tagNames"
+              label="Tags"
+              defaultValue={emailTemplate.tags?.map((tag) => tag.name).join(', ')}
+              description="Separate tags with commas"
+            />
+
             <Button type="submit">{submitButtonText}</Button>
           </Form>
           {loading && <LoadingOverlay description={loadingMessage} />}

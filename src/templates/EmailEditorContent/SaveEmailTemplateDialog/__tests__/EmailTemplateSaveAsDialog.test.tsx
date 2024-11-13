@@ -72,6 +72,7 @@ describe('EmailTemplateSaveAsDialog', () => {
     expect(mutateAsync).toHaveBeenCalledWith({
       ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges),
       previewText,
+      tagNames: [],
     })
   })
 

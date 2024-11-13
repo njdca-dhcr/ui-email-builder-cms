@@ -1,4 +1,4 @@
-import React, { FC, FormEventHandler, HTMLProps, TextareaHTMLAttributes } from 'react'
+import React, { FC, FormEventHandler, HTMLProps } from 'react'
 import { Input, InputProps } from './Input'
 import classNames from 'classnames'
 import { Alert } from './Alert'
@@ -107,6 +107,7 @@ export const FormFieldArea: FC<FormFieldAreaProps> = ({
         aria-describedby={description && descriptionId}
         {...props}
       />
+
       {description && (
         <p id={descriptionId} className="description">
           {description}
