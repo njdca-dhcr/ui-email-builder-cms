@@ -150,7 +150,7 @@ describe('SaveEmailTemplateDialog', () => {
       expect(mutate).toHaveBeenCalledWith({
         ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges),
         previewText,
-        tagNames: ['tag']
+        tagNames: ['tag'],
       })
     })
 
