@@ -1,202 +1,204 @@
 name: Certification - Payment is On Hold
 description: >-
-  To confirm that we received a claimant's weekly certification submission but 
+  To confirm that we received a claimant's weekly certification submission but
   that payment is on hold for something that was flagged (requires manual review).
 appModes: ["ALL", "NJ"]
-previewText: Your certification requires manual review. It may take up to 5 business days to review your answers and release funds.
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: DateRange
-        defaultValue:
-          range: "[00/00/0000 - 00/00/0000]"
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Certification Received—payment is on hold
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Unemployment Insurance (UI)
-          name: Unemployment Insurance (UI)
-          backgroundColor: "#B9D8F3"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "Captain America:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview
-          status: Requires manual review
-          showSupportiveInformation: true
-          spaceAfter: false
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: It may take up to 5 business days
-                  bold: true
-                - text: " to review your answers"
-            - type: paragraph
-              children:
-                - text: "Confirmation #23095132401217"
-                  italic: true
-          supportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    If there is a holiday that falls within this period, please allow 1
-                    additional day for processing.
-                  italic: true
-      - kind: InformationalBox
-        defaultValue:
-          boxColor: Benefit Blue
-          icon: Info
-          title: "Reasons why this is happening:"
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    You reported a change in one or more of the following in your weekly
-                    certification questionnaire...
-                  bold: true
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: ... availability for work
-            - type: paragraph
-              children:
-                - text: ... a new pension payment
-            - type: paragraph
-              children:
-                - text: ... seeking of work
-            - type: paragraph
-              children:
-                - text: ... accepting of work or work hours offered
-            - type: paragraph
-              children:
-                - text: ... enrollment or progress in school or job training
-            - type: paragraph
-              children:
-                - text: ... pension/retirement payment
-            - type: paragraph
-              children:
-                - text: ... the number of hours worked
-            - type: paragraph
-              children:
-                - text: ... whether you have self-employment
-            - type: paragraph
-              children:
-                - text: ... the date you expect to return to work
-            - type: paragraph
-              children:
-                - text: ... the last day you worked
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: "Or, we are waiting for information from you."
-                  bold: true
-            - type: paragraph
-              children:
-                - bold: true
-                  text: ""
-            - type: paragraph
-              children:
-                - text: Check your email for requests from no-reply@dol.nj.gov
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: More information on certification questions can be found here.
-                  italic: true
-          showSupportiveInformation: false
-      - kind: SupplementalContent
-        defaultValue:
-          variant: Double Supplemental Content
-          title: If we can pay you...
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    Another email will be sent to you when payment is sent to your direct
-                    deposit account or your NJDOL provided debit card.
-          secondTitle: If we need more information
-          secondDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    You will receive a link to an online questionnaire. The faster you
-                    send us your responses, the faster we can make a determination.
-      - kind: InformationalBox
-        defaultValue:
-          boxColor: Yielding Yellow
-          icon: Autorenew
-          title: Certifications are every week!
-          description:
-            - type: paragraph
-              children:
-                - text: "Continue to certify for benefits "
-                - text: for every week you would like unemployment payments.
-                  bold: true
-                - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: You can certify for benefits Sunday to Friday from 8am - 7pm.
-          showSupportiveInformation: false
-      - kind: RulesRightsRegulations
-        required: true
-        defaultValue:
-          variant: Reminder
-          icon: Flag
-          reminderTitle: No response after 7 business days?
-          reminderDescription:
-            - type: paragraph
-              children:
-                - text: "Call: "
-                  bold: true
-                - text: " 732-761-2020"
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information on New Jersey’s unemployment program can be found "
-                - type: link
-                  url: >-
-                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
-                  children:
-                    - text: here
-                - text: .
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  previewText: Your certification requires manual review. It may take up to 5 business days to review your answers and release funds.
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: DateRange
+          defaultValue:
+            range: "[00/00/0000 - 00/00/0000]"
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Certification Received—payment is on hold
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Unemployment Insurance (UI)
+            name: Unemployment Insurance (UI)
+            backgroundColor: "#B9D8F3"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "Captain America:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your weekly certification (00/00 - 00/00/0000) for Unemployment Insurance benefits
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview
+            status: Requires manual review
+            showSupportiveInformation: true
+            spaceAfter: false
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: It may take up to 5 business days
+                    bold: true
+                  - text: " to review your answers"
+              - type: paragraph
+                children:
+                  - text: "Confirmation #23095132401217"
+                    italic: true
+            supportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If there is a holiday that falls within this period, please allow 1
+                      additional day for processing.
+                    italic: true
+        - kind: InformationalBox
+          defaultValue:
+            boxColor: Benefit Blue
+            icon: Info
+            title: "Reasons why this is happening:"
+            description:
+              - type: paragraph
+                children:
+                  - text: >-
+                      You reported a change in one or more of the following in your weekly
+                      certification questionnaire...
+                    bold: true
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: ... availability for work
+              - type: paragraph
+                children:
+                  - text: ... a new pension payment
+              - type: paragraph
+                children:
+                  - text: ... seeking of work
+              - type: paragraph
+                children:
+                  - text: ... accepting of work or work hours offered
+              - type: paragraph
+                children:
+                  - text: ... enrollment or progress in school or job training
+              - type: paragraph
+                children:
+                  - text: ... pension/retirement payment
+              - type: paragraph
+                children:
+                  - text: ... the number of hours worked
+              - type: paragraph
+                children:
+                  - text: ... whether you have self-employment
+              - type: paragraph
+                children:
+                  - text: ... the date you expect to return to work
+              - type: paragraph
+                children:
+                  - text: ... the last day you worked
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: "Or, we are waiting for information from you."
+                    bold: true
+              - type: paragraph
+                children:
+                  - bold: true
+                    text: ""
+              - type: paragraph
+                children:
+                  - text: Check your email for requests from no-reply@dol.nj.gov
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: More information on certification questions can be found here.
+                    italic: true
+            showSupportiveInformation: false
+        - kind: SupplementalContent
+          defaultValue:
+            variant: Double Supplemental Content
+            title: If we can pay you...
+            description:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Another email will be sent to you when payment is sent to your direct
+                      deposit account or your NJDOL provided debit card.
+            secondTitle: If we need more information
+            secondDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      You will receive a link to an online questionnaire. The faster you
+                      send us your responses, the faster we can make a determination.
+        - kind: InformationalBox
+          defaultValue:
+            boxColor: Yielding Yellow
+            icon: Autorenew
+            title: Certifications are every week!
+            description:
+              - type: paragraph
+                children:
+                  - text: "Continue to certify for benefits "
+                  - text: for every week you would like unemployment payments.
+                    bold: true
+                  - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: You can certify for benefits Sunday to Friday from 8am - 7pm.
+            showSupportiveInformation: false
+        - kind: RulesRightsRegulations
+          required: true
+          defaultValue:
+            variant: Reminder
+            icon: Flag
+            reminderTitle: No response after 7 business days?
+            reminderDescription:
+              - type: paragraph
+                children:
+                  - text: "Call: "
+                    bold: true
+                  - text: " 732-761-2020"
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information on New Jersey’s unemployment program can be found "
+                  - type: link
+                    url: >-
+                      https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                    children:
+                      - text: here
+                  - text: .
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true
