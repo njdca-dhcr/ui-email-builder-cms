@@ -1,4 +1,4 @@
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 import { defaultDisclaimerValue } from './EmailTemplateComponents/Values/DisclaimerValue'
 import { defaultBannerValue } from './EmailTemplateComponents/Values/BannerValue'
@@ -17,7 +17,7 @@ import { defaultTitleValue } from './EmailTemplateSubComponents/Values/TitleValu
 import { defaultProgramNameValue } from './EmailTemplateSubComponents/Values/ProgramNameValue'
 import { defaultDepartmentSealValue } from './EmailTemplateSubComponents/Values/DepartmentSealValue'
 
-export const AllDefaultValues: EmailTemplate.DefaultValues.Part = {
+export const AllDefaultValues: EmailParts.DefaultValues.Part = {
   Banner: defaultBannerValue(),
   Body: {},
   Footer: {},

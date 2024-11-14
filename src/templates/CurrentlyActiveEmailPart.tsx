@@ -8,7 +8,7 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 type CurrentlyActiveEmailPartContextType = [string, (value: string) => void]
 
@@ -74,7 +74,7 @@ export const useIsCurrentlyActiveEmailPart = (
 }
 
 export const useIsCurrentlyActiveEmailComponent = (
-  emailComponent: EmailTemplate.Unique.Component,
+  emailComponent: EmailParts.Unique.Component,
 ): {
   isActive: boolean
   isComponentActive: boolean

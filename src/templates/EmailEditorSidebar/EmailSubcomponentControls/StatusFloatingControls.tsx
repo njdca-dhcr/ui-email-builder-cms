@@ -1,10 +1,10 @@
 import React, { FC, useEffect } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
 import { Radio } from 'src/ui'
 
 interface Props {
-  emailSubComponent: EmailTemplate.Status
+  emailSubComponent: EmailParts.Status
 }
 
 export const StatusFloatingControls: FC<Props> = ({ emailSubComponent }) => {

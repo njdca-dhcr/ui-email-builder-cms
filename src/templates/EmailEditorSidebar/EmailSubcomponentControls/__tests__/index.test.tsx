@@ -2,11 +2,11 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { buildUniqueEmailComponent, buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { EmailSubComponentControls } from '..'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailSubComponentControls', () => {
-  let component: EmailTemplate.Unique.Component
+  let component: EmailParts.Unique.Component
 
   beforeEach(() => {
     component = buildUniqueEmailComponent('Body')

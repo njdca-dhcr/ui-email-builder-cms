@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { EmailSubComponentControlsProps } from './shared'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { StatusControls } from './StatusControls'
 import { DirectiveControls } from './DirectiveControls'
 import { RulesRightsRegulationsControls } from './RulesRightsRegulationsControls'
@@ -11,8 +11,8 @@ import { InformationalBoxControls } from './InformationalBoxControls'
 import { SupplementalContentControls } from './SupplementalContentControls'
 import './EmailSubcomponentControls.css'
 
-interface Props extends EmailSubComponentControlsProps<EmailTemplate.Kinds.SubComponent> {
-  component: EmailTemplate.Unique.Component
+interface Props extends EmailSubComponentControlsProps<EmailParts.Kinds.SubComponent> {
+  component: EmailParts.Unique.Component
 }
 
 interface WrapperProps {
@@ -63,7 +63,7 @@ export const EmailSubComponentControls: FC<Props> = ({ emailSubComponent, ...pro
 }
 
 export const useSubComponentControlOptions = (
-  emailSubComponent: EmailTemplate.Unique.SubComponent,
+  emailSubComponent: EmailParts.Unique.SubComponent,
   value: any,
   setValue: (newValues: any) => void,
 ) => {

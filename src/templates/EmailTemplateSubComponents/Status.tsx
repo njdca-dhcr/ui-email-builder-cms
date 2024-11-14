@@ -13,9 +13,9 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate, StatusVariant } from 'src/appTypes'
+import { EmailParts, StatusVariant } from 'src/appTypes'
 
-export const useStatusValue = (emailSubComponent: EmailTemplate.Status) => {
+export const useStatusValue = (emailSubComponent: EmailParts.Status) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

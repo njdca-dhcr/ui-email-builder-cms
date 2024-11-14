@@ -13,12 +13,13 @@ import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRight
 import { LoginDetails } from '../EmailTemplateSubComponents/LoginDetails'
 import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
 import { InformationalBox } from '../EmailTemplateSubComponents/InformationalBox'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts, EmailTemplate } from 'src/appTypes'
 import { DirectiveButton } from '../EmailTemplateSubComponents/DirectiveButton'
 
-export const EditEmailSubComponent: FC<
-  EmailSubComponentProps<EmailTemplate.Kinds.SubComponent>
-> = ({ emailSubComponent, ...props }) => {
+export const EditEmailSubComponent: FC<EmailSubComponentProps<EmailParts.Kinds.SubComponent>> = ({
+  emailSubComponent,
+  ...props
+}) => {
   const shouldShow = useShouldShowEmailPart(emailSubComponent)
 
   if (shouldShow.off) return null
@@ -28,70 +29,60 @@ export const EditEmailSubComponent: FC<
       return (
         <AdditionalContent
           {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.AdditionalContent}
+          emailSubComponent={emailSubComponent as EmailParts.AdditionalContent}
         />
       )
     case 'DateRange':
-      return (
-        <DateRange {...props} emailSubComponent={emailSubComponent as EmailTemplate.DateRange} />
-      )
+      return <DateRange {...props} emailSubComponent={emailSubComponent as EmailParts.DateRange} />
     case 'Title':
-      return <Title {...props} emailSubComponent={emailSubComponent as EmailTemplate.Title} />
+      return <Title {...props} emailSubComponent={emailSubComponent as EmailParts.Title} />
     case 'ProgramName':
       return (
-        <ProgramName
-          {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.ProgramName}
-        />
+        <ProgramName {...props} emailSubComponent={emailSubComponent as EmailParts.ProgramName} />
       )
     case 'DirectiveButton':
       return (
         <DirectiveButton
           {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.DirectiveButton}
+          emailSubComponent={emailSubComponent as EmailParts.DirectiveButton}
         />
       )
     case 'Intro':
-      return <Intro {...props} emailSubComponent={emailSubComponent as EmailTemplate.Intro} />
+      return <Intro {...props} emailSubComponent={emailSubComponent as EmailParts.Intro} />
     case 'RulesRightsRegulations':
       return (
         <RulesRightsRegulations
           {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.RulesRightsRegulations}
+          emailSubComponent={emailSubComponent as EmailParts.RulesRightsRegulations}
         />
       )
     case 'Status':
-      return <Status {...props} emailSubComponent={emailSubComponent as EmailTemplate.Status} />
+      return <Status {...props} emailSubComponent={emailSubComponent as EmailParts.Status} />
     case 'SupplementalContent':
       return (
         <SupplementalContent
           {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.SupplementalContent}
+          emailSubComponent={emailSubComponent as EmailParts.SupplementalContent}
         />
       )
     case 'Directive':
-      return (
-        <Directive {...props} emailSubComponent={emailSubComponent as EmailTemplate.Directive} />
-      )
+      return <Directive {...props} emailSubComponent={emailSubComponent as EmailParts.Directive} />
     case 'LoginDetails':
       return (
-        <LoginDetails
-          {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.LoginDetails}
-        />
+        <LoginDetails {...props} emailSubComponent={emailSubComponent as EmailParts.LoginDetails} />
       )
     case 'DepartmentSeal':
       return (
         <DepartmentSeal
           {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.DepartmentSeal}
+          emailSubComponent={emailSubComponent as EmailParts.DepartmentSeal}
         />
       )
     case 'InformationalBox':
       return (
         <InformationalBox
           {...props}
-          emailSubComponent={emailSubComponent as EmailTemplate.InformationalBox}
+          emailSubComponent={emailSubComponent as EmailParts.InformationalBox}
         />
       )
     default:

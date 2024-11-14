@@ -5,12 +5,12 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { StyleDefaults, Text } from '../styles'
 import { EmailBlock, EditableElement } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 const { Row } = EmailBlock
 
-export const useTitleValue = (emailSubComponent: EmailTemplate.Title | null) => {
-  const title: EmailTemplate.Title = emailSubComponent ?? { id: '', kind: 'Title' }
+export const useTitleValue = (emailSubComponent: EmailParts.Title | null) => {
+  const title: EmailParts.Title = emailSubComponent ?? { id: '', kind: 'Title' }
   return useEmailPartsContentFor(title)
 }
 

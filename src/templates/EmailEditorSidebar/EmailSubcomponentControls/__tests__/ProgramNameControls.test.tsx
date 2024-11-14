@@ -5,13 +5,13 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { faker } from '@faker-js/faker'
 import { buildUniqueEmailSubComponent, mockAppMode } from 'src/testHelpers'
 import { UserEvent, userEvent } from '@testing-library/user-event'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { useProgramNameValue } from 'src/templates/EmailTemplateSubComponents/ProgramName'
 
 describe('ProgramNameControls', () => {
   let user: UserEvent
   let rendered: RenderResult
-  let subComponent: EmailTemplate.ProgramName
+  let subComponent: EmailParts.ProgramName
 
   beforeEach(() => {
     subComponent = buildUniqueEmailSubComponent({ kind: 'ProgramName' })

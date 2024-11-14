@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { EmailSubComponentFloatingControls } from '../EmailSubcomponentFloatingControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailSubcomponentFloatingControls', () => {
-  const itRendersNothing = (subcomponentKind: EmailTemplate.Kinds.SubComponent) => {
+  const itRendersNothing = (subcomponentKind: EmailParts.Kinds.SubComponent) => {
     it(`renders nothing for ${subcomponentKind}`, () => {
       const { baseElement } = render(
         <EmailSubComponentFloatingControls
@@ -33,8 +33,8 @@ describe('EmailSubcomponentFloatingControls', () => {
   itRendersNothing('AdditionalContent')
 
   describe('Status', () => {
-    let status: EmailTemplate.Unique.SubComponent
-    let directive: EmailTemplate.Unique.SubComponent
+    let status: EmailParts.Unique.SubComponent
+    let directive: EmailParts.Unique.SubComponent
 
     beforeEach(() => {
       status = buildUniqueEmailSubComponent({

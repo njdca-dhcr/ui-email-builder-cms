@@ -1,12 +1,12 @@
 import React from 'react'
 import { Footer } from '../Footer'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 
 describe('Footer', () => {
-  let emailComponent: EmailTemplate.Footer
+  let emailComponent: EmailParts.Footer
 
   beforeEach(() => {
     emailComponent = buildUniqueEmailComponent('Footer')

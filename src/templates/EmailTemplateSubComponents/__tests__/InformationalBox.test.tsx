@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -13,7 +13,7 @@ import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('InformationalBox', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.InformationalBox
+  let emailSubComponent: EmailParts.InformationalBox
   let user: UserEvent
   let rendered: RenderResult
 

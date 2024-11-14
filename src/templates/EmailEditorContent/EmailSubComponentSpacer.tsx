@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { SpacingCell } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
@@ -7,8 +7,8 @@ import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 
 interface Props {
-  currentSubComponent: EmailTemplate.Unique.SubComponent
-  nextSubComponent: EmailTemplate.Unique.SubComponent | undefined
+  currentSubComponent: EmailParts.Unique.SubComponent
+  nextSubComponent: EmailParts.Unique.SubComponent | undefined
 }
 
 export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSubComponent }) => {
@@ -38,8 +38,8 @@ export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSu
 }
 
 const sizeForSubComponentKind = (
-  subComponentKind: EmailTemplate.Kinds.SubComponent,
-  nextSubComponentKind: EmailTemplate.Kinds.SubComponent | undefined,
+  subComponentKind: EmailParts.Kinds.SubComponent,
+  nextSubComponentKind: EmailParts.Kinds.SubComponent | undefined,
   shouldShowNext: boolean,
   shouldShowDirective: boolean,
 ): 'medium' | 'large' | 'extraLarge' | undefined => {

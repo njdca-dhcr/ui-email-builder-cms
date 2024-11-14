@@ -1,7 +1,7 @@
 import React from 'react'
 import { Name } from '../Name'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import {
   buildUniqueEmailComponent,
   emailPartWrapper,
@@ -14,7 +14,7 @@ import userEvent from '@testing-library/user-event'
 
 describe('Name', () => {
   let id: string
-  let emailComponent: EmailTemplate.Name
+  let emailComponent: EmailParts.Name
 
   beforeEach(() => {
     id = faker.lorem.word()

@@ -1,12 +1,12 @@
 import React from 'react'
 import { EditEmailSubComponent } from '../EditEmailSubComponent'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { render } from '@testing-library/react'
 import { buildUniqueEmailSubComponent, emailPartWrapper } from 'src/testHelpers'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EditEmailSubComponent', () => {
-  let emailSubComponent: EmailTemplate.Unique.SubComponent
+  let emailSubComponent: EmailParts.Unique.SubComponent
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })

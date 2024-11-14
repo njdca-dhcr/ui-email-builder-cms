@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { SupplementalContent, useSupplementalContentValue } from '../SupplementalContent'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { EmailTemplate, SupplementalContentVariant } from 'src/appTypes'
+import { EmailParts, SupplementalContentVariant } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -16,7 +16,7 @@ import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('SupplementalContent', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.SupplementalContent
+  let emailSubComponent: EmailParts.SupplementalContent
   let user: UserEvent
   let rendered: RenderResult
   let key: string

@@ -1,3 +1,4 @@
+export * from './EmailParts'
 export * from './EmailTemplate'
 export * from './EmailTemplateValues'
 

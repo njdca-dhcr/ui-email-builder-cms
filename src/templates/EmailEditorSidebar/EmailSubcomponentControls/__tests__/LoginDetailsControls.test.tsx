@@ -5,7 +5,7 @@ import { LoginDetailsControls } from '../LoginDetailsControls'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { useLoginDetailsValue } from 'src/templates/EmailTemplateSubComponents/LoginDetails'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts, EmailTemplate } from 'src/appTypes'
 
 jest.mock('src/ui/UswdsIconSelect', () => {
   return {
@@ -14,7 +14,7 @@ jest.mock('src/ui/UswdsIconSelect', () => {
 })
 
 describe('LoginDetailsControls', () => {
-  let emailSubComponent: EmailTemplate.LoginDetails
+  let emailSubComponent: EmailParts.LoginDetails
   let rendered: RenderResult
   let user: UserEvent
 

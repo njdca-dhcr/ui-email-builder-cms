@@ -1,14 +1,14 @@
 import React, { FC, ReactNode } from 'react'
 import { Disclaimer, useDisclaimerValue } from '../Disclaimer'
 import { render, renderHook } from '@testing-library/react'
-import { DisclaimerValue, EmailTemplate } from 'src/appTypes'
+import { DisclaimerValue, EmailParts } from 'src/appTypes'
 import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import { RichTextValue } from 'src/ui'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 
 describe('Disclaimer', () => {
-  let emailComponent: EmailTemplate.Disclaimer
+  let emailComponent: EmailParts.Disclaimer
 
   beforeEach(() => {
     emailComponent = buildUniqueEmailComponent('Disclaimer')

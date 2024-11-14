@@ -1,8 +1,6 @@
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
-export const labelForSubComponent = (
-  subComponentKind: EmailTemplate.Kinds.SubComponent,
-): string => {
+export const labelForSubComponent = (subComponentKind: EmailParts.Kinds.SubComponent): string => {
   switch (subComponentKind) {
     case 'AdditionalContent':
       return 'Additional Content'

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { DateRangeValue, EmailTemplate, NameValue } from 'src/appTypes'
+import { DateRangeValue, EmailParts, EmailTemplate, NameValue } from 'src/appTypes'
 import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
@@ -10,7 +10,7 @@ import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultVal
 describe('emailTemplateMergeDefaultValues', () => {
   describe('components', () => {
     let emailTemplate: EmailTemplate.Unique.Config
-    let nameComponent: EmailTemplate.Name
+    let nameComponent: EmailParts.Name
 
     beforeEach(() => {
       nameComponent = buildUniqueEmailComponent('Name', {
@@ -37,8 +37,8 @@ describe('emailTemplateMergeDefaultValues', () => {
 
   describe('subcomponents', () => {
     let emailTemplate: EmailTemplate.Unique.Config
-    let headerComponent: EmailTemplate.Header
-    let dateRangeSubComponent: EmailTemplate.DateRange
+    let headerComponent: EmailParts.Header
+    let dateRangeSubComponent: EmailParts.DateRange
 
     beforeEach(() => {
       dateRangeSubComponent = buildUniqueEmailSubComponent({

@@ -5,7 +5,6 @@ import { EmailBlock, EditableElement } from 'src/ui'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Font, StyleDefaults, Text } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { NameValue } from 'src/appTypes'
 
 const { Row } = EmailBlock
 

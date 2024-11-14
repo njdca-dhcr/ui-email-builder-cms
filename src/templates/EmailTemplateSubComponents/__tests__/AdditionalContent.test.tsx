@@ -2,7 +2,7 @@ import React from 'react'
 import { AdditionalContent } from '../AdditionalContent'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -12,7 +12,7 @@ import {
 import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('AdditionalContent', () => {
-  let emailSubComponent: EmailTemplate.AdditionalContent
+  let emailSubComponent: EmailParts.AdditionalContent
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })

@@ -6,13 +6,13 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { UswdsIcon } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate, LoginDetailsVariant } from 'src/appTypes'
+import { EmailParts, LoginDetailsVariant } from 'src/appTypes'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
 const { Row, Cell, Link } = EmailBlock
 
-export const useLoginDetailsValue = (emailSubComponent: EmailTemplate.LoginDetails) => {
+export const useLoginDetailsValue = (emailSubComponent: EmailParts.LoginDetails) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

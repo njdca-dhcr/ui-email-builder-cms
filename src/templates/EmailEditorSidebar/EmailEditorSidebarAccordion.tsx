@@ -3,7 +3,7 @@ import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@reac
 import '@reach/accordion/styles.css'
 import times from 'lodash.times'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { labelForSubComponent } from './labelForSubComponent'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import './EmailEditorSidebarAccordion.css'
@@ -74,11 +74,11 @@ Container.displayName = 'EmailEditorSidebarAccordion.Container'
 
 interface EmailComponentProps {
   children: ReactNode
-  emailComponent: EmailTemplate.Unique.Component
+  emailComponent: EmailParts.Unique.Component
 }
 
-const EDITABLE_IN_SETTINGS: EmailTemplate.Kinds.Component[] = ['Banner', 'Disclaimer', 'StateSeal']
-const SUBCOMPONENT_CONTAINERS: EmailTemplate.Kinds.Component[] = ['Body', 'Footer', 'Header']
+const EDITABLE_IN_SETTINGS: EmailParts.Kinds.Component[] = ['Banner', 'Disclaimer', 'StateSeal']
+const SUBCOMPONENT_CONTAINERS: EmailParts.Kinds.Component[] = ['Body', 'Footer', 'Header']
 
 const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) => {
   const shouldShow = useShouldShowEmailPart(emailComponent)
@@ -123,9 +123,9 @@ const EmailComponent: FC<EmailComponentProps> = ({ children, emailComponent }) =
 EmailComponent.displayName = 'EmailEditorSidebarAccordion.EmailComponent'
 
 interface EmailSubComponentProps {
-  component: EmailTemplate.Unique.Component
-  emailSubComponent: EmailTemplate.Unique.Part<EmailTemplate.Kinds.SubComponent>
-  nextEmailSubComponent: EmailTemplate.Unique.Part<EmailTemplate.Kinds.SubComponent> | undefined
+  component: EmailParts.Unique.Component
+  emailSubComponent: EmailParts.Unique.Part<EmailParts.Kinds.SubComponent>
+  nextEmailSubComponent: EmailParts.Unique.Part<EmailParts.Kinds.SubComponent> | undefined
 }
 
 const EmailSubComponent: FC<EmailSubComponentProps> = ({

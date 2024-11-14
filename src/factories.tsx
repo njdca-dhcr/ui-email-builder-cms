@@ -4,9 +4,9 @@ import {
   BannerValue,
   DepartmentSealValue,
   DisclaimerValue,
+  EmailParts,
   EmailTemplate,
   StateSealValue,
-  SUBCOMPONENTS,
 } from './appTypes'
 import uniqueId from 'lodash.uniqueid'
 import sample from 'lodash.sample'
@@ -48,18 +48,18 @@ export const randomDisclaimerValue = (text?: string): DisclaimerValue => {
   }
 }
 
-export const buildEmailTemplateSubComponent = <K extends EmailTemplate.Kinds.SubComponent>(
-  options: { kind: K } & Partial<EmailTemplate.Base.SubComponent<K>>,
-): EmailTemplate.Base.SubComponent => {
+export const buildEmailTemplateSubComponent = <K extends EmailParts.Kinds.SubComponent>(
+  options: { kind: K } & Partial<EmailParts.Base.SubComponent<K>>,
+): EmailParts.Base.SubComponent => {
   return {
     required: false,
     ...options,
   }
 }
 
-export const buildUniqueEmailSubComponent = <T extends EmailTemplate.Kinds.SubComponent>(
-  options: { kind: T } & Partial<EmailTemplate.Unique.SubComponent<T>>,
-): EmailTemplate.Unique.SubComponent<T> => {
+export const buildUniqueEmailSubComponent = <T extends EmailParts.Kinds.SubComponent>(
+  options: { kind: T } & Partial<EmailParts.Unique.SubComponent<T>>,
+): EmailParts.Unique.SubComponent<T> => {
   return {
     required: false,
     id: uniqueId(),
@@ -67,10 +67,10 @@ export const buildUniqueEmailSubComponent = <T extends EmailTemplate.Kinds.SubCo
   }
 }
 
-export const buildEmailTemplateComponent = <T extends EmailTemplate.Kinds.Component>(
+export const buildEmailTemplateComponent = <T extends EmailParts.Kinds.Component>(
   kind: T,
-  options?: Partial<EmailTemplate.Base.Component<T>>,
-): EmailTemplate.Base.Component<T> => {
+  options?: Partial<EmailParts.Base.Component<T>>,
+): EmailParts.Base.Component<T> => {
   return {
     kind,
     required: false,
@@ -78,10 +78,10 @@ export const buildEmailTemplateComponent = <T extends EmailTemplate.Kinds.Compon
   }
 }
 
-export const buildUniqueEmailComponent = <T extends EmailTemplate.Kinds.Component>(
+export const buildUniqueEmailComponent = <T extends EmailParts.Kinds.Component>(
   kind: T,
-  options?: Partial<EmailTemplate.Unique.Component<T>>,
-): EmailTemplate.Unique.Component<T> => {
+  options?: Partial<EmailParts.Unique.Component<T>>,
+): EmailParts.Unique.Component<T> => {
   const { subComponents, ...emailComponent } = buildEmailTemplateComponent(kind, options)
   return {
     ...emailComponent,

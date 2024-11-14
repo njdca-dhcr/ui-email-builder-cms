@@ -5,7 +5,7 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { StatusFloatingControls } from '../StatusFloatingControls'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { useStatusValue } from 'src/templates/EmailTemplateSubComponents/Status'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 describe('StatusFloatingControls', () => {
   it('provides radio buttons for changing the spacing after the subcomponent', async () => {
@@ -31,7 +31,7 @@ describe('StatusFloatingControls', () => {
     expect(largeButton).toBeChecked()
   })
 
-  const Dummy: FC<{ emailSubComponent: EmailTemplate.Status }> = ({ emailSubComponent }) => {
+  const Dummy: FC<{ emailSubComponent: EmailParts.Status }> = ({ emailSubComponent }) => {
     const [value] = useStatusValue(emailSubComponent)
     return <div id="dummy">Spacing after is: {value.spaceAfter ? 'true' : 'false'}</div>
   }

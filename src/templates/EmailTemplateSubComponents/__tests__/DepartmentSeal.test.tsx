@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import { buildUniqueEmailSubComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { DepartmentSeal, DepartmentSealMarkup, useDepartmentSealValue } from '../DepartmentSeal'
-import { DepartmentSealValue, EmailTemplate } from 'src/appTypes'
+import { DepartmentSealValue, EmailParts } from 'src/appTypes'
 import { render, renderHook } from '@testing-library/react'
 import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
@@ -25,7 +25,7 @@ describe('DepartmentSealMarkup', () => {
 })
 
 describe('DepartmentSeal', () => {
-  let emailSubComponent: EmailTemplate.DepartmentSeal
+  let emailSubComponent: EmailParts.DepartmentSeal
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DepartmentSeal' })

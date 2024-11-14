@@ -2,7 +2,7 @@ import React from 'react'
 import { DateRange } from '../DateRange'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -13,7 +13,7 @@ import {
 } from 'src/testHelpers'
 
 describe('Date Range', () => {
-  let emailSubComponent: EmailTemplate.DateRange
+  let emailSubComponent: EmailParts.DateRange
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DateRange' })

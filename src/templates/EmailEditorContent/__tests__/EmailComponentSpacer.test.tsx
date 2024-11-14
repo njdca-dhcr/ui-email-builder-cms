@@ -3,7 +3,7 @@ import React from 'react'
 import { EmailComponentSpacer } from '../EmailComponentSpacer'
 import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 
 describe('EmailComponentSpacer', () => {
@@ -11,8 +11,8 @@ describe('EmailComponentSpacer', () => {
     currentComponent,
     nextComponent,
   }: {
-    currentComponent: EmailTemplate.Kinds.Component
-    nextComponent: EmailTemplate.Kinds.Component | undefined
+    currentComponent: EmailParts.Kinds.Component
+    nextComponent: EmailParts.Kinds.Component | undefined
   }) => {
     const { baseElement } = render(
       <EmailComponentSpacer

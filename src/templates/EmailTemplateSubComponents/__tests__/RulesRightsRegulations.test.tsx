@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import React, { FC } from 'react'
-import { EmailTemplate, RulesRightsRegulationsVariant } from 'src/appTypes'
+import { EmailParts, EmailTemplate, RulesRightsRegulationsVariant } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -17,7 +17,7 @@ import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('RulesRightsRegulations', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.RulesRightsRegulations
+  let emailSubComponent: EmailParts.RulesRightsRegulations
   let user: UserEvent
   let rendered: RenderResult
   let key: string

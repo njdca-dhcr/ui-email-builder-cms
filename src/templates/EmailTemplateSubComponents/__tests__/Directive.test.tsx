@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { DirectiveVariant, EmailTemplate } from 'src/appTypes'
+import { DirectiveVariant, EmailParts } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -16,7 +16,7 @@ import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('Directive', () => {
   let value: string
-  let emailSubComponent: EmailTemplate.Directive
+  let emailSubComponent: EmailParts.Directive
   let user: UserEvent
   let rendered: RenderResult
   let key: string

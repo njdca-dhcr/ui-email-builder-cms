@@ -8,9 +8,9 @@ import { Disclaimer } from '../EmailTemplateComponents/Disclaimer'
 import { StateSeal } from '../EmailTemplateComponents/StateSeal'
 import { EmailComponentProps } from '../EmailTemplateComponents/shared'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
-export const EditEmailComponent: FC<EmailComponentProps<EmailTemplate.Kinds.Component>> = ({
+export const EditEmailComponent: FC<EmailComponentProps<EmailParts.Kinds.Component>> = ({
   emailComponent,
   ...props
 }) => {
@@ -23,49 +23,43 @@ export const EditEmailComponent: FC<EmailComponentProps<EmailTemplate.Kinds.Comp
       return (
         <Header
           {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'Header'>}
+          emailComponent={emailComponent as EmailParts.Unique.Component<'Header'>}
         />
       )
     case 'Footer':
       return (
         <Footer
           {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'Footer'>}
+          emailComponent={emailComponent as EmailParts.Unique.Component<'Footer'>}
         />
       )
     case 'Banner':
       return (
         <Banner
           {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'Banner'>}
+          emailComponent={emailComponent as EmailParts.Unique.Component<'Banner'>}
         />
       )
     case 'Name':
       return (
-        <Name
-          {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'Name'>}
-        />
+        <Name {...props} emailComponent={emailComponent as EmailParts.Unique.Component<'Name'>} />
       )
     case 'Body':
       return (
-        <Body
-          {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'Body'>}
-        />
+        <Body {...props} emailComponent={emailComponent as EmailParts.Unique.Component<'Body'>} />
       )
     case 'Disclaimer':
       return (
         <Disclaimer
           {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'Disclaimer'>}
+          emailComponent={emailComponent as EmailParts.Unique.Component<'Disclaimer'>}
         />
       )
     case 'StateSeal':
       return (
         <StateSeal
           {...props}
-          emailComponent={emailComponent as EmailTemplate.Unique.Component<'StateSeal'>}
+          emailComponent={emailComponent as EmailParts.Unique.Component<'StateSeal'>}
         />
       )
     default:

@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, ReactNode } from 'react'
 import { Link } from 'gatsby'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import {
   MoreInfoAboutDateRange,
   MoreInfoAboutStatus,
@@ -13,7 +13,7 @@ import {
 } from 'src/guides/MoreInfoAboutSubComponent'
 
 interface Props {
-  emailSubComponent: EmailTemplate.Base.Part<EmailTemplate.Kinds.SubComponent>
+  emailSubComponent: EmailParts.Base.Part<EmailParts.Kinds.SubComponent>
 }
 
 export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) => {

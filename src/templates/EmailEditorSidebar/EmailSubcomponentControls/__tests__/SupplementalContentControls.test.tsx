@@ -4,7 +4,7 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { SupplementalContentControls } from '../SupplementalContentControls'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 jest.mock('src/ui/UswdsIconSelect', () => {
   return {
@@ -15,7 +15,7 @@ jest.mock('src/ui/UswdsIconSelect', () => {
 describe('SupplementalContentControls', () => {
   let rendered: RenderResult
   let user: UserEvent
-  let emailSubComponent: EmailTemplate.SupplementalContent
+  let emailSubComponent: EmailParts.SupplementalContent
 
   beforeEach(() => {
     user = userEvent.setup()

@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui'
 import { useEmailTemplateConfig } from '../EmailTemplateConfig'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { useDirectiveValue } from './Directive'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { Colors, Spacing, StyleDefaults, Text } from '../styles'
@@ -13,7 +13,7 @@ const { Link, Row } = EmailBlock
 
 export const DirectiveButton: FC<EmailSubComponentProps<'DirectiveButton'>> = () => {
   const emailTemplateConfig = useEmailTemplateConfig()
-  const directive: EmailTemplate.Directive = getSubComponentByKind(
+  const directive: EmailParts.Directive = getSubComponentByKind(
     emailTemplateConfig,
     'Directive',
   ) ?? {

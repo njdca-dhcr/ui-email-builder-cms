@@ -12,12 +12,12 @@ import {
   UswdsIcon,
 } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate, RulesRightsRegulationsVariant } from 'src/appTypes'
+import { EmailParts, RulesRightsRegulationsVariant } from 'src/appTypes'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
 export const useRulesRightsRegulationsValue = (
-  emailSubComponent: EmailTemplate.RulesRightsRegulations,
+  emailSubComponent: EmailParts.RulesRightsRegulations,
 ) => {
   return useEmailPartsContentFor(emailSubComponent)
 }

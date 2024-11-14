@@ -2,7 +2,7 @@ import React from 'react'
 import { Intro } from '../Intro'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -12,7 +12,7 @@ import {
 import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('Intro', () => {
-  let emailSubComponent: EmailTemplate.Intro
+  let emailSubComponent: EmailParts.Intro
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Intro' })

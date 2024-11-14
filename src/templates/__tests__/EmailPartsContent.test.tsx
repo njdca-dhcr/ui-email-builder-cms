@@ -2,7 +2,7 @@ import { act, render, renderHook } from '@testing-library/react'
 import React from 'react'
 import { EmailPartsContent, useEmailPartsContentFor } from '../EmailPartsContent'
 import { faker } from '@faker-js/faker'
-import { EmailTemplate, TitleValue } from 'src/appTypes'
+import { EmailParts, EmailTemplate, TitleValue } from 'src/appTypes'
 import { buildUniqueEmailSubComponent } from 'src/testHelpers'
 import { defaultTitleValue } from '../EmailTemplateSubComponents/Values/TitleValue'
 
@@ -19,7 +19,7 @@ describe('EmailPartsContent', () => {
 })
 
 describe('useEmailPartsContentFor', () => {
-  let emailPart: EmailTemplate.Unique.Part<'Title'>
+  let emailPart: EmailParts.Unique.Part<'Title'>
 
   beforeEach(() => {
     emailPart = buildUniqueEmailSubComponent({ kind: 'Title', defaultValue: {} })

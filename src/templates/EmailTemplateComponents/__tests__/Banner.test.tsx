@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react'
 import { Banner, BannerMarkup, useBannerValue } from '../Banner'
 import { render, renderHook } from '@testing-library/react'
-import { BannerValue, EmailTemplate } from 'src/appTypes'
+import { BannerValue, EmailParts } from 'src/appTypes'
 import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { faker } from '@faker-js/faker'
 import { Colors } from 'src/templates/styles'
@@ -117,7 +117,7 @@ describe('BannerMarkup', () => {
 })
 
 describe('Banner', () => {
-  let emailComponent: EmailTemplate.Banner
+  let emailComponent: EmailParts.Banner
   let bannerValue: BannerValue
   let secondaryLinkHost: string
 

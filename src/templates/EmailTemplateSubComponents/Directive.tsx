@@ -5,12 +5,12 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Colors, Font, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { DirectiveVariant, EmailTemplate } from 'src/appTypes'
+import { DirectiveVariant, EmailParts } from 'src/appTypes'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 
 const DISPLAYED_HREF_MAX_WIDTH = 297
 
-export const useDirectiveValue = (emailSubComponent: EmailTemplate.Directive) => {
+export const useDirectiveValue = (emailSubComponent: EmailParts.Directive) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

@@ -5,11 +5,11 @@ import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Colors, StyleDefaults, Text } from '../styles'
 import { EmailBlock, RichTextEditableElement } from 'src/ui'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 const { Row } = EmailBlock
 
-export const useAdditionalContentValue = (emailSubComponent: EmailTemplate.AdditionalContent) => {
+export const useAdditionalContentValue = (emailSubComponent: EmailParts.AdditionalContent) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

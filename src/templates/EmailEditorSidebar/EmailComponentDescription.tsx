@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { Link } from 'gatsby'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
 interface Props {
-  emailComponent: EmailTemplate.Base.Part<EmailTemplate.Kinds.Component>
+  emailComponent: EmailParts.Base.Part<EmailParts.Kinds.Component>
 }
 
 export const EmailComponentDescription: FC<Props> = ({ emailComponent }) => {

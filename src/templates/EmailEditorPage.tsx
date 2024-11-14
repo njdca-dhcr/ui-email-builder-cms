@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { type HeadFC } from 'gatsby'
 import { Layout, PageContent } from 'src/ui'
-import type { EmailTemplate } from 'src/appTypes'
+import type { EmailParts, EmailTemplate } from 'src/appTypes'
 import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './CurrentlyActiveEmailPart'
 import { EmailEditorContent } from './EmailEditorContent'
 import { EmailEditorHeadingAndSelect } from './EmailEditorSidebar/EmailEditorHeadingAndSelect'
@@ -59,7 +59,7 @@ export const Head: HeadFC<object, PageContext> = ({ pageContext }) => {
   return <title>{formatPageTitle(name)}</title>
 }
 
-const addIds = (components: EmailTemplate.Base.Component[]): EmailTemplate.Unique.Component[] => {
+const addIds = (components: EmailParts.Base.Component[]): EmailParts.Unique.Component[] => {
   return components.map(({ subComponents, ...emailComponent }) => {
     return {
       ...emailComponent,
@@ -70,8 +70,8 @@ const addIds = (components: EmailTemplate.Base.Component[]): EmailTemplate.Uniqu
 }
 
 const addIdsToSubComponents = (
-  subComponents: EmailTemplate.Base.SubComponent[],
-): EmailTemplate.Unique.SubComponent[] => {
+  subComponents: EmailParts.Base.SubComponent[],
+): EmailParts.Unique.SubComponent[] => {
   return subComponents.map((subComponent) => {
     return {
       ...subComponent,

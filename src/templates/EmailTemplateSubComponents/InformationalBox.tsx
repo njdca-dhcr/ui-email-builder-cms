@@ -11,9 +11,9 @@ import { useIsCurrentlyActiveEmailPart } from '../CurrentlyActiveEmailPart'
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, StyleDefaults, Text, Font, SpacingCell } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
-export const useInformationalBoxValue = (emailSubComponent: EmailTemplate.InformationalBox) => {
+export const useInformationalBoxValue = (emailSubComponent: EmailParts.InformationalBox) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

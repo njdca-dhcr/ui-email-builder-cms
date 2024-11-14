@@ -9,7 +9,7 @@ import {
   useIsCurrentlyActiveEmailComponent,
   useIsCurrentlyActiveEmailPart,
 } from '../CurrentlyActiveEmailPart'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { buildUniqueEmailComponent, buildUniqueEmailSubComponent } from 'src/testHelpers'
 
 const Dummy = ({ children, initialValue }: { children: ReactNode; initialValue: string }) => {
@@ -127,8 +127,8 @@ describe('useClearCurrentlyActiveEmailPart', () => {
 })
 
 describe('useIsCurrentlyActiveEmailComponent', () => {
-  let emailComponent: EmailTemplate.Unique.Component
-  let emailSubComponent: EmailTemplate.Unique.SubComponent
+  let emailComponent: EmailParts.Unique.Component
+  let emailSubComponent: EmailParts.Unique.SubComponent
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })

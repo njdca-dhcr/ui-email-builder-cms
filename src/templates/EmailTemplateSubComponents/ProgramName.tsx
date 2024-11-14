@@ -6,11 +6,11 @@ import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { EmailBlock, EditableElement } from 'src/ui'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts, EmailTemplate } from 'src/appTypes'
 
 const { Table, Row } = EmailBlock
 
-export const useProgramNameValue = (emailSubComponent: EmailTemplate.ProgramName) => {
+export const useProgramNameValue = (emailSubComponent: EmailParts.ProgramName) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

@@ -1,6 +1,6 @@
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 
-export const labelForComponent = (componentKind: EmailTemplate.Kinds.Component): string => {
+export const labelForComponent = (componentKind: EmailParts.Kinds.Component): string => {
   switch (componentKind) {
     case 'StateSeal':
       return 'State Seal'

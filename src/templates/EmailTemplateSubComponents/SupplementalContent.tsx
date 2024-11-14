@@ -11,13 +11,11 @@ import {
 import { useEmailPartsContentFor } from '../EmailPartsContent'
 import { Borders, Spacing, SpacingCell, StyleDefaults, Text } from '../styles'
 import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
-import { EmailTemplate, SupplementalContentVariant } from 'src/appTypes'
+import { EmailParts, SupplementalContentVariant } from 'src/appTypes'
 
 const { Row, Cell } = EmailBlock
 
-export const useSupplementalContentValue = (
-  emailSubComponent: EmailTemplate.SupplementalContent,
-) => {
+export const useSupplementalContentValue = (emailSubComponent: EmailParts.SupplementalContent) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 

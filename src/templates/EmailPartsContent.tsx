@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts, EmailTemplate } from 'src/appTypes'
 import { AllDefaultValues } from './defaultValues'
 
 interface EmailPartsContentData<T extends any> {
@@ -38,10 +38,10 @@ export const EmailPartsContent: FC<{
 export const useEmailPartsContentData = () => useContext(EmailPartsContentContext)
 
 export const useEmailPartsContentFor = <
-  K extends EmailTemplate.Unique.Part['kind'],
-  T extends EmailTemplate.DefaultValues.Part[K],
+  K extends EmailParts.Unique.Part['kind'],
+  T extends EmailParts.DefaultValues.Part[K],
 >(
-  emailPart?: EmailTemplate.Unique.Part<K>,
+  emailPart?: EmailParts.Unique.Part<K>,
 ): [T, (value: T | ((previous: T) => T)) => void] => {
   const [data, update] = useEmailPartsContentData()
 

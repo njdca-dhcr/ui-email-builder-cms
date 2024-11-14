@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { useShouldShowEmailPart } from 'src/templates/ShouldShowEmailPart'
 import { StatusFloatingControls } from './StatusFloatingControls'
 
 interface Props {
-  emailSubComponent: EmailTemplate.Unique.SubComponent
-  nextEmailSubComponent: EmailTemplate.Unique.SubComponent | undefined
+  emailSubComponent: EmailParts.Unique.SubComponent
+  nextEmailSubComponent: EmailParts.Unique.SubComponent | undefined
 }
 
 export const EmailSubComponentFloatingControls: FC<Props> = ({
@@ -22,7 +22,7 @@ export const EmailSubComponentFloatingControls: FC<Props> = ({
       return (
         nextEmailSubComponent?.kind === 'Directive' &&
         shouldShowNextSubComponent.on && (
-          <StatusFloatingControls emailSubComponent={emailSubComponent as EmailTemplate.Status} />
+          <StatusFloatingControls emailSubComponent={emailSubComponent as EmailParts.Status} />
         )
       )
     default:

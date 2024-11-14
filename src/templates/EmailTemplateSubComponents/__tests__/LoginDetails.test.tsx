@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { faker } from '@faker-js/faker'
 import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { EmailTemplate, LoginDetailsVariant } from 'src/appTypes'
+import { EmailParts, LoginDetailsVariant } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -15,7 +15,7 @@ import { LoginDetails, useLoginDetailsValue } from '../LoginDetails'
 import { RICH_TEXT_EDITOR_TEST_ID as richTextEditorTestId } from 'src/ui'
 
 describe('LoginDetails', () => {
-  let emailSubComponent: EmailTemplate.LoginDetails
+  let emailSubComponent: EmailParts.LoginDetails
 
   beforeEach(() => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'LoginDetails' })

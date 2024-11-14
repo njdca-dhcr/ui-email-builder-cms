@@ -7,7 +7,7 @@ import {
   emailPartWrapper,
 } from 'src/testHelpers'
 import { spacingCellSizes } from 'src/templates/styles'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { EmailSubComponentSpacer } from '../EmailSubComponentSpacer'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
@@ -18,8 +18,8 @@ describe('EmailSubComponentSpacer', () => {
     nextSubComponent,
     shouldShowNextComponent,
   }: {
-    currentSubComponent: EmailTemplate.Kinds.SubComponent
-    nextSubComponent: EmailTemplate.Kinds.SubComponent | undefined
+    currentSubComponent: EmailParts.Kinds.SubComponent
+    nextSubComponent: EmailParts.Kinds.SubComponent | undefined
     shouldShowNextComponent?: boolean
   }) => {
     const nextOne = nextSubComponent && buildUniqueEmailSubComponent({ kind: nextSubComponent })

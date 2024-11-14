@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@reach/accordion'
 import { EmailEditorSidebarAccordion } from '../EmailEditorSidebarAccordion'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import {
   WrapperComponent,
   buildUniqueEmailComponent,
@@ -127,7 +127,7 @@ describe(EmailEditorSidebarAccordion.Container.displayName!, () => {
 })
 
 describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
-  let emailComponent: EmailTemplate.Unique.Component
+  let emailComponent: EmailParts.Unique.Component
 
   const wrapper: WrapperComponent = ({ children }) => {
     return (
@@ -237,7 +237,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   }
 
   describe('all', () => {
-    const allKinds: EmailTemplate.Kinds.Component[] = [
+    const allKinds: EmailParts.Kinds.Component[] = [
       'Banner',
       'Body',
       'Disclaimer',
@@ -317,7 +317,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   })
 
   describe('subcomponent containers', () => {
-    const kinds: EmailTemplate.Kinds.Component[] = ['Body', 'Footer', 'Header']
+    const kinds: EmailParts.Kinds.Component[] = ['Body', 'Footer', 'Header']
 
     kinds.forEach((kind) => {
       describe(`when ${kind}`, () => {
@@ -389,7 +389,7 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
   })
 
   describe('when edited in settings', () => {
-    const kinds: EmailTemplate.Kinds.Component[] = ['Banner', 'StateSeal', 'Disclaimer']
+    const kinds: EmailParts.Kinds.Component[] = ['Banner', 'StateSeal', 'Disclaimer']
 
     kinds.forEach((kind) => {
       describe(`when ${kind}`, () => {
@@ -420,8 +420,8 @@ describe(EmailEditorSidebarAccordion.EmailComponent.displayName!, () => {
 })
 
 describe(EmailEditorSidebarAccordion.EmailSubComponent.displayName!, () => {
-  let emailSubComponent: EmailTemplate.Unique.SubComponent
-  let emailComponent: EmailTemplate.Unique.Component
+  let emailSubComponent: EmailParts.Unique.SubComponent
+  let emailComponent: EmailParts.Unique.Component
 
   const wrapper: WrapperComponent = ({ children }) => {
     return <EmailPartsContent>{children}</EmailPartsContent>
