@@ -15,6 +15,7 @@ import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex, UserShow } from './network/users'
 import { GroupsIndex, GroupShow, GroupShowUser } from './network/groups'
+import { EmailTranslation } from './appTypes/EmailTranslation'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -121,6 +122,17 @@ export const buildEmailTemplateIndex = (
     name: faker.lorem.words(3),
     description: faker.lorem.sentence(),
     ...options,
+  }
+}
+
+export const buildEmailTranslation = (
+  attributes?: Partial<EmailTranslation.Unique>,
+): EmailTranslation.Unique => {
+  return {
+    language: 'english',
+    components: [buildUniqueEmailComponent('Header')],
+    previewText: faker.lorem.paragraph(),
+    ...attributes,
   }
 }
 

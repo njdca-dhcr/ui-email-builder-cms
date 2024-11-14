@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import { EmailParts, EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { AllDefaultValues } from './defaultValues'
 
 interface EmailPartsContentData<T extends any> {

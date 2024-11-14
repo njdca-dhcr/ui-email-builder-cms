@@ -2,7 +2,7 @@ import { EmailParts } from './EmailParts'
 
 export const LANGUAGES = ['english', 'spanish'] as const
 
-type Language = (typeof LANGUAGES)[number]
+export type Language = (typeof LANGUAGES)[number]
 
 export namespace EmailTranslation {
   export interface Base {
