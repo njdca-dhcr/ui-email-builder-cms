@@ -1,7 +1,7 @@
 name: Overpayment - Denial
 description: To tell the claimant their waiver application was denied
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

@@ -4,7 +4,7 @@ description: >-
   need to fill out for their previous employee. It encourages them to create set
   their password so that they can access it more readily in the future.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: Set your password and finish creating your account. This login will help you respond to forms BC3E (Request for Separation with Monetary) and BC28 (Request for Separation).
     components:

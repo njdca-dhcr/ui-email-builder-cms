@@ -1,7 +1,7 @@
 name: DUA - Confirmation
 description: To confirm to the claimant that we received their application for DUA benefits
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: Application received. Your DUA application is received and under review. It make take up to 2 weeks to determine your eligibility.
     components:

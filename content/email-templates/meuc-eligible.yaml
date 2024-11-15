@@ -1,7 +1,7 @@
 name: MEUC - Eligible
 description: To tell a claimant they are eligible for MEUC benefits and that payment is on the way
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

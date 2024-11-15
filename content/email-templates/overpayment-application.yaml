@@ -1,7 +1,7 @@
 name: Overpayment - Application
 description: To invite claimants to apply for an overpayment waiver
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

@@ -1,7 +1,7 @@
 name: MEUC - Ineligible
 description: To tell a claimant they are ineligible for MEUC benefits
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

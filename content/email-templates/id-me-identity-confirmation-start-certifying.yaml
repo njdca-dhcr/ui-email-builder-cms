@@ -4,7 +4,7 @@ description: >-
   them to begin certifying on the calculated date based on their claim. Graphic
   of how this date is calculated is included.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We've confirmed your identity and you can start certifying on {October 12}. Remember to certify every week! Details enclosed.
     components:

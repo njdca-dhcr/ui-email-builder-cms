@@ -1,7 +1,7 @@
 name: MEUC - Proof of Income Request
 description: To ask a claimant to provide proof of their income
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

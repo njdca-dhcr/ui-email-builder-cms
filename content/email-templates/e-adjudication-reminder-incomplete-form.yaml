@@ -1,7 +1,7 @@
 name: eAdjudication - Reminder (Incomplete Form)
 description: When someone needs to finish submitting their UI claim form.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

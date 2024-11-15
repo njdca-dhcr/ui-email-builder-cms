@@ -5,7 +5,7 @@ description: >-
 
   Benefit amount according to claimant's circumstances are included.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
     components:

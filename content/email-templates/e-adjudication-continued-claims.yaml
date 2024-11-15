@@ -5,7 +5,7 @@ description: >-
 
   They will need to fill out a customized questionnaire.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

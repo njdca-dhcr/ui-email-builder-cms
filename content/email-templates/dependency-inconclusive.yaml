@@ -3,7 +3,7 @@ description: >-
   To tell the claimant that their application can't be reviewed because they
   don't have a valid UI claim to refer to
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

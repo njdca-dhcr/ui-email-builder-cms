@@ -3,7 +3,7 @@ description: >-
   To confirm that NJ received information from an Employer and to encourage them
   to create an Employer Access Account
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We received your employer response for Captain America and it is under review. Make sure you have an Employer Access Account! Sign up today.
     components:

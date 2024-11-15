@@ -1,7 +1,7 @@
 name: ID.me - Verify Identity
 description: When their unemployment insurance claim has been locked and we need to verify their identity.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

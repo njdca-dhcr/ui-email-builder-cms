@@ -3,7 +3,7 @@ description: >-
   To ask for missing documents from the claimant in order to process their
   request for dependency benefits
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

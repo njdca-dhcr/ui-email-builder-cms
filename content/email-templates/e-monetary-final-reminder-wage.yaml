@@ -1,7 +1,7 @@
 name: eMonetary - Final Reminder (Wage Only)
 description: To send a final reminder (24 hours before expiration date) that their form will expire
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

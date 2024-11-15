@@ -3,7 +3,7 @@ description: >-
   To initiate information gathering based on application  (they will receive
   this if they checked the box that they are interested in dependency wages)
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

@@ -1,7 +1,7 @@
 name: Status Update
 description: Confirmations, updates, determinations, and any other status related messaging.
 appModes: ["ALL", "NJ", "KY"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

@@ -1,7 +1,7 @@
 name: Waiver Application
 description: Often used for campaigns, or general registration announcements.
 appModes: ["ALL", "NJ", "KY"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

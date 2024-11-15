@@ -4,7 +4,7 @@ description: >-
   that their payment is pending because of an existing determination that is in
   the works.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We're holding your payment until we come to a determination.
     components:

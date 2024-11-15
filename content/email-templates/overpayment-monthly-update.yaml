@@ -1,7 +1,7 @@
 name: Overpayment - Monthly Update
 description: To update the claimant that we are still working through their application (sent once a month)
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

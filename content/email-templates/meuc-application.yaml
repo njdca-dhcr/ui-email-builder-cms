@@ -1,7 +1,7 @@
 name: MEUC - Application
 description: To invite a claimant to apply for extra benefits if they indicated "self-employment" in their UI claim
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

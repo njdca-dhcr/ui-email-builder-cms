@@ -3,7 +3,7 @@ description: >-
   To tell the claimant that benefits will be dispersed and they will receive
   funds (a breakdown of what is deducted is included)
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We are processing your payment of $165 for May 12 - May 19. See details of your benefit breakdown.
     components:

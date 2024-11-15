@@ -6,7 +6,7 @@ description: >-
 
   There are also options on how to pay down an overpayment.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: You will not receive funds this week—your payment was applied to an overpayment. Continue to certify weekly.
     components:

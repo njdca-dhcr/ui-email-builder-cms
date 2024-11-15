@@ -1,7 +1,7 @@
 name: Overpayment - Confirmation
 description: To confirm that we received their application
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

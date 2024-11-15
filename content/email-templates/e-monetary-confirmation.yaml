@@ -1,7 +1,7 @@
 name: eMonetary - Confirmation
 description: To confirm receipt of reponses
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

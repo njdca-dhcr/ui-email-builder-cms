@@ -5,7 +5,7 @@ description: >-
 
   Date of claim and the proof submission deadline is displayed.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

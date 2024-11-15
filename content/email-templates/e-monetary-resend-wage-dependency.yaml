@@ -1,7 +1,7 @@
 name: eMonetary - Resend (Wage & Dependency)
 description: To resend an email if it wasn't "received"
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

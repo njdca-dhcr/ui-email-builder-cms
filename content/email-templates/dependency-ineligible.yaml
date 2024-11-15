@@ -3,7 +3,7 @@ description: >-
   To tell the claimant that they are ineligible to receive dependency benefits
   (dynamic reason is included)
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

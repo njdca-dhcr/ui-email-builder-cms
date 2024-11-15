@@ -3,7 +3,7 @@ description: >-
   To tell the claimant that we need some documents from them (It will also tell
   them that they will receive instructions to certify the following week)
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
     components:

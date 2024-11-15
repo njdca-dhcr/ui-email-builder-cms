@@ -1,7 +1,7 @@
 name: eMonetary - Resend (Dependency Only)
 description: To resend an email if it wasn't "received" (Dependency specific)
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

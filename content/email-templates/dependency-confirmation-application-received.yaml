@@ -2,7 +2,7 @@ name: Dependency - Confirmation Application Received
 description: >-
   To confirm to the claimant that we received their application for dependency benefits
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

@@ -1,7 +1,7 @@
 name: DUA - Denial
 description: To tell the claimant that their DUA application was denied
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: You are not eligible for Disaster Unemployment Assistance. If you disagree with this decision, you can file an appeal.
     components:

@@ -4,7 +4,7 @@ description: >-
   that a payment has been approved. This will tell them how much they will
   receive for that week.
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: We are processing your payment of $100. It may take 2-3 business days for funds to appear in your account/debit card.
     components:

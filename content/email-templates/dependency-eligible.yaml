@@ -1,7 +1,7 @@
 name: Dependency - Eligible
 description: To tell the claimant that they are eligible to receive dependency benefits
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

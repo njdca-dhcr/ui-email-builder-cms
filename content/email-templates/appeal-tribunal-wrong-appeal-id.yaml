@@ -1,7 +1,7 @@
 name: Appeal Tribunal - Wrong Appeal ID
 description: To ask the claimant/appellant to try again
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: There is a mismatch between your name and docket number. Please try again and double check your docket number and appeal record.
     components:

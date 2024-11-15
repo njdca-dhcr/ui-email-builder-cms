@@ -1,7 +1,7 @@
 name: eAdjudication - Reminder (Missing Information)
 description: When someone needs to submit the required UI claim form(s).
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     components:
       - kind: Banner

@@ -3,7 +3,7 @@ description: >-
   To confirm that we received a claimant's weekly certification submission but
   that payment is on hold for something that was flagged (requires manual review).
 appModes: ["ALL", "NJ"]
-templates:
+translations:
   - language: english
     previewText: Your certification requires manual review. It may take up to 5 business days to review your answers and release funds.
     components:
