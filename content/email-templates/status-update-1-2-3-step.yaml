@@ -2,31 +2,31 @@ name: Status Update + 1, 2, 3, step
 description: Confirmations, updates, determinations, and any other status related messaging.
 appModes: ["ALL", "NJ", "KY"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-        - kind: ProgramName
-    - kind: Name
-    - kind: Body
-      subComponents:
-        - kind: Intro
-        - kind: Status
-        - kind: Directive
-        - kind: SupplementalContent
-        - kind: SupplementalContent
-      required: true
-    - kind: Footer
-      subComponents:
-        - kind: AdditionalContent
-      required: false
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+          - kind: ProgramName
+      - kind: Name
+      - kind: Body
+        subComponents:
+          - kind: Intro
+          - kind: Status
+          - kind: Directive
+          - kind: SupplementalContent
+          - kind: SupplementalContent
+        required: true
+      - kind: Footer
+        subComponents:
+          - kind: AdditionalContent
+        required: false
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

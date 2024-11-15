@@ -6,214 +6,214 @@ description: >-
   Date of claim and the proof submission deadline is displayed.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Dependency Benefits Rules & Regulations
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Dependency Benefits
-            name: Dependency Benefits
-            backgroundColor: "#F1DEA0"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: You have requested to apply for Dependency Benefits. This email contains information about dependency benefits that may help you with your application.
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: Your application will be sent in a separate email
-            showSupportiveInformation: false
-            spaceAfter: false
-            showDescription: false
-        - kind: InformationalBox
-          required: true
-          defaultValue:
-            boxColor: Benefit Blue
-            icon: Alarm
-            title: Keep an eye out for the application!
-            description:
-              - type: paragraph
-                children:
-                  - text: "Look for the application in your inbox — it should have arrived. "
-                  - text: You have 6 weeks from the date of your UI claim to submit all proofs.
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "Date of Claim:"
-                    bold: true
-                  - text: " {!eadj_Issue__c.eadj_Date_of_Claim__c}"
-              - type: paragraph
-                children:
-                  - text: "Submit proofs by:"
-                    bold: true
-                  - text: " {!eadj_Issue__c.Dependency_Deadline__c}"
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you do not submit proofs within this time frame, you may become
-                      ineligible for these benefits
-            showSupportiveInformation: false
-        - kind: SupplementalContent
-          required: true
-          defaultValue:
-            variant: Triple Supplemental Content
-            title: How do I qualify?
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you have dependents (defined below) and your weekly benefit amount
-                      is less than the
-                  - type: link
-                    url: "https://nj.gov/labor/myunemployment/before/about/calculator/"
-                    children:
-                      - text: maximum weekly rate
-                  - text: ", you may be able to get extra money called Dependency Benefits."
-            secondTitle: Dependency Benefit Details
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Dependency Benefits calculate to the following percentages of your
-                      weekly benefit rate:
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: bulleted-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: "First eligible dependent: 7%"
-                        bold: true
-                  - type: list-item
-                    children:
-                      - bold: true
-                        text: "Second & third dependent:"
-                      - text: " +4% for second, +4% for third"
-                  - type: list-item
-                    children:
-                      - text: "Maximum amount for 3 dependents:"
-                        bold: true
-                      - text: " 15%"
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      You will be required to provide proof of your dependents. Details can
-                      be found here.
-                    italic: true
-            thirdTitle: What kind of proof do you need?
-            thirdDescription:
-              - type: paragraph
-                children:
-                  - text: "Your "
-                  - text: most recent federal or state income tax return
-                    bold: true
-                  - text: " is best way to prove you have dependents."
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      If a federal or state income tax return is unavailable or
-                      insufficient, a combination of the following documents can be
-                      provided:
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: bulleted-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: "Birth Certificate, Baptismal Certificate, or Adoption Order"
-                  - type: list-item
-                    children:
-                      - text: Marriage Certificate or Civil Union License
-                  - type: list-item
-                    children:
-                      - text: "Certified Divorce, Annulment, or Dissolution"
-                  - type: list-item
-                    children:
-                      - text: Child Support
-                  - type: list-item
-                    children:
-                      - text: Other legal documents
-        - kind: RulesRightsRegulations
-          required: true
-          defaultValue:
-            variant: Your Rights
-            yourRightsTitle: "Additional rules to be considered for Dependency Benefits:"
-            showYourRightsDescription: true
-            yourRightsDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A dependent is an unemployed spouse/civil union partner or an
-                      unemployed, unmarried child (including stepchild or legally adopted
-                      child) under the age of 19 (or 22 if the child is attending school
-                      full-time).
-                    italic: true
-            yourRightsList:
-              - type: numbered-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You cannot receive Dependency Benefits if your spouse/partner is
-                          employed the week you start your claim
-                  - type: list-item
-                    children:
-                      - text: >-
-                          Only one person can claim Dependency Benefits if both you and your
-                          spouse/partner are unemployed
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You will need to provide the social security numbers of your
-                          dependents
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You will need to provide proof of dependency, such as your most
-                          recent tax return or other legal documents like birth or marriage
-                          certificates (additional ways are listed above). This must be
-                          provided within 6 weeks of starting your claim or you will not be
-                          able to receive Dependency Benefits for the duration of your claim
-                  - type: list-item
-                    children:
-                      - text: No one can receive more than the maximum Weekly Benefit Amount
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Dependency Benefits Rules & Regulations
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Dependency Benefits
+              name: Dependency Benefits
+              backgroundColor: "#F1DEA0"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: You have requested to apply for Dependency Benefits. This email contains information about dependency benefits that may help you with your application.
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: Your application will be sent in a separate email
+              showSupportiveInformation: false
+              spaceAfter: false
+              showDescription: false
+          - kind: InformationalBox
+            required: true
+            defaultValue:
+              boxColor: Benefit Blue
+              icon: Alarm
+              title: Keep an eye out for the application!
+              description:
+                - type: paragraph
+                  children:
+                    - text: "Look for the application in your inbox — it should have arrived. "
+                    - text: You have 6 weeks from the date of your UI claim to submit all proofs.
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "Date of Claim:"
+                      bold: true
+                    - text: " {!eadj_Issue__c.eadj_Date_of_Claim__c}"
+                - type: paragraph
+                  children:
+                    - text: "Submit proofs by:"
+                      bold: true
+                    - text: " {!eadj_Issue__c.Dependency_Deadline__c}"
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you do not submit proofs within this time frame, you may become
+                        ineligible for these benefits
+              showSupportiveInformation: false
+          - kind: SupplementalContent
+            required: true
+            defaultValue:
+              variant: Triple Supplemental Content
+              title: How do I qualify?
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you have dependents (defined below) and your weekly benefit amount
+                        is less than the
+                    - type: link
+                      url: "https://nj.gov/labor/myunemployment/before/about/calculator/"
+                      children:
+                        - text: maximum weekly rate
+                    - text: ", you may be able to get extra money called Dependency Benefits."
+              secondTitle: Dependency Benefit Details
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Dependency Benefits calculate to the following percentages of your
+                        weekly benefit rate:
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: bulleted-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: "First eligible dependent: 7%"
+                          bold: true
+                    - type: list-item
+                      children:
+                        - bold: true
+                          text: "Second & third dependent:"
+                        - text: " +4% for second, +4% for third"
+                    - type: list-item
+                      children:
+                        - text: "Maximum amount for 3 dependents:"
+                          bold: true
+                        - text: " 15%"
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You will be required to provide proof of your dependents. Details can
+                        be found here.
+                      italic: true
+              thirdTitle: What kind of proof do you need?
+              thirdDescription:
+                - type: paragraph
+                  children:
+                    - text: "Your "
+                    - text: most recent federal or state income tax return
+                      bold: true
+                    - text: " is best way to prove you have dependents."
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If a federal or state income tax return is unavailable or
+                        insufficient, a combination of the following documents can be
+                        provided:
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: bulleted-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: "Birth Certificate, Baptismal Certificate, or Adoption Order"
+                    - type: list-item
+                      children:
+                        - text: Marriage Certificate or Civil Union License
+                    - type: list-item
+                      children:
+                        - text: "Certified Divorce, Annulment, or Dissolution"
+                    - type: list-item
+                      children:
+                        - text: Child Support
+                    - type: list-item
+                      children:
+                        - text: Other legal documents
+          - kind: RulesRightsRegulations
+            required: true
+            defaultValue:
+              variant: Your Rights
+              yourRightsTitle: "Additional rules to be considered for Dependency Benefits:"
+              showYourRightsDescription: true
+              yourRightsDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A dependent is an unemployed spouse/civil union partner or an
+                        unemployed, unmarried child (including stepchild or legally adopted
+                        child) under the age of 19 (or 22 if the child is attending school
+                        full-time).
+                      italic: true
+              yourRightsList:
+                - type: numbered-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You cannot receive Dependency Benefits if your spouse/partner is
+                            employed the week you start your claim
+                    - type: list-item
+                      children:
+                        - text: >-
+                            Only one person can claim Dependency Benefits if both you and your
+                            spouse/partner are unemployed
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You will need to provide the social security numbers of your
+                            dependents
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You will need to provide proof of dependency, such as your most
+                            recent tax return or other legal documents like birth or marriage
+                            certificates (additional ways are listed above). This must be
+                            provided within 6 weeks of starting your claim or you will not be
+                            able to receive Dependency Benefits for the duration of your claim
+                    - type: list-item
+                      children:
+                        - text: No one can receive more than the maximum Weekly Benefit Amount
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

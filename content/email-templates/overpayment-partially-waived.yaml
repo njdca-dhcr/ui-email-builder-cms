@@ -2,36 +2,36 @@ name: Overpayment - Partially Waived
 description: PUA focused but can still be applied to general overpayment campaigns
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-        - kind: ProgramName
-          required: false
-    - kind: Name
-    - kind: Body
-      subComponents:
-        - kind: Intro
-          required: true
-        - kind: Status
-        - kind: SupplementalContent
-          required: true
-        - kind: SupplementalContent
-        - kind: RulesRightsRegulations
-          required: false
-      required: true
-    - kind: Footer
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-      required: false
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+          - kind: ProgramName
+            required: false
+      - kind: Name
+      - kind: Body
+        subComponents:
+          - kind: Intro
+            required: true
+          - kind: Status
+          - kind: SupplementalContent
+            required: true
+          - kind: SupplementalContent
+          - kind: RulesRightsRegulations
+            required: false
+        required: true
+      - kind: Footer
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+        required: false
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

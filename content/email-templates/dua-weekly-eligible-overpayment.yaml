@@ -5,186 +5,186 @@ description: >-
   claimant what their overpayment balance is.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: We are processing your payment of $165 for May 12 - May 19. See details of your benefit breakdown.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Benefits are on the way
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Disaster Unemployment Assistance (DUA)
-            name: Disaster Unemployment Assistance (DUA)
-            backgroundColor: "#CCBDDF"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Your Disaster Unemployment Assistance (DUA) benefits have been
-                      processed and will soon arrive in your bank account (or state issued
-                      debit card).
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "You will receive:"
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview With Reason And Amount Breakdown
-            icon: Folder
-            status: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
-            statusDueTo: For
-            showSupportiveInformation: true
-            spaceAfter: false
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: "{!eadj_UI_Case__c.DUA_Cert_Range_for_Email__c}"
-                    bold: true
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This determination was made based on the DUA regulations 20 CFR 625.
-                      Its details and breakdown can be found in the document that will be
-                      mailed to you. A link for this regulation is available
-                    italic: true
-                  - text: " "
-                  - type: link
-                    url: "https://oui.doleta.gov/unemploy/pdf/20_CFR_625-Disaster.pdf"
-                    children:
-                      - italic: true
-                        text: here
-                  - italic: true
-                    text: .
-            showMissingDocumentDeadline: false
-            boxColor: Benefit Blue
-            amountLabel: Calculation Details
-            amountLineItems:
-              - label: Your Benefit Amount
-                value: "${!eadj_Issue__c.eMon_DUA_WBR__c}"
+  - language: english
+    previewText: We are processing your payment of $165 for May 12 - May 19. See details of your benefit breakdown.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Benefits are on the way
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Disaster Unemployment Assistance (DUA)
+              name: Disaster Unemployment Assistance (DUA)
+              backgroundColor: "#CCBDDF"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Your Disaster Unemployment Assistance (DUA) benefits have been
+                        processed and will soon arrive in your bank account (or state issued
+                        debit card).
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "You will receive:"
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview With Reason And Amount Breakdown
+              icon: Folder
+              status: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
+              statusDueTo: For
+              showSupportiveInformation: true
+              spaceAfter: false
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: "{!eadj_UI_Case__c.DUA_Cert_Range_for_Email__c}"
+                      bold: true
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This determination was made based on the DUA regulations 20 CFR 625.
+                        Its details and breakdown can be found in the document that will be
+                        mailed to you. A link for this regulation is available
+                      italic: true
+                    - text: " "
+                    - type: link
+                      url: "https://oui.doleta.gov/unemploy/pdf/20_CFR_625-Disaster.pdf"
+                      children:
+                        - italic: true
+                          text: here
+                    - italic: true
+                      text: .
+              showMissingDocumentDeadline: false
+              boxColor: Benefit Blue
+              amountLabel: Calculation Details
+              amountLineItems:
+                - label: Your Benefit Amount
+                  value: "${!eadj_Issue__c.eMon_DUA_WBR__c}"
+                  bold: true
+                - label: Earnings
+                  value: "${!eadj_Issue__c.DUA_Earnings__c}"
+                - label: Garnishment
+                  value: "${!eadj_Issue__c.DUA_Garnishment__c}"
+                - label: Pension
+                  value: "${!eadj_Issue__c.DUA_Pension_Deduction__c}"
+                - label: Applied to Overpayment
+                  value: "{!eadj_Issue__c.DUA_Applied_Overpay__c}"
+              amountTotal:
+                label: You will receive
+                value: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
                 bold: true
-              - label: Earnings
-                value: "${!eadj_Issue__c.DUA_Earnings__c}"
-              - label: Garnishment
-                value: "${!eadj_Issue__c.DUA_Garnishment__c}"
-              - label: Pension
-                value: "${!eadj_Issue__c.DUA_Pension_Deduction__c}"
-              - label: Applied to Overpayment
-                value: "{!eadj_Issue__c.DUA_Applied_Overpay__c}"
-            amountTotal:
-              label: You will receive
-              value: "${!eadj_Issue__c.DUA_Net_Pay_Received__c}"
-              bold: true
-        - kind: InformationalBox
-          defaultValue:
-            boxColor: Yielding Yellow
-            icon: Warning
-            title: "Your overpayment balance is now {!eadj_Issue__c.DUA_Overpay_Balance__c}"
-            description:
-              - type: paragraph
-                children:
-                  - text: "More information about overpayments and how to request a waiver can be found "
-                    italic: true
-                  - type: link
-                    url: "#ENTER-LINK"
-                    children:
-                      - text: here
-                        italic: true
-                  - text: .
-                    italic: true
-            showSupportiveInformation: false
+          - kind: InformationalBox
+            defaultValue:
+              boxColor: Yielding Yellow
+              icon: Warning
+              title: "Your overpayment balance is now {!eadj_Issue__c.DUA_Overpay_Balance__c}"
+              description:
+                - type: paragraph
+                  children:
+                    - text: "More information about overpayments and how to request a waiver can be found "
+                      italic: true
+                    - type: link
+                      url: "#ENTER-LINK"
+                      children:
+                        - text: here
+                          italic: true
+                    - text: .
+                      italic: true
+              showSupportiveInformation: false
 
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Next Week
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You will continue to receive certification emails which you must
-                      complete on a weekly basis until the end of the program.
-            secondTitle: Did you return to work full-time?
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you returned to work full-time and are no longer pursuing DUA, you
-                      can simply stop certifying. There are no additional forms.
-        - kind: RulesRightsRegulations
-          required: true
-          defaultValue:
-            variant: Reminder
-            icon: Star
-            reminderTitle: Note on earnings
-            reminderDescription:
-              - type: paragraph
-                children:
-                  - text: "If you earn "
-                  - bold: true
-                    text: "${!eadj_Issue__c.eMon_DUA_Diff_WBR_and_PWBR__c} "
-                  - text: or more it will be deducted from your partial amount.
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: " "
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: "For your earnings:"
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: "Standard benefit rate: ${!eadj_Claim__c.DUA_Monetary_WBR__c}"
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: "Partial benefit rate: ${!eadj_Claim__c.DUA_PWBR__C}"
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
-                  - type: link
-                    url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
-                    children:
-                      - text: here
-                  - text: ". Frequently Asked Questions can be found "
-                  - type: link
-                    url: >-
-                      https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Next Week
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You will continue to receive certification emails which you must
+                        complete on a weekly basis until the end of the program.
+              secondTitle: Did you return to work full-time?
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you returned to work full-time and are no longer pursuing DUA, you
+                        can simply stop certifying. There are no additional forms.
+          - kind: RulesRightsRegulations
+            required: true
+            defaultValue:
+              variant: Reminder
+              icon: Star
+              reminderTitle: Note on earnings
+              reminderDescription:
+                - type: paragraph
+                  children:
+                    - text: "If you earn "
+                    - bold: true
+                      text: "${!eadj_Issue__c.eMon_DUA_Diff_WBR_and_PWBR__c} "
+                    - text: or more it will be deducted from your partial amount.
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: " "
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: "For your earnings:"
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: "Standard benefit rate: ${!eadj_Claim__c.DUA_Monetary_WBR__c}"
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: "Partial benefit rate: ${!eadj_Claim__c.DUA_PWBR__C}"
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                      children:
+                        - text: here
+                    - text: ". Frequently Asked Questions can be found "
+                    - type: link
+                      url: >-
+                        https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

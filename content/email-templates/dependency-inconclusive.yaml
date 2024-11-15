@@ -4,88 +4,88 @@ description: >-
   don't have a valid UI claim to refer to
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Dependency Benefits cannot be determined
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Dependency Benefits
-            name: Dependency Benefits
-            backgroundColor: "#F1DEA0"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: Your Dependency Benefits claim cannot be reviewed at this time.
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: You need a valid Unemployment Insurance claim
-            statusDueTo: because...
-            showSupportiveInformation: true
-            spaceAfter: true
-            description:
-              - type: paragraph
-                children:
-                  - text: "Without a valid UI claim, Dependency Benefits cannot be distributed."
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - italic: true
-                    text: This determination was made based on available information.
-        - kind: SupplementalContent
-          required: true
-          defaultValue:
-            variant: Double Supplemental Content
-            title: What you can do
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you feel that your claim should be valid, you can begin filing an
-                      appeal in the email you received declaring why your UI claim was
-                      invalid.
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you did not receive an email about your invalid claim, contact the
-                      call center at (732) 761-2020.
-            secondTitle: Feedback (Optional)
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
-                  - type: link
-                    url: >-
-                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Dependency Benefits cannot be determined
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Dependency Benefits
+              name: Dependency Benefits
+              backgroundColor: "#F1DEA0"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: Your Dependency Benefits claim cannot be reviewed at this time.
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: You need a valid Unemployment Insurance claim
+              statusDueTo: because...
+              showSupportiveInformation: true
+              spaceAfter: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: "Without a valid UI claim, Dependency Benefits cannot be distributed."
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - italic: true
+                      text: This determination was made based on available information.
+          - kind: SupplementalContent
+            required: true
+            defaultValue:
+              variant: Double Supplemental Content
+              title: What you can do
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you feel that your claim should be valid, you can begin filing an
+                        appeal in the email you received declaring why your UI claim was
+                        invalid.
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you did not receive an email about your invalid claim, contact the
+                        call center at (732) 761-2020.
+              secondTitle: Feedback (Optional)
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                    - type: link
+                      url: >-
+                        https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

@@ -2,173 +2,173 @@ name: eMonetary - Confirmation
 description: To confirm receipt of reponses
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Your response has been received
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Unemployment Insurance (UI) Monetary Eligibility
-            name: Unemployment Insurance (UI) Monetary Eligibility
-            backgroundColor: "#F3B9C3"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_Issue__c.eAdj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: Your Unemployment Insurance (UI) response is
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: Received & Under Review
-            showSupportiveInformation: true
-            spaceAfter: true
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: It may take up to 4 weeks
-                    bold: true
-                  - text: " to determine your eligibility (results)."
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: Your determination, its details, and appeal rights will arrive via email.
-                    italic: true
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Continue your weekly claims
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Remember to claim benefits for each week while you are waiting for a
-                      determination. If you are approved for benefits, you will only be paid
-                      for the weeks that you have claimed benefits for.
-            secondTitle: Your Certification Day
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: "Your designated certification day is: "
-                  - text: "Sunday, 8am-9pm"
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      Add this to your calendar, refrigerator, or anywhere that will help
-                      you not forget. Additional details on our certification hours can be
-                      found
-                  - type: link
-                    url: >-
-                      https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
-                    children:
-                      - text: here
-                  - text: .
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you miss your designated certification day, you can certify on
-                      Friday between 8am - 7pm.
-                    textSize: small
-                    italic: true
-            thirdTitle: Supplemental Content Title 3
-            thirdDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            benefitAmountBoxColor: Granted Green
-            benefitAmountIcon: CreditCard
-            benefitAmountTitle: Your Benefit Details
-            benefitAmountDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A detailed breakdown of your benefit amount and how we got to that
-                      number will be mailed to you. If you disagree with it, appeal rights
-                      and processes are available.
-            benefitAmountBoxTitle: Benefit Amount
-            benefitAmountMainBoxCopy:
-              - type: paragraph
-                children:
-                  - text: "Weekly Rate:   "
-                    bold: true
-                  - text: $400
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: "Partial Weekly Rate:   "
-                    bold: true
-                  - text: $200
-                    bold: true
-            benefitAmountSupplementalBoxCopy:
-              - type: paragraph
-                children:
-                  - text: This rate includes an increase for dependency benefits
-                    bold: true
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      This amount is subject to change based on the submitted tax record or
-                      dependency documents you send in.
-                    italic: true
-            benefitAmountSupportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you're working part-time, a partial weekly rate (which is 20%
-                      higher than your weekly rate) will be used to calculate your benefit
-                      amount.
-                    italic: true
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on New Jersey's unemployment program can be found "
-                  - type: link
-                    url: >-
-                      https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
-                    children:
-                      - text: here
-                  - text: "."
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Your response has been received
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Unemployment Insurance (UI) Monetary Eligibility
+              name: Unemployment Insurance (UI) Monetary Eligibility
+              backgroundColor: "#F3B9C3"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_Issue__c.eAdj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: Your Unemployment Insurance (UI) response is
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: Received & Under Review
+              showSupportiveInformation: true
+              spaceAfter: true
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: It may take up to 4 weeks
+                      bold: true
+                    - text: " to determine your eligibility (results)."
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: Your determination, its details, and appeal rights will arrive via email.
+                      italic: true
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Continue your weekly claims
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Remember to claim benefits for each week while you are waiting for a
+                        determination. If you are approved for benefits, you will only be paid
+                        for the weeks that you have claimed benefits for.
+              secondTitle: Your Certification Day
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: "Your designated certification day is: "
+                    - text: "Sunday, 8am-9pm"
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Add this to your calendar, refrigerator, or anywhere that will help
+                        you not forget. Additional details on our certification hours can be
+                        found
+                    - type: link
+                      url: >-
+                        https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                      children:
+                        - text: here
+                    - text: .
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you miss your designated certification day, you can certify on
+                        Friday between 8am - 7pm.
+                      textSize: small
+                      italic: true
+              thirdTitle: Supplemental Content Title 3
+              thirdDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              benefitAmountBoxColor: Granted Green
+              benefitAmountIcon: CreditCard
+              benefitAmountTitle: Your Benefit Details
+              benefitAmountDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A detailed breakdown of your benefit amount and how we got to that
+                        number will be mailed to you. If you disagree with it, appeal rights
+                        and processes are available.
+              benefitAmountBoxTitle: Benefit Amount
+              benefitAmountMainBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: "Weekly Rate:   "
+                      bold: true
+                    - text: $400
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: "Partial Weekly Rate:   "
+                      bold: true
+                    - text: $200
+                      bold: true
+              benefitAmountSupplementalBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: This rate includes an increase for dependency benefits
+                      bold: true
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This amount is subject to change based on the submitted tax record or
+                        dependency documents you send in.
+                      italic: true
+              benefitAmountSupportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you're working part-time, a partial weekly rate (which is 20%
+                        higher than your weekly rate) will be used to calculate your benefit
+                        amount.
+                      italic: true
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on New Jersey's unemployment program can be found "
+                    - type: link
+                      url: >-
+                        https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                      children:
+                        - text: here
+                    - text: "."
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

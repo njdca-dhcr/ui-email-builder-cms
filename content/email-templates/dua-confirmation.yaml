@@ -2,121 +2,121 @@ name: DUA - Confirmation
 description: To confirm to the claimant that we received their application for DUA benefits
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: Application received. Your DUA application is received and under review. It make take up to 2 weeks to determine your eligibility.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Application Received
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Disaster Unemployment Assistance (DUA)
-            name: Disaster Unemployment Assistance (DUA)
-            backgroundColor: "#CCBDDF"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Your Disaster Unemployment Assistance (DUA) application is
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: Received &amp; Under Review
-            statusDueTo: because...
-            showSupportiveInformation: true
-            spaceAfter: true
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: It may take up to 2 weeks
-                    bold: true
-                  - text: " to determine your eligibility (results)."
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you are eligible, you will receive an email directing you to
-                      complete your weekly certification.
-                    italic: true
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: You can only participate in one program
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Disaster Unemployment Assistance (DUA) replaces your Unemployment
-                      Insurance (UI) benefits.
-                  - text: You cannot participate in both.
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      If approved for DUA, you will complete weekly certification forms for
-                      DUA.
-                    italic: true
-            secondTitle: Feedback (Optional)
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This email is a new beta design created by New Jersey's Division of
-                      Unemployment Insurance in collaboration with New Jersey's Office of
-                      Innovation. Take our 2 minute survey
-                  - text: " "
-                  - type: link
-                    url: >-
-                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
-                    children:
-                      - text: here
-                  - text: .
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
-                  - type: link
-                    url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
-                    children:
-                      - text: here
-                  - text: ". Frequently Asked Questions can be found "
-                  - type: link
-                    url: >-
-                      https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    previewText: Application received. Your DUA application is received and under review. It make take up to 2 weeks to determine your eligibility.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Application Received
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Disaster Unemployment Assistance (DUA)
+              name: Disaster Unemployment Assistance (DUA)
+              backgroundColor: "#CCBDDF"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Your Disaster Unemployment Assistance (DUA) application is
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: Received &amp; Under Review
+              statusDueTo: because...
+              showSupportiveInformation: true
+              spaceAfter: true
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: It may take up to 2 weeks
+                      bold: true
+                    - text: " to determine your eligibility (results)."
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you are eligible, you will receive an email directing you to
+                        complete your weekly certification.
+                      italic: true
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: You can only participate in one program
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Disaster Unemployment Assistance (DUA) replaces your Unemployment
+                        Insurance (UI) benefits.
+                    - text: You cannot participate in both.
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If approved for DUA, you will complete weekly certification forms for
+                        DUA.
+                      italic: true
+              secondTitle: Feedback (Optional)
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This email is a new beta design created by New Jersey's Division of
+                        Unemployment Insurance in collaboration with New Jersey's Office of
+                        Innovation. Take our 2 minute survey
+                    - text: " "
+                    - type: link
+                      url: >-
+                        https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
+                      children:
+                        - text: here
+                    - text: .
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                      children:
+                        - text: here
+                    - text: ". Frequently Asked Questions can be found "
+                    - type: link
+                      url: >-
+                        https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

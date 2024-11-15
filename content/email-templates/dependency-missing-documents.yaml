@@ -4,123 +4,123 @@ description: >-
   request for dependency benefits
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Missing Document(s)
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Dependency Benefits
-            name: Dependency Benefits
-            backgroundColor: "#F1DEA0"
-        - kind: DirectiveButton
-          defaultValue:
-            visible: false
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      We have received your application for Dependency Benefits, but we need more information to decide if you are eligible.
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview With Reason
-            status: Document(s) needed
-            statusDueTo: "We need the following:"
-            showSupportiveInformation: false
-            spaceAfter: false
-            description:
-              - type: paragraph
-                children:
-                  - text: "{!eadj_UI_Case__c.eAdj_Dependency_Docs_Needed__c}"
-                    bold: true
-        - kind: Directive
-          required: true
-          defaultValue:
-            variant: Three Steps
-            showTitle: false
-            label:
-              - type: paragraph
-                children:
-                  - text: "To help resolve this issue, complete the following steps:"
-            linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
-            buttonLabel: Get Started
-            buttonColor: "#2378c3"
-            step1Label:
-              - type: paragraph
-                children:
-                  - text: Sign In
-                    bold: true
-            showStep1AdditionalContent: true
-            step1Additional:
-              - type: paragraph
-                children:
-                  - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
-            step2Label:
-              - type: paragraph
-                children:
-                  - text: Upload Documentation(s)
-                    bold: true
-            showStep2AdditionalContent: true
-            step2Additional:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Required proofs must be sent by {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}
-            step3Label:
-              - type: paragraph
-                children:
-                  - text: Submit
-                    bold: true
-                  - text: " your file(s). "
-                  - bold: true
-                    text: Don't wait.
-            showStep3AdditionalContent: false
-            showMultipleStepsSupportiveText: true
-            multipleStepsSupportiveText:
-              - type: paragraph
-                children:
-                  - italic: true
-                    text: >-
-                      If you do not submit your documents by
-                      {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}, you may be denied these
-                      benefits.
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: ""
-                  - type: link
-                    url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
-                    children:
-                      - text: Click here
-                  - text: " for tips on how to attach documents to a form."
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Missing Document(s)
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Dependency Benefits
+              name: Dependency Benefits
+              backgroundColor: "#F1DEA0"
+          - kind: DirectiveButton
+            defaultValue:
+              visible: false
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        We have received your application for Dependency Benefits, but we need more information to decide if you are eligible.
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview With Reason
+              status: Document(s) needed
+              statusDueTo: "We need the following:"
+              showSupportiveInformation: false
+              spaceAfter: false
+              description:
+                - type: paragraph
+                  children:
+                    - text: "{!eadj_UI_Case__c.eAdj_Dependency_Docs_Needed__c}"
+                      bold: true
+          - kind: Directive
+            required: true
+            defaultValue:
+              variant: Three Steps
+              showTitle: false
+              label:
+                - type: paragraph
+                  children:
+                    - text: "To help resolve this issue, complete the following steps:"
+              linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
+              buttonLabel: Get Started
+              buttonColor: "#2378c3"
+              step1Label:
+                - type: paragraph
+                  children:
+                    - text: Sign In
+                      bold: true
+              showStep1AdditionalContent: true
+              step1Additional:
+                - type: paragraph
+                  children:
+                    - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
+              step2Label:
+                - type: paragraph
+                  children:
+                    - text: Upload Documentation(s)
+                      bold: true
+              showStep2AdditionalContent: true
+              step2Additional:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Required proofs must be sent by {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}
+              step3Label:
+                - type: paragraph
+                  children:
+                    - text: Submit
+                      bold: true
+                    - text: " your file(s). "
+                    - bold: true
+                      text: Don't wait.
+              showStep3AdditionalContent: false
+              showMultipleStepsSupportiveText: true
+              multipleStepsSupportiveText:
+                - type: paragraph
+                  children:
+                    - italic: true
+                      text: >-
+                        If you do not submit your documents by
+                        {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}, you may be denied these
+                        benefits.
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: ""
+                    - type: link
+                      url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
+                      children:
+                        - text: Click here
+                    - text: " for tips on how to attach documents to a form."
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

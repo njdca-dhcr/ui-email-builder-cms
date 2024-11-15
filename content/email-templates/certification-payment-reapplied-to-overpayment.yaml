@@ -7,215 +7,215 @@ description: >-
   There are also options on how to pay down an overpayment.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: You will not receive funds this week—your payment was applied to an overpayment. Continue to certify weekly.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: DateRange
-          defaultValue:
-            range: "[July 20-27]"
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Certification Received—you will not receive funds this week
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Unemployment Insurance (UI)
-            name: Unemployment Insurance (UI)
-            backgroundColor: "#B9D8F3"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "Captain America:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Your weekly certification  (00/00 - 00/00/0000) for Unemployment Insurance benefits is received and your
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview With Reason And Amount Breakdown
-            icon: Folder
-            status: Payment was applied to an overpayment
-            statusDueTo: ""
-            showSupportiveInformation: false
-            spaceAfter: false
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: It may take 2 - 3 business days
-                    bold: true
-                  - text: " for funds to appear "
-              - type: paragraph
-                children:
-                  - text: "Confirmation #23095132401217"
-                    italic: true
-            boxColor: Benefit Blue
-            amountLabel: Calculation Details
-            amountLineItems:
-              - label: Your Benefit Amount
-                value: "$200"
-              - label: Applied to overpayment
-                value: "$200"
+  - language: english
+    previewText: You will not receive funds this week—your payment was applied to an overpayment. Continue to certify weekly.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: DateRange
+            defaultValue:
+              range: "[July 20-27]"
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Certification Received—you will not receive funds this week
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Unemployment Insurance (UI)
+              name: Unemployment Insurance (UI)
+              backgroundColor: "#B9D8F3"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "Captain America:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Your weekly certification  (00/00 - 00/00/0000) for Unemployment Insurance benefits is received and your
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview With Reason And Amount Breakdown
+              icon: Folder
+              status: Payment was applied to an overpayment
+              statusDueTo: ""
+              showSupportiveInformation: false
+              spaceAfter: false
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: It may take 2 - 3 business days
+                      bold: true
+                    - text: " for funds to appear "
+                - type: paragraph
+                  children:
+                    - text: "Confirmation #23095132401217"
+                      italic: true
+              boxColor: Benefit Blue
+              amountLabel: Calculation Details
+              amountLineItems:
+                - label: Your Benefit Amount
+                  value: "$200"
+                - label: Applied to overpayment
+                  value: "$200"
+                  bold: true
+                  italic: true
+              amountTotal:
+                label: You will receive
+                value: "$0"
                 bold: true
-                italic: true
-            amountTotal:
-              label: You will receive
-              value: "$0"
-              bold: true
-        - kind: InformationalBox
-          defaultValue:
-            boxColor: Yielding Yellow
-            icon: Warning
-            title: "Your overpayment balance is now $2,800"
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Each week that you certify for unemployment benefits and are found to
-                      be eligible,
-                  - text: >-
-                      those benefit payments are applied to your overpayment and will reduce
-                      the balance owed.
-                    bold: true
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      More information about overpayments and how to request a waiver can be
-                      found here.
-                    italic: true
-            showSupportiveInformation: false
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Continue Weekly Certifications
-            description:
-              - type: paragraph
-                children:
-                  - text: "Continue to certify for benefits "
-                  - text: for every week you would like unemployment payments.
-                    bold: true
-                  - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "You can certify for benefits "
-                  - text: Sunday to Friday from 8am - 7pm.
-                    bold: true
-            secondTitle: Feedback (Optional)
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This email is a new beta design created by New Jersey's Division of
-                      Unemployment Insurance in collaboration with New Jersey's Office of
-                      Innovation. Take our 2 minute survey
-                  - type: link
-                    url: >-
-                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
-                    children:
-                      - text: here
-                  - text: .
-        - kind: RulesRightsRegulations
-          required: true
-          defaultValue:
-            variant: Reminder
-            icon: Info
-            reminderTitle: Paying down your overpayment
-            reminderDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You received $0 this week because you are paying off your
-                      overpayment.
-                  - text: "This balance does not go away until all of it is paid. "
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "Details:"
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: "Weekly Benefit Rate:"
-                    bold: true
-                  - text: " $692"
-              - type: paragraph
-                children:
-                  - text: "Amount available:"
-                    bold: true
-                  - text: " $8,996"
-              - type: paragraph
-                children:
-                  - text: "Overpayment total:"
-                    bold: true
-                  - text: " $2,800"
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      You will begin to receive payments after your overpayment is paid
-                      back.
-                  - text: "You can use your weekly benefit funds to repay this amount or you can "
-                    bold: true
-                  - bold: true
-                    text: pay online.
-                    underline: true
-                  - bold: true
-                    text: " "
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you want to use your weekly benefit funds to repay this debt,
-                      continue to certify every week until the balance of your overpayment
-                      reaches $0.
-                    bold: true
-                    italic: true
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on New Jersey’s unemployment program can be found "
-                  - type: link
-                    url: >-
-                      https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+          - kind: InformationalBox
+            defaultValue:
+              boxColor: Yielding Yellow
+              icon: Warning
+              title: "Your overpayment balance is now $2,800"
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Each week that you certify for unemployment benefits and are found to
+                        be eligible,
+                    - text: >-
+                        those benefit payments are applied to your overpayment and will reduce
+                        the balance owed.
+                      bold: true
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        More information about overpayments and how to request a waiver can be
+                        found here.
+                      italic: true
+              showSupportiveInformation: false
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Continue Weekly Certifications
+              description:
+                - type: paragraph
+                  children:
+                    - text: "Continue to certify for benefits "
+                    - text: for every week you would like unemployment payments.
+                      bold: true
+                    - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "You can certify for benefits "
+                    - text: Sunday to Friday from 8am - 7pm.
+                      bold: true
+              secondTitle: Feedback (Optional)
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This email is a new beta design created by New Jersey's Division of
+                        Unemployment Insurance in collaboration with New Jersey's Office of
+                        Innovation. Take our 2 minute survey
+                    - type: link
+                      url: >-
+                        https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                      children:
+                        - text: here
+                    - text: .
+          - kind: RulesRightsRegulations
+            required: true
+            defaultValue:
+              variant: Reminder
+              icon: Info
+              reminderTitle: Paying down your overpayment
+              reminderDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You received $0 this week because you are paying off your
+                        overpayment.
+                    - text: "This balance does not go away until all of it is paid. "
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "Details:"
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: "Weekly Benefit Rate:"
+                      bold: true
+                    - text: " $692"
+                - type: paragraph
+                  children:
+                    - text: "Amount available:"
+                      bold: true
+                    - text: " $8,996"
+                - type: paragraph
+                  children:
+                    - text: "Overpayment total:"
+                      bold: true
+                    - text: " $2,800"
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You will begin to receive payments after your overpayment is paid
+                        back.
+                    - text: "You can use your weekly benefit funds to repay this amount or you can "
+                      bold: true
+                    - bold: true
+                      text: pay online.
+                      underline: true
+                    - bold: true
+                      text: " "
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you want to use your weekly benefit funds to repay this debt,
+                        continue to certify every week until the balance of your overpayment
+                        reaches $0.
+                      bold: true
+                      italic: true
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on New Jersey’s unemployment program can be found "
+                    - type: link
+                      url: >-
+                        https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

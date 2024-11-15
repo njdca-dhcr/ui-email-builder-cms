@@ -2,158 +2,158 @@ name: ID.me - Verify Identity
 description: When their unemployment insurance claim has been locked and we need to verify their identity.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Your identity is confirmed — start certifying weekly on {{Attributes.Certification_Date}}
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Unemployment Insurance (UI)
-            name: Unemployment Insurance (UI)
-            backgroundColor: "#B9D8F3"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_UI_Case__c.Eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Your unemployment insurance claim has been locked and we need to
-                      verify your identity. To verify and unlock your account, follow these
-                      3 steps:
-        - kind: Directive
-          required: true
-          defaultValue:
-            variant: One Step
-            title: 'Enroll<span style="font-weight: normal;">&nbsp;in Id.me</span>'
-            showTitle: true
-            showLabel: true
-            label:
-              - type: paragraph
-                children:
-                  - text: "To help resolve this issue, complete the following steps:"
-            linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
-            buttonLabel: Get Started
-            buttonColor: "#1b1b1b"
-            step1Label:
-              - type: paragraph
-                children:
-                  - text: Step 1 Directive
-                    bold: true
-            showStep1AdditionalContent: true
-            step1Additional:
-              - type: paragraph
-                children:
-                  - text: Additional information around Step 1
-            oneStepSupportiveText:
-              - type: paragraph
-                children:
-                  - text: "This link will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
-                    textSize: small
-                    italic: true
-            step2Label:
-              - type: paragraph
-                children:
-                  - text: Step 2 Directive
-                    bold: true
-            showStep2AdditionalContent: true
-            step2Additional:
-              - type: paragraph
-                children:
-                  - text: Additional information around Step 2
-            step2Tertiary:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Tertiary information around Step 2, (usually involving an alternate
-                      way to complete the second step).
-            step2CaseNumber:
-              - type: paragraph
-                children:
-                  - text: "Case #: [000000]"
-            step3Label:
-              - type: paragraph
-                children:
-                  - text: Step 3 Directive
-                    bold: true
-            showStep3AdditionalContent: true
-            step3Additional:
-              - type: paragraph
-                children:
-                  - text: Additional information around Step 3
-            showMultipleStepsSupportiveText: true
-            multipleStepsSupportiveText:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
-                      tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
-                      quis congue eget, commodo eu urna. Donec laoreet a dui consequat
-                      sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
-                    italic: true
-            alternativePaymentLabel: >-
-              Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
-              Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
-            payOnlineSupportiveText:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Make the check or money order payable to NJ Dept. of Labor and
-                      Workforce Development. Be sure to write your name and social security
-                      number on the payment.
-        - kind: SupplementalContent
-          required: true
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Do not certify for benefits while you wait for verification!
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Make sure NOT to certify for benefits online or by phone. Be patient
-                      and wait a few days. If you cerify during this wait period, it may
-                      delay future payments.
-            secondTitle: Will my claim be approved if I verify with ID.me?
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      No. Even if you verify your identity, your unemployment claim may be
-                      denied for other reasons.
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on our identity verification program can be found "
-                  - type: link
-                    url: >-
-                      https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Your identity is confirmed — start certifying weekly on {{Attributes.Certification_Date}}
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Unemployment Insurance (UI)
+              name: Unemployment Insurance (UI)
+              backgroundColor: "#B9D8F3"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_UI_Case__c.Eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Your unemployment insurance claim has been locked and we need to
+                        verify your identity. To verify and unlock your account, follow these
+                        3 steps:
+          - kind: Directive
+            required: true
+            defaultValue:
+              variant: One Step
+              title: 'Enroll<span style="font-weight: normal;">&nbsp;in Id.me</span>'
+              showTitle: true
+              showLabel: true
+              label:
+                - type: paragraph
+                  children:
+                    - text: "To help resolve this issue, complete the following steps:"
+              linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
+              buttonLabel: Get Started
+              buttonColor: "#1b1b1b"
+              step1Label:
+                - type: paragraph
+                  children:
+                    - text: Step 1 Directive
+                      bold: true
+              showStep1AdditionalContent: true
+              step1Additional:
+                - type: paragraph
+                  children:
+                    - text: Additional information around Step 1
+              oneStepSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: "This link will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
+                      textSize: small
+                      italic: true
+              step2Label:
+                - type: paragraph
+                  children:
+                    - text: Step 2 Directive
+                      bold: true
+              showStep2AdditionalContent: true
+              step2Additional:
+                - type: paragraph
+                  children:
+                    - text: Additional information around Step 2
+              step2Tertiary:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Tertiary information around Step 2, (usually involving an alternate
+                        way to complete the second step).
+              step2CaseNumber:
+                - type: paragraph
+                  children:
+                    - text: "Case #: [000000]"
+              step3Label:
+                - type: paragraph
+                  children:
+                    - text: Step 3 Directive
+                      bold: true
+              showStep3AdditionalContent: true
+              step3Additional:
+                - type: paragraph
+                  children:
+                    - text: Additional information around Step 3
+              showMultipleStepsSupportiveText: true
+              multipleStepsSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
+                        tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
+                        quis congue eget, commodo eu urna. Donec laoreet a dui consequat
+                        sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
+                      italic: true
+              alternativePaymentLabel: >-
+                Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
+                Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
+              payOnlineSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Make the check or money order payable to NJ Dept. of Labor and
+                        Workforce Development. Be sure to write your name and social security
+                        number on the payment.
+          - kind: SupplementalContent
+            required: true
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Do not certify for benefits while you wait for verification!
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Make sure NOT to certify for benefits online or by phone. Be patient
+                        and wait a few days. If you cerify during this wait period, it may
+                        delay future payments.
+              secondTitle: Will my claim be approved if I verify with ID.me?
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        No. Even if you verify your identity, your unemployment claim may be
+                        denied for other reasons.
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on our identity verification program can be found "
+                    - type: link
+                      url: >-
+                        https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

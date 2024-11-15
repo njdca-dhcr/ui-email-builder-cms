@@ -4,331 +4,331 @@ description: >-
   to create an Employer Access Account
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: We received your employer response for Captain America and it is under review. Make sure you have an Employer Access Account! Sign up today.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Response Received
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!Employer_Response__c.CreatedBy}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: "Your online employer response for "
-                  - text: "{!Employer_Response__c.ER_Claimant_Name__c}"
-                    bold: true
-                  - text: " is"
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            icon: Warning
-            status: Received and Under Review
-            statusDueTo: because...
-            showSupportiveInformation: true
-            spaceAfter: true
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: It may take up to 4 weeks
-                    bold: true
-                  - text: " for a determination to be entered."
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Once a decision has been made, you may receive notification by mail at
-                      your registered business address to notify you of your chargeability
-                      on the claim.
-                    italic: true
-            documentsNeededLabel: "We need the following:"
-            documentsNeededValue: "{Name_of_document(s)}"
-            emailToLabel: "Email this to:"
-            emailToValue: DUA@unemployment.gov
-            subjectLineLabel: "Subject Line:"
-            subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
-            showMissingDocumentDeadline: true
-            missingDocumentDeadline: >-
-              If you do not submit your documents by 00/00/0000, you will be denied your
-              claim and will be required to pay back any DUA funds released to you.
-            boxColor: Yielding Yellow
-            amountLabel: You owe $200
-            amountLineItems:
-              - label: Overpayment Total
-                value: $200
-              - label: Amount waived
-                value: $50
+  - language: english
+    previewText: We received your employer response for Captain America and it is under review. Make sure you have an Employer Access Account! Sign up today.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Response Received
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!Employer_Response__c.CreatedBy}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: "Your online employer response for "
+                    - text: "{!Employer_Response__c.ER_Claimant_Name__c}"
+                      bold: true
+                    - text: " is"
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              icon: Warning
+              status: Received and Under Review
+              statusDueTo: because...
+              showSupportiveInformation: true
+              spaceAfter: true
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: It may take up to 4 weeks
+                      bold: true
+                    - text: " for a determination to be entered."
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Once a decision has been made, you may receive notification by mail at
+                        your registered business address to notify you of your chargeability
+                        on the claim.
+                      italic: true
+              documentsNeededLabel: "We need the following:"
+              documentsNeededValue: "{Name_of_document(s)}"
+              emailToLabel: "Email this to:"
+              emailToValue: DUA@unemployment.gov
+              subjectLineLabel: "Subject Line:"
+              subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
+              showMissingDocumentDeadline: true
+              missingDocumentDeadline: >-
+                If you do not submit your documents by 00/00/0000, you will be denied your
+                claim and will be required to pay back any DUA funds released to you.
+              boxColor: Yielding Yellow
+              amountLabel: You owe $200
+              amountLineItems:
+                - label: Overpayment Total
+                  value: $200
+                - label: Amount waived
+                  value: $50
+                  bold: true
+                  italic: true
+              amountTotal:
+                label: You must pay
+                value: $150
                 bold: true
-                italic: true
-            amountTotal:
-              label: You must pay
-              value: $150
-              bold: true
-        - kind: RulesRightsRegulations
-          required: true
-          defaultValue:
-            variant: Appeal Rights
-            icon: Warning
-            boxColor: Yielding Yellow
-            reminderTitle: Reminder
-            reminderDescription:
-              - type: paragraph
-                children:
-                  - text: You may only be eligible for this waiver if...
-                    bold: true
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: ""
-              - type: numbered-list
-                children:
-                  - type: list-item
-                    children:
-                      - bold: true
-                        text: Overpayment was due to no fault of your own*
-                  - type: list-item
-                    children:
-                      - bold: true
-                        text: Repayment would be unfair and unreasonable given the context
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      This waiver is for Pandemic Unemployment Assistance (PUA), Federal
-                      Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment
-                      Compensation (MEUC), and Pandemic Extended Unemployment Compensation
-                      (PEUC).
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      *State and federal laws, rules, and guidance will be used to make
-                      these determinations.
-                    bold: true
-            appealRightsTitle: You must have an Employer Access account!
-            appealRightsSummary:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You will soon be required to provide separation information even if a
-                      claim is not filed.
-                    bold: true
-                    textSize: small
-              - type: paragraph
-                children:
-                  - text: >-
-                      The first step to being in compliance is registering with Employer
-                      Access.
-                    italic: true
-                    textSize: small
-            appealRightsShowInstruction: true
-            appealRightsInstruction:
-              - type: paragraph
-                children:
-                  - text: Sign up for an account today
-                    bold: true
-                  - text: " as we prepare to make this process easy and effective for you and your company."
-            appealRightsButton: Create an Account
-            appealRightsHref: >-
-              https://twes.dol.state.nj.us/EmployerValidator/homePage.htm?_gl=1*13w17e3*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY5NTczODYyMC4xMTEuMS4xNjk1NzM4NjMzLjAuMC4w*_ga_2F7W0D0NDJ*MTY5NTczODYyMC40NC4xLjE2OTU3Mzg2MzMuMC4wLjA.&amp;_ga=2.144651189.1634796142.1695653536-1043225092.1660310389
-            appealRightsShowInfoLabel: false
-            appealRightsInfoLabel: >-
-              More information regarding the new legislation and your Employer Access
-              account can be found here.
-            appealRightsShowInfo: true
-            appealRightsInfo:
-              - type: paragraph
-                children:
-                  - text: "More information regarding the "
-                    italic: true
-                    textSize: small
-                  - type: link
-                    url: >-
-                      https://pub.njleg.state.nj.us/Bills/2022/AL22/120_.PDF?_gl=1*1un8mj6*_ga*MTY2MjMzNjAwNC4xNjIxMDExNTYw*_ga_N8RFJ4LE4D*MTY5NjMzODg3OS41MS4wLjE2OTYzMzg4NzkuMC4wLjA.*_ga_2F7W0D0NDJ*MTY5NjMzODg3OS4xNi4wLjE2OTYzMzg4NzkuMC4wLjA.&_ga=2.193790445.1704654281.1696338880-1662336004.1621011560
-                    children:
-                      - text: new legislation
-                        italic: true
-                        textSize: small
-                  - text: " and your Employer Access account can be found "
-                    italic: true
-                    textSize: small
-                  - type: link
-                    url: >-
-                      https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml
-                    children:
-                      - text: here
-                        italic: true
-                        textSize: small
-                  - text: .
-                    italic: true
-                    textSize: small
-            yourRightsTitle: "Your Rights:"
-            showYourRightsDescription: true
-            yourRightsDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A dependent is an unemployed spouse/civil union partner or an
-                      unemployed, unmarried child (including stepchild or legally adopted
-                      child) under the age of 19 (or 22 if the child is attending school
-                      full-time).
-                    italic: true
-            yourRightsList:
-              - type: numbered-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may represent yourself or you may be represented at your own
-                          expense by an attorney or non-attorney
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may request a postponement, if you require additional time to
-                          prepare your response to this questionnaire
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may request that your employer produce any documents which
-                          relate to your eligibility for benefits
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may request that statements be taken from your witnesses who
-                          have firsthand knowledge of the case
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You or your representative will have the opportunity to provide
-                          witness statements, present documents and provide a closing
-                          statement or summary
-                  - type: list-item
-                    children:
-                      - text: >-
-                          If the reason for the questionnaire is related to your employment,
-                          any questions that you may have for your former employer may be
-                          included on the form and the reviewing claims examiner may, at
-                          his/her discretion, pose the question(s) to your former employer.
-        - kind: SupplementalContent
-          required: true
-          defaultValue:
-            variant: Single Supplemental Content
-            title: Feedback (Optional)
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This email is a new beta design created by New Jersey's Division of
-                      Unemployment Insurance in collaboration with New Jersey's Office of
-                      Innovation. Take our 2 minute survey
-                  - type: link
-                    url: "https://forms.office.com/g/50ttt7iewq"
-                    children:
-                      - text: here
-                  - text: .
-            secondTitle: Supplemental Content Title 2
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            thirdTitle: Supplemental Content Title 3
-            thirdDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            benefitAmountBoxColor: Granted Green
-            benefitAmountIcon: CreditCard
-            benefitAmountTitle: Your Benefit Details
-            benefitAmountDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A detailed breakdown of your benefit amount and how we got to that
-                      number will be mailed to you. If you disagree with it, appeal rights
-                      and processes are available.
-            benefitAmountBoxTitle: Benefit Amount
-            benefitAmountMainBoxCopy:
-              - type: paragraph
-                children:
-                  - text: "Weekly Rate:   "
-                    bold: true
-                  - text: $400
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: "Partial Weekly Rate:   "
-                    bold: true
-                  - text: $200
-                    bold: true
-            benefitAmountSupplementalBoxCopy:
-              - type: paragraph
-                children:
-                  - text: This rate includes an increase for dependency benefits
-                    bold: true
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      This amount is subject to change based on the submitted tax record or
-                      dependency documents you send in.
-                    italic: true
-            benefitAmountSupportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you're working part-time, a partial weekly rate (which is 20%
-                      higher than your weekly rate) will be used to calculate your benefit
-                      amount.
-                    italic: true
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on New Jersey's unemployment program can be found "
-                  - type: link
-                    url: "https://www.nj.gov/labor/myunemployment/employers/"
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+          - kind: RulesRightsRegulations
+            required: true
+            defaultValue:
+              variant: Appeal Rights
+              icon: Warning
+              boxColor: Yielding Yellow
+              reminderTitle: Reminder
+              reminderDescription:
+                - type: paragraph
+                  children:
+                    - text: You may only be eligible for this waiver if...
+                      bold: true
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: ""
+                - type: numbered-list
+                  children:
+                    - type: list-item
+                      children:
+                        - bold: true
+                          text: Overpayment was due to no fault of your own*
+                    - type: list-item
+                      children:
+                        - bold: true
+                          text: Repayment would be unfair and unreasonable given the context
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This waiver is for Pandemic Unemployment Assistance (PUA), Federal
+                        Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment
+                        Compensation (MEUC), and Pandemic Extended Unemployment Compensation
+                        (PEUC).
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        *State and federal laws, rules, and guidance will be used to make
+                        these determinations.
+                      bold: true
+              appealRightsTitle: You must have an Employer Access account!
+              appealRightsSummary:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You will soon be required to provide separation information even if a
+                        claim is not filed.
+                      bold: true
+                      textSize: small
+                - type: paragraph
+                  children:
+                    - text: >-
+                        The first step to being in compliance is registering with Employer
+                        Access.
+                      italic: true
+                      textSize: small
+              appealRightsShowInstruction: true
+              appealRightsInstruction:
+                - type: paragraph
+                  children:
+                    - text: Sign up for an account today
+                      bold: true
+                    - text: " as we prepare to make this process easy and effective for you and your company."
+              appealRightsButton: Create an Account
+              appealRightsHref: >-
+                https://twes.dol.state.nj.us/EmployerValidator/homePage.htm?_gl=1*13w17e3*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY5NTczODYyMC4xMTEuMS4xNjk1NzM4NjMzLjAuMC4w*_ga_2F7W0D0NDJ*MTY5NTczODYyMC40NC4xLjE2OTU3Mzg2MzMuMC4wLjA.&amp;_ga=2.144651189.1634796142.1695653536-1043225092.1660310389
+              appealRightsShowInfoLabel: false
+              appealRightsInfoLabel: >-
+                More information regarding the new legislation and your Employer Access
+                account can be found here.
+              appealRightsShowInfo: true
+              appealRightsInfo:
+                - type: paragraph
+                  children:
+                    - text: "More information regarding the "
+                      italic: true
+                      textSize: small
+                    - type: link
+                      url: >-
+                        https://pub.njleg.state.nj.us/Bills/2022/AL22/120_.PDF?_gl=1*1un8mj6*_ga*MTY2MjMzNjAwNC4xNjIxMDExNTYw*_ga_N8RFJ4LE4D*MTY5NjMzODg3OS41MS4wLjE2OTYzMzg4NzkuMC4wLjA.*_ga_2F7W0D0NDJ*MTY5NjMzODg3OS4xNi4wLjE2OTYzMzg4NzkuMC4wLjA.&_ga=2.193790445.1704654281.1696338880-1662336004.1621011560
+                      children:
+                        - text: new legislation
+                          italic: true
+                          textSize: small
+                    - text: " and your Employer Access account can be found "
+                      italic: true
+                      textSize: small
+                    - type: link
+                      url: >-
+                        https://www.nj.gov/labor/ea/employer-services/register-update/employeraccess.shtml
+                      children:
+                        - text: here
+                          italic: true
+                          textSize: small
+                    - text: .
+                      italic: true
+                      textSize: small
+              yourRightsTitle: "Your Rights:"
+              showYourRightsDescription: true
+              yourRightsDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A dependent is an unemployed spouse/civil union partner or an
+                        unemployed, unmarried child (including stepchild or legally adopted
+                        child) under the age of 19 (or 22 if the child is attending school
+                        full-time).
+                      italic: true
+              yourRightsList:
+                - type: numbered-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may represent yourself or you may be represented at your own
+                            expense by an attorney or non-attorney
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may request a postponement, if you require additional time to
+                            prepare your response to this questionnaire
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may request that your employer produce any documents which
+                            relate to your eligibility for benefits
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may request that statements be taken from your witnesses who
+                            have firsthand knowledge of the case
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You or your representative will have the opportunity to provide
+                            witness statements, present documents and provide a closing
+                            statement or summary
+                    - type: list-item
+                      children:
+                        - text: >-
+                            If the reason for the questionnaire is related to your employment,
+                            any questions that you may have for your former employer may be
+                            included on the form and the reviewing claims examiner may, at
+                            his/her discretion, pose the question(s) to your former employer.
+          - kind: SupplementalContent
+            required: true
+            defaultValue:
+              variant: Single Supplemental Content
+              title: Feedback (Optional)
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This email is a new beta design created by New Jersey's Division of
+                        Unemployment Insurance in collaboration with New Jersey's Office of
+                        Innovation. Take our 2 minute survey
+                    - type: link
+                      url: "https://forms.office.com/g/50ttt7iewq"
+                      children:
+                        - text: here
+                    - text: .
+              secondTitle: Supplemental Content Title 2
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              thirdTitle: Supplemental Content Title 3
+              thirdDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              benefitAmountBoxColor: Granted Green
+              benefitAmountIcon: CreditCard
+              benefitAmountTitle: Your Benefit Details
+              benefitAmountDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A detailed breakdown of your benefit amount and how we got to that
+                        number will be mailed to you. If you disagree with it, appeal rights
+                        and processes are available.
+              benefitAmountBoxTitle: Benefit Amount
+              benefitAmountMainBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: "Weekly Rate:   "
+                      bold: true
+                    - text: $400
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: "Partial Weekly Rate:   "
+                      bold: true
+                    - text: $200
+                      bold: true
+              benefitAmountSupplementalBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: This rate includes an increase for dependency benefits
+                      bold: true
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This amount is subject to change based on the submitted tax record or
+                        dependency documents you send in.
+                      italic: true
+              benefitAmountSupportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you're working part-time, a partial weekly rate (which is 20%
+                        higher than your weekly rate) will be used to calculate your benefit
+                        amount.
+                      italic: true
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on New Jersey's unemployment program can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/employers/"
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

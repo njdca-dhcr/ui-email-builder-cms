@@ -2,104 +2,104 @@ name: eAdjudication - Reminder (Incomplete Form)
 description: When someone needs to finish submitting their UI claim form.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Finish submitting your form
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Unemployment Insurance (UI)
-            name: Unemployment Insurance (UI)
-            backgroundColor: "#B9D8F3"
-        - kind: DirectiveButton
-          defaultValue:
-            visible: false
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "CAPTAIN AMERICA:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: Your Unemployment Insurance (UI) claim is under review and it has been found to be
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: More information needed
-            showSupportiveInformation: false
-            spaceAfter: false
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: "If you do not submit your form, you may not be eligible for benefits."
-        - kind: Directive
-          defaultValue:
-            variant: Three Steps
-            showTitle: false
-            showLabel: true
-            label:
-              - type: paragraph
-                children:
-                  - text: "To resolve this, complete the following steps:"
-            linkHref: >-
-              https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link
-            buttonLabel: Get Started
-            buttonColor: "#1b1b1b"
-            step1Label:
-              - type: paragraph
-                children:
-                  - text: Login & Answer
-                    bold: true
-                  - text: " all the questions"
-            showStep1AdditionalContent: true
-            step1Additional:
-              - type: paragraph
-                children:
-                  - text: This form will expire on 5/12/2022
-            step2Label:
-              - type: paragraph
-                children:
-                  - text: Certify
-                    bold: true
-                  - text: " your answers"
-            showStep2AdditionalContent: true
-            step2Additional:
-              - type: paragraph
-                children:
-                  - text: Check the “Certify” box at the end of your form!
-            step3Label:
-              - type: paragraph
-                children:
-                  - text: Submit
-                    bold: true
-                  - text: " your answers."
-                  - bold: true
-                    text: " Don't wait."
-            showStep3AdditionalContent: true
-            step3Additional:
-              - type: paragraph
-                children:
-                  - text: Look for a confirmation email
-            showMultipleStepsSupportiveText: false
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Finish submitting your form
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Unemployment Insurance (UI)
+              name: Unemployment Insurance (UI)
+              backgroundColor: "#B9D8F3"
+          - kind: DirectiveButton
+            defaultValue:
+              visible: false
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "CAPTAIN AMERICA:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: Your Unemployment Insurance (UI) claim is under review and it has been found to be
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: More information needed
+              showSupportiveInformation: false
+              spaceAfter: false
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: "If you do not submit your form, you may not be eligible for benefits."
+          - kind: Directive
+            defaultValue:
+              variant: Three Steps
+              showTitle: false
+              showLabel: true
+              label:
+                - type: paragraph
+                  children:
+                    - text: "To resolve this, complete the following steps:"
+              linkHref: >-
+                https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link
+              buttonLabel: Get Started
+              buttonColor: "#1b1b1b"
+              step1Label:
+                - type: paragraph
+                  children:
+                    - text: Login & Answer
+                      bold: true
+                    - text: " all the questions"
+              showStep1AdditionalContent: true
+              step1Additional:
+                - type: paragraph
+                  children:
+                    - text: This form will expire on 5/12/2022
+              step2Label:
+                - type: paragraph
+                  children:
+                    - text: Certify
+                      bold: true
+                    - text: " your answers"
+              showStep2AdditionalContent: true
+              step2Additional:
+                - type: paragraph
+                  children:
+                    - text: Check the “Certify” box at the end of your form!
+              step3Label:
+                - type: paragraph
+                  children:
+                    - text: Submit
+                      bold: true
+                    - text: " your answers."
+                    - bold: true
+                      text: " Don't wait."
+              showStep3AdditionalContent: true
+              step3Additional:
+                - type: paragraph
+                  children:
+                    - text: Look for a confirmation email
+              showMultipleStepsSupportiveText: false
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

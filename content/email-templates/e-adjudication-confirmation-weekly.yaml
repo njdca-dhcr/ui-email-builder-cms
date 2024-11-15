@@ -4,121 +4,121 @@ description: >-
   to the questionnaire we asked them to fill out
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: DateRange
-          defaultValue:
-            visible: false
-            range: "[00/00/0000 - 00/00/0000]"
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Questionnaire received
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Unemployment Insurance (UI)
-            name: Unemployment Insurance (UI)
-            backgroundColor: "#B9D8F3"
-        - kind: DirectiveButton
-          defaultValue:
-            visible: false
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "CAPTAIN AMERICA:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: Your Unemployment Insurance (UI) response is
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: Received &amp; Under Review
-            showSupportiveInformation: true
-            spaceAfter: true
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: It may take up to 4 weeks
-                    bold: true
-                  - text: " to determine your eligibility (results)."
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: Your determination details will arrive in the mail.
-                    italic: true
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Weekly Certifications
-            description:
-              - type: paragraph
-                children:
-                  - text: "While we review your claim, "
-                  - text: you must continue to certify for benefits every week.
-                    bold: true
-                  - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "You can now certify for benefits "
-                  - text: Sunday to Friday from 8am – 7pm.
-                    bold: true
-            secondTitle: Feedback (Optional)
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This email is a new beta design created by New Jersey's Division of
-                      Unemployment Insurance in collaboration with New Jersey's Office of
-                      Innovation. Take our 2 minute survey
-                  - text: " "
-                  - type: link
-                    url: >-
-                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
-                    children:
-                      - text: here
-                  - text: .
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on New Jersey's unemployment program can be found "
-                  - type: link
-                    url: >-
-                      https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
-                    children:
-                      - text: here
-                  - text: ". Frequently Asked Questions can be found "
-                  - type: link
-                    url: "https://www.nj.gov/labor/myunemployment/help/faqs/"
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: DateRange
+            defaultValue:
+              visible: false
+              range: "[00/00/0000 - 00/00/0000]"
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Questionnaire received
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Unemployment Insurance (UI)
+              name: Unemployment Insurance (UI)
+              backgroundColor: "#B9D8F3"
+          - kind: DirectiveButton
+            defaultValue:
+              visible: false
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "CAPTAIN AMERICA:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: Your Unemployment Insurance (UI) response is
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: Received &amp; Under Review
+              showSupportiveInformation: true
+              spaceAfter: true
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: It may take up to 4 weeks
+                      bold: true
+                    - text: " to determine your eligibility (results)."
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: Your determination details will arrive in the mail.
+                      italic: true
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Weekly Certifications
+              description:
+                - type: paragraph
+                  children:
+                    - text: "While we review your claim, "
+                    - text: you must continue to certify for benefits every week.
+                      bold: true
+                    - text: " You will only receive benefits for the weeks you have certified and have been found eligible."
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "You can now certify for benefits "
+                    - text: Sunday to Friday from 8am – 7pm.
+                      bold: true
+              secondTitle: Feedback (Optional)
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This email is a new beta design created by New Jersey's Division of
+                        Unemployment Insurance in collaboration with New Jersey's Office of
+                        Innovation. Take our 2 minute survey
+                    - text: " "
+                    - type: link
+                      url: >-
+                        https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
+                      children:
+                        - text: here
+                    - text: .
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on New Jersey's unemployment program can be found "
+                    - type: link
+                      url: >-
+                        https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                      children:
+                        - text: here
+                    - text: ". Frequently Asked Questions can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/help/faqs/"
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

@@ -2,103 +2,103 @@ name: DUA - Certification Confirmation
 description: Confirmation that NJ received their certification submission
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: We received your weekly DUA certification and it is under review. It may take up to 2 weeks to process—continue to look out for additional emails.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Weekly Certification Received
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Disaster Unemployment Assistance (DUA)
-            name: Disaster Unemployment Assistance (DUA)
-            backgroundColor: "#CCBDDF"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Your Disaster Unemployment Assistance (DUA) weekly certification is
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            status: Received &amp; Under Review
-            statusDueTo: because...
-            showSupportiveInformation: true
-            spaceAfter: true
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: It may take up to 2 weeks
-                    bold: true
-                  - text: " to determine if payment can be processed"
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A payment and/or determination will be made based on available
-                      information. If you are ineligible for this certification period, you
-                      will receive details in the mail.
-                    italic: true
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Next Week
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You will continue to receive certification emails. Complete these on a
-                      weekly basis until the end of the program.
-            secondTitle: Did you return to work full-time?
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you returned to work full-time and are no longer pursuing DUA, you
-                      can simply stop certifying. There are no additional forms.
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
-                  - type: link
-                    url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
-                    children:
-                      - text: here
-                  - text: ". Frequently Asked Questions can be found "
-                  - type: link
-                    url: >-
-                      https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    previewText: We received your weekly DUA certification and it is under review. It may take up to 2 weeks to process—continue to look out for additional emails.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Weekly Certification Received
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Disaster Unemployment Assistance (DUA)
+              name: Disaster Unemployment Assistance (DUA)
+              backgroundColor: "#CCBDDF"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Your Disaster Unemployment Assistance (DUA) weekly certification is
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              status: Received &amp; Under Review
+              statusDueTo: because...
+              showSupportiveInformation: true
+              spaceAfter: true
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: It may take up to 2 weeks
+                      bold: true
+                    - text: " to determine if payment can be processed"
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A payment and/or determination will be made based on available
+                        information. If you are ineligible for this certification period, you
+                        will receive details in the mail.
+                      italic: true
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Next Week
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You will continue to receive certification emails. Complete these on a
+                        weekly basis until the end of the program.
+              secondTitle: Did you return to work full-time?
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you returned to work full-time and are no longer pursuing DUA, you
+                        can simply stop certifying. There are no additional forms.
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                      children:
+                        - text: here
+                    - text: ". Frequently Asked Questions can be found "
+                    - type: link
+                      url: >-
+                        https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

@@ -5,507 +5,507 @@ description: >-
   their password so that they can access it more readily in the future.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: Set your password and finish creating your account. This login will help you respond to forms BC3E (Request for Separation with Monetary) and BC28 (Request for Separation).
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Employer Response Portal Access
-        - kind: DirectiveButton
-          defaultValue:
-            visible: false
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{!Receiving_User.Full_Name__c}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: Welcome to the Employer Response Portal.
-        - kind: LoginDetails
-          required: true
-          defaultValue:
-            variant: Information
-            loginDetailsTitle: "Your Username:"
-            usernameLabel: ""
-            usernameValue: "{!Receiving_User.Username}"
-            resetPasswordMessage:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you're having trouble logging in, send a request to reset your
-                      password.
-            button: Reset Password
-            buttonHref: >-
-              https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link
-            resetPasswordDetails:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Your request may take up to 7-10 business days. An email will be sent
-                      to you when your password has been reset.
-                    italic: true
-            loginDetailsIcon: Person
-            loginInformationTitle: "Your Username:"
-            loginInformationDescription:
-              - type: paragraph
-                children:
-                  - text: "{!Receiving_User.Username}"
-                    bold: true
-            showLoginInformationBody: false
-            loginInformationBody:
-              - type: paragraph
-                children:
-                  - text: ""
-                    italic: true
-            loginInformationIcon: Person
-        - kind: SupplementalContent
-          required: true
-          defaultValue:
-            variant: Single Supplemental Content
-            title: Finish creating your account
-            description:
-              - type: paragraph
-                children:
-                  - text: "Set your password to finish creating your account. "
-                  - text: "With this account, you will be able to respond to BC3E and/or BC28 forms."
-                    bold: true
-            secondTitle: Supplemental Content Title 2
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            thirdTitle: Supplemental Content Title 3
-            thirdDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            benefitAmountBoxColor: Granted Green
-            benefitAmountIcon: CreditCard
-            benefitAmountTitle: Your Benefit Details
-            benefitAmountDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A detailed breakdown of your benefit amount and how we got to that
-                      number will be mailed to you. If you disagree with it, appeal rights
-                      and processes are available.
-            benefitAmountBoxTitle: Benefit Amount
-            benefitAmountMainBoxCopy:
-              - type: paragraph
-                children:
-                  - text: "Weekly Rate:   "
-                    bold: true
-                  - text: $400
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: "Partial Weekly Rate:   "
-                    bold: true
-                  - text: $200
-                    bold: true
-            benefitAmountSupplementalBoxCopy:
-              - type: paragraph
-                children:
-                  - text: This rate includes an increase for dependency benefits
-                    bold: true
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      This amount is subject to change based on the submitted tax record or
-                      dependency documents you send in.
-                    italic: true
-            benefitAmountSupportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you're working part-time, a partial weekly rate (which is 20%
-                      higher than your weekly rate) will be used to calculate your benefit
-                      amount.
-                    italic: true
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            icon: Warning
-            status: BC3E & BC28
-            statusDueTo: because...
-            showSupportiveInformation: false
-            spaceAfter: false
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: Request for Separation with Monetary (BC3E)
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: Request for Separation (BC28)
-                    italic: true
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Supportive information around how the status above was informed and
-                      how a claimant will receive more detailed information and/or a
-                      determination.
-                    italic: true
-            documentsNeededLabel: "We need the following:"
-            documentsNeededValue: "{Name_of_document(s)}"
-            emailToLabel: "Email this to:"
-            emailToValue: DUA@unemployment.gov
-            subjectLineLabel: "Subject Line:"
-            subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
-            showMissingDocumentDeadline: true
-            missingDocumentDeadline: >-
-              If you do not submit your documents by 00/00/0000, you will be denied your
-              claim and will be required to pay back any DUA funds released to you.
-            boxColor: Yielding Yellow
-            amountLabel: You owe $200
-            overpaymentLabel: Overpayment Total
-            overpaymentValue: $200
-            waivedLabel: Amount waived
-            waivedValue: $50
-            totalLabel: You must pay
-            totalValue: $150
-        - kind: Directive
-          required: true
-          defaultValue:
-            variant: One Step
-            title: Directive Title
-            showTitle: false
-            showLabel: false
-            label:
-              - type: paragraph
-                children:
-                  - text: "To help resolve this issue, complete the following steps:"
-            linkHref: "{!Community_Url}"
-            buttonLabel: Set your password
-            buttonColor: "#1b1b1b"
-            step1Label:
-              - type: paragraph
-                children:
-                  - text: Step 1 Directive
-                    bold: true
-            showStep1AdditionalContent: true
-            step1Additional:
-              - type: paragraph
-                children:
-                  - text: Additional information around Step 1
-            oneStepSupportiveText:
-              - type: paragraph
-                children:
-                  - text: ""
-                    italic: true
-            step2Label:
-              - type: paragraph
-                children:
-                  - text: Step 2 Directive
-                    bold: true
-            showStep2AdditionalContent: true
-            step2Additional:
-              - type: paragraph
-                children:
-                  - text: Additional information around Step 2
-            step2Tertiary:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Tertiary information around Step 2, (usually involving an alternate
-                      way to complete the second step).
-            step2CaseNumber:
-              - type: paragraph
-                children:
-                  - text: "Case #: [000000]"
-            step3Label:
-              - type: paragraph
-                children:
-                  - text: Step 3 Directive
-                    bold: true
-            showStep3AdditionalContent: true
-            step3Additional:
-              - type: paragraph
-                children:
-                  - text: Additional information around Step 3
-            showMultipleStepsSupportiveText: true
-            multipleStepsSupportiveText:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
-                      tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
-                      quis congue eget, commodo eu urna. Donec laoreet a dui consequat
-                      sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
-                    italic: true
-            alternativePaymentLabel: >-
-              Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
-              Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
-            payOnlineSupportiveText:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Make the check or money order payable to NJ Dept. of Labor and
-                      Workforce Development. Be sure to write your name and social security
-                      number on the payment.
-        - kind: SupplementalContent
-          required: true
-          defaultValue:
-            variant: Double Supplemental Content
-            title: Need additional accounts for your company?
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You can add more users from your company to manage these forms. There
-                      is no limit to how many accounts your company can have
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "Create another account "
-                  - type: link
-                    url: >-
-                      https://njlwduiappeal.my.site.com/EmployerResponse2/s/login/SelfRegister
-                    children:
-                      - text: here
-                  - text: .
-            secondTitle: Feedback (Optional)
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This email is a new beta design created by New Jersey's Division of
-                      Unemployment Insurance in collaboration with New Jersey's Office of
-                      Innovation. Take our 2 minute survey
-                  - text: " "
-                  - type: link
-                    url: "https://forms.office.com/g/50ttt7iewq"
-                    children:
-                      - text: here
-                  - text: .
-            thirdTitle: Supplemental Content Title 3
-            thirdDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            benefitAmountBoxColor: Granted Green
-            benefitAmountIcon: CreditCard
-            benefitAmountTitle: Your Benefit Details
-            benefitAmountDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A detailed breakdown of your benefit amount and how we got to that
-                      number will be mailed to you. If you disagree with it, appeal rights
-                      and processes are available.
-            benefitAmountBoxTitle: Benefit Amount
-            benefitAmountMainBoxCopy:
-              - type: paragraph
-                children:
-                  - text: "Weekly Rate:   "
-                    bold: true
-                  - text: $400
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: "Partial Weekly Rate:   "
-                    bold: true
-                  - text: $200
-                    bold: true
-            benefitAmountSupplementalBoxCopy:
-              - type: paragraph
-                children:
-                  - text: This rate includes an increase for dependency benefits
-                    bold: true
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      This amount is subject to change based on the submitted tax record or
-                      dependency documents you send in.
-                    italic: true
-            benefitAmountSupportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you're working part-time, a partial weekly rate (which is 20%
-                      higher than your weekly rate) will be used to calculate your benefit
-                      amount.
-                    italic: true
-        - kind: RulesRightsRegulations
-          required: true
-          defaultValue:
-            variant: Appeal Rights
-            icon: Flag
-            reminderTitle: Are you looking for the BC2 portal?
-            eligibilityLabel: >-
-              <span style="font-weight: normal;">You may be trying to access the "Request
-              for Monetary Information", also known as the BC2</span>
-            eligibilityConditions:
-              - type: numbered-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: Overpayment was due to no fault of your own*
-                        bold: true
-                  - type: list-item
-                    children:
-                      - text: Repayment would be unfair and unreasonable given the context
-                        bold: true
-            showReminderIsFor: false
-            reminderIsFor:
-              - type: paragraph
-                children:
-                  - text: >-
-                      This waiver is for Pandemic Unemployment Assistance (PUA), Federal
-                      Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment
-                      Compensation (MEUC), and Pandemic Extended Unemployment Compensation
-                      (PEUC).
-                    italic: true
-            showFootnote: false
-            footnote:
-              - type: paragraph
-                children:
-                  - text: >-
-                      *State and federal laws, rules, and guidance will be used to make
-                      these determinations.
-                    italic: true
-                    bold: true
-            appealRightsTitle: Are you looking for the BC28 or BC3E portal?
-            appealRightsSummary:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You may be trying to access the "Request for Monetary Information",
-                      also known as the BC2.
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: A separate login is needed
-                    bold: true
-                  - text: " but you can use the same username and password for both accounts."
-            appealRightsShowInstruction: false
-            appealRightsInstruction:
-              - type: paragraph
-                children:
-                  - text: A separate login is needed
-                    bold: true
-                  - text: " but you can use the same username and password for both accounts"
-            appealRightsButton: Access BC2 Portal
-            appealRightsHref: >-
-              https://nj-lwd-ui-org2.my.site.com/EmployerResponse2/s/login/
-            appealRightsShowInfoLabel: false
-            appealRightsInfoLabel: "For your appeal:"
-            appealRightsShowInfo: false
-            appealRightsInfo:
-              - type: paragraph
-                children:
-                  - text: "Program Code:"
-                    bold: true
-                  - text: "  ###"
-              - type: paragraph
-                children:
-                  - text: "Date of Claim:"
-                    bold: true
-                  - text: "  00/00/0000"
-              - type: paragraph
-                children:
-                  - text: "Date of Determination:"
-                    bold: true
-                  - text: "  00/00/0000"
-            yourRightsTitle: "Your Rights:"
-            showYourRightsDescription: true
-            yourRightsDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A dependent is an unemployed spouse/civil union partner or an
-                      unemployed, unmarried child (including stepchild or legally adopted
-                      child) under the age of 19 (or 22 if the child is attending school
-                      full-time).
-                    italic: true
-            yourRightsList:
-              - type: numbered-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may represent yourself or you may be represented at your own
-                          expense by an attorney or non-attorney
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may request a postponement, if you require additional time to
-                          prepare your response to this questionnaire
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may request that your employer produce any documents which
-                          relate to your eligibility for benefits
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You may request that statements be taken from your witnesses who
-                          have firsthand knowledge of the case
-                  - type: list-item
-                    children:
-                      - text: >-
-                          You or your representative will have the opportunity to provide
-                          witness statements, present documents and provide a closing
-                          statement or summary
-                  - type: list-item
-                    children:
-                      - text: >-
-                          If the reason for the questionnaire is related to your employment,
-                          any questions that you may have for your former employer may be
-                          included on the form and the reviewing claims examiner may, at
-                          his/her discretion, pose the question(s) to your former employer.
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: "More information on employer forms can be found "
-                  - type: link
-                    url: "https://www.nj.gov/labor/myunemployment/employers/letter/index.shtml"
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    previewText: Set your password and finish creating your account. This login will help you respond to forms BC3E (Request for Separation with Monetary) and BC28 (Request for Separation).
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Employer Response Portal Access
+          - kind: DirectiveButton
+            defaultValue:
+              visible: false
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{!Receiving_User.Full_Name__c}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: Welcome to the Employer Response Portal.
+          - kind: LoginDetails
+            required: true
+            defaultValue:
+              variant: Information
+              loginDetailsTitle: "Your Username:"
+              usernameLabel: ""
+              usernameValue: "{!Receiving_User.Username}"
+              resetPasswordMessage:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you're having trouble logging in, send a request to reset your
+                        password.
+              button: Reset Password
+              buttonHref: >-
+                https://link.embedded-into-the-button-above.should-be-shown-here-in-order-to-give-an-alternative-way-to-access-a-link
+              resetPasswordDetails:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Your request may take up to 7-10 business days. An email will be sent
+                        to you when your password has been reset.
+                      italic: true
+              loginDetailsIcon: Person
+              loginInformationTitle: "Your Username:"
+              loginInformationDescription:
+                - type: paragraph
+                  children:
+                    - text: "{!Receiving_User.Username}"
+                      bold: true
+              showLoginInformationBody: false
+              loginInformationBody:
+                - type: paragraph
+                  children:
+                    - text: ""
+                      italic: true
+              loginInformationIcon: Person
+          - kind: SupplementalContent
+            required: true
+            defaultValue:
+              variant: Single Supplemental Content
+              title: Finish creating your account
+              description:
+                - type: paragraph
+                  children:
+                    - text: "Set your password to finish creating your account. "
+                    - text: "With this account, you will be able to respond to BC3E and/or BC28 forms."
+                      bold: true
+              secondTitle: Supplemental Content Title 2
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              thirdTitle: Supplemental Content Title 3
+              thirdDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              benefitAmountBoxColor: Granted Green
+              benefitAmountIcon: CreditCard
+              benefitAmountTitle: Your Benefit Details
+              benefitAmountDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A detailed breakdown of your benefit amount and how we got to that
+                        number will be mailed to you. If you disagree with it, appeal rights
+                        and processes are available.
+              benefitAmountBoxTitle: Benefit Amount
+              benefitAmountMainBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: "Weekly Rate:   "
+                      bold: true
+                    - text: $400
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: "Partial Weekly Rate:   "
+                      bold: true
+                    - text: $200
+                      bold: true
+              benefitAmountSupplementalBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: This rate includes an increase for dependency benefits
+                      bold: true
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This amount is subject to change based on the submitted tax record or
+                        dependency documents you send in.
+                      italic: true
+              benefitAmountSupportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you're working part-time, a partial weekly rate (which is 20%
+                        higher than your weekly rate) will be used to calculate your benefit
+                        amount.
+                      italic: true
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              icon: Warning
+              status: BC3E & BC28
+              statusDueTo: because...
+              showSupportiveInformation: false
+              spaceAfter: false
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: Request for Separation with Monetary (BC3E)
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: Request for Separation (BC28)
+                      italic: true
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Supportive information around how the status above was informed and
+                        how a claimant will receive more detailed information and/or a
+                        determination.
+                      italic: true
+              documentsNeededLabel: "We need the following:"
+              documentsNeededValue: "{Name_of_document(s)}"
+              emailToLabel: "Email this to:"
+              emailToValue: DUA@unemployment.gov
+              subjectLineLabel: "Subject Line:"
+              subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
+              showMissingDocumentDeadline: true
+              missingDocumentDeadline: >-
+                If you do not submit your documents by 00/00/0000, you will be denied your
+                claim and will be required to pay back any DUA funds released to you.
+              boxColor: Yielding Yellow
+              amountLabel: You owe $200
+              overpaymentLabel: Overpayment Total
+              overpaymentValue: $200
+              waivedLabel: Amount waived
+              waivedValue: $50
+              totalLabel: You must pay
+              totalValue: $150
+          - kind: Directive
+            required: true
+            defaultValue:
+              variant: One Step
+              title: Directive Title
+              showTitle: false
+              showLabel: false
+              label:
+                - type: paragraph
+                  children:
+                    - text: "To help resolve this issue, complete the following steps:"
+              linkHref: "{!Community_Url}"
+              buttonLabel: Set your password
+              buttonColor: "#1b1b1b"
+              step1Label:
+                - type: paragraph
+                  children:
+                    - text: Step 1 Directive
+                      bold: true
+              showStep1AdditionalContent: true
+              step1Additional:
+                - type: paragraph
+                  children:
+                    - text: Additional information around Step 1
+              oneStepSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: ""
+                      italic: true
+              step2Label:
+                - type: paragraph
+                  children:
+                    - text: Step 2 Directive
+                      bold: true
+              showStep2AdditionalContent: true
+              step2Additional:
+                - type: paragraph
+                  children:
+                    - text: Additional information around Step 2
+              step2Tertiary:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Tertiary information around Step 2, (usually involving an alternate
+                        way to complete the second step).
+              step2CaseNumber:
+                - type: paragraph
+                  children:
+                    - text: "Case #: [000000]"
+              step3Label:
+                - type: paragraph
+                  children:
+                    - text: Step 3 Directive
+                      bold: true
+              showStep3AdditionalContent: true
+              step3Additional:
+                - type: paragraph
+                  children:
+                    - text: Additional information around Step 3
+              showMultipleStepsSupportiveText: true
+              multipleStepsSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
+                        tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
+                        quis congue eget, commodo eu urna. Donec laoreet a dui consequat
+                        sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
+                      italic: true
+              alternativePaymentLabel: >-
+                Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
+                Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
+              payOnlineSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Make the check or money order payable to NJ Dept. of Labor and
+                        Workforce Development. Be sure to write your name and social security
+                        number on the payment.
+          - kind: SupplementalContent
+            required: true
+            defaultValue:
+              variant: Double Supplemental Content
+              title: Need additional accounts for your company?
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You can add more users from your company to manage these forms. There
+                        is no limit to how many accounts your company can have
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "Create another account "
+                    - type: link
+                      url: >-
+                        https://njlwduiappeal.my.site.com/EmployerResponse2/s/login/SelfRegister
+                      children:
+                        - text: here
+                    - text: .
+              secondTitle: Feedback (Optional)
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This email is a new beta design created by New Jersey's Division of
+                        Unemployment Insurance in collaboration with New Jersey's Office of
+                        Innovation. Take our 2 minute survey
+                    - text: " "
+                    - type: link
+                      url: "https://forms.office.com/g/50ttt7iewq"
+                      children:
+                        - text: here
+                    - text: .
+              thirdTitle: Supplemental Content Title 3
+              thirdDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              benefitAmountBoxColor: Granted Green
+              benefitAmountIcon: CreditCard
+              benefitAmountTitle: Your Benefit Details
+              benefitAmountDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A detailed breakdown of your benefit amount and how we got to that
+                        number will be mailed to you. If you disagree with it, appeal rights
+                        and processes are available.
+              benefitAmountBoxTitle: Benefit Amount
+              benefitAmountMainBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: "Weekly Rate:   "
+                      bold: true
+                    - text: $400
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: "Partial Weekly Rate:   "
+                      bold: true
+                    - text: $200
+                      bold: true
+              benefitAmountSupplementalBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: This rate includes an increase for dependency benefits
+                      bold: true
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This amount is subject to change based on the submitted tax record or
+                        dependency documents you send in.
+                      italic: true
+              benefitAmountSupportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you're working part-time, a partial weekly rate (which is 20%
+                        higher than your weekly rate) will be used to calculate your benefit
+                        amount.
+                      italic: true
+          - kind: RulesRightsRegulations
+            required: true
+            defaultValue:
+              variant: Appeal Rights
+              icon: Flag
+              reminderTitle: Are you looking for the BC2 portal?
+              eligibilityLabel: >-
+                <span style="font-weight: normal;">You may be trying to access the "Request
+                for Monetary Information", also known as the BC2</span>
+              eligibilityConditions:
+                - type: numbered-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: Overpayment was due to no fault of your own*
+                          bold: true
+                    - type: list-item
+                      children:
+                        - text: Repayment would be unfair and unreasonable given the context
+                          bold: true
+              showReminderIsFor: false
+              reminderIsFor:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This waiver is for Pandemic Unemployment Assistance (PUA), Federal
+                        Pandemic Unemployment Compensation (FPUC), Mixed Earners Unemployment
+                        Compensation (MEUC), and Pandemic Extended Unemployment Compensation
+                        (PEUC).
+                      italic: true
+              showFootnote: false
+              footnote:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        *State and federal laws, rules, and guidance will be used to make
+                        these determinations.
+                      italic: true
+                      bold: true
+              appealRightsTitle: Are you looking for the BC28 or BC3E portal?
+              appealRightsSummary:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You may be trying to access the "Request for Monetary Information",
+                        also known as the BC2.
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: A separate login is needed
+                      bold: true
+                    - text: " but you can use the same username and password for both accounts."
+              appealRightsShowInstruction: false
+              appealRightsInstruction:
+                - type: paragraph
+                  children:
+                    - text: A separate login is needed
+                      bold: true
+                    - text: " but you can use the same username and password for both accounts"
+              appealRightsButton: Access BC2 Portal
+              appealRightsHref: >-
+                https://nj-lwd-ui-org2.my.site.com/EmployerResponse2/s/login/
+              appealRightsShowInfoLabel: false
+              appealRightsInfoLabel: "For your appeal:"
+              appealRightsShowInfo: false
+              appealRightsInfo:
+                - type: paragraph
+                  children:
+                    - text: "Program Code:"
+                      bold: true
+                    - text: "  ###"
+                - type: paragraph
+                  children:
+                    - text: "Date of Claim:"
+                      bold: true
+                    - text: "  00/00/0000"
+                - type: paragraph
+                  children:
+                    - text: "Date of Determination:"
+                      bold: true
+                    - text: "  00/00/0000"
+              yourRightsTitle: "Your Rights:"
+              showYourRightsDescription: true
+              yourRightsDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A dependent is an unemployed spouse/civil union partner or an
+                        unemployed, unmarried child (including stepchild or legally adopted
+                        child) under the age of 19 (or 22 if the child is attending school
+                        full-time).
+                      italic: true
+              yourRightsList:
+                - type: numbered-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may represent yourself or you may be represented at your own
+                            expense by an attorney or non-attorney
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may request a postponement, if you require additional time to
+                            prepare your response to this questionnaire
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may request that your employer produce any documents which
+                            relate to your eligibility for benefits
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You may request that statements be taken from your witnesses who
+                            have firsthand knowledge of the case
+                    - type: list-item
+                      children:
+                        - text: >-
+                            You or your representative will have the opportunity to provide
+                            witness statements, present documents and provide a closing
+                            statement or summary
+                    - type: list-item
+                      children:
+                        - text: >-
+                            If the reason for the questionnaire is related to your employment,
+                            any questions that you may have for your former employer may be
+                            included on the form and the reviewing claims examiner may, at
+                            his/her discretion, pose the question(s) to your former employer.
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: "More information on employer forms can be found "
+                    - type: link
+                      url: "https://www.nj.gov/labor/myunemployment/employers/letter/index.shtml"
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

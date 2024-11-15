@@ -5,276 +5,276 @@ description: >-
   of how this date is calculated is included.
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: We've confirmed your identity and you can start certifying on {October 12}. Remember to certify every week! Details enclosed.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Your identity is confirmed — start certifying weekly on {{Attributes.Certification_Date}}
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "{{Attributes.Full_Name}}:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Thank you for verifying your identity. You can start certifying for
-                      benefits on
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview
-            icon: Warning
-            status: "Wednesday, {{Attributes.Certification_Date}}"
-            showSupportiveInformation: true
-            spaceAfter: false
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - bold: true
-                    text: "This is the day you can begin to certify for benefits. "
-                  - text: You may not certify before this date.
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If this date has passed, start certifying as soon as you can.
-                      Certification is available Sunday to Friday from 8am-7pm.
-                    italic: true
-        - kind: InformationalBox
-          required: true
-          defaultValue:
-            boxColor: Yielding Yellow
-            icon: Autorenew
-            title: Certifications are every week!
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You must answer the same set of questions every week to receive
-                      payment.
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "Recommendation:"
-                    bold: true
-                  - text: " Choose a day of the week and set an alert to certify so you don't forget."
-              - type: paragraph
-                children:
-                  - italic: true
-                    bold: true
-                    text: " "
-                    textSize: medium
-              - type: paragraph
-                children:
-                  - text: "You can certify for benefits "
-                    textSize: medium
-                  - bold: true
-                    text: Sunday to Friday from 8am-7pm.
-                    textSize: medium
-            showSupportiveInformation: false
-        - kind: Directive
-          required: true
-          defaultValue:
-            variant: One Step
-            title: 'Certify weekly<span style="font-weight: normal;">&nbsp;online:</span>'
-            showTitle: true
-            showLabel: true
-            label:
-              - type: paragraph
-                children:
-                  - text: "To help resolve this issue, complete the following steps:"
-            linkHref: "https://lwdlba.state.nj.us/CertQueueMini/employerVerifyForm.htm"
-            buttonLabel: Get Started
-            buttonColor: "#2378c3"
-            oneStepSupportiveText:
-              - type: paragraph
-                children:
-                  - text: "Or call:"
-                    textSize: large
-                    bold: true
-                  - textSize: large
-                    text: " 732-761-2020"
-        - kind: SupplementalContent
-          required: true
-          defaultvalue:
-            variant: Double Supplemental Content
-            title: Watch out for emails from NJDOL!
-            description:
-              - type: paragraph
-                children:
-                  - text: Answer any requests for information from NJDOL.
-                    bold: true
-                  - text: " Check your email for messages from no-reply@dol.nj.gov. We may reach out to you to review any eligibility issues about your claim. The sooner you respond, the faster we can process your claim."
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      Call 732-761-2020 if it has been 10 business days since you certified
-                      weekly and you still haven’t been paid OR heard from NJDOL about any
-                      eligibility issues.
-            secondTitle: When will you receive money after certifying?
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Benefit payments depend on your eligibility. Any identified issues
-                      must be resolved before payment can be issued.
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "If approved/eligible:"
-                    bold: true
-                  - text: " You will receive payment 2 days after you certify."
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "If denied/ineligible:"
-                    bold: true
-                  - text: " We will send a letter via postal mail explaining the reason your claim was denied. It may take up to 4 weeks to arrive."
-            thirdTitle: Supplemental Content Title 3
-            thirdDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                      ipsum dolor sit amet, consectetur adipiscing elit.
-            benefitAmountBoxColor: Granted Green
-            benefitAmountIcon: CreditCard
-            benefitAmountTitle: Your Benefit Details
-            benefitAmountDescription:
-              - type: paragraph
-                children:
-                  - text: >-
-                      A detailed breakdown of your benefit amount and how we got to that
-                      number will be mailed to you. If you disagree with it, appeal rights
-                      and processes are available.
-            benefitAmountBoxTitle: Benefit Amount
-            benefitAmountMainBoxCopy:
-              - type: paragraph
-                children:
-                  - text: "Weekly Rate:   "
-                    bold: true
-                  - text: $400
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: "Partial Weekly Rate:   "
-                    bold: true
-                  - text: $200
-                    bold: true
-            benefitAmountSupplementalBoxCopy:
-              - type: paragraph
-                children:
-                  - text: This rate includes an increase for dependency benefits
-                    bold: true
-                    italic: true
-              - type: paragraph
-                children:
-                  - text: " "
-              - type: paragraph
-                children:
-                  - text: >-
-                      This amount is subject to change based on the submitted tax record or
-                      dependency documents you send in.
-                    italic: true
-            benefitAmountSupportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      If you're working part-time, a partial weekly rate (which is 20%
-                      higher than your weekly rate) will be used to calculate your benefit
-                      amount.
-                    italic: true
-        - kind: InformationalBox
-          required: true
-          defaultValue:
-            boxColor: Benefit Blue
-            icon: Lock
-            title: "Why {{Attributes.Certification_Date}}?"
-            description:
-              - type: paragraph
-                children:
-                  - text: This date is calculated based on the week you filed your claim.
-                    bold: true
-                    textSize: medium
-              - type: paragraph
-                children:
-                  - bold: true
-                    textSize: medium
-                    text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      We use the beginning of the week you filed (Sunday) and count 17 days
-                      from that date.
-              - type: paragraph
-                children:
-                  - textSize: medium
-                    text: " "
-              - type: paragraph
-                children:
-                  - textSize: small
-                    text: >-
-                      For example, even if you file your claim on a Friday, we use the
-                      previous Sunday to calculate 17 days.
-              - type: paragraph
-                children:
-                  - bold: true
-                    textSize: medium
-                    text: ""
-            showSupportiveInformation: true
-            supportiveInformation:
-              - type: paragraph
-                children:
-                  - text: >-
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
-                      tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
-                      quis congue eget, commodo eu urna. Donec laoreet a dui consequat
-                      sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
-                    italic: true
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: "More information on certifying can be found "
-                  - type: link
-                    url: >-
-                      https://www.nj.gov/labor/myunemployment/before/about/howtoapply/howtocertify.shtml
-                    children:
-                      - text: here
-                  - text: .
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    previewText: We've confirmed your identity and you can start certifying on {October 12}. Remember to certify every week! Details enclosed.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Your identity is confirmed — start certifying weekly on {{Attributes.Certification_Date}}
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "{{Attributes.Full_Name}}:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Thank you for verifying your identity. You can start certifying for
+                        benefits on
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview
+              icon: Warning
+              status: "Wednesday, {{Attributes.Certification_Date}}"
+              showSupportiveInformation: true
+              spaceAfter: false
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - bold: true
+                      text: "This is the day you can begin to certify for benefits. "
+                    - text: You may not certify before this date.
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If this date has passed, start certifying as soon as you can.
+                        Certification is available Sunday to Friday from 8am-7pm.
+                      italic: true
+          - kind: InformationalBox
+            required: true
+            defaultValue:
+              boxColor: Yielding Yellow
+              icon: Autorenew
+              title: Certifications are every week!
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You must answer the same set of questions every week to receive
+                        payment.
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "Recommendation:"
+                      bold: true
+                    - text: " Choose a day of the week and set an alert to certify so you don't forget."
+                - type: paragraph
+                  children:
+                    - italic: true
+                      bold: true
+                      text: " "
+                      textSize: medium
+                - type: paragraph
+                  children:
+                    - text: "You can certify for benefits "
+                      textSize: medium
+                    - bold: true
+                      text: Sunday to Friday from 8am-7pm.
+                      textSize: medium
+              showSupportiveInformation: false
+          - kind: Directive
+            required: true
+            defaultValue:
+              variant: One Step
+              title: 'Certify weekly<span style="font-weight: normal;">&nbsp;online:</span>'
+              showTitle: true
+              showLabel: true
+              label:
+                - type: paragraph
+                  children:
+                    - text: "To help resolve this issue, complete the following steps:"
+              linkHref: "https://lwdlba.state.nj.us/CertQueueMini/employerVerifyForm.htm"
+              buttonLabel: Get Started
+              buttonColor: "#2378c3"
+              oneStepSupportiveText:
+                - type: paragraph
+                  children:
+                    - text: "Or call:"
+                      textSize: large
+                      bold: true
+                    - textSize: large
+                      text: " 732-761-2020"
+          - kind: SupplementalContent
+            required: true
+            defaultvalue:
+              variant: Double Supplemental Content
+              title: Watch out for emails from NJDOL!
+              description:
+                - type: paragraph
+                  children:
+                    - text: Answer any requests for information from NJDOL.
+                      bold: true
+                    - text: " Check your email for messages from no-reply@dol.nj.gov. We may reach out to you to review any eligibility issues about your claim. The sooner you respond, the faster we can process your claim."
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Call 732-761-2020 if it has been 10 business days since you certified
+                        weekly and you still haven’t been paid OR heard from NJDOL about any
+                        eligibility issues.
+              secondTitle: When will you receive money after certifying?
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Benefit payments depend on your eligibility. Any identified issues
+                        must be resolved before payment can be issued.
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "If approved/eligible:"
+                      bold: true
+                    - text: " You will receive payment 2 days after you certify."
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "If denied/ineligible:"
+                      bold: true
+                    - text: " We will send a letter via postal mail explaining the reason your claim was denied. It may take up to 4 weeks to arrive."
+              thirdTitle: Supplemental Content Title 3
+              thirdDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                        purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                        ipsum dolor sit amet, consectetur adipiscing elit.
+              benefitAmountBoxColor: Granted Green
+              benefitAmountIcon: CreditCard
+              benefitAmountTitle: Your Benefit Details
+              benefitAmountDescription:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        A detailed breakdown of your benefit amount and how we got to that
+                        number will be mailed to you. If you disagree with it, appeal rights
+                        and processes are available.
+              benefitAmountBoxTitle: Benefit Amount
+              benefitAmountMainBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: "Weekly Rate:   "
+                      bold: true
+                    - text: $400
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: "Partial Weekly Rate:   "
+                      bold: true
+                    - text: $200
+                      bold: true
+              benefitAmountSupplementalBoxCopy:
+                - type: paragraph
+                  children:
+                    - text: This rate includes an increase for dependency benefits
+                      bold: true
+                      italic: true
+                - type: paragraph
+                  children:
+                    - text: " "
+                - type: paragraph
+                  children:
+                    - text: >-
+                        This amount is subject to change based on the submitted tax record or
+                        dependency documents you send in.
+                      italic: true
+              benefitAmountSupportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If you're working part-time, a partial weekly rate (which is 20%
+                        higher than your weekly rate) will be used to calculate your benefit
+                        amount.
+                      italic: true
+          - kind: InformationalBox
+            required: true
+            defaultValue:
+              boxColor: Benefit Blue
+              icon: Lock
+              title: "Why {{Attributes.Certification_Date}}?"
+              description:
+                - type: paragraph
+                  children:
+                    - text: This date is calculated based on the week you filed your claim.
+                      bold: true
+                      textSize: medium
+                - type: paragraph
+                  children:
+                    - bold: true
+                      textSize: medium
+                      text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        We use the beginning of the week you filed (Sunday) and count 17 days
+                        from that date.
+                - type: paragraph
+                  children:
+                    - textSize: medium
+                      text: " "
+                - type: paragraph
+                  children:
+                    - textSize: small
+                      text: >-
+                        For example, even if you file your claim on a Friday, we use the
+                        previous Sunday to calculate 17 days.
+                - type: paragraph
+                  children:
+                    - bold: true
+                      textSize: medium
+                      text: ""
+              showSupportiveInformation: true
+              supportiveInformation:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
+                        tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
+                        quis congue eget, commodo eu urna. Donec laoreet a dui consequat
+                        sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
+                      italic: true
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: "More information on certifying can be found "
+                    - type: link
+                      url: >-
+                        https://www.nj.gov/labor/myunemployment/before/about/howtoapply/howtocertify.shtml
+                      children:
+                        - text: here
+                    - text: .
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true
