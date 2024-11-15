@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { EmailTemplate } from 'src/appTypes'
 import {
+  buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
@@ -13,12 +14,15 @@ describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate.Unique.Config
 
   beforeEach(() => {
-    emailTemplate = buildUniqueEmailConfig()
+    emailTemplate = buildUniqueEmailConfig({
+      translations: [buildEmailTranslation({ language: 'english' })],
+    })
   })
 
   it('displays a link back to the home page', () => {
     const { baseElement } = render(
       <EmailEditorSidebar
+        language="english"
         emailTemplate={emailTemplate}
         heading={<h1>{faker.lorem.words(3)}</h1>}
       />,
@@ -30,25 +34,39 @@ describe('EmailEditorSidebar', () => {
   it('displays the given heading', () => {
     const title = faker.lorem.words(3)
     const { baseElement } = render(
-      <EmailEditorSidebar emailTemplate={emailTemplate} heading={<h1>{title}</h1>} />,
+      <EmailEditorSidebar
+        language="english"
+        emailTemplate={emailTemplate}
+        heading={<h1>{title}</h1>}
+      />,
     )
     expect(baseElement).toContainHTML(`<h1>${title}</h1>`)
   })
 
   it('displays email edit component and subcomponent toggles', () => {
     emailTemplate = buildUniqueEmailConfig({
-      components: [
-        buildUniqueEmailComponent('Banner'),
-        buildUniqueEmailComponent('Header', {
-          subComponents: [buildUniqueEmailSubComponent({ kind: 'Title' })],
-        }),
-        buildUniqueEmailComponent('Footer', {
-          subComponents: [buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })],
-        }),
+      translations: [
+        {
+          language: 'english',
+          components: [
+            buildUniqueEmailComponent('Banner'),
+            buildUniqueEmailComponent('Header', {
+              subComponents: [buildUniqueEmailSubComponent({ kind: 'Title' })],
+            }),
+            buildUniqueEmailComponent('Footer', {
+              subComponents: [buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })],
+            }),
+          ],
+        },
+        {
+          language: 'spanish',
+          components: [],
+        },
       ],
     })
     const { queryByLabelText, queryAllByLabelText } = render(
       <EmailEditorSidebar
+        language="english"
         emailTemplate={emailTemplate}
         heading={<h1>{faker.lorem.words(3)}</h1>}
       />,
@@ -66,7 +84,11 @@ describe('EmailEditorSidebar', () => {
   describe('without an email template', () => {
     it('does not render the accordion', () => {
       const { baseElement } = render(
-        <EmailEditorSidebar emailTemplate={undefined} heading={<h1>{faker.lorem.words(3)}</h1>} />,
+        <EmailEditorSidebar
+          language="english"
+          emailTemplate={undefined}
+          heading={<h1>{faker.lorem.words(3)}</h1>}
+        />,
       )
 
       expect(baseElement.querySelector('.sidebar-accordion-container')).toBeNull()

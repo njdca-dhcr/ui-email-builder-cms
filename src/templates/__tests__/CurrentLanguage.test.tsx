@@ -1,47 +1,65 @@
 import React from 'react'
 import { faker } from '@faker-js/faker'
 import { act, render, renderHook } from '@testing-library/react'
-import { CurrentLanguage, useCurrentLanguage, useCurrentTranslation } from '../CurrentLanguage'
-import { EmailTemplateConfig } from '../EmailTemplateConfig'
+import { CurrentLanguage, translationForLanguage, useCurrentLanguage } from '../CurrentLanguage'
 import { buildEmailTranslation, buildUniqueEmailConfig } from 'src/factories'
-import { EmailTranslation } from 'src/appTypes/EmailTranslation'
+import { EmailTemplate } from 'src/appTypes'
 
 describe('CurrentLanguage', () => {
+  let emailTemplate: EmailTemplate.Unique.Config
+
+  beforeEach(async () => {
+    emailTemplate = buildUniqueEmailConfig({
+      translations: [
+        buildEmailTranslation({ language: 'english' }),
+        buildEmailTranslation({ language: 'spanish' }),
+      ],
+    })
+  })
+
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <EmailTemplateConfig
-        emailTemplateConfig={buildUniqueEmailConfig({
-          translations: [
-            buildEmailTranslation({ language: 'english' }),
-            buildEmailTranslation({ language: 'spanish' }),
-          ],
-        })}
-      >
-        <CurrentLanguage>
-          <div>{text}</div>
-        </CurrentLanguage>
-      </EmailTemplateConfig>,
+      <CurrentLanguage emailTemplateConfig={emailTemplate}>
+        {() => {
+          return <div>{text}</div>
+        }}
+      </CurrentLanguage>,
     )
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  it('yields its context', () => {
+    render(
+      <CurrentLanguage emailTemplateConfig={emailTemplate}>
+        {(value) => {
+          const [language, setLanguage] = value
+          expect(language).toEqual('english')
+          expect(setLanguage).toEqual(expect.any(Function))
+          return null
+        }}
+      </CurrentLanguage>,
+    )
   })
 })
 
 describe('useCurrentLanguage', () => {
+  let emailTemplate: EmailTemplate.Unique.Config
+
+  beforeEach(async () => {
+    emailTemplate = buildUniqueEmailConfig({
+      translations: [
+        buildEmailTranslation({ language: 'english' }),
+        buildEmailTranslation({ language: 'spanish' }),
+      ],
+    })
+  })
+
   const renderCurrentLanguage = () => {
     return renderHook(() => useCurrentLanguage(), {
       wrapper: ({ children }) => {
         return (
-          <EmailTemplateConfig
-            emailTemplateConfig={buildUniqueEmailConfig({
-              translations: [
-                buildEmailTranslation({ language: 'english' }),
-                buildEmailTranslation({ language: 'spanish' }),
-              ],
-            })}
-          >
-            <CurrentLanguage>{children}</CurrentLanguage>
-          </EmailTemplateConfig>
+          <CurrentLanguage emailTemplateConfig={emailTemplate}>{() => children}</CurrentLanguage>
         )
       },
     })
@@ -67,34 +85,25 @@ describe('useCurrentLanguage', () => {
   })
 })
 
-describe('useCurrentTranslation', () => {
-  let englishTranslation: EmailTranslation.Unique
-  let spanishTranslation: EmailTranslation.Unique
+describe('translationForLanguage', () => {
+  it('is the current translation for the language', async () => {
+    const english = buildEmailTranslation({ language: 'english' })
+    const spanish = buildEmailTranslation({ language: 'spanish' })
+    const emailTemplate = buildUniqueEmailConfig({
+      translations: [english, spanish],
+    })
 
-  beforeEach(async () => {
-    englishTranslation = buildEmailTranslation({ language: 'english' })
-    spanishTranslation = buildEmailTranslation({ language: 'spanish' })
+    expect(translationForLanguage(emailTemplate, 'english')).toEqual(english)
+    expect(translationForLanguage(emailTemplate, 'spanish')).toEqual(spanish)
   })
 
-  const renderCurrentTranslation = () => {
-    return renderHook(() => useCurrentTranslation(), {
-      wrapper: ({ children }) => {
-        return (
-          <EmailTemplateConfig
-            emailTemplateConfig={buildUniqueEmailConfig({
-              translations: [englishTranslation, spanishTranslation],
-            })}
-          >
-            <CurrentLanguage>{children}</CurrentLanguage>
-          </EmailTemplateConfig>
-        )
-      },
+  it('throws an error if there is no translation for the language', async () => {
+    const emailTemplate = buildUniqueEmailConfig({
+      translations: [buildEmailTranslation({ language: 'english' })],
     })
-  }
 
-  it('is the translation that matches the current language', async () => {
-    const { result } = renderCurrentTranslation()
-
-    expect(result.current).toEqual(englishTranslation)
+    expect(() => translationForLanguage(emailTemplate, 'spanish')).toThrow(
+      /no translation for: spanish/i,
+    )
   })
 })

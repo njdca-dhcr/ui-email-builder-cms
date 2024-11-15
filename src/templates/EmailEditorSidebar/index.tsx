@@ -1,15 +1,20 @@
 import React, { FC, ReactElement } from 'react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, Language } from 'src/appTypes'
 import { Sidebar, SkipNavContent, SpacedSidebarContainer } from 'src/ui'
 import { BackLink } from './BackLink'
 import { EmailEditorSidebarAccordion } from './EmailEditorSidebarAccordion'
+import { translationForLanguage } from '../CurrentLanguage'
 
 interface Props {
   emailTemplate?: EmailTemplate.Unique.Config
   heading: ReactElement
+  language: Language
 }
 
-export const EmailEditorSidebar: FC<Props> = ({ emailTemplate, heading }) => {
+export const EmailEditorSidebar: FC<Props> = ({ emailTemplate, heading, language }) => {
+  const translation = emailTemplate && translationForLanguage(emailTemplate, language)
+  const components = translation?.components ?? []
+
   return (
     <Sidebar id="sidebar-container">
       <SpacedSidebarContainer>
@@ -19,7 +24,7 @@ export const EmailEditorSidebar: FC<Props> = ({ emailTemplate, heading }) => {
       </SpacedSidebarContainer>
       {emailTemplate && (
         <EmailEditorSidebarAccordion.Container>
-          {(emailTemplate.components ?? []).map((emailComponent) => (
+          {components.map((emailComponent) => (
             <EmailEditorSidebarAccordion.EmailComponent
               key={emailComponent.id}
               emailComponent={emailComponent}

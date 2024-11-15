@@ -13,6 +13,7 @@ import { PreviewText } from './PreviewText'
 import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
 import uniqueId from 'lodash.uniqueid'
 import './EmailEditorPage.css'
+import { CurrentLanguage } from './CurrentLanguage'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Base.Config
@@ -25,7 +26,10 @@ interface Props {
 const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   const [emailTemplate] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
-    components: addIds(pageContext.emailTemplate.components ?? []),
+    translations: (pageContext.emailTemplate.translations ?? []).map((translation) => ({
+      ...translation,
+      components: addIds(translation.components),
+    })),
   }))
 
   return (
@@ -34,17 +38,22 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
         <CurrentlyActiveEmailPart>
           <SyncSidebarAndPreviewScroll>
             <ClearCurrentlyActiveEmailPart />
-            <EmailPartsContent>
-              <EmailEditorSidebar
-                emailTemplate={emailTemplate}
-                heading={<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />}
-              />
-              <PreviewText initialValue={emailTemplate.previewText}>
-                <PageContent element="div" className="email-editor-page-content">
-                  <EmailEditorContent emailTemplate={emailTemplate} />
-                </PageContent>
-              </PreviewText>
-            </EmailPartsContent>
+            <CurrentLanguage emailTemplateConfig={emailTemplate}>
+              {([language]) => (
+                <EmailPartsContent>
+                  <EmailEditorSidebar
+                    language={language}
+                    emailTemplate={emailTemplate}
+                    heading={<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />}
+                  />
+                  <PreviewText initialValue={emailTemplate.previewText}>
+                    <PageContent element="div" className="email-editor-page-content">
+                      <EmailEditorContent emailTemplate={emailTemplate} />
+                    </PageContent>
+                  </PreviewText>
+                </EmailPartsContent>
+              )}
+            </CurrentLanguage>
           </SyncSidebarAndPreviewScroll>
         </CurrentlyActiveEmailPart>
       </EmailTemplateConfig>

@@ -125,6 +125,17 @@ export const buildEmailTemplateIndex = (
   }
 }
 
+export const buildBaseEmailTranslation = (
+  attributes?: Partial<EmailTranslation.Base>,
+): EmailTranslation.Base => {
+  return {
+    language: 'english',
+    components: [buildEmailTemplateComponent('Header')],
+    previewText: faker.lorem.paragraph(),
+    ...attributes,
+  }
+}
+
 export const buildEmailTranslation = (
   attributes?: Partial<EmailTranslation.Unique>,
 ): EmailTranslation.Unique => {
