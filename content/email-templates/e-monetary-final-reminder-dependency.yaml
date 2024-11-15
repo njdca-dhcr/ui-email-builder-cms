@@ -1,197 +1,199 @@
 name: eMonetary - Final Reminder (Dependency Only)
 description: To send a final reminder (24 hours before expiration date) that their form will expire
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Your response has been received
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Dependency Benefits
-          name: Dependency Benefits
-          backgroundColor: "#E1E291"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: Your Dependency Benefits application needs some additional information.
-      - kind: Directive
-        required: true
-        defaultValue:
-          variant: One Step
-          title: >-
-            Complete &amp; Submit<span style="font-weight: normal;">&nbsp;waiver
-            form:</span>
-          showTitle: true
-          showLabel: true
-          label:
-            - type: paragraph
-              children:
-                - text: "To help resolve this issue, complete the following steps:"
-          linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
-          buttonLabel: Get Started
-          buttonColor: "#1b1b1b"
-          step1Label:
-            - type: paragraph
-              children:
-                - text: Step 1 Directive
-                  bold: true
-          showStep1AdditionalContent: true
-          step1Additional:
-            - type: paragraph
-              children:
-                - text: Additional information around Step 1
-          oneStepSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    This link will expire on
-                    {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}. Don't wait!
-                  italic: true
-          step2Label:
-            - type: paragraph
-              children:
-                - text: Step 2 Directive
-                  bold: true
-          showStep2AdditionalContent: true
-          step2Additional:
-            - type: paragraph
-              children:
-                - text: Additional information around Step 2
-          step2Tertiary:
-            - type: paragraph
-              children:
-                - text: >-
-                    Tertiary information around Step 2, (usually involving an alternate
-                    way to complete the second step).
-          step2CaseNumber:
-            - type: paragraph
-              children:
-                - text: "Case #: [000000]"
-          step3Label:
-            - type: paragraph
-              children:
-                - text: Step 3 Directive
-                  bold: true
-          showStep3AdditionalContent: true
-          step3Additional:
-            - type: paragraph
-              children:
-                - text: Additional information around Step 3
-          showMultipleStepsSupportiveText: true
-          multipleStepsSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
-                    tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
-                    quis congue eget, commodo eu urna. Donec laoreet a dui consequat
-                    sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
-                  italic: true
-          alternativePaymentLabel: >-
-            Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
-            Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
-          payOnlineSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    Make the check or money order payable to NJ Dept. of Labor and
-                    Workforce Development. Be sure to write your name and social security
-                    number on the payment.
-      - kind: SupplementalContent
-        defaultValue:
-          variant: Double Supplemental Content
-          title: Certify your answers
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    To complete your submission, check the "Certify" box and click the
-                    "Submit" button on the "Certify & Submit" page.
-          secondTitle: Are you receiving multiple emails?
-          secondDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    You may receive multiple emails with a link to a questionnaire that
-                    needs to be completed.
-                - text: It is important to follow the link in each email
-                  bold: true
-                - text: " and complete all of the questionnaires that are sent to you."
-          thirdTitle: Supplemental Content Title 3
-          thirdDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                    purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                    ipsum dolor sit amet, consectetur adipiscing elit.
-          benefitAmountBoxColor: Granted Green
-          benefitAmountIcon: CreditCard
-          benefitAmountTitle: Your Benefit Details
-          benefitAmountDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    A detailed breakdown of your benefit amount and how we got to that
-                    number will be mailed to you. If you disagree with it, appeal rights
-                    and processes are available.
-          benefitAmountBoxTitle: Benefit Amount
-          benefitAmountMainBoxCopy:
-            - type: paragraph
-              children:
-                - text: "Weekly Rate:   "
-                  bold: true
-                - text: $400
-                  bold: true
-            - type: paragraph
-              children:
-                - text: "Partial Weekly Rate:   "
-                  bold: true
-                - text: $200
-                  bold: true
-          benefitAmountSupplementalBoxCopy:
-            - type: paragraph
-              children:
-                - text: This rate includes an increase for dependency benefits
-                  bold: true
-                  italic: true
-            - type: paragraph
-              children:
-                - text: " "
-            - type: paragraph
-              children:
-                - text: >-
-                    This amount is subject to change based on the submitted tax record or
-                    dependency documents you send in.
-                  italic: true
-          benefitAmountSupportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you're working part-time, a partial weekly rate (which is 20%
-                    higher than your weekly rate) will be used to calculate your benefit
-                    amount.
-                  italic: true
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Your response has been received
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Dependency Benefits
+            name: Dependency Benefits
+            backgroundColor: "#E1E291"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: Your Dependency Benefits application needs some additional information.
+        - kind: Directive
+          required: true
+          defaultValue:
+            variant: One Step
+            title: >-
+              Complete &amp; Submit<span style="font-weight: normal;">&nbsp;waiver
+              form:</span>
+            showTitle: true
+            showLabel: true
+            label:
+              - type: paragraph
+                children:
+                  - text: "To help resolve this issue, complete the following steps:"
+            linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
+            buttonLabel: Get Started
+            buttonColor: "#1b1b1b"
+            step1Label:
+              - type: paragraph
+                children:
+                  - text: Step 1 Directive
+                    bold: true
+            showStep1AdditionalContent: true
+            step1Additional:
+              - type: paragraph
+                children:
+                  - text: Additional information around Step 1
+            oneStepSupportiveText:
+              - type: paragraph
+                children:
+                  - text: >-
+                      This link will expire on
+                      {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}. Don't wait!
+                    italic: true
+            step2Label:
+              - type: paragraph
+                children:
+                  - text: Step 2 Directive
+                    bold: true
+            showStep2AdditionalContent: true
+            step2Additional:
+              - type: paragraph
+                children:
+                  - text: Additional information around Step 2
+            step2Tertiary:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Tertiary information around Step 2, (usually involving an alternate
+                      way to complete the second step).
+            step2CaseNumber:
+              - type: paragraph
+                children:
+                  - text: "Case #: [000000]"
+            step3Label:
+              - type: paragraph
+                children:
+                  - text: Step 3 Directive
+                    bold: true
+            showStep3AdditionalContent: true
+            step3Additional:
+              - type: paragraph
+                children:
+                  - text: Additional information around Step 3
+            showMultipleStepsSupportiveText: true
+            multipleStepsSupportiveText:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a
+                      tellus nec eros placerat ornare at sed ante. Duis enim quam, auctor
+                      quis congue eget, commodo eu urna. Donec laoreet a dui consequat
+                      sollicitudin. Aliquam et dapibus ex, at malesuada tellus.
+                    italic: true
+            alternativePaymentLabel: >-
+              Or, send a check here: <br>Bureau of Benefit Payment Control<br>c/o Refund
+              Processing Station<br>P.O. Box 951<br>Trenton, NJ 08625-0951
+            payOnlineSupportiveText:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Make the check or money order payable to NJ Dept. of Labor and
+                      Workforce Development. Be sure to write your name and social security
+                      number on the payment.
+        - kind: SupplementalContent
+          defaultValue:
+            variant: Double Supplemental Content
+            title: Certify your answers
+            description:
+              - type: paragraph
+                children:
+                  - text: >-
+                      To complete your submission, check the "Certify" box and click the
+                      "Submit" button on the "Certify & Submit" page.
+            secondTitle: Are you receiving multiple emails?
+            secondDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      You may receive multiple emails with a link to a questionnaire that
+                      needs to be completed.
+                  - text: It is important to follow the link in each email
+                    bold: true
+                  - text: " and complete all of the questionnaires that are sent to you."
+            thirdTitle: Supplemental Content Title 3
+            thirdDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                      ipsum dolor sit amet, consectetur adipiscing elit.
+            benefitAmountBoxColor: Granted Green
+            benefitAmountIcon: CreditCard
+            benefitAmountTitle: Your Benefit Details
+            benefitAmountDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      A detailed breakdown of your benefit amount and how we got to that
+                      number will be mailed to you. If you disagree with it, appeal rights
+                      and processes are available.
+            benefitAmountBoxTitle: Benefit Amount
+            benefitAmountMainBoxCopy:
+              - type: paragraph
+                children:
+                  - text: "Weekly Rate:   "
+                    bold: true
+                  - text: $400
+                    bold: true
+              - type: paragraph
+                children:
+                  - text: "Partial Weekly Rate:   "
+                    bold: true
+                  - text: $200
+                    bold: true
+            benefitAmountSupplementalBoxCopy:
+              - type: paragraph
+                children:
+                  - text: This rate includes an increase for dependency benefits
+                    bold: true
+                    italic: true
+              - type: paragraph
+                children:
+                  - text: " "
+              - type: paragraph
+                children:
+                  - text: >-
+                      This amount is subject to change based on the submitted tax record or
+                      dependency documents you send in.
+                    italic: true
+            benefitAmountSupportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you're working part-time, a partial weekly rate (which is 20%
+                      higher than your weekly rate) will be used to calculate your benefit
+                      amount.
+                    italic: true
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

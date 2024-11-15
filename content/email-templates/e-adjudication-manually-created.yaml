@@ -1,211 +1,213 @@
 name: eAdjudication - Manually Created
 description: >-
-  To tell a claimant that there is an issue with their claim and that more 
+  To tell a claimant that there is an issue with their claim and that more
   information is needed. (This is sent manually by an agent so time sent varies)
 
   They will need to fill out a customized questionnaire.
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: New issue regarding your claim
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Unemployment Insurance (UI)
-          name: Unemployment Insurance (UI)
-          backgroundColor: "#B9D8F3"
-      - kind: DirectiveButton
-        defaultValue:
-          visible: false
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "CAPTAIN AMERICA:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: Your Unemployment Insurance (UI) claim has a new issue and we need some more information.
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview With Reason
-          status: More information needed
-          statusDueTo: and...
-          showSupportiveInformation: false
-          spaceAfter: false
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: we need a response from you.
-                  bold: true
-      - kind: Directive
-        defaultValue:
-          variant: Three Steps
-          showTitle: false
-          showLabel: true
-          label:
-            - type: paragraph
-              children:
-                - text: "To resolve this, complete the following steps:"
-          linkHref: >-
-            https://forms.office.com/Pages/ResponsePage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8zTKxTpe0RMmjY7qrMr_3BUOFlVUklYTzhDQjlWR0NaMVk1NjBQODJDWCQlQCN0PWcu
-          buttonLabel: Get Started
-          buttonColor: "#1b1b1b"
-          step1Label:
-            - type: paragraph
-              children:
-                - text: Login & Answer
-                  bold: true
-                - text: " all the questions"
-          showStep1AdditionalContent: true
-          step1Additional:
-            - type: paragraph
-              children:
-                - text: This form will expire on 5/12/2022
-          step2Label:
-            - type: paragraph
-              children:
-                - text: Upload
-                  bold: true
-                - text: " documentation (if necessary)"
-          showStep2AdditionalContent: true
-          step2Additional:
-            - type: paragraph
-              children:
-                - text: Required proofs must be sent by 00/00/0000
-          step3Label:
-            - type: paragraph
-              children:
-                - text: Submit
-                  bold: true
-                - text: " your answers."
-                - bold: true
-                  text: " Don't wait."
-          showStep3AdditionalContent: true
-          step3Additional:
-            - type: paragraph
-              children:
-                - text: Look for a confirmation
-          showMultipleStepsSupportiveText: true
-          multipleStepsSupportiveText:
-            - type: paragraph
-              children:
-                - text: >-
-                    A written decision will be mailed to your address to notify you of
-                    your results.
-                  italic: true
-      - kind: RulesRightsRegulations
-        defaultValue:
-          variant: Your Rights
-          yourRightsTitle: "Your Rights:"
-          showYourRightsDescription: false
-          yourRightsDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    A dependent is an unemployed spouse/civil union partner or an
-                    unemployed, unmarried child (including stepchild or legally adopted
-                    child) under the age of 19 (or 22 if the child is attending school
-                    full-time).
-                  italic: true
-          yourRightsList:
-            - type: numbered-list
-              children:
-                - type: list-item
-                  children:
-                    - text: >-
-                        You may represent yourself or you may be represented at your own
-                        expense by an attorney or non-attorney
-                - type: list-item
-                  children:
-                    - text: >-
-                        You may request a postponement, if you require additional time to
-                        prepare your response to this questionnaire
-                - type: list-item
-                  children:
-                    - text: >-
-                        You may request that your employer produce any documents which
-                        relate to your eligibility for benefits
-                - type: list-item
-                  children:
-                    - text: >-
-                        You may request that statements be taken from your witnesses who
-                        have firsthand knowledge of the case
-                - type: list-item
-                  children:
-                    - text: >-
-                        You or your representative will have the opportunity to provide
-                        witness statements, present documents and provide a closing
-                        statement or summary
-                - type: list-item
-                  children:
-                    - text: >-
-                        If the reason for the questionnaire is related to your employment,
-                        any questions that you may have for your former employer may be
-                        included on the form and the reviewing claims examiner may, at
-                        his/her discretion, pose the question(s) to your former employer.
-      - kind: LoginDetails
-        defaultValue:
-          variant: Information
-          loginInformationTitle: Important Login Information
-          loginInformationDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    Login using the same Login ID and Password you used to file your
-                    claim.
-                  bold: true
-          showLoginInformationBody: true
-          loginInformationBody:
-            - type: bulleted-list
-              children:
-                - type: list-item
-                  children:
-                    - text: "If you do not have an account,"
-                      bold: true
-                      italic: true
-                    - text: " create one here. After creating your account, return to this email and get started."
-                      italic: true
-                - type: list-item
-                  children:
-                    - text: Forget your username and password?
-                      bold: true
-                      italic: true
-                    - text: " Follow the links on the login page to help access your account."
-                      italic: true
-          loginInformationIcon: LockOpen
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: ""
-                - type: link
-                  url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
-                  children:
-                    - text: Click here
-                - text: " for tips on how to attach documents to a form."
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: New issue regarding your claim
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Unemployment Insurance (UI)
+            name: Unemployment Insurance (UI)
+            backgroundColor: "#B9D8F3"
+        - kind: DirectiveButton
+          defaultValue:
+            visible: false
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "CAPTAIN AMERICA:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: Your Unemployment Insurance (UI) claim has a new issue and we need some more information.
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview With Reason
+            status: More information needed
+            statusDueTo: and...
+            showSupportiveInformation: false
+            spaceAfter: false
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: we need a response from you.
+                    bold: true
+        - kind: Directive
+          defaultValue:
+            variant: Three Steps
+            showTitle: false
+            showLabel: true
+            label:
+              - type: paragraph
+                children:
+                  - text: "To resolve this, complete the following steps:"
+            linkHref: >-
+              https://forms.office.com/Pages/ResponsePage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8zTKxTpe0RMmjY7qrMr_3BUOFlVUklYTzhDQjlWR0NaMVk1NjBQODJDWCQlQCN0PWcu
+            buttonLabel: Get Started
+            buttonColor: "#1b1b1b"
+            step1Label:
+              - type: paragraph
+                children:
+                  - text: Login & Answer
+                    bold: true
+                  - text: " all the questions"
+            showStep1AdditionalContent: true
+            step1Additional:
+              - type: paragraph
+                children:
+                  - text: This form will expire on 5/12/2022
+            step2Label:
+              - type: paragraph
+                children:
+                  - text: Upload
+                    bold: true
+                  - text: " documentation (if necessary)"
+            showStep2AdditionalContent: true
+            step2Additional:
+              - type: paragraph
+                children:
+                  - text: Required proofs must be sent by 00/00/0000
+            step3Label:
+              - type: paragraph
+                children:
+                  - text: Submit
+                    bold: true
+                  - text: " your answers."
+                  - bold: true
+                    text: " Don't wait."
+            showStep3AdditionalContent: true
+            step3Additional:
+              - type: paragraph
+                children:
+                  - text: Look for a confirmation
+            showMultipleStepsSupportiveText: true
+            multipleStepsSupportiveText:
+              - type: paragraph
+                children:
+                  - text: >-
+                      A written decision will be mailed to your address to notify you of
+                      your results.
+                    italic: true
+        - kind: RulesRightsRegulations
+          defaultValue:
+            variant: Your Rights
+            yourRightsTitle: "Your Rights:"
+            showYourRightsDescription: false
+            yourRightsDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      A dependent is an unemployed spouse/civil union partner or an
+                      unemployed, unmarried child (including stepchild or legally adopted
+                      child) under the age of 19 (or 22 if the child is attending school
+                      full-time).
+                    italic: true
+            yourRightsList:
+              - type: numbered-list
+                children:
+                  - type: list-item
+                    children:
+                      - text: >-
+                          You may represent yourself or you may be represented at your own
+                          expense by an attorney or non-attorney
+                  - type: list-item
+                    children:
+                      - text: >-
+                          You may request a postponement, if you require additional time to
+                          prepare your response to this questionnaire
+                  - type: list-item
+                    children:
+                      - text: >-
+                          You may request that your employer produce any documents which
+                          relate to your eligibility for benefits
+                  - type: list-item
+                    children:
+                      - text: >-
+                          You may request that statements be taken from your witnesses who
+                          have firsthand knowledge of the case
+                  - type: list-item
+                    children:
+                      - text: >-
+                          You or your representative will have the opportunity to provide
+                          witness statements, present documents and provide a closing
+                          statement or summary
+                  - type: list-item
+                    children:
+                      - text: >-
+                          If the reason for the questionnaire is related to your employment,
+                          any questions that you may have for your former employer may be
+                          included on the form and the reviewing claims examiner may, at
+                          his/her discretion, pose the question(s) to your former employer.
+        - kind: LoginDetails
+          defaultValue:
+            variant: Information
+            loginInformationTitle: Important Login Information
+            loginInformationDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Login using the same Login ID and Password you used to file your
+                      claim.
+                    bold: true
+            showLoginInformationBody: true
+            loginInformationBody:
+              - type: bulleted-list
+                children:
+                  - type: list-item
+                    children:
+                      - text: "If you do not have an account,"
+                        bold: true
+                        italic: true
+                      - text: " create one here. After creating your account, return to this email and get started."
+                        italic: true
+                  - type: list-item
+                    children:
+                      - text: Forget your username and password?
+                        bold: true
+                        italic: true
+                      - text: " Follow the links on the login page to help access your account."
+                        italic: true
+            loginInformationIcon: LockOpen
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: ""
+                  - type: link
+                    url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
+                    children:
+                      - text: Click here
+                  - text: " for tips on how to attach documents to a form."
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true
