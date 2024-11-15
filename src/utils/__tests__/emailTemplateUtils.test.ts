@@ -1,6 +1,6 @@
 import {
+  buildEmailTranslation,
   buildUniqueEmailComponent,
-  buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
 import { getSubComponentByKind } from '../emailTemplateUtils'
@@ -10,20 +10,20 @@ describe('useEmailTemplateSubComponent', () => {
     const directiveButton = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
     const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
 
-    const emailTemplateConfig = buildUniqueEmailConfig({
+    const emailTranslation = buildEmailTranslation({
       components: [
         buildUniqueEmailComponent('Header', { subComponents: [directiveButton] }),
         buildUniqueEmailComponent('Body', { subComponents: [directive] }),
       ],
     })
 
-    expect(getSubComponentByKind(emailTemplateConfig, 'DirectiveButton')).toEqual(directiveButton)
-    expect(getSubComponentByKind(emailTemplateConfig, 'Directive')).toEqual(directive)
+    expect(getSubComponentByKind(emailTranslation, 'DirectiveButton')).toEqual(directiveButton)
+    expect(getSubComponentByKind(emailTranslation, 'Directive')).toEqual(directive)
   })
 
   it('is null when the email template config lacks the subcomponent', () => {
-    const emailTemplateConfig = buildUniqueEmailConfig()
-    expect(getSubComponentByKind(emailTemplateConfig, 'DirectiveButton')).toBeNull()
-    expect(getSubComponentByKind(emailTemplateConfig, 'Directive')).toBeNull()
+    const emailTranslation = buildEmailTranslation({ components: [] })
+    expect(getSubComponentByKind(emailTranslation, 'DirectiveButton')).toBeNull()
+    expect(getSubComponentByKind(emailTranslation, 'Directive')).toBeNull()
   })
 })

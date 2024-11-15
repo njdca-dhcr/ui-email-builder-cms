@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import {
+  buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
@@ -11,6 +12,7 @@ import { EmailParts } from 'src/appTypes'
 import { EmailSubComponentSpacer } from '../EmailSubComponentSpacer'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
+import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 
 describe('EmailSubComponentSpacer', () => {
   const renderWithSubComponents = ({
@@ -120,25 +122,35 @@ describe('EmailSubComponentSpacer', () => {
       const programName = buildUniqueEmailSubComponent({ kind: 'ProgramName' })
 
       const emailTemplateConfig = buildUniqueEmailConfig({
-        components: [
-          buildUniqueEmailComponent('Header', { subComponents: [programName, directiveButton] }),
-          buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+        translations: [
+          buildEmailTranslation({
+            components: [
+              buildUniqueEmailComponent('Header', {
+                subComponents: [programName, directiveButton],
+              }),
+              buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+            ],
+          }),
         ],
       })
 
       const { baseElement } = render(
         <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-          <EmailPartsContent
-            initialData={{
-              [directive.id]: { visible: false },
-              [directiveButton.id]: { visible: true },
-            }}
-          >
-            <EmailSubComponentSpacer
-              currentSubComponent={programName}
-              nextSubComponent={directiveButton}
-            />
-          </EmailPartsContent>
+          <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
+            {([_language]) => (
+              <EmailPartsContent
+                initialData={{
+                  [directive.id]: { visible: false },
+                  [directiveButton.id]: { visible: true },
+                }}
+              >
+                <EmailSubComponentSpacer
+                  currentSubComponent={programName}
+                  nextSubComponent={directiveButton}
+                />
+              </EmailPartsContent>
+            )}
+          </CurrentLanguage>
         </EmailTemplateConfig>,
         {
           wrapper: emailPartWrapper,

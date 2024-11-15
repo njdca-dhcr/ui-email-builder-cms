@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
@@ -10,15 +11,20 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { DirectiveValue } from 'src/appTypes'
 import { DirectiveButton } from '../DirectiveButton'
+import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 
 describe('DirectiveButton', () => {
   it('displays the directive button', () => {
     const emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
     const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
     const emailTemplateConfig = buildUniqueEmailConfig({
-      components: [
-        buildUniqueEmailComponent('Header', { subComponents: [emailSubComponent] }),
-        buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+      translations: [
+        buildEmailTranslation({
+          components: [
+            buildUniqueEmailComponent('Header', { subComponents: [emailSubComponent] }),
+            buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+          ],
+        }),
       ],
     })
     const directiveValue: Partial<DirectiveValue> = {
@@ -29,13 +35,17 @@ describe('DirectiveButton', () => {
 
     const { getByRole, baseElement } = render(
       <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-        <EmailPartsContent initialData={{ [directive.id]: directiveValue }}>
-          <table>
-            <tbody>
-              <DirectiveButton emailSubComponent={emailSubComponent} />
-            </tbody>
-          </table>
-        </EmailPartsContent>
+        <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
+          {([_language]) => (
+            <EmailPartsContent initialData={{ [directive.id]: directiveValue }}>
+              <table>
+                <tbody>
+                  <DirectiveButton emailSubComponent={emailSubComponent} />
+                </tbody>
+              </table>
+            </EmailPartsContent>
+          )}
+        </CurrentLanguage>
       </EmailTemplateConfig>,
     )
 
@@ -51,21 +61,29 @@ describe('DirectiveButton', () => {
     const emailSubComponent = buildUniqueEmailSubComponent({ kind: 'DirectiveButton' })
     const directive = buildUniqueEmailSubComponent({ kind: 'Directive' })
     const emailTemplateConfig = buildUniqueEmailConfig({
-      components: [
-        buildUniqueEmailComponent('Header', { subComponents: [emailSubComponent] }),
-        buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+      translations: [
+        buildEmailTranslation({
+          components: [
+            buildUniqueEmailComponent('Header', { subComponents: [emailSubComponent] }),
+            buildUniqueEmailComponent('Body', { subComponents: [directive] }),
+          ],
+        }),
       ],
     })
 
     const { queryByRole } = render(
       <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-        <EmailPartsContent initialData={{ [directive.id]: { visible: false } }}>
-          <table>
-            <tbody>
-              <DirectiveButton emailSubComponent={emailSubComponent} />
-            </tbody>
-          </table>
-        </EmailPartsContent>
+        <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
+          {([_language]) => (
+            <EmailPartsContent initialData={{ [directive.id]: { visible: false } }}>
+              <table>
+                <tbody>
+                  <DirectiveButton emailSubComponent={emailSubComponent} />
+                </tbody>
+              </table>
+            </EmailPartsContent>
+          )}
+        </CurrentLanguage>
       </EmailTemplateConfig>,
     )
     expect(queryByRole('link')).toBeNull()

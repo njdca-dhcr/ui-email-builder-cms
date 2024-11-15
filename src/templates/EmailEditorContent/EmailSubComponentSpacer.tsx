@@ -5,6 +5,7 @@ import { EmailBlock } from 'src/ui'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { useEmailTemplateConfig } from '../EmailTemplateConfig'
+import { translationForLanguage, useCurrentLanguage } from '../CurrentLanguage'
 
 interface Props {
   currentSubComponent: EmailParts.Unique.SubComponent
@@ -13,10 +14,12 @@ interface Props {
 
 export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSubComponent }) => {
   const emailTemplate = useEmailTemplateConfig()
+  const [language] = useCurrentLanguage()
+  const translation = translationForLanguage(emailTemplate, language)
   const shouldShow = useShouldShowEmailPart(currentSubComponent)
   const shouldShowNext = useShouldShowEmailPart(nextSubComponent ?? { kind: 'Banner', id: '' })
   const shouldShowDirective = useShouldShowEmailPart(
-    getSubComponentByKind(emailTemplate, 'Directive') ?? { kind: 'Directive', id: '' },
+    getSubComponentByKind(translation, 'Directive') ?? { kind: 'Directive', id: '' },
   )
 
   if (shouldShow.off) return null

@@ -16,7 +16,7 @@ import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { EditPreviewText } from './EditPreviewText'
 import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, Language } from 'src/appTypes'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { isRestricted } from 'src/utils/appMode'
 import { PreviewTextHtml } from './PreviewTextHtml'
@@ -31,21 +31,25 @@ import './EmailEditorContent.css'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
+import { translationForLanguage } from '../CurrentLanguage'
 
 interface Props {
   emailTemplate: EmailTemplate.Unique.Config
+  language: Language
 }
 
-export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
+export const EmailEditorContent: FC<Props> = ({ emailTemplate, language }) => {
   const { data: user, isLoading, error, enabled } = useCurrentUser()
   const [previewType, setPreviewType] = useState<'desktop' | 'mobile'>('desktop')
   const isPreviewDesktop = previewType === 'desktop'
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
-  const [titleValue] = useTitleValue(getSubComponentByKind(emailTemplate, 'Title'))
+  const translation = translationForLanguage(emailTemplate, language)
+  const [titleValue] = useTitleValue(getSubComponentByKind(translation, 'Title'))
   const [previewText] = usePreviewText()
-  const emailComponents = emailTemplate.components ?? []
+
+  const components = translation.components ?? []
 
   const hasPreviewText = () => {
     const text = previewText.trim()
@@ -130,7 +134,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
             maxWidth={Spacing.layout.maxWidth}
             style={{ margin: '0 auto' }}
           >
-            {emailComponents.map((emailComponent, i) => (
+            {components.map((emailComponent, i) => (
               <Fragment key={i}>
                 <EditEmailComponent emailComponent={emailComponent}>
                   {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
@@ -145,7 +149,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate }) => {
                 </EditEmailComponent>
                 <EmailComponentSpacer
                   currentComponent={emailComponent}
-                  nextComponent={emailComponents[i + 1]}
+                  nextComponent={components[i + 1]}
                 />
               </Fragment>
             ))}

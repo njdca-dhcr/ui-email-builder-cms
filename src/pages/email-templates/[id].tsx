@@ -46,7 +46,9 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                   <PreviewText initialValue={emailTemplate?.previewText}>
                     <PageContent element="div" className="email-editor-page-content">
                       {error && <Alert>{error.message}</Alert>}
-                      {emailTemplate && <EmailEditorContent emailTemplate={emailTemplate} />}
+                      {emailTemplate && (
+                        <EmailEditorContent language={language} emailTemplate={emailTemplate} />
+                      )}
                     </PageContent>
                   </PreviewText>
                   {isLoading && <LoadingOverlay description="Loading your email template" />}

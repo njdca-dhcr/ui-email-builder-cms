@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EmailTemplate } from 'src/appTypes'
 import {
   asMock,
+  buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
@@ -48,12 +49,17 @@ describe('EmailEditorContent', () => {
     user = userEvent.setup()
     client = new QueryClient()
     emailTemplate = buildUniqueEmailConfig({
-      components: [
-        buildUniqueEmailComponent('Banner'),
-        buildUniqueEmailComponent('Header', {
-          subComponents: [
-            buildUniqueEmailSubComponent({ kind: 'Title' }),
-            buildUniqueEmailSubComponent({ kind: 'ProgramName' }),
+      translations: [
+        buildEmailTranslation({
+          language: 'english',
+          components: [
+            buildUniqueEmailComponent('Banner'),
+            buildUniqueEmailComponent('Header', {
+              subComponents: [
+                buildUniqueEmailSubComponent({ kind: 'Title' }),
+                buildUniqueEmailSubComponent({ kind: 'ProgramName' }),
+              ],
+            }),
           ],
         }),
       ],
@@ -72,7 +78,7 @@ describe('EmailEditorContent', () => {
   it('can display the email in desktop or mobile', async () => {
     const { baseElement, getByLabelText } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent emailTemplate={emailTemplate} />
+        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
 
@@ -92,7 +98,7 @@ describe('EmailEditorContent', () => {
   it('can display the email components and subcomponents', () => {
     const { queryByText } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent emailTemplate={emailTemplate} />
+        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
     expect(queryByText('Title')).not.toBeNull()
@@ -103,7 +109,7 @@ describe('EmailEditorContent', () => {
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <EmailPartsContent>
-          <EmailEditorContent emailTemplate={emailTemplate} />
+          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
         </EmailPartsContent>
       </QueryClientProvider>,
     )
@@ -126,7 +132,7 @@ describe('EmailEditorContent', () => {
       <QueryClientProvider client={client}>
         <PreviewText initialValue="Some preview text">
           <EmailPartsContent>
-            <EmailEditorContent emailTemplate={emailTemplate} />
+            <EmailEditorContent language="english" emailTemplate={emailTemplate} />
           </EmailPartsContent>
         </PreviewText>
       </QueryClientProvider>,
@@ -150,7 +156,7 @@ describe('EmailEditorContent', () => {
       <QueryClientProvider client={client}>
         <PreviewText initialValue="Some preview text">
           <EmailPartsContent>
-            <EmailEditorContent emailTemplate={emailTemplate} />
+            <EmailEditorContent language="english" emailTemplate={emailTemplate} />
           </EmailPartsContent>
         </PreviewText>
       </QueryClientProvider>,
@@ -176,7 +182,7 @@ describe('EmailEditorContent', () => {
   it('displays the edit preview text field', () => {
     const { baseElement } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent emailTemplate={emailTemplate} />
+        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
     const input = baseElement.querySelector('#edit-preview-text')
@@ -187,7 +193,7 @@ describe('EmailEditorContent', () => {
   it('renders the preview text', () => {
     const { baseElement } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent emailTemplate={emailTemplate} />
+        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()
@@ -201,7 +207,7 @@ describe('EmailEditorContent', () => {
     it('does not have a share dropdown', () => {
       const { queryByRole } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent emailTemplate={emailTemplate} />
+          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
 
@@ -224,7 +230,7 @@ describe('EmailEditorContent', () => {
 
       const { baseElement } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent emailTemplate={emailTemplate} />
+          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
 
@@ -240,7 +246,7 @@ describe('EmailEditorContent', () => {
 
       const { baseElement } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent emailTemplate={emailTemplate} />
+          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
       expect(baseElement).toHaveTextContent('Loading your settings')
@@ -252,7 +258,7 @@ describe('EmailEditorContent', () => {
       asMock(useCurrentUser).mockReturnValue(query)
       const { queryByText } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent emailTemplate={emailTemplate} />
+          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
       expect(queryByText(error.message)).not.toBeNull()
@@ -270,7 +276,10 @@ describe('EmailEditorContent', () => {
       const { queryByRole } = render(
         <AuthProvider>
           <QueryClientProvider client={client}>
-            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: randomUUID() }} />
+            <EmailEditorContent
+              language="english"
+              emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+            />
           </QueryClientProvider>
         </AuthProvider>,
       )
@@ -282,7 +291,10 @@ describe('EmailEditorContent', () => {
       const { queryByRole } = render(
         <AuthProvider>
           <QueryClientProvider client={client}>
-            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: randomUUID() }} />
+            <EmailEditorContent
+              language="english"
+              emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+            />
           </QueryClientProvider>
         </AuthProvider>,
       )
@@ -302,7 +314,10 @@ describe('EmailEditorContent', () => {
       const { queryByRole } = render(
         <AuthProvider>
           <QueryClientProvider client={client}>
-            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: undefined }} />
+            <EmailEditorContent
+              language="english"
+              emailTemplate={{ ...emailTemplate, id: undefined }}
+            />
           </QueryClientProvider>
         </AuthProvider>,
       )
@@ -314,7 +329,10 @@ describe('EmailEditorContent', () => {
       const { queryByRole } = render(
         <AuthProvider>
           <QueryClientProvider client={client}>
-            <EmailEditorContent emailTemplate={{ ...emailTemplate, id: undefined }} />
+            <EmailEditorContent
+              language="english"
+              emailTemplate={{ ...emailTemplate, id: undefined }}
+            />
           </QueryClientProvider>
         </AuthProvider>,
       )

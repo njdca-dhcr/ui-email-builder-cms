@@ -14,6 +14,7 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { EditPreviewText } from 'src/templates/EmailEditorContent/EditPreviewText'
 import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
 import uniqueId from 'lodash.uniqueid'
+import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
@@ -49,33 +50,37 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
     <Layout element="main">
       <CurrentlyActiveEmailPart>
         <ClearCurrentlyActiveEmailPart />
-        <PreviewText>
-          <EmailPartsContent>
-            <Sidebar>
-              <EditPreviewText />
-              <EmailEditorSidebarAccordion.Container>
-                {(emailTemplate.components ?? []).map((emailComponent) => (
-                  <EmailEditorSidebarAccordion.EmailComponent
-                    key={emailComponent.id}
-                    emailComponent={emailComponent}
-                  >
-                    {(emailComponent.subComponents ?? []).map((emailSubComponent, i) => (
-                      <EmailEditorSidebarAccordion.EmailSubComponent
-                        key={emailSubComponent.id}
-                        component={emailComponent}
-                        emailSubComponent={emailSubComponent}
-                        nextEmailSubComponent={(emailComponent.subComponents ?? [])[i + 1]}
-                      />
+        <CurrentLanguage emailTemplateConfig={emailTemplate}>
+          {([language]) => (
+            <PreviewText>
+              <EmailPartsContent>
+                <Sidebar>
+                  <EditPreviewText />
+                  <EmailEditorSidebarAccordion.Container>
+                    {(emailTemplate.components ?? []).map((emailComponent) => (
+                      <EmailEditorSidebarAccordion.EmailComponent
+                        key={emailComponent.id}
+                        emailComponent={emailComponent}
+                      >
+                        {(emailComponent.subComponents ?? []).map((emailSubComponent, i) => (
+                          <EmailEditorSidebarAccordion.EmailSubComponent
+                            key={emailSubComponent.id}
+                            component={emailComponent}
+                            emailSubComponent={emailSubComponent}
+                            nextEmailSubComponent={(emailComponent.subComponents ?? [])[i + 1]}
+                          />
+                        ))}
+                      </EmailEditorSidebarAccordion.EmailComponent>
                     ))}
-                  </EmailEditorSidebarAccordion.EmailComponent>
-                ))}
-              </EmailEditorSidebarAccordion.Container>
-            </Sidebar>
-            <PageContent element="div" className="email-editor-page-content">
-              <EmailEditorContent emailTemplate={emailTemplate} />
-            </PageContent>
-          </EmailPartsContent>
-        </PreviewText>
+                  </EmailEditorSidebarAccordion.Container>
+                </Sidebar>
+                <PageContent element="div" className="email-editor-page-content">
+                  <EmailEditorContent language={language} emailTemplate={emailTemplate} />
+                </PageContent>
+              </EmailPartsContent>
+            </PreviewText>
+          )}
+        </CurrentLanguage>
       </CurrentlyActiveEmailPart>
     </Layout>
   )

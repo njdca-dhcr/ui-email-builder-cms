@@ -46,7 +46,9 @@ export const translationForLanguage = (
 
   const translation = translations.find((translation) => translation.language === language)
 
-  if (!translation) throw new Error(`No translation for: ${language}`)
-
-  return translation
+  if (translation) {
+    return translation
+  } else {
+    return { language, components: [] }
+  }
 }

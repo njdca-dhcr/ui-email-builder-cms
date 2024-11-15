@@ -1,10 +1,10 @@
-import { EmailParts, EmailTemplate } from 'src/appTypes'
+import { EmailParts, EmailTemplate, EmailTranslation } from 'src/appTypes'
 
 export const getSubComponentByKind = <T extends EmailParts.Kinds.SubComponent>(
-  emailTemplate: EmailTemplate.Unique.Config,
+  emailTranslation: EmailTranslation.Unique,
   subComponentKind: T,
 ): EmailParts.Unique.SubComponent<T> | null => {
-  const subComponents = (emailTemplate.components ?? []).flatMap(
+  const subComponents = (emailTranslation.components ?? []).flatMap(
     ({ subComponents }) => subComponents ?? [],
   )
 

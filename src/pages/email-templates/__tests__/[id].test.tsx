@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import EmailTemplateShowPage, { Props } from '../[id]'
 import {
   asMock,
+  buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
@@ -75,12 +76,16 @@ describe('Email Template Show Page', () => {
         id: randomUUID(),
         ...buildUniqueEmailConfig({
           previewText,
-          components: [
-            buildUniqueEmailComponent('Header', {
-              subComponents: [
-                buildUniqueEmailSubComponent({
-                  kind: 'Title',
-                  defaultValue: { title },
+          translations: [
+            buildEmailTranslation({
+              components: [
+                buildUniqueEmailComponent('Header', {
+                  subComponents: [
+                    buildUniqueEmailSubComponent({
+                      kind: 'Title',
+                      defaultValue: { title },
+                    }),
+                  ],
                 }),
               ],
             }),

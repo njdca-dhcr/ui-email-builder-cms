@@ -48,7 +48,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
                   />
                   <PreviewText initialValue={emailTemplate.previewText}>
                     <PageContent element="div" className="email-editor-page-content">
-                      <EmailEditorContent emailTemplate={emailTemplate} />
+                      <EmailEditorContent language={language} emailTemplate={emailTemplate} />
                     </PageContent>
                   </PreviewText>
                 </EmailPartsContent>

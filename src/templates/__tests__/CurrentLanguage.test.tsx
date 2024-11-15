@@ -97,13 +97,14 @@ describe('translationForLanguage', () => {
     expect(translationForLanguage(emailTemplate, 'spanish')).toEqual(spanish)
   })
 
-  it('throws an error if there is no translation for the language', async () => {
+  it('returns an empty translation', async () => {
     const emailTemplate = buildUniqueEmailConfig({
       translations: [buildEmailTranslation({ language: 'english' })],
     })
 
-    expect(() => translationForLanguage(emailTemplate, 'spanish')).toThrow(
-      /no translation for: spanish/i,
-    )
+    expect(translationForLanguage(emailTemplate, 'spanish')).toEqual({
+      language: 'spanish',
+      components: [],
+    })
   })
 })

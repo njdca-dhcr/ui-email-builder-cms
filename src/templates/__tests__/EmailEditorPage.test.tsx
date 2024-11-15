@@ -62,7 +62,7 @@ describe('EmailEditorPage', () => {
     expect(baseElement.querySelector('.layout')).not.toBeNull()
   })
 
-  xit('displays the EmailEditorContent', () => {
+  it('displays the EmailEditorContent', () => {
     const { baseElement } = rendered
     const h1 = baseElement.querySelector('h1[contenteditable="true"]')
     expect(h1).not.toBeNull()
@@ -99,7 +99,7 @@ describe('EmailEditorPage', () => {
     })
   })
 
-  xdescribe('toggling/editing components and their subcomponents', () => {
+  describe('toggling/editing components and their subcomponents', () => {
     it('preserves entered subcomponent text after toggling a subcomponent off and then on again', async () => {
       const value = faker.lorem.paragraph()
       const { getAllByLabelText } = rendered
