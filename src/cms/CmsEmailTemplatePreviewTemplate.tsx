@@ -20,24 +20,30 @@ type Entry = PreviewTemplateComponentProps['entry']
 
 const entryToEmailTemplate = (entry: Entry): EmailTemplate.Unique.Config => {
   const data: Entry = entry.get('data')
-  const componentEntries: Entry[] = data.get('components').toArray()
+  const translationEntries: Entry[] = data.get('translations').toArray()
 
   return {
     name: data.get('name') ?? '',
     description: data.get('description') ?? '',
-    components: componentEntries.map((componentEntry) => {
-      const subComponents = componentEntry.get('subComponents')
-      const subComponentEntries: Entry[] = subComponents ? subComponents.toArray() : []
+    translations: translationEntries.map((translationEntry) => {
+      const componentEntries: Entry[] = translationEntry.get('components').toArray()
       return {
-        id: uniqueId(),
-        kind: componentEntry.get('kind') ?? '',
-        required: componentEntry.get('required') ?? false,
-        subComponents: subComponentEntries.map((subComponent) => ({
-          id: uniqueId(),
-          kind: subComponent.get('kind'),
-          description: subComponent.get('description'),
-          required: subComponent.get('required'),
-        })),
+        language: translationEntry.get('language') ?? '',
+        components: componentEntries.map((componentEntry) => {
+          const subComponents = componentEntry.get('subComponents')
+          const subComponentEntries: Entry[] = subComponents ? subComponents.toArray() : []
+          return {
+            id: uniqueId(),
+            kind: componentEntry.get('kind') ?? '',
+            required: componentEntry.get('required') ?? false,
+            subComponents: subComponentEntries.map((subComponent) => ({
+              id: uniqueId(),
+              kind: subComponent.get('kind'),
+              description: subComponent.get('description'),
+              required: subComponent.get('required'),
+            })),
+          }
+        }),
       }
     }),
   }
@@ -45,6 +51,8 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.Unique.Config => {
 
 export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> = ({ entry }) => {
   const emailTemplate = entryToEmailTemplate(entry)
+  const [firstTranslation] = emailTemplate.translations ?? []
+  const translation = firstTranslation ?? []
 
   return (
     <Layout element="main">
@@ -57,7 +65,7 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
                 <Sidebar>
                   <EditPreviewText />
                   <EmailEditorSidebarAccordion.Container>
-                    {(emailTemplate.components ?? []).map((emailComponent) => (
+                    {(translation.components ?? []).map((emailComponent) => (
                       <EmailEditorSidebarAccordion.EmailComponent
                         key={emailComponent.id}
                         emailComponent={emailComponent}

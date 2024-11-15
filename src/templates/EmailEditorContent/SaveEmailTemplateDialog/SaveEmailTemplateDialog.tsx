@@ -9,6 +9,7 @@ import { useEmailPartsContentData } from 'src/templates/EmailPartsContent'
 import { usePreviewText } from 'src/templates/PreviewText'
 import { DefaultError, UseMutateAsyncFunction } from '@tanstack/react-query'
 import { FormFieldArea } from 'src/ui/Form'
+import { useCurrentLanguage } from 'src/templates/CurrentLanguage'
 
 interface ErrorJSON {
   errors: { name: string }
@@ -46,6 +47,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
   trigger,
 }) => {
   const emailTemplate = useEmailTemplateConfig()
+  const [language] = useCurrentLanguage()
   const [emailPartsContentData] = useEmailPartsContentData()
   const [previewText] = usePreviewText()
   const [validationErrors, setValidationErrors] = useState<ErrorJSON['errors'] | null>(null)
@@ -63,7 +65,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
               setValidationErrors(null)
               const formData = new FormData(event.currentTarget)
               const result = await mutate({
-                ...emailTemplateMergeDefaultValues(emailTemplate, emailPartsContentData),
+                ...emailTemplateMergeDefaultValues(emailTemplate, emailPartsContentData, language),
                 previewText,
                 name: stringFromFormData(formData, 'name'),
                 description: stringFromFormData(formData, 'description'),

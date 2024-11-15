@@ -6,17 +6,19 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { faker } from '@faker-js/faker'
 import {
   buildEmailTemplateConfig,
+  buildEmailTranslation,
   buildUniqueEmailConfig,
   buildUseMutationResult,
 } from 'src/factories'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, Language } from 'src/appTypes'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { asMock } from 'src/testHelpers'
 import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultValues'
 import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
 import { EmailTemplateUpdateDialog } from '../EmailTemplateUpdateDialog'
+import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useUpdateEmailTemplate: jest.fn() }
@@ -27,13 +29,16 @@ describe('EmailTemplateUpdateDialog', () => {
   let emailTemplate: EmailTemplate.Unique.Config
   let emailTemplateChanges: EmailTemplate.Base.Config
   let user: UserEvent
+  let language: Language
 
   beforeEach(async () => {
+    language = 'english'
     previewText = faker.lorem.paragraph()
     emailTemplate = buildUniqueEmailConfig({ id: randomUUID() })
     emailTemplateChanges = buildEmailTemplateConfig({
       name: emailTemplate.name,
       description: emailTemplate.description,
+      translations: [buildEmailTranslation({ language })],
     })
     user = userEvent.setup()
   })
@@ -41,11 +46,15 @@ describe('EmailTemplateUpdateDialog', () => {
   const renderDialog = () => {
     return render(
       <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-        <EmailPartsContent initialData={emailTemplateChanges}>
-          <PreviewText initialValue={previewText}>
-            <EmailTemplateUpdateDialog />
-          </PreviewText>
-        </EmailPartsContent>
+        <CurrentLanguage emailTemplateConfig={emailTemplate}>
+          {([_language]) => (
+            <EmailPartsContent initialData={emailTemplateChanges}>
+              <PreviewText initialValue={previewText}>
+                <EmailTemplateUpdateDialog />
+              </PreviewText>
+            </EmailPartsContent>
+          )}
+        </CurrentLanguage>
       </EmailTemplateConfig>,
     )
   }
@@ -70,7 +79,7 @@ describe('EmailTemplateUpdateDialog', () => {
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Update' }))
     expect(mutateAsync).toHaveBeenCalledWith({
-      ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges),
+      ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges, language),
       previewText,
       tagNames: [],
     })

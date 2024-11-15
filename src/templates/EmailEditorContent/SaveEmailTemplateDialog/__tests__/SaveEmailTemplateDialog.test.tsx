@@ -3,13 +3,18 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { SaveEmailTemplateDialog } from '../SaveEmailTemplateDialog'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { EmailTemplate } from 'src/appTypes'
-import { buildEmailTemplateConfig, buildUniqueEmailConfig } from 'src/factories'
+import { EmailTemplate, Language } from 'src/appTypes'
+import {
+  buildEmailTemplateConfig,
+  buildEmailTranslation,
+  buildUniqueEmailConfig,
+} from 'src/factories'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
 import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultValues'
 import { randomUUID } from 'crypto'
+import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 
 describe('SaveEmailTemplateDialog', () => {
   let description: string
@@ -24,9 +29,11 @@ describe('SaveEmailTemplateDialog', () => {
   let previewText: string
   let emailTemplate: EmailTemplate.Unique.Config
   let emailTemplateChanges: EmailTemplate.Base.Config
+  let language: Language
   let user: UserEvent
 
   beforeEach(async () => {
+    language = 'english'
     description = faker.lorem.paragraph()
     errorMessage = undefined
     loading = false
@@ -37,10 +44,12 @@ describe('SaveEmailTemplateDialog', () => {
     title = faker.lorem.words(5)
     trigger = faker.lorem.words(2)
     previewText = faker.lorem.paragraph()
-    emailTemplate = buildUniqueEmailConfig()
+    const translation = buildEmailTranslation({ language })
+    emailTemplate = buildUniqueEmailConfig({ translations: [translation] })
     emailTemplateChanges = buildEmailTemplateConfig({
       name: emailTemplate.name,
       description: emailTemplate.description,
+      translations: [translation],
     })
     user = userEvent.setup()
   })
@@ -48,21 +57,25 @@ describe('SaveEmailTemplateDialog', () => {
   it('displays its trigger', async () => {
     const { queryByRole } = render(
       <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-        <EmailPartsContent initialData={emailTemplateChanges}>
-          <PreviewText initialValue={previewText}>
-            <SaveEmailTemplateDialog
-              description={description}
-              errorMessage={errorMessage}
-              loading={loading}
-              loadingMessage={loadingMessage}
-              mutate={mutate}
-              onSuccess={onSuccess}
-              submitButtonText={submitButtonText}
-              title={title}
-              trigger={trigger}
-            />
-          </PreviewText>
-        </EmailPartsContent>
+        <CurrentLanguage emailTemplateConfig={emailTemplate}>
+          {([_language]) => (
+            <EmailPartsContent initialData={emailTemplateChanges}>
+              <PreviewText initialValue={previewText}>
+                <SaveEmailTemplateDialog
+                  description={description}
+                  errorMessage={errorMessage}
+                  loading={loading}
+                  loadingMessage={loadingMessage}
+                  mutate={mutate}
+                  onSuccess={onSuccess}
+                  submitButtonText={submitButtonText}
+                  title={title}
+                  trigger={trigger}
+                />
+              </PreviewText>
+            </EmailPartsContent>
+          )}
+        </CurrentLanguage>
       </EmailTemplateConfig>,
     )
     const button = queryByRole('button')
@@ -75,21 +88,25 @@ describe('SaveEmailTemplateDialog', () => {
     const renderAndOpen = async () => {
       const result = render(
         <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-          <EmailPartsContent initialData={emailTemplateChanges}>
-            <PreviewText initialValue={previewText}>
-              <SaveEmailTemplateDialog
-                description={description}
-                errorMessage={errorMessage}
-                loading={loading}
-                loadingMessage={loadingMessage}
-                mutate={mutate}
-                onSuccess={onSuccess}
-                submitButtonText={submitButtonText}
-                title={title}
-                trigger={trigger}
-              />
-            </PreviewText>
-          </EmailPartsContent>
+          <CurrentLanguage emailTemplateConfig={emailTemplate}>
+            {([_language]) => (
+              <EmailPartsContent initialData={emailTemplateChanges}>
+                <PreviewText initialValue={previewText}>
+                  <SaveEmailTemplateDialog
+                    description={description}
+                    errorMessage={errorMessage}
+                    loading={loading}
+                    loadingMessage={loadingMessage}
+                    mutate={mutate}
+                    onSuccess={onSuccess}
+                    submitButtonText={submitButtonText}
+                    title={title}
+                    trigger={trigger}
+                  />
+                </PreviewText>
+              </EmailPartsContent>
+            )}
+          </CurrentLanguage>
         </EmailTemplateConfig>,
       )
       await user.click(result.getByRole('button'))
@@ -148,7 +165,7 @@ describe('SaveEmailTemplateDialog', () => {
       expect(mutate).not.toHaveBeenCalled()
       await user.click(button!)
       expect(mutate).toHaveBeenCalledWith({
-        ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges),
+        ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges, language),
         previewText,
         tagNames: ['tag'],
       })

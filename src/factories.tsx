@@ -97,7 +97,11 @@ export const buildEmailTemplateConfig = (
   return {
     name: faker.lorem.word(),
     description: faker.lorem.paragraph(),
-    components: [buildEmailTemplateComponent('Header'), buildEmailTemplateComponent('Footer')],
+    translations: [
+      buildBaseEmailTranslation({
+        components: [buildEmailTemplateComponent('Header'), buildEmailTemplateComponent('Footer')],
+      }),
+    ],
     ...options,
   }
 }
@@ -108,7 +112,11 @@ export const buildUniqueEmailConfig = (
   return {
     name: faker.lorem.word(),
     description: faker.lorem.paragraph(),
-    components: [buildUniqueEmailComponent('Header'), buildUniqueEmailComponent('Footer')],
+    translations: [
+      buildEmailTranslation({
+        components: [buildUniqueEmailComponent('Header'), buildUniqueEmailComponent('Footer')],
+      }),
+    ],
     ...options,
   }
 }
