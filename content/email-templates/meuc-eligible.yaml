@@ -1,208 +1,210 @@
 name: MEUC - Eligible
 description: To tell a claimant they are eligible for MEUC benefits and that payment is on the way
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Benefits are on the way
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Custom
-          name: Mixed Earners Unemployment Compensation (MEUC)
-          backgroundColor: "#e1e291"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your Mixed Earners Unemployment Compensation (MEUC) application 
-                    has been reviewed and you have been found to be:
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview
-          icon: Warning
-          status: Eligible for payment
-          statusDueTo: because...
-          showSupportiveInformation: true
-          spaceAfter: true
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: "Date of Claim:"
-                  bold: true
-                - text: " {!eadj_UI_Case__c.eadj_Date_of_Claim__c}"
-          supportiveInformation:
-            - type: paragraph
-              children:
-                - text: Benefits will be paid automatically.
-                  italic: true
-          documentsNeededLabel: "We need the following:"
-          documentsNeededValue: "{Name_of_document(s)}"
-          emailToLabel: "Email this to:"
-          emailToValue: DUA@unemployment.gov
-          subjectLineLabel: "Subject Line:"
-          subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
-          showMissingDocumentDeadline: true
-          missingDocumentDeadline: >-
-            If you do not submit your documents by 00/00/0000, you will be denied your
-            claim and will be required to pay back any DUA funds released to you.
-          boxColor: Yielding Yellow
-          amountLabel: You owe $200
-          amountLineItems:
-            - label: Overpayment Total
-              value: $200
-            - label: Amount waived
-              value: $50
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Benefits are on the way
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Custom
+            name: Mixed Earners Unemployment Compensation (MEUC)
+            backgroundColor: "#e1e291"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your Mixed Earners Unemployment Compensation (MEUC) application
+                      has been reviewed and you have been found to be:
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview
+            icon: Warning
+            status: Eligible for payment
+            statusDueTo: because...
+            showSupportiveInformation: true
+            spaceAfter: true
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: "Date of Claim:"
+                    bold: true
+                  - text: " {!eadj_UI_Case__c.eadj_Date_of_Claim__c}"
+            supportiveInformation:
+              - type: paragraph
+                children:
+                  - text: Benefits will be paid automatically.
+                    italic: true
+            documentsNeededLabel: "We need the following:"
+            documentsNeededValue: "{Name_of_document(s)}"
+            emailToLabel: "Email this to:"
+            emailToValue: DUA@unemployment.gov
+            subjectLineLabel: "Subject Line:"
+            subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
+            showMissingDocumentDeadline: true
+            missingDocumentDeadline: >-
+              If you do not submit your documents by 00/00/0000, you will be denied your
+              claim and will be required to pay back any DUA funds released to you.
+            boxColor: Yielding Yellow
+            amountLabel: You owe $200
+            amountLineItems:
+              - label: Overpayment Total
+                value: $200
+              - label: Amount waived
+                value: $50
+                bold: true
+                italic: true
+            amountTotal:
+              label: You must pay
+              value: $150
               bold: true
-              italic: true
-          amountTotal:
-            label: You must pay
-            value: $150
-            bold: true
-      - kind: SupplementalContent
-        required: true
-        defaultValue:
-          variant: Single Supplemental Content
-          title: When will I receive payment?
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    You will receive payment automatically within 2 weeks of this email.
-            - type: paragraph
-              children:
-                - text: " "
-            - type: paragraph
-              children:
-                - text: "Payment will be made to your "
-                - type: link
-                  url: "https://nj.gov/labor/myunemployment/before/about/payment/"
-                  children:
-                    - text: most recent banking information
-                - text: " on file:"
-            - type: bulleted-list
-              children:
-                - type: list-item
-                  children:
-                    - text: Your direct deposit account
-                - type: list-item
-                  children:
-                    - text: "A state issued "
-                    - type: link
-                      url: "https://nj.gov/labor/myunemployment/help/debitcard/"
-                      children:
-                        - text: debit card
-                    - text: ""
-          secondTitle: What happens if you're not eligible?<br>
-          secondDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you're ineligible, be sure to read determination details and your
-                    appeal rights.
-          thirdTitle: Supplemental Content Title 3
-          thirdDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
-                    purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
-                    ipsum dolor sit amet, consectetur adipiscing elit.
-          benefitAmountBoxColor: Granted Green
-          benefitAmountIcon: CreditCard
-          benefitAmountTitle: Your Benefit Details
-          benefitAmountDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    A detailed breakdown of your benefit amount and how we got to that
-                    number will be mailed to you. If you disagree with it, appeal rights
-                    and processes are available.
-          benefitAmountBoxTitle: Benefit Amount
-          benefitAmountMainBoxCopy:
-            - type: paragraph
-              children:
-                - text: "Weekly Rate:   "
-                  bold: true
-                - text: $400
-                  bold: true
-            - type: paragraph
-              children:
-                - text: "Partial Weekly Rate:   "
-                  bold: true
-                - text: $200
-                  bold: true
-          benefitAmountSupplementalBoxCopy:
-            - type: paragraph
-              children:
-                - text: This rate includes an increase for dependency benefits
-                  bold: true
-                  italic: true
-            - type: paragraph
-              children:
-                - text: " "
-            - type: paragraph
-              children:
-                - text: >-
-                    This amount is subject to change based on the submitted tax record or
-                    dependency documents you send in.
-                  italic: true
-          benefitAmountSupportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you're working part-time, a partial weekly rate (which is 20%
-                    higher than your weekly rate) will be used to calculate your benefit
-                    amount.
-                  italic: true
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: ""
-                - type: link
-                  url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
-                  children:
-                    - text: Click here
-                - text: " for tips on how to attach documents to a form."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: "More information on New Jersey's Unemployment Insurance program can be found "
-                - type: link
-                  url: >-
-                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
-                  children:
-                    - text: here
-                - text: .
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+        - kind: SupplementalContent
+          required: true
+          defaultValue:
+            variant: Single Supplemental Content
+            title: When will I receive payment?
+            description:
+              - type: paragraph
+                children:
+                  - text: >-
+                      You will receive payment automatically within 2 weeks of this email.
+              - type: paragraph
+                children:
+                  - text: " "
+              - type: paragraph
+                children:
+                  - text: "Payment will be made to your "
+                  - type: link
+                    url: "https://nj.gov/labor/myunemployment/before/about/payment/"
+                    children:
+                      - text: most recent banking information
+                  - text: " on file:"
+              - type: bulleted-list
+                children:
+                  - type: list-item
+                    children:
+                      - text: Your direct deposit account
+                  - type: list-item
+                    children:
+                      - text: "A state issued "
+                      - type: link
+                        url: "https://nj.gov/labor/myunemployment/help/debitcard/"
+                        children:
+                          - text: debit card
+                      - text: ""
+            secondTitle: What happens if you're not eligible?<br>
+            secondDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you're ineligible, be sure to read determination details and your
+                      appeal rights.
+            thirdTitle: Supplemental Content Title 3
+            thirdDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur
+                      purus sit amet fermentum. Curabitur blandit tempus porttitor. Lorem
+                      ipsum dolor sit amet, consectetur adipiscing elit.
+            benefitAmountBoxColor: Granted Green
+            benefitAmountIcon: CreditCard
+            benefitAmountTitle: Your Benefit Details
+            benefitAmountDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      A detailed breakdown of your benefit amount and how we got to that
+                      number will be mailed to you. If you disagree with it, appeal rights
+                      and processes are available.
+            benefitAmountBoxTitle: Benefit Amount
+            benefitAmountMainBoxCopy:
+              - type: paragraph
+                children:
+                  - text: "Weekly Rate:   "
+                    bold: true
+                  - text: $400
+                    bold: true
+              - type: paragraph
+                children:
+                  - text: "Partial Weekly Rate:   "
+                    bold: true
+                  - text: $200
+                    bold: true
+            benefitAmountSupplementalBoxCopy:
+              - type: paragraph
+                children:
+                  - text: This rate includes an increase for dependency benefits
+                    bold: true
+                    italic: true
+              - type: paragraph
+                children:
+                  - text: " "
+              - type: paragraph
+                children:
+                  - text: >-
+                      This amount is subject to change based on the submitted tax record or
+                      dependency documents you send in.
+                    italic: true
+            benefitAmountSupportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you're working part-time, a partial weekly rate (which is 20%
+                      higher than your weekly rate) will be used to calculate your benefit
+                      amount.
+                    italic: true
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: ""
+                  - type: link
+                    url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
+                    children:
+                      - text: Click here
+                  - text: " for tips on how to attach documents to a form."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: "More information on New Jersey's Unemployment Insurance program can be found "
+                  - type: link
+                    url: >-
+                      https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                    children:
+                      - text: here
+                  - text: .
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

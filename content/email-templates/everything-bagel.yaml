@@ -1,34 +1,36 @@
 name: Everything Bagel
 description: You know what you want so make it happen.
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: DateRange
-      - kind: Title
-      - kind: ProgramName
-      - kind: DirectiveButton
-  - kind: Name
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-      - kind: Status
-      - kind: Directive
-      - kind: SupplementalContent
-      - kind: RulesRightsRegulations
-      - kind: InformationalBox
-      - kind: LoginDetails
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: DateRange
+        - kind: Title
+        - kind: ProgramName
+        - kind: DirectiveButton
+    - kind: Name
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+        - kind: Status
+        - kind: Directive
+        - kind: SupplementalContent
+        - kind: RulesRightsRegulations
+        - kind: InformationalBox
+        - kind: LoginDetails
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

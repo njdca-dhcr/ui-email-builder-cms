@@ -1,116 +1,118 @@
 name: Overpayment - Confirmation
 description: To confirm that we received their application
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Your waiver application has been received
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Custom
-          name: Pandemic Unemployment Overpayment
-          backgroundColor: "#f1dea0"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your request for a Pandemic Overpayment Waiver is
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview
-          icon: Warning
-          status: Received &amp; Under Review
-          statusDueTo: because...
-          showSupportiveInformation: true
-          spaceAfter: true
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: "Due to a high volume of requests, "
-                  bold: true
-                - text: your determination make take an extended period of time.
-          supportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your determination, its details, and appeal rights will arrive via
-                    email.
-                  italic: true
-          documentsNeededLabel: "We need the following:"
-          documentsNeededValue: "{Name_of_document(s)}"
-          emailToLabel: "Email this to:"
-          emailToValue: DUA@unemployment.gov
-          subjectLineLabel: "Subject Line:"
-          subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
-          showMissingDocumentDeadline: true
-          missingDocumentDeadline: >-
-            If you do not submit your documents by 00/00/0000, you will be denied your
-            claim and will be required to pay back any DUA funds released to you.
-          boxColor: Yielding Yellow
-          amountLabel: You owe $200
-          amountLineItems:
-            - label: Overpayment Total
-              value: $200
-            - label: Amount waived
-              value: $50
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Your waiver application has been received
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Custom
+            name: Pandemic Unemployment Overpayment
+            backgroundColor: "#f1dea0"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your request for a Pandemic Overpayment Waiver is
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview
+            icon: Warning
+            status: Received &amp; Under Review
+            statusDueTo: because...
+            showSupportiveInformation: true
+            spaceAfter: true
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: "Due to a high volume of requests, "
+                    bold: true
+                  - text: your determination make take an extended period of time.
+            supportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your determination, its details, and appeal rights will arrive via
+                      email.
+                    italic: true
+            documentsNeededLabel: "We need the following:"
+            documentsNeededValue: "{Name_of_document(s)}"
+            emailToLabel: "Email this to:"
+            emailToValue: DUA@unemployment.gov
+            subjectLineLabel: "Subject Line:"
+            subjectLineValue: "Eligible Pending Review Documents<br/>{Name_of_claimant}"
+            showMissingDocumentDeadline: true
+            missingDocumentDeadline: >-
+              If you do not submit your documents by 00/00/0000, you will be denied your
+              claim and will be required to pay back any DUA funds released to you.
+            boxColor: Yielding Yellow
+            amountLabel: You owe $200
+            amountLineItems:
+              - label: Overpayment Total
+                value: $200
+              - label: Amount waived
+                value: $50
+                bold: true
+                italic: true
+            amountTotal:
+              label: You must pay
+              value: $150
               bold: true
-              italic: true
-          amountTotal:
-            label: You must pay
-            value: $150
-            bold: true
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: Status Updates
-                  bold: true
-                  textSize: large
-            - type: paragraph
-              children:
-                - text: >-
-                    The status of your application will be emailed to you monthly. Thank
-                    you in advance for your patience.
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information  on Pandemic Overpayment Waivers can be found "
-                - type: link
-                  url: >-
-                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
-                  children:
-                    - text: here
-                - text: .
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: Status Updates
+                    bold: true
+                    textSize: large
+              - type: paragraph
+                children:
+                  - text: >-
+                      The status of your application will be emailed to you monthly. Thank
+                      you in advance for your patience.
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information  on Pandemic Overpayment Waivers can be found "
+                  - type: link
+                    url: >-
+                      https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                    children:
+                      - text: here
+                  - text: .
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true
