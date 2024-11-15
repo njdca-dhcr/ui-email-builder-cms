@@ -31,3 +31,17 @@ export const CurrentLanguage: FC<Props> = ({ children }) => {
 export const useCurrentLanguage = () => {
   return useContext(CurrentLanguageContext)
 }
+
+export const useCurrentTranslation = () => {
+  const emailTemplateConfig = useEmailTemplateConfig()
+  const [currentLanguage] = useCurrentLanguage()
+  const translations = emailTemplateConfig.translations ?? []
+
+  const currentTranslation = translations.find(({ language }) => language === currentLanguage)
+
+  if (!currentTranslation) {
+    throw new Error(`No translation exists for language: ${currentLanguage}`)
+  }
+
+  return currentTranslation
+}
