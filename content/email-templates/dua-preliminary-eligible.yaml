@@ -1,229 +1,231 @@
 name: DUA - Preliminary Eligible
 description: >-
-  To confirm that a claimant's application for DUA benefits was received and to 
-  request missing documents by a certain date. 
+  To confirm that a claimant's application for DUA benefits was received and to
+  request missing documents by a certain date.
 
   Benefit amount according to claimant's circumstances are included.
 appModes: ["ALL", "NJ"]
-previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Application recieved; More information required
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Disaster Unemployment Assistance (DUA)
-          name: Disaster Unemployment Assistance (DUA)
-          backgroundColor: "#CCBDDF"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your Disaster Unemployment Assistance (DUA) application is received but we are...
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Missing Document
-          status: >-
-            Missing Documents<br>required by
-            {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}
-          statusDueTo: because...
-          showSupportiveInformation: true
-          spaceAfter: false
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: "{Data Reference} or a sentence that colors more of the status of claim"
-                  bold: true
-          supportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    This determination was made based on the DUA regulations 20 CFR 625.
-                    Its details and breakdown can be found in the document that will be
-                    mailed to you. A link for this regulation is available
-                  italic: true
-                - text: " "
-                - type: link
-                  url: "https://oui.doleta.gov/unemploy/pdf/20_CFR_625-Disaster.pdf"
-                  children:
-                    - italic: true
-                      text: here
-                - italic: true
-                  text: .
-          documentsNeededLabel: "We need the following:"
-          documentsNeededValue: "{!eadj_Claim_c.DUA_Missing_Docs_c}"
-          emailToLabel: "Email this to:"
-          emailToValue: "&nbsp;DUA@dol.nj.gov"
-          subjectLineLabel: "Subject Line:"
-          subjectLineValue: "Eligible Pending Review Documents<br>{!eadj_Claim_c.Name}"
-          showMissingDocumentDeadline: false
-      - kind: InformationalBox
-        required: true
-        defaultValue:
-          boxColor: Yielding Yellow
-          icon: Alarm
-          title: "Submit by {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}"
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you do not submit by
-                    {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}, your benefits may be
-                    reduced or denied and you will be required to pay back any DUA funds
-                    overpaid.
-                  italic: true
-          showSupportiveInformation: false
-      - kind: SupplementalContent
-        defaultValue:
-          variant: Benefit Amount
-          title: Weekly Certifications
-          description:
-            - type: paragraph
-              children:
-                - text: You will start to receive weekly DUA certification emails.
-                  bold: true
-                - text: " This is different from standard UI certification."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: >-
-                    You must complete and submit each week's certification in order to
-                    receive your benefits. If you don't, we will be unable to disperse
-                    your benefits.
-          benefitAmountBoxColor: Granted Green
-          benefitAmountIcon: CreditCard
-          benefitAmountTitle: Your Benefit Details
-          benefitAmountDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    A detailed breakdown of your benefit amount and how we got to that
-                    number will be mailed to you. If you disagree with it, appeal rights
-                    and processes are available.
-          benefitAmountBoxTitle: Benefit Amount
-          benefitAmountMainBoxCopy:
-            - type: paragraph
-              children:
-                - text: "Weekly Rate:   ${!eadj_Claim__c.DUA_Monetary_WBR__c}"
-                  bold: true
-            - type: paragraph
-              children:
-                - text: "Partial Weekly Rate:   ${!eadj_Claim__c.DUA_PWBR__C}"
-                  bold: true
-          benefitAmountSupplementalBoxCopy:
-            - type: paragraph
-              children:
-                - text: "{!eadj_Claim__c.DUA_dependency__c}"
-                  bold: true
-                  italic: true
-            - type: paragraph
-              children:
-                - text: " "
-            - type: paragraph
-              children:
-                - text: >-
-                    This amount is subject to change based on the submitted tax record or
-                    dependency documents you send in
-                  italic: true
-          benefitAmountSupportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you're working part-time, a partial weekly rate (which is 20%
-                    higher than your weekly rate) will be used to calculate your benefit
-                    amount.
-                  italic: true
-      - kind: RulesRightsRegulations
-        required: true
-        defaultValue:
-          variant: Appeal Rights
-          icon: Flag
-          appealRightsTitle: Appeal Rights
-          appealRightsSummary:
-            - type: paragraph
-              children:
-                - text: "If you disagree with this determination, you have the right to file an appeal. "
-                - text: >-
-                    Your appeal must be received by
-                    {!eadj_Claim__c.DUA_Determination_60_day_lapse__c}.
-                  bold: true
-          appealRightsShowInstruction: false
-          appealRightsInstruction:
-            - type: paragraph
-              children:
-                - text: "To begin an appeal online, get started below:"
-          appealRightsButton: Get Started
-          appealRightsHref: >-
-            https://www.nj.gov/labor/salesforce/uia-w2l/onlineappealsProd.htm?_gl=1*18faptt*_g[%E2%80%A6]wLjA.&amp;_ga=2.141211767.475107882.1705677406-154199185.1616181038
-          appealRightsShowInfoLabel: true
-          appealRightsInfoLabel: "For your appeal:"
-          appealRightsShowInfo: true
-          appealRightsInfo:
-            - type: paragraph
-              children:
-                - text: "Program Code:"
-                  bold: true
-                - text: " {!eadj_Issue__c.PC_Code__c}"
-            - type: paragraph
-              children:
-                - text: "Date of Claim:"
-                  bold: true
-                - text: " {!eadj_Issue__c.eadj_Date_of_Claim__c}"
-            - type: paragraph
-              children:
-                - text: "Date you recieved the Determination Letter:"
-                  bold: true
-            - type: paragraph
-              children:
-                - text: "        Email: {!eadj_Claim_c.LastModifiedDate}"
-            - type: paragraph
-              children:
-                - text: "        Mail: Date you physically received written documentation"
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
-                - type: link
-                  url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
-                  children:
-                    - text: here
-                - text: ". Frequently Asked Questions can be found "
-                - type: link
-                  url: >-
-                    https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
-                  children:
-                    - text: here
-                - text: .
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Application recieved; More information required
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Disaster Unemployment Assistance (DUA)
+            name: Disaster Unemployment Assistance (DUA)
+            backgroundColor: "#CCBDDF"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your Disaster Unemployment Assistance (DUA) application is received but we are...
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Missing Document
+            status: >-
+              Missing Documents<br>required by
+              {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}
+            statusDueTo: because...
+            showSupportiveInformation: true
+            spaceAfter: false
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: "{Data Reference} or a sentence that colors more of the status of claim"
+                    bold: true
+            supportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      This determination was made based on the DUA regulations 20 CFR 625.
+                      Its details and breakdown can be found in the document that will be
+                      mailed to you. A link for this regulation is available
+                    italic: true
+                  - text: " "
+                  - type: link
+                    url: "https://oui.doleta.gov/unemploy/pdf/20_CFR_625-Disaster.pdf"
+                    children:
+                      - italic: true
+                        text: here
+                  - italic: true
+                    text: .
+            documentsNeededLabel: "We need the following:"
+            documentsNeededValue: "{!eadj_Claim_c.DUA_Missing_Docs_c}"
+            emailToLabel: "Email this to:"
+            emailToValue: "&nbsp;DUA@dol.nj.gov"
+            subjectLineLabel: "Subject Line:"
+            subjectLineValue: "Eligible Pending Review Documents<br>{!eadj_Claim_c.Name}"
+            showMissingDocumentDeadline: false
+        - kind: InformationalBox
+          required: true
+          defaultValue:
+            boxColor: Yielding Yellow
+            icon: Alarm
+            title: "Submit by {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}"
+            description:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you do not submit by
+                      {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}, your benefits may be
+                      reduced or denied and you will be required to pay back any DUA funds
+                      overpaid.
+                    italic: true
+            showSupportiveInformation: false
+        - kind: SupplementalContent
+          defaultValue:
+            variant: Benefit Amount
+            title: Weekly Certifications
+            description:
+              - type: paragraph
+                children:
+                  - text: You will start to receive weekly DUA certification emails.
+                    bold: true
+                  - text: " This is different from standard UI certification."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: >-
+                      You must complete and submit each week's certification in order to
+                      receive your benefits. If you don't, we will be unable to disperse
+                      your benefits.
+            benefitAmountBoxColor: Granted Green
+            benefitAmountIcon: CreditCard
+            benefitAmountTitle: Your Benefit Details
+            benefitAmountDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      A detailed breakdown of your benefit amount and how we got to that
+                      number will be mailed to you. If you disagree with it, appeal rights
+                      and processes are available.
+            benefitAmountBoxTitle: Benefit Amount
+            benefitAmountMainBoxCopy:
+              - type: paragraph
+                children:
+                  - text: "Weekly Rate:   ${!eadj_Claim__c.DUA_Monetary_WBR__c}"
+                    bold: true
+              - type: paragraph
+                children:
+                  - text: "Partial Weekly Rate:   ${!eadj_Claim__c.DUA_PWBR__C}"
+                    bold: true
+            benefitAmountSupplementalBoxCopy:
+              - type: paragraph
+                children:
+                  - text: "{!eadj_Claim__c.DUA_dependency__c}"
+                    bold: true
+                    italic: true
+              - type: paragraph
+                children:
+                  - text: " "
+              - type: paragraph
+                children:
+                  - text: >-
+                      This amount is subject to change based on the submitted tax record or
+                      dependency documents you send in
+                    italic: true
+            benefitAmountSupportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you're working part-time, a partial weekly rate (which is 20%
+                      higher than your weekly rate) will be used to calculate your benefit
+                      amount.
+                    italic: true
+        - kind: RulesRightsRegulations
+          required: true
+          defaultValue:
+            variant: Appeal Rights
+            icon: Flag
+            appealRightsTitle: Appeal Rights
+            appealRightsSummary:
+              - type: paragraph
+                children:
+                  - text: "If you disagree with this determination, you have the right to file an appeal. "
+                  - text: >-
+                      Your appeal must be received by
+                      {!eadj_Claim__c.DUA_Determination_60_day_lapse__c}.
+                    bold: true
+            appealRightsShowInstruction: false
+            appealRightsInstruction:
+              - type: paragraph
+                children:
+                  - text: "To begin an appeal online, get started below:"
+            appealRightsButton: Get Started
+            appealRightsHref: >-
+              https://www.nj.gov/labor/salesforce/uia-w2l/onlineappealsProd.htm?_gl=1*18faptt*_g[%E2%80%A6]wLjA.&amp;_ga=2.141211767.475107882.1705677406-154199185.1616181038
+            appealRightsShowInfoLabel: true
+            appealRightsInfoLabel: "For your appeal:"
+            appealRightsShowInfo: true
+            appealRightsInfo:
+              - type: paragraph
+                children:
+                  - text: "Program Code:"
+                    bold: true
+                  - text: " {!eadj_Issue__c.PC_Code__c}"
+              - type: paragraph
+                children:
+                  - text: "Date of Claim:"
+                    bold: true
+                  - text: " {!eadj_Issue__c.eadj_Date_of_Claim__c}"
+              - type: paragraph
+                children:
+                  - text: "Date you recieved the Determination Letter:"
+                    bold: true
+              - type: paragraph
+                children:
+                  - text: "        Email: {!eadj_Claim_c.LastModifiedDate}"
+              - type: paragraph
+                children:
+                  - text: "        Mail: Date you physically received written documentation"
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                  - type: link
+                    url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                    children:
+                      - text: here
+                  - text: ". Frequently Asked Questions can be found "
+                  - type: link
+                    url: >-
+                      https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                    children:
+                      - text: here
+                  - text: .
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

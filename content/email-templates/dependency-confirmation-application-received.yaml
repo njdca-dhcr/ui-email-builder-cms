@@ -2,134 +2,136 @@ name: Dependency - Confirmation Application Received
 description: >-
   To confirm to the claimant that we received their application for dependency benefits
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Your application has been received
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Dependency Benefits
-          name: Dependency Benefits
-          backgroundColor: "#F1DEA0"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your request to increase your weekly benefit rate with Dependency
-                    Benefits is
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview
-          status: Received &amp; Under Review
-          showSupportiveInformation: true
-          spaceAfter: true
-          description:
-            - type: paragraph
-              children:
-                - text: "It may take up to 4 weeks "
-                  bold: true
-                - text: to determine your eligibility.
-          supportiveInformation:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your determination, its details, and appeal rights will arrive via
-                    email.
-                  italic: true
-      - kind: SupplementalContent
-        required: true
-        defaultValue:
-          variant: Double Supplemental Content
-          title: Start/Continue Weekly Certification
-          description:
-            - type: paragraph
-              children:
-                - text: "While we review your application,"
-                - text: " you must start/continue to certify for benefits every week."
-                  bold: true
-                - text: " If your application is approved, you will only receive benefits for the weeks you have certified and have been found eligible."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: "You can certify for benefits "
-                - text: Sunday to Friday from 8am - 7pm.
-                  bold: true
-          secondTitle: Feedback (Optional)
-          secondDescription:
-            - type: paragraph
-              children:
-                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
-                - type: link
-                  url: >-
-                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
-                  children:
-                    - text: "here"
-                - text: .
-      - kind: LoginDetails
-        required: true
-        defaultValue:
-          variant: Information
-          loginInformationTitle: "Important: Keep an eye out for emails from NJDOL"
-          loginInformationDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    You may receive multiple emails about other issues on your claim that
-                    require a response.
-                - bold: true
-                  text: " It is important to respond to these emails in a timely manner."
-            - type: paragraph
-              children:
-                - bold: true
-                  text: ""
-            - type: paragraph
-              children:
-                - text: >-
-                    It is possible that your claim may remain on hold even after a
-                    monetary determination has been made due to an issue that needs to be
-                    resolved.
-          showLoginInformationBody: false
-          loginInformationIcon: Flag
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information on New Jersey's unemployment program can be found "
-                - type: link
-                  url: >-
-                    https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
-                  children:
-                    - text: here
-                - text: .
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Your application has been received
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Dependency Benefits
+            name: Dependency Benefits
+            backgroundColor: "#F1DEA0"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your request to increase your weekly benefit rate with Dependency
+                      Benefits is
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview
+            status: Received &amp; Under Review
+            showSupportiveInformation: true
+            spaceAfter: true
+            description:
+              - type: paragraph
+                children:
+                  - text: "It may take up to 4 weeks "
+                    bold: true
+                  - text: to determine your eligibility.
+            supportiveInformation:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your determination, its details, and appeal rights will arrive via
+                      email.
+                    italic: true
+        - kind: SupplementalContent
+          required: true
+          defaultValue:
+            variant: Double Supplemental Content
+            title: Start/Continue Weekly Certification
+            description:
+              - type: paragraph
+                children:
+                  - text: "While we review your application,"
+                  - text: " you must start/continue to certify for benefits every week."
+                    bold: true
+                  - text: " If your application is approved, you will only receive benefits for the weeks you have certified and have been found eligible."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: "You can certify for benefits "
+                  - text: Sunday to Friday from 8am - 7pm.
+                    bold: true
+            secondTitle: Feedback (Optional)
+            secondDescription:
+              - type: paragraph
+                children:
+                  - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                  - type: link
+                    url: >-
+                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                    children:
+                      - text: "here"
+                  - text: .
+        - kind: LoginDetails
+          required: true
+          defaultValue:
+            variant: Information
+            loginInformationTitle: "Important: Keep an eye out for emails from NJDOL"
+            loginInformationDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      You may receive multiple emails about other issues on your claim that
+                      require a response.
+                  - bold: true
+                    text: " It is important to respond to these emails in a timely manner."
+              - type: paragraph
+                children:
+                  - bold: true
+                    text: ""
+              - type: paragraph
+                children:
+                  - text: >-
+                      It is possible that your claim may remain on hold even after a
+                      monetary determination has been made due to an issue that needs to be
+                      resolved.
+            showLoginInformationBody: false
+            loginInformationIcon: Flag
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information on New Jersey's unemployment program can be found "
+                  - type: link
+                    url: >-
+                      https://nj.gov/labor/myunemployment/labor/myunemployment/help/faqs/eligibility.shtml?_gl=1*l5i4zg*_ga*MTA0MzIyNTA5Mi4xNjYwMzEwMzg5*_ga_N8RFJ4LE4D*MTY3NTEwMjA1MC43OC4xLjE2NzUxM
+                    children:
+                      - text: here
+                  - text: .
 
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

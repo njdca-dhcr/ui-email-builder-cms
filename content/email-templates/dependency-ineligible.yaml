@@ -1,131 +1,133 @@
 name: Dependency - Ineligible
 description: >-
-  To tell the claimant that they are ineligible to receive dependency benefits 
+  To tell the claimant that they are ineligible to receive dependency benefits
   (dynamic reason is included)
 appModes: ["ALL", "NJ"]
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: You are not eligible for Dependency Benefits
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Dependency Benefits
-          name: Dependency Benefits
-          backgroundColor: "#F1DEA0"
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your application for Dependency Benefits has been reviewed, and you have been found to be
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview With Reason
-          status: Ineligible
-          statusDueTo: because...
-          showSupportiveInformation: true
-          spaceAfter: true
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: "{!eadj_Issue__c.Dependency_General_Denied__c}"
-                  bold: true
-          supportiveInformation:
-            - type: paragraph
-              children:
-                - italic: true
-                  text: This determination was made based on available information.
-      - kind: RulesRightsRegulations
-        required: true
-        defaultValue:
-          variant: Appeal Rights
-          icon: Flag
-          appealRightsTitle: Appeal Rights
-          appealRightsSummary:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you disagree with this determination, you have the right to file an
-                    appeal.
-                - text: >-
-                    Your appeal must be received by
-                    {!eadj_Issue__c.Determination_sent_7_day_lapse__c}.
-                  bold: true
-          appealRightsShowInstruction: false
-          appealRightsButton: Get Started
-          appealRightsHref: "https://www.state.nj.us/labor/salesforce/uia-w2l/onlineappealsProd.htm"
-          appealRightsShowInfoLabel: true
-          appealRightsInfoLabel: "For your appeal:"
-          appealRightsShowInfo: true
-          appealRightsInfo:
-            - type: paragraph
-              children:
-                - text: "Program Code:"
-                  bold: true
-                - text: "  {!eadj_Issue__c.PC_Code__c}"
-            - type: paragraph
-              children:
-                - text: "Date of Claim:  "
-                  bold: true
-                - text: "{!eadj_Issue__c.eadj_Date_of_Claim__c}"
-            - type: paragraph
-              children:
-                - text: "Date of Determination:"
-                  bold: true
-                - text: "  {!eadj_Issue__c.LastModifiedDate}"
-      - kind: SupplementalContent
-        required: true
-        defaultValue:
-          variant: Single Supplemental Content
-          title: Feedback (Optional)
-          description:
-            - type: paragraph
-              children:
-                - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
-                - type: link
-                  url: >-
-                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
-                  children:
-                    - text: here
-                - text: .
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information on Dependency Benefits can be found "
-                - type: link
-                  url: >-
-                    https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
-                  children:
-                    - text: here
-                - text: .
+templates:
+  language: english
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: You are not eligible for Dependency Benefits
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Dependency Benefits
+            name: Dependency Benefits
+            backgroundColor: "#F1DEA0"
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_Issue__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your application for Dependency Benefits has been reviewed, and you have been found to be
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview With Reason
+            status: Ineligible
+            statusDueTo: because...
+            showSupportiveInformation: true
+            spaceAfter: true
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: "{!eadj_Issue__c.Dependency_General_Denied__c}"
+                    bold: true
+            supportiveInformation:
+              - type: paragraph
+                children:
+                  - italic: true
+                    text: This determination was made based on available information.
+        - kind: RulesRightsRegulations
+          required: true
+          defaultValue:
+            variant: Appeal Rights
+            icon: Flag
+            appealRightsTitle: Appeal Rights
+            appealRightsSummary:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you disagree with this determination, you have the right to file an
+                      appeal.
+                  - text: >-
+                      Your appeal must be received by
+                      {!eadj_Issue__c.Determination_sent_7_day_lapse__c}.
+                    bold: true
+            appealRightsShowInstruction: false
+            appealRightsButton: Get Started
+            appealRightsHref: "https://www.state.nj.us/labor/salesforce/uia-w2l/onlineappealsProd.htm"
+            appealRightsShowInfoLabel: true
+            appealRightsInfoLabel: "For your appeal:"
+            appealRightsShowInfo: true
+            appealRightsInfo:
+              - type: paragraph
+                children:
+                  - text: "Program Code:"
+                    bold: true
+                  - text: "  {!eadj_Issue__c.PC_Code__c}"
+              - type: paragraph
+                children:
+                  - text: "Date of Claim:  "
+                    bold: true
+                  - text: "{!eadj_Issue__c.eadj_Date_of_Claim__c}"
+              - type: paragraph
+                children:
+                  - text: "Date of Determination:"
+                    bold: true
+                  - text: "  {!eadj_Issue__c.LastModifiedDate}"
+        - kind: SupplementalContent
+          required: true
+          defaultValue:
+            variant: Single Supplemental Content
+            title: Feedback (Optional)
+            description:
+              - type: paragraph
+                children:
+                  - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                  - type: link
+                    url: >-
+                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                    children:
+                      - text: here
+                  - text: .
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information on Dependency Benefits can be found "
+                  - type: link
+                    url: >-
+                      https://www.myunemployment.nj.gov/labor/myunemployment/apply/overpayments/
+                    children:
+                      - text: here
+                  - text: .
 
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

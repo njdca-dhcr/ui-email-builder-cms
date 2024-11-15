@@ -1,171 +1,173 @@
 name: DUA - Application
 description: To invite people to apply to the Disaster Unemployment Assistance program
 appModes: ["ALL", "NJ"]
-previewText: We see that you may be applying for unemployment because of the recent disaster that took place. Apply today for Disaster Unemployment Assistance.
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Ready for you to apply
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Disaster Unemployment Assistance (DUA)
-          name: Disaster Unemployment Assistance (DUA)
-          backgroundColor: "#CCBDDF"
-      - kind: DirectiveButton
-        defaultValue:
-          visible: false
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Our records show that you may be applying for unemployment due to a recent disaster that took place.
-      - kind: Directive
-        required: true
-        defaultValue:
-          variant: Three Steps w/ Step 2 Expansion
-          showTitle: false
-          label:
-            - type: paragraph
-              children:
-                - text: "To apply, complete the following steps:"
-                  bold: true
-          linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
-          buttonLabel: Get Started
-          buttonColor: "#1c1c1c"
-          step1Label:
-            - type: paragraph
-              children:
-                - text: Sign In & Answer
-                  bold: true
-                - text: " the form"
-          showStep1AdditionalContent: true
-          step1Additional:
-            - type: paragraph
-              children:
-                - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
-          step2Label:
-            - type: paragraph
-              children:
-                - text: "Upload "
-                  bold: true
-                - text: documentation
-          showStep2AdditionalContent: true
-          step2Additional:
-            - type: paragraph
-              children:
-                - text: "Required proofs "
-                - text: must be sent within 21 days
-                  bold: true
-                - text: " of submitting your application"
-          step2Tertiary:
-            - type: paragraph
-              children:
-                - text: You can also email your proof to DUA@dol.nj.gov.
-                  italic: true
-            - type: paragraph
-              children:
-                - text: Include your case number below in the email subject line.
-                  italic: true
-          step2CaseNumber:
-            - type: paragraph
-              children:
-                - text: "{!eadj_UI_Case_c.Name}"
-          step3Label:
-            - type: paragraph
-              children:
-                - text: Submit
-                  bold: true
-                - text: " your form."
-                - bold: true
-                  text: " Don't wait."
-          showStep3AdditionalContent: false
-          step3Additional:
-            - type: paragraph
-              children:
-                - text: Additional information around Step 3
-          showMultipleStepsSupportiveText: false
-      - kind: SupplementalContent
-        defaultValue:
-          variant: Double Supplemental Content
-          title: Required Documentation
-          description:
-            - type: paragraph
-              children:
-                - type: link
-                  url: "#ENTER-LINK"
-                  children:
-                    - text: Review the list
-                - text: " of required documentation and follow instructions on how to attach them."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: Submit all documentation within 21 days of submitting your application
-                  bold: true
-                - text: " or you will be denied your claim and will be required to pay back any DUA funds released to you."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: "Tips on how to attach documents to a form can be found "
-                  italic: true
-                - type: link
-                  url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
-                  children:
-                    - italic: true
-                      text: here
-                - italic: true
-                  text: .
-          secondTitle: Can you be part of two different programs?
-          secondDescription:
-            - type: paragraph
-              children:
-                - text: "No, you cannot be part of two different programs."
-                  bold: true
-                - text: " You must be ineligible for standard Unemployment Insurance (UI) benefits to be considered for Disaster Unemployment Assistance (DUA)."
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
-                - type: link
-                  url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
-                  children:
-                    - text: here
-                - text: ". Frequently Asked Questions can be found "
-                - type: link
-                  url: >-
-                    https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
-                  children:
-                    - text: here
-                - text: .
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  previewText: We see that you may be applying for unemployment because of the recent disaster that took place. Apply today for Disaster Unemployment Assistance.
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Ready for you to apply
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Disaster Unemployment Assistance (DUA)
+            name: Disaster Unemployment Assistance (DUA)
+            backgroundColor: "#CCBDDF"
+        - kind: DirectiveButton
+          defaultValue:
+            visible: false
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Our records show that you may be applying for unemployment due to a recent disaster that took place.
+        - kind: Directive
+          required: true
+          defaultValue:
+            variant: Three Steps w/ Step 2 Expansion
+            showTitle: false
+            label:
+              - type: paragraph
+                children:
+                  - text: "To apply, complete the following steps:"
+                    bold: true
+            linkHref: "{!eadj_UI_Case__c.eadj_Custom_Link__c}"
+            buttonLabel: Get Started
+            buttonColor: "#1c1c1c"
+            step1Label:
+              - type: paragraph
+                children:
+                  - text: Sign In & Answer
+                    bold: true
+                  - text: " the form"
+            showStep1AdditionalContent: true
+            step1Additional:
+              - type: paragraph
+                children:
+                  - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
+            step2Label:
+              - type: paragraph
+                children:
+                  - text: "Upload "
+                    bold: true
+                  - text: documentation
+            showStep2AdditionalContent: true
+            step2Additional:
+              - type: paragraph
+                children:
+                  - text: "Required proofs "
+                  - text: must be sent within 21 days
+                    bold: true
+                  - text: " of submitting your application"
+            step2Tertiary:
+              - type: paragraph
+                children:
+                  - text: You can also email your proof to DUA@dol.nj.gov.
+                    italic: true
+              - type: paragraph
+                children:
+                  - text: Include your case number below in the email subject line.
+                    italic: true
+            step2CaseNumber:
+              - type: paragraph
+                children:
+                  - text: "{!eadj_UI_Case_c.Name}"
+            step3Label:
+              - type: paragraph
+                children:
+                  - text: Submit
+                    bold: true
+                  - text: " your form."
+                  - bold: true
+                    text: " Don't wait."
+            showStep3AdditionalContent: false
+            step3Additional:
+              - type: paragraph
+                children:
+                  - text: Additional information around Step 3
+            showMultipleStepsSupportiveText: false
+        - kind: SupplementalContent
+          defaultValue:
+            variant: Double Supplemental Content
+            title: Required Documentation
+            description:
+              - type: paragraph
+                children:
+                  - type: link
+                    url: "#ENTER-LINK"
+                    children:
+                      - text: Review the list
+                  - text: " of required documentation and follow instructions on how to attach them."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: Submit all documentation within 21 days of submitting your application
+                    bold: true
+                  - text: " or you will be denied your claim and will be required to pay back any DUA funds released to you."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: "Tips on how to attach documents to a form can be found "
+                    italic: true
+                  - type: link
+                    url: "https://www.youtube.com/watch?v=S6zki_9fiDE"
+                    children:
+                      - italic: true
+                        text: here
+                  - italic: true
+                    text: .
+            secondTitle: Can you be part of two different programs?
+            secondDescription:
+              - type: paragraph
+                children:
+                  - text: "No, you cannot be part of two different programs."
+                    bold: true
+                  - text: " You must be ineligible for standard Unemployment Insurance (UI) benefits to be considered for Disaster Unemployment Assistance (DUA)."
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                  - type: link
+                    url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                    children:
+                      - text: here
+                  - text: ". Frequently Asked Questions can be found "
+                  - type: link
+                    url: >-
+                      https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                    children:
+                      - text: here
+                  - text: .
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true

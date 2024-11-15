@@ -1,187 +1,189 @@
 name: DUA - Certify - Document Needed
 description: >-
-  To tell the claimant that we need some documents from them (It will also tell 
+  To tell the claimant that we need some documents from them (It will also tell
   them that they will receive instructions to certify the following week)
 appModes: ["ALL", "NJ"]
-previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
-components:
-  - kind: Banner
-    required: true
-  - kind: Header
-    required: true
-    subComponents:
-      - kind: DepartmentSeal
-        required: true
-      - kind: Title
-        required: true
-        defaultValue:
-          title: Submit Documentation; Certify for benefits
-      - kind: ProgramName
-        required: true
-        defaultValue:
-          preset: Disaster Unemployment Assistance (DUA)
-          name: Disaster Unemployment Assistance (DUA)
-          backgroundColor: "#CCBDDF"
-      - kind: DirectiveButton
-        defaultValue:
-          visible: false
-  - kind: Name
-    required: true
-    defaultValue:
-      name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
-  - kind: Body
-    required: true
-    subComponents:
-      - kind: Intro
-        required: true
-        defaultValue:
-          intro:
-            - type: paragraph
-              children:
-                - text: >-
-                    Your Disaster Unemployment Assistance (DUA) application is received but we are...
-      - kind: Status
-        required: true
-        defaultValue:
-          variant: Overview With Reason
-          status: Missing documentation
-          statusDueTo: "We need the following:"
-          showSupportiveInformation: false
-          spaceAfter: false
-          showDescription: true
-          description:
-            - type: paragraph
-              children:
-                - text: "{!eadj_UI_Case__c.DUA_Missing_Documentation__c}"
-                  bold: true
-      - kind: InformationalBox
-        required: true
-        defaultValue:
-          boxColor: Yielding Yellow
-          icon: Alarm
-          title: "Submit by {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}"
-          description:
-            - type: paragraph
-              children:
-                - text: >-
-                    If you do not submit by
-                    {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}, your benefits may be
-                    reduced or denied and you will be required to pay back any DUA funds
-                    overpaid.
-                  italic: true
-          showSupportiveInformation: false
-      - kind: Directive
-        required: true
-        defaultValue:
-          variant: Three Steps w/ Step 2 Expansion
-          showTitle: false
-          label:
-            - type: paragraph
-              children:
-                - text: "To help resolve this issue, complete the following steps:"
-                  bold: true
-          linkHref: "{!eadj_UI_Case__c.eadj_UI_Case_Link__c}"
-          buttonLabel: Get Started
-          buttonColor: "#1b1b1b"
-          step1Label:
-            - type: paragraph
-              children:
-                - text: Sign in & Answer
-                  bold: true
-                - text: " the form"
-          showStep1AdditionalContent: true
-          step1Additional:
-            - type: paragraph
-              children:
-                - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
-          step2Label:
-            - type: paragraph
-              children:
-                - text: Upload
-                  bold: true
-                - text: " documentation"
-          showStep2AdditionalContent: true
-          step2Additional:
-            - type: paragraph
-              children:
-                - text: >-
-                    Required documentation must be sent by
-                    {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}
-          step2Tertiary:
-            - type: paragraph
-              children:
-                - text: >-
-                    You can also email your proof to DUA@dol.nj.gov. Include your case
-                    number below in the email subject line.
-          step2CaseNumber:
-            - type: paragraph
-              children:
-                - text: "{!eadj_UI_Case_c.Name}"
-          step3Label:
-            - type: paragraph
-              children:
-                - text: Submit
-                  bold: true
-                - text: " your form."
-                - bold: true
-                  text: " Don't wait."
-          showStep3AdditionalContent: false
-          showMultipleStepsSupportiveText: false
-      - kind: SupplementalContent
-        defaultValue:
-          variant: Double Supplemental Content
-          title: Weekly Certifications
-          description:
-            - type: paragraph
-              children:
-                - text: Continue to certify for benefits every week.
-                  bold: true
-                - text: " You will receive a link next week to complete."
-            - type: paragraph
-              children:
-                - text: ""
-            - type: paragraph
-              children:
-                - text: >-
-                    You will only receive benefits for the weeks you have certified and
-                    have been found eligible.
-          secondTitle: Feedback (Optional)
-          secondDescription:
-            - type: paragraph
-              children:
-                - text: >-
-                    This email is a new beta design created by New Jersey's Division of
-                    Unemployment Insurance in collaboration with New Jersey's Office of
-                    Innovation. Take our 2 minute survey
-                - text: " "
-                - type: link
-                  url: >-
-                    https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
-                  children:
-                    - text: here
-                - text: .
-  - kind: Footer
-    required: true
-    subComponents:
-      - kind: AdditionalContent
-        required: true
-        defaultValue:
-          content:
-            - type: paragraph
-              children:
-                - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
-                - type: link
-                  url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
-                  children:
-                    - text: here
-                - text: ". Frequently Asked Questions can be found "
-                - type: link
-                  url: >-
-                    https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
-                  children:
-                    - text: here
-                - text: .
-  - kind: StateSeal
-    required: true
-  - kind: Disclaimer
-    required: true
+templates:
+  language: english
+  previewText: We’re missing documentation to complete your DUA claim. Submit your documents and complete your questionnaire today, don’t wait.
+  components:
+    - kind: Banner
+      required: true
+    - kind: Header
+      required: true
+      subComponents:
+        - kind: DepartmentSeal
+          required: true
+        - kind: Title
+          required: true
+          defaultValue:
+            title: Submit Documentation; Certify for benefits
+        - kind: ProgramName
+          required: true
+          defaultValue:
+            preset: Disaster Unemployment Assistance (DUA)
+            name: Disaster Unemployment Assistance (DUA)
+            backgroundColor: "#CCBDDF"
+        - kind: DirectiveButton
+          defaultValue:
+            visible: false
+    - kind: Name
+      required: true
+      defaultValue:
+        name: "{!eadj_UI_Case__c.eadj_Claimant_Name__c}:"
+    - kind: Body
+      required: true
+      subComponents:
+        - kind: Intro
+          required: true
+          defaultValue:
+            intro:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Your Disaster Unemployment Assistance (DUA) application is received but we are...
+        - kind: Status
+          required: true
+          defaultValue:
+            variant: Overview With Reason
+            status: Missing documentation
+            statusDueTo: "We need the following:"
+            showSupportiveInformation: false
+            spaceAfter: false
+            showDescription: true
+            description:
+              - type: paragraph
+                children:
+                  - text: "{!eadj_UI_Case__c.DUA_Missing_Documentation__c}"
+                    bold: true
+        - kind: InformationalBox
+          required: true
+          defaultValue:
+            boxColor: Yielding Yellow
+            icon: Alarm
+            title: "Submit by {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline_Email__c}"
+            description:
+              - type: paragraph
+                children:
+                  - text: >-
+                      If you do not submit by
+                      {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}, your benefits may be
+                      reduced or denied and you will be required to pay back any DUA funds
+                      overpaid.
+                    italic: true
+            showSupportiveInformation: false
+        - kind: Directive
+          required: true
+          defaultValue:
+            variant: Three Steps w/ Step 2 Expansion
+            showTitle: false
+            label:
+              - type: paragraph
+                children:
+                  - text: "To help resolve this issue, complete the following steps:"
+                    bold: true
+            linkHref: "{!eadj_UI_Case__c.eadj_UI_Case_Link__c}"
+            buttonLabel: Get Started
+            buttonColor: "#1b1b1b"
+            step1Label:
+              - type: paragraph
+                children:
+                  - text: Sign in & Answer
+                    bold: true
+                  - text: " the form"
+            showStep1AdditionalContent: true
+            step1Additional:
+              - type: paragraph
+                children:
+                  - text: "This form will expire on {!eadj_UI_Case__c.eadj_LinkExpirationDate__c}"
+            step2Label:
+              - type: paragraph
+                children:
+                  - text: Upload
+                    bold: true
+                  - text: " documentation"
+            showStep2AdditionalContent: true
+            step2Additional:
+              - type: paragraph
+                children:
+                  - text: >-
+                      Required documentation must be sent by
+                      {!eadj_UI_Case__c.DUA_Missing_Doc_Deadline__c}
+            step2Tertiary:
+              - type: paragraph
+                children:
+                  - text: >-
+                      You can also email your proof to DUA@dol.nj.gov. Include your case
+                      number below in the email subject line.
+            step2CaseNumber:
+              - type: paragraph
+                children:
+                  - text: "{!eadj_UI_Case_c.Name}"
+            step3Label:
+              - type: paragraph
+                children:
+                  - text: Submit
+                    bold: true
+                  - text: " your form."
+                  - bold: true
+                    text: " Don't wait."
+            showStep3AdditionalContent: false
+            showMultipleStepsSupportiveText: false
+        - kind: SupplementalContent
+          defaultValue:
+            variant: Double Supplemental Content
+            title: Weekly Certifications
+            description:
+              - type: paragraph
+                children:
+                  - text: Continue to certify for benefits every week.
+                    bold: true
+                  - text: " You will receive a link next week to complete."
+              - type: paragraph
+                children:
+                  - text: ""
+              - type: paragraph
+                children:
+                  - text: >-
+                      You will only receive benefits for the weeks you have certified and
+                      have been found eligible.
+            secondTitle: Feedback (Optional)
+            secondDescription:
+              - type: paragraph
+                children:
+                  - text: >-
+                      This email is a new beta design created by New Jersey's Division of
+                      Unemployment Insurance in collaboration with New Jersey's Office of
+                      Innovation. Take our 2 minute survey
+                  - text: " "
+                  - type: link
+                    url: >-
+                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp0BRb6bO541Dr1v6j032E9RUM1dJMTA4VlVCS1lMRE5XQlpGWTAwODBVRS4u
+                    children:
+                      - text: here
+                  - text: .
+    - kind: Footer
+      required: true
+      subComponents:
+        - kind: AdditionalContent
+          required: true
+          defaultValue:
+            content:
+              - type: paragraph
+                children:
+                  - text: "More information on Disaster Unemployment Assistance (DUA) can be found "
+                  - type: link
+                    url: "https://www.nj.gov/labor/myunemployment/before/circumstances/disaster/"
+                    children:
+                      - text: here
+                  - text: ". Frequently Asked Questions can be found "
+                  - type: link
+                    url: >-
+                      https://www.nj.gov/labor/myunemployment/assets/pdfs/dua_application_FAQs.pdf
+                    children:
+                      - text: here
+                  - text: .
+    - kind: StateSeal
+      required: true
+    - kind: Disclaimer
+      required: true
