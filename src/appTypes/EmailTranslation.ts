@@ -1,6 +1,6 @@
 import { EmailParts } from './EmailParts'
 
-export const LANGUAGES = ['english', 'spanish'] as const
+export const LANGUAGES = ['english', 'spanish', 'not-set'] as const
 
 export type Language = (typeof LANGUAGES)[number]
 

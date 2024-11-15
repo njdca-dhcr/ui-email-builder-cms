@@ -27,9 +27,12 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
         <CurrentlyActiveEmailPart>
           <SyncSidebarAndPreviewScroll>
             <ClearCurrentlyActiveEmailPart />
-            <CurrentLanguage emailTemplateConfig={emailTemplate ?? { name: '' }}>
+            <CurrentLanguage
+              key={emailTemplate?.id}
+              emailTemplateConfig={emailTemplate ?? { name: '' }}
+            >
               {([language]) => (
-                <EmailPartsContent>
+                <EmailPartsContent key={language}>
                   <EmailEditorSidebar
                     language={language}
                     emailTemplate={emailTemplate}

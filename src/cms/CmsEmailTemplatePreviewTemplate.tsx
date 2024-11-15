@@ -50,10 +50,10 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
     <Layout element="main">
       <CurrentlyActiveEmailPart>
         <ClearCurrentlyActiveEmailPart />
-        <CurrentLanguage emailTemplateConfig={emailTemplate}>
+        <CurrentLanguage key={emailTemplate.id} emailTemplateConfig={emailTemplate}>
           {([language]) => (
             <PreviewText>
-              <EmailPartsContent>
+              <EmailPartsContent key={language}>
                 <Sidebar>
                   <EditPreviewText />
                   <EmailEditorSidebarAccordion.Container>

@@ -38,9 +38,9 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
         <CurrentlyActiveEmailPart>
           <SyncSidebarAndPreviewScroll>
             <ClearCurrentlyActiveEmailPart />
-            <CurrentLanguage emailTemplateConfig={emailTemplate}>
+            <CurrentLanguage key={emailTemplate.id} emailTemplateConfig={emailTemplate}>
               {([language]) => (
-                <EmailPartsContent>
+                <EmailPartsContent key={language}>
                   <EmailEditorSidebar
                     language={language}
                     emailTemplate={emailTemplate}

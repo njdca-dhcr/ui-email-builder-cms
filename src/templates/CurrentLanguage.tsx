@@ -8,22 +8,20 @@ import React, {
   useState,
 } from 'react'
 import { EmailTranslation, Language } from 'src/appTypes/EmailTranslation'
-import { useEmailTemplateConfig } from './EmailTemplateConfig'
 import { EmailTemplate } from 'src/appTypes'
 
 export type LanguageContextValue = [Language, Dispatch<SetStateAction<Language>>]
 
-const CurrentLanguageContext = createContext<LanguageContextValue>(['english', () => {}])
+const CurrentLanguageContext = createContext<LanguageContextValue>(['not-set', () => {}])
 
 interface Props {
   children: (value: LanguageContextValue) => ReactNode
   emailTemplateConfig: EmailTemplate.Unique.Config
 }
 
-export const CurrentLanguage: FC<Props> = ({ children }) => {
-  const emailTemplateConfig = useEmailTemplateConfig()
+export const CurrentLanguage: FC<Props> = ({ children, emailTemplateConfig }) => {
   const [firstTranslation] = emailTemplateConfig.translations ?? []
-  const initialLanguage = firstTranslation?.language ?? 'english'
+  const initialLanguage = firstTranslation?.language ?? 'not-set'
 
   const value = useState(initialLanguage)
 
