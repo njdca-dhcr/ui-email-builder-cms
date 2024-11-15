@@ -130,7 +130,7 @@ describe('EmailEditorContent', () => {
   it('allows users to copy the current preview into their clipboard', async () => {
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
-        <PreviewText initialValue="Some preview text">
+        <PreviewText emailTemplateConfig={emailTemplate} language="english">
           <EmailPartsContent>
             <EmailEditorContent language="english" emailTemplate={emailTemplate} />
           </EmailPartsContent>
@@ -154,7 +154,7 @@ describe('EmailEditorContent', () => {
   it('allows users to download the current preview', async () => {
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
-        <PreviewText initialValue="Some preview text">
+        <PreviewText emailTemplateConfig={emailTemplate} language="english">
           <EmailPartsContent>
             <EmailEditorContent language="english" emailTemplate={emailTemplate} />
           </EmailPartsContent>

@@ -44,7 +44,7 @@ describe('SaveEmailTemplateDialog', () => {
     title = faker.lorem.words(5)
     trigger = faker.lorem.words(2)
     previewText = faker.lorem.paragraph()
-    const translation = buildEmailTranslation({ language })
+    const translation = buildEmailTranslation({ language, previewText })
     emailTemplate = buildUniqueEmailConfig({ translations: [translation] })
     emailTemplateChanges = buildEmailTemplateConfig({
       name: emailTemplate.name,
@@ -60,7 +60,7 @@ describe('SaveEmailTemplateDialog', () => {
         <CurrentLanguage emailTemplateConfig={emailTemplate}>
           {([_language]) => (
             <EmailPartsContent initialData={emailTemplateChanges}>
-              <PreviewText initialValue={previewText}>
+              <PreviewText emailTemplateConfig={emailTemplate} language={language}>
                 <SaveEmailTemplateDialog
                   description={description}
                   errorMessage={errorMessage}
@@ -91,7 +91,7 @@ describe('SaveEmailTemplateDialog', () => {
           <CurrentLanguage emailTemplateConfig={emailTemplate}>
             {([_language]) => (
               <EmailPartsContent initialData={emailTemplateChanges}>
-                <PreviewText initialValue={previewText}>
+                <PreviewText language={language} emailTemplateConfig={emailTemplate}>
                   <SaveEmailTemplateDialog
                     description={description}
                     errorMessage={errorMessage}

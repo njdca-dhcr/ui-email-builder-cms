@@ -19,18 +19,16 @@ export type Props = PageProps<null, null, null>
 
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   const query = useEmailTemplate(params.id)
-  const { data: emailTemplate, isLoading, error } = query
+  const { data: queriedEmailTemplate, isLoading, error } = useEmailTemplate(params.id)
+  const emailTemplate = queriedEmailTemplate ?? { name: '', id: '' }
 
   return (
     <Layout element="main">
-      <EmailTemplateConfig emailTemplateConfig={emailTemplate ?? { name: '' }}>
+      <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
         <CurrentlyActiveEmailPart>
           <SyncSidebarAndPreviewScroll>
             <ClearCurrentlyActiveEmailPart />
-            <CurrentLanguage
-              key={emailTemplate?.id}
-              emailTemplateConfig={emailTemplate ?? { name: '' }}
-            >
+            <CurrentLanguage key={emailTemplate?.id} emailTemplateConfig={emailTemplate}>
               {([language]) => (
                 <EmailPartsContent key={language}>
                   <EmailEditorSidebar
@@ -46,7 +44,11 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       </h1>
                     }
                   />
-                  <PreviewText initialValue={emailTemplate?.previewText}>
+                  <PreviewText
+                    key={language}
+                    emailTemplateConfig={emailTemplate}
+                    language={language}
+                  >
                     <PageContent element="div" className="email-editor-page-content">
                       {error && <Alert>{error.message}</Alert>}
                       {emailTemplate && (

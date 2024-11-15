@@ -23,10 +23,10 @@ describe('EmailEditorPage', () => {
     user = userEvent.setup()
     defaultPreviewText = faker.lorem.paragraph()
     emailTemplate = buildEmailTemplateConfig({
-      previewText: defaultPreviewText,
       translations: [
         buildBaseEmailTranslation({
           language: 'english',
+          previewText: defaultPreviewText,
           components: [
             buildEmailTemplateComponent('Header', {
               subComponents: [

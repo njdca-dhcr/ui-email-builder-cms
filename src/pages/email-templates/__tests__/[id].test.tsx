@@ -75,9 +75,9 @@ describe('Email Template Show Page', () => {
       emailTemplate = {
         id: randomUUID(),
         ...buildUniqueEmailConfig({
-          previewText,
           translations: [
             buildEmailTranslation({
+              previewText,
               components: [
                 buildUniqueEmailComponent('Header', {
                   subComponents: [

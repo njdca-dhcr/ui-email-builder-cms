@@ -38,7 +38,7 @@ describe('EmailTemplateSaveAsDialog', () => {
     emailTemplateChanges = buildEmailTemplateConfig({
       name: emailTemplate.name,
       description: emailTemplate.description,
-      translations: [buildEmailTranslation({ language })],
+      translations: [buildEmailTranslation({ language, previewText })],
     })
     user = userEvent.setup()
   })
@@ -49,7 +49,7 @@ describe('EmailTemplateSaveAsDialog', () => {
         <CurrentLanguage emailTemplateConfig={emailTemplate}>
           {([_language]) => (
             <EmailPartsContent initialData={emailTemplateChanges}>
-              <PreviewText initialValue={previewText}>
+              <PreviewText emailTemplateConfig={emailTemplate} language={language}>
                 <EmailTemplateSaveAsDialog />
               </PreviewText>
             </EmailPartsContent>

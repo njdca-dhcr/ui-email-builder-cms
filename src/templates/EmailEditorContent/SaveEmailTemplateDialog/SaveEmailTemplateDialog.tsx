@@ -66,7 +66,6 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
               const formData = new FormData(event.currentTarget)
               const result = await mutate({
                 ...emailTemplateMergeDefaultValues(emailTemplate, emailPartsContentData, language),
-                previewText,
                 name: stringFromFormData(formData, 'name'),
                 description: stringFromFormData(formData, 'description'),
                 tagNames: uniq(

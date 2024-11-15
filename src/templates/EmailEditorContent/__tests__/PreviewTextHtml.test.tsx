@@ -3,12 +3,18 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { PreviewText } from 'src/templates/PreviewText'
 import { PreviewTextHtml } from '../PreviewTextHtml'
+import { buildEmailTranslation, buildUniqueEmailConfig } from 'src/factories'
 
 describe('PreviewTextHtml', () => {
   it('displays the text in the preview text context', () => {
     const value = faker.lorem.paragraph()
     const { baseElement } = render(
-      <PreviewText initialValue={value}>
+      <PreviewText
+        emailTemplateConfig={buildUniqueEmailConfig({
+          translations: [buildEmailTranslation({ previewText: value, language: 'english' })],
+        })}
+        language="english"
+      >
         <PreviewTextHtml />
       </PreviewText>,
     )
@@ -21,7 +27,12 @@ describe('PreviewTextHtml', () => {
   it('is display: none', () => {
     const value = faker.lorem.paragraph()
     const { baseElement } = render(
-      <PreviewText initialValue={value}>
+      <PreviewText
+        emailTemplateConfig={buildUniqueEmailConfig({
+          translations: [buildEmailTranslation({ previewText: value, language: 'english' })],
+        })}
+        language="english"
+      >
         <PreviewTextHtml />
       </PreviewText>,
     )

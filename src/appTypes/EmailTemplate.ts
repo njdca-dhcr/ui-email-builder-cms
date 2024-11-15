@@ -7,7 +7,6 @@ export namespace EmailTemplate {
     export interface Config {
       name: string
       description?: string
-      previewText?: string
       translations?: EmailTranslation.Base[]
       appModes?: AppMode[]
     }
@@ -18,7 +17,6 @@ export namespace EmailTemplate {
       id?: string
       name: string
       description?: string
-      previewText?: string
       translations?: EmailTranslation.Unique[]
       tags?: Tag[]
       tagNames?: string[]
