@@ -2,124 +2,124 @@ name: Appeal Tribunal - Confirmation Success
 description: To confirm receipt of registering/confirming for their hearing
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: Your registration is received and confirmed for your hearing on March 22, 2024 @ 11am. Details included on how to prepare for your hearing.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Registration complete
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Custom
-            name: Appeal Tribunal
-            backgroundColor: "#0076d6"
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "CAPTAIN AMERICA:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: The registration/confirmation you submitted for your scheduled hearing was
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview With Reason
-            status: Received &amp; confirmed
-            statusDueTo: for your hearing on
-            showSupportiveInformation: false
-            spaceAfter: true
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: "March 22, 2024 @ 11am"
-                    bold: true
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: How to prepare for your appeal
-            description:
-              - type: paragraph
-                children:
-                  - text: "Read the entire notice you received in the mail (front and back) and "
-                  - text: refer to the insert titled “Preparing For Your Hearing.”
-                    bold: true
-                  - text: " You will find information regarding:"
-              - type: bulleted-list
-                children:
-                  - type: list-item
-                    children:
-                      - text: Evidence
-                  - type: list-item
-                    children:
-                      - text: Witnesses
-                  - type: list-item
-                    children:
-                      - text: Representation
-                  - type: list-item
-                    children:
-                      - text: Postponements
-                  - type: list-item
-                    children:
-                      - text: Request to withdraw your appeal
-                  - type: list-item
-                    children:
-                      - text: Subpoenas
-                  - type: list-item
-                    children:
-                      - text: Accessibility Accommodations
-                  - type: list-item
-                    children:
-                      - text: Interpreters
-                  - type: list-item
-                    children:
-                      - text: and more
-            secondTitle: Are others going to join your appeal call?
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: All parties are required to register
-                    bold: true
-                  - text: " by 3pm EST on the business day before your hearing date."
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      If any party does not follow the instructions properly without a valid
-                      reason, their appeal may be rejected, or they might not be allowed to
-                      participate in the hearing.
-                    italic: true
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: >-
-                      More information on the Appeal process can be found here. Frequently
-                      Asked Questions can be found here.
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    previewText: Your registration is received and confirmed for your hearing on March 22, 2024 @ 11am. Details included on how to prepare for your hearing.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Registration complete
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Custom
+              name: Appeal Tribunal
+              backgroundColor: "#0076d6"
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "CAPTAIN AMERICA:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: The registration/confirmation you submitted for your scheduled hearing was
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview With Reason
+              status: Received &amp; confirmed
+              statusDueTo: for your hearing on
+              showSupportiveInformation: false
+              spaceAfter: true
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: "March 22, 2024 @ 11am"
+                      bold: true
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: How to prepare for your appeal
+              description:
+                - type: paragraph
+                  children:
+                    - text: "Read the entire notice you received in the mail (front and back) and "
+                    - text: refer to the insert titled “Preparing For Your Hearing.”
+                      bold: true
+                    - text: " You will find information regarding:"
+                - type: bulleted-list
+                  children:
+                    - type: list-item
+                      children:
+                        - text: Evidence
+                    - type: list-item
+                      children:
+                        - text: Witnesses
+                    - type: list-item
+                      children:
+                        - text: Representation
+                    - type: list-item
+                      children:
+                        - text: Postponements
+                    - type: list-item
+                      children:
+                        - text: Request to withdraw your appeal
+                    - type: list-item
+                      children:
+                        - text: Subpoenas
+                    - type: list-item
+                      children:
+                        - text: Accessibility Accommodations
+                    - type: list-item
+                      children:
+                        - text: Interpreters
+                    - type: list-item
+                      children:
+                        - text: and more
+              secondTitle: Are others going to join your appeal call?
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: All parties are required to register
+                      bold: true
+                    - text: " by 3pm EST on the business day before your hearing date."
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        If any party does not follow the instructions properly without a valid
+                        reason, their appeal may be rejected, or they might not be allowed to
+                        participate in the hearing.
+                      italic: true
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        More information on the Appeal process can be found here. Frequently
+                        Asked Questions can be found here.
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

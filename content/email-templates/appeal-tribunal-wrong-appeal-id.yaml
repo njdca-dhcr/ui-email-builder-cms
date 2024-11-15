@@ -2,182 +2,182 @@ name: Appeal Tribunal - Wrong Appeal ID
 description: To ask the claimant/appellant to try again
 appModes: ["ALL", "NJ"]
 templates:
-  language: english
-  previewText: There is a mismatch between your name and docket number. Please try again and double check your docket number and appeal record.
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: Title
-          required: true
-          defaultValue:
-            title: Incomplete Registration/ Confirmation
-        - kind: ProgramName
-          required: true
-          defaultValue:
-            preset: Custom
-            name: Appeal Tribunal
-            backgroundColor: "#0076d6"
-        - kind: DirectiveButton
-          defaultValue:
-            visible: false
-    - kind: Name
-      required: true
-      defaultValue:
-        name: "CAPTAIN AMERICA:"
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          required: true
-          defaultValue:
-            intro:
-              - type: paragraph
-                children:
-                  - text: The registration/confirmation you submitted for your scheduled hearing was
-        - kind: Status
-          required: true
-          defaultValue:
-            variant: Overview With Reason
-            status: Unsuccessful
-            statusDueTo: because...
-            showSupportiveInformation: false
-            spaceAfter: false
-            showDescription: true
-            description:
-              - type: paragraph
-                children:
-                  - text: there is a mismatch between the docket number and the appeal record
-                    bold: true
-        - kind: InformationalBox
-          defaultValue:
-            boxColor: Yielding Yellow
-            icon: Warning
-            title: You may have more than one notice!
-            description:
-              - type: paragraph
-                children:
-                  - text: Use your most recent notice of hearing
-                    bold: true
-                  - text: " to register/confirm your attendance. "
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: "If you are scheduled for more than one hearing,"
-                  - text: " you must register for each one separately. "
-                    bold: true
-              - type: paragraph
-                children:
-                  - text: ""
-              - type: paragraph
-                children:
-                  - text: >-
-                      Example: If you have 5 determinations you're appealing and you receive
-                      5 notices for each of those hearings, you must submit the form 5 times
-                      with different docket number and appeal record.
-                    italic: true
-            showSupportiveInformation: false
-        - kind: Directive
-          required: true
-          defaultValue:
-            variant: Three Steps
-            showTitle: false
-            showLabel: false
-            linkHref: "https://www.nj.gov/labor/ui/appeals/onlineregistration.html"
-            buttonLabel: Get Started
-            buttonColor: "#1b1b1b"
-            step1Label:
-              - type: paragraph
-                children:
-                  - text: Go back to
-                    bold: true
-                  - text: " the form"
-            showStep1AdditionalContent: true
-            step1Additional:
-              - type: paragraph
-                children:
-                  - text: Have your paper notice close by
-            step2Label:
-              - type: paragraph
-                children:
-                  - text: Answer
-                    bold: true
-                  - text: " the questions"
-            showStep2AdditionalContent: true
-            step2Additional:
-              - type: paragraph
-                children:
-                  - text: Double check your docket number and appeal record
-            step2CaseNumber:
-              - type: paragraph
-                children:
-                  - text: "Example: 123456"
-            step3Label:
-              - type: paragraph
-                children:
-                  - text: Submit
-                    bold: true
-                  - text: " your form."
-                  - bold: true
-                    text: " Don’t wait."
-            showStep3AdditionalContent: true
-            step3Additional:
-              - type: paragraph
-                children:
-                  - text: "Must be received "
-                  - text: before 3pm the business day before your hearing
-                    bold: true
-            showMultipleStepsSupportiveText: false
-        - kind: SupplementalContent
-          defaultValue:
-            variant: Double Supplemental Content
-            title: You must receive a confirmation email
-            description:
-              - type: paragraph
-                children:
-                  - text: >-
-                      You will not be registered for your hearing until you receive a
-                      confirmation email.
-            secondTitle: Feedback (Optional)
-            secondDescription:
-              - type: paragraph
-                children:
-                  - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
-                  - type: link
-                    url: >-
-                      https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
-                    children:
-                      - text: "here"
-                  - text: .
-        - kind: RulesRightsRegulations
-          defaultValue:
-            variant: Reminder
-            icon: Flag
-            reminderTitle: Can't register online?
-            reminderDescription:
-              - type: paragraph
-                children:
-                  - text: "Call:  123-456-7890                                                                                "
-                    bold: true
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          required: true
-          defaultValue:
-            content:
-              - type: paragraph
-                children:
-                  - text: >-
-                      More information on the Appeal process can be found here. Frequently
-                      Asked Questions can be found here.
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    previewText: There is a mismatch between your name and docket number. Please try again and double check your docket number and appeal record.
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: Title
+            required: true
+            defaultValue:
+              title: Incomplete Registration/ Confirmation
+          - kind: ProgramName
+            required: true
+            defaultValue:
+              preset: Custom
+              name: Appeal Tribunal
+              backgroundColor: "#0076d6"
+          - kind: DirectiveButton
+            defaultValue:
+              visible: false
+      - kind: Name
+        required: true
+        defaultValue:
+          name: "CAPTAIN AMERICA:"
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            required: true
+            defaultValue:
+              intro:
+                - type: paragraph
+                  children:
+                    - text: The registration/confirmation you submitted for your scheduled hearing was
+          - kind: Status
+            required: true
+            defaultValue:
+              variant: Overview With Reason
+              status: Unsuccessful
+              statusDueTo: because...
+              showSupportiveInformation: false
+              spaceAfter: false
+              showDescription: true
+              description:
+                - type: paragraph
+                  children:
+                    - text: there is a mismatch between the docket number and the appeal record
+                      bold: true
+          - kind: InformationalBox
+            defaultValue:
+              boxColor: Yielding Yellow
+              icon: Warning
+              title: You may have more than one notice!
+              description:
+                - type: paragraph
+                  children:
+                    - text: Use your most recent notice of hearing
+                      bold: true
+                    - text: " to register/confirm your attendance. "
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: "If you are scheduled for more than one hearing,"
+                    - text: " you must register for each one separately. "
+                      bold: true
+                - type: paragraph
+                  children:
+                    - text: ""
+                - type: paragraph
+                  children:
+                    - text: >-
+                        Example: If you have 5 determinations you're appealing and you receive
+                        5 notices for each of those hearings, you must submit the form 5 times
+                        with different docket number and appeal record.
+                      italic: true
+              showSupportiveInformation: false
+          - kind: Directive
+            required: true
+            defaultValue:
+              variant: Three Steps
+              showTitle: false
+              showLabel: false
+              linkHref: "https://www.nj.gov/labor/ui/appeals/onlineregistration.html"
+              buttonLabel: Get Started
+              buttonColor: "#1b1b1b"
+              step1Label:
+                - type: paragraph
+                  children:
+                    - text: Go back to
+                      bold: true
+                    - text: " the form"
+              showStep1AdditionalContent: true
+              step1Additional:
+                - type: paragraph
+                  children:
+                    - text: Have your paper notice close by
+              step2Label:
+                - type: paragraph
+                  children:
+                    - text: Answer
+                      bold: true
+                    - text: " the questions"
+              showStep2AdditionalContent: true
+              step2Additional:
+                - type: paragraph
+                  children:
+                    - text: Double check your docket number and appeal record
+              step2CaseNumber:
+                - type: paragraph
+                  children:
+                    - text: "Example: 123456"
+              step3Label:
+                - type: paragraph
+                  children:
+                    - text: Submit
+                      bold: true
+                    - text: " your form."
+                    - bold: true
+                      text: " Don’t wait."
+              showStep3AdditionalContent: true
+              step3Additional:
+                - type: paragraph
+                  children:
+                    - text: "Must be received "
+                    - text: before 3pm the business day before your hearing
+                      bold: true
+              showMultipleStepsSupportiveText: false
+          - kind: SupplementalContent
+            defaultValue:
+              variant: Double Supplemental Content
+              title: You must receive a confirmation email
+              description:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        You will not be registered for your hearing until you receive a
+                        confirmation email.
+              secondTitle: Feedback (Optional)
+              secondDescription:
+                - type: paragraph
+                  children:
+                    - text: "This email is a new beta design created by New Jersey's Division of Unemployment Insurance in collaboration with New Jersey's Office of Innovation. Take our 2 minute survey "
+                    - type: link
+                      url: >-
+                        https://forms.office.com/pages/responsepage.aspx?id=0cN2UAI4n0uzauCkG9ZCp8vdJirKkE1EhbKGZFHwI15UQzlKNTlVRDlDRVAyWTlCQVNWMk9aWk9RUS4u
+                      children:
+                        - text: "here"
+                    - text: .
+          - kind: RulesRightsRegulations
+            defaultValue:
+              variant: Reminder
+              icon: Flag
+              reminderTitle: Can't register online?
+              reminderDescription:
+                - type: paragraph
+                  children:
+                    - text: "Call:  123-456-7890                                                                                "
+                      bold: true
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            required: true
+            defaultValue:
+              content:
+                - type: paragraph
+                  children:
+                    - text: >-
+                        More information on the Appeal process can be found here. Frequently
+                        Asked Questions can be found here.
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true

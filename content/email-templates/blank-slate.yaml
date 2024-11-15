@@ -2,61 +2,61 @@ name: Blank Slate
 description: You know what you want so make it happen.
 appModes: ["ALL", "NJ", "KY"]
 templates:
-  language: english
-  components:
-    - kind: Banner
-      required: true
-    - kind: Header
-      required: true
-      subComponents:
-        - kind: DepartmentSeal
-          required: true
-        - kind: DateRange
-          defaultValue:
-            visible: false
-        - kind: Title
-          defaultValue:
-            visible: false
-        - kind: ProgramName
-          defaultValue:
-            visible: false
-        - kind: DirectiveButton
-          defaultValue:
-            visible: false
-    - kind: Name
-      defaultValue:
-        visible: false
-    - kind: Body
-      required: true
-      subComponents:
-        - kind: Intro
-          defaultValue:
-            visible: false
-        - kind: Status
-          defaultValue:
-            visible: false
-        - kind: Directive
-          defaultValue:
-            visible: false
-        - kind: SupplementalContent
-          defaultValue:
-            visible: false
-        - kind: RulesRightsRegulations
-          defaultValue:
-            visible: false
-        - kind: InformationalBox
-          defaultValue:
-            visible: false
-        - kind: LoginDetails
-          defaultValue:
-            visible: false
-    - kind: Footer
-      required: true
-      subComponents:
-        - kind: AdditionalContent
-          defaultValue:
-            visible: false
-    - kind: StateSeal
-      required: true
-    - kind: Disclaimer
-      required: true
+  - language: english
+    components:
+      - kind: Banner
+        required: true
+      - kind: Header
+        required: true
+        subComponents:
+          - kind: DepartmentSeal
+            required: true
+          - kind: DateRange
+            defaultValue:
+              visible: false
+          - kind: Title
+            defaultValue:
+              visible: false
+          - kind: ProgramName
+            defaultValue:
+              visible: false
+          - kind: DirectiveButton
+            defaultValue:
+              visible: false
+      - kind: Name
+        defaultValue:
+          visible: false
+      - kind: Body
+        required: true
+        subComponents:
+          - kind: Intro
+            defaultValue:
+              visible: false
+          - kind: Status
+            defaultValue:
+              visible: false
+          - kind: Directive
+            defaultValue:
+              visible: false
+          - kind: SupplementalContent
+            defaultValue:
+              visible: false
+          - kind: RulesRightsRegulations
+            defaultValue:
+              visible: false
+          - kind: InformationalBox
+            defaultValue:
+              visible: false
+          - kind: LoginDetails
+            defaultValue:
+              visible: false
+      - kind: Footer
+        required: true
+        subComponents:
+          - kind: AdditionalContent
+            defaultValue:
+              visible: false
+      - kind: StateSeal
+        required: true
+      - kind: Disclaimer
+        required: true
