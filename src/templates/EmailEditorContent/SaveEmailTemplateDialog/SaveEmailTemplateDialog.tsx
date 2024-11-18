@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import uniq from 'lodash.uniq'
 import { EmailTemplate } from 'src/appTypes'
 import { Button, ButtonLike, Dialog, Form, FormField, LoadingOverlay } from 'src/ui'
-import { emailTemplateMergeDefaultValues } from './emailTemplateMergeDefaultValues'
+import { mergeEmailTemplateValues } from './emailTemplateMergeDefaultValues'
 import { stringFromFormData } from 'src/utils/stringFromFormData'
 import { useEmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { useEmailPartsContentData } from 'src/templates/EmailPartsContent'
@@ -64,17 +64,22 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
             onSubmit={async (event) => {
               setValidationErrors(null)
               const formData = new FormData(event.currentTarget)
-              const result = await mutate({
-                ...emailTemplateMergeDefaultValues(emailTemplate, emailPartsContentData, language),
-                name: stringFromFormData(formData, 'name'),
-                description: stringFromFormData(formData, 'description'),
-                tagNames: uniq(
-                  stringFromFormData(formData, 'tagNames')
-                    .split(',')
-                    .map((name) => name.trim())
-                    .filter(Boolean),
-                ),
-              })
+              const result = await mutate(
+                mergeEmailTemplateValues({
+                  previewText,
+                  emailTemplate,
+                  data: emailPartsContentData,
+                  name: stringFromFormData(formData, 'name'),
+                  language,
+                  description: stringFromFormData(formData, 'description'),
+                  tagNames: uniq(
+                    stringFromFormData(formData, 'tagNames')
+                      .split(',')
+                      .map((name) => name.trim())
+                      .filter(Boolean),
+                  ),
+                }),
+              )
 
               if (result && 'errors' in result) {
                 setValidationErrors(result.errors)

@@ -14,7 +14,7 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailTemplate, Language } from 'src/appTypes'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { asMock } from 'src/testHelpers'
-import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultValues'
+import { mergeEmailTemplateValues } from '../emailTemplateMergeDefaultValues'
 import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
 import { EmailTemplateUpdateDialog } from '../EmailTemplateUpdateDialog'
@@ -24,12 +24,19 @@ jest.mock('src/network/emailTemplates', () => {
   return { useUpdateEmailTemplate: jest.fn() }
 })
 
+jest.mock('../emailTemplateMergeDefaultValues', () => {
+  return {
+    mergeEmailTemplateValues: jest.fn(),
+  }
+})
+
 describe('EmailTemplateUpdateDialog', () => {
   let previewText: string
   let emailTemplate: EmailTemplate.Unique.Config
   let emailTemplateChanges: EmailTemplate.Base.Config
   let user: UserEvent
   let language: Language
+  let mergedEmailTemplate: EmailTemplate.Unique.Config
 
   beforeEach(async () => {
     language = 'english'
@@ -40,6 +47,10 @@ describe('EmailTemplateUpdateDialog', () => {
       description: emailTemplate.description,
       translations: [buildEmailTranslation({ language, previewText })],
     })
+    mergedEmailTemplate = {
+      name: 'mocked merged email template values',
+    }
+    asMock(mergeEmailTemplateValues).mockReturnValue(mergedEmailTemplate)
     user = userEvent.setup()
   })
 
@@ -78,11 +89,7 @@ describe('EmailTemplateUpdateDialog', () => {
 
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Update' }))
-    expect(mutateAsync).toHaveBeenCalledWith({
-      ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges, language),
-      previewText,
-      tagNames: [],
-    })
+    expect(mutateAsync).toHaveBeenCalledWith(mergedEmailTemplate)
     expect(useUpdateEmailTemplate).toHaveBeenCalledWith(emailTemplate.id!)
   })
 

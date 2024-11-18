@@ -7,12 +7,12 @@ import { EmailTemplate, Language } from 'src/appTypes'
 import {
   buildEmailTemplateConfig,
   buildEmailTranslation,
+  buildUniqueEmailComponent,
   buildUniqueEmailConfig,
 } from 'src/factories'
 import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
-import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultValues'
 import { randomUUID } from 'crypto'
 import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 
@@ -31,6 +31,7 @@ describe('SaveEmailTemplateDialog', () => {
   let emailTemplateChanges: EmailTemplate.Base.Config
   let language: Language
   let user: UserEvent
+  let emailPartsContent: Record<string, any>
 
   beforeEach(async () => {
     language = 'english'
@@ -44,13 +45,27 @@ describe('SaveEmailTemplateDialog', () => {
     title = faker.lorem.words(5)
     trigger = faker.lorem.words(2)
     previewText = faker.lorem.paragraph()
-    const translation = buildEmailTranslation({ language, previewText })
-    emailTemplate = buildUniqueEmailConfig({ translations: [translation] })
+    const nameComponent = buildUniqueEmailComponent('Name', {
+      defaultValue: { name: faker.lorem.word() },
+    })
+    const originalTranslation = buildEmailTranslation({
+      language,
+      previewText,
+      components: [nameComponent],
+    })
+    const newName = 'new name'
+    const newTranslation = buildEmailTranslation({
+      language,
+      previewText,
+      components: [{ ...nameComponent, defaultValue: { name: newName }, subComponents: [] }],
+    })
+    emailTemplate = buildUniqueEmailConfig({ translations: [originalTranslation] })
     emailTemplateChanges = buildEmailTemplateConfig({
       name: emailTemplate.name,
       description: emailTemplate.description,
-      translations: [translation],
+      translations: [newTranslation],
     })
+    emailPartsContent = { [nameComponent.id]: { name: newName } }
     user = userEvent.setup()
   })
 
@@ -90,7 +105,7 @@ describe('SaveEmailTemplateDialog', () => {
         <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
           <CurrentLanguage emailTemplateConfig={emailTemplate}>
             {([_language]) => (
-              <EmailPartsContent initialData={emailTemplateChanges}>
+              <EmailPartsContent initialData={emailPartsContent}>
                 <PreviewText language={language} emailTemplateConfig={emailTemplate}>
                   <SaveEmailTemplateDialog
                     description={description}
@@ -165,8 +180,7 @@ describe('SaveEmailTemplateDialog', () => {
       expect(mutate).not.toHaveBeenCalled()
       await user.click(button!)
       expect(mutate).toHaveBeenCalledWith({
-        ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges, language),
-        previewText,
+        ...emailTemplateChanges,
         tagNames: ['tag'],
       })
     })

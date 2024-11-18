@@ -1,30 +1,5 @@
 import { EmailParts, EmailTemplate, EmailTranslation, Language } from 'src/appTypes'
 
-export const emailTemplateMergeDefaultValues = (
-  emailTemplate: EmailTemplate.Unique.Config,
-  emailPartsContentData: Record<string, any>,
-  language: Language,
-): EmailTemplate.Unique.Config => {
-  return {
-    ...emailTemplate,
-    translations: emailTemplate.translations?.map((translation) =>
-      translation.language === language
-        ? {
-            ...translation,
-            components: translation.components?.map((component) => ({
-              ...component,
-              defaultValue: emailPartsContentData[component.id] ?? component.defaultValue,
-              subComponents: component.subComponents?.map((subComponent) => ({
-                ...subComponent,
-                defaultValue: emailPartsContentData[subComponent.id] ?? subComponent.defaultValue,
-              })),
-            })),
-          }
-        : translation,
-    ),
-  }
-}
-
 export const mergeSubComponentDefaultValue = (
   subComponent: EmailParts.Unique.SubComponent,
   data: Record<string, any>,
@@ -63,6 +38,16 @@ export const mergeTranslationValues = ({
   }
 }
 
+interface MergeEmailTemplateValuesOptions {
+  data: Record<string, any>
+  description: string
+  emailTemplate: EmailTemplate.Unique.Config
+  language: Language
+  name: string
+  previewText: string
+  tagNames: string[]
+}
+
 export const mergeEmailTemplateValues = ({
   data,
   description,
@@ -71,15 +56,7 @@ export const mergeEmailTemplateValues = ({
   name,
   previewText,
   tagNames,
-}: {
-  data: Record<string, any>
-  description: string
-  emailTemplate: EmailTemplate.Unique.Config
-  language: Language
-  name: string
-  previewText: string
-  tagNames: string[]
-}): EmailTemplate.Unique.Config => {
+}: MergeEmailTemplateValuesOptions): EmailTemplate.Unique.Config => {
   const translations = emailTemplate.translations ?? []
   return {
     ...emailTemplate,

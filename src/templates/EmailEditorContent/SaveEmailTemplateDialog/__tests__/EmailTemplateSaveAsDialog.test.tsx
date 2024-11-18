@@ -15,13 +15,19 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailTemplate, Language } from 'src/appTypes'
 import { useCreateEmailTemplate } from 'src/network/emailTemplates'
 import { asMock } from 'src/testHelpers'
-import { emailTemplateMergeDefaultValues } from '../emailTemplateMergeDefaultValues'
 import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
 import { CurrentLanguage } from 'src/templates/CurrentLanguage'
+import { mergeEmailTemplateValues } from '../emailTemplateMergeDefaultValues'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useCreateEmailTemplate: jest.fn() }
+})
+
+jest.mock('../emailTemplateMergeDefaultValues', () => {
+  return {
+    mergeEmailTemplateValues: jest.fn(),
+  }
 })
 
 describe('EmailTemplateSaveAsDialog', () => {
@@ -30,6 +36,7 @@ describe('EmailTemplateSaveAsDialog', () => {
   let emailTemplateChanges: EmailTemplate.Base.Config
   let user: UserEvent
   let language: Language
+  let mergedEmailTemplate: EmailTemplate.Unique.Config
 
   beforeEach(async () => {
     language = 'english'
@@ -40,6 +47,10 @@ describe('EmailTemplateSaveAsDialog', () => {
       description: emailTemplate.description,
       translations: [buildEmailTranslation({ language, previewText })],
     })
+    mergedEmailTemplate = {
+      name: 'mocked merged email template values',
+    }
+    asMock(mergeEmailTemplateValues).mockReturnValue(mergedEmailTemplate)
     user = userEvent.setup()
   })
 
@@ -78,11 +89,8 @@ describe('EmailTemplateSaveAsDialog', () => {
 
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Create' }))
-    expect(mutateAsync).toHaveBeenCalledWith({
-      ...emailTemplateMergeDefaultValues(emailTemplate, emailTemplateChanges, language),
-      previewText,
-      tagNames: [],
-    })
+    expect(mutateAsync).toHaveBeenCalledWith(mergedEmailTemplate)
+    expect(useCreateEmailTemplate).toHaveBeenCalled()
   })
 
   it('navigates to /my-library when successful', async () => {

@@ -22,6 +22,7 @@ describe('EditPreviewText', () => {
     )
 
     const input = getByRole('textbox')
+    await user.clear(input)
     await user.type(input, value)
     expect(input).toHaveValue(value)
   })
