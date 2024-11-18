@@ -14,6 +14,7 @@ import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
 import uniqueId from 'lodash.uniqueid'
 import './EmailEditorPage.css'
 import { CurrentLanguage } from './CurrentLanguage'
+import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationSelector'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Base.Config
@@ -24,7 +25,7 @@ interface Props {
 }
 
 const EmailEditorPage: FC<Props> = ({ pageContext }) => {
-  const [emailTemplate] = useState<EmailTemplate.Unique.Config>(() => ({
+  const [emailTemplateConfig] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
     translations: (pageContext.emailTemplate.translations ?? []).map((translation) => ({
       ...translation,
@@ -34,32 +35,39 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
 
   return (
     <Layout element="main">
-      <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-        <CurrentlyActiveEmailPart>
-          <SyncSidebarAndPreviewScroll>
-            <ClearCurrentlyActiveEmailPart />
-            <CurrentLanguage key={emailTemplate.id} emailTemplateConfig={emailTemplate}>
-              {([language]) => (
-                <EmailPartsContent key={language}>
-                  <EmailEditorSidebar
-                    language={language}
-                    emailTemplate={emailTemplate}
-                    heading={<EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />}
-                  />
-                  <PreviewText
-                    key={language}
-                    emailTemplateConfig={emailTemplate}
-                    language={language}
-                  >
-                    <PageContent element="div" className="email-editor-page-content">
-                      <EmailEditorContent language={language} emailTemplate={emailTemplate} />
-                    </PageContent>
-                  </PreviewText>
-                </EmailPartsContent>
-              )}
-            </CurrentLanguage>
-          </SyncSidebarAndPreviewScroll>
-        </CurrentlyActiveEmailPart>
+      <EmailTemplateConfig key={emailTemplateConfig.id} emailTemplateConfig={emailTemplateConfig}>
+        {(emailTemplate) => (
+          <CurrentlyActiveEmailPart>
+            <SyncSidebarAndPreviewScroll>
+              <ClearCurrentlyActiveEmailPart />
+              <CurrentLanguage key={emailTemplate.id} emailTemplateConfig={emailTemplate}>
+                {([language]) => (
+                  <EmailPartsContent key={language}>
+                    <EmailEditorSidebar
+                      language={language}
+                      emailTemplate={emailTemplate}
+                      heading={
+                        <>
+                          <EmailEditorHeadingAndSelect emailTemplate={emailTemplate} />
+                          <EmailTranslationSelector emailTemplateConfig={emailTemplate} />
+                        </>
+                      }
+                    />
+                    <PreviewText
+                      key={language}
+                      emailTemplateConfig={emailTemplate}
+                      language={language}
+                    >
+                      <PageContent element="div" className="email-editor-page-content">
+                        <EmailEditorContent language={language} emailTemplate={emailTemplate} />
+                      </PageContent>
+                    </PreviewText>
+                  </EmailPartsContent>
+                )}
+              </CurrentLanguage>
+            </SyncSidebarAndPreviewScroll>
+          </CurrentlyActiveEmailPart>
+        )}
       </EmailTemplateConfig>
     </Layout>
   )

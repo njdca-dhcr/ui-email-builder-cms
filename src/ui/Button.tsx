@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { DetailedHTMLProps, FC, forwardRef } from 'react'
+import React, { DetailedHTMLProps, forwardRef } from 'react'
 import './Button.css'
 
 export interface Props

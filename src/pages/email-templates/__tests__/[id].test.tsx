@@ -62,6 +62,11 @@ describe('Email Template Show Page', () => {
       const { queryByText } = renderEmailTemplateShowPage()
       expect(queryByText('Loading your email template')).not.toBeNull()
     })
+
+    it('does not display a language selector', async () => {
+      const { queryByLabelText } = renderEmailTemplateShowPage()
+      expect(queryByLabelText('Translation Language')).toBeNull()
+    })
   })
 
   describe('when successful', () => {
@@ -111,6 +116,11 @@ describe('Email Template Show Page', () => {
     it('displays the EmailEditorSidebar', () => {
       const { queryByText } = renderEmailTemplateShowPage()
       expect(queryByText('Back')).not.toBeNull()
+    })
+
+    it('displays a language selector', async () => {
+      const { queryByLabelText } = renderEmailTemplateShowPage()
+      expect(queryByLabelText('Translation Language')).not.toBeNull()
     })
 
     it('loads the saved preview text', () => {

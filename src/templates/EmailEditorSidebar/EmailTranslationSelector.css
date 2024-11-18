@@ -1,0 +1,8 @@
+.email-translation-selector {
+  display: flex;
+  gap: 1ch;
+}
+
+.email-translation-selector-dialog-actions {
+  padding-top: 1rem;
+}

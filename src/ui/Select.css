@@ -54,6 +54,7 @@
   max-height: 25vh;
   min-width: 10rem;
   overflow: auto;
+  z-index: 100;
 
   &.small {
     font-size: var(--font-small);
