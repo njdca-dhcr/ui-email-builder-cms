@@ -4,7 +4,7 @@ import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
 import { base, faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import {
   asMock,
   buildEmailTranslation,
@@ -40,6 +40,7 @@ jest.mock('src/network/users', () => {
 })
 
 describe('EmailEditorContent', () => {
+  let emailTranslation: EmailTranslation.Unique
   let emailTemplate: EmailTemplate.Unique.Config
   let alertSpy: jest.SpyInstance
   let client: QueryClient
@@ -48,22 +49,19 @@ describe('EmailEditorContent', () => {
   beforeEach(() => {
     user = userEvent.setup()
     client = new QueryClient()
-    emailTemplate = buildUniqueEmailConfig({
-      translations: [
-        buildEmailTranslation({
-          language: 'english',
-          components: [
-            buildUniqueEmailComponent('Banner'),
-            buildUniqueEmailComponent('Header', {
-              subComponents: [
-                buildUniqueEmailSubComponent({ kind: 'Title' }),
-                buildUniqueEmailSubComponent({ kind: 'ProgramName' }),
-              ],
-            }),
+    emailTranslation = buildEmailTranslation({
+      language: 'english',
+      components: [
+        buildUniqueEmailComponent('Banner'),
+        buildUniqueEmailComponent('Header', {
+          subComponents: [
+            buildUniqueEmailSubComponent({ kind: 'Title' }),
+            buildUniqueEmailSubComponent({ kind: 'ProgramName' }),
           ],
         }),
       ],
     })
+    emailTemplate = buildUniqueEmailConfig({ translations: [emailTranslation] })
     alertSpy = jest.spyOn(window, 'alert')
     alertSpy.mockReturnValue(false)
     userIsNotSignedIn()
@@ -78,7 +76,7 @@ describe('EmailEditorContent', () => {
   it('can display the email in desktop or mobile', async () => {
     const { baseElement, getByLabelText } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
 
@@ -98,7 +96,7 @@ describe('EmailEditorContent', () => {
   it('can display the email components and subcomponents', () => {
     const { queryByText } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
     expect(queryByText('Title')).not.toBeNull()
@@ -109,7 +107,7 @@ describe('EmailEditorContent', () => {
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <EmailPartsContent>
-          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
         </EmailPartsContent>
       </QueryClientProvider>,
     )
@@ -130,9 +128,9 @@ describe('EmailEditorContent', () => {
   it('allows users to copy the current preview into their clipboard', async () => {
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
-        <PreviewText emailTemplateConfig={emailTemplate} language="english">
+        <PreviewText emailTranslation={emailTranslation}>
           <EmailPartsContent>
-            <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+            <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
           </EmailPartsContent>
         </PreviewText>
       </QueryClientProvider>,
@@ -154,9 +152,9 @@ describe('EmailEditorContent', () => {
   it('allows users to download the current preview', async () => {
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
-        <PreviewText emailTemplateConfig={emailTemplate} language="english">
+        <PreviewText emailTranslation={emailTranslation}>
           <EmailPartsContent>
-            <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+            <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
           </EmailPartsContent>
         </PreviewText>
       </QueryClientProvider>,
@@ -182,7 +180,7 @@ describe('EmailEditorContent', () => {
   it('displays the edit preview text field', () => {
     const { baseElement } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
     const input = baseElement.querySelector('#edit-preview-text')
@@ -193,7 +191,7 @@ describe('EmailEditorContent', () => {
   it('renders the preview text', () => {
     const { baseElement } = render(
       <QueryClientProvider client={client}>
-        <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
       </QueryClientProvider>,
     )
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()
@@ -207,7 +205,7 @@ describe('EmailEditorContent', () => {
     it('does not have a share dropdown', () => {
       const { queryByRole } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
 
@@ -230,7 +228,7 @@ describe('EmailEditorContent', () => {
 
       const { baseElement } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
 
@@ -246,7 +244,7 @@ describe('EmailEditorContent', () => {
 
       const { baseElement } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
       expect(baseElement).toHaveTextContent('Loading your settings')
@@ -258,7 +256,7 @@ describe('EmailEditorContent', () => {
       asMock(useCurrentUser).mockReturnValue(query)
       const { queryByText } = render(
         <QueryClientProvider client={client}>
-          <EmailEditorContent language="english" emailTemplate={emailTemplate} />
+          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
         </QueryClientProvider>,
       )
       expect(queryByText(error.message)).not.toBeNull()
@@ -277,7 +275,7 @@ describe('EmailEditorContent', () => {
         <AuthProvider>
           <QueryClientProvider client={client}>
             <EmailEditorContent
-              language="english"
+              emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: randomUUID() }}
             />
           </QueryClientProvider>
@@ -292,7 +290,7 @@ describe('EmailEditorContent', () => {
         <AuthProvider>
           <QueryClientProvider client={client}>
             <EmailEditorContent
-              language="english"
+              emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: randomUUID() }}
             />
           </QueryClientProvider>
@@ -315,7 +313,7 @@ describe('EmailEditorContent', () => {
         <AuthProvider>
           <QueryClientProvider client={client}>
             <EmailEditorContent
-              language="english"
+              emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: undefined }}
             />
           </QueryClientProvider>
@@ -330,7 +328,7 @@ describe('EmailEditorContent', () => {
         <AuthProvider>
           <QueryClientProvider client={client}>
             <EmailEditorContent
-              language="english"
+              emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: undefined }}
             />
           </QueryClientProvider>

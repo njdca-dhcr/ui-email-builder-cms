@@ -16,7 +16,7 @@ import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { EditPreviewText } from './EditPreviewText'
 import { EmailComponentSpacer } from './EmailComponentSpacer'
 import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
-import { EmailTemplate, Language } from 'src/appTypes'
+import { EmailTemplate, EmailTranslation, Language } from 'src/appTypes'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { isRestricted } from 'src/utils/appMode'
 import { PreviewTextHtml } from './PreviewTextHtml'
@@ -27,29 +27,27 @@ import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { useCurrentUser } from 'src/network/users'
-import './EmailEditorContent.css'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
-import { translationForLanguage } from '../CurrentLanguage'
+import './EmailEditorContent.css'
 
 interface Props {
   emailTemplate: EmailTemplate.Unique.Config
-  language: Language
+  emailTranslation: EmailTranslation.Unique
 }
 
-export const EmailEditorContent: FC<Props> = ({ emailTemplate, language }) => {
+export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation }) => {
   const { data: user, isLoading, error, enabled } = useCurrentUser()
   const [previewType, setPreviewType] = useState<'desktop' | 'mobile'>('desktop')
   const isPreviewDesktop = previewType === 'desktop'
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
-  const translation = translationForLanguage(emailTemplate, language)
-  const [titleValue] = useTitleValue(getSubComponentByKind(translation, 'Title'))
+  const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
   const [previewText] = usePreviewText()
 
-  const components = translation.components ?? []
+  const components = emailTranslation.components
 
   const hasPreviewText = () => {
     const text = previewText.trim()

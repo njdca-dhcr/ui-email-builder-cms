@@ -4,12 +4,11 @@ import { EmailTemplate } from 'src/appTypes'
 import { Button, ButtonLike, Dialog, Form, FormField, LoadingOverlay } from 'src/ui'
 import { mergeEmailTemplateValues } from './emailTemplateMergeDefaultValues'
 import { stringFromFormData } from 'src/utils/stringFromFormData'
-import { useEmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { useEmailPartsContentData } from 'src/templates/EmailPartsContent'
 import { usePreviewText } from 'src/templates/PreviewText'
 import { DefaultError, UseMutateAsyncFunction } from '@tanstack/react-query'
 import { FormFieldArea } from 'src/ui/Form'
-import { useCurrentLanguage } from 'src/templates/CurrentLanguage'
+import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemplateState'
 
 interface ErrorJSON {
   errors: { name: string }
@@ -46,7 +45,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
   title,
   trigger,
 }) => {
-  const emailTemplate = useEmailTemplateConfig()
+  const [emailTemplate] = useCurrentEmailTemplate()
   const [language] = useCurrentLanguage()
   const [emailPartsContentData] = useEmailPartsContentData()
   const [previewText] = usePreviewText()

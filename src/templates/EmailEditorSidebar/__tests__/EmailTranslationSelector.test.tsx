@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { buildEmailTranslation, buildUniqueEmailConfig } from 'src/factories'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 import { EmailTranslationSelector } from '../EmailTranslationSelector'
 import { AVAILABLE_LANGUAGES, EmailTemplate } from 'src/appTypes'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 describe('EmailTranslationSelector', () => {
   let user: UserEvent
@@ -16,13 +15,9 @@ describe('EmailTranslationSelector', () => {
 
   const renderSelector = (emailTemplate: EmailTemplate.Unique.Config) => {
     return render(
-      <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-        {(emailTemplateConfig) => (
-          <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
-            {() => <EmailTranslationSelector emailTemplateConfig={emailTemplateConfig} />}
-          </CurrentLanguage>
-        )}
-      </EmailTemplateConfig>,
+      <EmailTemplateState emailTemplate={emailTemplate}>
+        {() => <EmailTranslationSelector />}
+      </EmailTemplateState>,
     )
   }
 

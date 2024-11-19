@@ -8,10 +8,9 @@ import {
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { DirectiveValue } from 'src/appTypes'
 import { DirectiveButton } from '../DirectiveButton'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 describe('DirectiveButton', () => {
   it('displays the directive button', () => {
@@ -34,19 +33,17 @@ describe('DirectiveButton', () => {
     }
 
     const { getByRole, baseElement } = render(
-      <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-        <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
-          {([_language]) => (
-            <EmailPartsContent initialData={{ [directive.id]: directiveValue }}>
-              <table>
-                <tbody>
-                  <DirectiveButton emailSubComponent={emailSubComponent} />
-                </tbody>
-              </table>
-            </EmailPartsContent>
-          )}
-        </CurrentLanguage>
-      </EmailTemplateConfig>,
+      <EmailTemplateState emailTemplate={emailTemplateConfig}>
+        {() => (
+          <EmailPartsContent initialData={{ [directive.id]: directiveValue }}>
+            <table>
+              <tbody>
+                <DirectiveButton emailSubComponent={emailSubComponent} />
+              </tbody>
+            </table>
+          </EmailPartsContent>
+        )}
+      </EmailTemplateState>,
     )
 
     const link: HTMLAnchorElement = getByRole('link') as any
@@ -72,19 +69,17 @@ describe('DirectiveButton', () => {
     })
 
     const { queryByRole } = render(
-      <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-        <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
-          {([_language]) => (
-            <EmailPartsContent initialData={{ [directive.id]: { visible: false } }}>
-              <table>
-                <tbody>
-                  <DirectiveButton emailSubComponent={emailSubComponent} />
-                </tbody>
-              </table>
-            </EmailPartsContent>
-          )}
-        </CurrentLanguage>
-      </EmailTemplateConfig>,
+      <EmailTemplateState emailTemplate={emailTemplateConfig}>
+        {() => (
+          <EmailPartsContent initialData={{ [directive.id]: { visible: false } }}>
+            <table>
+              <tbody>
+                <DirectiveButton emailSubComponent={emailSubComponent} />
+              </tbody>
+            </table>
+          </EmailPartsContent>
+        )}
+      </EmailTemplateState>,
     )
     expect(queryByRole('link')).toBeNull()
   })

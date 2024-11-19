@@ -10,9 +10,8 @@ import {
 import { spacingCellSizes } from 'src/templates/styles'
 import { EmailParts } from 'src/appTypes'
 import { EmailSubComponentSpacer } from '../EmailSubComponentSpacer'
-import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 describe('EmailSubComponentSpacer', () => {
   const renderWithSubComponents = ({
@@ -135,23 +134,21 @@ describe('EmailSubComponentSpacer', () => {
       })
 
       const { baseElement } = render(
-        <EmailTemplateConfig emailTemplateConfig={emailTemplateConfig}>
-          <CurrentLanguage emailTemplateConfig={emailTemplateConfig}>
-            {([_language]) => (
-              <EmailPartsContent
-                initialData={{
-                  [directive.id]: { visible: false },
-                  [directiveButton.id]: { visible: true },
-                }}
-              >
-                <EmailSubComponentSpacer
-                  currentSubComponent={programName}
-                  nextSubComponent={directiveButton}
-                />
-              </EmailPartsContent>
-            )}
-          </CurrentLanguage>
-        </EmailTemplateConfig>,
+        <EmailTemplateState emailTemplate={emailTemplateConfig}>
+          {() => (
+            <EmailPartsContent
+              initialData={{
+                [directive.id]: { visible: false },
+                [directiveButton.id]: { visible: true },
+              }}
+            >
+              <EmailSubComponentSpacer
+                currentSubComponent={programName}
+                nextSubComponent={directiveButton}
+              />
+            </EmailPartsContent>
+          )}
+        </EmailTemplateState>,
         {
           wrapper: emailPartWrapper,
         },

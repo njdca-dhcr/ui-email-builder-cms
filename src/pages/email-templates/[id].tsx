@@ -8,80 +8,71 @@ import {
 import { EmailEditorContent } from 'src/templates/EmailEditorContent'
 import { EmailEditorSidebar } from 'src/templates/EmailEditorSidebar'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
 import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
 import { PreviewText } from 'src/templates/PreviewText'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/EmailTranslationSelector'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 export type Props = PageProps<null, null, null>
 
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   const query = useEmailTemplate(params.id)
   const { data: queriedEmailTemplate, isLoading, error } = useEmailTemplate(params.id)
-  const emailTemplateConfig = queriedEmailTemplate ?? { name: '', id: '' }
+  const emailTemplate = queriedEmailTemplate ?? null
 
   return (
     <Layout element="main">
-      <EmailTemplateConfig key={emailTemplateConfig.id} emailTemplateConfig={emailTemplateConfig}>
-        {(emailTemplate) => (
+      <EmailTemplateState emailTemplate={emailTemplate}>
+        {({ currentLanguage, currentEmailTemplate, currentTranslation }) => (
           <CurrentlyActiveEmailPart>
             <SyncSidebarAndPreviewScroll>
               <ClearCurrentlyActiveEmailPart />
-              <CurrentLanguage key={emailTemplate.id} emailTemplateConfig={emailTemplate}>
-                {([language]) => (
-                  <EmailPartsContent key={language}>
-                    <EmailEditorSidebar
-                      language={language}
-                      emailTemplate={emailTemplate}
-                      heading={
-                        <>
-                          <h1
-                            style={{
-                              fontSize: '1.5rem',
-                              paddingLeft: '0.5rem',
-                              marginTop: '0.75rem',
-                              marginBottom: 0,
-                            }}
-                          >
-                            {byQueryState(query, {
-                              data: ({ name }) => name,
-                              loading: () => 'Loading...',
-                              error: () => 'Something went wrong',
-                            })}
-                          </h1>
-                          {byQueryState(query, {
-                            data: () => (
-                              <EmailTranslationSelector emailTemplateConfig={emailTemplate} />
-                            ),
-                            loading: () => null,
-                            error: () => null,
-                          })}
-                        </>
-                      }
-                    />
-                    <PreviewText
-                      key={language}
-                      emailTemplateConfig={emailTemplate}
-                      language={language}
-                    >
-                      <PageContent element="div" className="email-editor-page-content">
-                        {error && <Alert>{error.message}</Alert>}
-                        {emailTemplate && (
-                          <EmailEditorContent language={language} emailTemplate={emailTemplate} />
-                        )}
-                      </PageContent>
-                    </PreviewText>
-                    {isLoading && <LoadingOverlay description="Loading your email template" />}
-                  </EmailPartsContent>
-                )}
-              </CurrentLanguage>
+              <EmailPartsContent key={currentLanguage}>
+                <EmailEditorSidebar
+                  emailTranslation={currentTranslation}
+                  heading={
+                    <>
+                      <h1
+                        style={{
+                          fontSize: '1.5rem',
+                          paddingLeft: '0.5rem',
+                          marginTop: '0.75rem',
+                          marginBottom: 0,
+                        }}
+                      >
+                        {byQueryState(query, {
+                          data: ({ name }) => name,
+                          loading: () => 'Loading...',
+                          error: () => 'Something went wrong',
+                        })}
+                      </h1>
+                      {byQueryState(query, {
+                        data: () => <EmailTranslationSelector />,
+                        loading: () => null,
+                        error: () => null,
+                      })}
+                    </>
+                  }
+                />
+                <PreviewText key={currentLanguage} emailTranslation={currentTranslation}>
+                  <PageContent element="div" className="email-editor-page-content">
+                    {error && <Alert>{error.message}</Alert>}
+                    {emailTemplate && (
+                      <EmailEditorContent
+                        emailTranslation={currentTranslation}
+                        emailTemplate={currentEmailTemplate}
+                      />
+                    )}
+                  </PageContent>
+                </PreviewText>
+                {isLoading && <LoadingOverlay description="Loading your email template" />}
+              </EmailPartsContent>
             </SyncSidebarAndPreviewScroll>
           </CurrentlyActiveEmailPart>
         )}
-      </EmailTemplateConfig>
+      </EmailTemplateState>
     </Layout>
   )
 }

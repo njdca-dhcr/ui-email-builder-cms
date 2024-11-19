@@ -4,8 +4,7 @@ import { SpacingCell } from '../styles'
 import { EmailBlock } from 'src/ui'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
-import { useEmailTemplateConfig } from '../EmailTemplateConfig'
-import { translationForLanguage, useCurrentLanguage } from '../CurrentLanguage'
+import { useCurrentTranslation } from 'src/utils/EmailTemplateState'
 
 interface Props {
   currentSubComponent: EmailParts.Unique.SubComponent
@@ -13,9 +12,7 @@ interface Props {
 }
 
 export const EmailSubComponentSpacer: FC<Props> = ({ currentSubComponent, nextSubComponent }) => {
-  const emailTemplate = useEmailTemplateConfig()
-  const [language] = useCurrentLanguage()
-  const translation = translationForLanguage(emailTemplate, language)
+  const translation = useCurrentTranslation()
   const shouldShow = useShouldShowEmailPart(currentSubComponent)
   const shouldShowNext = useShouldShowEmailPart(nextSubComponent ?? { kind: 'Banner', id: '' })
   const shouldShowDirective = useShouldShowEmailPart(

@@ -10,11 +10,10 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
 } from 'src/factories'
-import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
 import { randomUUID } from 'crypto'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 describe('SaveEmailTemplateDialog', () => {
   let description: string
@@ -71,11 +70,39 @@ describe('SaveEmailTemplateDialog', () => {
 
   it('displays its trigger', async () => {
     const { queryByRole } = render(
-      <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-        <CurrentLanguage emailTemplateConfig={emailTemplate}>
-          {([_language]) => (
-            <EmailPartsContent initialData={emailTemplateChanges}>
-              <PreviewText emailTemplateConfig={emailTemplate} language={language}>
+      <EmailTemplateState emailTemplate={emailTemplate}>
+        {({ currentTranslation }) => (
+          <EmailPartsContent initialData={emailTemplateChanges}>
+            <PreviewText emailTranslation={currentTranslation}>
+              <SaveEmailTemplateDialog
+                description={description}
+                errorMessage={errorMessage}
+                loading={loading}
+                loadingMessage={loadingMessage}
+                mutate={mutate}
+                onSuccess={onSuccess}
+                submitButtonText={submitButtonText}
+                title={title}
+                trigger={trigger}
+              />
+            </PreviewText>
+          </EmailPartsContent>
+        )}
+      </EmailTemplateState>,
+    )
+    const button = queryByRole('button')
+    expect(button).not.toBeNull()
+    expect(button).toHaveClass('save-email-template-dialog-trigger')
+    expect(button).toHaveTextContent(trigger)
+  })
+
+  describe('when open', () => {
+    const renderAndOpen = async () => {
+      const result = render(
+        <EmailTemplateState emailTemplate={emailTemplate}>
+          {({ currentTranslation }) => (
+            <EmailPartsContent initialData={emailPartsContent}>
+              <PreviewText emailTranslation={currentTranslation}>
                 <SaveEmailTemplateDialog
                   description={description}
                   errorMessage={errorMessage}
@@ -90,39 +117,7 @@ describe('SaveEmailTemplateDialog', () => {
               </PreviewText>
             </EmailPartsContent>
           )}
-        </CurrentLanguage>
-      </EmailTemplateConfig>,
-    )
-    const button = queryByRole('button')
-    expect(button).not.toBeNull()
-    expect(button).toHaveClass('save-email-template-dialog-trigger')
-    expect(button).toHaveTextContent(trigger)
-  })
-
-  describe('when open', () => {
-    const renderAndOpen = async () => {
-      const result = render(
-        <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-          <CurrentLanguage emailTemplateConfig={emailTemplate}>
-            {([_language]) => (
-              <EmailPartsContent initialData={emailPartsContent}>
-                <PreviewText language={language} emailTemplateConfig={emailTemplate}>
-                  <SaveEmailTemplateDialog
-                    description={description}
-                    errorMessage={errorMessage}
-                    loading={loading}
-                    loadingMessage={loadingMessage}
-                    mutate={mutate}
-                    onSuccess={onSuccess}
-                    submitButtonText={submitButtonText}
-                    title={title}
-                    trigger={trigger}
-                  />
-                </PreviewText>
-              </EmailPartsContent>
-            )}
-          </CurrentLanguage>
-        </EmailTemplateConfig>,
+        </EmailTemplateState>,
       )
       await user.click(result.getByRole('button'))
       return result

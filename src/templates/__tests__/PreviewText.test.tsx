@@ -1,14 +1,14 @@
-import React, { FC, ReactNode } from 'react'
+import React from 'react'
 import { act, render, renderHook } from '@testing-library/react'
 import { PreviewText, usePreviewText } from '../PreviewText'
 import { faker } from '@faker-js/faker'
-import { buildEmailTranslation, buildUniqueEmailConfig } from 'src/factories'
+import { buildEmailTranslation } from 'src/factories'
 
 describe('PreviewText', () => {
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <PreviewText language="english" emailTemplateConfig={buildUniqueEmailConfig()}>
+      <PreviewText emailTranslation={buildEmailTranslation()}>
         <section>{text}</section>
       </PreviewText>,
     )
@@ -21,10 +21,7 @@ describe('usePreviewText', () => {
     const { result } = renderHook(() => usePreviewText(), {
       wrapper: (props) => (
         <PreviewText
-          language="english"
-          emailTemplateConfig={buildUniqueEmailConfig({
-            translations: [buildEmailTranslation({ language: 'english', previewText: undefined })],
-          })}
+          emailTranslation={buildEmailTranslation({ language: 'english', previewText: undefined })}
           {...props}
         />
       ),
@@ -47,15 +44,7 @@ describe('usePreviewText', () => {
       const language = 'english'
       const translation = buildEmailTranslation({ language, previewText: faker.lorem.paragraph() })
       const { result } = renderHook(() => usePreviewText(), {
-        wrapper: (props) => (
-          <PreviewText
-            language={language}
-            emailTemplateConfig={buildUniqueEmailConfig({
-              translations: [translation],
-            })}
-            {...props}
-          />
-        ),
+        wrapper: (props) => <PreviewText emailTranslation={translation} {...props} />,
       })
       const [previewText] = result.current
 
@@ -68,15 +57,7 @@ describe('usePreviewText', () => {
       const language = 'english'
       const translation = buildEmailTranslation({ language, previewText: undefined })
       const { result } = renderHook(() => usePreviewText(), {
-        wrapper: (props) => (
-          <PreviewText
-            language={language}
-            emailTemplateConfig={buildUniqueEmailConfig({
-              translations: [translation],
-            })}
-            {...props}
-          />
-        ),
+        wrapper: (props) => <PreviewText emailTranslation={translation} {...props} />,
       })
       const [previewText] = result.current
       expect(previewText).toEqual('')

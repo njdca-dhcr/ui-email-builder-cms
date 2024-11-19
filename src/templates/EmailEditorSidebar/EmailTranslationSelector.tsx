@@ -2,19 +2,19 @@ import React, { FC, useState } from 'react'
 import capitalize from 'lodash.capitalize'
 import difference from 'lodash.difference'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { AVAILABLE_LANGUAGES, EmailTemplate, Language } from 'src/appTypes'
+import { AVAILABLE_LANGUAGES, Language } from 'src/appTypes'
 import { Button, ButtonLike, Dialog, Form, Select, UswdsIcon } from 'src/ui'
-import { translationForLanguage, useCurrentLanguage } from '../CurrentLanguage'
+import {
+  useCurrentEmailTemplate,
+  useCurrentLanguage,
+  useCurrentTranslation,
+} from 'src/utils/EmailTemplateState'
 import './EmailTranslationSelector.css'
-import { useSetEmailTemplateConfig } from '../EmailTemplateConfig'
 
-interface Props {
-  emailTemplateConfig: EmailTemplate.Unique.Config
-}
-
-export const EmailTranslationSelector: FC<Props> = ({ emailTemplateConfig }) => {
+export const EmailTranslationSelector: FC = () => {
+  const [emailTemplate] = useCurrentEmailTemplate()
   const [currentLanguage, setCurrentLanguage] = useCurrentLanguage()
-  const { translations } = emailTemplateConfig
+  const { translations } = emailTemplate
 
   const availableLanguages = difference(
     AVAILABLE_LANGUAGES,
@@ -39,10 +39,7 @@ export const EmailTranslationSelector: FC<Props> = ({ emailTemplateConfig }) => 
         value={currentLanguage}
       />
       {availableLanguages.length > 0 && (
-        <AddTranslationDialog
-          availableLanguages={availableLanguages}
-          emailTemplateConfig={emailTemplateConfig}
-        />
+        <AddTranslationDialog availableLanguages={availableLanguages} />
       )}
     </div>
   )
@@ -50,18 +47,14 @@ export const EmailTranslationSelector: FC<Props> = ({ emailTemplateConfig }) => 
 
 interface AddTranslationDialogProps {
   availableLanguages: Language[]
-  emailTemplateConfig: EmailTemplate.Unique.Config
 }
 
-const AddTranslationDialog: FC<AddTranslationDialogProps> = ({
-  availableLanguages,
-  emailTemplateConfig,
-}) => {
-  const [currentLanguage, setCurrentLanguage] = useCurrentLanguage()
-  const setEmailTemplateConfig = useSetEmailTemplateConfig()
+const AddTranslationDialog: FC<AddTranslationDialogProps> = ({ availableLanguages }) => {
+  const [_currentLanguage, setCurrentLanguage] = useCurrentLanguage()
+  const [currentEmailTemplate, setCurrentEmailTemplate] = useCurrentEmailTemplate()
   const [selectedLanguage, setSelectedLanguage] = useState(availableLanguages[0])
-  const translations = emailTemplateConfig.translations ?? []
-  const currentTranslation = translationForLanguage(emailTemplateConfig, currentLanguage)
+  const translations = currentEmailTemplate.translations ?? []
+  const currentTranslation = useCurrentTranslation()
 
   return (
     <Dialog
@@ -77,8 +70,8 @@ const AddTranslationDialog: FC<AddTranslationDialogProps> = ({
         <>
           <Form
             onSubmit={() => {
-              setEmailTemplateConfig({
-                ...emailTemplateConfig,
+              setCurrentEmailTemplate({
+                ...currentEmailTemplate,
                 translations: [
                   ...translations,
                   { ...currentTranslation, language: selectedLanguage },

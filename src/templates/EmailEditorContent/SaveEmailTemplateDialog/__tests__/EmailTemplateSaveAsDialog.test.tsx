@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { EmailTemplateSaveAsDialog } from '../EmailTemplateSaveAsDialog'
-import { EmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
 import { faker } from '@faker-js/faker'
@@ -12,13 +11,13 @@ import {
   buildUseMutationResult,
 } from 'src/factories'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { EmailTemplate, Language } from 'src/appTypes'
+import { EmailTemplate, EmailTranslation, Language } from 'src/appTypes'
 import { useCreateEmailTemplate } from 'src/network/emailTemplates'
 import { asMock } from 'src/testHelpers'
 import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
 import { mergeEmailTemplateValues } from '../emailTemplateMergeDefaultValues'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useCreateEmailTemplate: jest.fn() }
@@ -37,15 +36,17 @@ describe('EmailTemplateSaveAsDialog', () => {
   let user: UserEvent
   let language: Language
   let mergedEmailTemplate: EmailTemplate.Unique.Config
+  let emailTranslation: EmailTranslation.Unique
 
   beforeEach(async () => {
     language = 'english'
     previewText = faker.lorem.paragraph()
     emailTemplate = buildUniqueEmailConfig()
+    emailTranslation = buildEmailTranslation({ language, previewText })
     emailTemplateChanges = buildEmailTemplateConfig({
       name: emailTemplate.name,
       description: emailTemplate.description,
-      translations: [buildEmailTranslation({ language, previewText })],
+      translations: [emailTranslation],
     })
     mergedEmailTemplate = {
       name: 'mocked merged email template values',
@@ -56,17 +57,15 @@ describe('EmailTemplateSaveAsDialog', () => {
 
   const renderDialog = () => {
     return render(
-      <EmailTemplateConfig emailTemplateConfig={emailTemplate}>
-        <CurrentLanguage emailTemplateConfig={emailTemplate}>
-          {([_language]) => (
-            <EmailPartsContent initialData={emailTemplateChanges}>
-              <PreviewText emailTemplateConfig={emailTemplate} language={language}>
-                <EmailTemplateSaveAsDialog />
-              </PreviewText>
-            </EmailPartsContent>
-          )}
-        </CurrentLanguage>
-      </EmailTemplateConfig>,
+      <EmailTemplateState emailTemplate={emailTemplate}>
+        {({ currentTranslation }) => (
+          <EmailPartsContent initialData={emailTemplateChanges}>
+            <PreviewText emailTranslation={currentTranslation}>
+              <EmailTemplateSaveAsDialog />
+            </PreviewText>
+          </EmailPartsContent>
+        )}
+      </EmailTemplateState>,
     )
   }
 

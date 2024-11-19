@@ -1,30 +1,26 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { EmailTemplate } from 'src/appTypes'
+import { EmailTranslation } from 'src/appTypes'
 import {
   buildEmailTranslation,
   buildUniqueEmailComponent,
-  buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
 import { EmailEditorSidebar } from '..'
 import { faker } from '@faker-js/faker'
 
 describe('EmailEditorSidebar', () => {
-  let emailTemplate: EmailTemplate.Unique.Config
+  let emailTranslation: EmailTranslation.Unique
 
   beforeEach(() => {
-    emailTemplate = buildUniqueEmailConfig({
-      translations: [buildEmailTranslation({ language: 'english' })],
-    })
+    emailTranslation = buildEmailTranslation({ language: 'english' })
   })
 
   it('displays a link back to the home page', () => {
     const { baseElement } = render(
       <EmailEditorSidebar
-        language="english"
-        emailTemplate={emailTemplate}
         heading={<h1>{faker.lorem.words(3)}</h1>}
+        emailTranslation={emailTranslation}
       />,
     )
     const link: HTMLAnchorElement = baseElement.querySelector('.back-link') as any
@@ -34,40 +30,27 @@ describe('EmailEditorSidebar', () => {
   it('displays the given heading', () => {
     const title = faker.lorem.words(3)
     const { baseElement } = render(
-      <EmailEditorSidebar
-        language="english"
-        emailTemplate={emailTemplate}
-        heading={<h1>{title}</h1>}
-      />,
+      <EmailEditorSidebar emailTranslation={emailTranslation} heading={<h1>{title}</h1>} />,
     )
     expect(baseElement).toContainHTML(`<h1>${title}</h1>`)
   })
 
   it('displays email edit component and subcomponent toggles', () => {
-    emailTemplate = buildUniqueEmailConfig({
-      translations: [
-        {
-          language: 'english',
-          components: [
-            buildUniqueEmailComponent('Banner'),
-            buildUniqueEmailComponent('Header', {
-              subComponents: [buildUniqueEmailSubComponent({ kind: 'Title' })],
-            }),
-            buildUniqueEmailComponent('Footer', {
-              subComponents: [buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })],
-            }),
-          ],
-        },
-        {
-          language: 'spanish',
-          components: [],
-        },
+    emailTranslation = buildEmailTranslation({
+      language: 'english',
+      components: [
+        buildUniqueEmailComponent('Banner'),
+        buildUniqueEmailComponent('Header', {
+          subComponents: [buildUniqueEmailSubComponent({ kind: 'Title' })],
+        }),
+        buildUniqueEmailComponent('Footer', {
+          subComponents: [buildUniqueEmailSubComponent({ kind: 'AdditionalContent' })],
+        }),
       ],
     })
     const { queryByLabelText, queryAllByLabelText } = render(
       <EmailEditorSidebar
-        language="english"
-        emailTemplate={emailTemplate}
+        emailTranslation={emailTranslation}
         heading={<h1>{faker.lorem.words(3)}</h1>}
       />,
     )
@@ -81,12 +64,11 @@ describe('EmailEditorSidebar', () => {
     expect(queryByLabelText('Additional Content')).not.toBeNull()
   })
 
-  describe('without an email template', () => {
+  describe('when the translation is not set', () => {
     it('does not render the accordion', () => {
       const { baseElement } = render(
         <EmailEditorSidebar
-          language="english"
-          emailTemplate={undefined}
+          emailTranslation={buildEmailTranslation({ language: 'not-set' })}
           heading={<h1>{faker.lorem.words(3)}</h1>}
         />,
       )

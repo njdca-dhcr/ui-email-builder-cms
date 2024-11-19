@@ -1,21 +1,18 @@
 import React, { CSSProperties, FC } from 'react'
 import { EmailSubComponentProps } from './shared'
 import { EmailBlock } from 'src/ui'
-import { useEmailTemplateConfig } from '../EmailTemplateConfig'
 import { EmailParts } from 'src/appTypes'
 import { useDirectiveValue } from './Directive'
 import { textColorForBackground } from 'src/utils/textColorForBackground'
 import { Colors, Spacing, StyleDefaults, Text } from '../styles'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
-import { translationForLanguage, useCurrentLanguage } from '../CurrentLanguage'
+import { useCurrentTranslation } from 'src/utils/EmailTemplateState'
 
 const { Link, Row } = EmailBlock
 
 export const DirectiveButton: FC<EmailSubComponentProps<'DirectiveButton'>> = () => {
-  const emailTemplateConfig = useEmailTemplateConfig()
-  const [language] = useCurrentLanguage()
-  const translation = translationForLanguage(emailTemplateConfig, language)
+  const translation = useCurrentTranslation()
   const directive: EmailParts.Directive = getSubComponentByKind(translation, 'Directive') ?? {
     kind: 'Directive',
     id: '',

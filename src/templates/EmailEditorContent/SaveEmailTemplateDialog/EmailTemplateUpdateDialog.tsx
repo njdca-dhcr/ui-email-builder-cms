@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { SaveEmailTemplateDialog } from './SaveEmailTemplateDialog'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
-import { useEmailTemplateConfig } from 'src/templates/EmailTemplateConfig'
+import { useCurrentEmailTemplate } from 'src/utils/EmailTemplateState'
 
 export const EmailTemplateUpdateDialog: FC = () => {
-  const emailTemplate = useEmailTemplateConfig()
+  const [emailTemplate] = useCurrentEmailTemplate()
   const { mutateAsync, isPending, error } = useUpdateEmailTemplate(emailTemplate.id ?? '')
 
   return (

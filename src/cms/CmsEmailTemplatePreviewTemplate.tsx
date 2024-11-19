@@ -14,7 +14,7 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { EditPreviewText } from 'src/templates/EmailEditorContent/EditPreviewText'
 import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
 import uniqueId from 'lodash.uniqueid'
-import { CurrentLanguage } from 'src/templates/CurrentLanguage'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
@@ -51,21 +51,19 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.Unique.Config => {
 
 export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> = ({ entry }) => {
   const emailTemplate = entryToEmailTemplate(entry)
-  const [firstTranslation] = emailTemplate.translations ?? []
-  const translation = firstTranslation ?? []
 
   return (
     <Layout element="main">
-      <CurrentlyActiveEmailPart>
-        <ClearCurrentlyActiveEmailPart />
-        <CurrentLanguage key={emailTemplate.id} emailTemplateConfig={emailTemplate}>
-          {([language]) => (
-            <PreviewText language={language} emailTemplateConfig={emailTemplate}>
-              <EmailPartsContent key={language}>
+      <EmailTemplateState emailTemplate={emailTemplate}>
+        {({ currentTranslation }) => (
+          <CurrentlyActiveEmailPart>
+            <ClearCurrentlyActiveEmailPart />
+            <PreviewText emailTranslation={currentTranslation}>
+              <EmailPartsContent>
                 <Sidebar>
                   <EditPreviewText />
                   <EmailEditorSidebarAccordion.Container>
-                    {(translation.components ?? []).map((emailComponent) => (
+                    {currentTranslation.components.map((emailComponent) => (
                       <EmailEditorSidebarAccordion.EmailComponent
                         key={emailComponent.id}
                         emailComponent={emailComponent}
@@ -83,13 +81,16 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
                   </EmailEditorSidebarAccordion.Container>
                 </Sidebar>
                 <PageContent element="div" className="email-editor-page-content">
-                  <EmailEditorContent language={language} emailTemplate={emailTemplate} />
+                  <EmailEditorContent
+                    emailTemplate={emailTemplate}
+                    emailTranslation={currentTranslation}
+                  />
                 </PageContent>
               </EmailPartsContent>
             </PreviewText>
-          )}
-        </CurrentLanguage>
-      </CurrentlyActiveEmailPart>
+          </CurrentlyActiveEmailPart>
+        )}
+      </EmailTemplateState>
     </Layout>
   )
 }
