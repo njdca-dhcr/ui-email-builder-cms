@@ -3,7 +3,7 @@ import capitalize from 'lodash.capitalize'
 import difference from 'lodash.difference'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { AVAILABLE_LANGUAGES, EmailTemplate, Language } from 'src/appTypes'
-import { Button, Dialog, Form, Select } from 'src/ui'
+import { Button, ButtonLike, Dialog, Form, Select, UswdsIcon } from 'src/ui'
 import { translationForLanguage, useCurrentLanguage } from '../CurrentLanguage'
 import './EmailTranslationSelector.css'
 import { useSetEmailTemplateConfig } from '../EmailTemplateConfig'
@@ -65,7 +65,12 @@ const AddTranslationDialog: FC<AddTranslationDialogProps> = ({
 
   return (
     <Dialog
-      trigger={<button>Add Translation</button>}
+      trigger={
+        <ButtonLike className="add-translation-trigger">
+          <VisuallyHidden>Add Translation</VisuallyHidden>
+          <UswdsIcon icon="AddCircle" />
+        </ButtonLike>
+      }
       title="New Translation"
       description={`Choose the language of the translation you would like to add. Any unsaved changes you've made will be lost.`}
       contents={({ close }) => (

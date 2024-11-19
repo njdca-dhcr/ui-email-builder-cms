@@ -34,7 +34,6 @@
   color: var(--black);
   display: flex;
   gap: 0.75rem;
-  padding-top: 0.25rem;
   text-decoration: none;
 }
 

@@ -38,7 +38,14 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       emailTemplate={emailTemplate}
                       heading={
                         <>
-                          <h1 style={{ fontSize: '1.5rem', paddingLeft: '0.5rem' }}>
+                          <h1
+                            style={{
+                              fontSize: '1.5rem',
+                              paddingLeft: '0.5rem',
+                              marginTop: '0.75rem',
+                              marginBottom: 0,
+                            }}
+                          >
                             {byQueryState(query, {
                               data: ({ name }) => name,
                               loading: () => 'Loading...',

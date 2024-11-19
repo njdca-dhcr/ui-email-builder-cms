@@ -99,9 +99,9 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: calc(100% - 2.375rem);
+  height: calc(100% - 1.25rem);
   overflow: auto;
-  padding-top: 2.375rem;
+  padding-top: 1.25rem;
 }
 
 .sidebar .department-seal-container {

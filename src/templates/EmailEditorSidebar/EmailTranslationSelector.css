@@ -1,6 +1,14 @@
 .email-translation-selector {
   display: flex;
-  gap: 1ch;
+  gap: 0.25rem;
+  padding-left: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+.add-translation-trigger {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .email-translation-selector-dialog-actions {
