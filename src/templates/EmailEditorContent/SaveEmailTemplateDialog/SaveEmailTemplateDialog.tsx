@@ -9,13 +9,14 @@ import { usePreviewText } from 'src/templates/PreviewText'
 import { DefaultError, UseMutateAsyncFunction } from '@tanstack/react-query'
 import { FormFieldArea } from 'src/ui/Form'
 import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemplateState'
+import { EmailTemplateShow } from 'src/network/emailTemplates'
 
 interface ErrorJSON {
   errors: { name: string }
 }
 
 interface SuccessJSON {
-  emailTemplate: { id: string }
+  emailTemplate: EmailTemplateShow
 }
 
 interface Props {
@@ -28,7 +29,7 @@ interface Props {
     DefaultError,
     EmailTemplate.Unique.Config
   >
-  onSuccess?: (emailTemplate: { id: string }) => void
+  onSuccess?: (emailTemplate: EmailTemplateShow) => void
   submitButtonText: string
   title: string
   trigger: string

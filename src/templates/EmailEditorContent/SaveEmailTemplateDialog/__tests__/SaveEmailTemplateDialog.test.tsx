@@ -207,19 +207,19 @@ describe('SaveEmailTemplateDialog', () => {
     describe('submission without errors', () => {
       it('calls onSuccess', async () => {
         const { baseElement } = await renderAndOpen()
-        const emailTemplateId = randomUUID()
-        mutate.mockResolvedValue({ emailTemplate: { id: emailTemplateId } })
+        const emailTemplate = buildUniqueEmailConfig({ id: randomUUID() })
+        mutate.mockResolvedValue({ emailTemplate: emailTemplate })
         const form = baseElement.querySelector('form')
         const button = form!.querySelector('button[type="submit"]')
         await user.click(button!)
         expect(mutate).toHaveBeenCalled()
-        expect(onSuccess).toHaveBeenCalledWith({ id: emailTemplateId })
+        expect(onSuccess).toHaveBeenCalledWith(emailTemplate)
       })
 
       it('calls closes the dialog', async () => {
         const { baseElement } = await renderAndOpen()
-        const emailTemplateId = randomUUID()
-        mutate.mockResolvedValue({ emailTemplate: { id: emailTemplateId } })
+        const emailTemplate = buildUniqueEmailConfig({ id: randomUUID() })
+        mutate.mockResolvedValue({ emailTemplate })
         const form = baseElement.querySelector('form')
         const button = form!.querySelector('button[type="submit"]')
         await user.click(button!)

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import React from 'react'
+import React, { FC } from 'react'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
 import { faker } from '@faker-js/faker'
@@ -17,7 +17,7 @@ import { mergeEmailTemplateValues } from '../emailTemplateMergeDefaultValues'
 import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
 import { EmailTemplateUpdateDialog } from '../EmailTemplateUpdateDialog'
-import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { EmailTemplateState, useCurrentEmailTemplate } from 'src/utils/EmailTemplateState'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useUpdateEmailTemplate: jest.fn() }
@@ -48,12 +48,18 @@ describe('EmailTemplateUpdateDialog', () => {
       description: emailTemplate.description,
       translations: [emailTranslation],
     })
-    mergedEmailTemplate = {
+    mergedEmailTemplate = buildUniqueEmailConfig({
+      id: emailTemplate.id,
       name: 'mocked merged email template values',
-    }
+    })
     asMock(mergeEmailTemplateValues).mockReturnValue(mergedEmailTemplate)
     user = userEvent.setup()
   })
+
+  const Dummy: FC = () => {
+    const [emailTemplate] = useCurrentEmailTemplate()
+    return <span>{emailTemplate.name}</span>
+  }
 
   const renderDialog = () => {
     return render(
@@ -62,6 +68,7 @@ describe('EmailTemplateUpdateDialog', () => {
           <EmailPartsContent initialData={emailTemplateChanges}>
             <PreviewText emailTranslation={currentTranslation}>
               <EmailTemplateUpdateDialog />
+              <Dummy />
             </PreviewText>
           </EmailPartsContent>
         )}
@@ -80,7 +87,7 @@ describe('EmailTemplateUpdateDialog', () => {
   })
 
   it('updates the email template when submitted', async () => {
-    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: { id: emailTemplate.id! } })
+    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: mergedEmailTemplate })
     asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
 
     const { getByRole } = renderDialog()
@@ -93,7 +100,7 @@ describe('EmailTemplateUpdateDialog', () => {
   })
 
   it('does not navigate when successful', async () => {
-    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: { id: emailTemplate.id! } })
+    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: mergedEmailTemplate })
     asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
 
     const { getByRole } = renderDialog()
@@ -103,5 +110,19 @@ describe('EmailTemplateUpdateDialog', () => {
     await user.click(getByRole('button', { name: 'Update' }))
     expect(mutateAsync).toHaveBeenCalled()
     expect(navigate).not.toHaveBeenCalled()
+  })
+
+  it('resets the current email template with result', async () => {
+    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: mergedEmailTemplate })
+    asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
+
+    const { getByRole, baseElement } = renderDialog()
+    await user.click(getByRole('button'))
+
+    expect(mutateAsync).not.toHaveBeenCalled()
+    expect(baseElement).not.toHaveTextContent(mergedEmailTemplate.name)
+    await user.click(getByRole('button', { name: 'Update' }))
+    expect(mutateAsync).toHaveBeenCalled()
+    expect(baseElement).toHaveTextContent(mergedEmailTemplate.name)
   })
 })

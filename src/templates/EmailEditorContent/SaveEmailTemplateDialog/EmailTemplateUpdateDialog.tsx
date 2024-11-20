@@ -4,7 +4,7 @@ import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { useCurrentEmailTemplate } from 'src/utils/EmailTemplateState'
 
 export const EmailTemplateUpdateDialog: FC = () => {
-  const [emailTemplate] = useCurrentEmailTemplate()
+  const [emailTemplate, setCurrentEmailTemplate] = useCurrentEmailTemplate()
   const { mutateAsync, isPending, error } = useUpdateEmailTemplate(emailTemplate.id ?? '')
 
   return (
@@ -13,6 +13,7 @@ export const EmailTemplateUpdateDialog: FC = () => {
       loading={isPending}
       loadingMessage="Updating email template"
       mutate={mutateAsync}
+      onSuccess={setCurrentEmailTemplate}
       title="Update"
       trigger="Update"
       submitButtonText="Update"
