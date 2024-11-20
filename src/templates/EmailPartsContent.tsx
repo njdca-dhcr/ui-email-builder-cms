@@ -8,10 +8,12 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import { EmailParts } from 'src/appTypes'
 import { AllDefaultValues } from './defaultValues'
+import { useCurrentLanguage } from 'src/utils/EmailTemplateState'
 
 interface EmailPartsContentData<T extends any> {
   [key: string]: undefined | T
@@ -24,11 +26,29 @@ type EmailPartsContentContext<T = any> = [
 
 const EmailPartsContentContext = createContext<EmailPartsContentContext>([{}, () => {}])
 
+const useEffectAfterFirstRender: typeof useEffect = (callback, deps) => {
+  const renderedRef = useRef(false)
+
+  useEffect(() => {
+    if (renderedRef.current) {
+      callback()
+    } else {
+      renderedRef.current = true
+    }
+  }, deps)
+}
+
 export const EmailPartsContent: FC<{
   children: ReactNode
   initialData?: EmailPartsContentData<any>
 }> = ({ children, initialData }) => {
+  const [currentLanguage] = useCurrentLanguage()
   const value = useState<EmailPartsContentData<any>>(initialData ?? {})
+  const [_data, setData] = value
+
+  useEffectAfterFirstRender(() => {
+    setData(initialData ?? {})
+  }, [currentLanguage])
 
   return (
     <EmailPartsContentContext.Provider value={value}>{children}</EmailPartsContentContext.Provider>
@@ -49,7 +69,7 @@ export const useEmailPartsContentFor = <
   const defaultValue = emailPart ? AllDefaultValues[emailPart.kind] : {}
   const mergedDefaultValue = useMemo(() => {
     return { ...defaultValue, ...emailPart?.defaultValue }
-  }, [])
+  }, [emailPart])
 
   const value: T = data[id] ?? mergedDefaultValue
 

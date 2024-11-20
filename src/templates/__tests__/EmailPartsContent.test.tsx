@@ -1,20 +1,86 @@
 import { act, render, renderHook } from '@testing-library/react'
-import React from 'react'
-import { EmailPartsContent, useEmailPartsContentFor } from '../EmailPartsContent'
+import React, { FC, useEffect } from 'react'
+import {
+  EmailPartsContent,
+  useEmailPartsContentData,
+  useEmailPartsContentFor,
+} from '../EmailPartsContent'
 import { faker } from '@faker-js/faker'
-import { EmailParts, EmailTemplate, TitleValue } from 'src/appTypes'
-import { buildUniqueEmailSubComponent } from 'src/testHelpers'
+import { EmailParts, TitleValue } from 'src/appTypes'
+import {
+  buildEmailTranslation,
+  buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
+  buildUniqueEmailSubComponent,
+} from 'src/testHelpers'
 import { defaultTitleValue } from '../EmailTemplateSubComponents/Values/TitleValue'
+import { EmailTemplateState, useCurrentLanguage } from 'src/utils/EmailTemplateState'
+import userEvent from '@testing-library/user-event'
 
 describe('EmailPartsContent', () => {
+  const Dummy: FC = () => {
+    const [data, setData] = useEmailPartsContentData()
+    const [_, setCurrentLanguage] = useCurrentLanguage()
+
+    useEffect(() => {
+      setData({ foo: { bar: 'baz' } })
+    }, [])
+
+    return (
+      <>
+        <button
+          onClick={() => {
+            setCurrentLanguage('spanish')
+          }}
+        >
+          change language
+        </button>
+        <span>{Object.keys(data).length > 0 ? 'full' : 'empty'}</span>
+      </>
+    )
+  }
+
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <EmailPartsContent>
-        <div>{text}</div>
-      </EmailPartsContent>,
+      <EmailTemplateState emailTemplate={buildUniqueEmailConfig()}>
+        {() => (
+          <EmailPartsContent>
+            <div>{text}</div>
+          </EmailPartsContent>
+        )}
+      </EmailTemplateState>,
     )
     expect(baseElement).toContainHTML(`<div>${text}</div>`)
+  })
+
+  describe('when the current language changes', () => {
+    it('clears its data', async () => {
+      const user = userEvent.setup()
+      const { baseElement, getByRole } = render(
+        <EmailTemplateState
+          emailTemplate={buildUniqueEmailConfig({
+            translations: [
+              buildEmailTranslation({ language: 'english' }),
+              buildEmailTranslation({ language: 'spanish' }),
+            ],
+          })}
+        >
+          {() => (
+            <EmailPartsContent>
+              <Dummy />
+            </EmailPartsContent>
+          )}
+        </EmailTemplateState>,
+      )
+      expect(baseElement).toHaveTextContent('full')
+      expect(baseElement).not.toHaveTextContent('empty')
+
+      await user.click(getByRole('button', { name: 'change language' }))
+
+      expect(baseElement).not.toHaveTextContent('full')
+      expect(baseElement).toHaveTextContent('empty')
+    })
   })
 })
 
@@ -83,6 +149,34 @@ describe('useEmailPartsContentFor', () => {
       const [value, setValue] = result.current
       expect(value).toEqual({})
       expect(setValue).toEqual(expect.any(Function))
+    })
+  })
+
+  describe('when the email part changes', () => {
+    it('resets its default value', async () => {
+      const englishEmailComponent = buildUniqueEmailComponent('Name', {
+        defaultValue: { name: 'english name' },
+      })
+      const spanishEmailComponent = {
+        ...englishEmailComponent,
+        defaultValue: { name: 'spanish name' },
+      }
+      const { result, rerender } = renderHook(
+        (props: { emailComponent: EmailParts.Unique.Component }) => {
+          const [value, _setValue] = useEmailPartsContentFor(props.emailComponent)
+          return value
+        },
+        {
+          initialProps: { emailComponent: englishEmailComponent },
+          wrapper: ({ children }) => {
+            return <EmailPartsContent>{children}</EmailPartsContent>
+          },
+        },
+      )
+
+      expect(result.current).toEqual(englishEmailComponent.defaultValue)
+      rerender({ emailComponent: spanishEmailComponent })
+      expect(result.current).toEqual(spanishEmailComponent.defaultValue)
     })
   })
 })
