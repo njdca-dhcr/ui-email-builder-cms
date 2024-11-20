@@ -29,9 +29,11 @@ export const useUpdateEmailTemplate = (id: string) => {
       })
       return result.json
     },
-    onSuccess: () => {
-      client.invalidateQueries({ queryKey: [buildUseEmailTemplateQueryKey(id)] })
-      client.invalidateQueries({ queryKey: [QUERY_KEY] })
+    onSuccess: (result) => {
+      client.invalidateQueries({ queryKey: [QUERY_KEY] }, { cancelRefetch: true })
+      if ('emailTemplate' in result!) {
+        client.setQueryData([buildUseEmailTemplateQueryKey(id)], result.emailTemplate)
+      }
     },
   })
 }
