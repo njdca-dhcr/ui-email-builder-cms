@@ -9,12 +9,20 @@ import {
   useCurrentLanguage,
   useCurrentTranslation,
 } from 'src/utils/EmailTemplateState'
+import { mergeTranslationValues } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/emailTemplateMergeDefaultValues'
+import { hasUnsavedChanges } from 'src/utils/hasUnsavedChanges'
+import { usePreviewText } from '../PreviewText'
+import { useEmailPartsContentData } from '../EmailPartsContent'
+
 import './EmailTranslationSelector.css'
 
 export const EmailTranslationSelector: FC = () => {
+  const currentTranslation = useCurrentTranslation()
   const [emailTemplate] = useCurrentEmailTemplate()
   const [currentLanguage, setCurrentLanguage] = useCurrentLanguage()
   const { translations } = emailTemplate
+  const [previewText] = usePreviewText()
+  const [emailPartsContentData] = useEmailPartsContentData()
 
   const availableLanguages = difference(
     AVAILABLE_LANGUAGES,
@@ -23,6 +31,22 @@ export const EmailTranslationSelector: FC = () => {
 
   if (!translations) return null
 
+  const onChangeHandler = (value: string) => {
+    const changedTranslation = mergeTranslationValues({
+      translation: currentTranslation,
+      previewText: previewText,
+      data: emailPartsContentData,
+    })
+
+    if (hasUnsavedChanges(currentTranslation, changedTranslation)) {
+      if (window.confirm('You have unsaved changes. Are you sure you want to continue?')) {
+        setCurrentLanguage(value as Language)
+      }
+    } else {
+      setCurrentLanguage(value as Language)
+    }
+  }
+
   return (
     <div className="email-translation-selector">
       <VisuallyHidden>
@@ -30,7 +54,7 @@ export const EmailTranslationSelector: FC = () => {
       </VisuallyHidden>
       <Select
         labelId="language-select-label"
-        onChange={(value) => setCurrentLanguage(value as Language)}
+        onChange={onChangeHandler}
         size="small"
         options={translations.map(({ language }) => ({
           value: language,

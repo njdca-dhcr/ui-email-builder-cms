@@ -4,20 +4,23 @@ export const mergeSubComponentDefaultValue = (
   subComponent: EmailParts.Unique.SubComponent,
   data: Record<string, any>,
 ): EmailParts.Unique.SubComponent => {
-  return { ...subComponent, defaultValue: data[subComponent.id] ?? subComponent.defaultValue }
+  const defaultValue = data[subComponent.id] ?? subComponent.defaultValue
+
+  return defaultValue ? { ...subComponent, defaultValue } : subComponent
 }
 
 export const mergeComponentDefaultValue = (
   component: EmailParts.Unique.Component,
   data: Record<string, any>,
 ): EmailParts.Unique.Component => {
-  return {
-    ...component,
-    defaultValue: data[component.id] ?? component.defaultValue,
-    subComponents: (component.subComponents ?? []).map((subComponent) =>
-      mergeSubComponentDefaultValue(subComponent, data),
-    ),
-  }
+  const defaultValue = data[component.id] ?? component.defaultValue
+  const subComponents = (component.subComponents ?? []).map((subComponent) =>
+    mergeSubComponentDefaultValue(subComponent, data),
+  )
+
+  return defaultValue
+    ? { ...component, defaultValue, subComponents }
+    : { ...component, subComponents }
 }
 
 export const mergeTranslationValues = ({

@@ -40,19 +40,19 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
             <SyncSidebarAndPreviewScroll>
               <ClearCurrentlyActiveEmailPart />
               <EmailPartsContent>
-                <EmailEditorSidebar
-                  emailTranslation={currentTranslation}
-                  heading={
-                    <>
-                      <EmailEditorHeadingAndSelect emailTemplate={currentEmailTemplate} />
-                      <EmailTranslationSelector />
-                    </>
-                  }
-                />
                 <PreviewText
                   key={currentTranslation.language}
                   emailTranslation={currentTranslation}
                 >
+                  <EmailEditorSidebar
+                    emailTranslation={currentTranslation}
+                    heading={
+                      <>
+                        <EmailEditorHeadingAndSelect emailTemplate={currentEmailTemplate} />
+                        <EmailTranslationSelector />
+                      </>
+                    }
+                  />
                   <PageContent element="div" className="email-editor-page-content">
                     <EmailEditorContent
                       emailTemplate={currentEmailTemplate}

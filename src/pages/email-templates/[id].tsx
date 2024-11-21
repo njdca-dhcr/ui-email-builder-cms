@@ -30,33 +30,34 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
             <SyncSidebarAndPreviewScroll>
               <ClearCurrentlyActiveEmailPart />
               <EmailPartsContent key={currentLanguage}>
-                <EmailEditorSidebar
-                  emailTranslation={currentTranslation}
-                  heading={
-                    <>
-                      <h1
-                        style={{
-                          fontSize: '1.5rem',
-                          paddingLeft: '0.5rem',
-                          marginTop: '0.75rem',
-                          marginBottom: 0,
-                        }}
-                      >
-                        {byQueryState(query, {
-                          data: ({ name }) => name,
-                          loading: () => 'Loading...',
-                          error: () => 'Something went wrong',
-                        })}
-                      </h1>
-                      {byQueryState(query, {
-                        data: () => <EmailTranslationSelector />,
-                        loading: () => null,
-                        error: () => null,
-                      })}
-                    </>
-                  }
-                />
                 <PreviewText key={currentLanguage} emailTranslation={currentTranslation}>
+                  <EmailEditorSidebar
+                    emailTranslation={currentTranslation}
+                    heading={
+                      <>
+                        <h1
+                          style={{
+                            fontSize: '1.5rem',
+                            paddingLeft: '0.5rem',
+                            marginTop: '0.75rem',
+                            marginBottom: 0,
+                          }}
+                        >
+                          {byQueryState(query, {
+                            data: ({ name }) => name,
+                            loading: () => 'Loading...',
+                            error: () => 'Something went wrong',
+                          })}
+                        </h1>
+                        {byQueryState(query, {
+                          data: () => <EmailTranslationSelector />,
+                          loading: () => null,
+                          error: () => null,
+                        })}
+                      </>
+                    }
+                  />
+
                   <PageContent element="div" className="email-editor-page-content">
                     {error && <Alert>{error.message}</Alert>}
                     {emailTemplate && (
@@ -66,8 +67,8 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       />
                     )}
                   </PageContent>
+                  {isLoading && <LoadingOverlay description="Loading your email template" />}
                 </PreviewText>
-                {isLoading && <LoadingOverlay description="Loading your email template" />}
               </EmailPartsContent>
             </SyncSidebarAndPreviewScroll>
           </CurrentlyActiveEmailPart>
