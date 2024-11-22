@@ -19,10 +19,10 @@ describe('useRedirectIfNotSignedIn', () => {
       userIsNotSignedIn()
     })
 
-    it('redirects to the root page', async () => {
+    it('redirects to the sign in page', async () => {
       expect(navigate).not.toHaveBeenCalled()
       renderPage()
-      expect(navigate).toHaveBeenCalledWith('/')
+      expect(navigate).toHaveBeenCalledWith('/sign-in')
     })
   })
 

@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { type HeadFC } from 'gatsby'
+import uniqueId from 'lodash.uniqueid'
 import { Layout, PageContent } from 'src/ui'
 import type { EmailParts, EmailTemplate } from 'src/appTypes'
 import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './CurrentlyActiveEmailPart'
@@ -10,10 +11,10 @@ import { EmailPartsContent } from './EmailPartsContent'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { PreviewText } from './PreviewText'
 import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
-import uniqueId from 'lodash.uniqueid'
-import './EmailEditorPage.css'
 import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationSelector'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import './EmailEditorPage.css'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Base.Config
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const EmailEditorPage: FC<Props> = ({ pageContext }) => {
+  useRedirectIfNotSignedIn()
   const [emailTemplateConfig] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
     translations: (pageContext.emailTemplate.translations ?? []).map((translation) => ({

@@ -10,7 +10,6 @@ import {
   Sidebar,
   SideBarList,
   SideBarListItem,
-  SideBarListItemBottom,
   SkipNavContent,
   SkipNavLink,
   SpacedContainer,
@@ -170,18 +169,6 @@ describe('SideBarListItem', () => {
       </SideBarListItem>,
     )
     expect(baseElement).toContainHTML('<li class="sidebar-list-item my-class"><div></div></li>')
-  })
-})
-
-describe('SideBarListItemBottom', () => {
-  it('displays its children', () => {
-    const text = faker.lorem.paragraph()
-    const { baseElement } = render(
-      <SideBarListItemBottom>
-        <div>{text}</div>
-      </SideBarListItemBottom>,
-    )
-    expect(baseElement).toContainHTML(`<div>${text}</div>`)
   })
 })
 

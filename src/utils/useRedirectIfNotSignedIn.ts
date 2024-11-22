@@ -1,13 +1,13 @@
 import { navigate } from 'gatsby'
 import { useEffect } from 'react'
-import { useAuth } from './AuthContext'
+import { useIsSignedIn } from './AuthContext'
 
 export const useRedirectIfNotSignedIn = () => {
-  const [auth] = useAuth()
+  const isSignedIn = useIsSignedIn()
 
   useEffect(() => {
-    if (!auth) {
-      navigate('/')
+    if (!isSignedIn) {
+      navigate('/sign-in')
     }
-  }, [auth])
+  }, [isSignedIn])
 }

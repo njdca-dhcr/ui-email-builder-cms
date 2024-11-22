@@ -14,10 +14,12 @@ import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreview
 import { PreviewText } from 'src/templates/PreviewText'
 import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/EmailTranslationSelector'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 export type Props = PageProps<null, null, null>
 
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
+  useRedirectIfNotSignedIn()
   const query = useEmailTemplate(params.id)
   const { data: queriedEmailTemplate, isLoading, error } = useEmailTemplate(params.id)
   const emailTemplate = queriedEmailTemplate ?? null

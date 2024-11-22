@@ -13,6 +13,7 @@ import {
   UswdsIconVariantKey,
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import settingsPagePng from 'src/images/tips-and-tricks/settings-page.png'
 import libraryPagePng from 'src/images/tips-and-tricks/library-page.png'
 import emailEditingPageSidebarArrowsPng from 'src/images/tips-and-tricks/email-editing-page-sidebar-arrows.png'
@@ -24,6 +25,7 @@ import richTextEditingPng from 'src/images/tips-and-tricks/rich-text-editing.png
 import './tips-and-tricks.css'
 
 const TipsAndTricksPage: FC = () => {
+  useRedirectIfNotSignedIn()
   return (
     <Layout element="div">
       <Sidebar>

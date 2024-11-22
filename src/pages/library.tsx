@@ -15,9 +15,11 @@ import {
 } from 'src/ui'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import './library.css'
 
 const LibaryPage: FC = () => {
+  useRedirectIfNotSignedIn()
   const [filterQuery, setFilterQuery] = useState('')
   const lowerCaseFilterQuery = filterQuery.toLowerCase()
   const emailTemplates = useEmailTemplatesData()

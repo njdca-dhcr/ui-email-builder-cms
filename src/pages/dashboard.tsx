@@ -15,10 +15,12 @@ import {
 } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { isRestricted } from 'src/utils/appMode'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import 'src/styles/app.css'
 import './dashboard.css'
 
 const DashboardPage: FC = () => {
+  useRedirectIfNotSignedIn()
   return (
     <Layout element="div">
       <Sidebar>

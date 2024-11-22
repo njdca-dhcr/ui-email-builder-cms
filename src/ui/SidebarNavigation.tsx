@@ -1,10 +1,5 @@
 import React, { FC, ReactElement } from 'react'
-import {
-  SideBarList,
-  SideBarListItem,
-  SideBarListItemBottom,
-  SpacedSidebarContainer,
-} from './Layout'
+import { SideBarList, SideBarListItem, SpacedSidebarContainer } from './Layout'
 import { Link } from 'gatsby'
 import { UswdsIcon } from './UswdsIcon'
 import classNames from 'classnames'

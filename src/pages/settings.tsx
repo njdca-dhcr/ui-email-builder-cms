@@ -16,9 +16,11 @@ import { EditingEmailCSS } from 'src/templates/emailHtmlDocument/EmailCSS'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { useCurrentUser } from 'src/network/users'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import './settings.css'
 
 const SettingsPage: FC = () => {
+  useRedirectIfNotSignedIn()
   const { data: user, isLoading, error, enabled } = useCurrentUser()
 
   const forms = (
