@@ -117,6 +117,9 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
                     if ('translationUrl' in result) {
                       copy(result.translationUrl)
                       alert('Copied translation url')
+                    } else {
+                      console.error(result)
+                      alert('Failed to create translation url')
                     }
                   }}
                 >
