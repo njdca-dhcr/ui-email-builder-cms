@@ -16,9 +16,11 @@ import { defaultDateRangeValue } from './EmailTemplateSubComponents/Values/DateR
 import { defaultTitleValue } from './EmailTemplateSubComponents/Values/TitleValue'
 import { defaultProgramNameValue } from './EmailTemplateSubComponents/Values/ProgramNameValue'
 import { defaultDepartmentSealValue } from './EmailTemplateSubComponents/Values/DepartmentSealValue'
+import { defaultTranslationLinksValue } from './EmailTemplateComponents/Values/TranslationLinksValue'
 
 export const AllDefaultValues: EmailParts.DefaultValues.Part = {
   Banner: defaultBannerValue(),
+  TranslationLinks: defaultTranslationLinksValue,
   Body: {},
   Footer: {},
   Header: {},

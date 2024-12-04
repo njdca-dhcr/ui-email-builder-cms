@@ -16,10 +16,12 @@ import {
   StatusValue,
   SupplementalContentValue,
   TitleValue,
+  TranslationLinksValue,
 } from './EmailTemplateValues'
 
 export const COMPONENTS = [
   'Banner',
+  'TranslationLinks',
   'Body',
   'Footer',
   'Header',
@@ -54,6 +56,7 @@ export namespace EmailParts {
   export namespace DefaultValues {
     export interface Component {
       Banner: BannerValue
+      TranslationLinks: TranslationLinksValue
       Body: BaseValue
       Footer: BaseValue
       Header: BaseValue
@@ -114,6 +117,7 @@ export namespace EmailParts {
   }
 
   export type Banner = Unique.Part<'Banner'>
+  export type TranslationLinks = Unique.Part<'TranslationLinks'>
   export type Body = Unique.Part<'Body'>
   export type Footer = Unique.Part<'Footer'>
   export type Header = Unique.Part<'Header'>

@@ -1,11 +1,5 @@
 import { EmailParts } from './EmailParts'
-
-export const LANGUAGES = ['english', 'spanish', 'not-set'] as const
-const [english, spanish] = LANGUAGES
-
-export type Language = (typeof LANGUAGES)[number]
-
-export const AVAILABLE_LANGUAGES = [english, spanish] as const
+import { Language } from './Languages'
 
 export namespace EmailTranslation {
   export interface Base {

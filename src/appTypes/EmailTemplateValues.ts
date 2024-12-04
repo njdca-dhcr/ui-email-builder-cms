@@ -1,5 +1,6 @@
 import { RichTextValue } from 'src/ui'
 import { BoxColor, UswdsIconVariantKey } from 'src/ui'
+import { Language, LANGUAGES } from './Languages'
 
 export type {
   BannerValue,
@@ -228,4 +229,13 @@ export interface SupplementalContentValue extends BaseValue {
 
 export interface TitleValue extends BaseValue {
   title: string
+}
+
+export interface TranslationLinksValue extends BaseValue {
+  languages: {
+    [key in Language]?: {
+      text: string
+      href?: string
+    }
+  }
 }
