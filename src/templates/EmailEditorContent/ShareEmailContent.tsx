@@ -4,7 +4,7 @@ import { ButtonLike, UswdsIcon } from 'src/ui'
 import { useDidMount } from 'src/utils/useDidMount'
 
 interface Props {
-  children: ReactElement[]
+  children: (ReactElement | null | boolean)[]
 }
 
 export const ShareEmailContent: FC<Props> = ({ children }) => {

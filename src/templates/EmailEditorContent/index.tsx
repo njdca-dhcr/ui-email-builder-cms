@@ -31,6 +31,9 @@ import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 import './EmailEditorContent.css'
+import { useIsSignedIn } from 'src/utils/AuthContext'
+import { useCreateHtmlTranslationLink } from 'src/network/useCreateHtmlTranslationLink'
+import copy from 'copy-to-clipboard'
 
 interface Props {
   emailTemplate: EmailTemplate.Unique.Config
@@ -46,6 +49,8 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
   const [previewText] = usePreviewText()
+  const isSignedIn = useIsSignedIn()
+  const { mutateAsync, isPending } = useCreateHtmlTranslationLink()
 
   const components = emailTranslation.components
 
@@ -101,6 +106,23 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
               >
                 Download HTML
               </DownloadButton>
+              {isSignedIn && (
+                <button
+                  onClick={async () => {
+                    const result = await mutateAsync({
+                      emailTemplateId: emailTemplate.id!,
+                      language: emailTranslation.language,
+                      htmlTranslation: toEmailText(titleValue.title),
+                    })
+                    if ('translationUrl' in result) {
+                      copy(result.translationUrl)
+                      alert('Copied translation url')
+                    }
+                  }}
+                >
+                  Copy Translation Link
+                </button>
+              )}
             </ShareEmailContent>
             <WhenSignedIn>
               <div className="save-and-update-buttons">
@@ -162,6 +184,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
       {error && <Alert>{error.message}</Alert>}
       {enabled && user ? <UserInfoProvider userInfo={user}>{content}</UserInfoProvider> : content}
       {isLoading && <LoadingOverlay description="Loading your settings" />}
+      {isPending && <LoadingOverlay description="Creating translation link" />}
     </>
   )
 }

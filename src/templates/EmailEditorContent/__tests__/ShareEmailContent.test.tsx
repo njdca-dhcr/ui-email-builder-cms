@@ -15,12 +15,14 @@ describe('ShareEmailContent', () => {
       <ShareEmailContent>
         <button>Test 1</button>
         <button>Test 2</button>
+        {null}
+        {false}
       </ShareEmailContent>,
     )
   }
 
   it('has a button that can open the dropdown menu', async () => {
-    const { queryByRole } = renderComponent()
+    const { queryByRole, queryAllByRole, debug } = renderComponent()
 
     const button = queryByRole('button')
     expect(button).not.toBeNull()
@@ -30,5 +32,6 @@ describe('ShareEmailContent', () => {
     expect(queryByRole('menu')).not.toBeNull()
     expect(queryByRole('menuitem', { name: 'Test 1' })).not.toBeNull()
     expect(queryByRole('menuitem', { name: 'Test 2' })).not.toBeNull()
+    expect(queryAllByRole('menuitem')).toHaveLength(2)
   })
 })

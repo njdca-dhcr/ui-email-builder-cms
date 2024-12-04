@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, createRef, useRef } from 'react'
+import { useRef } from 'react'
 import { useElementsToEmailString } from '../useElementsToEmailString'
 import { renderHook } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
@@ -46,7 +46,7 @@ describe('useElementsToEmailString', () => {
 
     it('creates email markup with a doctype', () => {
       expect(resultCallback(title)).toContain(
-        `<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`,
+        `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`,
       )
     })
 

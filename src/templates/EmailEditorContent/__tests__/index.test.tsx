@@ -11,6 +11,7 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
+  buildUseMutationResult,
   buildUseQueryResult,
   buildUserShow,
   mockAppMode,
@@ -26,6 +27,7 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { CurrentUser, useCurrentUser } from 'src/network/users'
 import { randomUUID } from 'crypto'
 import { AuthProvider } from 'src/utils/AuthContext'
+import { useCreateHtmlTranslationLink } from 'src/network/useCreateHtmlTranslationLink'
 
 jest.mock('src/utils/download', () => {
   return {
@@ -38,6 +40,8 @@ jest.mock('src/network/users', () => {
     useCurrentUser: jest.fn(),
   }
 })
+
+jest.mock('src/network/useCreateHtmlTranslationLink')
 
 describe('EmailEditorContent', () => {
   let emailTranslation: EmailTranslation.Unique
@@ -67,6 +71,7 @@ describe('EmailEditorContent', () => {
     userIsNotSignedIn()
     const query = { ...buildUseQueryResult<CurrentUser>({ data: undefined }), enabled: false }
     asMock(useCurrentUser).mockReturnValue(query)
+    asMock(useCreateHtmlTranslationLink).mockReturnValue(buildUseMutationResult())
   })
 
   afterEach(() => {
@@ -147,6 +152,41 @@ describe('EmailEditorContent', () => {
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
     expect(lastArgumentToCopy).toContain(`${value}</h1>`)
     expect(lastArgumentToCopy).toContain(`${value}</title>`)
+  })
+
+  it('allows users to copy a link to the html of the current translation', async () => {
+    userIsSignedIn()
+    const value = faker.lorem.words(4)
+    const translationUrl = faker.internet.url()
+    const mutateAsync = jest.fn().mockResolvedValue({ translationUrl })
+    asMock(useCreateHtmlTranslationLink).mockReturnValue(buildUseMutationResult({ mutateAsync }))
+
+    const { getByText, getByRole } = render(
+      <QueryClientProvider client={client}>
+        <AuthProvider>
+          <PreviewText emailTranslation={emailTranslation}>
+            <EmailPartsContent>
+              <EmailEditorContent
+                emailTranslation={emailTranslation}
+                emailTemplate={emailTemplate}
+              />
+            </EmailPartsContent>
+          </PreviewText>
+        </AuthProvider>
+      </QueryClientProvider>,
+    )
+    await user.type(getByText('Title'), value)
+
+    expect(copy).not.toHaveBeenCalled()
+    await user.click(getByRole('button', { name: 'Share' }))
+    await user.click(getByText('Copy Translation Link'))
+
+    expect(mutateAsync).toHaveBeenCalledWith({
+      emailTemplateId: emailTemplate.id!,
+      language: emailTranslation.language,
+      htmlTranslation: expect.stringContaining(`${value}</h1>`),
+    })
+    expect(copy).toHaveBeenCalledWith(translationUrl)
   })
 
   it('allows users to download the current preview', async () => {
