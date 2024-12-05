@@ -42,19 +42,6 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> 
         />
       </Control.Container>
 
-      <SubComponentControlToggle
-        subComponentId={emailSubComponent.id}
-        label="+ Title"
-        onChange={(showTitle) => setValue({ ...value, showTitle })}
-        value={value.showTitle}
-      />
-      <SubComponentControlToggle
-        subComponentId={emailSubComponent.id}
-        label="+ Label"
-        onChange={(showLabel) => setValue({ ...value, showLabel })}
-        value={value.showLabel}
-      />
-
       <Control.Container className="program-name-inline-color-picker">
         <Control.Label htmlFor={buttonColorPickerHtmlId}>Button Color</Control.Label>
         <VisuallyHidden>
@@ -75,8 +62,21 @@ export const DirectiveControls: FC<EmailSubComponentControlsProps<'Directive'>> 
         </div>
       </Control.Container>
 
+      <SubComponentControlToggle
+        subComponentId={emailSubComponent.id}
+        label="+ Title"
+        onChange={(showTitle) => setValue({ ...value, showTitle })}
+        value={value.showTitle}
+      />
+
       {[DirectiveVariant.ThreeStep, DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
         <>
+          <SubComponentControlToggle
+            subComponentId={emailSubComponent.id}
+            label="+ Label"
+            onChange={(showLabel) => setValue({ ...value, showLabel })}
+            value={value.showLabel}
+          />
           <SubComponentControlToggle
             className="directive-addl-content-toggle"
             subComponentId={emailSubComponent.id}

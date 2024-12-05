@@ -82,8 +82,6 @@ describe('DirectiveControls', () => {
       })
 
       itProvidesAToggleFor('title', '+ Title')
-
-      itProvidesAToggleFor('show label', '+ Label')
     })
 
     describe(DirectiveVariant.ThreeStep, () => {
@@ -152,8 +150,6 @@ describe('DirectiveControls', () => {
       })
 
       itProvidesAToggleFor('title', '+ Title')
-
-      itProvidesAToggleFor('show label', '+ Label')
     })
   })
 })
