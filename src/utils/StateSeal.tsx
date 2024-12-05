@@ -1,7 +1,6 @@
 import { StateAbbreviation } from 'src/utils/statesAndTerritories'
 
 interface StateSeal {
-  readonly darkModeImage?: string
   readonly image: string
   readonly state: StateAbbreviation
 }
@@ -38,7 +37,7 @@ export const STATE_SEALS: ReadonlyArray<StateSeal> = [
   { state: 'NE', image: 'Nebraska' },
   { state: 'NV', image: 'Nevada' },
   { state: 'NH', image: 'New-Hampshire' },
-  { state: 'NJ', image: 'New-Jersey', darkModeImage: 'New-Jersey-White' },
+  { state: 'NJ', image: 'New-Jersey' },
   { state: 'NM', image: 'New-Mexico' },
   { state: 'NY', image: 'New-York' },
   { state: 'NC', image: 'North-Carolina' },

@@ -58,19 +58,10 @@ export const StateSealMarkup: FC<StateSealMarkupProps> = ({
           >
             <Cell style={imageContainerStyles}>
               <img
-                className="lightmode"
                 src={buildStateSealUrl(`/${stateSeal.image}.png`)}
                 alt={`The seal of the ${stateTitle}`}
                 style={imageStyles}
               />
-              {stateSeal.darkModeImage && (
-                <img
-                  className="darkmode"
-                  src={buildStateSealUrl(`/${stateSeal.darkModeImage}.png`)}
-                  alt={`The seal of the ${stateTitle}`}
-                  style={imageStyles}
-                />
-              )}
             </Cell>
             <Cell style={textStyles}>{stateTitle}</Cell>
           </Row>
