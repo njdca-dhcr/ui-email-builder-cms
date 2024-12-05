@@ -97,14 +97,15 @@ translations:
               step2Additional:
                 - type: paragraph
                   children:
-                    - text: >-
+                    - italic: true
+                      text: >-
                         *Question 1: “Have you worked since you last filed a claim for
                         benefits?”
-                      italic: true
                 - type: paragraph
                   children:
                     - italic: true
                       text: "Answer: “Yes,” and select an employer listed or add a new employer"
+                      textSize: small
               step3Label:
                 - type: paragraph
                   children:

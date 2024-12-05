@@ -261,7 +261,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                       {/* Button & Link */}
                       <Row elements={['cell', { part: 'table', align: 'left' }]}>
                         {/* Space Above Button */}
-                        <Row elements={['cell']}>
+                        <Row condition={value.showStep1AdditionalContent} elements={['cell']}>
                           <div style={styles.whiteSpace}>&nbsp;</div>
                         </Row>
 
@@ -352,6 +352,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                             label="Label for Step 2"
                             onValueChange={(step2Label) => setValue({ ...value, step2Label })}
                             value={value.step2Label}
+                            additionalStyles={{ paragraph: { whiteSpace: 'nowrap' } }}
                           />
                         </span>
                       </div>
@@ -454,24 +455,25 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                   </Row>
 
                   {/* Step 3 Additional Information */}
-                  <Row elements={['cell', 'table', 'row']}>
+                  <Row
+                    condition={value.showStep3AdditionalContent}
+                    elements={['cell', 'table', 'row']}
+                  >
                     <Cell style={styles.emptyCellBeforeBar}>&nbsp;</Cell>
-                    {value.showStep3AdditionalContent && (
-                      <Cell style={styles.step3AdditionalInfo}>
-                        <div style={{ lineHeight: '16px' }}>
-                          <RichTextEditableElement
-                            element="span"
-                            label="Additional information for Step 3"
-                            onValueChange={(step3Additional) =>
-                              setValue({ ...value, step3Additional })
-                            }
-                            value={value.step3Additional}
-                            style={styles.stepDescription}
-                          />
-                        </div>
-                        <div style={styles.whiteSpace}>&nbsp;</div>
-                      </Cell>
-                    )}
+                    <Cell style={styles.step3AdditionalInfo}>
+                      <div style={{ lineHeight: '16px' }}>
+                        <RichTextEditableElement
+                          element="span"
+                          label="Additional information for Step 3"
+                          onValueChange={(step3Additional) =>
+                            setValue({ ...value, step3Additional })
+                          }
+                          value={value.step3Additional}
+                          style={styles.stepDescription}
+                        />
+                      </div>
+                      <div style={styles.whiteSpace}>&nbsp;</div>
+                    </Cell>
                   </Row>
                 </Row>
               </Table>
@@ -518,6 +520,7 @@ const styles = {
     color: Colors.black,
     textAlign: 'left',
     margin: 0,
+    lineHeight: 1.75,
   } as CSSProperties,
   circleNumberTableStyles: {
     ...Text.header.h3.bold,
@@ -556,7 +559,6 @@ const styles = {
   } as CSSProperties,
   additionalInfo: {
     paddingLeft: '38px',
-    paddingTop: '5px',
     width: '100%',
     borderLeft: Borders.large(grayBar),
   } as CSSProperties,
