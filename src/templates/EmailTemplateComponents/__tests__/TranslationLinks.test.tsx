@@ -64,12 +64,14 @@ describe('TranslationLinks', () => {
     expect(english?.nodeName).toEqual('SPAN')
   })
 
-  xit('displays the other languages as links', async () => {
-    const { queryByText } = renderComponent()
+  it('displays the other languages as links', async () => {
+    const { queryByText, queryByRole } = renderComponent()
     const spanish = queryByText('Español')
     expect(spanish).not.toBeNull()
-    expect(spanish?.nodeName).toEqual('A')
-    expect((spanish as any).href).toEqual('http://example.org/')
+    expect(spanish?.nodeName).toEqual('SPAN')
+    const link = queryByRole('link')
+    expect(link).not.toBeNull()
+    expect((link as any).href).toEqual('http://example.org/')
   })
 
   it('has editable fields', async () => {

@@ -6,7 +6,7 @@ import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemp
 import capitalize from 'lodash.capitalize'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 
-const { Row, Cell } = EmailBlock
+const { Row, Cell, Link } = EmailBlock
 
 export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
   emailComponent,
@@ -40,20 +40,21 @@ export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
       {translations.map((translation) =>
         translation.language === language ? null : (
           <Cell key={translation.language}>
-            <EditableElement
-              element="span"
-              label={`${capitalize(translation.language)} label`}
-              onValueChange={(text) => {
-                setValue({
-                  languages: {
-                    ...value.languages,
-                    [translation.language]: { ...value.languages[translation.language], text },
-                  },
-                })
-              }}
-              value={value.languages[translation.language]?.text ?? ''}
-              {...({ href: value.languages[translation.language]?.href ?? '' } as any)}
-            />
+            <Link to={value.languages[translation.language]?.href ?? ''}>
+              <EditableElement
+                element="span"
+                label={`${capitalize(translation.language)} label`}
+                onValueChange={(text) => {
+                  setValue({
+                    languages: {
+                      ...value.languages,
+                      [translation.language]: { ...value.languages[translation.language], text },
+                    },
+                  })
+                }}
+                value={value.languages[translation.language]?.text ?? ''}
+              />
+            </Link>
           </Cell>
         ),
       )}
