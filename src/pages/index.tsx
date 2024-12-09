@@ -5,8 +5,6 @@ import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useAuth } from 'src/utils/AuthContext'
 import { useExchangeCodeForToken } from 'src/network/useExchangeCodeForToken'
 
-import './index.css'
-
 const LoadingPage: FC = () => {
   const { loading, errorMessage } = useExchangeCodeForToken()
 
