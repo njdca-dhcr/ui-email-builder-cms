@@ -1,49 +1,45 @@
 .homepage {
-  display: flex;
-  max-height: 100vh;
-  overflow: hidden;
+  display: grid;
+  grid-template: 1fr / minmax(30rem, 1.5fr) 3fr;
+  gap: clamp(1rem, 5%, 8rem);
 
-  header {
-    margin-bottom: 3rem;
-
-    div {
-      font-weight: bold;
-      font-size: var(--font-large);
-    }
-  }
-
-  .login-pane {
-    background-color: var(--gray-light);
-    max-height: 100%;
+  .homepage-panel {
+    padding-block: 8rem 0;
     min-height: 100vh;
-    overflow: auto;
-    min-width: 20rem;
-    padding-top: 6rem;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    max-width: 50rem;
-    flex: 2;
+    max-height: 100vh;
   }
 
-  .login-container {
-    width: 80%;
-    max-width: 35rem;
+  .login-panel-wrapper {
+    background-color: var(--gray-light);
   }
 
-  form {
+  .login-panel {
+    padding-inline: 1rem;
     max-width: 30rem;
+    margin: 0 auto;
   }
 
-  .image-pane {
-    flex: 3;
+  .image-panel {
+    display: flex;
     position: relative;
+    --top-padding: 62px;
+
+    .template-images-wrapper {
+      padding-top: var(--top-padding);
+      margin: 0;
+    }
+
+    .template-images {
+      height: calc(var(--top-padding) + 540px);
+      position: relative;
+      overflow: hidden;
+      min-width: 557px;
+      padding-left: 3rem;
+    }
 
     .gatsby-image-wrapper {
       border-radius: 8px;
       border: 1px solid var(--black);
-      overflow: hidden;
-      position: absolute;
       background-color: var(--white);
     }
 
@@ -52,9 +48,16 @@
     }
 
     .template-mobile {
-      top: 200px;
-      left: 410px;
+      position: absolute;
+      top: 160px;
+      left: 330px;
       min-width: 222px;
+    }
+
+    figcaption {
+      border-top: 1px solid var(--black);
+      padding-top: 1.5rem;
+      font-size: var(--font-large);
     }
   }
 
