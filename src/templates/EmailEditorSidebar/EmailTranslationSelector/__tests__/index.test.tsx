@@ -7,21 +7,26 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { hasUnsavedChanges } from 'src/utils/hasUnsavedChanges'
 import { asMock } from 'src/testHelpers'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 jest.mock('src/utils/hasUnsavedChanges')
 
 describe('EmailTranslationSelector', () => {
   let user: UserEvent
+  let client: QueryClient
 
   beforeEach(async () => {
     user = userEvent.setup()
+    client = new QueryClient()
   })
 
   const renderSelector = (emailTemplate: EmailTemplate.Unique.Config) => {
     return render(
-      <EmailTemplateState emailTemplate={emailTemplate}>
-        {() => <EmailTranslationSelector />}
-      </EmailTemplateState>,
+      <QueryClientProvider client={client}>
+        <EmailTemplateState emailTemplate={emailTemplate}>
+          {() => <EmailTranslationSelector />}
+        </EmailTemplateState>,
+      </QueryClientProvider>,
     )
   }
 
