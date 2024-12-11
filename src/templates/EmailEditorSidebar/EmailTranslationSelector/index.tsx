@@ -11,14 +11,15 @@ import {
 } from 'src/utils/EmailTemplateState'
 import { mergeTranslationValues } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/emailTemplateMergeDefaultValues'
 import { hasUnsavedChanges } from 'src/utils/hasUnsavedChanges'
-import { usePreviewText } from '../PreviewText'
-import { useEmailPartsContentData } from '../EmailPartsContent'
+import { usePreviewText } from '../../PreviewText'
+import { useEmailPartsContentData } from '../../EmailPartsContent'
+import { DeleteTranslationDialog } from './DeleteTranslationDialog'
 
-import './EmailTranslationSelector.css'
+import './index.css'
 
 export const EmailTranslationSelector: FC = () => {
   const currentTranslation = useCurrentTranslation()
-  const [emailTemplate] = useCurrentEmailTemplate()
+  const [emailTemplate, setCurrentEmailTemplate] = useCurrentEmailTemplate()
   const [currentLanguage, setCurrentLanguage] = useCurrentLanguage()
   const { translations } = emailTemplate
   const [previewText] = usePreviewText()
@@ -64,6 +65,14 @@ export const EmailTranslationSelector: FC = () => {
       />
       {availableLanguages.length > 0 && (
         <AddTranslationDialog availableLanguages={availableLanguages} />
+      )}
+      {currentLanguage !== 'english' && (
+        <DeleteTranslationDialog
+          emailTemplate={emailTemplate}
+          setCurrentEmailTemplate={setCurrentEmailTemplate}
+          currentLanguage={currentLanguage}
+          setCurrentLanguage={setCurrentLanguage}
+        />
       )}
     </div>
   )

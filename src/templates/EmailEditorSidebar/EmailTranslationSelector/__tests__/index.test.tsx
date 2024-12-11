@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { buildEmailTranslation, buildUniqueEmailConfig } from 'src/factories'
-import { EmailTranslationSelector } from '../EmailTranslationSelector'
+import { EmailTranslationSelector } from '..'
 import { AVAILABLE_LANGUAGES, EmailTemplate } from 'src/appTypes'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
