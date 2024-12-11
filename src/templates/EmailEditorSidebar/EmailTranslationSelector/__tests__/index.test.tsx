@@ -25,7 +25,8 @@ describe('EmailTranslationSelector', () => {
       <QueryClientProvider client={client}>
         <EmailTemplateState emailTemplate={emailTemplate}>
           {() => <EmailTranslationSelector />}
-        </EmailTemplateState>,
+        </EmailTemplateState>
+        ,
       </QueryClientProvider>,
     )
   }
