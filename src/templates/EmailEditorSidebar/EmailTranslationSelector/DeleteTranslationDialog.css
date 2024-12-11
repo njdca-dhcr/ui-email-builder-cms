@@ -1,0 +1,21 @@
+.destroy-translation-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cancel-button {
+  border: 1px solid var(--black);
+  background-color: transparent;
+  color: var(--gray-dark-extra);
+  transition: background-color 50ms ease-in;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-light-medium);
+  }
+
+  &:active {
+    background-color: var(--gray-medium);
+  }
+}

@@ -5,6 +5,8 @@ import { EmailTemplate, Language } from 'src/appTypes'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { Button, ButtonLike, Dialog, Form, UswdsIcon } from 'src/ui'
 
+import './DeleteTranslationDialog.css'
+
 interface DeleteTranslationDialogProps {
   emailTemplate: EmailTemplate.Unique.Config
   setCurrentEmailTemplate: (emailTemplate: EmailTemplate.Unique.Config) => void
@@ -57,6 +59,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
       contents={({ close }) => (
         <>
           <Form
+            className="destroy-translation-form"
             onSubmit={async () => {
               const result = await handleDelete()
 
@@ -71,7 +74,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
             <Button type="submit" className="destroy-dialog-delete-button" disabled={isPending}>
               Delete Translation
             </Button>
-            <Button type="button" onClick={close}>
+            <Button className="cancel-button" type="button" onClick={close}>
               Cancel
             </Button>
           </Form>
