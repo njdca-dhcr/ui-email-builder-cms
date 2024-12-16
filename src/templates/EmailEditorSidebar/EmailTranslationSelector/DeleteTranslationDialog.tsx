@@ -49,7 +49,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
   return (
     <Dialog
       trigger={
-        <ButtonLike className="delete-translation-trigger">
+        <ButtonLike className="destroy-translation-trigger">
           <VisuallyHidden>Delete Current Translation</VisuallyHidden>
           <UswdsIcon icon="Delete" />
         </ButtonLike>
