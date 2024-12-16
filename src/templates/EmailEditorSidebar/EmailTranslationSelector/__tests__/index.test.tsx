@@ -8,6 +8,7 @@ import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { hasUnsavedChanges } from 'src/utils/hasUnsavedChanges'
 import { asMock } from 'src/testHelpers'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/utils/hasUnsavedChanges')
 
@@ -26,7 +27,6 @@ describe('EmailTranslationSelector', () => {
         <EmailTemplateState emailTemplate={emailTemplate}>
           {() => <EmailTranslationSelector />}
         </EmailTemplateState>
-        ,
       </QueryClientProvider>,
     )
   }
@@ -142,7 +142,19 @@ describe('EmailTranslationSelector', () => {
     it('does not render when all of the languages already exist', async () => {
       const { queryByRole } = renderSelector(
         buildUniqueEmailConfig({
+          id: randomUUID(),
           translations: AVAILABLE_LANGUAGES.map((language) => buildEmailTranslation({ language })),
+        }),
+      )
+
+      const button = queryByRole('button', { name: 'Add Translation' })
+      expect(button).toBeNull()
+    })
+
+    it('does not render for template library templates', () => {
+      const { queryByRole } = renderSelector(
+        buildUniqueEmailConfig({
+          id: undefined,
         }),
       )
 
@@ -153,6 +165,7 @@ describe('EmailTranslationSelector', () => {
     it('renders when there is an available language', async () => {
       const { queryByRole } = renderSelector(
         buildUniqueEmailConfig({
+          id: randomUUID(),
           translations: [buildEmailTranslation({ language: 'english' })],
         }),
       )
@@ -164,6 +177,7 @@ describe('EmailTranslationSelector', () => {
       const renderAndOpen = async () => {
         const rendered = renderSelector(
           buildUniqueEmailConfig({
+            id: randomUUID(),
             translations: [buildEmailTranslation({ language: 'english' })],
           }),
         )
