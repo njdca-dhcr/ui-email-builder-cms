@@ -100,36 +100,34 @@ const AddTranslationDialog: FC<AddTranslationDialogProps> = ({ availableLanguage
       title="New Translation"
       description={`Choose the language of the translation you would like to add. Any unsaved changes you've made will be lost.`}
       contents={({ close }) => (
-        <>
-          <Form
-            onSubmit={() => {
-              setCurrentEmailTemplate({
-                ...currentEmailTemplate,
-                translations: [
-                  ...translations,
-                  { ...currentTranslation, language: selectedLanguage },
-                ],
-              })
-              setCurrentLanguage(selectedLanguage)
-              close()
-            }}
-          >
-            <label id="available-lanague-select-label">Language</label>
-            <Select
-              labelId="available-lanague-select-label"
-              onChange={(value) => setSelectedLanguage(value as Language)}
-              value={selectedLanguage}
-              options={availableLanguages.map((language) => ({
-                value: language,
-                label: capitalize(language),
-              }))}
-            />
+        <Form
+          onSubmit={() => {
+            setCurrentEmailTemplate({
+              ...currentEmailTemplate,
+              translations: [
+                ...translations,
+                { ...currentTranslation, language: selectedLanguage },
+              ],
+            })
+            setCurrentLanguage(selectedLanguage)
+            close()
+          }}
+        >
+          <label id="available-lanague-select-label">Language</label>
+          <Select
+            labelId="available-lanague-select-label"
+            onChange={(value) => setSelectedLanguage(value as Language)}
+            value={selectedLanguage}
+            options={availableLanguages.map((language) => ({
+              value: language,
+              label: capitalize(language),
+            }))}
+          />
 
-            <div className="email-translation-selector-dialog-actions">
-              <Button type="submit">Add Translation</Button>
-            </div>
-          </Form>
-        </>
+          <div className="email-translation-selector-dialog-actions">
+            <Button type="submit">Add Translation</Button>
+          </div>
+        </Form>
       )}
     />
   )

@@ -57,28 +57,25 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
       title="Delete Current Translation"
       description={`Are you sure you want to delete the ${capitalize(currentLanguage)} translation? This action cannot be undone.`}
       contents={({ close }) => (
-        <>
-          <Form
-            className="destroy-translation-form"
-            onSubmit={async () => {
-              const result = await handleDelete()
+        <Form
+          className="destroy-translation-form"
+          onSubmit={async () => {
+            const result = await handleDelete()
 
-              if (result && 'errors' in result) {
-                // do something with the error
-                console.log(result.errors)
-              } else if (result) {
-                close()
-              }
-            }}
-          >
-            <Button type="submit" className="destroy-dialog-delete-button" disabled={isPending}>
-              Delete Translation
-            </Button>
-            <Button className="cancel-button" type="button" onClick={close}>
-              Cancel
-            </Button>
-          </Form>
-        </>
+            if (result && 'errors' in result) {
+              alert('Something went wrong with deleting the translation. Please try again.')
+            } else if (result) {
+              close()
+            }
+          }}
+        >
+          <Button type="submit" className="destroy-dialog-delete-button" disabled={isPending}>
+            Delete Translation
+          </Button>
+          <Button className="cancel-button" type="button" onClick={close}>
+            Cancel
+          </Button>
+        </Form>
       )}
     />
   )
