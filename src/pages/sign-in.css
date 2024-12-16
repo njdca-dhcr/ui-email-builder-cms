@@ -17,6 +17,24 @@
     padding-inline: 1rem;
     max-width: 30rem;
     margin: 0 auto;
+
+    .form-field + .form-field {
+      padding-block-end: 0;
+    }
+
+    div:has(.forgot-password) {
+      margin-block-end: 1rem;
+    }
+
+    .forgot-password {
+      color: var(--blue-dark);
+      font-size: var(--font-small);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .image-panel {

@@ -1,5 +1,5 @@
-import { mockBackendUrl, mockCognitoSigninUrl } from 'src/testHelpers'
-import { backendUrl, cognitoSigninUrl } from '../backendUrl'
+import { mockBackendUrl, mockCognitoForgotPasswordUrl, mockCognitoSigninUrl } from 'src/testHelpers'
+import { backendUrl, cognitoForgotPasswordUrl, cognitoSigninUrl } from '../backendUrl'
 import { faker } from '@faker-js/faker'
 
 describe('backendUrl', () => {
@@ -32,6 +32,23 @@ describe('cognitoSigninUrl', () => {
     it('is null', () => {
       mockCognitoSigninUrl(undefined)
       expect(cognitoSigninUrl()).toBeNull()
+    })
+  })
+})
+
+describe('cognitoForgotPasswordUrl', () => {
+  describe('when there is a cognito forgot password url environment variable', () => {
+    it('is the given cognito forgot password url', () => {
+      const url = faker.internet.url()
+      mockCognitoForgotPasswordUrl(url)
+      expect(cognitoForgotPasswordUrl()).toEqual(url)
+    })
+  })
+
+  describe('when there is no a cognito forgot password url environment variable', () => {
+    it('is null', () => {
+      mockCognitoForgotPasswordUrl(undefined)
+      expect(cognitoForgotPasswordUrl()).toBeNull()
     })
   })
 })

@@ -7,3 +7,7 @@ export const backendUrl = (): string | null => {
 export const cognitoSigninUrl = (): string | null => {
   return (Config.siteMetadata?.cognitoSigninUrl as any) ?? null
 }
+
+export const cognitoForgotPasswordUrl = (): string | null => {
+  return (Config.siteMetadata?.cognitoForgotPasswordUrl as any) ?? null
+}

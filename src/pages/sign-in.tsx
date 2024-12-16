@@ -11,7 +11,7 @@ import {
   FormField,
   Button,
 } from 'src/ui'
-import { cognitoSigninUrl } from 'src/utils/backendUrl'
+import { cognitoForgotPasswordUrl, cognitoSigninUrl } from 'src/utils/backendUrl'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { signIn } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
@@ -32,6 +32,7 @@ const SignInPage: FC = () => {
   const stateAbbreviation = appModeAsStateAbbreviation()
   const state = stateById(appModeAsStateAbbreviation() ?? 'US')
   const departmentSeal = departmentSealForState(stateAbbreviation)
+  const forgotPasswordUrl = cognitoForgotPasswordUrl()
 
   return (
     <Layout element="div">
@@ -94,6 +95,13 @@ const SignInPage: FC = () => {
                   value={password}
                   required
                 />
+                {forgotPasswordUrl && (
+                  <div>
+                    <a href={forgotPasswordUrl} className="forgot-password">
+                      Forgot your password?
+                    </a>
+                  </div>
+                )}
                 <Button type="submit">Sign In</Button>
               </Form>
 

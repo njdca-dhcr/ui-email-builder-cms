@@ -1,5 +1,6 @@
 import type { GatsbyConfig } from 'gatsby'
 import postcssPresetEnv from 'postcss-preset-env'
+import { mockCognitoForgotPasswordUrl } from 'src/testHelpers'
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -8,6 +9,7 @@ const config: GatsbyConfig = {
     backendUrl: process.env.GATSBY_BACKEND_URL,
     env: process.env.NODE_ENV,
     cognitoSigninUrl: process.env.GATSBY_COGNITO_SIGNIN_URL,
+    cognitoForgotPasswordUrl: process.env.GATSBY_COGNITO_FORGOT_PASSWORD_URL,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

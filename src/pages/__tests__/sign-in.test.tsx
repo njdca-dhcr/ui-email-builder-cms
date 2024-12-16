@@ -9,6 +9,7 @@ import {
   asMock,
   currentAuthCredentials,
   mockBackendUrl,
+  mockCognitoForgotPasswordUrl,
   userIsNotSignedIn,
   userIsSignedIn,
 } from 'src/testHelpers'
@@ -46,6 +47,18 @@ describe('Sign in page', () => {
     await user.type(getByLabelText('Password'), password)
     await user.click(await getByRole('button', { name: 'Sign In' }))
   }
+
+  describe('forgot password link', () => {
+    it('is present', () => {
+      mockCognitoForgotPasswordUrl(faker.internet.url())
+      const { queryByRole } = render(
+        <AuthProvider>
+          <SignIn />
+        </AuthProvider>,
+      )
+      expect(queryByRole('link', { name: 'Forgot your password?' })).toBeInTheDocument()
+    })
+  })
 
   describe('when signing in successfully', () => {
     let idToken: string

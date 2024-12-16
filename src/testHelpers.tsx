@@ -111,6 +111,10 @@ export const mockCognitoSigninUrl = (cognitoSigninUrl: string | undefined) => {
   Config.siteMetadata = { ...Config.siteMetadata, cognitoSigninUrl }
 }
 
+export const mockCognitoForgotPasswordUrl = (cognitoForgotPasswordUrl: string | undefined) => {
+  Config.siteMetadata = { ...Config.siteMetadata, cognitoForgotPasswordUrl }
+}
+
 export const userIsSignedIn = (auth?: Partial<AuthInfo>) => {
   const authToPersist: AuthInfo = {
     idToken: faker.lorem.words(3),
