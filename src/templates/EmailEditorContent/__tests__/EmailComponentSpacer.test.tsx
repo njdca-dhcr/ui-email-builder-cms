@@ -44,9 +44,29 @@ describe('EmailComponentSpacer', () => {
     expect(baseElement.querySelector('td')).toBeNull()
   })
 
-  it(`is extraLarge when the current component is Banner`, () => {
+  describe('when it is a Banner', () => {
+    it(`is extraLarge when the next component is Header`, () => {
+      const size = renderWithComponents({
+        currentComponent: 'Banner',
+        nextComponent: 'Header',
+      })
+
+      expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
+    })
+
+    it(`is undefined when the next component is TranslationLinks`, () => {
+      const size = renderWithComponents({
+        currentComponent: 'Banner',
+        nextComponent: 'TranslationLinks',
+      })
+
+      expect(size).toBeUndefined()
+    })
+  })
+
+  it(`is extraLarge when the current component is TranslationLinks`, () => {
     const size = renderWithComponents({
-      currentComponent: 'Banner',
+      currentComponent: 'TranslationLinks',
       nextComponent: 'Header',
     })
 

@@ -2,9 +2,15 @@ import React from 'react'
 import { EditEmailComponent } from '../EditEmailComponent'
 import { DisclaimerValue, EmailParts } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
-import { buildUniqueEmailComponent, emailPartWrapper } from 'src/testHelpers'
+import {
+  buildEmailTranslation,
+  buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
+  emailPartWrapper,
+} from 'src/testHelpers'
 import { render } from '@testing-library/react'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 
 describe('EditEmailComponent', () => {
   let emailComponent: EmailParts.Unique.Component
@@ -66,6 +72,25 @@ describe('EditEmailComponent', () => {
       { wrapper: emailPartWrapper },
     )
     expect(queryByLabelText("Recipient's name")).not.toBeNull()
+  })
+
+  it('can render a TranslationLinks', () => {
+    emailComponent = buildUniqueEmailComponent('TranslationLinks')
+    const { queryByLabelText } = render(
+      <EmailTemplateState
+        emailTemplate={buildUniqueEmailConfig({
+          translations: [buildEmailTranslation({ language: 'english' })],
+        })}
+      >
+        {() => (
+          <EditEmailComponent emailComponent={emailComponent}>
+            <tr />
+          </EditEmailComponent>
+        )}
+      </EmailTemplateState>,
+      { wrapper: emailPartWrapper },
+    )
+    expect(queryByLabelText('English label')).not.toBeNull()
   })
 
   it('can render a Body', () => {

@@ -9,12 +9,12 @@ interface Props {
   nextComponent: EmailParts.Unique.Component | undefined
 }
 
-export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
+export const EmailComponentSpacer: FC<Props> = ({ currentComponent, nextComponent }) => {
   const shouldShow = useShouldShowEmailPart(currentComponent)
 
   if (shouldShow.off) return null
 
-  const size = sizeForComponent(currentComponent.kind)
+  const size = sizeForComponent(currentComponent.kind, nextComponent?.kind)
 
   if (!size) return null
 
@@ -27,11 +27,19 @@ export const EmailComponentSpacer: FC<Props> = ({ currentComponent }) => {
 
 const sizeForComponent = (
   componentKind: EmailParts.Kinds.Component,
+  nextComponentKind: EmailParts.Kinds.Component | undefined,
 ): 'medium' | 'extraLarge' | undefined => {
   switch (componentKind) {
     case 'Banner':
+      switch (nextComponentKind) {
+        case 'TranslationLinks':
+          return
+        default:
+          return 'extraLarge'
+      }
     case 'Header':
     case 'StateSeal':
+    case 'TranslationLinks':
       return 'extraLarge'
     case 'Name':
     case 'Footer':

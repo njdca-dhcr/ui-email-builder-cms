@@ -9,6 +9,7 @@ import { StateSeal } from '../EmailTemplateComponents/StateSeal'
 import { EmailComponentProps } from '../EmailTemplateComponents/shared'
 import { useShouldShowEmailPart } from '../ShouldShowEmailPart'
 import { EmailParts } from 'src/appTypes'
+import { TranslationLinks } from '../EmailTemplateComponents/TranslationLinks'
 
 export const EditEmailComponent: FC<EmailComponentProps<EmailParts.Kinds.Component>> = ({
   emailComponent,
@@ -60,6 +61,13 @@ export const EditEmailComponent: FC<EmailComponentProps<EmailParts.Kinds.Compone
         <StateSeal
           {...props}
           emailComponent={emailComponent as EmailParts.Unique.Component<'StateSeal'>}
+        />
+      )
+    case 'TranslationLinks':
+      return (
+        <TranslationLinks
+          {...props}
+          emailComponent={emailComponent as EmailParts.Unique.Component<'TranslationLinks'>}
         />
       )
     default:
