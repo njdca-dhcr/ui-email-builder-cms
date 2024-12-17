@@ -1,6 +1,7 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import React, { FC } from 'react'
 import capitalize from 'lodash.capitalize'
+import cloneDeep from 'lodash.clonedeep'
 import { EmailTemplate, Language } from 'src/appTypes'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { Button, ButtonLike, Dialog, Form, UswdsIcon } from 'src/ui'
@@ -27,7 +28,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
     emailTemplate: EmailTemplate.Unique.Config,
     language: Language,
   ): EmailTemplate.Unique.Config => {
-    const editedTemplate = { ...emailTemplate }
+    const editedTemplate = cloneDeep(emailTemplate)
     const { translations } = editedTemplate
 
     if (!translations) return editedTemplate
@@ -35,7 +36,6 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
     const translationIndex = translations.findIndex(
       (translation) => translation.language === language,
     )
-    // TODO: is this splice still mutating the translations object since the spread operator is shallow?
     translations.splice(translationIndex, 1)
 
     return editedTemplate
