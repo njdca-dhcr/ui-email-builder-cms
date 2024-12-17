@@ -21,7 +21,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
   currentLanguage,
   setCurrentLanguage,
 }) => {
-  const { mutateAsync, isPending, error } = useUpdateEmailTemplate(emailTemplate.id ?? '')
+  const { mutateAsync, isPending } = useUpdateEmailTemplate(emailTemplate.id ?? '')
 
   const removeTranslationFromEmailTemplate = (
     emailTemplate: EmailTemplate.Unique.Config,
@@ -35,6 +35,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
     const translationIndex = translations.findIndex(
       (translation) => translation.language === language,
     )
+    // TODO: is this splice still mutating the translations object since the spread operator is shallow?
     translations.splice(translationIndex, 1)
 
     return editedTemplate
