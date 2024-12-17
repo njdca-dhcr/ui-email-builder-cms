@@ -11,7 +11,7 @@ import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { EmailTranslationSelector } from '..'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
-import { asMock } from 'src/testHelpers'
+import { asMock, buildUniqueEmailComponent } from 'src/testHelpers'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useUpdateEmailTemplate: jest.fn() }
@@ -65,7 +65,15 @@ describe('DeleteTranslationDialog', () => {
   describe('dialog', () => {
     beforeEach(async () => {
       emailTemplateWithTranslation = buildUniqueEmailConfig({
-        translations: AVAILABLE_LANGUAGES.map((language) => buildEmailTranslation({ language })),
+        translations: AVAILABLE_LANGUAGES.map((language) =>
+          buildEmailTranslation({
+            language,
+            components: [
+              buildUniqueEmailComponent('Banner'),
+              buildUniqueEmailComponent('TranslationLinks'),
+            ],
+          }),
+        ),
       })
     })
 
@@ -97,12 +105,29 @@ describe('DeleteTranslationDialog', () => {
       })
 
       it('sets the current language to english', async () => {
-        const { queryByRole, getByLabelText, getByRole, debug } = await renderAndOpen(
-          emailTemplateWithTranslation,
-        )
+        const { getByLabelText, getByRole } = await renderAndOpen(emailTemplateWithTranslation)
 
         await user.click(getByRole('button', { name: 'Delete Translation' }))
         expect(await getByLabelText('Translation Language')).toHaveTextContent('English')
+      })
+
+      it('removes translation links from the last translation if there is only one translation left', async () => {
+        const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: emailTemplateInEnglish })
+        asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
+
+        const { getByRole } = await renderAndOpen(emailTemplateWithTranslation)
+
+        await user.click(getByRole('button', { name: 'Delete Translation' }))
+        expect(mutateAsync).toHaveBeenCalledWith(
+          expect.objectContaining({
+            ...emailTemplateWithTranslation,
+            translations: [
+              expect.objectContaining({
+                components: [emailTemplateWithTranslation.translations![0].components[0]],
+              }),
+            ],
+          }),
+        )
       })
     })
 

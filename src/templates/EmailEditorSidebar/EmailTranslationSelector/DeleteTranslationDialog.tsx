@@ -4,6 +4,7 @@ import capitalize from 'lodash.capitalize'
 import { EmailTemplate, Language } from 'src/appTypes'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { Button, ButtonLike, Dialog, Form, UswdsIcon } from 'src/ui'
+import { addOrRemoveTranslationLinks } from 'src/utils/addOrRemoveTranslationLinks'
 
 import './DeleteTranslationDialog.css'
 
@@ -40,7 +41,9 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
   }
 
   const handleDelete = () => {
-    const editedTemplate = removeTranslationFromEmailTemplate(emailTemplate, currentLanguage)
+    const editedTemplate = addOrRemoveTranslationLinks(
+      removeTranslationFromEmailTemplate(emailTemplate, currentLanguage),
+    )
     setCurrentEmailTemplate(editedTemplate)
     setCurrentLanguage('english')
     return mutateAsync(editedTemplate)

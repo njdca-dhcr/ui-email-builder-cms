@@ -15,6 +15,7 @@ jest.mock('src/utils/hasUnsavedChanges')
 describe('EmailTranslationSelector', () => {
   let user: UserEvent
   let client: QueryClient
+  const currentEmailTemplateId = 'current-email-template'
 
   beforeEach(async () => {
     user = userEvent.setup()
@@ -25,10 +26,21 @@ describe('EmailTranslationSelector', () => {
     return render(
       <QueryClientProvider client={client}>
         <EmailTemplateState emailTemplate={emailTemplate}>
-          {() => <EmailTranslationSelector />}
+          {({ currentEmailTemplate }) => (
+            <>
+              <EmailTranslationSelector />
+              <template id={currentEmailTemplateId}>
+                {JSON.stringify(currentEmailTemplate)}
+              </template>
+            </>
+          )}
         </EmailTemplateState>
       </QueryClientProvider>,
     )
+  }
+
+  const getCurrentEmailTemplate = (element: HTMLElement): EmailTemplate.Unique.Config => {
+    return JSON.parse(element.querySelector(`#${currentEmailTemplateId}`)!.textContent!)
   }
 
   describe('languages dropdown', () => {
@@ -199,6 +211,24 @@ describe('EmailTranslationSelector', () => {
         await user.click(getByLabelText('Translation Language'))
         expect(queryByRole('option', { name: 'English' })).not.toBeNull()
         expect(queryByRole('option', { name: 'Spanish' })).not.toBeNull()
+      })
+
+      it('adds translation links to each translation', async () => {
+        const { getByRole, getByLabelText, queryByRole, baseElement } = await renderAndOpen()
+
+        expect(queryByRole('dialog')).not.toBeNull()
+
+        await user.click(getByLabelText('Language'))
+        await user.click(getByRole('option', { name: 'Spanish' }))
+        await user.click(getByRole('button', { name: 'Add Translation' }))
+
+        const currentEmailTemplate = getCurrentEmailTemplate(baseElement)
+
+        currentEmailTemplate.translations!.forEach((translation) => {
+          expect(
+            translation.components.find(({ kind }) => kind === 'TranslationLinks'),
+          ).toBeDefined()
+        })
       })
     })
   })

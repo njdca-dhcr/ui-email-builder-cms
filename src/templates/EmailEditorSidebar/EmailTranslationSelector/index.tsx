@@ -14,6 +14,7 @@ import { hasUnsavedChanges } from 'src/utils/hasUnsavedChanges'
 import { usePreviewText } from '../../PreviewText'
 import { useEmailPartsContentData } from '../../EmailPartsContent'
 import { DeleteTranslationDialog } from './DeleteTranslationDialog'
+import { addOrRemoveTranslationLinks } from 'src/utils/addOrRemoveTranslationLinks'
 
 import './index.css'
 
@@ -102,13 +103,15 @@ const AddTranslationDialog: FC<AddTranslationDialogProps> = ({ availableLanguage
       contents={({ close }) => (
         <Form
           onSubmit={() => {
-            setCurrentEmailTemplate({
-              ...currentEmailTemplate,
-              translations: [
-                ...translations,
-                { ...currentTranslation, language: selectedLanguage },
-              ],
-            })
+            setCurrentEmailTemplate(
+              addOrRemoveTranslationLinks({
+                ...currentEmailTemplate,
+                translations: [
+                  ...translations,
+                  { ...currentTranslation, language: selectedLanguage },
+                ],
+              }),
+            )
             setCurrentLanguage(selectedLanguage)
             close()
           }}
