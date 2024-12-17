@@ -76,7 +76,7 @@ export const DeleteTranslationDialog: FC<DeleteTranslationDialogProps> = ({
           <Button type="submit" className="destroy-dialog-delete-button" disabled={isPending}>
             Delete Translation
           </Button>
-          <Button className="cancel-button" type="button" onClick={close}>
+          <Button className="cancel-button" type="button" onClick={close} disabled={isPending}>
             Cancel
           </Button>
         </Form>
