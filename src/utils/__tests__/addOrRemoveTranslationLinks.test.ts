@@ -82,29 +82,13 @@ describe('addOrRemoveTranslationLinks', () => {
 
       const result = addOrRemoveTranslationLinks(emailTemplate)
 
-      expect(result).toEqual(
-        expect.objectContaining({
-          translations: [
-            expect.objectContaining({
-              language: 'english',
-              components: expect.arrayContaining([
-                expect.objectContaining({ kind: 'TranslationLinks' }),
-              ]),
-            }),
-            expect.objectContaining({
-              language: 'spanish',
-              components: expect.arrayContaining([
-                expect.objectContaining({ kind: 'TranslationLinks' }),
-              ]),
-            }),
-          ],
-        }),
-      )
-
-      const englishTranslationLinks = result.translations![0].components.filter(
-        ({ kind }) => kind === 'TranslationLinks',
-      )
-      expect(englishTranslationLinks).toHaveLength(1)
+      result.translations?.forEach((translation) => {
+        expect(translation.components.map(({ kind }) => kind)).toEqual([
+          'Banner',
+          'TranslationLinks',
+          'Header',
+        ])
+      })
     })
   })
 
@@ -126,9 +110,7 @@ describe('addOrRemoveTranslationLinks', () => {
       const result = addOrRemoveTranslationLinks(emailTemplate)
 
       result.translations?.forEach((translation) => {
-        expect(
-          translation.components.find(({ kind }) => kind === 'TranslationLinks'),
-        ).toBeUndefined()
+        expect(translation.components.map(({ kind }) => kind)).toEqual(['Banner', 'Header'])
       })
     })
   })

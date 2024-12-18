@@ -35,7 +35,7 @@ const addTranslationLinks = (translation: EmailTranslation.Unique): EmailTransla
 
     const bannerIndex = components.findIndex(({ kind }) => kind === 'Banner') ?? 0
 
-    components.splice(bannerIndex, 0, translationLinks)
+    components.splice(bannerIndex + 1, 0, translationLinks)
 
     return {
       ...translation,
