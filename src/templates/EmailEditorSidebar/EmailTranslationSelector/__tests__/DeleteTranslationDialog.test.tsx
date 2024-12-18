@@ -22,6 +22,7 @@ describe('DeleteTranslationDialog', () => {
   let client: QueryClient
   let emailTemplateInEnglish: EmailTemplate.Unique.Config
   let emailTemplateWithTranslation: EmailTemplate.Unique.Config
+  const currentEmailTemplateId = 'current-email-template'
 
   beforeEach(() => {
     user = userEvent.setup()
@@ -34,11 +35,21 @@ describe('DeleteTranslationDialog', () => {
     return render(
       <QueryClientProvider client={client}>
         <EmailTemplateState emailTemplate={emailTemplate}>
-          {() => <EmailTranslationSelector />}
+          {({ currentEmailTemplate }) => (
+            <>
+              <EmailTranslationSelector />
+              <template id={currentEmailTemplateId}>
+                {JSON.stringify(currentEmailTemplate)}
+              </template>
+            </>
+          )}
         </EmailTemplateState>
-        ,
       </QueryClientProvider>,
     )
+  }
+
+  const getCurrentEmailTemplate = (element: HTMLElement): EmailTemplate.Unique.Config => {
+    return JSON.parse(element.querySelector(`#${currentEmailTemplateId}`)!.textContent!)
   }
 
   it('does not render for the english translation', () => {
@@ -97,11 +108,10 @@ describe('DeleteTranslationDialog', () => {
       })
 
       it('removes the current translation from the email template', async () => {
-        const { getByRole } = await renderAndOpen(emailTemplateWithTranslation)
+        const { getByRole, baseElement } = await renderAndOpen(emailTemplateWithTranslation)
         await user.click(getByRole('button', { name: 'Delete Translation' }))
-        expect(emailTemplateWithTranslation.translations).toHaveLength(
-          AVAILABLE_LANGUAGES.length - 1,
-        )
+        const currentEmailTemplate = getCurrentEmailTemplate(baseElement)
+        expect(currentEmailTemplate.translations).toHaveLength(AVAILABLE_LANGUAGES.length - 1)
       })
 
       it('sets the current language to english', async () => {
@@ -136,7 +146,7 @@ describe('DeleteTranslationDialog', () => {
         const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: emailTemplateInEnglish })
         asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
 
-        const { queryByRole, getByRole } = await renderAndOpen(emailTemplateWithTranslation)
+        const { getByRole } = await renderAndOpen(emailTemplateWithTranslation)
         await user.click(getByRole('button', { name: 'Cancel' }))
         expect(mutateAsync).not.toHaveBeenCalled()
       })
