@@ -95,13 +95,14 @@ const SignInPage: FC = () => {
                   value={password}
                   required
                 />
-                {forgotPasswordUrl && (
-                  <div>
+                <div>
+                  {forgotPasswordUrl && (
                     <a href={forgotPasswordUrl} className="forgot-password">
                       Forgot your password?
                     </a>
-                  </div>
-                )}
+                  )}
+                  &nbsp;
+                </div>
                 <Button type="submit">Sign In</Button>
               </Form>
 
