@@ -212,6 +212,21 @@ describe('EmailTemplateState', () => {
       act(() => leakedSetCurrentLanguage!(newLanguage))
       expect(leakedCurrentTranslation).toEqual(spanishTranslation)
     })
+
+    it('accepts an initialLanguage', async () => {
+      const emailTemplate = buildUniqueEmailConfig({
+        translations: [
+          buildEmailTranslation({ language: 'english' }),
+          buildEmailTranslation({ language: 'spanish' }),
+        ],
+      })
+      const { baseElement } = render(
+        <EmailTemplateState emailTemplate={emailTemplate} initialLanguage="spanish">
+          {({ currentLanguage }) => <div>{currentLanguage}</div>}
+        </EmailTemplateState>,
+      )
+      expect(baseElement).toHaveTextContent('spanish')
+    })
   })
 })
 

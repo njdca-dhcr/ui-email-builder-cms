@@ -53,16 +53,20 @@ export interface State {
 interface Props {
   children: (values: State) => ReactNode
   emailTemplate: EmailTemplate.Unique.Config | null
+  initialLanguage?: Language
 }
 
-export const EmailTemplateState: FC<Props> = ({ children, emailTemplate }) => {
+export const EmailTemplateState: FC<Props> = ({ children, emailTemplate, initialLanguage }) => {
   return (
     <OriginalEmailTemplateContext.Provider value={emailTemplate ?? PLACEHOLDER_EMAIL_TEMPLATE}>
       <OriginalEmailTemplateContext.Consumer>
         {(originalEmailTemplate) => (
           <CurrentEmailTemplate emailTemplate={originalEmailTemplate}>
             {([currentEmailTemplate, setCurrentEmailTemplate]) => (
-              <CurrentLanguage emailTemplate={originalEmailTemplate}>
+              <CurrentLanguage
+                emailTemplate={originalEmailTemplate}
+                initialLanguage={initialLanguage}
+              >
                 {([currentLanguage, setCurrentLanguage]) => {
                   const currentTranslation = translationForLanguage(
                     currentEmailTemplate,
@@ -119,18 +123,23 @@ const CurrentEmailTemplate: FC<CurrentEmailTemplateProps> = ({ emailTemplate, ch
 interface CurrentLanguageProps {
   emailTemplate: EmailTemplate.Unique.Config
   children: (value: UseState<Language>) => ReactNode
+  initialLanguage?: Language
 }
 
-const CurrentLanguage: FC<CurrentLanguageProps> = ({ emailTemplate, children }) => {
-  const value = useState(() => firstLanguageFrom(emailTemplate))
+const CurrentLanguage: FC<CurrentLanguageProps> = ({
+  emailTemplate,
+  children,
+  initialLanguage,
+}) => {
+  const value = useState(() => initialLanguage ?? firstLanguageFrom(emailTemplate))
 
   const [currentLanguage, setCurrentLanguage] = value
 
   useEffect(() => {
     if (!isPlaceholder(emailTemplate) && currentLanguage === 'not-set') {
-      setCurrentLanguage(firstLanguageFrom(emailTemplate))
+      setCurrentLanguage(initialLanguage ?? firstLanguageFrom(emailTemplate))
     }
-  }, [emailTemplate, currentLanguage, setCurrentLanguage])
+  }, [emailTemplate, currentLanguage, setCurrentLanguage, initialLanguage])
 
   return (
     <CurrentLanguageContext.Provider value={value}>
