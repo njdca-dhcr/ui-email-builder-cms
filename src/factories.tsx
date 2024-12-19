@@ -16,6 +16,7 @@ import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex, UserShow } from './network/users'
 import { GroupsIndex, GroupShow, GroupShowUser } from './network/groups'
 import { EmailTranslation } from './appTypes/EmailTranslation'
+import { currentTimestamp } from './utils/currentTimestamp'
 
 export const randomObject = () => {
   return { [faker.lorem.word()]: faker.lorem.words(3) }
@@ -117,6 +118,7 @@ export const buildUniqueEmailConfig = (
         components: [buildUniqueEmailComponent('Header'), buildUniqueEmailComponent('Footer')],
       }),
     ],
+    versionTimestamp: currentTimestamp(),
     ...options,
   }
 }

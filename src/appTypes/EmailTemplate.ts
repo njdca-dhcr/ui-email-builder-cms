@@ -20,6 +20,7 @@ export namespace EmailTemplate {
       translations?: EmailTranslation.Unique[]
       tags?: Tag[]
       tagNames?: string[]
+      versionTimestamp: string
     }
   }
 }

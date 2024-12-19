@@ -176,6 +176,7 @@ describe('SaveEmailTemplateDialog', () => {
       await user.click(button!)
       expect(mutate).toHaveBeenCalledWith({
         ...emailTemplateChanges,
+        versionTimestamp: emailTemplate.versionTimestamp,
         tagNames: ['tag'],
       })
     })

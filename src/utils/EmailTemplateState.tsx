@@ -17,6 +17,7 @@ type UseState<T> = [T, UseStateSetter<T>]
 const PLACEHOLDER_EMAIL_TEMPLATE = {
   name: '',
   id: '',
+  versionTimestamp: '',
 } as const satisfies EmailTemplate.Unique.Config
 
 const isPlaceholder = (emailTemplate: EmailTemplate.Unique.Config): boolean =>

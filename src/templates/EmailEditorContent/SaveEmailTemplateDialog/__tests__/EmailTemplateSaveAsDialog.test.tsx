@@ -18,6 +18,7 @@ import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
 import { mergeEmailTemplateValues } from '../emailTemplateMergeDefaultValues'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { currentTimestamp } from 'src/utils/currentTimestamp'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useCreateEmailTemplate: jest.fn() }
@@ -50,6 +51,7 @@ describe('EmailTemplateSaveAsDialog', () => {
     })
     mergedEmailTemplate = {
       name: 'mocked merged email template values',
+      versionTimestamp: currentTimestamp(),
     }
     asMock(mergeEmailTemplateValues).mockReturnValue(mergedEmailTemplate)
     user = userEvent.setup()

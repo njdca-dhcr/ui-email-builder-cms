@@ -14,6 +14,7 @@ import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
 import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationSelector'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import { currentTimestamp } from 'src/utils/currentTimestamp'
 import './EmailEditorPage.css'
 
 interface PageContext {
@@ -28,6 +29,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   useRedirectIfNotSignedIn()
   const [emailTemplateConfig] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
+    versionTimestamp: currentTimestamp(),
     translations: (pageContext.emailTemplate.translations ?? []).map((translation) => ({
       ...translation,
       components: addIds(translation.components),

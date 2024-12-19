@@ -25,6 +25,7 @@ const entryToEmailTemplate = (entry: Entry): EmailTemplate.Unique.Config => {
   return {
     name: data.get('name') ?? '',
     description: data.get('description') ?? '',
+    versionTimestamp: '',
     translations: translationEntries.map((translationEntry) => {
       const componentEntries: Entry[] = translationEntry.get('components').toArray()
       return {

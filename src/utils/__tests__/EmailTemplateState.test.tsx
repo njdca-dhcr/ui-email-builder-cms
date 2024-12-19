@@ -43,13 +43,13 @@ describe('EmailTemplateState', () => {
 
     it('yields a placeholder original email template', async () => {
       assertOnYielded(({ originalEmailTemplate }) => {
-        expect(originalEmailTemplate).toEqual({ name: '', id: '' })
+        expect(originalEmailTemplate).toEqual({ name: '', id: '', versionTimestamp: '' })
       })
     })
 
     it('yields a placeholder current email template', async () => {
       assertOnYielded(({ currentEmailTemplate }) => {
-        expect(currentEmailTemplate).toEqual({ name: '', id: '' })
+        expect(currentEmailTemplate).toEqual({ name: '', id: '', versionTimestamp: '' })
       })
     })
 
@@ -223,7 +223,7 @@ describe('useOriginalEmailTemplate', () => {
       },
     })
 
-    expect(result.current).toEqual({ name: '', id: '' })
+    expect(result.current).toEqual({ name: '', id: '', versionTimestamp: '' })
   })
 
   it('provides the given email template as the original when present', async () => {
@@ -248,7 +248,7 @@ describe('useCurrentEmailTemplate', () => {
       },
     })
 
-    expect(result.current[0]).toEqual({ name: '', id: '' })
+    expect(result.current[0]).toEqual({ name: '', id: '', versionTimestamp: '' })
   })
 
   it('provides the given email template as the original when present', async () => {
