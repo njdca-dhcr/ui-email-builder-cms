@@ -10,11 +10,11 @@ import {
   useCurrentTranslation,
 } from 'src/utils/EmailTemplateState'
 import { mergeTranslationValues } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/emailTemplateMergeDefaultValues'
-import { hasUnsavedChanges } from 'src/utils/hasUnsavedChanges'
 import { usePreviewText } from '../../PreviewText'
 import { useEmailPartsContentData } from '../../EmailPartsContent'
 import { DeleteTranslationDialog } from './DeleteTranslationDialog'
 import { addOrRemoveTranslationLinks } from 'src/utils/addOrRemoveTranslationLinks'
+import { areEmailTranslationsEqual } from 'src/utils/emailPartsComparators'
 
 import './index.css'
 
@@ -40,11 +40,9 @@ export const EmailTranslationSelector: FC = () => {
       data: emailPartsContentData,
     })
 
-    if (hasUnsavedChanges(currentTranslation, changedTranslation)) {
-      if (window.confirm('You have unsaved changes. Are you sure you want to continue?')) {
-        setCurrentLanguage(value as Language)
-      }
-    } else {
+    if (areEmailTranslationsEqual(currentTranslation, changedTranslation)) {
+      setCurrentLanguage(value as Language)
+    } else if (window.confirm('You have unsaved changes. Are you sure you want to continue?')) {
       setCurrentLanguage(value as Language)
     }
   }

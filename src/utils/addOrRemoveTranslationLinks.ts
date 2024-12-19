@@ -28,9 +28,10 @@ const addTranslationLinks = (translation: EmailTranslation.Unique): EmailTransla
   } else {
     const components = [...translation.components]
 
-    const translationLinks: EmailParts.TranslationLinks = {
+    const translationLinks: EmailParts.Unique.Component<'TranslationLinks'> = {
       kind: 'TranslationLinks',
       id: 'translation-links',
+      subComponents: [],
     }
 
     const bannerIndex = components.findIndex(({ kind }) => kind === 'Banner') ?? 0
