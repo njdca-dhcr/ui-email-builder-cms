@@ -18,6 +18,7 @@ interface Variables {
   emailTemplateId: string
   language: Language
   htmlTranslation: string
+  versionTimestamp: string
 }
 
 export const useCreateHtmlTranslationLink = () => {

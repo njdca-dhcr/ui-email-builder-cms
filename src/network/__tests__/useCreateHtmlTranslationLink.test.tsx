@@ -8,6 +8,7 @@ import { useCreateHtmlTranslationLink } from '../useCreateHtmlTranslationLink'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { Language } from 'src/appTypes'
+import { currentTimestamp } from 'src/utils/currentTimestamp'
 
 jest.mock('../useAuthedFetch')
 
@@ -24,6 +25,7 @@ describe('useCreateHtmlTranslationLink', () => {
     const client = new QueryClient()
     const translationUrl = faker.internet.url()
     const emailTemplateId = randomUUID()
+    const versionTimestamp = currentTimestamp()
     const language: Language = 'spanish'
     const htmlTranslation = `<html><body><p>${faker.lorem.sentence()}</p></body></html>`
 
@@ -42,12 +44,17 @@ describe('useCreateHtmlTranslationLink', () => {
       },
     })
     expect(mockAuthedFetch).not.toHaveBeenCalled()
-    await result.current.mutateAsync({ emailTemplateId, language, htmlTranslation })
+    await result.current.mutateAsync({
+      emailTemplateId,
+      language,
+      htmlTranslation,
+      versionTimestamp,
+    })
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(mockAuthedFetch).toHaveBeenCalledWith({
       path: '/html-translations-link',
       method: 'POST',
-      body: { emailTemplateId, language, htmlTranslation },
+      body: { emailTemplateId, language, htmlTranslation, versionTimestamp },
     })
     expect(result.current.data).toEqual({ translationUrl })
   })
