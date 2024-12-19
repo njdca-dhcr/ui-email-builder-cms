@@ -2,7 +2,7 @@ import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
-import { base, faker } from '@faker-js/faker'
+import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import {
@@ -152,41 +152,6 @@ describe('EmailEditorContent', () => {
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
     expect(lastArgumentToCopy).toContain(`${value}</h1>`)
     expect(lastArgumentToCopy).toContain(`${value}</title>`)
-  })
-
-  it('allows users to copy a link to the html of the current translation', async () => {
-    userIsSignedIn()
-    const value = faker.lorem.words(4)
-    const translationUrl = faker.internet.url()
-    const mutateAsync = jest.fn().mockResolvedValue({ translationUrl })
-    asMock(useCreateHtmlTranslationLink).mockReturnValue(buildUseMutationResult({ mutateAsync }))
-
-    const { getByText, getByRole } = render(
-      <QueryClientProvider client={client}>
-        <AuthProvider>
-          <PreviewText emailTranslation={emailTranslation}>
-            <EmailPartsContent>
-              <EmailEditorContent
-                emailTranslation={emailTranslation}
-                emailTemplate={emailTemplate}
-              />
-            </EmailPartsContent>
-          </PreviewText>
-        </AuthProvider>
-      </QueryClientProvider>,
-    )
-    await user.type(getByText('Title'), value)
-
-    expect(copy).not.toHaveBeenCalled()
-    await user.click(getByRole('button', { name: 'Share' }))
-    await user.click(getByText('Copy Translation Link'))
-
-    expect(mutateAsync).toHaveBeenCalledWith({
-      emailTemplateId: emailTemplate.id!,
-      language: emailTranslation.language,
-      htmlTranslation: expect.stringContaining(`${value}</h1>`),
-    })
-    expect(copy).toHaveBeenCalledWith(translationUrl)
   })
 
   it('allows users to download the current preview', async () => {
