@@ -7,18 +7,17 @@ import {
   asMock,
   buildEmailTranslation,
   buildUniqueEmailConfig,
-  buildUseQueryResult,
   buildUserShow,
   userIsSignedIn,
 } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
 import { renderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
 import { faker } from '@faker-js/faker'
-import { useCurrentUser } from '../users'
+import { useUserInfo } from 'src/utils/UserInfoContext'
 
 jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
+jest.mock('src/utils/UserInfoContext')
 jest.mock('../useAuthedFetch')
-jest.mock('../users')
 
 describe('useKeepHtmlTranslationsLinksPopulated', () => {
   let mockAuthedFetch: AuthedFetch
@@ -27,10 +26,7 @@ describe('useKeepHtmlTranslationsLinksPopulated', () => {
     userIsSignedIn()
     mockAuthedFetch = jest.fn()
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
-    asMock(useCurrentUser).mockReturnValue({
-      enabled: true,
-      ...buildUseQueryResult({ data: buildUserShow() }),
-    })
+    asMock(useUserInfo).mockReturnValue([buildUserShow(), jest.fn()])
   })
 
   it("queries for all the the email template's translation links", async () => {

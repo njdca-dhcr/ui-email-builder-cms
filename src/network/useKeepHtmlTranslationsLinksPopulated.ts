@@ -2,7 +2,7 @@ import { useQueries } from '@tanstack/react-query'
 import { EmailTemplate, Language } from 'src/appTypes'
 import { useAuthedFetch } from './useAuthedFetch'
 import { renderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
-import { useCurrentUser } from './users'
+import { useUserInfo } from 'src/utils/UserInfoContext'
 
 interface CreateHtmlTranslationLinkSuccessfulResponse {
   translationUrl: string
@@ -12,7 +12,7 @@ interface CreateHtmlTranslationLinkErrorResponse {
   error: object
 }
 
-export type CreateHtmlTranslationLinkResponse =
+type CreateHtmlTranslationLinkResponse =
   | CreateHtmlTranslationLinkSuccessfulResponse
   | CreateHtmlTranslationLinkErrorResponse
 
@@ -28,7 +28,7 @@ export const useKeepHtmlTranslationsLinksPopulated = (
 ) => {
   const translations = emailTemplate.translations ?? []
   const authedFetch = useAuthedFetch()
-  const { data: user } = useCurrentUser()
+  const [userInfo] = useUserInfo()
 
   return useQueries({
     queries: translations.map((translation) => ({
@@ -44,7 +44,7 @@ export const useKeepHtmlTranslationsLinksPopulated = (
             htmlTranslation: renderEmailTranslationToString({
               emailTemplate,
               translation,
-              userInfo: user!,
+              userInfo,
             }),
           },
         })
