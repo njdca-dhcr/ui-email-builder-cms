@@ -8,11 +8,11 @@ export interface CurrentUserEmailConfig {
   departmentSeal?: object
   stateSeal?: object
   disclaimer?: object
+  id: string
 }
 
 export interface CurrentUser extends CurrentUserEmailConfig {
   role?: UserRole
-  id: string
   email: string
 }
 

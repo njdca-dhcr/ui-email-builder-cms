@@ -235,7 +235,6 @@ export interface TranslationLinksValue extends BaseValue {
   languages: {
     [key in Language]?: {
       text: string
-      href?: string
     }
   }
 }

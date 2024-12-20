@@ -10,6 +10,7 @@ import {
   randomObject,
 } from 'src/testHelpers'
 import { CurrentUserEmailConfig } from 'src/network/users'
+import { randomUUID } from 'crypto'
 
 describe('renderEmailTranslationToString', () => {
   let title: string
@@ -50,6 +51,7 @@ describe('renderEmailTranslationToString', () => {
     })
 
     userInfo = {
+      id: randomUUID(),
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),

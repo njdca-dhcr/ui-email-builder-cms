@@ -14,6 +14,7 @@ import { useUpdateDepartmentSeal } from 'src/network/useUpdateDepartmentSeal'
 import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { faker } from '@faker-js/faker'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/network/useUpdateDepartmentSeal', () => {
   return { useUpdateDepartmentSeal: jest.fn() }
@@ -25,10 +26,10 @@ describe('EditDepartmentSeal', () => {
     userIsSignedIn()
   })
 
-  const renderEditDepartmentSeal = (userInfo: CurrentUserEmailConfig) => {
+  const renderEditDepartmentSeal = (userInfo: Partial<CurrentUserEmailConfig>) => {
     return render(
       <AuthProvider>
-        <UserInfoProvider userInfo={userInfo}>
+        <UserInfoProvider userInfo={{ id: randomUUID(), ...userInfo }}>
           <EditDepartmentSeal />
         </UserInfoProvider>
       </AuthProvider>,

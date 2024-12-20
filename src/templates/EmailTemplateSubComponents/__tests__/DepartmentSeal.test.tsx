@@ -6,6 +6,7 @@ import { render, renderHook } from '@testing-library/react'
 import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { faker } from '@faker-js/faker'
+import { randomUUID } from 'crypto'
 
 describe('DepartmentSealMarkup', () => {
   it('displays the given image', () => {
@@ -53,7 +54,7 @@ describe('useDepartmentSealValue', () => {
   })
 
   const emptyUserInfo: FC<{ children: ReactNode }> = ({ children }) => {
-    return <UserInfoProvider userInfo={{}}>{children}</UserInfoProvider>
+    return <UserInfoProvider userInfo={{ id: randomUUID() }}>{children}</UserInfoProvider>
   }
 
   describe('when in all states mode', () => {
@@ -101,7 +102,7 @@ describe('useDepartmentSealValue', () => {
       const { result } = renderHook(() => useDepartmentSealValue(), {
         wrapper: ({ children }) => {
           return (
-            <UserInfoProvider userInfo={{ departmentSeal: departmentSealValue }}>
+            <UserInfoProvider userInfo={{ departmentSeal: departmentSealValue, id: randomUUID() }}>
               {children}
             </UserInfoProvider>
           )

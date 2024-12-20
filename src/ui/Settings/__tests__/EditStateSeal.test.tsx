@@ -14,6 +14,7 @@ import { useUpdateStateSeal } from 'src/network/useUpdateStateSeal'
 import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/network/useUpdateStateSeal', () => {
   return { useUpdateStateSeal: jest.fn() }
@@ -25,10 +26,10 @@ describe('EditStateSeal', () => {
     localStorage.removeItem('stateSeal')
   })
 
-  const renderEditStateSeal = (userInfo: CurrentUserEmailConfig) => {
+  const renderEditStateSeal = (userInfo: Partial<CurrentUserEmailConfig>) => {
     return render(
       <AuthProvider>
-        <UserInfoProvider userInfo={userInfo}>
+        <UserInfoProvider userInfo={{ id: randomUUID(), ...userInfo }}>
           <EditStateSeal />
         </UserInfoProvider>
       </AuthProvider>,

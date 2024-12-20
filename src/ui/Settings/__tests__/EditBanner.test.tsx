@@ -8,6 +8,7 @@ import { asMock, buildUseMutationResult, randomBannerValue, userIsSignedIn } fro
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/network/useUpdateBanner', () => {
   return { useUpdateBanner: jest.fn() }
@@ -20,10 +21,10 @@ describe('EditBanner', () => {
     user = userEvent.setup()
   })
 
-  const renderEditBanner = (userInfo: CurrentUserEmailConfig) => {
+  const renderEditBanner = (userInfo: Partial<CurrentUserEmailConfig>) => {
     return render(
       <AuthProvider>
-        <UserInfoProvider userInfo={userInfo}>
+        <UserInfoProvider userInfo={{ id: randomUUID(), ...userInfo }}>
           <EditBanner />
         </UserInfoProvider>
       </AuthProvider>,

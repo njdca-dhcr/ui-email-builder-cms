@@ -16,9 +16,9 @@ import { useLocalStorageJSON } from './useLocalStorage'
 
 const UserInfoContext = createContext<
   [CurrentUserEmailConfig, Dispatch<SetStateAction<CurrentUserEmailConfig>>]
->([{}, () => null])
+>([{ id: '' }, () => null])
 
-const OriginalUserInfoContext = createContext<CurrentUserEmailConfig>({})
+const OriginalUserInfoContext = createContext<CurrentUserEmailConfig>({ id: '' })
 
 export const UserInfoProvider: FC<{ children: ReactNode; userInfo: CurrentUserEmailConfig }> = ({
   children,
@@ -38,7 +38,7 @@ export const UserInfoProvider: FC<{ children: ReactNode; userInfo: CurrentUserEm
 export const useUserInfo = () => useContext(UserInfoContext)
 
 export const useUserInfoValue = <T extends object>(
-  key: keyof CurrentUserEmailConfig,
+  key: keyof Omit<CurrentUserEmailConfig, 'id'>,
   defaultValue: T,
   schema?: z.ZodObject<any>,
 ): [T, (value: T) => void, { hasChanges: boolean }] => {

@@ -14,6 +14,7 @@ import { faker } from '@faker-js/faker'
 import { CurrentUserEmailConfig } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/network/useUpdateDisclaimer', () => {
   return { useUpdateDisclaimer: jest.fn() }
@@ -27,10 +28,10 @@ describe('EditDisclaimer', () => {
     userIsSignedIn()
   })
 
-  const renderEditDisclaimer = (userInfo: CurrentUserEmailConfig) => {
+  const renderEditDisclaimer = (userInfo: Partial<CurrentUserEmailConfig>) => {
     return render(
       <AuthProvider>
-        <UserInfoProvider userInfo={userInfo}>
+        <UserInfoProvider userInfo={{ id: randomUUID(), ...userInfo }}>
           <EditDisclaimer />
         </UserInfoProvider>
       </AuthProvider>,

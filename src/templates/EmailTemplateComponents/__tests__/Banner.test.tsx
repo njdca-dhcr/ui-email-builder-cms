@@ -6,6 +6,7 @@ import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/te
 import { faker } from '@faker-js/faker'
 import { Colors } from 'src/templates/styles'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { randomUUID } from 'crypto'
 
 describe('BannerMarkup', () => {
   it('displays the primary text', () => {
@@ -179,7 +180,7 @@ describe('useBannerValue', () => {
   })
 
   const emptyUserInfo: FC<{ children: ReactNode }> = ({ children }) => {
-    return <UserInfoProvider userInfo={{}}>{children}</UserInfoProvider>
+    return <UserInfoProvider userInfo={{ id: randomUUID() }}>{children}</UserInfoProvider>
   }
 
   describe('in all states mode', () => {
@@ -273,7 +274,7 @@ describe('useBannerValue', () => {
       const { result } = renderHook(() => useBannerValue(), {
         wrapper: ({ children }) => {
           return (
-            <UserInfoProvider userInfo={{ banner: userInfoBannerValue }}>
+            <UserInfoProvider userInfo={{ banner: userInfoBannerValue, id: randomUUID() }}>
               {children}
             </UserInfoProvider>
           )

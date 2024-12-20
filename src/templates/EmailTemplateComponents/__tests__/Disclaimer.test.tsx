@@ -6,6 +6,7 @@ import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/te
 import { faker } from '@faker-js/faker'
 import { RichTextValue } from 'src/ui'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { randomUUID } from 'crypto'
 
 describe('Disclaimer', () => {
   let emailComponent: EmailParts.Disclaimer
@@ -42,7 +43,7 @@ describe('useDisclaimerValue', () => {
   })
 
   const emptyUserInfo: FC<{ children: ReactNode }> = ({ children }) => {
-    return <UserInfoProvider userInfo={{}}>{children}</UserInfoProvider>
+    return <UserInfoProvider userInfo={{ id: randomUUID() }}>{children}</UserInfoProvider>
   }
 
   describe('in all states mode', () => {
@@ -109,7 +110,7 @@ describe('useDisclaimerValue', () => {
       const { result } = renderHook(() => useDisclaimerValue(), {
         wrapper: ({ children }) => {
           return (
-            <UserInfoProvider userInfo={{ disclaimer: disclaimerValue }}>
+            <UserInfoProvider userInfo={{ disclaimer: disclaimerValue, id: randomUUID() }}>
               {children}
             </UserInfoProvider>
           )

@@ -6,6 +6,8 @@ import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemp
 import capitalize from 'lodash.capitalize'
 import { useIsCurrentlyActiveEmailComponent } from '../CurrentlyActiveEmailPart'
 import { Colors, Font, Spacing, StyleDefaults, Text } from '../styles'
+import { useUserInfo } from 'src/utils/UserInfoContext'
+import { buildHtmlTranslationUrl } from 'src/utils/buildHtmlTranslationUrl'
 
 const { Row, Link } = EmailBlock
 
@@ -17,6 +19,7 @@ export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
   const [emailTemplate] = useCurrentEmailTemplate()
   const [language] = useCurrentLanguage()
   const translations = emailTemplate.translations ?? []
+  const [user] = useUserInfo()
 
   return (
     <Row
@@ -49,7 +52,15 @@ export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
             value={value.languages[language]?.text ?? ''}
           />
         ) : (
-          <Link to={value.languages[translation.language]?.href ?? ''} key={translation.language}>
+          <Link
+            to={buildHtmlTranslationUrl({
+              emailTemplateId: emailTemplate.id!,
+              userId: user.id,
+              versionTimestamp: emailTemplate.versionTimestamp,
+              language: translation.language,
+            })}
+            key={translation.language}
+          >
             <EditableElement
               element="span"
               label={`${capitalize(translation.language)} label`}

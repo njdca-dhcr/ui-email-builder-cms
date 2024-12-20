@@ -5,12 +5,13 @@ import { UserInfoProvider, useUserInfo, useUserInfoValue } from '../UserInfoCont
 import { randomBannerValue, randomObject } from 'src/testHelpers'
 import { CurrentUserEmailConfig } from 'src/network/users'
 import { BannerValue } from 'src/appTypes'
+import { randomUUID } from 'crypto'
 
 describe('UserInfoProvider', () => {
   it('displays its children', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
-      <UserInfoProvider userInfo={{}}>
+      <UserInfoProvider userInfo={{ id: randomUUID() }}>
         <p>{text}</p>
       </UserInfoProvider>,
     )
@@ -19,6 +20,7 @@ describe('UserInfoProvider', () => {
 
   it('provides access to user information', () => {
     const givenUserInfo: CurrentUserEmailConfig = {
+      id: randomUUID(),
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),
@@ -36,12 +38,14 @@ describe('UserInfoProvider', () => {
 
   it('can update the user information', () => {
     const givenUserInfo: CurrentUserEmailConfig = {
+      id: randomUUID(),
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),
       disclaimer: randomObject(),
     }
     const newUserInfo: CurrentUserEmailConfig = {
+      id: randomUUID(),
       banner: randomObject(),
       departmentSeal: randomObject(),
       stateSeal: randomObject(),
@@ -78,13 +82,17 @@ describe('useUserInfoValue', () => {
   }
 
   const renderUseUserInfoValue = <T extends object>(
-    key: keyof CurrentUserEmailConfig,
+    key: keyof Omit<CurrentUserEmailConfig, 'id'>,
     defaultHookValue: T,
-    defaultUserInfo: CurrentUserEmailConfig,
+    defaultUserInfo: Partial<CurrentUserEmailConfig>,
   ) => {
     return renderHook(() => useUserInfoValue(key, defaultHookValue), {
       wrapper: ({ children }) => {
-        return <UserInfoProvider userInfo={defaultUserInfo}>{children}</UserInfoProvider>
+        return (
+          <UserInfoProvider userInfo={{ id: randomUUID(), ...defaultUserInfo }}>
+            {children}
+          </UserInfoProvider>
+        )
       },
     })
   }

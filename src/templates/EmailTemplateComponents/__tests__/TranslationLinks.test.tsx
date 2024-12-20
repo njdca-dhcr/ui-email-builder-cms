@@ -6,29 +6,41 @@ import { TranslationLinks } from '../TranslationLinks'
 import { CurrentlyActiveEmailPart } from 'src/templates/CurrentlyActiveEmailPart'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import {
+  asMock,
   buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   expectActiveEmailPartToBe,
   expectActiveEmailPartToNotBe,
   expectEmailPartContentFor,
+  mockHtmlTranslationsCdnUrl,
   ShowActiveEmailPart,
   ShowEmailPartsContentKeys,
 } from 'src/testHelpers'
 import userEvent from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
+import { buildHtmlTranslationUrl } from 'src/utils/buildHtmlTranslationUrl'
+import { randomUUID } from 'crypto'
+import { useUserInfo } from 'src/utils/UserInfoContext'
+
+jest.mock('src/utils/UserInfoContext')
 
 describe('TranslationLinks', () => {
   let emailTemplate: EmailTemplate.Unique.Config
   let emailTranslation: EmailTranslation.Unique
   let emailComponent: EmailParts.TranslationLinks
+  let userId: string
 
   beforeEach(async () => {
+    mockHtmlTranslationsCdnUrl(faker.internet.url({ appendSlash: false }))
     emailComponent = buildUniqueEmailComponent('TranslationLinks')
     emailTranslation = buildEmailTranslation({ language: 'english', components: [emailComponent] })
     emailTemplate = buildUniqueEmailConfig({
+      id: randomUUID(),
       translations: [emailTranslation, buildEmailTranslation({ language: 'spanish' })],
     })
+    userId = randomUUID()
+    asMock(useUserInfo).mockReturnValue([{ id: userId }, jest.fn()])
   })
 
   const renderComponent = () => {
@@ -71,7 +83,14 @@ describe('TranslationLinks', () => {
     expect(spanish?.nodeName).toEqual('SPAN')
     const link = queryByRole('link')
     expect(link).not.toBeNull()
-    expect((link as any).href).toEqual('http://example.org/')
+    expect((link as any).href).toEqual(
+      buildHtmlTranslationUrl({
+        emailTemplateId: emailTemplate.id!,
+        userId,
+        language: 'spanish',
+        versionTimestamp: emailTemplate.versionTimestamp,
+      }),
+    )
   })
 
   it('has editable fields', async () => {

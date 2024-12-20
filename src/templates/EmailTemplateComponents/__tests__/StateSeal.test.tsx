@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker'
 import { buildUniqueEmailComponent, emailPartWrapper, mockAppMode } from 'src/testHelpers'
 import { StateSealValue } from 'src/appTypes'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
+import { randomUUID } from 'crypto'
 
 describe('StateSealMarkup', () => {
   it('displays the additional content', () => {
@@ -118,7 +119,7 @@ describe('useStateSealValue', () => {
   })
 
   const emptyUserInfo: FC<{ children: ReactNode }> = ({ children }) => {
-    return <UserInfoProvider userInfo={{}}>{children}</UserInfoProvider>
+    return <UserInfoProvider userInfo={{ id: randomUUID() }}>{children}</UserInfoProvider>
   }
 
   describe('when in all states mode', () => {
@@ -189,7 +190,7 @@ describe('useStateSealValue', () => {
 
     const wrapper: FC<{ children: ReactNode }> = ({ children }) => {
       return (
-        <UserInfoProvider userInfo={{ stateSeal: userInfoStateSealValue }}>
+        <UserInfoProvider userInfo={{ stateSeal: userInfoStateSealValue, id: randomUUID() }}>
           {children}
         </UserInfoProvider>
       )

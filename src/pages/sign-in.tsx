@@ -1,16 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { HeadFC, navigate } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-import {
-  Heading,
-  Layout,
-  Paragraph,
-  SpacedContainer,
-  LoadingOverlay,
-  Form,
-  FormField,
-  Button,
-} from 'src/ui'
+import { Heading, Layout, Paragraph, LoadingOverlay, Form, FormField, Button } from 'src/ui'
 import { cognitoForgotPasswordUrl, cognitoSigninUrl } from 'src/utils/backendUrl'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { signIn } from 'src/network/auth'
