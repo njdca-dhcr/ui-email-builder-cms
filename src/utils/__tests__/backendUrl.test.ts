@@ -1,5 +1,15 @@
-import { mockBackendUrl, mockCognitoForgotPasswordUrl, mockCognitoSigninUrl } from 'src/testHelpers'
-import { backendUrl, cognitoForgotPasswordUrl, cognitoSigninUrl } from '../backendUrl'
+import {
+  mockBackendUrl,
+  mockCognitoForgotPasswordUrl,
+  mockCognitoSigninUrl,
+  mockHtmlTranslationsCdnUrl,
+} from 'src/testHelpers'
+import {
+  backendUrl,
+  cognitoForgotPasswordUrl,
+  cognitoSigninUrl,
+  htmlTranslationsCdnUrl,
+} from '../backendUrl'
 import { faker } from '@faker-js/faker'
 
 describe('backendUrl', () => {
@@ -45,10 +55,27 @@ describe('cognitoForgotPasswordUrl', () => {
     })
   })
 
-  describe('when there is no a cognito forgot password url environment variable', () => {
+  describe('when there is no cognito forgot password url environment variable', () => {
     it('is null', () => {
       mockCognitoForgotPasswordUrl(undefined)
       expect(cognitoForgotPasswordUrl()).toBeNull()
+    })
+  })
+})
+
+describe('htmlTranslationsCdnUrl', () => {
+  describe('when there is an html translation cdn url environment variable', () => {
+    it('is the given cognito forgot password url', () => {
+      const url = faker.internet.url()
+      mockHtmlTranslationsCdnUrl(url)
+      expect(htmlTranslationsCdnUrl()).toEqual(url)
+    })
+  })
+
+  describe('when there is not an html translation cdn url environment variable', () => {
+    it('is null', () => {
+      mockHtmlTranslationsCdnUrl(undefined)
+      expect(htmlTranslationsCdnUrl()).toBeNull()
     })
   })
 })

@@ -10,6 +10,7 @@ const config: GatsbyConfig = {
     env: process.env.NODE_ENV,
     cognitoSigninUrl: process.env.GATSBY_COGNITO_SIGNIN_URL,
     cognitoForgotPasswordUrl: process.env.GATSBY_COGNITO_FORGOT_PASSWORD_URL,
+    htmlTranslationsCdnUrl: process.env.GATSBY_HTML_TRANSLATIONS_CDN_URL,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

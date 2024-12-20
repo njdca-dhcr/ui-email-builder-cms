@@ -11,3 +11,7 @@ export const cognitoSigninUrl = (): string | null => {
 export const cognitoForgotPasswordUrl = (): string | null => {
   return (Config.siteMetadata?.cognitoForgotPasswordUrl as any) ?? null
 }
+
+export const htmlTranslationsCdnUrl = (): string | null => {
+  return (Config.siteMetadata?.htmlTranslationsCdnUrl as any) ?? null
+}
