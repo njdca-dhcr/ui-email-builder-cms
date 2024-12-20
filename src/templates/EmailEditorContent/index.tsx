@@ -30,6 +30,7 @@ import { useCurrentUser } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
+import { useRenderEmailTranslationToString } from '../emailHtmlDocument/renderEmailTranslationToString'
 import './EmailEditorContent.css'
 
 interface Props {
@@ -46,6 +47,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
   const [previewText] = usePreviewText()
+  const renderEmailTranslationToString = useRenderEmailTranslationToString()
 
   const components = emailTranslation.components
 
@@ -90,12 +92,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
               </ExportImageButton>
               <CopyToClipboardButton
                 fieldsCompleted={hasPreviewText}
-                textToCopy={() => toEmailText(titleValue.title)}
+                textToCopy={renderEmailTranslationToString}
               >
                 Copy HTML
               </CopyToClipboardButton>
               <DownloadButton
-                textToDownload={() => toEmailText(titleValue.title)}
+                textToDownload={renderEmailTranslationToString}
                 fileName={`${emailTemplate.name}.html`}
                 fieldsCompleted={hasPreviewText}
               >

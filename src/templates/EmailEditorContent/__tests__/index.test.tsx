@@ -28,20 +28,15 @@ import { CurrentUser, useCurrentUser } from 'src/network/users'
 import { randomUUID } from 'crypto'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { useCreateHtmlTranslationLink } from 'src/network/useCreateHtmlTranslationLink'
+import { useRenderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
 
-jest.mock('src/utils/download', () => {
-  return {
-    download: jest.fn(),
-  }
-})
+jest.mock('src/utils/download')
 
-jest.mock('src/network/users', () => {
-  return {
-    useCurrentUser: jest.fn(),
-  }
-})
+jest.mock('src/network/users')
 
 jest.mock('src/network/useCreateHtmlTranslationLink')
+
+jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
 
 describe('EmailEditorContent', () => {
   let emailTranslation: EmailTranslation.Unique
@@ -49,6 +44,7 @@ describe('EmailEditorContent', () => {
   let alertSpy: jest.SpyInstance
   let client: QueryClient
   let user: UserEvent
+  let mockRenderEmailToString: jest.Mock
 
   beforeEach(() => {
     user = userEvent.setup()
@@ -72,6 +68,8 @@ describe('EmailEditorContent', () => {
     const query = { ...buildUseQueryResult<CurrentUser>({ data: undefined }), enabled: false }
     asMock(useCurrentUser).mockReturnValue(query)
     asMock(useCreateHtmlTranslationLink).mockReturnValue(buildUseMutationResult())
+    mockRenderEmailToString = jest.fn()
+    asMock(useRenderEmailTranslationToString).mockReturnValue(mockRenderEmailToString)
   })
 
   afterEach(() => {
@@ -131,6 +129,9 @@ describe('EmailEditorContent', () => {
   })
 
   it('allows users to copy the current preview into their clipboard', async () => {
+    const mockHtml = faker.lorem.paragraph()
+    mockRenderEmailToString.mockReturnValue(mockHtml)
+
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <PreviewText emailTranslation={emailTranslation}>
@@ -140,9 +141,6 @@ describe('EmailEditorContent', () => {
         </PreviewText>
       </QueryClientProvider>,
     )
-
-    const value = faker.lorem.words(4)
-    await user.type(getByText('Title'), value)
 
     expect(copy).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Share' }))
@@ -150,11 +148,13 @@ describe('EmailEditorContent', () => {
     expect(copy).toHaveBeenCalled()
 
     const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
-    expect(lastArgumentToCopy).toContain(`${value}</h1>`)
-    expect(lastArgumentToCopy).toContain(`${value}</title>`)
+    expect(lastArgumentToCopy).toEqual(mockHtml)
   })
 
   it('allows users to download the current preview', async () => {
+    const mockHtml = faker.lorem.paragraph()
+    mockRenderEmailToString.mockReturnValue(mockHtml)
+
     const { getByText, getByRole } = render(
       <QueryClientProvider client={client}>
         <PreviewText emailTranslation={emailTranslation}>
@@ -164,9 +164,6 @@ describe('EmailEditorContent', () => {
         </PreviewText>
       </QueryClientProvider>,
     )
-
-    const value = faker.lorem.words(4)
-    await user.type(getByText('Title'), value)
 
     expect(download).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Share' }))
@@ -176,8 +173,7 @@ describe('EmailEditorContent', () => {
     const [{ fileData: givenHtml, fileName: givenFileName, fileType: givenType }] = (
       download as jest.Mock
     ).mock.calls[0]
-    expect(givenHtml).toContain(`${value}</h1>`)
-    expect(givenHtml).toContain(`${value}</title>`)
+    expect(givenHtml).toEqual(mockHtml)
     expect(givenFileName).toEqual(`${emailTemplate.name}.html`)
     expect(givenType).toEqual('text/html')
   })
