@@ -1,7 +1,7 @@
 import { backendUrl } from 'src/utils/backendUrl'
 
-export interface AuthedFetchJSONParams {
-  body?: object
+export interface AuthedFetchJSONParams<T extends object = object> {
+  body?: T
   idToken: string
   method: string
   path: string

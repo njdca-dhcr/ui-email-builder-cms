@@ -3,9 +3,11 @@ import { AppResponse, AuthedFetchJSONParams, authedFetchJSON, authedFetchBlob } 
 import { useAuth } from 'src/utils/AuthContext'
 import { refreshToken } from './auth'
 
-type useAuthedFetchParams = Omit<AuthedFetchJSONParams, 'idToken'>
+type useAuthedFetchParams<T extends object = object> = Omit<AuthedFetchJSONParams<T>, 'idToken'>
 
-export type AuthedFetch = <T>(params: useAuthedFetchParams) => Promise<AppResponse<T>>
+export type AuthedFetch = <T, V extends object = object>(
+  params: useAuthedFetchParams<V>,
+) => Promise<AppResponse<T>>
 
 export const useAuthedFetch = (
   responseType: 'json' | 'blob' = 'json',

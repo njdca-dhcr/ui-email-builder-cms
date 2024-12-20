@@ -11,7 +11,6 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
-  buildUseMutationResult,
   buildUseQueryResult,
   buildUserShow,
   mockAppMode,
@@ -27,14 +26,11 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { CurrentUser, useCurrentUser } from 'src/network/users'
 import { randomUUID } from 'crypto'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { useCreateHtmlTranslationLink } from 'src/network/useCreateHtmlTranslationLink'
 import { useRenderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
 
 jest.mock('src/utils/download')
 
 jest.mock('src/network/users')
-
-jest.mock('src/network/useCreateHtmlTranslationLink')
 
 jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
 
@@ -67,7 +63,6 @@ describe('EmailEditorContent', () => {
     userIsNotSignedIn()
     const query = { ...buildUseQueryResult<CurrentUser>({ data: undefined }), enabled: false }
     asMock(useCurrentUser).mockReturnValue(query)
-    asMock(useCreateHtmlTranslationLink).mockReturnValue(buildUseMutationResult())
     mockRenderEmailToString = jest.fn()
     asMock(useRenderEmailTranslationToString).mockReturnValue(mockRenderEmailToString)
   })
