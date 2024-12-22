@@ -31,6 +31,7 @@ import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 import { useRenderEmailTranslationToString } from '../emailHtmlDocument/renderEmailTranslationToString'
+import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
 import './EmailEditorContent.css'
 
 interface Props {
@@ -162,8 +163,22 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
   return (
     <>
       {error && <Alert>{error.message}</Alert>}
-      {enabled && user ? <UserInfoProvider userInfo={user}>{content}</UserInfoProvider> : content}
+      {enabled && user ? (
+        <UserInfoProvider userInfo={user}>
+          <KeepHtmlTranslationsLinksPopulated emailTemplate={emailTemplate} />
+          {content}
+        </UserInfoProvider>
+      ) : (
+        content
+      )}
       {isLoading && <LoadingOverlay description="Loading your settings" />}
     </>
   )
+}
+
+const KeepHtmlTranslationsLinksPopulated: FC<{ emailTemplate: EmailTemplate.Unique.Config }> = ({
+  emailTemplate,
+}) => {
+  useKeepHtmlTranslationsLinksPopulated(emailTemplate)
+  return null
 }

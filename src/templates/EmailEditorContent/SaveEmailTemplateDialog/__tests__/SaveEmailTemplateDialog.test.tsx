@@ -14,6 +14,10 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { PreviewText } from 'src/templates/PreviewText'
 import { randomUUID } from 'crypto'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { currentTimestamp } from 'src/utils/currentTimestamp'
+import { asMock } from 'src/testHelpers'
+
+jest.mock('src/utils/currentTimestamp')
 
 describe('SaveEmailTemplateDialog', () => {
   let description: string
@@ -31,6 +35,7 @@ describe('SaveEmailTemplateDialog', () => {
   let language: Language
   let user: UserEvent
   let emailPartsContent: Record<string, any>
+  let versionTimestamp: string
 
   beforeEach(async () => {
     language = 'english'
@@ -66,6 +71,8 @@ describe('SaveEmailTemplateDialog', () => {
     })
     emailPartsContent = { [nameComponent.id]: { name: newName } }
     user = userEvent.setup()
+    versionTimestamp = faker.lorem.word()
+    asMock(currentTimestamp).mockReturnValue(versionTimestamp)
   })
 
   it('displays its trigger', async () => {
@@ -176,7 +183,7 @@ describe('SaveEmailTemplateDialog', () => {
       await user.click(button!)
       expect(mutate).toHaveBeenCalledWith({
         ...emailTemplateChanges,
-        versionTimestamp: emailTemplate.versionTimestamp,
+        versionTimestamp,
         tagNames: ['tag'],
       })
     })

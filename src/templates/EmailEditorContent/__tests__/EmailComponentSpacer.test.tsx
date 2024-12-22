@@ -54,13 +54,28 @@ describe('EmailComponentSpacer', () => {
       expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
     })
 
-    it(`is undefined when the next component is TranslationLinks`, () => {
+    it(`is undefined when the next component is TranslationLinks and it will be shown`, () => {
       const size = renderWithComponents({
         currentComponent: 'Banner',
         nextComponent: 'TranslationLinks',
       })
 
       expect(size).toBeUndefined()
+    })
+
+    it(`is extraLarge when the next component is TranslationLinks and it will not be shown`, () => {
+      const currentComponent = buildUniqueEmailComponent('Banner')
+      const nextComponent = buildUniqueEmailComponent('TranslationLinks')
+      const { baseElement } = render(
+        <EmailPartsContent initialData={{ [nextComponent.id]: { visible: false } }}>
+          <EmailComponentSpacer currentComponent={currentComponent} nextComponent={nextComponent} />
+        </EmailPartsContent>,
+        {
+          wrapper: emailPartWrapper,
+        },
+      )
+      const size = baseElement.querySelector('td')?.style.height
+      expect(size).toEqual(`${spacingCellSizes.extraLarge}px`)
     })
   })
 

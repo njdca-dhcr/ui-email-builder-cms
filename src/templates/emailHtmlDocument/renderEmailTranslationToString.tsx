@@ -86,11 +86,18 @@ export const useRenderEmailTranslationToString = () => {
   const translation = useCurrentTranslation()
   const { data: user } = useCurrentUser()
 
-  return useCallback(() => {
-    if (user) {
-      return renderEmailTranslationToString({ emailTemplate, translation, userInfo: user })
-    } else {
-      return ''
-    }
-  }, [emailTemplate, translation, user])
+  return useCallback(
+    (options?: Partial<Options>) => {
+      if (user) {
+        return renderEmailTranslationToString({
+          emailTemplate: options?.emailTemplate ?? emailTemplate,
+          translation: options?.translation ?? translation,
+          userInfo: options?.userInfo ?? user,
+        })
+      } else {
+        return ''
+      }
+    },
+    [emailTemplate, translation, user],
+  )
 }

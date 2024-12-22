@@ -1,7 +1,7 @@
 import { labelForComponent } from '../labelForComponent'
 
 describe('labelForComponent', () => {
-  it('is the kind attribute of the sub component', () => {
+  it('is the kind attribute of the component', () => {
     expect(labelForComponent('Banner')).toEqual('Banner')
     expect(labelForComponent('Body')).toEqual('Body')
     expect(labelForComponent('Disclaimer')).toEqual('Disclaimer')
@@ -10,9 +10,15 @@ describe('labelForComponent', () => {
     expect(labelForComponent('Name')).toEqual('Name')
   })
 
-  describe('when the subcomponent is StateSeal', () => {
+  describe('when the component is StateSeal', () => {
     it('is "State Seal"', () => {
       expect(labelForComponent('StateSeal')).toEqual('State Seal')
+    })
+  })
+
+  describe('when the component is TranslationLinks', () => {
+    it('is "Translations"', () => {
+      expect(labelForComponent('TranslationLinks')).toEqual('Translations')
     })
   })
 })

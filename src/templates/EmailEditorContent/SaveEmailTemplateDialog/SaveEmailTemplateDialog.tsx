@@ -10,6 +10,7 @@ import { DefaultError, UseMutateAsyncFunction } from '@tanstack/react-query'
 import { FormFieldArea } from 'src/ui/Form'
 import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemplateState'
 import { EmailTemplateShow } from 'src/network/emailTemplates'
+import { currentTimestamp } from 'src/utils/currentTimestamp'
 
 interface ErrorJSON {
   errors: { name: string }
@@ -67,7 +68,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
               const result = await mutate(
                 mergeEmailTemplateValues({
                   previewText,
-                  emailTemplate,
+                  emailTemplate: { ...emailTemplate, versionTimestamp: currentTimestamp() },
                   data: emailPartsContentData,
                   name: stringFromFormData(formData, 'name'),
                   language,

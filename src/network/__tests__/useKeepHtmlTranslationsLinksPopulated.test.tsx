@@ -7,31 +7,32 @@ import {
   asMock,
   buildEmailTranslation,
   buildUniqueEmailConfig,
-  buildUserShow,
   userIsSignedIn,
 } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../useAuthedFetch'
-import { renderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
+import { useRenderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
 import { faker } from '@faker-js/faker'
-import { useUserInfo } from 'src/utils/UserInfoContext'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
-jest.mock('src/utils/UserInfoContext')
 jest.mock('../useAuthedFetch')
 
 describe('useKeepHtmlTranslationsLinksPopulated', () => {
   let mockAuthedFetch: AuthedFetch
+  let mockRenderEmailTranslationToString: ReturnType<typeof useRenderEmailTranslationToString>
 
   beforeEach(() => {
     userIsSignedIn()
     mockAuthedFetch = jest.fn()
+    mockRenderEmailTranslationToString = jest.fn()
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
-    asMock(useUserInfo).mockReturnValue([buildUserShow(), jest.fn()])
+    asMock(useRenderEmailTranslationToString).mockReturnValue(mockRenderEmailTranslationToString)
   })
 
   it("queries for all the the email template's translation links", async () => {
     const client = new QueryClient()
     const emailTemplate = buildUniqueEmailConfig({
+      id: randomUUID(),
       translations: [
         buildEmailTranslation({ language: 'english' }),
         buildEmailTranslation({ language: 'spanish' }),
@@ -47,7 +48,7 @@ describe('useKeepHtmlTranslationsLinksPopulated', () => {
     })
     const englishMarkup = faker.lorem.words(3)
     const spanishMarkup = faker.lorem.words(4)
-    asMock(renderEmailTranslationToString).mockImplementation(({ translation }) => {
+    asMock(mockRenderEmailTranslationToString).mockImplementation(({ translation }) => {
       if (translation.language === 'english') {
         return englishMarkup
       }
@@ -65,6 +66,14 @@ describe('useKeepHtmlTranslationsLinksPopulated', () => {
     })
 
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
+    expect(mockRenderEmailTranslationToString).toHaveBeenCalledWith({
+      emailTemplate,
+      translation: emailTemplate.translations![0],
+    })
+    expect(mockRenderEmailTranslationToString).toHaveBeenCalledWith({
+      emailTemplate,
+      translation: emailTemplate.translations![1],
+    })
     expect(mockAuthedFetch).toHaveBeenCalledWith({
       path: '/html-translations-link',
       method: 'POST',
