@@ -1,8 +1,10 @@
 import React, { CSSProperties, FC } from 'react'
-import { usePreviewText } from '../PreviewText'
 
-export const PreviewTextHtml: FC = () => {
-  const [value] = usePreviewText()
+interface Props {
+  value: string
+}
+
+export const PreviewTextHtml: FC<Props> = ({ value }) => {
   return (
     <>
       <div id="preview-text" style={styles}>

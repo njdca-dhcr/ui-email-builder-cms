@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { renderToString } from 'react-dom/server'
 import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import {
@@ -8,16 +8,9 @@ import {
 } from 'src/utils/EmailTemplateState'
 import { CurrentUserEmailConfig, useCurrentUser } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { EditEmailComponent } from '../EmailEditorContent/EditEmailComponent'
-import { EditEmailSubComponent } from '../EmailEditorContent/EditEmailSubComponent'
-import { EmailComponentSpacer } from '../EmailEditorContent/EmailComponentSpacer'
 import { EmailLayout } from './EmailLayout'
-import { EmailSubComponentSpacer } from '../EmailEditorContent/EmailSubComponentSpacer'
-import { EmailTable } from 'src/ui'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
-import { PreviewText } from '../PreviewText'
-import { PreviewTextHtml } from '../EmailEditorContent/PreviewTextHtml'
-import { Spacing } from '../styles'
+import { EmailBody } from './EmailBody'
 
 const DOCTYPE = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`
 
@@ -32,43 +25,15 @@ export const renderEmailTranslationToString = ({
   emailTemplate,
   userInfo,
 }: Options): string => {
-  const components = translation.components
   const title = getSubComponentByKind(translation, 'Title')?.defaultValue?.title ?? ''
 
   const markup = renderToString(
     <UserInfoProvider userInfo={userInfo}>
       <EmailTemplateState emailTemplate={emailTemplate} initialLanguage={translation.language}>
-        {({ currentTranslation }) => (
-          <PreviewText emailTranslation={currentTranslation}>
-            <EmailLayout title={title}>
-              <PreviewTextHtml />
-              <EmailTable
-                role="presentation"
-                maxWidth={Spacing.layout.maxWidth}
-                style={{ margin: '0 auto' }}
-              >
-                {components.map((emailComponent, i) => (
-                  <Fragment key={i}>
-                    <EditEmailComponent emailComponent={emailComponent}>
-                      {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
-                        <Fragment key={n}>
-                          <EditEmailSubComponent emailSubComponent={emailSubComponent} />
-                          <EmailSubComponentSpacer
-                            currentSubComponent={emailSubComponent}
-                            nextSubComponent={(emailComponent.subComponents ?? [])[n + 1]}
-                          />
-                        </Fragment>
-                      ))}
-                    </EditEmailComponent>
-                    <EmailComponentSpacer
-                      currentComponent={emailComponent}
-                      nextComponent={components[i + 1]}
-                    />
-                  </Fragment>
-                ))}
-              </EmailTable>
-            </EmailLayout>
-          </PreviewText>
+        {() => (
+          <EmailLayout title={title}>
+            <EmailBody previewText={translation.previewText ?? ''} translation={translation} />
+          </EmailLayout>
         )}
       </EmailTemplateState>
     </UserInfoProvider>,

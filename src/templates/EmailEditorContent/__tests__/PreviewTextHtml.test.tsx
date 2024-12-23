@@ -1,20 +1,12 @@
+import React from 'react'
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
-import React from 'react'
-import { PreviewText } from 'src/templates/PreviewText'
 import { PreviewTextHtml } from '../PreviewTextHtml'
-import { buildEmailTranslation } from 'src/factories'
 
 describe('PreviewTextHtml', () => {
-  it('displays the text in the preview text context', () => {
+  it('displays the given preview text', () => {
     const value = faker.lorem.paragraph()
-    const { baseElement } = render(
-      <PreviewText
-        emailTranslation={buildEmailTranslation({ previewText: value, language: 'english' })}
-      >
-        <PreviewTextHtml />
-      </PreviewText>,
-    )
+    const { baseElement } = render(<PreviewTextHtml value={value} />)
 
     const element = baseElement.querySelector('#preview-text')
     expect(element).not.toBeNull()
@@ -23,13 +15,7 @@ describe('PreviewTextHtml', () => {
 
   it('is display: none', () => {
     const value = faker.lorem.paragraph()
-    const { baseElement } = render(
-      <PreviewText
-        emailTranslation={buildEmailTranslation({ previewText: value, language: 'english' })}
-      >
-        <PreviewTextHtml />
-      </PreviewText>,
-    )
+    const { baseElement } = render(<PreviewTextHtml value={value} />)
 
     const element = baseElement.querySelector('#preview-text')
     expect(element).not.toBeNull()

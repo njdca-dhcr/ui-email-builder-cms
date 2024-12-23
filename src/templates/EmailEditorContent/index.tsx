@@ -1,18 +1,12 @@
-import React, { FC, Fragment, useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
-import { Alert, EmailTable, LoadingOverlay } from 'src/ui'
-import { EditEmailComponent } from './EditEmailComponent'
-import { EditEmailSubComponent } from './EditEmailSubComponent'
+import { Alert, LoadingOverlay } from 'src/ui'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { EditPreviewText } from './EditPreviewText'
-import { EmailComponentSpacer } from './EmailComponentSpacer'
-import { EmailSubComponentSpacer } from './EmailSubComponentSpacer'
 import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
 import { isRestricted } from 'src/utils/appMode'
-import { PreviewTextHtml } from './PreviewTextHtml'
-import { Spacing } from '../styles'
 import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmailString'
 import { usePreviewText } from '../PreviewText'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
@@ -24,6 +18,7 @@ import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmai
 import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
 import { SelectPreviewType, PreviewType } from './SelectPreviewType'
 import { ExportEmailTemplate } from './ExportEmailTemplate'
+import { EmailBody } from '../emailHtmlDocument/EmailBody'
 import './EmailEditorContent.css'
 
 interface Props {
@@ -40,8 +35,6 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
   const [previewText] = usePreviewText()
-
-  const components = emailTranslation.components
 
   const content = (
     <>
@@ -83,32 +76,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
             mobile: isPreviewMobile,
           })}
         >
-          <PreviewTextHtml />
-          <EmailTable
-            role="presentation"
-            maxWidth={Spacing.layout.maxWidth}
-            style={{ margin: '0 auto' }}
-          >
-            {components.map((emailComponent, i) => (
-              <Fragment key={i}>
-                <EditEmailComponent emailComponent={emailComponent}>
-                  {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
-                    <Fragment key={n}>
-                      <EditEmailSubComponent emailSubComponent={emailSubComponent} />
-                      <EmailSubComponentSpacer
-                        currentSubComponent={emailSubComponent}
-                        nextSubComponent={(emailComponent.subComponents ?? [])[n + 1]}
-                      />
-                    </Fragment>
-                  ))}
-                </EditEmailComponent>
-                <EmailComponentSpacer
-                  currentComponent={emailComponent}
-                  nextComponent={components[i + 1]}
-                />
-              </Fragment>
-            ))}
-          </EmailTable>
+          <EmailBody previewText={previewText} translation={emailTranslation} />
         </div>
       </Root.div>
     </>

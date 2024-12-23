@@ -6,7 +6,6 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
-  buildUserShow,
   randomObject,
 } from 'src/testHelpers'
 import { CurrentUserEmailConfig } from 'src/network/users'
@@ -46,9 +45,7 @@ describe('renderEmailTranslationToString', () => {
       ],
     })
 
-    emailTemplate = buildUniqueEmailConfig({
-      translations: [translation],
-    })
+    emailTemplate = buildUniqueEmailConfig({ translations: [translation] })
 
     userInfo = {
       id: randomUUID(),
