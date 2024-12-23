@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import { ShareEmailContent } from './ShareEmailContent'
 import { CopyToClipboardButton, DownloadButton, ExportImageButton } from 'src/ui'
 import { useRenderEmailTranslationToString } from '../emailHtmlDocument/renderEmailTranslationToString'
+import { useTranslationHasChanges } from './SaveEmailTemplateDialog/useTranslationHasChanges'
 
 interface Props {
   emailTemplate: EmailTemplate.Unique.Config
@@ -18,15 +19,30 @@ export const ExportEmailTemplate: FC<Props> = ({
   previewText,
 }) => {
   const renderEmailTranslationToString = useRenderEmailTranslationToString()
+  const translationHasChanges = useTranslationHasChanges()
 
-  const hasPreviewText = () => {
+  const hasPreviewText = useCallback(() => {
     const text = previewText.trim()
     const readyToCopy = text.length > 0
+
     if (!readyToCopy) {
       alert('Please add Preview Text before exporting HTML')
     }
     return readyToCopy
-  }
+  }, [previewText])
+
+  const hasNoUnsavedChanges = useCallback(() => {
+    if (translationHasChanges) {
+      alert('Please update before exporting HTML')
+    }
+
+    return !translationHasChanges
+  }, [translationHasChanges])
+
+  const shouldExport = useCallback(
+    () => hasPreviewText() && hasNoUnsavedChanges(),
+    [hasNoUnsavedChanges, hasPreviewText],
+  )
 
   return (
     <ShareEmailContent>
@@ -34,7 +50,7 @@ export const ExportEmailTemplate: FC<Props> = ({
         Export Image
       </ExportImageButton>
       <CopyToClipboardButton
-        shouldCopy={hasPreviewText}
+        shouldCopy={shouldExport}
         textToCopy={() =>
           renderEmailTranslationToString({ emailTemplate, translation: emailTranslation })
         }
@@ -42,11 +58,11 @@ export const ExportEmailTemplate: FC<Props> = ({
         Copy HTML
       </CopyToClipboardButton>
       <DownloadButton
+        fileName={`${emailTemplate.name}.html`}
+        shouldDownload={shouldExport}
         textToDownload={() =>
           renderEmailTranslationToString({ emailTemplate, translation: emailTranslation })
         }
-        fileName={`${emailTemplate.name}.html`}
-        shouldDownload={hasPreviewText}
       >
         Download HTML
       </DownloadButton>

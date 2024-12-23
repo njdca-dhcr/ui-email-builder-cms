@@ -14,10 +14,12 @@ import { faker } from '@faker-js/faker'
 import copy from 'copy-to-clipboard'
 import { download } from 'src/utils/download'
 import { useExportImage } from 'src/network/useExportImage'
+import { useTranslationHasChanges } from '../SaveEmailTemplateDialog/useTranslationHasChanges'
 
 jest.mock('src/utils/download')
 jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
 jest.mock('src/network/useExportImage')
+jest.mock('../SaveEmailTemplateDialog/useTranslationHasChanges')
 
 describe('ExportEmailTemplate', () => {
   let emailTemplate: EmailTemplate.Unique.Config
@@ -29,12 +31,12 @@ describe('ExportEmailTemplate', () => {
 
   beforeEach(() => {
     user = userEvent.setup()
-    alertSpy = jest.spyOn(window, 'alert')
-    alertSpy.mockReturnValue(false)
+    alertSpy = jest.spyOn(window, 'alert').mockReturnValue()
     mockRenderEmailToString = jest.fn()
     asMock(useRenderEmailTranslationToString).mockReturnValue(mockRenderEmailToString)
     mutateImage = jest.fn()
     asMock(useExportImage).mockReturnValue(buildUseMutationResult({ mutate: mutateImage }))
+    asMock(useTranslationHasChanges).mockReturnValue(false)
 
     emailTranslation = buildEmailTranslation({ language: 'english' })
     emailTemplate = buildUniqueEmailConfig({ translations: [emailTranslation] })
@@ -63,7 +65,7 @@ describe('ExportEmailTemplate', () => {
   })
 
   describe('copying email markup', () => {
-    it('allows it when there is preview text', async () => {
+    it('allows it when there is preview text and no changes', async () => {
       const mockHtml = faker.lorem.paragraph()
       mockRenderEmailToString.mockReturnValue(mockHtml)
 
@@ -105,10 +107,28 @@ describe('ExportEmailTemplate', () => {
       expect(alertSpy).toHaveBeenCalledTimes(1)
       expect(copy).not.toHaveBeenCalled()
     })
+
+    it('alerts when there are unsaved changes', async () => {
+      asMock(useTranslationHasChanges).mockReturnValue(true)
+      const { getByText, getByRole } = render(
+        <ExportEmailTemplate
+          emailTemplate={emailTemplate}
+          emailTranslation={emailTranslation}
+          htmlForImage={jest.fn()}
+          previewText={faker.lorem.word()}
+        />,
+      )
+      await user.click(getByRole('button', { name: 'Share' }))
+      await user.click(getByText('Copy HTML'))
+
+      expect(alertSpy).toHaveBeenCalledTimes(1)
+      expect(copy).not.toHaveBeenCalled()
+      expect(alertSpy).toHaveBeenCalledWith('Please update before exporting HTML')
+    })
   })
 
   describe('downloading email markup', () => {
-    it('allows it when there is preview text', async () => {
+    it('allows it when there is preview text and no changes', async () => {
       const mockHtml = faker.lorem.paragraph()
       mockRenderEmailToString.mockReturnValue(mockHtml)
 
@@ -153,6 +173,24 @@ describe('ExportEmailTemplate', () => {
       expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
       expect(download).not.toHaveBeenCalled()
       expect(alertSpy).toHaveBeenCalledTimes(1)
+    })
+
+    it('alerts when there are unsaved changes', async () => {
+      asMock(useTranslationHasChanges).mockReturnValue(true)
+      const { getByText, getByRole } = render(
+        <ExportEmailTemplate
+          emailTemplate={emailTemplate}
+          emailTranslation={emailTranslation}
+          htmlForImage={jest.fn()}
+          previewText={faker.lorem.word()}
+        />,
+      )
+      await user.click(getByRole('button', { name: 'Share' }))
+      await user.click(getByText('Download HTML'))
+
+      expect(alertSpy).toHaveBeenCalledTimes(1)
+      expect(download).not.toHaveBeenCalled()
+      expect(alertSpy).toHaveBeenCalledWith('Please update before exporting HTML')
     })
   })
 })
