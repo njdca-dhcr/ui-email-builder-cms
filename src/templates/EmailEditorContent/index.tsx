@@ -8,7 +8,6 @@ import {
   EmailTable,
   ExportImageButton,
   LoadingOverlay,
-  Radio,
 } from 'src/ui'
 import { EditEmailComponent } from './EditEmailComponent'
 import { EditEmailSubComponent } from './EditEmailSubComponent'
@@ -32,6 +31,7 @@ import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 import { useRenderEmailTranslationToString } from '../emailHtmlDocument/renderEmailTranslationToString'
 import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
+import { SelectPreviewType, PreviewType } from './SelectPreviewType'
 import './EmailEditorContent.css'
 
 interface Props {
@@ -41,7 +41,7 @@ interface Props {
 
 export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation }) => {
   const { data: user, isLoading, error, enabled } = useCurrentUser()
-  const [previewType, setPreviewType] = useState<'desktop' | 'mobile'>('desktop')
+  const [previewType, setPreviewType] = useState<PreviewType>('desktop')
   const isPreviewDesktop = previewType === 'desktop'
   const isPreviewMobile = !isPreviewDesktop
   const previewRef = useRef()
@@ -68,23 +68,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
       </VisuallyHidden>
       <EditPreviewText />
       <div className="email-preview-actions">
-        <Radio.Fieldset
-          className="select-preview-type"
-          legend="Select preview type"
-          legendId="select-preview-type"
-          renderLegend={(legend) => <VisuallyHidden>{legend}</VisuallyHidden>}
-        >
-          <Radio.Button
-            checked={isPreviewDesktop}
-            label="Desktop"
-            onChange={() => setPreviewType('desktop')}
-          />
-          <Radio.Button
-            checked={isPreviewMobile}
-            label="Mobile"
-            onChange={() => setPreviewType('mobile')}
-          />
-        </Radio.Fieldset>
+        <SelectPreviewType previewType={previewType} onChange={setPreviewType} />
         {!isRestricted() && (
           <div className="share-and-save-buttons">
             <ShareEmailContent>
