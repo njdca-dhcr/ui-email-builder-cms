@@ -11,7 +11,6 @@ import {
   buildEmailTranslation,
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
-  randomObject,
 } from 'src/testHelpers'
 import { mergeTranslationValues } from '../emailTemplateMergeDefaultValues'
 
@@ -35,7 +34,7 @@ describe('useTranslationHasChanges', () => {
 
     asMock(usePreviewText).mockReturnValue([previewText, jest.fn()])
     asMock(mergeTranslationValues).mockReturnValue(translationWithChanges)
-    asMock(areEmailTranslationsEqual).mockReturnValue(true)
+    asMock(areEmailTranslationsEqual).mockReturnValue(false)
 
     const { result } = renderHook(() => useTranslationHasChanges(), {
       wrapper: ({ children }) => {
@@ -67,7 +66,7 @@ describe('useTranslationHasChanges', () => {
 
     asMock(usePreviewText).mockReturnValue([previewText, jest.fn()])
     asMock(mergeTranslationValues).mockReturnValue(translationWithChanges)
-    asMock(areEmailTranslationsEqual).mockReturnValue(false)
+    asMock(areEmailTranslationsEqual).mockReturnValue(true)
 
     const { result } = renderHook(() => useTranslationHasChanges(), {
       wrapper: ({ children }) => {

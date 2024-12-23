@@ -11,5 +11,5 @@ export const useTranslationHasChanges = () => {
 
   const changedTranslation = mergeTranslationValues({ translation, previewText, data })
 
-  return areEmailTranslationsEqual(translation, changedTranslation)
+  return !areEmailTranslationsEqual(translation, changedTranslation)
 }
