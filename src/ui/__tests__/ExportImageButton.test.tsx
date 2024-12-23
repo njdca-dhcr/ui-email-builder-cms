@@ -9,15 +9,8 @@ import { buildUseMutationResult } from 'src/factories'
 import { useExportImage } from 'src/network/useExportImage'
 import { asMock } from 'src/testHelpers'
 
-jest.mock('src/utils/download', () => {
-  return {
-    download: jest.fn(),
-  }
-})
-
-jest.mock('src/network/useExportImage', () => {
-  return { useExportImage: jest.fn() }
-})
+jest.mock('src/utils/download')
+jest.mock('src/network/useExportImage')
 
 describe('ExportImageButton', () => {
   let client: QueryClient
@@ -31,7 +24,7 @@ describe('ExportImageButton', () => {
   it('is a button', () => {
     const { queryByRole } = render(
       <QueryClientProvider client={client}>
-        <ExportImageButton html={faker.lorem.paragraph()} fileName={faker.lorem.word()}>
+        <ExportImageButton html={() => faker.lorem.paragraph()} fileName={faker.lorem.word()}>
           {faker.lorem.word()}
         </ExportImageButton>
       </QueryClientProvider>,
@@ -44,7 +37,7 @@ describe('ExportImageButton', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
       <QueryClientProvider client={client}>
-        <ExportImageButton html={faker.lorem.paragraph()} fileName={faker.lorem.word()}>
+        <ExportImageButton html={() => faker.lorem.paragraph()} fileName={faker.lorem.word()}>
           <div>{text}</div>
         </ExportImageButton>
       </QueryClientProvider>,
@@ -64,7 +57,7 @@ describe('ExportImageButton', () => {
 
     const { getByRole, queryByText } = render(
       <QueryClientProvider client={client}>
-        <ExportImageButton html={html} fileName={filename}>
+        <ExportImageButton html={() => html} fileName={filename}>
           {faker.lorem.word()}
         </ExportImageButton>
       </QueryClientProvider>,
@@ -87,7 +80,7 @@ describe('ExportImageButton', () => {
 
     const { queryByText } = render(
       <QueryClientProvider client={client}>
-        <ExportImageButton html={html} fileName={filename}>
+        <ExportImageButton html={() => html} fileName={filename}>
           {faker.lorem.word()}
         </ExportImageButton>
       </QueryClientProvider>,
@@ -114,7 +107,7 @@ describe('ExportImageButton', () => {
 
     const { getByRole, queryByText } = render(
       <QueryClientProvider client={client}>
-        <ExportImageButton html={html} fileName={filename}>
+        <ExportImageButton html={() => html} fileName={filename}>
           {faker.lorem.word()}
         </ExportImageButton>
       </QueryClientProvider>,

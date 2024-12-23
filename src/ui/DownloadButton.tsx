@@ -5,13 +5,13 @@ interface Props {
   children: ReactNode
   textToDownload: () => string
   fileName: string
-  fieldsCompleted: () => boolean
+  shouldDownload: () => boolean
 }
 
 export const DownloadButton = forwardRef<HTMLButtonElement, Props>(
-  ({ children, textToDownload, fileName, fieldsCompleted, ...props }, ref) => {
+  ({ children, textToDownload, fileName, shouldDownload, ...props }, ref) => {
     const clickHandler = () => {
-      if (fieldsCompleted()) {
+      if (shouldDownload()) {
         download({ fileData: textToDownload(), fileName, fileType: 'text/html' })
       }
     }

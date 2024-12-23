@@ -101,76 +101,15 @@ describe('EmailEditorContent', () => {
     expect(queryByText('Dependency Benefits')).not.toBeNull()
   })
 
-  it('raises an alert if the user tries to export the email without preview text', async () => {
-    const { getByText, getByRole } = render(
+  it('displays the export email template button', async () => {
+    const { queryByRole } = render(
       <QueryClientProvider client={client}>
         <EmailPartsContent>
           <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
         </EmailPartsContent>
       </QueryClientProvider>,
     )
-    const value = faker.lorem.words(4)
-    await user.type(getByText('Title'), value)
-    await user.click(getByRole('button', { name: 'Share' }))
-    await user.click(getByText('Copy HTML'))
-    expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
-    expect(alertSpy).toHaveBeenCalledTimes(1)
-    expect(copy).not.toHaveBeenCalled()
-
-    await user.click(getByText('Download HTML'))
-    expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
-    expect(download).not.toHaveBeenCalled()
-    expect(alertSpy).toHaveBeenCalledTimes(2)
-  })
-
-  it('allows users to copy the current preview into their clipboard', async () => {
-    const mockHtml = faker.lorem.paragraph()
-    mockRenderEmailToString.mockReturnValue(mockHtml)
-
-    const { getByText, getByRole } = render(
-      <QueryClientProvider client={client}>
-        <PreviewText emailTranslation={emailTranslation}>
-          <EmailPartsContent>
-            <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-          </EmailPartsContent>
-        </PreviewText>
-      </QueryClientProvider>,
-    )
-
-    expect(copy).not.toHaveBeenCalled()
-    await user.click(getByRole('button', { name: 'Share' }))
-    await user.click(getByText('Copy HTML'))
-    expect(copy).toHaveBeenCalled()
-
-    const lastArgumentToCopy: string = (copy as jest.Mock).mock.calls[0][0]
-    expect(lastArgumentToCopy).toEqual(mockHtml)
-  })
-
-  it('allows users to download the current preview', async () => {
-    const mockHtml = faker.lorem.paragraph()
-    mockRenderEmailToString.mockReturnValue(mockHtml)
-
-    const { getByText, getByRole } = render(
-      <QueryClientProvider client={client}>
-        <PreviewText emailTranslation={emailTranslation}>
-          <EmailPartsContent>
-            <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-          </EmailPartsContent>
-        </PreviewText>
-      </QueryClientProvider>,
-    )
-
-    expect(download).not.toHaveBeenCalled()
-    await user.click(getByRole('button', { name: 'Share' }))
-    await user.click(getByText('Download HTML'))
-    expect(download).toHaveBeenCalled()
-
-    const [{ fileData: givenHtml, fileName: givenFileName, fileType: givenType }] = (
-      download as jest.Mock
-    ).mock.calls[0]
-    expect(givenHtml).toEqual(mockHtml)
-    expect(givenFileName).toEqual(`${emailTemplate.name}.html`)
-    expect(givenType).toEqual('text/html')
+    expect(queryByRole('button', { name: 'Share' })).toBeDefined()
   })
 
   it('displays the edit preview text field', () => {

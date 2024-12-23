@@ -6,7 +6,7 @@ import { LoadingOverlay } from './LoadingOverlay'
 interface Props {
   children?: ReactNode
   fileName: string
-  html: string
+  html: () => string
 }
 
 export const ExportImageButton = forwardRef<HTMLButtonElement, Props>(
@@ -14,7 +14,7 @@ export const ExportImageButton = forwardRef<HTMLButtonElement, Props>(
     const { mutate, isPending } = useExportImage()
 
     const buttonHandler = () => {
-      mutate(html, {
+      mutate(html(), {
         onSuccess: (imageBlob) => {
           download({ fileBlob: imageBlob, fileName: `${fileName}.png`, fileType: 'image/png' })
         },

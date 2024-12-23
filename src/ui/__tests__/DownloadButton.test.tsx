@@ -16,7 +16,7 @@ describe('DownloadButton', () => {
     const text = faker.lorem.paragraph()
     const { baseElement } = render(
       <DownloadButton
-        fieldsCompleted={() => true}
+        shouldDownload={() => true}
         textToDownload={() => faker.lorem.paragraph()}
         fileName={faker.lorem.word()}
       >
@@ -29,7 +29,7 @@ describe('DownloadButton', () => {
   it('is a button', () => {
     const { queryByRole } = render(
       <DownloadButton
-        fieldsCompleted={() => true}
+        shouldDownload={() => true}
         textToDownload={() => faker.lorem.paragraph()}
         fileName={faker.lorem.word()}
       >
@@ -46,7 +46,7 @@ describe('DownloadButton', () => {
     const fileName = `${faker.lorem.word()}.html`
 
     const { queryByRole } = render(
-      <DownloadButton fieldsCompleted={() => true} textToDownload={() => html} fileName={fileName}>
+      <DownloadButton shouldDownload={() => true} textToDownload={() => html} fileName={fileName}>
         download
       </DownloadButton>,
     )
@@ -59,13 +59,13 @@ describe('DownloadButton', () => {
     expect(download).toHaveBeenCalledWith({ fileData: html, fileName, fileType: 'text/html' })
   })
 
-  it('does not download the given content when clicked if fields are not completed', async () => {
+  it('does not download the given content when clicked if it should not download', async () => {
     const user = userEvent.setup()
     const html = `<div>${faker.lorem.paragraph()}</div>`
     const fileName = `${faker.lorem.word()}.html`
 
     const { queryByRole } = render(
-      <DownloadButton fieldsCompleted={() => false} textToDownload={() => html} fileName={fileName}>
+      <DownloadButton shouldDownload={() => false} textToDownload={() => html} fileName={fileName}>
         download
       </DownloadButton>,
     )

@@ -4,13 +4,13 @@ import copy from 'copy-to-clipboard'
 interface Props {
   children: ReactNode
   textToCopy: () => string
-  fieldsCompleted: () => boolean
+  shouldCopy: () => boolean
 }
 
 export const CopyToClipboardButton = forwardRef<HTMLButtonElement, Props>(
-  ({ children, textToCopy, fieldsCompleted, ...props }, ref) => {
+  ({ children, textToCopy, shouldCopy, ...props }, ref) => {
     const clickHandler = () => {
-      if (fieldsCompleted()) {
+      if (shouldCopy()) {
         copy(textToCopy())
       }
     }

@@ -1,14 +1,7 @@
 import React, { FC, Fragment, useRef, useState } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
-import {
-  Alert,
-  CopyToClipboardButton,
-  DownloadButton,
-  EmailTable,
-  ExportImageButton,
-  LoadingOverlay,
-} from 'src/ui'
+import { Alert, EmailTable, LoadingOverlay } from 'src/ui'
 import { EditEmailComponent } from './EditEmailComponent'
 import { EditEmailSubComponent } from './EditEmailSubComponent'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
@@ -27,11 +20,10 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { useCurrentUser } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { ShareEmailContent } from './ShareEmailContent'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
-import { useRenderEmailTranslationToString } from '../emailHtmlDocument/renderEmailTranslationToString'
 import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
 import { SelectPreviewType, PreviewType } from './SelectPreviewType'
+import { ExportEmailTemplate } from './ExportEmailTemplate'
 import './EmailEditorContent.css'
 
 interface Props {
@@ -48,18 +40,8 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
   const [previewText] = usePreviewText()
-  const renderEmailTranslationToString = useRenderEmailTranslationToString()
 
   const components = emailTranslation.components
-
-  const hasPreviewText = () => {
-    const text = previewText.trim()
-    const readyToCopy = text.length > 0
-    if (!readyToCopy) {
-      alert('Please add Preview Text before exporting HTML')
-    }
-    return readyToCopy
-  }
 
   const content = (
     <>
@@ -71,24 +53,12 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
         <SelectPreviewType previewType={previewType} onChange={setPreviewType} />
         {!isRestricted() && (
           <div className="share-and-save-buttons">
-            <ShareEmailContent>
-              <ExportImageButton html={toEmailText(titleValue.title)} fileName={emailTemplate.name}>
-                Export Image
-              </ExportImageButton>
-              <CopyToClipboardButton
-                fieldsCompleted={hasPreviewText}
-                textToCopy={renderEmailTranslationToString}
-              >
-                Copy HTML
-              </CopyToClipboardButton>
-              <DownloadButton
-                textToDownload={renderEmailTranslationToString}
-                fileName={`${emailTemplate.name}.html`}
-                fieldsCompleted={hasPreviewText}
-              >
-                Download HTML
-              </DownloadButton>
-            </ShareEmailContent>
+            <ExportEmailTemplate
+              htmlForImage={() => toEmailText(titleValue.title)}
+              emailTemplate={emailTemplate}
+              emailTranslation={emailTranslation}
+              previewText={previewText}
+            />
             <WhenSignedIn>
               <div className="save-and-update-buttons">
                 {emailTemplate.id && <EmailTemplateUpdateDialog />}
