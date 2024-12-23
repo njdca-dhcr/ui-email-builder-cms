@@ -62,8 +62,8 @@ describe('ExportEmailTemplate', () => {
     })
   })
 
-  describe('with preview text', () => {
-    it('allows users to copy the email markup into their clipboard', async () => {
+  describe('copying email markup', () => {
+    it('allows it when there is preview text', async () => {
       const mockHtml = faker.lorem.paragraph()
       mockRenderEmailToString.mockReturnValue(mockHtml)
 
@@ -89,7 +89,26 @@ describe('ExportEmailTemplate', () => {
       })
     })
 
-    it('allows users to download the email markup', async () => {
+    it('alerts when there is no preview text', async () => {
+      const { getByText, getByRole } = render(
+        <ExportEmailTemplate
+          emailTemplate={emailTemplate}
+          emailTranslation={emailTranslation}
+          htmlForImage={jest.fn()}
+          previewText="  "
+        />,
+      )
+      await user.click(getByRole('button', { name: 'Share' }))
+      await user.click(getByText('Copy HTML'))
+
+      expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
+      expect(alertSpy).toHaveBeenCalledTimes(1)
+      expect(copy).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('downloading email markup', () => {
+    it('allows it when there is preview text', async () => {
       const mockHtml = faker.lorem.paragraph()
       mockRenderEmailToString.mockReturnValue(mockHtml)
 
@@ -118,27 +137,8 @@ describe('ExportEmailTemplate', () => {
         translation: emailTranslation,
       })
     })
-  })
 
-  describe('without preview text', () => {
-    it('alerts if the user tries to copy the email markup', async () => {
-      const { getByText, getByRole } = render(
-        <ExportEmailTemplate
-          emailTemplate={emailTemplate}
-          emailTranslation={emailTranslation}
-          htmlForImage={jest.fn()}
-          previewText="  "
-        />,
-      )
-      await user.click(getByRole('button', { name: 'Share' }))
-      await user.click(getByText('Copy HTML'))
-
-      expect(alertSpy).toHaveBeenCalledWith('Please add Preview Text before exporting HTML')
-      expect(alertSpy).toHaveBeenCalledTimes(1)
-      expect(copy).not.toHaveBeenCalled()
-    })
-
-    it('alerts if the user tries to download the email markup', async () => {
+    it('alerts when there is not preview text', async () => {
       const { getByText, getByRole } = render(
         <ExportEmailTemplate
           emailTemplate={emailTemplate}

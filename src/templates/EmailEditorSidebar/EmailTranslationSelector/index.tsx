@@ -9,22 +9,17 @@ import {
   useCurrentLanguage,
   useCurrentTranslation,
 } from 'src/utils/EmailTemplateState'
-import { mergeTranslationValues } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/emailTemplateMergeDefaultValues'
-import { usePreviewText } from '../../PreviewText'
-import { useEmailPartsContentData } from '../../EmailPartsContent'
 import { DeleteTranslationDialog } from './DeleteTranslationDialog'
 import { addOrRemoveTranslationLinks } from 'src/utils/addOrRemoveTranslationLinks'
-import { areEmailTranslationsEqual } from 'src/utils/emailPartsComparators'
+import { useTranslationHasChanges } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
 
 import './index.css'
 
 export const EmailTranslationSelector: FC = () => {
-  const currentTranslation = useCurrentTranslation()
   const [emailTemplate, setCurrentEmailTemplate] = useCurrentEmailTemplate()
   const [currentLanguage, setCurrentLanguage] = useCurrentLanguage()
   const { translations } = emailTemplate
-  const [previewText] = usePreviewText()
-  const [emailPartsContentData] = useEmailPartsContentData()
+  const translationHasChanges = useTranslationHasChanges()
 
   const availableLanguages = difference(
     AVAILABLE_LANGUAGES,
@@ -33,14 +28,8 @@ export const EmailTranslationSelector: FC = () => {
 
   if (!translations) return null
 
-  const onChangeHandler = (value: string) => {
-    const changedTranslation = mergeTranslationValues({
-      translation: currentTranslation,
-      previewText: previewText,
-      data: emailPartsContentData,
-    })
-
-    if (areEmailTranslationsEqual(currentTranslation, changedTranslation)) {
+  const onSelectHandler = (value: string) => {
+    if (!translationHasChanges) {
       setCurrentLanguage(value as Language)
     } else if (window.confirm('You have unsaved changes. Are you sure you want to continue?')) {
       setCurrentLanguage(value as Language)
@@ -54,7 +43,7 @@ export const EmailTranslationSelector: FC = () => {
       </VisuallyHidden>
       <Select
         labelId="language-select-label"
-        onChange={onChangeHandler}
+        onChange={onSelectHandler}
         size="small"
         options={translations.map(({ language }) => ({
           value: language,

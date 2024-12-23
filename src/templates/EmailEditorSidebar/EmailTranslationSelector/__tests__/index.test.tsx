@@ -5,12 +5,12 @@ import { EmailTranslationSelector } from '..'
 import { AVAILABLE_LANGUAGES, EmailTemplate } from 'src/appTypes'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
-import { areEmailTranslationsEqual } from 'src/utils/emailPartsComparators'
 import { asMock } from 'src/testHelpers'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { randomUUID } from 'crypto'
+import { useTranslationHasChanges } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
 
-jest.mock('src/utils/emailPartsComparators')
+jest.mock('src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges')
 
 describe('EmailTranslationSelector', () => {
   let user: UserEvent
@@ -20,6 +20,7 @@ describe('EmailTranslationSelector', () => {
   beforeEach(async () => {
     user = userEvent.setup()
     client = new QueryClient()
+    asMock(useTranslationHasChanges).mockReturnValue(false)
   })
 
   const renderSelector = (emailTemplate: EmailTemplate.Unique.Config) => {
@@ -59,87 +60,72 @@ describe('EmailTranslationSelector', () => {
       expect(queryByRole('option', { name: 'Spanish' })).not.toBeNull()
     })
 
-    it('changes the language when there are no unsaved changes', async () => {
-      asMock(areEmailTranslationsEqual).mockReturnValue(true)
-      jest.spyOn(window, 'confirm').mockReturnValue(false)
+    describe('with unsaved changes', () => {
+      beforeEach(async () => {
+        asMock(useTranslationHasChanges).mockReturnValue(true)
+      })
 
-      const { getByLabelText, getByRole } = renderSelector(
-        buildUniqueEmailConfig({
-          translations: [
-            buildEmailTranslation({ language: 'english' }),
-            buildEmailTranslation({ language: 'spanish' }),
-          ],
-        }),
-      )
+      it('changes the language when the user confirms', async () => {
+        jest.spyOn(window, 'confirm').mockReturnValue(true)
 
-      await user.click(getByLabelText('Translation Language'))
-      await user.click(getByRole('option', { name: 'Spanish' }))
+        const { getByLabelText, getByRole } = renderSelector(
+          buildUniqueEmailConfig({
+            translations: [
+              buildEmailTranslation({ language: 'english' }),
+              buildEmailTranslation({ language: 'spanish' }),
+            ],
+          }),
+        )
 
-      expect(areEmailTranslationsEqual).toHaveBeenCalled()
-      expect(window.confirm).not.toHaveBeenCalled()
-      expect(getByLabelText('Translation Language')).toHaveTextContent('Spanish')
+        await user.click(getByLabelText('Translation Language'))
+        await user.click(getByRole('option', { name: 'Spanish' }))
+
+        expect(window.confirm).toHaveBeenCalled()
+        expect(getByLabelText('Translation Language')).toHaveTextContent('Spanish')
+      })
+
+      it('does not change the language when the user cancels', async () => {
+        jest.spyOn(window, 'confirm').mockReturnValue(false)
+
+        const { getByLabelText, getByRole } = renderSelector(
+          buildUniqueEmailConfig({
+            translations: [
+              buildEmailTranslation({ language: 'english' }),
+              buildEmailTranslation({ language: 'spanish' }),
+            ],
+          }),
+        )
+
+        await user.click(getByLabelText('Translation Language'))
+        await user.click(getByRole('option', { name: 'Spanish' }))
+
+        expect(window.confirm).toHaveBeenCalled()
+        expect(getByLabelText('Translation Language')).toHaveTextContent('English')
+      })
     })
 
-    it('changes the language when the user confirms', async () => {
-      asMock(areEmailTranslationsEqual).mockReturnValue(false)
-      jest.spyOn(window, 'confirm').mockReturnValue(true)
+    describe('without unsaved changes', () => {
+      beforeEach(async () => {
+        asMock(useTranslationHasChanges).mockReturnValue(false)
+        jest.spyOn(window, 'confirm')
+      })
 
-      const { getByLabelText, getByRole } = renderSelector(
-        buildUniqueEmailConfig({
-          translations: [
-            buildEmailTranslation({ language: 'english' }),
-            buildEmailTranslation({ language: 'spanish' }),
-          ],
-        }),
-      )
+      it('changes the language without confirmation', async () => {
+        const { getByLabelText, getByRole } = renderSelector(
+          buildUniqueEmailConfig({
+            translations: [
+              buildEmailTranslation({ language: 'english' }),
+              buildEmailTranslation({ language: 'spanish' }),
+            ],
+          }),
+        )
 
-      await user.click(getByLabelText('Translation Language'))
-      await user.click(getByRole('option', { name: 'Spanish' }))
+        await user.click(getByLabelText('Translation Language'))
+        await user.click(getByRole('option', { name: 'Spanish' }))
 
-      expect(areEmailTranslationsEqual).toHaveBeenCalled()
-      expect(window.confirm).toHaveBeenCalled()
-      expect(getByLabelText('Translation Language')).toHaveTextContent('Spanish')
-    })
-
-    it('does not change the language when the user cancels', async () => {
-      asMock(areEmailTranslationsEqual).mockReturnValue(false)
-      jest.spyOn(window, 'confirm').mockReturnValue(false)
-
-      const { getByLabelText, getByRole } = renderSelector(
-        buildUniqueEmailConfig({
-          translations: [
-            buildEmailTranslation({ language: 'english' }),
-            buildEmailTranslation({ language: 'spanish' }),
-          ],
-        }),
-      )
-
-      await user.click(getByLabelText('Translation Language'))
-      await user.click(getByRole('option', { name: 'Spanish' }))
-
-      expect(areEmailTranslationsEqual).toHaveBeenCalled()
-      expect(window.confirm).toHaveBeenCalled()
-      expect(getByLabelText('Translation Language')).toHaveTextContent('English')
-    })
-
-    it('changes the current language when an option is selected', async () => {
-      asMock(areEmailTranslationsEqual).mockReturnValue(true)
-      const { getByLabelText, getByRole } = renderSelector(
-        buildUniqueEmailConfig({
-          translations: [
-            buildEmailTranslation({ language: 'english' }),
-            buildEmailTranslation({ language: 'spanish' }),
-          ],
-        }),
-      )
-
-      const button = getByLabelText('Translation Language')
-      expect(button).toHaveTextContent('English')
-
-      await user.click(button)
-      await user.click(getByRole('option', { name: 'Spanish' }))
-
-      expect(getByLabelText('Translation Language')).toHaveTextContent('Spanish')
+        expect(window.confirm).not.toHaveBeenCalled()
+        expect(getByLabelText('Translation Language')).toHaveTextContent('Spanish')
+      })
     })
 
     it('renders nothing when there are no translations', async () => {
