@@ -46,12 +46,14 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
         <SelectPreviewType previewType={previewType} onChange={setPreviewType} />
         {!isRestricted() && (
           <div className="share-and-save-buttons">
-            <ExportEmailTemplate
-              htmlForImage={() => toEmailText(titleValue.title)}
-              emailTemplate={emailTemplate}
-              emailTranslation={emailTranslation}
-              previewText={previewText}
-            />
+            {emailTemplate.id && (
+              <ExportEmailTemplate
+                htmlForImage={() => toEmailText(titleValue.title)}
+                emailTemplate={emailTemplate}
+                emailTranslation={emailTranslation}
+                previewText={previewText}
+              />
+            )}
             <WhenSignedIn>
               <div className="save-and-update-buttons">
                 {emailTemplate.id && <EmailTemplateUpdateDialog />}

@@ -1,6 +1,5 @@
 import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import copy from 'copy-to-clipboard'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -20,9 +19,7 @@ import {
   userIsSignedIn,
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
-import { download } from 'src/utils/download'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { PreviewText } from 'src/templates/PreviewText'
 import { CurrentUser, useCurrentUser } from 'src/network/users'
 import { randomUUID } from 'crypto'
 import { AuthProvider } from 'src/utils/AuthContext'
@@ -99,17 +96,6 @@ describe('EmailEditorContent', () => {
     )
     expect(queryByText('Title')).not.toBeNull()
     expect(queryByText('Dependency Benefits')).not.toBeNull()
-  })
-
-  it('displays the export email template button', async () => {
-    const { queryByRole } = render(
-      <QueryClientProvider client={client}>
-        <EmailPartsContent>
-          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-        </EmailPartsContent>
-      </QueryClientProvider>,
-    )
-    expect(queryByRole('button', { name: 'Share' })).toBeDefined()
   })
 
   it('displays the edit preview text field', () => {
@@ -234,6 +220,20 @@ describe('EmailEditorContent', () => {
 
       expect(queryByRole('button', { name: 'Save As' })).not.toBeNull()
     })
+
+    it('displays the export email template button', async () => {
+      const { queryByRole } = render(
+        <QueryClientProvider client={client}>
+          <EmailPartsContent>
+            <EmailEditorContent
+              emailTranslation={emailTranslation}
+              emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+            />
+          </EmailPartsContent>
+        </QueryClientProvider>,
+      )
+      expect(queryByRole('button', { name: 'Share' })).toBeDefined()
+    })
   })
 
   describe('when the email template lacks an id', () => {
@@ -271,6 +271,20 @@ describe('EmailEditorContent', () => {
       )
 
       expect(queryByRole('button', { name: 'Save As' })).not.toBeNull()
+    })
+
+    it('does not display the export email template button', async () => {
+      const { queryByRole } = render(
+        <QueryClientProvider client={client}>
+          <EmailPartsContent>
+            <EmailEditorContent
+              emailTranslation={emailTranslation}
+              emailTemplate={{ ...emailTemplate, id: undefined }}
+            />
+          </EmailPartsContent>
+        </QueryClientProvider>,
+      )
+      expect(queryByRole('button', { name: 'Share' })).toBeNull()
     })
   })
 })

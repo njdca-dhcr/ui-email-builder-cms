@@ -138,7 +138,7 @@ describe('ExportEmailTemplate', () => {
       })
     })
 
-    it('alerts when there is not preview text', async () => {
+    it('alerts when there is no preview text', async () => {
       const { getByText, getByRole } = render(
         <ExportEmailTemplate
           emailTemplate={emailTemplate}
