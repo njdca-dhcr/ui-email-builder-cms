@@ -15,6 +15,7 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/EmailTranslationSelector'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import classNames from 'classnames'
 
 export type Props = PageProps<null, null, null>
 
@@ -25,14 +26,19 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   const emailTemplate = queriedEmailTemplate ?? null
 
   return (
-    <Layout element="main">
-      <EmailTemplateState emailTemplate={emailTemplate}>
-        {({ currentLanguage, currentEmailTemplate, currentTranslation }) => (
-          <CurrentlyActiveEmailPart>
-            <SyncSidebarAndPreviewScroll>
-              <ClearCurrentlyActiveEmailPart />
-              <EmailPartsContent key={currentLanguage}>
-                <PreviewText key={currentLanguage} emailTranslation={currentTranslation}>
+    <EmailTemplateState emailTemplate={emailTemplate}>
+      {({ currentLanguage, currentEmailTemplate, currentTranslation }) => (
+        <CurrentlyActiveEmailPart>
+          <SyncSidebarAndPreviewScroll>
+            <ClearCurrentlyActiveEmailPart />
+            <EmailPartsContent>
+              <PreviewText emailTranslation={currentTranslation}>
+                <Layout
+                  element="main"
+                  className={classNames({
+                    'translation-mode': !['not-set', 'english'].includes(currentLanguage),
+                  })}
+                >
                   <EmailEditorSidebar
                     emailTranslation={currentTranslation}
                     heading={
@@ -63,20 +69,28 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                   <PageContent element="div" className="email-editor-page-content">
                     {error && <Alert>{error.message}</Alert>}
                     {emailTemplate && (
-                      <EmailEditorContent
-                        emailTranslation={currentTranslation}
-                        emailTemplate={currentEmailTemplate}
-                      />
+                      <>
+                        {!['not-set', 'english'].includes(currentLanguage) && (
+                          <EmailEditorContent
+                            emailTranslation={currentEmailTemplate.translations![0]}
+                            emailTemplate={currentEmailTemplate}
+                          />
+                        )}
+                        <EmailEditorContent
+                          emailTranslation={currentTranslation}
+                          emailTemplate={currentEmailTemplate}
+                        />
+                      </>
                     )}
                   </PageContent>
                   {isLoading && <LoadingOverlay description="Loading your email template" />}
-                </PreviewText>
-              </EmailPartsContent>
-            </SyncSidebarAndPreviewScroll>
-          </CurrentlyActiveEmailPart>
-        )}
-      </EmailTemplateState>
-    </Layout>
+                </Layout>
+              </PreviewText>
+            </EmailPartsContent>
+          </SyncSidebarAndPreviewScroll>
+        </CurrentlyActiveEmailPart>
+      )}
+    </EmailTemplateState>
   )
 }
 

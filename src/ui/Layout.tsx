@@ -2,19 +2,20 @@ import React, { FC, ReactNode } from 'react'
 import classNames from 'classnames'
 import { Header } from './Header'
 import { List } from './List'
-import './Layout.css'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
+import './Layout.css'
 
 interface LayoutProps {
   children: ReactNode
+  className?: string
   element?: 'div' | 'main'
 }
 
-export const Layout: FC<LayoutProps> = ({ children, element }) => {
+export const Layout: FC<LayoutProps> = ({ children, className, element }) => {
   const Element = element ?? 'div'
 
   return (
-    <div className="page-wrapper">
+    <div className={classNames('page-wrapper', className)}>
       <WhenSignedIn>
         <Header />
       </WhenSignedIn>

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, createContext, useContext, useState } from 'react'
+import React, { FC, ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { EmailTranslation } from 'src/appTypes'
 
 type PreviewTextContextType = [string, (value: string) => void]
@@ -11,6 +11,13 @@ interface Props {
 
 export const PreviewText: FC<Props> = ({ children, emailTranslation }) => {
   const value = useState(emailTranslation.previewText ?? '')
+  const [_, setPreviewText] = value
+
+  const { language, previewText } = emailTranslation
+
+  useEffect(() => {
+    setPreviewText(previewText ?? '')
+  }, [language, setPreviewText, previewText])
 
   return <PreviewTextContext.Provider value={value}>{children}</PreviewTextContext.Provider>
 }

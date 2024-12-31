@@ -63,4 +63,30 @@ describe('usePreviewText', () => {
       expect(previewText).toEqual('')
     })
   })
+
+  describe('when the current translation changes', () => {
+    it('updates the preview text', async () => {
+      const englishPreviewText = faker.lorem.paragraph()
+      let translation = buildEmailTranslation({
+        language: 'english',
+        previewText: englishPreviewText,
+      })
+
+      const { result, rerender } = renderHook(() => usePreviewText(), {
+        wrapper: (props) => <PreviewText emailTranslation={translation} {...props} />,
+      })
+
+      expect(result.current[0]).toEqual(englishPreviewText)
+
+      const spanishPreviewText = faker.lorem.paragraph()
+      translation = buildEmailTranslation({
+        language: 'spanish',
+        previewText: spanishPreviewText,
+      })
+
+      rerender()
+
+      expect(result.current[0]).toEqual(spanishPreviewText)
+    })
+  })
 })

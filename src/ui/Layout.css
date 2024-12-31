@@ -106,6 +106,15 @@
   clip: auto;
 }
 
+.translation-mode {
+  --easing: ease-in;
+  --duration: 500ms;
+}
+
+.translation-mode .sidebar {
+  transform: translateX(-100%);
+}
+
 .sidebar {
   background-color: var(--gray-light);
   display: flex;
@@ -114,6 +123,8 @@
   height: calc(100% - 1.25rem);
   overflow: auto;
   padding-top: 1.25rem;
+  transform: translateX(0);
+  transition: transform var(--easing) var(--duration);
 }
 
 .sidebar .department-seal-container {
@@ -155,11 +166,17 @@
   text-decoration: underline;
 }
 
+.translation-mode .page-content {
+  transform: translateX(-40vw);
+}
+
 .page-content {
   flex: 4;
   height: 100%;
   overflow: auto;
   position: relative;
+  transform: translateX(0);
+  transition: transform var(--easing) var(--duration);
 }
 
 .heading {

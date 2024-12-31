@@ -50,6 +50,17 @@ describe('Layout', () => {
     expect(layout).not.toBeNull()
     expect(layout?.tagName).toEqual('MAIN')
   })
+
+  it('accepts a class name', () => {
+    const text = faker.lorem.paragraph()
+    const { baseElement } = render(
+      <Layout className="my-class" element="main">
+        <div>{text}</div>
+      </Layout>,
+    )
+    const pageContent = baseElement.querySelector('.my-class')
+    expect(pageContent).not.toBeNull()
+  })
 })
 
 describe('SkipNavLink', () => {
