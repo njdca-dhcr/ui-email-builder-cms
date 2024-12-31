@@ -23,25 +23,23 @@ export const useAuthedFetch = (
       if (!auth) throw new Error('must be signed in to make that request')
 
       const originalResponse = await authedRequest({ ...params, idToken: auth.idToken })
-
       if (originalResponse.statusCode !== 401) return originalResponse
 
       const refreshTokenResponse = await refreshToken({ token: auth.refreshToken })
 
-      switch (refreshTokenResponse.kind) {
-        case 'NOT_AUTHORIZED':
-          setAuth(null)
-          return originalResponse
-        case 'SUCCESS':
-          setAuth({
-            idToken: refreshTokenResponse.AuthenticationResult.IdToken,
-            refreshToken: refreshTokenResponse.AuthenticationResult.RefreshToken,
-          })
+      if (refreshTokenResponse.kind === 'SUCCESS') {
+        setAuth({
+          idToken: refreshTokenResponse.AuthenticationResult.IdToken,
+          refreshToken: refreshTokenResponse.AuthenticationResult.RefreshToken,
+        })
 
-          return authedRequest({
-            ...params,
-            idToken: refreshTokenResponse.AuthenticationResult.IdToken,
-          })
+        return authedRequest({
+          ...params,
+          idToken: refreshTokenResponse.AuthenticationResult.IdToken,
+        })
+      } else {
+        setAuth(null)
+        return originalResponse
       }
     },
     [auth, setAuth],

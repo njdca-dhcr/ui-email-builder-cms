@@ -8,11 +8,13 @@ import {
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
   buildUseQueryResult,
+  userIsSignedIn,
 } from 'src/testHelpers'
 import { useEmailTemplate, EmailTemplateShow } from 'src/network/emailTemplates'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthProvider } from 'src/utils/AuthContext'
 
 jest.mock('src/network/emailTemplates', () => {
   return {
@@ -23,20 +25,22 @@ jest.mock('src/network/emailTemplates', () => {
 describe('Email Template Show Page', () => {
   const renderEmailTemplateShowPage = (props?: Partial<Props>) => {
     return render(
-      <QueryClientProvider client={new QueryClient()}>
-        <EmailTemplateShowPage
-          pageContext={null}
-          uri=""
-          path=""
-          location={{} as any}
-          pageResources={{} as any}
-          params={{ id: faker.lorem.word() }}
-          children={undefined}
-          data={null}
-          serverData={{}}
-          {...props}
-        />
-      </QueryClientProvider>,
+      <AuthProvider>
+        <QueryClientProvider client={new QueryClient()}>
+          <EmailTemplateShowPage
+            pageContext={null}
+            uri=""
+            path=""
+            location={{} as any}
+            pageResources={{} as any}
+            params={{ id: faker.lorem.word() }}
+            children={undefined}
+            data={null}
+            serverData={{}}
+            {...props}
+          />
+        </QueryClientProvider>
+      </AuthProvider>,
     )
   }
 
@@ -132,6 +136,7 @@ describe('Email Template Show Page', () => {
 
   describe('when there is an error', () => {
     it('displays an error', () => {
+      userIsSignedIn()
       const error = new Error(faker.lorem.sentence())
       const query = buildUseQueryResult<EmailTemplateShow>({ error, isError: true })
       asMock(useEmailTemplate).mockReturnValue(query)

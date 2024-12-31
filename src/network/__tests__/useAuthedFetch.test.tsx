@@ -156,7 +156,7 @@ describe('useAuthedFetch', () => {
     })
   })
 
-  describe('when the idToken is expired and it fails to refresh', () => {
+  describe('when the idToken is expired and it fails to refresh because it is not authorized', () => {
     let unauthorizedJSON: object
 
     beforeEach(() => {
@@ -164,6 +164,43 @@ describe('useAuthedFetch', () => {
       unauthorizedJSON = randomObject()
       asMock(authRefreshToken).mockResolvedValue({
         kind: 'NOT_AUTHORIZED',
+        error: { name: 'Broken', message: 'it is broken' },
+      })
+
+      asMock(authedFetchJSON).mockImplementation(async () => {
+        return { statusCode: 401, json: unauthorizedJSON }
+      })
+      renderHookResult = renderHook(() => useAuthedFetch(), {
+        wrapper: ({ children }) => {
+          return <AuthProvider>{children}</AuthProvider>
+        },
+      })
+    })
+
+    it('clears auth the current auth credentials', async () => {
+      expect(currentAuthCredentials()).not.toBeNull()
+      await act(async () => {
+        return await renderHookResult.result.current({ path: '/foo', body: {}, method: 'POST' })
+      })
+      expect(currentAuthCredentials()).toBeNull()
+    })
+
+    it('returns the original unauthorized response', async () => {
+      const result = await act(async () => {
+        return await renderHookResult.result.current({ path: '/foo', body: {}, method: 'POST' })
+      })
+      expect(result).toEqual({ statusCode: 401, json: unauthorizedJSON })
+    })
+  })
+
+  describe('when the idToken is expired and it fails to refresh because of an invalid parameter', () => {
+    let unauthorizedJSON: object
+
+    beforeEach(() => {
+      userIsSignedIn()
+      unauthorizedJSON = randomObject()
+      asMock(authRefreshToken).mockResolvedValue({
+        kind: 'INVALID_PARAMETER',
         error: { name: 'Broken', message: 'it is broken' },
       })
 

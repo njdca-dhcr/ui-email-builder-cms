@@ -24,6 +24,11 @@ interface NotAuthorizedResponse {
   error: { name: string; message: string }
 }
 
+interface InvalidParameterResponse {
+  kind: 'INVALID_PARAMETER'
+  error: { name: string; message: string }
+}
+
 type SignInResponse = AuthSuccessResponse | SignInNewPasswordRequired | NotAuthorizedResponse
 
 export const signIn = async ({
@@ -64,7 +69,7 @@ export const newPasswordRequired = async ({
   })
 }
 
-type RefreshTokenResponse = AuthSuccessResponse | NotAuthorizedResponse
+type RefreshTokenResponse = AuthSuccessResponse | NotAuthorizedResponse | InvalidParameterResponse
 
 export const refreshToken = async ({ token }: { token: string }): Promise<RefreshTokenResponse> => {
   return fetchJSON({
