@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { render } from '@testing-library/react'
-import { currentAuthCredentials, mockAppMode, userIsSignedIn } from 'src/testHelpers'
+import { currentAuthCredentials, mockAppMode, urlFor, userIsSignedIn } from 'src/testHelpers'
 import { Header, LogOutButton } from '../Header'
 import { AuthProvider, useAuth } from 'src/utils/AuthContext'
 import userEvent from '@testing-library/user-event'
@@ -18,7 +18,7 @@ describe('Header', () => {
           <div />
         </Header>,
       )
-      expect(baseElement.querySelector('img')).toBeNull()
+      expect(baseElement.querySelector('.department-seal-container')).toBeNull()
     })
 
     it('displays a generic title', () => {
@@ -86,6 +86,17 @@ describe('Header', () => {
         expect(headerTitle).toHaveTextContent('Kentucky Email Builder (Beta)')
       })
     })
+  })
+
+  it('displays a settings button', () => {
+    const { getByRole } = render(
+      <Header>
+        <div />
+      </Header>,
+    )
+    const link: HTMLAnchorElement = getByRole('link', { name: 'Settings' }) as any
+    expect(link.tagName).toEqual('A')
+    expect(link.href).toEqual(urlFor('/settings'))
   })
 })
 

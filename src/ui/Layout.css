@@ -69,6 +69,10 @@
   .log-out-button:focus {
     background-color: var(--gray-dark-extra);
   }
+
+  .settings-link {
+    margin-inline-start: 1rem;
+  }
 }
 
 [href='#skip-to-content'] {
