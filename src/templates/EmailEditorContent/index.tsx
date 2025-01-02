@@ -10,7 +10,6 @@ import { isRestricted } from 'src/utils/appMode'
 import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmailString'
 import { usePreviewText } from '../PreviewText'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { useCurrentUser } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
@@ -36,9 +35,6 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
 
   const content = (
     <>
-      <VisuallyHidden>
-        <h2>Email Preview</h2>
-      </VisuallyHidden>
       <EditPreviewText value={previewText} onChange={setPreviewText} />
       <div className="email-preview-actions">
         <SelectPreviewType {...previewType} />

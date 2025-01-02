@@ -15,6 +15,7 @@ import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationS
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import { currentTimestamp } from 'src/utils/currentTimestamp'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import './EmailEditorPage.css'
 
 interface PageContext {
@@ -58,6 +59,9 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
                     }
                   />
                   <PageContent element="div" className="email-editor-page-content">
+                    <VisuallyHidden>
+                      <h2>Email Preview</h2>
+                    </VisuallyHidden>
                     <EmailEditorContent
                       emailTemplate={currentEmailTemplate}
                       emailTranslation={currentTranslation}

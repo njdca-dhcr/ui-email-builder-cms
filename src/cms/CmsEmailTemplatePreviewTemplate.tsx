@@ -14,6 +14,7 @@ import { PreviewText } from 'src/templates/PreviewText'
 import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
 import uniqueId from 'lodash.uniqueid'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 type Entry = PreviewTemplateComponentProps['entry']
 
@@ -80,6 +81,9 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
                   </EmailEditorSidebarAccordion.Container>
                 </Sidebar>
                 <PageContent element="div" className="email-editor-page-content">
+                  <VisuallyHidden>
+                    <h2>Email Preview</h2>
+                  </VisuallyHidden>
                   <EmailEditorContent
                     emailTemplate={emailTemplate}
                     emailTranslation={currentTranslation}
