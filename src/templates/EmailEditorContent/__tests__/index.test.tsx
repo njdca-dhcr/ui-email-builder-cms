@@ -21,7 +21,6 @@ import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { randomUUID } from 'crypto'
 import { useRenderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
 import { CurrentUserEmailConfig } from 'src/network/users'
-import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 

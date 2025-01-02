@@ -80,7 +80,7 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
                     ))}
                   </EmailEditorSidebarAccordion.Container>
                 </Sidebar>
-                <PageContent element="div" className="email-editor-page-content">
+                <PageContent element="div" className="email-editor-page-content-container">
                   <VisuallyHidden>
                     <h2>Email Preview</h2>
                   </VisuallyHidden>

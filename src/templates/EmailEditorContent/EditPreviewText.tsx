@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import './EditPreviewText.css'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import './EditPreviewText.css'
 
 interface Props {
   onChange: (value: string) => void

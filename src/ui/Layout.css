@@ -108,23 +108,35 @@
 
 .translation-mode {
   --easing: ease-in;
-  --duration: 500ms;
-}
-
-.translation-mode .sidebar {
-  transform: translateX(-100%);
+  --duration: 0.5s;
 }
 
 .sidebar {
   background-color: var(--gray-light);
-  display: flex;
+  position: relative;
   flex: 1;
-  flex-direction: column;
   height: calc(100% - 1.25rem);
-  overflow: auto;
+  width: 33.33vw;
+  transition: width var(--easing) var(--duration);
+}
+
+.translation-mode .sidebar {
+  flex: unset;
+  width: 0;
+}
+
+.sidebar-inner {
+  position: absolute;
+  right: 0;
+  top: 0;
   padding-top: 1.25rem;
-  transform: translateX(0);
-  transition: transform var(--easing) var(--duration);
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+}
+
+.translation-mode .sidebar-inner {
+  width: 33.33vw;
 }
 
 .sidebar .department-seal-container {
@@ -164,10 +176,6 @@
 
 .sidebar-list a.sidebar-active-link {
   text-decoration: underline;
-}
-
-.translation-mode .page-content {
-  transform: translateX(-40vw);
 }
 
 .page-content {

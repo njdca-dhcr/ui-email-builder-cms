@@ -54,7 +54,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ children, className, id }) => {
   return (
     <div id={id} className={classNames('sidebar', className)}>
-      {children}
+      <div className="sidebar-inner">{children}</div>
     </div>
   )
 }

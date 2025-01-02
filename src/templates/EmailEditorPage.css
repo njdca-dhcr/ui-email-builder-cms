@@ -41,9 +41,31 @@
   line-height: 2rem;
 }
 
-.email-editor-page-content {
+.email-editor-page-content-container {
+  flex: 2;
+  overflow-x: hidden;
+}
+
+.translation-mode .translations {
+  display: flex;
+  justify-content: space-around;
+  animation: translations-slide-in var(--duration) var(--easing) forwards;
+  width: 100vw;
+}
+
+@keyframes translations-slide-in {
+  from {
+    transform: translateX(7.75vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.email-editor-content {
   align-items: center;
   display: flex;
   flex-direction: column;
-  flex: 2;
+  flex: 1;
 }

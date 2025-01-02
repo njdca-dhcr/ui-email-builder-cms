@@ -29,71 +29,88 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
 
   return (
     <EmailTemplateState emailTemplate={emailTemplate}>
-      {({ currentLanguage, currentEmailTemplate, currentTranslation }) => (
-        <CurrentlyActiveEmailPart>
-          <SyncSidebarAndPreviewScroll>
-            <ClearCurrentlyActiveEmailPart />
-            <EmailPartsContent>
-              <PreviewText emailTranslation={currentTranslation}>
-                <Layout
-                  element="main"
-                  className={classNames({
-                    'translation-mode': !['not-set', 'english'].includes(currentLanguage),
-                  })}
-                >
-                  <EmailEditorSidebar
-                    emailTranslation={currentTranslation}
-                    heading={
-                      <>
-                        <h1
-                          style={{
-                            fontSize: '1.5rem',
-                            paddingLeft: '0.5rem',
-                            marginTop: '0.75rem',
-                            marginBottom: 0,
-                          }}
-                        >
-                          {byQueryState(query, {
-                            data: ({ name }) => name,
-                            loading: () => 'Loading...',
-                            error: () => 'Something went wrong',
-                          })}
-                        </h1>
-                        {byQueryState(query, {
-                          data: () => <EmailTranslationSelector />,
-                          loading: () => null,
-                          error: () => null,
-                        })}
-                      </>
-                    }
-                  />
+      {({ currentLanguage, currentEmailTemplate, currentTranslation }) => {
+        const inTranslationMode = !['not-set', 'english'].includes(currentLanguage)
 
-                  <PageContent element="div" className="email-editor-page-content">
-                    {error && <Alert>{error.message}</Alert>}
-                    {emailTemplate && (
-                      <>
-                        {!['not-set', 'english'].includes(currentLanguage) && (
+        return (
+          <CurrentlyActiveEmailPart>
+            <SyncSidebarAndPreviewScroll>
+              <ClearCurrentlyActiveEmailPart />
+              <EmailPartsContent>
+                <PreviewText emailTranslation={currentTranslation}>
+                  <Layout
+                    element="main"
+                    className={classNames({
+                      'translation-mode': !['not-set', 'english'].includes(currentLanguage),
+                    })}
+                  >
+                    <EmailEditorSidebar
+                      emailTranslation={currentTranslation}
+                      heading={
+                        <>
+                          <h1
+                            style={{
+                              fontSize: '1.5rem',
+                              paddingLeft: '0.5rem',
+                              marginTop: '0.75rem',
+                              marginBottom: 0,
+                            }}
+                          >
+                            {byQueryState(query, {
+                              data: ({ name }) => name,
+                              loading: () => 'Loading...',
+                              error: () => 'Something went wrong',
+                            })}
+                          </h1>
+                          {byQueryState(query, {
+                            data: () => <EmailTranslationSelector />,
+                            loading: () => null,
+                            error: () => null,
+                          })}
+                        </>
+                      }
+                    />
+
+                    <PageContent element="div" className="email-editor-page-content-container">
+                      {error && <Alert>{error.message}</Alert>}
+                      {emailTemplate &&
+                        (inTranslationMode ? (
+                          <div className="translations">
+                            <EmailTemplateState emailTemplate={emailTemplate}>
+                              {({ currentEmailTemplate, currentTranslation }) => (
+                                <EmailPartsContent>
+                                  <PreviewText emailTranslation={currentTranslation}>
+                                    <EmailEditorContent
+                                      emailTranslation={currentTranslation}
+                                      emailTemplate={currentEmailTemplate}
+                                      currentUser={currentUser ?? { id: 'placeholder' }}
+                                    />
+                                  </PreviewText>
+                                </EmailPartsContent>
+                              )}
+                            </EmailTemplateState>
+                            <EmailEditorContent
+                              emailTranslation={currentTranslation}
+                              emailTemplate={currentEmailTemplate}
+                              currentUser={currentUser ?? { id: 'placeholder' }}
+                            />
+                          </div>
+                        ) : (
                           <EmailEditorContent
-                            emailTranslation={currentEmailTemplate.translations![0]}
+                            emailTranslation={currentTranslation}
                             emailTemplate={currentEmailTemplate}
                             currentUser={currentUser ?? { id: 'placeholder' }}
                           />
-                        )}
-                        <EmailEditorContent
-                          emailTranslation={currentTranslation}
-                          emailTemplate={currentEmailTemplate}
-                          currentUser={currentUser ?? { id: 'placeholder' }}
-                        />
-                      </>
-                    )}
-                  </PageContent>
-                  {isLoading && <LoadingOverlay description="Loading your email template" />}
-                </Layout>
-              </PreviewText>
-            </EmailPartsContent>
-          </SyncSidebarAndPreviewScroll>
-        </CurrentlyActiveEmailPart>
-      )}
+                        ))}
+                    </PageContent>
+                    {isLoading && <LoadingOverlay description="Loading your email template" />}
+                  </Layout>
+                </PreviewText>
+              </EmailPartsContent>
+            </SyncSidebarAndPreviewScroll>
+          </CurrentlyActiveEmailPart>
+        )
+      }}
     </EmailTemplateState>
   )
 }

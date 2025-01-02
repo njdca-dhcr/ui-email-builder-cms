@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import { type HeadFC } from 'gatsby'
 import uniqueId from 'lodash.uniqueid'
 import { Layout, PageContent } from 'src/ui'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import type { EmailParts, EmailTemplate } from 'src/appTypes'
 import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './CurrentlyActiveEmailPart'
 import { EmailEditorContent } from './EmailEditorContent'
@@ -15,7 +16,6 @@ import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationS
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import { currentTimestamp } from 'src/utils/currentTimestamp'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useCurrentUser } from 'src/network/users'
 import './EmailEditorPage.css'
 
@@ -60,7 +60,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
                       </>
                     }
                   />
-                  <PageContent element="div" className="email-editor-page-content">
+                  <PageContent element="div" className="email-editor-page-content-container">
                     <VisuallyHidden>
                       <h2>Email Preview</h2>
                     </VisuallyHidden>
