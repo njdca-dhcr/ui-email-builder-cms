@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useRef } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
 import { Alert, LoadingOverlay } from 'src/ui'
@@ -16,7 +16,7 @@ import { useCurrentUser } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
-import { SelectPreviewType, PreviewType } from './SelectPreviewType'
+import { SelectPreviewType, usePreviewType } from './SelectPreviewType'
 import { ExportEmailTemplate } from './ExportEmailTemplate'
 import { EmailBody } from '../emailHtmlDocument/EmailBody'
 import './EmailEditorContent.css'
@@ -28,9 +28,7 @@ interface Props {
 
 export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation }) => {
   const { data: user, isLoading, error, enabled } = useCurrentUser()
-  const [previewType, setPreviewType] = useState<PreviewType>('desktop')
-  const isPreviewDesktop = previewType === 'desktop'
-  const isPreviewMobile = !isPreviewDesktop
+  const previewType = usePreviewType()
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
@@ -43,7 +41,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
       </VisuallyHidden>
       <EditPreviewText value={previewText} onChange={setPreviewText} />
       <div className="email-preview-actions">
-        <SelectPreviewType previewType={previewType} onChange={setPreviewType} />
+        <SelectPreviewType {...previewType} />
         {!isRestricted() && (
           <div className="share-and-save-buttons">
             {emailTemplate.id && (
@@ -66,16 +64,16 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
       <Root.div
         id="preview-container"
         className={classNames('email-preview', {
-          'email-preview-desktop': isPreviewDesktop,
-          'email-preview-mobile': isPreviewMobile,
+          'email-preview-desktop': previewType.isDesktop,
+          'email-preview-mobile': previewType.isMobile,
         })}
       >
         <EditingEmailCSS />
         <div
           ref={previewRef as any}
           className={classNames({
-            desktop: isPreviewDesktop,
-            mobile: isPreviewMobile,
+            desktop: previewType.isDesktop,
+            mobile: previewType.isMobile,
           })}
         >
           <EmailBody previewText={previewText} translation={emailTranslation} />

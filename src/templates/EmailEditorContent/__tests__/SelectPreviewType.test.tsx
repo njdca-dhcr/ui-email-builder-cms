@@ -7,7 +7,7 @@ describe('SelectPreviewType', () => {
   describe('when desktop is selected', () => {
     it('has desktop selected', async () => {
       const { getByLabelText } = render(
-        <SelectPreviewType previewType="desktop" onChange={jest.fn()} />,
+        <SelectPreviewType current="desktop" onChange={jest.fn()} />,
       )
       const radioButton = getByLabelText('Desktop')
       expect(radioButton).toBeChecked()
@@ -15,7 +15,7 @@ describe('SelectPreviewType', () => {
 
     it('has mobile unselected', async () => {
       const { getByLabelText } = render(
-        <SelectPreviewType previewType="desktop" onChange={jest.fn()} />,
+        <SelectPreviewType current="desktop" onChange={jest.fn()} />,
       )
       const radioButton = getByLabelText('Mobile')
       expect(radioButton).not.toBeChecked()
@@ -24,9 +24,7 @@ describe('SelectPreviewType', () => {
     it('calls onChange with "mobile" when mobile is clicked', async () => {
       const user = userEvent.setup()
       const onChange = jest.fn()
-      const { getByLabelText } = render(
-        <SelectPreviewType previewType="desktop" onChange={onChange} />,
-      )
+      const { getByLabelText } = render(<SelectPreviewType current="desktop" onChange={onChange} />)
 
       expect(onChange).not.toHaveBeenCalled()
       await user.click(getByLabelText('Mobile'))
@@ -36,17 +34,13 @@ describe('SelectPreviewType', () => {
 
   describe('when mobile is selected', () => {
     it('has mobile selected', async () => {
-      const { getByLabelText } = render(
-        <SelectPreviewType previewType="mobile" onChange={jest.fn()} />,
-      )
+      const { getByLabelText } = render(<SelectPreviewType current="mobile" onChange={jest.fn()} />)
       const radioButton = getByLabelText('Mobile')
       expect(radioButton).toBeChecked()
     })
 
     it('has desktop unselected', async () => {
-      const { getByLabelText } = render(
-        <SelectPreviewType previewType="mobile" onChange={jest.fn()} />,
-      )
+      const { getByLabelText } = render(<SelectPreviewType current="mobile" onChange={jest.fn()} />)
       const radioButton = getByLabelText('Desktop')
       expect(radioButton).not.toBeChecked()
     })
@@ -54,9 +48,7 @@ describe('SelectPreviewType', () => {
     it('calls onChange with "desktop" when desktop is clicked', async () => {
       const user = userEvent.setup()
       const onChange = jest.fn()
-      const { getByLabelText } = render(
-        <SelectPreviewType previewType="mobile" onChange={onChange} />,
-      )
+      const { getByLabelText } = render(<SelectPreviewType current="mobile" onChange={onChange} />)
 
       expect(onChange).not.toHaveBeenCalled()
       await user.click(getByLabelText('Desktop'))

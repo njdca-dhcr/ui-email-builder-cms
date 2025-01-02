@@ -1,15 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Radio } from 'src/ui'
 
-export type PreviewType = 'desktop' | 'mobile'
+type PreviewType = 'desktop' | 'mobile'
 
-interface Props {
-  previewType: PreviewType
-  onChange: (previewType: PreviewType) => void
+export const usePreviewType = () => {
+  const [previewType, setPreviewType] = useState<PreviewType>('desktop')
+  const isDesktop = previewType === 'desktop'
+  const isMobile = !isDesktop
+
+  return { current: previewType, onChange: setPreviewType, isDesktop, isMobile }
 }
 
-export const SelectPreviewType: FC<Props> = ({ previewType, onChange }) => {
+interface Props {
+  current: PreviewType
+  onChange: (value: PreviewType) => void
+}
+
+export const SelectPreviewType: FC<Props> = ({ current, onChange }) => {
   return (
     <Radio.Fieldset
       className="select-preview-type"
@@ -18,12 +26,12 @@ export const SelectPreviewType: FC<Props> = ({ previewType, onChange }) => {
       renderLegend={(legend) => <VisuallyHidden>{legend}</VisuallyHidden>}
     >
       <Radio.Button
-        checked={previewType === 'desktop'}
+        checked={current === 'desktop'}
         label="Desktop"
         onChange={() => onChange('desktop')}
       />
       <Radio.Button
-        checked={previewType === 'mobile'}
+        checked={current === 'mobile'}
         label="Mobile"
         onChange={() => onChange('mobile')}
       />
