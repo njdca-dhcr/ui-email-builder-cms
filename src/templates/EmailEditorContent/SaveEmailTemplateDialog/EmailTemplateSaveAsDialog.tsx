@@ -12,7 +12,7 @@ export const EmailTemplateSaveAsDialog: FC = () => {
       loading={isPending}
       loadingMessage="Creating email template"
       mutate={mutateAsync}
-      onSuccess={() => navigate('/my-library')}
+      onSuccess={() => navigate('/my-drafts')}
       title="Save As"
       trigger="Save As"
       submitButtonText="Create"

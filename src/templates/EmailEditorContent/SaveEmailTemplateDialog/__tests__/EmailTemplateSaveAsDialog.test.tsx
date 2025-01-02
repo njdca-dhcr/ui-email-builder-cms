@@ -94,7 +94,7 @@ describe('EmailTemplateSaveAsDialog', () => {
     expect(useCreateEmailTemplate).toHaveBeenCalled()
   })
 
-  it('navigates to /my-library when successful', async () => {
+  it('navigates to /my-drafts when successful', async () => {
     const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: { id: randomUUID() } })
     asMock(useCreateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
 
@@ -104,6 +104,6 @@ describe('EmailTemplateSaveAsDialog', () => {
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Create' }))
     expect(mutateAsync).toHaveBeenCalled()
-    expect(navigate).toHaveBeenCalledWith('/my-library')
+    expect(navigate).toHaveBeenCalledWith('/my-drafts')
   })
 })

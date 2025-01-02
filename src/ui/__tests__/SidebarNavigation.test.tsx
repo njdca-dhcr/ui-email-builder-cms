@@ -42,15 +42,15 @@ describe('SidebarNavigation', () => {
       userIsSignedIn()
     })
 
-    it('displays a my library link', () => {
+    it('displays a my drafts link', () => {
       const { getByRole } = render(
         <AuthProvider>
           <SidebarNavigation />
         </AuthProvider>,
       )
-      const link: HTMLAnchorElement = getByRole('link', { name: 'My Library' }) as any
+      const link: HTMLAnchorElement = getByRole('link', { name: 'My Drafts' }) as any
       expect(link.tagName).toEqual('A')
-      expect(link.href).toEqual(urlFor('/my-library'))
+      expect(link.href).toEqual(urlFor('/my-drafts'))
     })
 
     it('displays a users link', () => {

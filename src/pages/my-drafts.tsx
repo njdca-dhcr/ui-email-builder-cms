@@ -18,7 +18,7 @@ import { useEmailTemplates } from 'src/network/emailTemplates'
 import { DestroyEmailTemplate } from 'src/ui/DestroyDialog'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
-const MyLibraryPage: FC = () => {
+const MyDraftsPage: FC = () => {
   useRedirectIfNotSignedIn()
   const { data: emailTemplates, isLoading, error } = useEmailTemplates()
 
@@ -30,7 +30,7 @@ const MyLibraryPage: FC = () => {
       <PageContent element="main">
         <SkipNavContent />
         <SpacedContainer>
-          <Heading element="h1">My Library</Heading>
+          <Heading element="h1">My Drafts</Heading>
           <Paragraph>All of your saved templates can be found here</Paragraph>
           {error && <Paragraph>{error.message}</Paragraph>}
           {emailTemplates && emailTemplates.length > 0 && (
@@ -61,6 +61,6 @@ const MyLibraryPage: FC = () => {
   )
 }
 
-export default MyLibraryPage
+export default MyDraftsPage
 
-export const Head: HeadFC = () => <title>{formatPageTitle('My Libary')}</title>
+export const Head: HeadFC = () => <title>{formatPageTitle('My Drafts')}</title>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import MyLibraryPage from '../my-library'
+import MyDraftsPage from '../my-drafts'
 import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import {
   asMock,
@@ -32,7 +32,7 @@ describe('My Library page', () => {
   const renderMyLibraryPage = () => {
     return render(
       <QueryClientProvider client={new QueryClient()}>
-        <MyLibraryPage />
+        <MyDraftsPage />
       </QueryClientProvider>,
     )
   }
