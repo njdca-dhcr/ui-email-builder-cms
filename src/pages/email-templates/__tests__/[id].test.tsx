@@ -7,20 +7,22 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
+  buildUseMutationResult,
   buildUseQueryResult,
   userIsSignedIn,
 } from 'src/testHelpers'
-import { useEmailTemplate, EmailTemplateShow } from 'src/network/emailTemplates'
+import {
+  useEmailTemplate,
+  EmailTemplateShow,
+  useUpdateEmailTemplate,
+} from 'src/network/emailTemplates'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
+import userEvent from '@testing-library/user-event'
 
-jest.mock('src/network/emailTemplates', () => {
-  return {
-    useEmailTemplate: jest.fn(),
-  }
-})
+jest.mock('src/network/emailTemplates')
 
 describe('Email Template Show Page', () => {
   const renderEmailTemplateShowPage = (props?: Partial<Props>) => {
@@ -86,6 +88,7 @@ describe('Email Template Show Page', () => {
         ...buildUniqueEmailConfig({
           translations: [
             buildEmailTranslation({
+              language: 'english',
               previewText,
               components: [
                 buildUniqueEmailComponent('Header', {
@@ -93,6 +96,20 @@ describe('Email Template Show Page', () => {
                     buildUniqueEmailSubComponent({
                       kind: 'Title',
                       defaultValue: { title },
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            buildEmailTranslation({
+              language: 'spanish',
+              previewText,
+              components: [
+                buildUniqueEmailComponent('Header', {
+                  subComponents: [
+                    buildUniqueEmailSubComponent({
+                      kind: 'Title',
+                      defaultValue: { title: faker.lorem.word() },
                     }),
                   ],
                 }),
@@ -131,6 +148,33 @@ describe('Email Template Show Page', () => {
       const { getByLabelText } = renderEmailTemplateShowPage()
       const textarea: HTMLTextAreaElement = getByLabelText('Preview Text') as any
       expect(textarea).toHaveValue(previewText)
+    })
+
+    describe('translation mode', () => {
+      it('displays two translations in translation mode', async () => {
+        asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult())
+        const user = userEvent.setup()
+        const { getByLabelText, getByRole, baseElement } = renderEmailTemplateShowPage()
+
+        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(1)
+        await user.click(getByLabelText('Translation Language'))
+        await user.click(getByRole('option', { name: 'Spanish' }))
+        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(2)
+      })
+
+      it('is possible to exit translation mode', async () => {
+        asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult())
+        const user = userEvent.setup()
+        const { getByLabelText, getByRole, baseElement } = renderEmailTemplateShowPage()
+
+        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(1)
+        await user.click(getByLabelText('Translation Language'))
+        await user.click(getByRole('option', { name: 'Spanish' }))
+        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(2)
+
+        await user.click(getByRole('button', { name: 'Exit translation mode' }))
+        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(1)
+      })
     })
   })
 

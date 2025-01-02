@@ -9,11 +9,11 @@ import { EmailEditorContent } from 'src/templates/EmailEditorContent'
 import { EmailEditorSidebar } from 'src/templates/EmailEditorSidebar'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
+import { Layout, PageContent, LoadingOverlay, Alert, Button } from 'src/ui'
 import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
 import { PreviewText } from 'src/templates/PreviewText'
 import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/EmailTranslationSelector'
-import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { EmailTemplateState, useCurrentLanguage } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import classNames from 'classnames'
 import { useCurrentUser } from 'src/network/users'
@@ -40,9 +40,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                 <PreviewText emailTranslation={currentTranslation}>
                   <Layout
                     element="main"
-                    className={classNames({
-                      'translation-mode': !['not-set', 'english'].includes(currentLanguage),
-                    })}
+                    className={classNames({ 'translation-mode': inTranslationMode })}
                   >
                     <EmailEditorSidebar
                       emailTranslation={currentTranslation}
@@ -76,6 +74,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       {emailTemplate &&
                         (inTranslationMode ? (
                           <div className="translations">
+                            <ExitTranslationMode />
                             <EmailTemplateState emailTemplate={emailTemplate}>
                               {({ currentEmailTemplate, currentTranslation }) => (
                                 <EmailPartsContent>
@@ -112,6 +111,16 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
         )
       }}
     </EmailTemplateState>
+  )
+}
+
+const ExitTranslationMode: FC = () => {
+  const [_, setCurrentLanguage] = useCurrentLanguage()
+
+  return (
+    <Button className="exit-translation-mode-button" onClick={() => setCurrentLanguage('english')}>
+      Exit translation mode
+    </Button>
   )
 }
 

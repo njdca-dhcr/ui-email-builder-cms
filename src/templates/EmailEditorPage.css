@@ -56,11 +56,20 @@
 @keyframes translations-slide-in {
   from {
     transform: translateX(7.75vw);
+    padding-block-start: 0;
   }
 
   to {
     transform: translateX(0);
+    padding-block-start: 3rem;
   }
+}
+
+.exit-translation-mode-button {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  z-index: 100;
 }
 
 .email-editor-content {
