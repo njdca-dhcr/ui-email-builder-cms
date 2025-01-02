@@ -16,13 +16,15 @@ import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/Email
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import classNames from 'classnames'
+import { useCurrentUser } from 'src/network/users'
 
 export type Props = PageProps<null, null, null>
 
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
   const query = useEmailTemplate(params.id)
-  const { data: queriedEmailTemplate, isLoading, error } = useEmailTemplate(params.id)
+  const { data: queriedEmailTemplate, isLoading, error } = query
+  const { data: currentUser } = useCurrentUser()
   const emailTemplate = queriedEmailTemplate ?? null
 
   return (
@@ -74,11 +76,13 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                           <EmailEditorContent
                             emailTranslation={currentEmailTemplate.translations![0]}
                             emailTemplate={currentEmailTemplate}
+                            currentUser={currentUser ?? { id: 'placeholder' }}
                           />
                         )}
                         <EmailEditorContent
                           emailTranslation={currentTranslation}
                           emailTemplate={currentEmailTemplate}
+                          currentUser={currentUser ?? { id: 'placeholder' }}
                         />
                       </>
                     )}

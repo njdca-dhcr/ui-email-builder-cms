@@ -87,6 +87,7 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
                   <EmailEditorContent
                     emailTemplate={emailTemplate}
                     emailTranslation={currentTranslation}
+                    currentUser={{ id: 'placeholder' }}
                   />
                 </PageContent>
               </EmailPartsContent>

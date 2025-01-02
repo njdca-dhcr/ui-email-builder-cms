@@ -16,6 +16,7 @@ import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import { currentTimestamp } from 'src/utils/currentTimestamp'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { useCurrentUser } from 'src/network/users'
 import './EmailEditorPage.css'
 
 interface PageContext {
@@ -28,6 +29,7 @@ interface Props {
 
 const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   useRedirectIfNotSignedIn()
+  const { data: currentUser } = useCurrentUser()
   const [emailTemplateConfig] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
     versionTimestamp: currentTimestamp(),
@@ -65,6 +67,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
                     <EmailEditorContent
                       emailTemplate={currentEmailTemplate}
                       emailTranslation={currentTranslation}
+                      currentUser={currentUser ?? { id: 'placeholder' }}
                     />
                   </PageContent>
                 </PreviewText>

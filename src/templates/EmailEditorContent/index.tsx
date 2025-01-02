@@ -1,7 +1,6 @@
 import React, { FC, useRef } from 'react'
 import Root from 'react-shadow'
 import classNames from 'classnames'
-import { Alert, LoadingOverlay } from 'src/ui'
 import { EditingEmailCSS } from '../emailHtmlDocument/EmailCSS'
 import { EditPreviewText } from './EditPreviewText'
 import { EmailTemplate, EmailTranslation } from 'src/appTypes'
@@ -11,7 +10,7 @@ import { useElementsToEmailString } from '../emailHtmlDocument/useElementsToEmai
 import { usePreviewText } from '../PreviewText'
 import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
-import { useCurrentUser } from 'src/network/users'
+import { CurrentUserEmailConfig } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
 import { EmailTemplateSaveAsDialog, EmailTemplateUpdateDialog } from './SaveEmailTemplateDialog'
 import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
@@ -23,18 +22,19 @@ import './EmailEditorContent.css'
 interface Props {
   emailTemplate: EmailTemplate.Unique.Config
   emailTranslation: EmailTranslation.Unique
+  currentUser: CurrentUserEmailConfig
 }
 
-export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation }) => {
-  const { data: user, isLoading, error, enabled } = useCurrentUser()
+export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation, currentUser }) => {
   const previewType = usePreviewType()
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
   const [previewText, setPreviewText] = usePreviewText()
 
-  const content = (
-    <>
+  return (
+    <UserInfoProvider userInfo={currentUser}>
+      <KeepHtmlTranslationsLinksPopulated emailTemplate={emailTemplate} />
       <EditPreviewText value={previewText} onChange={setPreviewText} />
       <div className="email-preview-actions">
         <SelectPreviewType {...previewType} />
@@ -75,22 +75,7 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
           <EmailBody previewText={previewText} translation={emailTranslation} />
         </div>
       </Root.div>
-    </>
-  )
-
-  return (
-    <>
-      {error && <Alert>{error.message}</Alert>}
-      {enabled && user ? (
-        <UserInfoProvider userInfo={user}>
-          <KeepHtmlTranslationsLinksPopulated emailTemplate={emailTemplate} />
-          {content}
-        </UserInfoProvider>
-      ) : (
-        content
-      )}
-      {isLoading && <LoadingOverlay description="Loading your settings" />}
-    </>
+    </UserInfoProvider>
   )
 }
 

@@ -2,7 +2,6 @@ import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import {
   asMock,
@@ -10,7 +9,6 @@ import {
   buildUniqueEmailComponent,
   buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
-  buildUseQueryResult,
   buildUserShow,
   mockAppMode,
   mockBackendUrl,
@@ -20,28 +18,28 @@ import {
 } from 'src/testHelpers'
 import { EmailEditorContent } from '..'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { CurrentUser, useCurrentUser } from 'src/network/users'
 import { randomUUID } from 'crypto'
-import { AuthProvider } from 'src/utils/AuthContext'
 import { useRenderEmailTranslationToString } from 'src/templates/emailHtmlDocument/renderEmailTranslationToString'
+import { CurrentUserEmailConfig } from 'src/network/users'
+import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
+import { AuthProvider } from 'src/utils/AuthContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 jest.mock('src/utils/download')
-
-jest.mock('src/network/users')
-
 jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
+jest.mock('src/network/useKeepHtmlTranslationsLinksPopulated')
 
 describe('EmailEditorContent', () => {
   let emailTranslation: EmailTranslation.Unique
   let emailTemplate: EmailTemplate.Unique.Config
   let alertSpy: jest.SpyInstance
-  let client: QueryClient
   let user: UserEvent
   let mockRenderEmailToString: jest.Mock
+  let currentUser: CurrentUserEmailConfig
 
   beforeEach(() => {
     user = userEvent.setup()
-    client = new QueryClient()
+    currentUser = buildUserShow()
     emailTranslation = buildEmailTranslation({
       language: 'english',
       components: [
@@ -58,8 +56,6 @@ describe('EmailEditorContent', () => {
     alertSpy = jest.spyOn(window, 'alert')
     alertSpy.mockReturnValue(false)
     userIsNotSignedIn()
-    const query = { ...buildUseQueryResult<CurrentUser>({ data: undefined }), enabled: false }
-    asMock(useCurrentUser).mockReturnValue(query)
     mockRenderEmailToString = jest.fn()
     asMock(useRenderEmailTranslationToString).mockReturnValue(mockRenderEmailToString)
   })
@@ -70,9 +66,11 @@ describe('EmailEditorContent', () => {
 
   it('can display the email in desktop or mobile', async () => {
     const { baseElement, getByLabelText } = render(
-      <QueryClientProvider client={client}>
-        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-      </QueryClientProvider>,
+      <EmailEditorContent
+        emailTranslation={emailTranslation}
+        emailTemplate={emailTemplate}
+        currentUser={currentUser}
+      />,
     )
 
     expect(baseElement.querySelector('.email-preview-desktop')).not.toBeNull()
@@ -90,9 +88,11 @@ describe('EmailEditorContent', () => {
 
   it('can display the email components and subcomponents', () => {
     const { queryByText } = render(
-      <QueryClientProvider client={client}>
-        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-      </QueryClientProvider>,
+      <EmailEditorContent
+        emailTranslation={emailTranslation}
+        emailTemplate={emailTemplate}
+        currentUser={currentUser}
+      />,
     )
     expect(queryByText('Title')).not.toBeNull()
     expect(queryByText('Dependency Benefits')).not.toBeNull()
@@ -100,9 +100,11 @@ describe('EmailEditorContent', () => {
 
   it('displays the edit preview text field', () => {
     const { baseElement } = render(
-      <QueryClientProvider client={client}>
-        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-      </QueryClientProvider>,
+      <EmailEditorContent
+        emailTranslation={emailTranslation}
+        emailTemplate={emailTemplate}
+        currentUser={currentUser}
+      />,
     )
     const input = baseElement.querySelector('#edit-preview-text')
 
@@ -111,9 +113,11 @@ describe('EmailEditorContent', () => {
 
   it('renders the preview text', () => {
     const { baseElement } = render(
-      <QueryClientProvider client={client}>
-        <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-      </QueryClientProvider>,
+      <EmailEditorContent
+        emailTranslation={emailTranslation}
+        emailTemplate={emailTemplate}
+        currentUser={currentUser}
+      />,
     )
     expect(baseElement.querySelector('#preview-text')).not.toBeNull()
   })
@@ -125,66 +129,31 @@ describe('EmailEditorContent', () => {
 
     it('does not have a share dropdown', () => {
       const { queryByRole } = render(
-        <QueryClientProvider client={client}>
-          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-        </QueryClientProvider>,
+        <EmailEditorContent
+          emailTranslation={emailTranslation}
+          emailTemplate={emailTemplate}
+          currentUser={currentUser}
+        />,
       )
 
       expect(queryByRole('menu', { name: 'Share' })).toBeNull()
     })
   })
 
-  describe('when signed in', () => {
-    beforeEach(() => {
-      userIsSignedIn()
-    })
+  it('integrates the current user configuration', () => {
+    const banner = randomBannerValue()
+    const { baseElement } = render(
+      <EmailEditorContent
+        emailTranslation={emailTranslation}
+        emailTemplate={emailTemplate}
+        currentUser={{ ...currentUser, banner }}
+      />,
+    )
 
-    it('integrates user info once it has loaded', () => {
-      const banner = randomBannerValue()
-      const query = {
-        ...buildUseQueryResult<CurrentUser>({ data: { banner, ...buildUserShow() } }),
-        enabled: true,
-      }
-      asMock(useCurrentUser).mockReturnValue(query)
-
-      const { baseElement } = render(
-        <QueryClientProvider client={client}>
-          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-        </QueryClientProvider>,
-      )
-
-      expect(baseElement).toHaveTextContent(banner.primaryText)
-    })
-
-    it('displays a spinner when the user info is loading', () => {
-      const query = {
-        ...buildUseQueryResult<CurrentUser>({ isLoading: true, data: undefined }),
-        enabled: true,
-      }
-      asMock(useCurrentUser).mockReturnValue(query)
-
-      const { baseElement } = render(
-        <QueryClientProvider client={client}>
-          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-        </QueryClientProvider>,
-      )
-      expect(baseElement).toHaveTextContent('Loading your settings')
-    })
-
-    it('displays an error when the user info fails to load', () => {
-      const error = new Error(faker.lorem.sentence())
-      const query = { ...buildUseQueryResult<CurrentUser>({ error, isError: true }), enabled: true }
-      asMock(useCurrentUser).mockReturnValue(query)
-      const { queryByText } = render(
-        <QueryClientProvider client={client}>
-          <EmailEditorContent emailTranslation={emailTranslation} emailTemplate={emailTemplate} />
-        </QueryClientProvider>,
-      )
-      expect(queryByText(error.message)).not.toBeNull()
-    })
+    expect(baseElement).toHaveTextContent(banner.primaryText)
   })
 
-  describe('when the email template has an id', () => {
+  describe('when the email template has an id and signed in', () => {
     beforeEach(() => {
       mockBackendUrl(faker.internet.url())
       userIsSignedIn()
@@ -194,10 +163,11 @@ describe('EmailEditorContent', () => {
     it('allows users to update the email template', async () => {
       const { queryByRole } = render(
         <AuthProvider>
-          <QueryClientProvider client={client}>
+          <QueryClientProvider client={new QueryClient()}>
             <EmailEditorContent
               emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+              currentUser={currentUser}
             />
           </QueryClientProvider>
         </AuthProvider>,
@@ -209,10 +179,11 @@ describe('EmailEditorContent', () => {
     it('allows users to save the email template as a new email template', async () => {
       const { queryByRole } = render(
         <AuthProvider>
-          <QueryClientProvider client={client}>
+          <QueryClientProvider client={new QueryClient()}>
             <EmailEditorContent
               emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+              currentUser={currentUser}
             />
           </QueryClientProvider>
         </AuthProvider>,
@@ -223,14 +194,13 @@ describe('EmailEditorContent', () => {
 
     it('displays the export email template button', async () => {
       const { queryByRole } = render(
-        <QueryClientProvider client={client}>
-          <EmailPartsContent>
-            <EmailEditorContent
-              emailTranslation={emailTranslation}
-              emailTemplate={{ ...emailTemplate, id: randomUUID() }}
-            />
-          </EmailPartsContent>
-        </QueryClientProvider>,
+        <EmailPartsContent>
+          <EmailEditorContent
+            emailTranslation={emailTranslation}
+            emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+            currentUser={currentUser}
+          />
+        </EmailPartsContent>,
       )
       expect(queryByRole('button', { name: 'Share' })).toBeDefined()
     })
@@ -245,14 +215,11 @@ describe('EmailEditorContent', () => {
 
     it('does not have a way to update the email template', async () => {
       const { queryByRole } = render(
-        <AuthProvider>
-          <QueryClientProvider client={client}>
-            <EmailEditorContent
-              emailTranslation={emailTranslation}
-              emailTemplate={{ ...emailTemplate, id: undefined }}
-            />
-          </QueryClientProvider>
-        </AuthProvider>,
+        <EmailEditorContent
+          emailTranslation={emailTranslation}
+          emailTemplate={{ ...emailTemplate, id: undefined }}
+          currentUser={currentUser}
+        />,
       )
 
       expect(queryByRole('button', { name: 'Update' })).toBeNull()
@@ -261,10 +228,11 @@ describe('EmailEditorContent', () => {
     it('allows users to save the email template as a new email template', async () => {
       const { queryByRole } = render(
         <AuthProvider>
-          <QueryClientProvider client={client}>
+          <QueryClientProvider client={new QueryClient()}>
             <EmailEditorContent
               emailTranslation={emailTranslation}
               emailTemplate={{ ...emailTemplate, id: undefined }}
+              currentUser={currentUser}
             />
           </QueryClientProvider>
         </AuthProvider>,
@@ -275,14 +243,11 @@ describe('EmailEditorContent', () => {
 
     it('does not display the export email template button', async () => {
       const { queryByRole } = render(
-        <QueryClientProvider client={client}>
-          <EmailPartsContent>
-            <EmailEditorContent
-              emailTranslation={emailTranslation}
-              emailTemplate={{ ...emailTemplate, id: undefined }}
-            />
-          </EmailPartsContent>
-        </QueryClientProvider>,
+        <EmailEditorContent
+          emailTranslation={emailTranslation}
+          emailTemplate={{ ...emailTemplate, id: undefined }}
+          currentUser={currentUser}
+        />,
       )
       expect(queryByRole('button', { name: 'Share' })).toBeNull()
     })
