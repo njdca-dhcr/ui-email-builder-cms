@@ -1,13 +1,16 @@
 import React, { FC } from 'react'
-import { usePreviewText } from '../PreviewText'
 import './EditPreviewText.css'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
-export const EditPreviewText: FC = () => {
+interface Props {
+  onChange: (value: string) => void
+  value: string
+}
+
+export const EditPreviewText: FC<Props> = ({ onChange, value }) => {
   const headingId = 'edit-preview-text'
   const descriptionId = 'preview-text-description'
   const characterCountId = 'preview-text-character-count'
-  const [value, setValue] = usePreviewText()
 
   return (
     <div className="edit-preview-text">
@@ -20,7 +23,7 @@ export const EditPreviewText: FC = () => {
           aria-describedby={[descriptionId, characterCountId].join(' ')}
           aria-labelledby={headingId}
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
           placeholder="This is the preview text that you can edit. It gives insight into the email so that people will open it."
         />
         <p id={characterCountId}>

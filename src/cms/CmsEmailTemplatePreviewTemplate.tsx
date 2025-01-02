@@ -11,7 +11,6 @@ import { Layout, PageContent, Sidebar } from 'src/ui'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
 import 'src/templates/EmailEditorPage.css'
 import { PreviewText } from 'src/templates/PreviewText'
-import { EditPreviewText } from 'src/templates/EmailEditorContent/EditPreviewText'
 import { EmailEditorSidebarAccordion } from 'src/templates/EmailEditorSidebar/EmailEditorSidebarAccordion'
 import uniqueId from 'lodash.uniqueid'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
@@ -62,7 +61,6 @@ export const CmsEmailTemplatePreviewTemplate: FC<PreviewTemplateComponentProps> 
             <PreviewText emailTranslation={currentTranslation}>
               <EmailPartsContent>
                 <Sidebar>
-                  <EditPreviewText />
                   <EmailEditorSidebarAccordion.Container>
                     {currentTranslation.components.map((emailComponent) => (
                       <EmailEditorSidebarAccordion.EmailComponent

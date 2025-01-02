@@ -1,24 +1,27 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { PreviewText } from 'src/templates/PreviewText'
 import { EditPreviewText } from '../EditPreviewText'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
-import { buildEmailTranslation } from 'src/factories'
+import sample from 'lodash.sample'
 
 describe('EditPreviewText', () => {
-  it('displays and updates the preview text', async () => {
-    const user = userEvent.setup()
+  it('displays the preview text', async () => {
     const value = faker.lorem.paragraph()
-    const { getByRole } = render(
-      <PreviewText emailTranslation={buildEmailTranslation({ language: 'english' })}>
-        <EditPreviewText />
-      </PreviewText>,
-    )
+    const { getByRole } = render(<EditPreviewText value={value} onChange={jest.fn()} />)
 
     const input = getByRole('textbox')
-    await user.clear(input)
-    await user.type(input, value)
     expect(input).toHaveValue(value)
+  })
+
+  it('updates the preview text', async () => {
+    const user = userEvent.setup()
+    const handleChange = jest.fn()
+    const { getByRole } = render(<EditPreviewText value="" onChange={handleChange} />)
+
+    const input = getByRole('textbox')
+    const value = sample(['a', 'b', 'c'])
+    await user.type(input, value)
+    expect(handleChange).toHaveBeenCalledWith(value)
   })
 })

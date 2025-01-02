@@ -34,14 +34,14 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation 
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
   const [titleValue] = useTitleValue(getSubComponentByKind(emailTranslation, 'Title'))
-  const [previewText] = usePreviewText()
+  const [previewText, setPreviewText] = usePreviewText()
 
   const content = (
     <>
       <VisuallyHidden>
         <h2>Email Preview</h2>
       </VisuallyHidden>
-      <EditPreviewText />
+      <EditPreviewText value={previewText} onChange={setPreviewText} />
       <div className="email-preview-actions">
         <SelectPreviewType previewType={previewType} onChange={setPreviewType} />
         {!isRestricted() && (
