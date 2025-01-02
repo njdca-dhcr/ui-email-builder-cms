@@ -30,13 +30,6 @@ export const SidebarNavigation: FC<Props> = () => {
           text="Tips & Tricks"
           icon={<UswdsIcon icon="Support" />}
         />
-        <SpacedLink
-          className="sidebar-settings"
-          bottom
-          to="/settings"
-          text="Settings"
-          icon={<UswdsIcon icon="Settings" />}
-        />
       </SideBarList>
     </nav>
   )

@@ -109,11 +109,4 @@ describe('SidebarNavigation', () => {
       expect(queryByText('Groups')).toBeNull()
     })
   })
-
-  it('displays a settings link', () => {
-    const { getByRole } = render(<SidebarNavigation />)
-    const link: HTMLAnchorElement = getByRole('link', { name: 'Settings' }) as any
-    expect(link.tagName).toEqual('A')
-    expect(link.href).toEqual(urlFor('/settings'))
-  })
 })
