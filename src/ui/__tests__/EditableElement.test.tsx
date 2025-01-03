@@ -131,5 +131,6 @@ describe('EditableElement', () => {
     )
     expect(baseElement.querySelectorAll('[contenteditable="true"]')).toHaveLength(0)
     expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+    expect(baseElement.querySelectorAll('[aria-readonly]')).toHaveLength(1)
   })
 })

@@ -31,6 +31,7 @@ export const EditableElement = forwardRef<HTMLElement, Props>(
           document.execCommand('insertText', false, event.clipboardData.getData('text/plain'))
         }}
         readOnly={readOnly}
+        aria-readonly={readOnly}
         {...({ ref } as any)}
       />
     )

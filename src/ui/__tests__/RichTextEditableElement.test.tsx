@@ -128,6 +128,17 @@ describe('RichTextEditableElement', () => {
         expect(article).not.toBeNull()
         expect(article?.tabIndex).toEqual(-1)
       })
+
+      it('is marked read only', async () => {
+        const { baseElement, debug } = renderRichTextEditableElement({
+          element: 'article',
+          readOnly: true,
+          value: [{ type: 'paragraph', children: [{ text: 'foo' }] }],
+        })
+
+        expect(baseElement.querySelectorAll('[aria-readonly]')).toHaveLength(1)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+      })
     })
   })
 })
