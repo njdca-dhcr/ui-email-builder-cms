@@ -35,6 +35,17 @@ describe('EditEmailComponent', () => {
     expect(tbody).toBeEmptyDOMElement()
   })
 
+  it('passes props through', async () => {
+    emailComponent = buildUniqueEmailComponent('Name')
+    const { baseElement } = render(
+      <EditEmailComponent emailComponent={emailComponent} readOnly>
+        <tr />
+      </EditEmailComponent>,
+      { wrapper: emailPartWrapper },
+    )
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+  })
+
   it('can render a Header', () => {
     emailComponent = buildUniqueEmailComponent('Header')
     const text = faker.lorem.paragraph()

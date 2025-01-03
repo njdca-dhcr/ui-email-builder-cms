@@ -8,7 +8,7 @@ import { useSyncSidebarAndPreviewScroll } from '../SyncSidebarAndPreviewScroll'
 
 const { Row } = EmailBlock
 
-export const Name: FC<EmailComponentProps<'Name'>> = ({ emailComponent }) => {
+export const Name: FC<EmailComponentProps<'Name'>> = ({ emailComponent, readOnly }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(emailComponent)
   const [value, setValue] = useEmailPartsContentFor(emailComponent)
   const { scrollSidebar, previewRef } = useSyncSidebarAndPreviewScroll(emailComponent.id)
@@ -28,6 +28,7 @@ export const Name: FC<EmailComponentProps<'Name'>> = ({ emailComponent }) => {
           scrollSidebar()
         }}
         onValueChange={(name) => setValue({ ...value, name })}
+        readOnly={readOnly}
         style={styles}
         value={value.name}
       />

@@ -13,6 +13,7 @@ const { Row, Link } = EmailBlock
 
 export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
   emailComponent,
+  readOnly,
 }) => {
   const { activate } = useIsCurrentlyActiveEmailComponent(emailComponent)
   const [value, setValue] = useEmailPartsContentFor(emailComponent)
@@ -38,6 +39,7 @@ export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
         translation.language === language ? (
           <EditableElement
             key={translation.language}
+            readOnly={readOnly}
             element="span"
             style={styles.currentLanguage}
             label={`${capitalize(language)} label`}
@@ -62,6 +64,7 @@ export const TranslationLinks: FC<EmailComponentProps<'TranslationLinks'>> = ({
             key={translation.language}
           >
             <EditableElement
+              readOnly={readOnly}
               element="span"
               label={`${capitalize(translation.language)} label`}
               onValueChange={(text) => {

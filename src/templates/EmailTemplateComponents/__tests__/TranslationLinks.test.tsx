@@ -43,7 +43,7 @@ describe('TranslationLinks', () => {
     asMock(useUserInfo).mockReturnValue([{ id: userId }, jest.fn()])
   })
 
-  const renderComponent = () => {
+  const renderComponent = (props?: { readOnly: boolean }) => {
     return render(
       <EmailTemplateState emailTemplate={emailTemplate}>
         {() => (
@@ -51,7 +51,9 @@ describe('TranslationLinks', () => {
             <EmailPartsContent>
               <table>
                 <tbody>
-                  <TranslationLinks emailComponent={emailComponent}>{null}</TranslationLinks>
+                  <TranslationLinks emailComponent={emailComponent} {...props}>
+                    {null}
+                  </TranslationLinks>
                 </tbody>
               </table>
               <ShowActiveEmailPart />
@@ -120,5 +122,10 @@ describe('TranslationLinks', () => {
     expectActiveEmailPartToNotBe(emailComponent.id, baseElement)
     await user.click(getByLabelText('English label'))
     expectActiveEmailPartToBe(emailComponent.id, baseElement)
+  })
+
+  it('can be read only', async () => {
+    const { baseElement } = renderComponent({ readOnly: true })
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(2)
   })
 })
