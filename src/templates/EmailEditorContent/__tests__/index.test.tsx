@@ -152,16 +152,47 @@ describe('EmailEditorContent', () => {
     expect(baseElement).toHaveTextContent(banner.primaryText)
   })
 
-  it('can be read only', async () => {
-    const { baseElement } = render(
-      <EmailEditorContent
-        emailTranslation={emailTranslation}
-        emailTemplate={emailTemplate}
-        currentUser={currentUser}
-        readOnly
-      />,
-    )
-    expect(baseElement!.querySelectorAll('[readonly]').length).toBeGreaterThan(0)
+  describe('when read only', () => {
+    beforeEach(() => {
+      mockBackendUrl(faker.internet.url())
+      userIsSignedIn()
+      mockAppMode('NJ')
+    })
+
+    const renderReadOnly = () => {
+      return render(
+        <AuthProvider>
+          <QueryClientProvider client={new QueryClient()}>
+            <EmailEditorContent
+              emailTranslation={emailTranslation}
+              emailTemplate={{ ...emailTemplate, id: randomUUID() }}
+              currentUser={currentUser}
+              readOnly
+            />
+          </QueryClientProvider>
+        </AuthProvider>,
+      )
+    }
+
+    it('has read only fields', async () => {
+      const { baseElement } = renderReadOnly()
+      expect(baseElement!.querySelectorAll('[readonly]').length).toBeGreaterThan(0)
+    })
+
+    it('lacks an export button', async () => {
+      const { queryByRole } = renderReadOnly()
+      expect(queryByRole('button', { name: 'Share' })).toBeNull()
+    })
+
+    it('lacks an update button', async () => {
+      const { queryByRole } = renderReadOnly()
+      expect(queryByRole('button', { name: 'Update' })).toBeNull()
+    })
+
+    it('lacks a save as button', async () => {
+      const { queryByRole } = renderReadOnly()
+      expect(queryByRole('button', { name: 'Save As' })).toBeNull()
+    })
   })
 
   describe('when the email template has an id and signed in', () => {

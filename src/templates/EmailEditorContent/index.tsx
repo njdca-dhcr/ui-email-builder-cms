@@ -45,7 +45,7 @@ export const EmailEditorContent: FC<Props> = ({
         <EditPreviewText value={previewText} onChange={setPreviewText} />
         <div className="email-preview-actions">
           <SelectPreviewType {...previewType} />
-          {!isRestricted() && (
+          {!isRestricted() && !readOnly && (
             <div className="share-and-save-buttons">
               {emailTemplate.id && (
                 <ExportEmailTemplate
