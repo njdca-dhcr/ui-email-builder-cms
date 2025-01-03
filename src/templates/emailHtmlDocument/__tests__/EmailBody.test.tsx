@@ -59,4 +59,11 @@ describe('EmailBody', () => {
     expect(baseElement).toHaveTextContent(status)
     expect(baseElement).toHaveTextContent(name)
   })
+
+  it('can be marked read only', async () => {
+    const { baseElement } = render(
+      <EmailBody previewText={previewText} translation={translation} readOnly />,
+    )
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(5)
+  })
 })

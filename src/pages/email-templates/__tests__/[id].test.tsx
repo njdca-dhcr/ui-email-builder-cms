@@ -20,7 +20,7 @@ import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import userEvent from '@testing-library/user-event'
+import userEvent, { UserEvent } from '@testing-library/user-event'
 
 jest.mock('src/network/emailTemplates')
 
@@ -151,29 +151,56 @@ describe('Email Template Show Page', () => {
     })
 
     describe('translation mode', () => {
-      it('displays two translations in translation mode', async () => {
-        asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult())
-        const user = userEvent.setup()
-        const { getByLabelText, getByRole, baseElement } = renderEmailTemplateShowPage()
+      let user: UserEvent
 
-        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(1)
-        await user.click(getByLabelText('Translation Language'))
-        await user.click(getByRole('option', { name: 'Spanish' }))
+      beforeEach(async () => {
+        user = userEvent.setup()
+        asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult())
+      })
+
+      const renderEmailTemplateShowPageInTranslationMode = async () => {
+        const rendered = renderEmailTemplateShowPage()
+
+        await user.click(rendered.getByLabelText('Translation Language'))
+        await user.click(rendered.getByRole('option', { name: 'Spanish' }))
+        return rendered
+      }
+
+      it('displays two translations in translation mode', async () => {
+        const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
         expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(2)
       })
 
       it('is possible to exit translation mode', async () => {
-        asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult())
-        const user = userEvent.setup()
-        const { getByLabelText, getByRole, baseElement } = renderEmailTemplateShowPage()
-
-        expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(1)
-        await user.click(getByLabelText('Translation Language'))
-        await user.click(getByRole('option', { name: 'Spanish' }))
+        const { baseElement, getByRole } = await renderEmailTemplateShowPageInTranslationMode()
         expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(2)
 
         await user.click(getByRole('button', { name: 'Exit translation mode' }))
         expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(1)
+      })
+
+      it('has a read only version of the original translation', async () => {
+        const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
+        const originalTranslationContainer = baseElement.querySelector(
+          '.email-editor-content:first-of-type',
+        )
+
+        expect(originalTranslationContainer).toBeDefined()
+        expect(originalTranslationContainer!.querySelectorAll('[readonly]').length).toBeGreaterThan(
+          0,
+        )
+      })
+
+      it('has a writable version of the other translation', async () => {
+        const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
+        const otherTranslationContainer = baseElement.querySelector(
+          '.email-editor-content:last-of-type',
+        )
+
+        expect(otherTranslationContainer).toBeDefined()
+        expect(
+          otherTranslationContainer!.querySelectorAll('[contenteditable="true"]').length,
+        ).toBeGreaterThan(0)
       })
     })
   })

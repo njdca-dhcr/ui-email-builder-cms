@@ -23,9 +23,15 @@ interface Props {
   emailTemplate: EmailTemplate.Unique.Config
   emailTranslation: EmailTranslation.Unique
   currentUser: CurrentUserEmailConfig
+  readOnly?: boolean
 }
 
-export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation, currentUser }) => {
+export const EmailEditorContent: FC<Props> = ({
+  emailTemplate,
+  emailTranslation,
+  currentUser,
+  readOnly,
+}) => {
   const previewType = usePreviewType()
   const previewRef = useRef()
   const toEmailText = useElementsToEmailString(previewRef)
@@ -70,7 +76,11 @@ export const EmailEditorContent: FC<Props> = ({ emailTemplate, emailTranslation,
             ref={previewRef as any}
             className={classNames({ desktop: previewType.isDesktop, mobile: previewType.isMobile })}
           >
-            <EmailBody previewText={previewText} translation={emailTranslation} />
+            <EmailBody
+              previewText={previewText}
+              translation={emailTranslation}
+              readOnly={readOnly}
+            />
           </div>
         </Root.div>
       </UserInfoProvider>

@@ -83,6 +83,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                       emailTranslation={currentTranslation}
                                       emailTemplate={currentEmailTemplate}
                                       currentUser={currentUser ?? { id: 'placeholder' }}
+                                      readOnly
                                     />
                                   </PreviewText>
                                 </EmailPartsContent>

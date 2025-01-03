@@ -11,9 +11,10 @@ import { EmailComponentSpacer } from '../EmailEditorContent/EmailComponentSpacer
 interface Props {
   previewText: string
   translation: EmailTranslation.Unique
+  readOnly?: boolean
 }
 
-export const EmailBody: FC<Props> = ({ previewText, translation }) => {
+export const EmailBody: FC<Props> = ({ previewText, translation, readOnly }) => {
   const components = translation.components
 
   return (
@@ -26,10 +27,13 @@ export const EmailBody: FC<Props> = ({ previewText, translation }) => {
       >
         {components.map((emailComponent, i) => (
           <Fragment key={i}>
-            <EditEmailComponent emailComponent={emailComponent}>
+            <EditEmailComponent emailComponent={emailComponent} readOnly={readOnly}>
               {(emailComponent.subComponents ?? []).map((emailSubComponent, n) => (
                 <Fragment key={n}>
-                  <EditEmailSubComponent emailSubComponent={emailSubComponent} />
+                  <EditEmailSubComponent
+                    emailSubComponent={emailSubComponent}
+                    readOnly={readOnly}
+                  />
                   <EmailSubComponentSpacer
                     currentSubComponent={emailSubComponent}
                     nextSubComponent={(emailComponent.subComponents ?? [])[n + 1]}

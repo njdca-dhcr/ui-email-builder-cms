@@ -152,6 +152,18 @@ describe('EmailEditorContent', () => {
     expect(baseElement).toHaveTextContent(banner.primaryText)
   })
 
+  it('can be read only', async () => {
+    const { baseElement } = render(
+      <EmailEditorContent
+        emailTranslation={emailTranslation}
+        emailTemplate={emailTemplate}
+        currentUser={currentUser}
+        readOnly
+      />,
+    )
+    expect(baseElement!.querySelectorAll('[readonly]').length).toBeGreaterThan(0)
+  })
+
   describe('when the email template has an id and signed in', () => {
     beforeEach(() => {
       mockBackendUrl(faker.internet.url())
