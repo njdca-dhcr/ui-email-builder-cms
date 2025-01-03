@@ -6,10 +6,11 @@ interface Props extends TableHTMLAttributes<HTMLOrSVGElement> {
   onValueChange: (value: string) => void
   value: string
   valueKey?: any
+  readOnly?: boolean
 }
 
 export const EditableElement = forwardRef<HTMLElement, Props>(
-  ({ element, label, onValueChange, value, valueKey, ...props }, ref) => {
+  ({ element, label, onValueChange, value, valueKey, readOnly, ...props }, ref) => {
     const Element = element
 
     const initialValue = useMemo(() => value, [valueKey])
@@ -18,7 +19,7 @@ export const EditableElement = forwardRef<HTMLElement, Props>(
       <Element
         {...props}
         aria-label={label}
-        contentEditable
+        contentEditable={!readOnly}
         tabIndex={0}
         onInput={(event) => {
           onValueChange((event.target as any).innerHTML)
@@ -29,6 +30,7 @@ export const EditableElement = forwardRef<HTMLElement, Props>(
           event.preventDefault()
           document.execCommand('insertText', false, event.clipboardData.getData('text/plain'))
         }}
+        readOnly={readOnly}
         {...({ ref } as any)}
       />
     )

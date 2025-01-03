@@ -19,7 +19,7 @@ export const Disclaimer: FC<EmailComponentProps<'Disclaimer'>> = ({}) => {
       <RichTextEditableElement
         element="td"
         label="Disclaimer"
-        readonly
+        readOnly
         className="disclaimer"
         style={styles}
         onValueChange={() => null}

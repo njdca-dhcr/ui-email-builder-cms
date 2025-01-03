@@ -22,7 +22,7 @@ export interface RichTextEditableElementProps {
   onClick?: TableHTMLAttributes<HTMLOrSVGElement>['onClick']
   onFocus?: TableHTMLAttributes<HTMLOrSVGElement>['onFocus']
   onValueChange: (value: RichTextValue) => void
-  readonly?: boolean
+  readOnly?: boolean
   value: RichTextValue
   style?: CSSProperties
 }
@@ -36,7 +36,7 @@ export const RichTextEditableElement = forwardRef<any, RichTextEditableElementPr
       onFocus,
       onValueChange,
       value,
-      readonly,
+      readOnly,
       style,
       ...props
     },
@@ -63,11 +63,11 @@ export const RichTextEditableElement = forwardRef<any, RichTextEditableElementPr
         <RichTextAdditionalStylesContext.Provider value={memoizedAdditionalStyles}>
           <Element
             aria-label={label}
-            tabIndex={readonly ? null : 0}
+            tabIndex={readOnly ? null : 0}
             style={style}
             onFocus={(event) => {
               onFocus && onFocus(event)
-              if (!readonly) {
+              if (!readOnly) {
                 setIsFocused(true)
               }
             }}

@@ -121,7 +121,7 @@ describe('RichTextEditableElement', () => {
       it('lacks a tabIndex', () => {
         const { baseElement } = renderRichTextEditableElement({
           element: 'article',
-          readonly: true,
+          readOnly: true,
           value: [{ type: 'paragraph', children: [{ text: 'foo' }] }],
         })
         const article = baseElement.querySelector('article')

@@ -118,4 +118,18 @@ describe('EditableElement', () => {
     await user.paste(dataTransfer)
     expect(document.execCommand).toHaveBeenCalledWith('insertText', false, text)
   })
+
+  it('can be read only', async () => {
+    const { baseElement } = render(
+      <EditableElement
+        label={labelValue}
+        value={value}
+        onValueChange={handleChange}
+        element="section"
+        readOnly
+      />,
+    )
+    expect(baseElement.querySelectorAll('[contenteditable="true"]')).toHaveLength(0)
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+  })
 })
