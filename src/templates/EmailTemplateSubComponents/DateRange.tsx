@@ -12,7 +12,10 @@ export const useDateRangeValue = (emailSubComponent: EmailParts.DateRange) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 
-export const DateRange: FC<EmailSubComponentProps<'DateRange'>> = ({ emailSubComponent }) => {
+export const DateRange: FC<EmailSubComponentProps<'DateRange'>> = ({
+  emailSubComponent,
+  readOnly,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useDateRangeValue(emailSubComponent)
 
@@ -34,6 +37,7 @@ export const DateRange: FC<EmailSubComponentProps<'DateRange'>> = ({ emailSubCom
         onValueChange={(range) => setValue({ ...value, range })}
         style={styles}
         value={value.range}
+        readOnly={readOnly}
       />
     </Row>
   )

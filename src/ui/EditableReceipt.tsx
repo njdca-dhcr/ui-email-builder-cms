@@ -11,6 +11,7 @@ export interface ReceiptLineItem {
 }
 
 interface Props {
+  readOnly?: boolean
   lineItems: ReceiptLineItem[]
   total: ReceiptLineItem
   onLineItemChange: (index: number, part: 'label' | 'value', value: string) => void
@@ -24,12 +25,14 @@ export const EditableReceipt: FC<Props> = ({
   total,
   onLineItemChange,
   onTotalChange,
+  readOnly,
 }) => {
   return (
     <Table role="table">
       {lineItems.map((lineItem, i) => (
         <Row key={i} role="row">
           <EditableElement
+            readOnly={readOnly}
             align="left"
             role="rowheader"
             element="td"
@@ -39,6 +42,7 @@ export const EditableReceipt: FC<Props> = ({
             style={{ ...styles.amountLineItemLabel, ...additionalStyles(lineItem) }}
           />
           <EditableElement
+            readOnly={readOnly}
             align="right"
             role="cell"
             element="td"
@@ -51,6 +55,7 @@ export const EditableReceipt: FC<Props> = ({
       ))}
       <Row key="total" role="row">
         <EditableElement
+          readOnly={readOnly}
           align="left"
           role="rowheader"
           element="td"
@@ -60,6 +65,7 @@ export const EditableReceipt: FC<Props> = ({
           style={{ ...styles.total, ...additionalStyles(total) }}
         />
         <EditableElement
+          readOnly={readOnly}
           align="right"
           role="cell"
           element="td"

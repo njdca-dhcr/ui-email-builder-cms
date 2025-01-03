@@ -100,6 +100,16 @@ describe('Directive', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(4)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Directive emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.OneStep)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(4)
+      })
     })
 
     describe('Three Steps', () => {
@@ -134,6 +144,16 @@ describe('Directive', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(11)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Directive emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.ThreeStep)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(11)
       })
     })
 
@@ -177,6 +197,19 @@ describe('Directive', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(13)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Directive emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          DirectiveVariant.StepTwoExpansion,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(13)
+      })
     })
 
     describe('Pay Online', () => {
@@ -201,6 +234,16 @@ describe('Directive', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(4)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Directive emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), DirectiveVariant.PayOnline)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(4)
       })
     })
   })

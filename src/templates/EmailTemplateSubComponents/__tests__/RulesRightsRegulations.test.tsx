@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { RenderResult, render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import React, { FC } from 'react'
-import { EmailParts, EmailTemplate, RulesRightsRegulationsVariant } from 'src/appTypes'
+import { EmailParts, RulesRightsRegulationsVariant } from 'src/appTypes'
 import {
   buildUniqueEmailSubComponent,
   emailPartWrapper,
@@ -102,6 +102,19 @@ describe('RulesRightsRegulations', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(2)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <RulesRightsRegulations emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          RulesRightsRegulationsVariant.Reminder,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(2)
+      })
     })
 
     describe('Appeal Rights', () => {
@@ -136,6 +149,19 @@ describe('RulesRightsRegulations', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(7)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <RulesRightsRegulations emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          RulesRightsRegulationsVariant.AppealRights,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(7)
       })
 
       it('can have the appealRightsInstruction toggled on and off', async () => {
@@ -195,6 +221,19 @@ describe('RulesRightsRegulations', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(3)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <RulesRightsRegulations emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          RulesRightsRegulationsVariant.YourRights,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(3)
       })
     })
   })

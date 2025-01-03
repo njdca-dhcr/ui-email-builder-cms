@@ -104,6 +104,16 @@ describe('LoginDetails', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(7)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <LoginDetails emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), LoginDetailsVariant.Details)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(7)
+      })
     })
 
     describe('Information', () => {
@@ -123,6 +133,19 @@ describe('LoginDetails', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(3)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <LoginDetails emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          LoginDetailsVariant.Information,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(3)
       })
     })
   })

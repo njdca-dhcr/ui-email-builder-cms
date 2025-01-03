@@ -16,7 +16,10 @@ export const useLoginDetailsValue = (emailSubComponent: EmailParts.LoginDetails)
   return useEmailPartsContentFor(emailSubComponent)
 }
 
-export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ emailSubComponent }) => {
+export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({
+  emailSubComponent,
+  readOnly,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useLoginDetailsValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
@@ -53,6 +56,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
         {isDetails && (
           <EditableElement
             aria-level={2}
+            readOnly={readOnly}
             element="td"
             onValueChange={(loginDetailsTitle) => setValue({ ...value, loginDetailsTitle })}
             label="Login details title"
@@ -64,6 +68,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
         {isInformation && (
           <EditableElement
             aria-level={2}
+            readOnly={readOnly}
             element="td"
             onValueChange={(loginInformationTitle) => setValue({ ...value, loginInformationTitle })}
             label="Login information title"
@@ -78,6 +83,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
         <Cell elements={['table']}>
           <Row>
             <EditableElement
+              readOnly={readOnly}
               element="td"
               onValueChange={(usernameLabel) => setValue({ ...value, usernameLabel })}
               label="Username label"
@@ -87,6 +93,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
           </Row>
           <Row>
             <EditableElement
+              readOnly={readOnly}
               element="td"
               onValueChange={(usernameValue) => setValue({ ...value, usernameValue })}
               label="Username value"
@@ -96,6 +103,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
           </Row>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               onValueChange={(resetPasswordMessage) => setValue({ ...value, resetPasswordMessage })}
               label="Reset password message"
@@ -113,6 +121,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
           >
             <Link to={value.buttonHref}>
               <EditableElement
+                readOnly={readOnly}
                 element="span"
                 onValueChange={(button) => setValue({ ...value, button })}
                 label="Reset password button"
@@ -132,6 +141,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
           >
             <Link to={value.buttonHref}>
               <EditableElement
+                readOnly={readOnly}
                 element="span"
                 onValueChange={(buttonHref) => setValue({ ...value, buttonHref })}
                 label="Reset password link"
@@ -141,6 +151,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
           </Row>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               onValueChange={(resetPasswordDetails) => setValue({ ...value, resetPasswordDetails })}
               label="Reset password details"
@@ -155,6 +166,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
         <Cell elements={['table']}>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               label="Login information description"
               value={value.loginInformationDescription}
@@ -166,6 +178,7 @@ export const LoginDetails: FC<EmailSubComponentProps<'LoginDetails'>> = ({ email
           </Row>
           <Row condition={value.showLoginInformationBody}>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               label="Login information content"
               value={value.loginInformationBody}

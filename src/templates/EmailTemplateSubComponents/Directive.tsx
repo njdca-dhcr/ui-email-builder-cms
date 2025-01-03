@@ -16,7 +16,10 @@ export const useDirectiveValue = (emailSubComponent: EmailParts.Directive) => {
 
 const { Table, Row, Cell, Link } = EmailBlock
 
-export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubComponent }) => {
+export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({
+  emailSubComponent,
+  readOnly,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useDirectiveValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
@@ -61,6 +64,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                   </>
                 ) : (
                   <EditableElement
+                    readOnly={readOnly}
                     element="b"
                     label="Directive Title"
                     onValueChange={(title) => setValue({ ...value, title })}
@@ -96,6 +100,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
             >
               <Link to={value.linkHref}>
                 <EditableElement
+                  readOnly={readOnly}
                   element="span"
                   value={value.buttonLabel}
                   label="Directive Button"
@@ -114,6 +119,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
             <Row elements={[{ part: 'cell', style: styles.linkText, className: 'displayed-href' }]}>
               <Link to={value.linkHref}>
                 <EditableElement
+                  readOnly={readOnly}
                   element="span"
                   label="Directive Link"
                   value={value.linkHref}
@@ -126,6 +132,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
           {[DirectiveVariant.OneStep].includes(value.variant) && (
             <tr>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="td"
                 label="Supportive information"
                 onValueChange={(oneStepSupportiveText) =>
@@ -141,6 +148,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
             <>
               <tr>
                 <EditableElement
+                  readOnly={readOnly}
                   element="td"
                   label="Alternative payment information"
                   onValueChange={(alternativePaymentLabel) =>
@@ -159,6 +167,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
 
               <tr>
                 <RichTextEditableElement
+                  readOnly={readOnly}
                   element="td"
                   label="Supportive information"
                   onValueChange={(payOnlineSupportiveText) =>
@@ -183,6 +192,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
           >
             <div style={{ lineHeight: '150%' }}>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="span"
                 label="Label for the Directive"
                 onValueChange={(label) => setValue({ ...value, label })}
@@ -223,6 +233,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                       <div style={{ lineHeight: '145%' }}>
                         <span style={styles.stepNumberLabel}>
                           <RichTextEditableElement
+                            readOnly={readOnly}
                             element="span"
                             label="Label for Step 1"
                             onValueChange={(step1Label) => setValue({ ...value, step1Label })}
@@ -246,6 +257,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                         {value.showStep1AdditionalContent && (
                           <Cell style={{ lineHeight: '16px' }}>
                             <RichTextEditableElement
+                              readOnly={readOnly}
                               element="span"
                               label="Additional information for Step 1"
                               onValueChange={(step1Additional) =>
@@ -286,6 +298,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                         >
                           <Link to={value.linkHref}>
                             <EditableElement
+                              readOnly={readOnly}
                               element="span"
                               value={value.buttonLabel}
                               label="Directive Button"
@@ -308,6 +321,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                         >
                           <Link to={value.linkHref}>
                             <EditableElement
+                              readOnly={readOnly}
                               element="span"
                               label="Directive Link"
                               value={value.linkHref}
@@ -348,6 +362,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                       <div style={{ lineHeight: '145%' }}>
                         <span style={styles.stepNumberLabel}>
                           <RichTextEditableElement
+                            readOnly={readOnly}
                             element="span"
                             label="Label for Step 2"
                             onValueChange={(step2Label) => setValue({ ...value, step2Label })}
@@ -374,6 +389,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                         <>
                           <div style={{ lineHeight: '16px' }}>
                             <RichTextEditableElement
+                              readOnly={readOnly}
                               element="span"
                               label="Additional information for Step 2"
                               onValueChange={(step2Additional) =>
@@ -388,6 +404,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                           {[DirectiveVariant.StepTwoExpansion].includes(value.variant) && (
                             <>
                               <RichTextEditableElement
+                                readOnly={readOnly}
                                 element="div"
                                 label="Tertiary information for Step 2"
                                 onValueChange={(step2Tertiary) =>
@@ -399,6 +416,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                               <div style={styles.whiteSpace}>&nbsp;</div>
 
                               <RichTextEditableElement
+                                readOnly={readOnly}
                                 element="div"
                                 label="Case number information"
                                 onValueChange={(step2CaseNumber) =>
@@ -444,6 +462,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                       <div style={{ lineHeight: '145%' }}>
                         <span style={styles.stepNumberLabel}>
                           <RichTextEditableElement
+                            readOnly={readOnly}
                             element="span"
                             label="Label for Step 3"
                             onValueChange={(step3Label) => setValue({ ...value, step3Label })}
@@ -463,6 +482,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
                     <Cell style={styles.step3AdditionalInfo}>
                       <div style={{ lineHeight: '16px' }}>
                         <RichTextEditableElement
+                          readOnly={readOnly}
                           element="span"
                           label="Additional information for Step 3"
                           onValueChange={(step3Additional) =>
@@ -486,6 +506,7 @@ export const Directive: FC<EmailSubComponentProps<'Directive'>> = ({ emailSubCom
               </Row>
               <Row>
                 <RichTextEditableElement
+                  readOnly={readOnly}
                   element="td"
                   label="Supportive information"
                   onValueChange={(multipleStepsSupportiveText) =>

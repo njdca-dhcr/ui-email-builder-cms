@@ -13,7 +13,7 @@ import { RulesRightsRegulations } from '../EmailTemplateSubComponents/RulesRight
 import { LoginDetails } from '../EmailTemplateSubComponents/LoginDetails'
 import { DepartmentSeal } from '../EmailTemplateSubComponents/DepartmentSeal'
 import { InformationalBox } from '../EmailTemplateSubComponents/InformationalBox'
-import { EmailParts, EmailTemplate } from 'src/appTypes'
+import { EmailParts } from 'src/appTypes'
 import { DirectiveButton } from '../EmailTemplateSubComponents/DirectiveButton'
 
 export const EditEmailSubComponent: FC<EmailSubComponentProps<EmailParts.Kinds.SubComponent>> = ({

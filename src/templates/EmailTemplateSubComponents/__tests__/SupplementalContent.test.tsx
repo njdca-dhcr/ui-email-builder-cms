@@ -99,6 +99,19 @@ describe('SupplementalContent', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(2)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.SingleSupplementalContent,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(2)
+      })
     })
 
     describe('Double Supplemental Content', () => {
@@ -124,6 +137,19 @@ describe('SupplementalContent', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(4)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.DoubleSupplementalContent,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(4)
       })
     })
 
@@ -154,6 +180,19 @@ describe('SupplementalContent', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(6)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.TripleSupplementalContent,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(6)
       })
     })
 
@@ -188,6 +227,19 @@ describe('SupplementalContent', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(8)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <SupplementalContent emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          SupplementalContentVariant.BenefitAmount,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(8)
       })
     })
   })

@@ -56,4 +56,22 @@ describe('InformationalBox', () => {
     await user.click(input)
     expect(rendered.queryByTestId(richTextEditorTestId)).not.toBeNull()
   })
+
+  it('only has the correct fields', () => {
+    rendered = render(<InformationalBox emailSubComponent={emailSubComponent} />, {
+      wrapper: emailPartWrapper,
+    })
+    const all = rendered.baseElement.querySelectorAll('[aria-label]')
+    expect(all).toHaveLength(3)
+  })
+
+  it('can be read only', async () => {
+    const { baseElement } = render(
+      <InformationalBox emailSubComponent={emailSubComponent} readOnly />,
+      {
+        wrapper: emailPartWrapper,
+      },
+    )
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(3)
+  })
 })

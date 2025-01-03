@@ -15,6 +15,7 @@ export const useAdditionalContentValue = (emailSubComponent: EmailParts.Addition
 
 export const AdditionalContent: FC<EmailSubComponentProps<'AdditionalContent'>> = ({
   emailSubComponent,
+  readOnly,
 }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useAdditionalContentValue(emailSubComponent)
@@ -40,6 +41,7 @@ export const AdditionalContent: FC<EmailSubComponentProps<'AdditionalContent'>> 
         onValueChange={(content) => setValue({ ...value, content })}
         style={styles}
         value={value.content}
+        readOnly={readOnly}
       />
     </Row>
   )

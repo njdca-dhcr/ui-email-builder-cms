@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { RenderResult, render } from '@testing-library/react'
-import { EmailParts, EmailTemplate, StatusVariant } from 'src/appTypes'
+import { EmailParts, StatusVariant } from 'src/appTypes'
 import { faker } from '@faker-js/faker'
 import {
   buildUniqueEmailSubComponent,
@@ -128,6 +128,16 @@ describe('Status', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(3)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Status emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.Overview)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(3)
+      })
     })
 
     describe('Overview w/ Reason', () => {
@@ -153,6 +163,19 @@ describe('Status', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(4)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Status emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          StatusVariant.OverviewWithReason,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(4)
       })
     })
 
@@ -187,6 +210,16 @@ describe('Status', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(9)
       })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Status emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(rendered.getByLabelText('Variant'), StatusVariant.MissingDocument)
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(9)
+      })
     })
 
     describe('Overview w/ Reason + Amount Due', () => {
@@ -214,6 +247,19 @@ describe('Status', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(5)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Status emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          StatusVariant.OverviewWithReasonAndAmountDue,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(5)
       })
     })
 
@@ -254,6 +300,19 @@ describe('Status', () => {
       it('only has the correct fields', () => {
         const all = rendered.baseElement.querySelectorAll('[aria-label]')
         expect(all).toHaveLength(11)
+      })
+
+      it('can be read only', async () => {
+        rendered.unmount()
+        const { baseElement } = renderEmailPart(
+          <Status emailSubComponent={emailSubComponent} readOnly />,
+          <VariantSelect />,
+        )
+        await user.selectOptions(
+          rendered.getByLabelText('Variant'),
+          StatusVariant.OverviewWithReasonAndAmountBreakdown,
+        )
+        expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(11)
       })
     })
   })

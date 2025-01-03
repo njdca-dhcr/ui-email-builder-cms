@@ -13,7 +13,7 @@ export const useIntroValue = (emailSubComponent: EmailParts.Intro) => {
   return useEmailPartsContentFor(emailSubComponent)
 }
 
-export const Intro: FC<EmailSubComponentProps<'Intro'>> = ({ emailSubComponent }) => {
+export const Intro: FC<EmailSubComponentProps<'Intro'>> = ({ emailSubComponent, readOnly }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useIntroValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
@@ -22,6 +22,7 @@ export const Intro: FC<EmailSubComponentProps<'Intro'>> = ({ emailSubComponent }
     <Row className="intro">
       <RichTextEditableElement
         ref={previewRef}
+        readOnly={readOnly}
         element="td"
         className={StyleDefaults.layout.narrow}
         label="Introduction"

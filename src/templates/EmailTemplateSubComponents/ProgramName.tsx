@@ -14,7 +14,10 @@ export const useProgramNameValue = (emailSubComponent: EmailParts.ProgramName) =
   return useEmailPartsContentFor(emailSubComponent)
 }
 
-export const ProgramName: FC<EmailSubComponentProps<'ProgramName'>> = ({ emailSubComponent }) => {
+export const ProgramName: FC<EmailSubComponentProps<'ProgramName'>> = ({
+  emailSubComponent,
+  readOnly,
+}) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useProgramNameValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
@@ -37,6 +40,7 @@ export const ProgramName: FC<EmailSubComponentProps<'ProgramName'>> = ({ emailSu
     >
       <Table width="unset" elements={['row']}>
         <EditableElement
+          readOnly={readOnly}
           valueKey={value.preset}
           ref={previewRef}
           aria-level={2}

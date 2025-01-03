@@ -14,7 +14,7 @@ export const useTitleValue = (emailSubComponent: EmailParts.Title | null) => {
   return useEmailPartsContentFor(title)
 }
 
-export const Title: FC<EmailSubComponentProps<'Title'>> = ({ emailSubComponent }) => {
+export const Title: FC<EmailSubComponentProps<'Title'>> = ({ emailSubComponent, readOnly }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useTitleValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
@@ -42,6 +42,7 @@ export const Title: FC<EmailSubComponentProps<'Title'>> = ({ emailSubComponent }
           scrollSidebar()
         }}
         onValueChange={(title) => setValue({ ...value, title })}
+        readOnly={readOnly}
         style={styles}
         value={value.title}
       />

@@ -47,4 +47,11 @@ describe('Title', () => {
     await user.click(getByLabelText('Title'))
     expectActiveEmailPartToBe(key, baseElement)
   })
+
+  it('can be read only', async () => {
+    const { baseElement } = render(<Title emailSubComponent={emailSubComponent} readOnly />, {
+      wrapper: emailPartWrapper,
+    })
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+  })
 })

@@ -12,7 +12,7 @@ import {
   expectEmailPartContentFor,
 } from 'src/testHelpers'
 
-describe('Date Range', () => {
+describe('DateRange', () => {
   let emailSubComponent: EmailParts.DateRange
 
   beforeEach(() => {
@@ -46,5 +46,12 @@ describe('Date Range', () => {
     expectActiveEmailPartToNotBe(key, baseElement)
     await user.click(getByLabelText('Date Range'))
     expectActiveEmailPartToBe(key, baseElement)
+  })
+
+  it('can be read only', async () => {
+    const { baseElement } = render(<DateRange emailSubComponent={emailSubComponent} readOnly />, {
+      wrapper: emailPartWrapper,
+    })
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
   })
 })

@@ -21,6 +21,7 @@ const { Row, Cell } = EmailBlock
 
 export const InformationalBox: FC<EmailSubComponentProps<'InformationalBox'>> = ({
   emailSubComponent,
+  readOnly,
 }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useInformationalBoxValue(emailSubComponent)
@@ -70,6 +71,7 @@ export const InformationalBox: FC<EmailSubComponentProps<'InformationalBox'>> = 
               <EditableElement
                 ref={previewRef}
                 aria-level={2}
+                readOnly={readOnly}
                 element="div"
                 value={value.title}
                 label="Informational box title"
@@ -81,6 +83,7 @@ export const InformationalBox: FC<EmailSubComponentProps<'InformationalBox'>> = 
           </Row>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               value={value.description}
               label="Informational box content"
@@ -97,6 +100,7 @@ export const InformationalBox: FC<EmailSubComponentProps<'InformationalBox'>> = 
           </Row>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               label="Supportive information"
               value={value.supportiveInformation}

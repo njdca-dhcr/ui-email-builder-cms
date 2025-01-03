@@ -21,7 +21,7 @@ export const useStatusValue = (emailSubComponent: EmailParts.Status) => {
 
 const { Table, Row, Cell } = EmailBlock
 
-export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent }) => {
+export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent, readOnly }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useStatusValue(emailSubComponent)
   const { previewRef, scrollSidebar } = useSyncSidebarAndPreviewScroll(emailSubComponent.id)
@@ -54,6 +54,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
         >
           <Row>
             <EditableElement
+              readOnly={readOnly}
               ref={previewRef}
               aria-level={2}
               element="td"
@@ -72,6 +73,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             ].includes(value.variant)}
           >
             <EditableElement
+              readOnly={readOnly}
               element="td"
               value={value.statusDueTo}
               label="Status due to label"
@@ -83,6 +85,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             <>
               <Row>
                 <EditableElement
+                  readOnly={readOnly}
                   element="td"
                   value={value.documentsNeededLabel}
                   label="Documents needed label"
@@ -94,6 +97,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
               </Row>
               <Row>
                 <EditableElement
+                  readOnly={readOnly}
                   element="td"
                   value={value.documentsNeededValue}
                   label="Documents needed value"
@@ -106,6 +110,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
               <Row elements={['cell', { part: 'table', role: 'table', width: 'unset' }]}>
                 <Row role="row">
                   <EditableElement
+                    readOnly={readOnly}
                     element="td"
                     value={value.emailToLabel}
                     label="Email to label"
@@ -114,6 +119,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
                     style={styles.emailToLabel}
                   />
                   <EditableElement
+                    readOnly={readOnly}
                     element="td"
                     value={value.emailToValue}
                     label="Email to value"
@@ -124,6 +130,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
                 </Row>
                 <Row role="row">
                   <EditableElement
+                    readOnly={readOnly}
                     element="td"
                     value={value.subjectLineLabel}
                     label="Subject line label"
@@ -132,6 +139,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
                     style={styles.subjectLineLabel}
                   />
                   <EditableElement
+                    readOnly={readOnly}
                     element="td"
                     value={value.subjectLineValue}
                     label="Subject line value"
@@ -146,6 +154,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             value.showDescription && (
               <Row>
                 <RichTextEditableElement
+                  readOnly={readOnly}
                   element="td"
                   value={value.description}
                   label="Status description"
@@ -188,6 +197,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
               <UswdsIcon icon={value.icon} />
             </Cell>
             <EditableElement
+              readOnly={readOnly}
               aria-level={3}
               element="td"
               value={value.amountLabel}
@@ -203,6 +213,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             <Cell>{null}</Cell>
             <Cell style={styles.breakdownContainer}>
               <EditableReceipt
+                readOnly={readOnly}
                 lineItems={value.amountLineItems}
                 total={value.amountTotal}
                 onLineItemChange={(index, part, newValue) => {
@@ -230,6 +241,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
             </Row>
             <Row>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="td"
                 className={StyleDefaults.layout.narrow}
                 value={value.supportiveInformation}
@@ -250,6 +262,7 @@ export const Status: FC<EmailSubComponentProps<'Status'>> = ({ emailSubComponent
               </Row>
               <Row condition={[StatusVariant.MissingDocument].includes(value.variant)}>
                 <EditableElement
+                  readOnly={readOnly}
                   element="td"
                   className={StyleDefaults.layout.narrow}
                   value={value.missingDocumentDeadline}

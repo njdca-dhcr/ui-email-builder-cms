@@ -10,7 +10,10 @@ describe('EditableReceipt', () => {
   let user: UserEvent
   let value: string
 
-  const Dummy: FC<{ numberOfLineItems: number }> = ({ numberOfLineItems }) => {
+  const Dummy: FC<{ numberOfLineItems: number; readOnly?: boolean }> = ({
+    numberOfLineItems,
+    readOnly,
+  }) => {
     const [lineItems, setLineItems] = useState<ReceiptLineItem[]>(
       times(numberOfLineItems, () => ({ label: faker.lorem.word(), value: faker.lorem.word() })),
     )
@@ -21,6 +24,7 @@ describe('EditableReceipt', () => {
 
     return (
       <EditableReceipt
+        readOnly={readOnly}
         lineItems={lineItems}
         total={total}
         onLineItemChange={(index, part, newValue) => {
@@ -53,6 +57,12 @@ describe('EditableReceipt', () => {
   beforeEach(() => {
     user = userEvent.setup()
     value = faker.lorem.words(2)
+  })
+
+  it('can be read only', async () => {
+    const { baseElement } = render(<Dummy numberOfLineItems={2} readOnly />)
+    expect(baseElement.querySelectorAll('[aria-label]')).toHaveLength(6)
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(6)
   })
 
   describe('with 2 line items', () => {

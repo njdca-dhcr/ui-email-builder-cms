@@ -24,6 +24,15 @@ describe('EditEmailSubComponent', () => {
     expect(tbody).toBeEmptyDOMElement()
   })
 
+  it('passes through props', async () => {
+    emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })
+    const { baseElement, debug } = render(
+      <EditEmailSubComponent emailSubComponent={emailSubComponent} readOnly />,
+      { wrapper: emailPartWrapper },
+    )
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+  })
+
   it('can render Title', () => {
     emailSubComponent = buildUniqueEmailSubComponent({ kind: 'Title' })
     const { queryByLabelText } = render(

@@ -26,6 +26,7 @@ const { Row, Cell, Link, Table } = EmailBlock
 
 export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegulations'>> = ({
   emailSubComponent,
+  readOnly,
 }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useRulesRightsRegulationsValue(emailSubComponent)
@@ -71,6 +72,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         )}
         {isReminder && (
           <EditableElement
+            readOnly={readOnly}
             aria-level={2}
             element="td"
             value={value.reminderTitle}
@@ -82,6 +84,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         )}
         {isAppealRights && (
           <EditableElement
+            readOnly={readOnly}
             aria-level={2}
             element="td"
             value={value.appealRightsTitle}
@@ -93,6 +96,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         )}
         {isYourRights && (
           <EditableElement
+            readOnly={readOnly}
             aria-level={2}
             element="td"
             value={value.yourRightsTitle}
@@ -108,6 +112,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         <Cell elements={['table']} condition={isReminder}>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               className="rrr-reminder"
               label="Reminder description"
@@ -120,6 +125,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
         <Cell elements={['table']} condition={isAppealRights}>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               value={value.appealRightsSummary}
               label="Appeal Rights summary"
@@ -129,6 +135,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
           </Row>
           <Row condition={value.appealRightsShowInstruction}>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               value={value.appealRightsInstruction}
               label="Appeal Rights instruction"
@@ -148,6 +155,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
           >
             <Link to={value.appealRightsHref}>
               <EditableElement
+                readOnly={readOnly}
                 element="span"
                 value={value.appealRightsButton}
                 label="Appeal Rights button"
@@ -167,6 +175,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
           >
             <Link to={value.appealRightsHref}>
               <EditableElement
+                readOnly={readOnly}
                 element="span"
                 value={value.appealRightsHref}
                 label="Appeal Rights link"
@@ -176,6 +185,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
           </Row>
           <Row condition={value.appealRightsShowInfoLabel}>
             <EditableElement
+              readOnly={readOnly}
               element="td"
               id="appeal-rights-label"
               value={value.appealRightsInfoLabel}
@@ -188,6 +198,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
           </Row>
           <Row condition={value.appealRightsShowInfo}>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               label="Appeal Rights information"
               value={value.appealRightsInfo}
@@ -200,6 +211,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
           <Table>
             <Row condition={value.showYourRightsDescription}>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="td"
                 value={value.yourRightsDescription}
                 label="Your Rights description"
@@ -211,6 +223,7 @@ export const RulesRightsRegulations: FC<EmailSubComponentProps<'RulesRightsRegul
             </Row>
             <Row>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="td"
                 label="Your Rights body"
                 value={value.yourRightsList}

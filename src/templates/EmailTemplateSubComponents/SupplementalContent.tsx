@@ -21,6 +21,7 @@ export const useSupplementalContentValue = (emailSubComponent: EmailParts.Supple
 
 export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent'>> = ({
   emailSubComponent,
+  readOnly,
 }) => {
   const { activate } = useIsCurrentlyActiveEmailPart(emailSubComponent.id)
   const [value, setValue] = useSupplementalContentValue(emailSubComponent)
@@ -52,6 +53,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
         >
           <Row>
             <EditableElement
+              readOnly={readOnly}
               value={value.benefitAmountTitle}
               element="td"
               label="Benefit amount title"
@@ -61,6 +63,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
           </Row>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               label="Benefit amount description"
               onValueChange={(benefitAmountDescription) =>
@@ -88,6 +91,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
                 <UswdsIcon icon={value.benefitAmountIcon} />
               </Cell>
               <EditableElement
+                readOnly={readOnly}
                 aria-level={2}
                 value={value.benefitAmountBoxTitle}
                 element="td"
@@ -104,6 +108,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
               <Cell elements={['table']}>
                 <Row>
                   <RichTextEditableElement
+                    readOnly={readOnly}
                     element="td"
                     label="Benefit amount box copy"
                     onValueChange={(benefitAmountMainBoxCopy) =>
@@ -115,6 +120,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
                 </Row>
                 <Row>
                   <RichTextEditableElement
+                    readOnly={readOnly}
                     element="td"
                     label="Benefit amount supplemental box copy"
                     onValueChange={(benefitAmountSupplementalBoxCopy) =>
@@ -129,6 +135,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
           </Row>
           <Row>
             <RichTextEditableElement
+              readOnly={readOnly}
               element="td"
               label="Benefit amount box supportive information"
               onValueChange={(benefitAmountSupportiveInformation) =>
@@ -147,6 +154,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
       <Row elements={[{ part: 'cell', className: StyleDefaults.layout.narrow }, 'table']}>
         <Row>
           <EditableElement
+            readOnly={readOnly}
             ref={previewRef}
             aria-level={3}
             element="td"
@@ -159,6 +167,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
         </Row>
         <Row>
           <RichTextEditableElement
+            readOnly={readOnly}
             element="td"
             label="Supplemental content description"
             onValueChange={(description) => setValue({ ...value, description })}
@@ -176,6 +185,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
             </Row>
             <Row>
               <EditableElement
+                readOnly={readOnly}
                 ref={previewRef}
                 aria-level={3}
                 element="td"
@@ -188,6 +198,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
             </Row>
             <Row>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="td"
                 label="Supplemental content description 2"
                 onValueChange={(secondDescription) => setValue({ ...value, secondDescription })}
@@ -204,6 +215,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
             </Row>
             <Row>
               <EditableElement
+                readOnly={readOnly}
                 ref={previewRef}
                 aria-level={3}
                 element="td"
@@ -216,6 +228,7 @@ export const SupplementalContent: FC<EmailSubComponentProps<'SupplementalContent
             </Row>
             <Row>
               <RichTextEditableElement
+                readOnly={readOnly}
                 element="td"
                 label="Supplemental content description 3"
                 onValueChange={(thirdDescription) => setValue({ ...value, thirdDescription })}
