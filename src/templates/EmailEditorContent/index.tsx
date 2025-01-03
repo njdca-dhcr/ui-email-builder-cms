@@ -42,7 +42,7 @@ export const EmailEditorContent: FC<Props> = ({
     <div className="email-editor-content">
       <UserInfoProvider userInfo={currentUser}>
         <KeepHtmlTranslationsLinksPopulated emailTemplate={emailTemplate} />
-        <EditPreviewText value={previewText} onChange={setPreviewText} />
+        <EditPreviewText value={previewText} onChange={setPreviewText} readOnly={readOnly} />
         <div className="email-preview-actions">
           <SelectPreviewType {...previewType} />
           {!isRestricted() && !readOnly && (

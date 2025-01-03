@@ -179,6 +179,11 @@ describe('EmailEditorContent', () => {
       expect(baseElement!.querySelectorAll('[readonly]').length).toBeGreaterThan(0)
     })
 
+    it('renders the preview text as read only', async () => {
+      const { baseElement } = renderReadOnly()
+      expect(baseElement.querySelector('.edit-preview-text textarea[readonly]')).not.toBeNull()
+    })
+
     it('lacks an export button', async () => {
       const { queryByRole } = renderReadOnly()
       expect(queryByRole('button', { name: 'Share' })).toBeNull()

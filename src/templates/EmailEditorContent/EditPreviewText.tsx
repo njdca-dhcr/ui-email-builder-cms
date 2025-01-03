@@ -5,9 +5,10 @@ import './EditPreviewText.css'
 interface Props {
   onChange: (value: string) => void
   value: string
+  readOnly?: boolean
 }
 
-export const EditPreviewText: FC<Props> = ({ onChange, value }) => {
+export const EditPreviewText: FC<Props> = ({ onChange, readOnly, value }) => {
   const headingId = 'edit-preview-text'
   const descriptionId = 'preview-text-description'
   const characterCountId = 'preview-text-character-count'
@@ -22,6 +23,8 @@ export const EditPreviewText: FC<Props> = ({ onChange, value }) => {
         <textarea
           aria-describedby={[descriptionId, characterCountId].join(' ')}
           aria-labelledby={headingId}
+          aria-readonly={readOnly}
+          readOnly={readOnly}
           value={value}
           onChange={(event) => onChange(event.target.value)}
           placeholder="This is the preview text that you can edit. It gives insight into the email so that people will open it."

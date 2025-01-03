@@ -24,4 +24,12 @@ describe('EditPreviewText', () => {
     await user.type(input, value)
     expect(handleChange).toHaveBeenCalledWith(value)
   })
+
+  it('can be read only', async () => {
+    const { baseElement } = render(
+      <EditPreviewText value={faker.lorem.word()} onChange={jest.fn()} readOnly />,
+    )
+    expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
+    expect(baseElement.querySelectorAll('[aria-readonly]')).toHaveLength(1)
+  })
 })
