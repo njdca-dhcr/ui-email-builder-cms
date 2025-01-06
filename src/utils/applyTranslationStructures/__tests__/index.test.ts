@@ -1,37 +1,23 @@
 import {
   buildEmailTranslation,
   buildUniqueEmailComponent,
+  buildUniqueEmailConfig,
   buildUniqueEmailSubComponent,
 } from 'src/testHelpers'
-import { applyTranslationStructure } from '../index'
-import { BoxColor } from 'src/ui'
-import { StatusVariant } from 'src/appTypes'
+import { applyTranslationStructures } from '..'
 
-describe('applyTranslationStructure', () => {
-  it('applies the non-text values of the first translation to the second (smoke test)', async () => {
+describe('applyTranslationStructures', () => {
+  it("applies the first translation's structure to the other translations", async () => {
     const title = buildUniqueEmailSubComponent({ kind: 'Title' })
-    const status = buildUniqueEmailSubComponent({ kind: 'Status' })
     const header = buildUniqueEmailComponent('Header')
+
     const englishTranslation = buildEmailTranslation({
       language: 'english',
       components: [
         {
           ...header,
-          defaultValue: { visible: true },
-          subComponents: [
-            { ...title, defaultValue: { title: 'english title', visible: false } },
-            {
-              ...status,
-              defaultValue: {
-                visible: true,
-                variant: StatusVariant.Overview,
-                icon: 'AccountBox',
-                boxColor: BoxColor.BenefitBlue,
-                status: 'english status',
-                spaceAfter: true,
-              },
-            },
-          ],
+          defaultValue: { visible: false },
+          subComponents: [{ ...title, defaultValue: { title: 'english', visible: true } }],
         },
       ],
     })
@@ -40,45 +26,27 @@ describe('applyTranslationStructure', () => {
       components: [
         {
           ...header,
-          defaultValue: { visible: false },
-          subComponents: [
-            { ...title, defaultValue: { title: 'spanish title', visible: true } },
-            {
-              ...status,
-              defaultValue: {
-                visible: false,
-                variant: StatusVariant.OverviewWithReason,
-                icon: 'Alarm',
-                boxColor: BoxColor.GoverningGray,
-                status: 'spanish status',
-                spaceAfter: false,
-              },
-            },
-          ],
+          defaultValue: { visible: true },
+          subComponents: [{ ...title, defaultValue: { title: 'spanish', visible: false } }],
         },
       ],
     })
 
-    const result = applyTranslationStructure(englishTranslation, spanishTranslation)
+    const emailTemplate = buildUniqueEmailConfig({
+      translations: [englishTranslation, spanishTranslation],
+    })
 
-    expect(result).toEqual({
-      ...spanishTranslation,
-      components: [
+    expect(applyTranslationStructures(emailTemplate)).toEqual({
+      ...emailTemplate,
+      translations: [
+        englishTranslation,
         {
-          ...header,
-          defaultValue: { visible: true },
-          subComponents: [
-            { ...title, defaultValue: { title: 'spanish title', visible: false } },
+          ...spanishTranslation,
+          components: [
             {
-              ...status,
-              defaultValue: {
-                visible: true,
-                variant: StatusVariant.Overview,
-                icon: 'AccountBox',
-                boxColor: BoxColor.BenefitBlue,
-                status: 'spanish status',
-                spaceAfter: true,
-              },
+              ...header,
+              defaultValue: { visible: false },
+              subComponents: [{ ...title, defaultValue: { visible: true, title: 'spanish' } }],
             },
           ],
         },
