@@ -19,6 +19,7 @@ import { navigate } from 'gatsby'
 import { mergeEmailTemplateValues } from '../emailTemplateMergeDefaultValues'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
 import { currentTimestamp } from 'src/utils/currentTimestamp'
+import { applyTranslationStructures } from 'src/utils/applyTranslationStructures'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useCreateEmailTemplate: jest.fn() }
@@ -30,6 +31,8 @@ jest.mock('../emailTemplateMergeDefaultValues', () => {
   }
 })
 
+jest.mock('src/utils/applyTranslationStructures')
+
 describe('EmailTemplateSaveAsDialog', () => {
   let previewText: string
   let emailTemplate: EmailTemplate.Unique.Config
@@ -37,6 +40,7 @@ describe('EmailTemplateSaveAsDialog', () => {
   let user: UserEvent
   let language: Language
   let mergedEmailTemplate: EmailTemplate.Unique.Config
+  let appliedTranslationStructuresEmailTemplate: EmailTemplate.Unique.Config
   let emailTranslation: EmailTranslation.Unique
 
   beforeEach(async () => {
@@ -53,7 +57,13 @@ describe('EmailTemplateSaveAsDialog', () => {
       name: 'mocked merged email template values',
       versionTimestamp: currentTimestamp(),
     }
+    appliedTranslationStructuresEmailTemplate = {
+      ...mergedEmailTemplate,
+      name: 'mocked applied translation structures email template values',
+    }
+
     asMock(mergeEmailTemplateValues).mockReturnValue(mergedEmailTemplate)
+    asMock(applyTranslationStructures).mockReturnValue(appliedTranslationStructuresEmailTemplate)
     user = userEvent.setup()
   })
 
@@ -90,7 +100,9 @@ describe('EmailTemplateSaveAsDialog', () => {
 
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Create' }))
-    expect(mutateAsync).toHaveBeenCalledWith(mergedEmailTemplate)
+    expect(mergeEmailTemplateValues).toHaveBeenCalled()
+    expect(applyTranslationStructures).toHaveBeenCalledWith(mergedEmailTemplate)
+    expect(mutateAsync).toHaveBeenCalledWith(appliedTranslationStructuresEmailTemplate)
     expect(useCreateEmailTemplate).toHaveBeenCalled()
   })
 

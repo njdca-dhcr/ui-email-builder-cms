@@ -11,6 +11,7 @@ import { FormFieldArea } from 'src/ui/Form'
 import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemplateState'
 import { EmailTemplateShow } from 'src/network/emailTemplates'
 import { currentTimestamp } from 'src/utils/currentTimestamp'
+import { applyTranslationStructures } from 'src/utils/applyTranslationStructures'
 
 interface ErrorJSON {
   errors: { name: string }
@@ -66,20 +67,22 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
               setValidationErrors(null)
               const formData = new FormData(event.currentTarget)
               const result = await mutate(
-                mergeEmailTemplateValues({
-                  previewText,
-                  emailTemplate: { ...emailTemplate, versionTimestamp: currentTimestamp() },
-                  data: emailPartsContentData,
-                  name: stringFromFormData(formData, 'name'),
-                  language,
-                  description: stringFromFormData(formData, 'description'),
-                  tagNames: uniq(
-                    stringFromFormData(formData, 'tagNames')
-                      .split(',')
-                      .map((name) => name.trim())
-                      .filter(Boolean),
-                  ),
-                }),
+                applyTranslationStructures(
+                  mergeEmailTemplateValues({
+                    previewText,
+                    emailTemplate: { ...emailTemplate, versionTimestamp: currentTimestamp() },
+                    data: emailPartsContentData,
+                    name: stringFromFormData(formData, 'name'),
+                    language,
+                    description: stringFromFormData(formData, 'description'),
+                    tagNames: uniq(
+                      stringFromFormData(formData, 'tagNames')
+                        .split(',')
+                        .map((name) => name.trim())
+                        .filter(Boolean),
+                    ),
+                  }),
+                ),
               )
 
               if (result && 'errors' in result) {

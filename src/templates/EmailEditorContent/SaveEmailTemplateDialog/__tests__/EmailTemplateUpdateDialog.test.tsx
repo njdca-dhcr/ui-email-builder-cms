@@ -18,6 +18,7 @@ import { randomUUID } from 'crypto'
 import { navigate } from 'gatsby'
 import { EmailTemplateUpdateDialog } from '../EmailTemplateUpdateDialog'
 import { EmailTemplateState, useCurrentEmailTemplate } from 'src/utils/EmailTemplateState'
+import { applyTranslationStructures } from 'src/utils/applyTranslationStructures'
 
 jest.mock('src/network/emailTemplates', () => {
   return { useUpdateEmailTemplate: jest.fn() }
@@ -29,6 +30,8 @@ jest.mock('../emailTemplateMergeDefaultValues', () => {
   }
 })
 
+jest.mock('src/utils/applyTranslationStructures')
+
 describe('EmailTemplateUpdateDialog', () => {
   let previewText: string
   let emailTemplate: EmailTemplate.Unique.Config
@@ -36,6 +39,7 @@ describe('EmailTemplateUpdateDialog', () => {
   let user: UserEvent
   let language: Language
   let mergedEmailTemplate: EmailTemplate.Unique.Config
+  let appliedTranslationStructuresEmailTemplate: EmailTemplate.Unique.Config
   let emailTranslation: EmailTranslation.Unique
 
   beforeEach(async () => {
@@ -52,7 +56,13 @@ describe('EmailTemplateUpdateDialog', () => {
       id: emailTemplate.id,
       name: 'mocked merged email template values',
     })
+    appliedTranslationStructuresEmailTemplate = {
+      ...mergedEmailTemplate,
+      name: 'mocked applied translation structures email template values',
+    }
+
     asMock(mergeEmailTemplateValues).mockReturnValue(mergedEmailTemplate)
+    asMock(applyTranslationStructures).mockReturnValue(appliedTranslationStructuresEmailTemplate)
     user = userEvent.setup()
   })
 
@@ -95,7 +105,9 @@ describe('EmailTemplateUpdateDialog', () => {
 
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Update' }))
-    expect(mutateAsync).toHaveBeenCalledWith(mergedEmailTemplate)
+    expect(mergeEmailTemplateValues).toHaveBeenCalled()
+    expect(applyTranslationStructures).toHaveBeenCalledWith(mergedEmailTemplate)
+    expect(mutateAsync).toHaveBeenCalledWith(appliedTranslationStructuresEmailTemplate)
     expect(useUpdateEmailTemplate).toHaveBeenCalledWith(emailTemplate.id!)
   })
 
