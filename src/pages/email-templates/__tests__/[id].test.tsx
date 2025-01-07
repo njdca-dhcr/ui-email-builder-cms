@@ -21,8 +21,10 @@ import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
 import userEvent, { UserEvent } from '@testing-library/user-event'
+import { useTranslationHasChanges } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
 
 jest.mock('src/network/emailTemplates')
+jest.mock('src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges')
 
 describe('Email Template Show Page', () => {
   const renderEmailTemplateShowPage = (props?: Partial<Props>) => {
