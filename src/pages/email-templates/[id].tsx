@@ -89,11 +89,13 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                 </EmailPartsContent>
                               )}
                             </EmailTemplateState>
-                            <EmailEditorContent
-                              emailTranslation={currentTranslation}
-                              emailTemplate={currentEmailTemplate}
-                              currentUser={currentUser ?? { id: 'placeholder' }}
-                            />
+                            <EmailPartsContent>
+                              <EmailEditorContent
+                                emailTranslation={currentTranslation}
+                                emailTemplate={currentEmailTemplate}
+                                currentUser={currentUser ?? { id: 'placeholder' }}
+                              />
+                            </EmailPartsContent>
                           </div>
                         ) : (
                           <EmailEditorContent
