@@ -46,22 +46,26 @@
   overflow-x: hidden;
 }
 
-.translation-mode .translations {
+.email-editors {
   display: flex;
-  justify-content: space-around;
-  animation: translations-slide-in var(--duration) var(--easing) forwards;
+  justify-content: flex-start;
+  gap: 5rem;
+  position: relative;
   width: 100vw;
+  padding-block-start: 0;
+  transition: padding-block-start var(--easing) var(--duration);
+
+  > :first-child {
+    margin-left: 10rem;
+    transition: margin-left var(--easing) var(--duration);
+  }
 }
 
-@keyframes translations-slide-in {
-  from {
-    transform: translateX(7.75vw);
-    padding-block-start: 0;
-  }
+.translation-mode .email-editors {
+  padding-block-start: 3rem;
 
-  to {
-    transform: translateX(0);
-    padding-block-start: 3rem;
+  > :first-child {
+    margin-left: 5rem;
   }
 }
 
@@ -76,5 +80,4 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }

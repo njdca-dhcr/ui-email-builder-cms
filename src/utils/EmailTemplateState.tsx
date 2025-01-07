@@ -46,6 +46,7 @@ export interface State {
   originalEmailTemplate: EmailTemplate.Unique.Config
   currentLanguage: Language
   currentTranslation: EmailTranslation.Unique
+  englishTranslation: EmailTranslation.Unique
   setCurrentEmailTemplate: UseStateSetter<EmailTemplate.Unique.Config>
   setCurrentLanguage: UseStateSetter<Language>
 }
@@ -72,6 +73,7 @@ export const EmailTemplateState: FC<Props> = ({ children, emailTemplate, initial
                     currentEmailTemplate,
                     currentLanguage,
                   )
+                  const englishTranslation = translationForLanguage(currentEmailTemplate, 'english')
                   return (
                     <CurrentTranslationContext.Provider value={currentTranslation}>
                       {children({
@@ -79,6 +81,7 @@ export const EmailTemplateState: FC<Props> = ({ children, emailTemplate, initial
                         currentEmailTemplate,
                         currentLanguage,
                         currentTranslation,
+                        englishTranslation,
                         setCurrentEmailTemplate: isPlaceholder(currentEmailTemplate)
                           ? NO_OP
                           : setCurrentEmailTemplate,

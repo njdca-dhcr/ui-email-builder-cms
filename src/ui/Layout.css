@@ -4,6 +4,8 @@
 }
 
 .layout {
+  --easing: ease-in;
+  --duration: 500ms;
   align-items: stretch;
   display: flex;
   overflow-y: auto;
@@ -106,22 +108,15 @@
   clip: auto;
 }
 
-.translation-mode {
-  --easing: ease-in;
-  --duration: 0.5s;
-}
-
 .sidebar {
   background-color: var(--gray-light);
   position: relative;
-  flex: 1;
   height: calc(100% - 1.25rem);
   width: 33.33vw;
   transition: width var(--easing) var(--duration);
 }
 
 .translation-mode .sidebar {
-  flex: unset;
   width: 0;
 }
 
@@ -132,10 +127,7 @@
   padding-top: 1.25rem;
   height: 100%;
   overflow: auto;
-  width: 100%;
-}
-
-.translation-mode .sidebar-inner {
+  overflow-x: hidden;
   width: 33.33vw;
 }
 

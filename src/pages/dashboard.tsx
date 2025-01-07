@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useEffect, useState } from 'react'
 import { Link, type HeadFC } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
@@ -16,11 +16,63 @@ import {
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { isRestricted } from 'src/utils/appMode'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import {
+  AnimatePresence,
+  motion,
+  useAnimate,
+  useInstantTransition,
+  usePresence,
+} from 'motion/react'
 import 'src/styles/app.css'
 import './dashboard.css'
 
+const Dummy = () => {
+  const [isPresent, safeToRemove] = usePresence()
+  const [scope, animate] = useAnimate()
+
+  useEffect(() => {
+    if (isPresent) {
+      const enterAnimation = async () => {
+        await animate(scope.current, { opacity: 1 })
+        await animate('div', { opacity: 1, x: 0 })
+      }
+      enterAnimation()
+    } else {
+      const exitAnimation = async () => {
+        await animate('div', { opacity: 0, x: -100 })
+        await animate(scope.current, { opacity: 0 })
+        safeToRemove()
+      }
+
+      exitAnimation()
+    }
+  }, [isPresent])
+
+  return (
+    <div ref={scope}>
+      <div
+        // animate={{ rotate: 360, translateX: 400, transition: { delay: 0.2, duration: 2 } }}
+        style={{
+          backgroundColor: 'lightblue',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: 100,
+          height: 100,
+          borderRadius: '50%',
+          opacity: 0,
+        }}
+      >
+        hello
+      </div>
+    </div>
+  )
+}
+
 const DashboardPage: FC = () => {
   useRedirectIfNotSignedIn()
+  const [show, setShow] = useState(false)
+
   return (
     <Layout element="div">
       <Sidebar>
@@ -32,6 +84,11 @@ const DashboardPage: FC = () => {
           <VisuallyHidden>
             <h1>Email Builder (Beta)</h1>
           </VisuallyHidden>
+
+          <AnimatePresence>
+            <button onClick={() => setShow(!show)}>{show ? 'hide' : 'show'}</button>
+            {show ? <Dummy key="foo" /> : null}
+          </AnimatePresence>
           <section className="home-page-section">
             <Heading element="h2">Create from scratch</Heading>
             <Paragraph>Build custom emails that you are ready to test/deploy</Paragraph>

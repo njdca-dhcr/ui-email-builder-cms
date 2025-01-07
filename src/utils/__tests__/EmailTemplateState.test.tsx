@@ -65,6 +65,12 @@ describe('EmailTemplateState', () => {
       })
     })
 
+    it('yields a placeholder english translation', async () => {
+      assertOnYielded(({ englishTranslation }) => {
+        expect(englishTranslation).toEqual({ language: 'english', components: [] })
+      })
+    })
+
     it('yields a no-op setter for current email template', async () => {
       assertOnYielded(({ setCurrentEmailTemplate }) => {
         expect(setCurrentEmailTemplate).toEqual(expect.any(Function))
@@ -133,6 +139,12 @@ describe('EmailTemplateState', () => {
     it('yields the current translation', async () => {
       assertOnYielded(({ currentTranslation }) => {
         expect(currentTranslation).toEqual(emailTemplate.translations![0])
+      })
+    })
+
+    it('yields the english translation', async () => {
+      assertOnYielded(({ englishTranslation }) => {
+        expect(englishTranslation).toEqual(emailTemplate.translations![0])
       })
     })
 

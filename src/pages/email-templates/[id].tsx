@@ -1,5 +1,5 @@
 import { HeadFC, PageProps } from 'gatsby'
-import React, { FC } from 'react'
+import React, { FC, ReactNode, useEffect } from 'react'
 import { useEmailTemplate } from 'src/network/emailTemplates'
 import {
   ClearCurrentlyActiveEmailPart,
@@ -18,6 +18,7 @@ import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import classNames from 'classnames'
 import { useCurrentUser } from 'src/network/users'
 import { ExitTranslationModeButton } from 'src/templates/ExitTranslationModeButton'
+import { AnimatePresence, useAnimate, usePresence, motion, HTMLMotionProps } from 'motion/react'
 
 export type Props = PageProps<null, null, null>
 
@@ -30,7 +31,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
 
   return (
     <EmailTemplateState emailTemplate={emailTemplate}>
-      {({ currentLanguage, currentEmailTemplate, currentTranslation }) => {
+      {({ currentLanguage, currentEmailTemplate, currentTranslation, englishTranslation }) => {
         const inTranslationMode = !['not-set', 'english'].includes(currentLanguage)
 
         return (
@@ -72,40 +73,38 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
 
                     <PageContent element="div" className="email-editor-page-content-container">
                       {error && <Alert>{error.message}</Alert>}
-                      {emailTemplate &&
-                        (inTranslationMode ? (
-                          <div className="translations">
-                            <EmailPartsContent>
-                              <ExitTranslationModeButton />
-                              <EmailTemplateState emailTemplate={emailTemplate}>
-                                {({ currentEmailTemplate, currentTranslation }) => (
-                                  <EmailPartsContent>
-                                    <PreviewText emailTranslation={currentTranslation}>
-                                      <EmailEditorContent
-                                        emailTranslation={currentTranslation}
-                                        emailTemplate={currentEmailTemplate}
-                                        currentUser={currentUser ?? { id: 'placeholder' }}
-                                        readOnly
-                                      />
-                                    </PreviewText>
-                                  </EmailPartsContent>
-                                )}
-                              </EmailTemplateState>
-
-                              <EmailEditorContent
-                                emailTranslation={currentTranslation}
-                                emailTemplate={currentEmailTemplate}
-                                currentUser={currentUser ?? { id: 'placeholder' }}
-                              />
-                            </EmailPartsContent>
-                          </div>
-                        ) : (
+                      {emailTemplate && (
+                        <div className="email-editors">
                           <EmailEditorContent
-                            emailTranslation={currentTranslation}
+                            emailTranslation={englishTranslation}
                             emailTemplate={currentEmailTemplate}
                             currentUser={currentUser ?? { id: 'placeholder' }}
+                            readOnly={inTranslationMode}
                           />
-                        ))}
+                          <AnimatePresence>
+                            {inTranslationMode && (
+                              <EmailPartsContent>
+                                <PreviewText emailTranslation={currentTranslation}>
+                                  <motion.div
+                                    key="foo"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                  >
+                                    <EmailEditorContent
+                                      emailTranslation={currentTranslation}
+                                      emailTemplate={currentEmailTemplate}
+                                      currentUser={currentUser ?? { id: 'placeholder' }}
+                                    />
+                                    <ExitTranslationModeButton />
+                                  </motion.div>
+                                </PreviewText>
+                              </EmailPartsContent>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      )}
                     </PageContent>
                     {isLoading && <LoadingOverlay description="Loading your email template" />}
                   </Layout>
@@ -116,6 +115,35 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
         )
       }}
     </EmailTemplateState>
+  )
+}
+
+const AnimateFriend: FC<{ children: ReactNode }> = ({ children }) => {
+  const [isPresent, safeToRemove] = usePresence()
+  const [scope, animate] = useAnimate()
+
+  useEffect(() => {
+    if (isPresent) {
+      const enterAnimation = async () => {
+        await animate(scope.current, { opacity: 1 }, { duration: 1 })
+        await animate('div', { opacity: 1 }, { duration: 1 })
+      }
+      enterAnimation()
+    } else {
+      const exitAnimation = async () => {
+        await animate('div', { opacity: 0 }, { duration: 1 })
+        await animate(scope.current, { opacity: 0 }, { duration: 1 })
+        safeToRemove()
+      }
+
+      exitAnimation()
+    }
+  }, [isPresent])
+
+  return (
+    <div ref={scope} style={{ flex: 1 }}>
+      {children}
+    </div>
   )
 }
 
