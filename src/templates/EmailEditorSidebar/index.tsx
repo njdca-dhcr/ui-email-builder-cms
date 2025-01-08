@@ -13,7 +13,7 @@ export const EmailEditorSidebar: FC<Props> = ({ heading, emailTranslation }) => 
   const components = emailTranslation.components
 
   return (
-    <Sidebar id="sidebar-container">
+    <Sidebar id="sidebar-container" className="email-editor-sidebar">
       <SpacedSidebarContainer>
         <BackLink />
         <SkipNavContent />
