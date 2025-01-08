@@ -6,6 +6,7 @@
 .layout {
   --easing: ease-in;
   --duration: 500ms;
+  --header-height: 87px;
   align-items: stretch;
   display: flex;
   overflow-y: auto;
@@ -13,13 +14,13 @@
 }
 
 .page-wrapper:has(.global-header) .layout {
-  --spacing: 5.375rem;
-  margin-top: calc(var(--spacing) + 1px);
-  height: calc(100% - var(--spacing) - 1px);
+  margin-top: var(--header-height);
+  height: calc(100% - var(--header-height) - 1px);
 }
 
 .header-wrapper {
   position: fixed;
+  height: var(--header-height);
   width: 100%;
   top: 0;
   left: 0;
@@ -111,7 +112,7 @@
 .sidebar {
   background-color: var(--gray-light);
   position: relative;
-  height: calc(100% - 1.25rem);
+  height: 100%;
   flex: 1;
 }
 
@@ -130,7 +131,6 @@
   right: 0;
   top: 0;
   padding-top: 1.25rem;
-  height: 100%;
   overflow: auto;
   overflow-x: hidden;
   width: 100%;
