@@ -93,7 +93,13 @@
   margin: 1.5rem auto 0;
   overflow: auto;
   width: 37.5rem;
-  transition: width ease-in-out 100ms;
+  transition:
+    width ease-in-out 100ms,
+    height var(--easing) var(--duration);
+}
+
+.translation-mode .email-preview {
+  height: 65vh;
 }
 
 .email-preview-mobile {
