@@ -47,7 +47,9 @@ export const EmailEditorContent: FC<Props> = ({
           <SelectPreviewType {...previewType} />
           {!isRestricted() && !readOnly && (
             <div className="share-and-save-buttons">
-              <WhenSignedIn> {/* TODO: mock tests properly to remove WhenSignedIn (unnecessary) */}
+              <WhenSignedIn>
+                {' '}
+                {/* TODO: mock tests properly to remove WhenSignedIn (unnecessary) */}
                 <div className="save-and-update-buttons">
                   {emailTemplate.id && <EmailTemplateUpdateDialog />}
                   <EmailTemplateSaveAsDialog />
