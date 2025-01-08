@@ -13,6 +13,10 @@
   height: 100%;
 }
 
+.layout:has(.email-editor-page-content-container) {
+  overflow-y: hidden;
+}
+
 .page-wrapper:has(.global-header) .layout {
   margin-top: var(--header-height);
   height: calc(100% - var(--header-height) - 1px);
