@@ -7,13 +7,13 @@ export const useEmailTemplatesData = (): {
   return [
     {
       id: '123',
-      name: 'Email Template',
+      name: 'MEUC - Email Template',
       path: '/email-templates/email-template',
       description: 'This is the very FiRSt email template that appears.',
     },
     {
       id: '456',
-      name: 'Another Email Template',
+      name: 'eMonetary - Another Email Template',
       path: '/email-templates/another-email-template',
       description: 'This is the sEcoNd email template that appears.',
     },

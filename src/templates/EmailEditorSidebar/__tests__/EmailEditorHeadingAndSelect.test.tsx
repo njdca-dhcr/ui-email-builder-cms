@@ -10,7 +10,7 @@ describe('EmailEditorSidebar', () => {
   let emailTemplate: EmailTemplate.Base.Config
 
   beforeEach(() => {
-    emailTemplate = buildEmailTemplateConfig({ name: 'Email Template' })
+    emailTemplate = buildEmailTemplateConfig({ name: 'MEUC - Email Template' })
   })
 
   it('displays the name of the email template', () => {
@@ -26,7 +26,7 @@ describe('EmailEditorSidebar', () => {
 
     expect(navigate).not.toHaveBeenCalled()
     await user.click(getByRole('combobox'))
-    await user.click(getByRole('option', { name: 'Another Email Template' }))
+    await user.click(getByRole('option', { name: 'eMonetary - Another Email Template' }))
     expect(navigate).toHaveBeenCalledWith('/email-templates/another-email-template', {
       replace: true,
     })
