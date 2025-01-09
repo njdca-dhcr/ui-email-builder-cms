@@ -1,11 +1,10 @@
 .edit-preview-text {
-  align-items: center;
-  border-bottom: 1px solid var(--gray-light-medium);
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  justify-content: space-between;
-  padding: 1.375rem 0 1rem;
-  width: 37.5rem;
+  max-width: 37.5rem;
+  margin-block-start: 1.25rem;
+  width: 100%;
 }
 
 .edit-preview-text-heading-container {
@@ -16,13 +15,7 @@
 .edit-preview-text-heading-container h2 {
   display: flex;
   font-size: var(--font-medium);
-  font-weight: var(--weight-bold);
-  margin: 0;
-}
-.edit-preview-text-heading-container p {
-  color: var(--gray-dark);
-  font-size: var(--font-tiny);
-  font-style: italic;
+  font-weight: var(--weight-normal);
   margin: 0;
 }
 

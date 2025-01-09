@@ -17,7 +17,9 @@ export const EditPreviewText: FC<Props> = ({ onChange, readOnly, value }) => {
     <div className="edit-preview-text">
       <div className="edit-preview-text-heading-container">
         <h2 id={headingId}>Preview Text</h2>
-        <p id={descriptionId}>80-120 characters is ideal</p>
+        <VisuallyHidden>
+          <p id={descriptionId}>80-120 characters is ideal</p>
+        </VisuallyHidden>
       </div>
       <div className="edit-preview-text-text-area-container">
         <textarea
@@ -27,7 +29,7 @@ export const EditPreviewText: FC<Props> = ({ onChange, readOnly, value }) => {
           readOnly={readOnly}
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="This is the preview text that you can edit. It gives insight into the email so that people will open it."
+          placeholder="This is the preview text that you can edit (80-120 characters is ideal). It gives insight into the email so that people will open it."
         />
         <p id={characterCountId}>
           {value.length}
