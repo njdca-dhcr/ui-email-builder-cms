@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 
-.edit-preview-text-heading-container h2 {
+.edit-preview-text-heading-container h3 {
   display: flex;
   font-size: var(--font-medium);
   font-weight: var(--weight-normal);

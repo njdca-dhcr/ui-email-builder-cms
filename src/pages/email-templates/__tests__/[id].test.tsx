@@ -9,24 +9,30 @@ import {
   buildUniqueEmailSubComponent,
   buildUseMutationResult,
   buildUseQueryResult,
+  mockAppMode,
   userIsSignedIn,
 } from 'src/testHelpers'
 import {
   useEmailTemplate,
   EmailTemplateShow,
   useUpdateEmailTemplate,
+  useCreateEmailTemplate,
 } from 'src/network/emailTemplates'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
 import userEvent, { UserEvent } from '@testing-library/user-event'
-import { useTranslationHasChanges } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
 
 jest.mock('src/network/emailTemplates')
 jest.mock('src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges')
 
 describe('Email Template Show Page', () => {
+  beforeEach(async () => {
+    asMock(useCreateEmailTemplate).mockReturnValue(buildUseMutationResult())
+    asMock(useUpdateEmailTemplate).mockReturnValue(buildUseMutationResult())
+  })
+
   const renderEmailTemplateShowPage = (props?: Partial<Props>) => {
     return render(
       <AuthProvider>
@@ -136,6 +142,23 @@ describe('Email Template Show Page', () => {
       expect(h1).toHaveTextContent(title)
     })
 
+    it('can display the email in desktop or mobile', async () => {
+      const user = userEvent.setup()
+      const { baseElement, getByLabelText } = renderEmailTemplateShowPage()
+
+      expect(baseElement.querySelector('.email-preview-desktop')).not.toBeNull()
+      expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
+
+      await user.click(getByLabelText('Mobile'))
+
+      expect(baseElement.querySelector('.email-preview-desktop')).toBeNull()
+      expect(baseElement.querySelector('.email-preview-mobile')).not.toBeNull()
+
+      await user.click(getByLabelText('Desktop'))
+      expect(baseElement.querySelector('.email-preview-desktop')).not.toBeNull()
+      expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
+    })
+
     it('displays the EmailEditorSidebar', () => {
       const { queryByText } = renderEmailTemplateShowPage()
       expect(queryByText('Back')).not.toBeNull()
@@ -150,6 +173,38 @@ describe('Email Template Show Page', () => {
       const { getByLabelText } = renderEmailTemplateShowPage()
       const textarea: HTMLTextAreaElement = getByLabelText('Preview Text') as any
       expect(textarea).toHaveValue(previewText)
+    })
+
+    describe('when restricted', () => {
+      beforeEach(() => {
+        mockAppMode('KY')
+      })
+
+      it('does not have a share dropdown', () => {
+        const { queryByRole } = renderEmailTemplateShowPage()
+
+        expect(queryByRole('menu', { name: 'Share' })).toBeNull()
+      })
+    })
+
+    describe('saving and sharing', () => {
+      it('allows users to update the email template', async () => {
+        const { queryByRole } = renderEmailTemplateShowPage()
+
+        expect(queryByRole('button', { name: 'Update' })).toBeTruthy()
+      })
+
+      it('allows users to save the email template as a new email template', async () => {
+        const { queryByRole } = renderEmailTemplateShowPage()
+
+        expect(queryByRole('button', { name: 'Save As' })).toBeTruthy()
+      })
+
+      it('displays the export email template button', async () => {
+        const { queryByRole } = renderEmailTemplateShowPage()
+
+        expect(queryByRole('button', { name: 'Share' })).toBeTruthy()
+      })
     })
 
     describe('translation mode', () => {
@@ -175,16 +230,14 @@ describe('Email Template Show Page', () => {
 
       it('is possible to exit translation mode', async () => {
         const { queryByRole } = await renderEmailTemplateShowPageInTranslationMode()
-        expect(queryByRole('button', { name: 'Exit translation mode' })).not.toBeNull()
+        expect(queryByRole('button', { name: 'Edit Original Email' })).not.toBeNull()
       })
 
       it('has a read only version of the original translation', async () => {
         const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
-        const originalTranslationContainer = baseElement.querySelector(
-          '.email-editor-content:first-of-type',
-        )
+        const originalTranslationContainer = baseElement.querySelector('.original-translation')
 
-        expect(originalTranslationContainer).toBeDefined()
+        expect(originalTranslationContainer).toBeTruthy()
         expect(originalTranslationContainer!.querySelectorAll('[readonly]').length).toBeGreaterThan(
           0,
         )
@@ -192,14 +245,49 @@ describe('Email Template Show Page', () => {
 
       it('has a writable version of the other translation', async () => {
         const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
-        const otherTranslationContainer = baseElement.querySelector(
-          '.email-editor-content:last-of-type',
-        )
+        const otherTranslationContainer = baseElement.querySelector('.translation')
 
-        expect(otherTranslationContainer).toBeDefined()
+        expect(otherTranslationContainer).toBeTruthy()
         expect(
           otherTranslationContainer!.querySelectorAll('[contenteditable="true"]').length,
         ).toBeGreaterThan(0)
+      })
+
+      it('can display the email in desktop or mobile', async () => {
+        const user = userEvent.setup()
+        const { baseElement, getByLabelText } = await renderEmailTemplateShowPageInTranslationMode()
+
+        expect(baseElement.querySelectorAll('.email-preview-desktop')).toHaveLength(2)
+        expect(baseElement.querySelectorAll('.email-preview-mobile')).toHaveLength(0)
+
+        await user.click(getByLabelText('Mobile'))
+
+        expect(baseElement.querySelectorAll('.email-preview-desktop')).toHaveLength(0)
+        expect(baseElement.querySelectorAll('.email-preview-mobile')).toHaveLength(2)
+
+        await user.click(getByLabelText('Desktop'))
+        expect(baseElement.querySelectorAll('.email-preview-desktop')).toHaveLength(2)
+        expect(baseElement.querySelectorAll('.email-preview-mobile')).toHaveLength(0)
+      })
+
+      describe('saving and sharing', () => {
+        it('allows users to update the email template', async () => {
+          const { queryByRole } = await renderEmailTemplateShowPageInTranslationMode()
+
+          expect(queryByRole('button', { name: 'Update' })).not.toBeNull()
+        })
+
+        it('allows users to save the email template as a new email template', async () => {
+          const { queryByRole } = await renderEmailTemplateShowPageInTranslationMode()
+
+          expect(queryByRole('button', { name: 'Save As' })).not.toBeNull()
+        })
+
+        it('displays the export email template button', async () => {
+          const { queryByRole } = await renderEmailTemplateShowPageInTranslationMode()
+
+          expect(queryByRole('button', { name: 'Share' })).toBeDefined()
+        })
       })
     })
   })

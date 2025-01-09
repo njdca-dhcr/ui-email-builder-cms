@@ -5,18 +5,20 @@ import { Layout, PageContent } from 'src/ui'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import type { EmailParts, EmailTemplate } from 'src/appTypes'
 import { ClearCurrentlyActiveEmailPart, CurrentlyActiveEmailPart } from './CurrentlyActiveEmailPart'
+import { currentTimestamp } from 'src/utils/currentTimestamp'
 import { EmailEditorContent } from './EmailEditorContent'
 import { EmailEditorHeadingAndSelect } from './EmailEditorSidebar/EmailEditorHeadingAndSelect'
 import { EmailEditorSidebar } from './EmailEditorSidebar'
 import { EmailPartsContent } from './EmailPartsContent'
+import { EmailTemplateSaveAsDialog } from './EmailEditorContent/SaveEmailTemplateDialog'
+import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationSelector'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { PreviewText } from './PreviewText'
+import { SelectPreviewType, usePreviewType } from './EmailEditorContent/SelectPreviewType'
 import { SyncSidebarAndPreviewScroll } from './SyncSidebarAndPreviewScroll'
-import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationSelector'
-import { EmailTemplateState } from 'src/utils/EmailTemplateState'
-import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
-import { currentTimestamp } from 'src/utils/currentTimestamp'
 import { useCurrentUser } from 'src/network/users'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import './EmailEditorPage.css'
 
 interface PageContext {
@@ -29,6 +31,7 @@ interface Props {
 
 const EmailEditorPage: FC<Props> = ({ pageContext }) => {
   useRedirectIfNotSignedIn()
+  const previewTypeOptions = usePreviewType()
   const { data: currentUser } = useCurrentUser()
   const [emailTemplateConfig] = useState<EmailTemplate.Unique.Config>(() => ({
     ...pageContext.emailTemplate,
@@ -65,9 +68,20 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
                       <h2>Email Preview</h2>
                     </VisuallyHidden>
                     <EmailEditorContent
+                      actions={
+                        <>
+                          <SelectPreviewType {...previewTypeOptions} />
+                          <div className="share-and-save-buttons">
+                            <div className="save-and-update-buttons">
+                              <EmailTemplateSaveAsDialog />
+                            </div>
+                          </div>
+                        </>
+                      }
                       emailTemplate={currentEmailTemplate}
                       emailTranslation={currentTranslation}
                       currentUser={currentUser ?? { id: 'placeholder' }}
+                      preview={previewTypeOptions.current}
                     />
                   </PageContent>
                 </PreviewText>

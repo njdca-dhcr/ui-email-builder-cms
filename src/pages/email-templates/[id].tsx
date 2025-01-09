@@ -1,31 +1,49 @@
 import { HeadFC, PageProps } from 'gatsby'
-import React, { FC, ReactNode, useEffect } from 'react'
-import { useEmailTemplate } from 'src/network/emailTemplates'
+import React, { FC, ReactNode, useRef } from 'react'
+import classNames from 'classnames'
 import {
   ClearCurrentlyActiveEmailPart,
   CurrentlyActiveEmailPart,
 } from 'src/templates/CurrentlyActiveEmailPart'
+import {
+  SelectPreviewType,
+  usePreviewType,
+} from 'src/templates/EmailEditorContent/SelectPreviewType'
+import {
+  EmailTemplateSaveAsDialog,
+  EmailTemplateUpdateDialog,
+} from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog'
+import { AnimatePresence, motion } from 'motion/react'
 import { EmailEditorContent } from 'src/templates/EmailEditorContent'
 import { EmailEditorSidebar } from 'src/templates/EmailEditorSidebar'
 import { EmailPartsContent } from 'src/templates/EmailPartsContent'
-import { formatPageTitle } from 'src/utils/formatPageTitle'
-import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
-import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
-import { PreviewText } from 'src/templates/PreviewText'
-import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/EmailTranslationSelector'
+import { EmailTemplate, EmailTranslation } from 'src/appTypes'
 import { EmailTemplateState } from 'src/utils/EmailTemplateState'
-import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
-import classNames from 'classnames'
-import { useCurrentUser } from 'src/network/users'
+import { EmailTranslationSelector } from 'src/templates/EmailEditorSidebar/EmailTranslationSelector'
 import { ExitTranslationModeButton } from 'src/templates/ExitTranslationModeButton'
-import { AnimatePresence, motion } from 'motion/react'
+import { ExportEmailTemplate } from 'src/templates/EmailEditorContent/ExportEmailTemplate'
+import { formatPageTitle } from 'src/utils/formatPageTitle'
+import { getSubComponentByKind } from 'src/utils/emailTemplateUtils'
+import { Layout, PageContent, LoadingOverlay, Alert } from 'src/ui'
+import { PreviewText, PreviewTextConsumer } from 'src/templates/PreviewText'
+import { SyncSidebarAndPreviewScroll } from 'src/templates/SyncSidebarAndPreviewScroll'
+import { useCurrentUser } from 'src/network/users'
+import { useElementsToEmailString } from 'src/templates/emailHtmlDocument/useElementsToEmailString'
+import { useEmailTemplate } from 'src/network/emailTemplates'
 import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
-import { EmailTemplate } from 'src/appTypes'
+import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import { useTitleValue } from 'src/templates/EmailTemplateSubComponents/Title'
+import capitalize from 'lodash.capitalize'
 
 export type Props = PageProps<null, null, null>
 
+const TRANSITION_DURATION = 0.5
+
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
+  const previewTypeOptions = usePreviewType()
+  const previewRef = useRef()
+  const toEmailText = useElementsToEmailString(previewRef)
   const query = useEmailTemplate(params.id)
   const { data: queriedEmailTemplate, isLoading, error } = query
   const { data: currentUser } = useCurrentUser()
@@ -78,12 +96,43 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       {error && <Alert>{error.message}</Alert>}
                       {emailTemplate && (
                         <div className="email-editors">
-                          <EmailEditorContent
-                            emailTranslation={englishTranslation}
-                            emailTemplate={currentEmailTemplate}
-                            currentUser={currentUser ?? { id: 'placeholder' }}
-                            readOnly={inTranslationMode}
-                          />
+                          <div className="original-translation">
+                            {inTranslationMode && (
+                              <TranslationActions title="English (original)">
+                                <ExitTranslationModeButton label="Edit Original Email" />
+                              </TranslationActions>
+                            )}
+                            <EmailEditorContent
+                              emailTranslation={englishTranslation}
+                              emailTemplate={currentEmailTemplate}
+                              currentUser={currentUser ?? { id: 'placeholder' }}
+                              readOnly={inTranslationMode}
+                              preview={previewTypeOptions.current}
+                              actions={
+                                inTranslationMode ? null : (
+                                  <>
+                                    <SelectPreviewType {...previewTypeOptions} />
+                                    <div className="share-and-save-buttons">
+                                      <div className="save-and-update-buttons">
+                                        <EmailTemplateUpdateDialog />
+                                        <EmailTemplateSaveAsDialog />
+                                      </div>
+                                      <TitleAndPreviewText translation={englishTranslation}>
+                                        {({ previewText, title }) => (
+                                          <ExportEmailTemplate
+                                            emailTemplate={currentEmailTemplate}
+                                            emailTranslation={englishTranslation}
+                                            htmlForImage={() => toEmailText(title)}
+                                            previewText={previewText}
+                                          />
+                                        )}
+                                      </TitleAndPreviewText>
+                                    </div>
+                                  </>
+                                )
+                              }
+                            />
+                          </div>
                           <AnimatePresence>
                             {inTranslationMode && (
                               <EmailPartsContent>
@@ -93,14 +142,37 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.5 }}
+                                    transition={{ duration: TRANSITION_DURATION }}
+                                    className="translation"
                                   >
+                                    {inTranslationMode && (
+                                      <TranslationActions title={capitalize(currentLanguage)}>
+                                        <SelectPreviewType {...previewTypeOptions} />
+                                        <div className="share-and-save-buttons">
+                                          <div className="save-and-update-buttons">
+                                            <EmailTemplateUpdateDialog />
+                                            <EmailTemplateSaveAsDialog />
+                                          </div>
+                                          <TitleAndPreviewText translation={englishTranslation}>
+                                            {({ previewText, title }) => (
+                                              <ExportEmailTemplate
+                                                emailTemplate={currentEmailTemplate}
+                                                emailTranslation={englishTranslation}
+                                                htmlForImage={() => toEmailText(title)}
+                                                previewText={previewText}
+                                              />
+                                            )}
+                                          </TitleAndPreviewText>
+                                        </div>
+                                      </TranslationActions>
+                                    )}
                                     <EmailEditorContent
                                       emailTranslation={currentTranslation}
                                       emailTemplate={currentEmailTemplate}
                                       currentUser={currentUser ?? { id: 'placeholder' }}
+                                      actions={null}
+                                      preview={previewTypeOptions.current}
                                     />
-                                    <ExitTranslationModeButton />
                                   </motion.div>
                                 </PreviewText>
                               </EmailPartsContent>
@@ -145,4 +217,26 @@ const KeepHtmlTranslationsLinksPopulated: FC<{ emailTemplate: EmailTemplate.Uniq
 }) => {
   useKeepHtmlTranslationsLinksPopulated(emailTemplate)
   return null
+}
+
+const TitleAndPreviewText: FC<{
+  translation: EmailTranslation.Unique
+  children: (props: { title: string; previewText: string }) => ReactNode
+}> = ({ children, translation }) => {
+  const [titleValue] = useTitleValue(getSubComponentByKind(translation, 'Title'))
+
+  return (
+    <PreviewTextConsumer>
+      {([previewText]) => children({ title: titleValue.title, previewText })}
+    </PreviewTextConsumer>
+  )
+}
+
+const TranslationActions: FC<{ children: ReactNode; title: string }> = ({ children, title }) => {
+  return (
+    <div className="translation-actions">
+      <h2>{title}</h2>
+      <div className="actions">{children}</div>
+    </div>
+  )
 }

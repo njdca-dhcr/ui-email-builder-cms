@@ -1,17 +1,21 @@
 .email-preview-actions {
+  margin-block-start: 1rem;
+  max-width: 37.5rem;
+  width: 100%;
+}
+
+.email-preview-actions-inner {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
-  width: 37.5rem;
 }
 
-.email-preview-actions .select-preview-type {
+.select-preview-type {
   margin: 0;
   padding: 0;
 }
 
-.email-preview-actions .select-preview-type label {
+.select-preview-type label {
   font-size: var(--font-small);
   font-style: normal;
   padding: 0.5rem 1rem;

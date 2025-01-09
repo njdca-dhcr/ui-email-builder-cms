@@ -3,7 +3,11 @@ import { useCurrentLanguage } from 'src/utils/EmailTemplateState'
 import { useTranslationHasChanges } from './EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
 import { Button } from 'src/ui'
 
-export const ExitTranslationModeButton: FC = () => {
+export interface Props {
+  label: string
+}
+
+export const ExitTranslationModeButton: FC<Props> = ({ label }) => {
   const [_, setCurrentLanguage] = useCurrentLanguage()
   const translationHasChanges = useTranslationHasChanges()
 
@@ -19,7 +23,7 @@ export const ExitTranslationModeButton: FC = () => {
         }
       }}
     >
-      Exit translation mode
+      {label}
     </Button>
   )
 }

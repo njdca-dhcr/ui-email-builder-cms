@@ -16,7 +16,7 @@ export const EditPreviewText: FC<Props> = ({ onChange, readOnly, value }) => {
   return (
     <div className="edit-preview-text">
       <div className="edit-preview-text-heading-container">
-        <h2 id={headingId}>Preview Text</h2>
+        <h3 id={headingId}>Preview Text</h3>
         <VisuallyHidden>
           <p id={descriptionId}>80-120 characters is ideal</p>
         </VisuallyHidden>

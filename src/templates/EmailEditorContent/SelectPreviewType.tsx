@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Radio } from 'src/ui'
 
-type PreviewType = 'desktop' | 'mobile'
+export type PreviewType = 'desktop' | 'mobile'
 
 export const usePreviewType = () => {
   const [previewType, setPreviewType] = useState<PreviewType>('desktop')

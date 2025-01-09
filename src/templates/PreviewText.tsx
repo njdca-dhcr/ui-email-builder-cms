@@ -21,6 +21,9 @@ export const PreviewText: FC<Props> = ({ children, emailTranslation }) => {
 
   return <PreviewTextContext.Provider value={value}>{children}</PreviewTextContext.Provider>
 }
+
 export const usePreviewText = (): PreviewTextContextType => {
   return useContext(PreviewTextContext)
 }
+
+export const PreviewTextConsumer = PreviewTextContext.Consumer
