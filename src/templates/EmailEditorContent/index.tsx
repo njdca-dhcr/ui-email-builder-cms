@@ -13,7 +13,6 @@ import { useTitleValue } from '../EmailTemplateSubComponents/Title'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
 import { CurrentUserEmailConfig } from 'src/network/users'
 import { UserInfoProvider } from 'src/utils/UserInfoContext'
-import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
 import { SelectPreviewType, usePreviewType } from './SelectPreviewType'
 import { ExportEmailTemplate } from './ExportEmailTemplate'
 import { EmailBody } from '../emailHtmlDocument/EmailBody'
@@ -41,14 +40,12 @@ export const EmailEditorContent: FC<Props> = ({
   return (
     <div className="email-editor-content">
       <UserInfoProvider userInfo={currentUser}>
-        <KeepHtmlTranslationsLinksPopulated emailTemplate={emailTemplate} />
         <EditPreviewText value={previewText} onChange={setPreviewText} readOnly={readOnly} />
         <div className="email-preview-actions">
           <SelectPreviewType {...previewType} />
           {!isRestricted() && !readOnly && (
             <div className="share-and-save-buttons">
               <WhenSignedIn>
-                {' '}
                 {/* TODO: mock tests properly to remove WhenSignedIn (unnecessary) */}
                 <div className="save-and-update-buttons">
                   {emailTemplate.id && <EmailTemplateUpdateDialog />}
@@ -88,11 +85,4 @@ export const EmailEditorContent: FC<Props> = ({
       </UserInfoProvider>
     </div>
   )
-}
-
-const KeepHtmlTranslationsLinksPopulated: FC<{ emailTemplate: EmailTemplate.Unique.Config }> = ({
-  emailTemplate,
-}) => {
-  useKeepHtmlTranslationsLinksPopulated(emailTemplate)
-  return null
 }

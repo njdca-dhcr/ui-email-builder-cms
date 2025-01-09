@@ -26,7 +26,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 jest.mock('src/utils/download')
 jest.mock('src/templates/emailHtmlDocument/renderEmailTranslationToString')
-jest.mock('src/network/useKeepHtmlTranslationsLinksPopulated')
 
 describe('EmailEditorContent', () => {
   let emailTranslation: EmailTranslation.Unique

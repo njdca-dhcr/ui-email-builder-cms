@@ -18,7 +18,9 @@ import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import classNames from 'classnames'
 import { useCurrentUser } from 'src/network/users'
 import { ExitTranslationModeButton } from 'src/templates/ExitTranslationModeButton'
-import { AnimatePresence, useAnimate, usePresence, motion, HTMLMotionProps } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTranslationsLinksPopulated'
+import { EmailTemplate } from 'src/appTypes'
 
 export type Props = PageProps<null, null, null>
 
@@ -40,6 +42,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
               <ClearCurrentlyActiveEmailPart />
               <EmailPartsContent>
                 <PreviewText emailTranslation={currentTranslation}>
+                  <KeepHtmlTranslationsLinksPopulated emailTemplate={currentEmailTemplate} />
                   <Layout
                     element="main"
                     className={classNames({ 'translation-mode': inTranslationMode })}
@@ -86,7 +89,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                               <EmailPartsContent>
                                 <PreviewText emailTranslation={currentTranslation}>
                                   <motion.div
-                                    key="foo"
+                                    key="fade-in-translation"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
@@ -118,35 +121,6 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   )
 }
 
-const AnimateFriend: FC<{ children: ReactNode }> = ({ children }) => {
-  const [isPresent, safeToRemove] = usePresence()
-  const [scope, animate] = useAnimate()
-
-  useEffect(() => {
-    if (isPresent) {
-      const enterAnimation = async () => {
-        await animate(scope.current, { opacity: 1 }, { duration: 1 })
-        await animate('div', { opacity: 1 }, { duration: 1 })
-      }
-      enterAnimation()
-    } else {
-      const exitAnimation = async () => {
-        await animate('div', { opacity: 0 }, { duration: 1 })
-        await animate(scope.current, { opacity: 0 }, { duration: 1 })
-        safeToRemove()
-      }
-
-      exitAnimation()
-    }
-  }, [isPresent])
-
-  return (
-    <div ref={scope} style={{ flex: 1 }}>
-      {children}
-    </div>
-  )
-}
-
 const byQueryState = <T extends any, L, E, D>(
   queryState: { data: T; isLoading: boolean; error: Error | null },
   options: { loading: () => L; error: (error: Error) => E; data: (data: NonNullable<T>) => D },
@@ -165,3 +139,10 @@ const byQueryState = <T extends any, L, E, D>(
 export default EmailTemplateShowPage
 
 export const Head: HeadFC = () => <title>{formatPageTitle('Email Template')}</title>
+
+const KeepHtmlTranslationsLinksPopulated: FC<{ emailTemplate: EmailTemplate.Unique.Config }> = ({
+  emailTemplate,
+}) => {
+  useKeepHtmlTranslationsLinksPopulated(emailTemplate)
+  return null
+}
