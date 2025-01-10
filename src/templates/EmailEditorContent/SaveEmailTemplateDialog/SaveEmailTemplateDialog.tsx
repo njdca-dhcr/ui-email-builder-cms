@@ -127,8 +127,10 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
             />
 
             {groupOptions.length > 0 && (
-              <>
-                <label id="group-select">Group</label>
+              <div className="form-field">
+                <div className="label-container">
+                  <label id="group-select">Group</label>
+                </div>
                 <Select
                   labelId="group-select"
                   onChange={(value) => {
@@ -138,7 +140,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
                   name="groupId"
                   value={groupId}
                 />
-              </>
+              </div>
             )}
             <Button type="submit">{submitButtonText}</Button>
           </Form>
