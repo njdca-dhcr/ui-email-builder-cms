@@ -49,6 +49,7 @@ interface MergeEmailTemplateValuesOptions {
   name: string
   previewText: string
   tagNames: string[]
+  groupId?: string
 }
 
 export const mergeEmailTemplateValues = ({
@@ -59,13 +60,15 @@ export const mergeEmailTemplateValues = ({
   name,
   previewText,
   tagNames,
-}: MergeEmailTemplateValuesOptions): EmailTemplate.Unique.Config => {
+  groupId,
+}: MergeEmailTemplateValuesOptions): EmailTemplate.Unique.Config & { groupId?: string } => {
   const translations = emailTemplate.translations ?? []
   return {
     ...emailTemplate,
     name,
     description,
     tagNames,
+    groupId,
     translations: translations.map((translation) =>
       translation.language === language
         ? mergeTranslationValues({ translation, data, previewText })

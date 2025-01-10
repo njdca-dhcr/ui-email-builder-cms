@@ -3,7 +3,11 @@ import { SaveEmailTemplateDialog } from './SaveEmailTemplateDialog'
 import { useCreateEmailTemplate } from 'src/network/emailTemplates'
 import { navigate } from 'gatsby'
 
-export const EmailTemplateSaveAsDialog: FC = () => {
+interface DialogProps {
+  groups?: { id: string; name: string }[]
+}
+
+export const EmailTemplateSaveAsDialog: FC<DialogProps> = ({ groups }) => {
   const { mutateAsync, isPending, error } = useCreateEmailTemplate()
 
   return (
@@ -17,6 +21,7 @@ export const EmailTemplateSaveAsDialog: FC = () => {
       trigger="Save As"
       submitButtonText="Create"
       errorMessage={error?.message}
+      groups={groups}
     />
   )
 }

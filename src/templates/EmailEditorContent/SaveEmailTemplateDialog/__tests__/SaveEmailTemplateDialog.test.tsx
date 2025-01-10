@@ -36,6 +36,7 @@ describe('SaveEmailTemplateDialog', () => {
   let user: UserEvent
   let emailPartsContent: Record<string, any>
   let versionTimestamp: string
+  let groups: { id: string; name: string }[] | undefined
 
   beforeEach(async () => {
     language = 'english'
@@ -120,6 +121,7 @@ describe('SaveEmailTemplateDialog', () => {
                   submitButtonText={submitButtonText}
                   title={title}
                   trigger={trigger}
+                  groups={groups}
                 />
               </PreviewText>
             </EmailPartsContent>
@@ -138,6 +140,27 @@ describe('SaveEmailTemplateDialog', () => {
     it('displays its description', async () => {
       const { queryByText } = await renderAndOpen()
       expect(queryByText(description)).not.toBeNull()
+    })
+
+    describe('groups', () => {
+      it('does not display the group field when the user lacks groups', async () => {
+        const { queryByLabelText } = await renderAndOpen()
+        expect(queryByLabelText('Group')).toBeNull()
+      })
+
+      it('displays the group field options when the user has groups', async () => {
+        groups = [
+          { id: randomUUID(), name: faker.lorem.word() },
+          { id: randomUUID(), name: faker.lorem.word() },
+        ]
+        const { queryByRole, queryByLabelText } = await renderAndOpen()
+        const groupSelect = queryByLabelText('Group')
+        expect(groupSelect).not.toBeNull()
+        await user.click(groupSelect!)
+        expect(queryByRole('option', { name: 'None' })).not.toBeNull()
+        expect(queryByRole('option', { name: groups[0].name })).not.toBeNull()
+        expect(queryByRole('option', { name: groups[1].name })).not.toBeNull()
+      })
     })
 
     it('displays the given error message', async () => {
@@ -164,13 +187,20 @@ describe('SaveEmailTemplateDialog', () => {
     })
 
     it('calls mutate when the form is submitted', async () => {
-      const { baseElement, getByLabelText } = await renderAndOpen()
+      groups = [
+        { id: randomUUID(), name: faker.lorem.word() },
+        { id: randomUUID(), name: faker.lorem.word() },
+      ]
+
+      const { baseElement, getByLabelText, getByRole } = await renderAndOpen()
       mutate.mockResolvedValue({ emailTemplate: { id: randomUUID() } })
       await user.clear(getByLabelText('Name'))
       await user.type(getByLabelText('Name'), emailTemplateChanges.name)
       await user.clear(getByLabelText('Description'))
       await user.type(getByLabelText('Description'), emailTemplateChanges.description!)
       await user.type(getByLabelText('Tags'), 'tag')
+      await user.click(getByLabelText('Group'))
+      await user.click(getByRole('option', { name: groups[0].name }))
 
       const form = baseElement.querySelector('form')
       expect(form).not.toBeNull()
@@ -185,6 +215,43 @@ describe('SaveEmailTemplateDialog', () => {
         ...emailTemplateChanges,
         versionTimestamp,
         tagNames: ['tag'],
+        groupId: groups[0].id,
+      })
+    })
+
+    describe('submitting when removing the group id', () => {
+      it('submits the template with no group id', async () => {
+        groups = [
+          { id: randomUUID(), name: faker.lorem.word() },
+          { id: randomUUID(), name: faker.lorem.word() },
+        ]
+        emailTemplate.groupId = groups[0].id
+
+        const { baseElement, getByLabelText, getByRole } = await renderAndOpen()
+        mutate.mockResolvedValue({ emailTemplate: { id: randomUUID() } })
+        await user.clear(getByLabelText('Name'))
+        await user.type(getByLabelText('Name'), emailTemplateChanges.name)
+        await user.clear(getByLabelText('Description'))
+        await user.type(getByLabelText('Description'), emailTemplateChanges.description!)
+        await user.type(getByLabelText('Tags'), 'tag')
+        await user.click(getByLabelText('Group'))
+        await user.click(getByRole('option', { name: 'None' }))
+
+        const form = baseElement.querySelector('form')
+        expect(form).not.toBeNull()
+
+        const button = form!.querySelector('button[type="submit"]')
+        expect(button).not.toBeNull()
+        expect(button).toHaveTextContent(submitButtonText)
+
+        expect(mutate).not.toHaveBeenCalled()
+        await user.click(button!)
+        expect(mutate).toHaveBeenCalledWith({
+          ...emailTemplateChanges,
+          versionTimestamp,
+          tagNames: ['tag'],
+          groupId: '',
+        })
       })
     })
 

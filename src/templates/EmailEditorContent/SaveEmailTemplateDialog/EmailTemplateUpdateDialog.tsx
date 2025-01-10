@@ -3,7 +3,11 @@ import { SaveEmailTemplateDialog } from './SaveEmailTemplateDialog'
 import { useUpdateEmailTemplate } from 'src/network/emailTemplates'
 import { useCurrentEmailTemplate } from 'src/utils/EmailTemplateState'
 
-export const EmailTemplateUpdateDialog: FC = () => {
+interface DialogProps {
+  groups?: { id: string; name: string }[]
+}
+
+export const EmailTemplateUpdateDialog: FC<DialogProps> = ({ groups }) => {
   const [emailTemplate, setCurrentEmailTemplate] = useCurrentEmailTemplate()
   const { mutateAsync, isPending, error } = useUpdateEmailTemplate(emailTemplate.id ?? '')
 
@@ -18,6 +22,9 @@ export const EmailTemplateUpdateDialog: FC = () => {
       trigger="Update"
       submitButtonText="Update"
       errorMessage={error?.message}
+      groups={groups}
     />
   )
 }
+
+/* NEED TO CHECK TO SEE IF API CAN HANDLE GROUP BEING SENT ON EMAIL TEMPLATE UPDATE */

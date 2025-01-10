@@ -42,8 +42,10 @@ describe('EmailTemplateSaveAsDialog', () => {
   let mergedEmailTemplate: EmailTemplate.Unique.Config
   let appliedTranslationStructuresEmailTemplate: EmailTemplate.Unique.Config
   let emailTranslation: EmailTranslation.Unique
+  let groups: { id: string; name: string }[]
 
   beforeEach(async () => {
+    groups = []
     language = 'english'
     previewText = faker.lorem.paragraph()
     emailTemplate = buildUniqueEmailConfig()
@@ -73,7 +75,7 @@ describe('EmailTemplateSaveAsDialog', () => {
         {({ currentTranslation }) => (
           <EmailPartsContent initialData={emailTemplateChanges}>
             <PreviewText emailTranslation={currentTranslation}>
-              <EmailTemplateSaveAsDialog />
+              <EmailTemplateSaveAsDialog groups={groups} />
             </PreviewText>
           </EmailPartsContent>
         )}
@@ -89,6 +91,18 @@ describe('EmailTemplateSaveAsDialog', () => {
     expect(queryByRole('dialog')).toBeNull()
     await user.click(button!)
     expect(queryByRole('dialog')).not.toBeNull()
+  })
+
+  it("has a dropdown for the user's groups", async () => {
+    groups = [
+      { id: randomUUID(), name: 'Group 1' },
+      { id: randomUUID(), name: 'Group 2' },
+    ]
+    asMock(useCreateEmailTemplate).mockReturnValue(buildUseMutationResult())
+    const { queryByLabelText, queryByRole } = renderDialog()
+    await user.click(queryByRole('button')!)
+    expect(queryByRole('dialog')).not.toBeNull()
+    expect(queryByLabelText('Group')).not.toBeNull()
   })
 
   it('creates a new email template when submitted', async () => {

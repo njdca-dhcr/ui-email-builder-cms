@@ -20,7 +20,8 @@ import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 
 const MyDraftsPage: FC = () => {
   useRedirectIfNotSignedIn()
-  const { data: emailTemplates, isLoading, error } = useEmailTemplates()
+  const { data, isLoading, error } = useEmailTemplates()
+  const emailTemplates = data?.user
 
   return (
     <Layout element="div">

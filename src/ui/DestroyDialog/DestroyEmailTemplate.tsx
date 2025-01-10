@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { useDestroyEmailTemplate } from 'src/network/emailTemplates'
-import { EmailTemplateIndex } from 'src/network/emailTemplates'
+import { EmailTemplateIndexItem } from 'src/network/emailTemplates'
 import { DestroyDialog } from './DestroyDialog'
 
 interface DestroyEmailTemplateProps {
-  emailTemplate: EmailTemplateIndex
+  emailTemplate: EmailTemplateIndexItem
 }
 
 export const DestroyEmailTemplate: FC<DestroyEmailTemplateProps> = ({ emailTemplate }) => {

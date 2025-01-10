@@ -1,12 +1,12 @@
 import React from 'react'
-import { buildEmailTemplateIndex, buildUseMutationResult } from 'src/factories'
+import { buildEmailTemplateIndexItem, buildUseMutationResult } from 'src/factories'
 import { useDestroyEmailTemplate } from 'src/network/emailTemplates'
 import { asMock } from 'src/testHelpers'
 import { DestroyEmailTemplate } from '../DestroyEmailTemplate'
 import { render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { randomUUID } from 'crypto'
-import { EmailTemplateIndex } from 'src/network/emailTemplates'
+import { EmailTemplateIndexItem } from 'src/network/emailTemplates'
 import { faker } from '@faker-js/faker'
 
 jest.mock('src/network/emailTemplates', () => {
@@ -16,12 +16,12 @@ jest.mock('src/network/emailTemplates', () => {
 describe('DestroyEmailTemplate', () => {
   let user: UserEvent
   let id: string
-  let emailTemplate: EmailTemplateIndex
+  let emailTemplate: EmailTemplateIndexItem
 
   beforeEach(() => {
     user = userEvent.setup()
     id = randomUUID()
-    emailTemplate = buildEmailTemplateIndex({ id })
+    emailTemplate = buildEmailTemplateIndexItem({ id })
   })
 
   describe('when closed', () => {

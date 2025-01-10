@@ -10,7 +10,11 @@ import {
 } from './appTypes'
 import uniqueId from 'lodash.uniqueid'
 import sample from 'lodash.sample'
-import { EmailTemplateIndex } from './network/emailTemplates'
+import {
+  EmailTemplateIndexItem,
+  EmailTemplateIndexGroup,
+  EmailTemplateIndex,
+} from './network/emailTemplates'
 import { StateAbbreviation } from './utils/statesAndTerritories'
 import { DEPARTMENT_SEALS } from './utils/departmentSeals'
 import { UsersIndex, UserShow } from './network/users'
@@ -123,14 +127,36 @@ export const buildUniqueEmailConfig = (
   }
 }
 
-export const buildEmailTemplateIndex = (
-  options?: Partial<EmailTemplateIndex>,
-): EmailTemplateIndex => {
+export const buildEmailTemplateIndexItem = (
+  options?: Partial<EmailTemplateIndexItem>,
+): EmailTemplateIndexItem => {
   return {
     id: uniqueId(),
     userId: uniqueId(),
     name: faker.lorem.words(3),
     description: faker.lorem.sentence(),
+    ...options,
+  }
+}
+
+export const buildEmailTemplateIndexGroup = (
+  options?: Partial<EmailTemplateIndexGroup>,
+): EmailTemplateIndexGroup => {
+  return {
+    id: uniqueId(),
+    name: faker.lorem.words(3),
+    description: faker.lorem.sentence(),
+    templates: [buildEmailTemplateIndexItem()],
+    ...options,
+  }
+}
+
+export const buildEmailTemplateIndex = (
+  options?: Partial<EmailTemplateIndex>,
+): EmailTemplateIndex => {
+  return {
+    user: [buildEmailTemplateIndexItem()],
+    groups: [buildEmailTemplateIndexGroup()],
     ...options,
   }
 }

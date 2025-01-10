@@ -114,8 +114,8 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                     <SelectPreviewType {...previewTypeOptions} />
                                     <div className="share-and-save-buttons">
                                       <div className="save-and-update-buttons">
-                                        <EmailTemplateUpdateDialog />
-                                        <EmailTemplateSaveAsDialog />
+                                        <EmailTemplateUpdateDialog groups={currentUser?.groups} />
+                                        <EmailTemplateSaveAsDialog groups={currentUser?.groups} />
                                       </div>
                                       <TitleAndPreviewText translation={englishTranslation}>
                                         {({ previewText, title }) => (
@@ -150,8 +150,12 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                         <SelectPreviewType {...previewTypeOptions} />
                                         <div className="share-and-save-buttons">
                                           <div className="save-and-update-buttons">
-                                            <EmailTemplateUpdateDialog />
-                                            <EmailTemplateSaveAsDialog />
+                                            <EmailTemplateUpdateDialog
+                                              groups={currentUser?.groups}
+                                            />
+                                            <EmailTemplateSaveAsDialog
+                                              groups={currentUser?.groups}
+                                            />
                                           </div>
                                           <TitleAndPreviewText translation={englishTranslation}>
                                             {({ previewText, title }) => (

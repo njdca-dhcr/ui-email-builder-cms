@@ -15,6 +15,7 @@ interface Props {
   value: string
   renderValue?: (props: { value: string | null; valueLabel: string | null }) => ReactElement
   'data-testid'?: string
+  name?: string
 }
 
 export const Select: FC<Props> = ({
@@ -25,6 +26,7 @@ export const Select: FC<Props> = ({
   renderValue,
   size,
   value,
+  name,
   ...props
 }) => {
   const mounted = useDidMount()
@@ -36,7 +38,7 @@ export const Select: FC<Props> = ({
 
   return (
     <div className={classNames('SelectContainer', size, className)}>
-      <BaseSelect.Root value={value} onValueChange={onChange}>
+      <BaseSelect.Root value={value} onValueChange={onChange} name={name}>
         <BaseSelect.Trigger
           className="SelectTrigger"
           aria-labelledby={labelId}

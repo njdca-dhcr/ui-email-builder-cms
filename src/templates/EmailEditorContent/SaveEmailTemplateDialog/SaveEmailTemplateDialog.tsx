@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import uniq from 'lodash.uniq'
 import { EmailTemplate } from 'src/appTypes'
-import { Button, ButtonLike, Dialog, Form, FormField, LoadingOverlay } from 'src/ui'
+import { Button, ButtonLike, Dialog, Form, FormField, LoadingOverlay, Select } from 'src/ui'
 import { mergeEmailTemplateValues } from './emailTemplateMergeDefaultValues'
 import { stringFromFormData } from 'src/utils/stringFromFormData'
 import { useEmailPartsContentData } from 'src/templates/EmailPartsContent'
@@ -12,6 +12,7 @@ import { useCurrentEmailTemplate, useCurrentLanguage } from 'src/utils/EmailTemp
 import { EmailTemplateShow } from 'src/network/emailTemplates'
 import { currentTimestamp } from 'src/utils/currentTimestamp'
 import { applyTranslationStructures } from 'src/utils/applyTranslationStructures'
+import { group } from 'console'
 
 interface ErrorJSON {
   errors: { name: string }
@@ -35,6 +36,7 @@ interface Props {
   submitButtonText: string
   title: string
   trigger: string
+  groups?: { id: string; name: string }[]
 }
 
 export const SaveEmailTemplateDialog: FC<Props> = ({
@@ -47,12 +49,20 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
   submitButtonText,
   title,
   trigger,
+  groups,
 }) => {
   const [emailTemplate] = useCurrentEmailTemplate()
   const [language] = useCurrentLanguage()
   const [emailPartsContentData] = useEmailPartsContentData()
   const [previewText] = usePreviewText()
   const [validationErrors, setValidationErrors] = useState<ErrorJSON['errors'] | null>(null)
+  const [groupId, setGroupId] = useState<string>(emailTemplate.groupId || ' ')
+
+  let groupOptions = []
+  if (groups && groups.length > 0) {
+    groupOptions.push({ label: 'None', value: ' ' })
+    groupOptions.push(...groups?.map(({ id, name }) => ({ label: name, value: id })))
+  }
 
   return (
     <Dialog
@@ -81,6 +91,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
                         .map((name) => name.trim())
                         .filter(Boolean),
                     ),
+                    groupId: groupId.trim(),
                   }),
                 ),
               )
@@ -115,6 +126,20 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
               description="Separate tags with commas"
             />
 
+            {groupOptions.length > 0 && (
+              <>
+                <label id="group-select">Group</label>
+                <Select
+                  labelId="group-select"
+                  onChange={(value) => {
+                    setGroupId(value)
+                  }}
+                  options={groupOptions}
+                  name="groupId"
+                  value={groupId}
+                />
+              </>
+            )}
             <Button type="submit">{submitButtonText}</Button>
           </Form>
           {loading && <LoadingOverlay description={loadingMessage} />}

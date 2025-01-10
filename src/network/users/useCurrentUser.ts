@@ -9,11 +9,13 @@ export interface CurrentUserEmailConfig {
   stateSeal?: object
   disclaimer?: object
   id: string
+  groups?: { id: string; name: string }[]
 }
 
 export interface CurrentUser extends CurrentUserEmailConfig {
   role?: UserRole
   email: string
+  groups?: { id: string; name: string }[]
 }
 
 export const USE_CURRENT_USER_QUERY_KEY = 'useCurrentUser'

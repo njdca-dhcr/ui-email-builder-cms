@@ -21,6 +21,7 @@ export namespace EmailTemplate {
       tags?: Tag[]
       tagNames?: string[]
       versionTimestamp: string
+      groupId?: string
     }
   }
 }

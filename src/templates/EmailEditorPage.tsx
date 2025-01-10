@@ -73,7 +73,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
                           <SelectPreviewType {...previewTypeOptions} />
                           <div className="share-and-save-buttons">
                             <div className="save-and-update-buttons">
-                              <EmailTemplateSaveAsDialog />
+                              <EmailTemplateSaveAsDialog groups={currentUser?.groups} />
                             </div>
                           </div>
                         </>
