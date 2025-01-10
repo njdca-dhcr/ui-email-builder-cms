@@ -96,7 +96,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       {error && <Alert>{error.message}</Alert>}
                       {emailTemplate && (
                         <div className="email-editors">
-                          <div className="original-translation">
+                          <div className="original-translation translation">
                             {inTranslationMode && (
                               <TranslationActions title="English (original)">
                                 <ExitTranslationModeButton label="Edit Original Email" />
@@ -143,7 +143,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: TRANSITION_DURATION }}
-                                    className="translation"
+                                    className="new-translation translation"
                                   >
                                     {inTranslationMode && (
                                       <TranslationActions title={capitalize(currentLanguage)}>

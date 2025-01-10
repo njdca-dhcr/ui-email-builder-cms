@@ -245,7 +245,7 @@ describe('Email Template Show Page', () => {
 
       it('has a writable version of the other translation', async () => {
         const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
-        const otherTranslationContainer = baseElement.querySelector('.translation')
+        const otherTranslationContainer = baseElement.querySelector('.new-translation')
 
         expect(otherTranslationContainer).toBeTruthy()
         expect(

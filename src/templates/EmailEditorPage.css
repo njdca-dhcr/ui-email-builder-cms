@@ -47,13 +47,13 @@
 }
 
 .email-editors {
+  --translation-content-width: 37.5rem;
   display: flex;
   justify-content: flex-start;
   gap: 5rem;
   position: relative;
   width: 100vw;
   padding-block-start: 0;
-  /* transition: padding-block-start var(--easing) var(--duration); */
 
   > :first-child {
     margin-left: 10rem;
@@ -62,14 +62,17 @@
 }
 
 .translation-mode .email-editors {
-  /* padding-block-start: 3rem; */
-
   > :first-child {
     margin-left: 5rem;
   }
 }
 
+.translation {
+  width: var(--translation-content-width);
+}
+
 .translation-actions {
+  align-items: center;
   display: flex;
   justify-content: space-between;
   padding-block-start: 1rem;
@@ -80,11 +83,15 @@
   }
 }
 
-.exit-translation-mode-button {
-  /* position: absolute; */
-  /* top: 1rem;
-  right: 1.25rem;
-  z-index: 100; */
+.select-preview-type {
+  margin: 0;
+  padding: 0;
+
+  label {
+    font-size: var(--font-small);
+    font-style: normal;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .email-editor-content {

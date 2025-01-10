@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, ReactNode } from 'react'
 import classNames from 'classnames'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import './RadioButtons.css'
 
 interface ButtonProps {
@@ -10,12 +11,12 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({ checked, label, onChange }) => {
   return (
-    <div className="radio-button">
-      <label>
-        {label}
+    <label className="radio-button">
+      {label}
+      <VisuallyHidden>
         <input type="radio" checked={checked} onChange={onChange} />
-      </label>
-    </div>
+      </VisuallyHidden>
+    </label>
   )
 }
 Button.displayName = 'Radio.Button'

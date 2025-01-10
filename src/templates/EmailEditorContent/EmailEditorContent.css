@@ -1,6 +1,5 @@
 .email-preview-actions {
   margin-block-start: 1rem;
-  max-width: 37.5rem;
   width: 100%;
 }
 
@@ -8,17 +7,6 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-}
-
-.select-preview-type {
-  margin: 0;
-  padding: 0;
-}
-
-.select-preview-type label {
-  font-size: var(--font-small);
-  font-style: normal;
-  padding: 0.5rem 1rem;
 }
 
 .share-and-save-buttons {
@@ -96,7 +84,7 @@
   height: 70vh;
   margin: 1.5rem auto 0;
   overflow: auto;
-  width: 37.5rem;
+  width: var(--translation-content-width);
   transition:
     width ease-in-out 100ms,
     height var(--easing) var(--duration);
