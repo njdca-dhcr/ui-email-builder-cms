@@ -155,31 +155,26 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                     transition={{ duration: TRANSITION_DURATION }}
                                     className="new-translation translation"
                                   >
-                                    {inTranslationMode && (
-                                      <TranslationActions title={capitalize(currentLanguage)}>
-                                        <SelectPreviewType {...previewTypeOptions} />
-                                        <div className="share-and-save-buttons">
-                                          <div className="save-and-update-buttons">
-                                            <EmailTemplateUpdateDialog
-                                              groups={currentUser?.groups}
-                                            />
-                                            <EmailTemplateSaveAsDialog
-                                              groups={currentUser?.groups}
-                                            />
-                                          </div>
-                                          <TitleAndPreviewText translation={englishTranslation}>
-                                            {({ previewText, title }) => (
-                                              <ExportEmailTemplate
-                                                emailTemplate={currentEmailTemplate}
-                                                emailTranslation={englishTranslation}
-                                                htmlForImage={() => toEmailText(title)}
-                                                previewText={previewText}
-                                              />
-                                            )}
-                                          </TitleAndPreviewText>
+                                    <TranslationActions title={capitalize(currentLanguage)}>
+                                      <SelectPreviewType {...previewTypeOptions} />
+                                      <div className="share-and-save-buttons">
+                                        <div className="save-and-update-buttons">
+                                          <EmailTemplateUpdateDialog groups={currentUser?.groups} />
+                                          <EmailTemplateSaveAsDialog groups={currentUser?.groups} />
                                         </div>
-                                      </TranslationActions>
-                                    )}
+                                        <TitleAndPreviewText translation={englishTranslation}>
+                                          {({ previewText, title }) => (
+                                            <ExportEmailTemplate
+                                              emailTemplate={currentEmailTemplate}
+                                              emailTranslation={englishTranslation}
+                                              htmlForImage={() => toEmailText(title)}
+                                              previewText={previewText}
+                                            />
+                                          )}
+                                        </TitleAndPreviewText>
+                                      </div>
+                                    </TranslationActions>
+
                                     <EmailEditorContent
                                       emailTranslation={currentTranslation}
                                       emailTemplate={currentEmailTemplate}
@@ -249,8 +244,10 @@ const TitleAndPreviewText: FC<{
 const TranslationActions: FC<{ children: ReactNode; title: string }> = ({ children, title }) => {
   return (
     <div className="translation-actions">
-      <h2>{title}</h2>
-      <div className="actions">{children}</div>
+      <div className="translation-actions-inner">
+        <h2>{title}</h2>
+        <div className="actions">{children}</div>
+      </div>
     </div>
   )
 }
