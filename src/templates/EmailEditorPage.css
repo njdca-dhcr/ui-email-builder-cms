@@ -51,6 +51,7 @@
   display: flex;
   justify-content: flex-start;
   gap: 5rem;
+  height: 100%;
   position: relative;
   width: 100vw;
   padding-block-start: 0;
@@ -76,10 +77,12 @@
   display: flex;
   justify-content: space-between;
   padding-block-start: 1rem;
+  min-height: 55px;
 
   h2 {
     font-size: var(--font-large);
     font-weight: var(--weight-normal);
+    margin: 0;
   }
 }
 

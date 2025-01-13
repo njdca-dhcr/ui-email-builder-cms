@@ -97,11 +97,21 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                       {emailTemplate && (
                         <div className="email-editors">
                           <div className="original-translation translation">
-                            {inTranslationMode && (
-                              <TranslationActions title="English (original)">
-                                <ExitTranslationModeButton label="Edit Original Email" />
-                              </TranslationActions>
-                            )}
+                            <AnimatePresence>
+                              {inTranslationMode && (
+                                <motion.div
+                                  key="fade-in-translation"
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: 'fit-content' }}
+                                  exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: TRANSITION_DURATION }}
+                                >
+                                  <TranslationActions title="English (original)">
+                                    <ExitTranslationModeButton label="Edit Original Email" />
+                                  </TranslationActions>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                             <EmailEditorContent
                               emailTranslation={englishTranslation}
                               emailTemplate={currentEmailTemplate}
@@ -141,7 +151,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                     key="fade-in-translation"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
+                                    exit={{ opacity: 0, height: 0 }}
                                     transition={{ duration: TRANSITION_DURATION }}
                                     className="new-translation translation"
                                   >
