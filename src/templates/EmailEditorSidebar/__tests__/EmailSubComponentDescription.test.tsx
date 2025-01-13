@@ -57,7 +57,7 @@ describe('EmailSubComponentDescription', () => {
       const result = baseElement.querySelector('.description')
       expect(result).not.toBeNull()
       expect(result).toHaveTextContent('Edit this in Settings')
-      expect(result?.querySelector('a[href="/settings"]'))
+      expect(result?.querySelector('a[href="/settings/email"]'))
     })
   })
 

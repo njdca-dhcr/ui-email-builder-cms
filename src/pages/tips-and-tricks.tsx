@@ -378,7 +378,7 @@ const Icon: FC<{ icon: UswdsIconVariantKey }> = ({ icon }) => {
 
 const SettingsPageLink: FC = () => {
   return (
-    <InternalLink to="/settings">
+    <InternalLink to="/settings/email">
       <Icon icon="Settings" /> Settings page
     </InternalLink>
   )

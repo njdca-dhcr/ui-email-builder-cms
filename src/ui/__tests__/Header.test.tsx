@@ -96,7 +96,7 @@ describe('Header', () => {
     )
     const link: HTMLAnchorElement = getByRole('link', { name: 'Settings' }) as any
     expect(link.tagName).toEqual('A')
-    expect(link.href).toEqual(urlFor('/settings'))
+    expect(link.href).toEqual(urlFor('/settings/email'))
   })
 })
 

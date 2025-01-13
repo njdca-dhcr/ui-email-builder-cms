@@ -1,0 +1,44 @@
+.settings-layout {
+  --header-height: 87px;
+  --return-link-height: 2.75rem;
+  --content-max-height: calc(100vh - var(--header-height) - var(--return-link-height));
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: [row1-start] var(--return-link-height) [row1-end] var(--content-max-height) [last-line];
+  grid-template-areas:
+    'return-link return-link'
+    'sidebar main';
+
+  height: calc(100% - var(--header-height));
+  margin-top: var(--header-height);
+  overflow-y: hidden;
+}
+
+.return-to-email-building-link-container {
+  background-color: var(--gray-light-medium);
+  display: inline-grid;
+  grid-area: return-link;
+  min-height: var(--return-link-height);
+  place-items: center;
+  text-align: center;
+
+  a {
+    color: var(--black);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.settings-sidebar {
+  grid-area: sidebar;
+}
+
+.settings-page-content {
+  grid-area: main;
+  overflow-y: auto;
+  position: relative;
+}

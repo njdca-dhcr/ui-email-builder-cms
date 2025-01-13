@@ -19,7 +19,7 @@ export const EmailComponentDescription: FC<Props> = ({ emailComponent }) => {
     case 'Disclaimer':
       return (
         <p className="description">
-          Edit this in <Link to="/settings">Settings</Link>
+          Edit this in <Link to="/settings/email">Settings</Link>
         </p>
       )
     case 'Header':

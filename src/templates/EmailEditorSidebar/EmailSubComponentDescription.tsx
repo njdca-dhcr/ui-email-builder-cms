@@ -21,7 +21,7 @@ export const EmailSubComponentDescription: FC<Props> = ({ emailSubComponent }) =
     case 'DepartmentSeal':
       return (
         <Description>
-          Edit this in&nbsp;<Link to="/settings">Settings</Link>
+          Edit this in&nbsp;<Link to="/settings/email">Settings</Link>
         </Description>
       )
     case 'DateRange':

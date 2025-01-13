@@ -61,7 +61,7 @@ export const LogOutButton: FC = () => {
 
 export const SettingsButton: FC = () => {
   return (
-    <Link to="/settings" className="settings-link">
+    <Link to="/settings/email" className="settings-link">
       <UswdsIcon icon="Settings" />
       <VisuallyHidden>Settings</VisuallyHidden>
     </Link>

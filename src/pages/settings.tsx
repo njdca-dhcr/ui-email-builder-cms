@@ -59,7 +59,7 @@ const SettingsPage: FC = () => {
 
             {error && <Paragraph>{error.message}</Paragraph>}
 
-            {enabled && user ? <UserInfoProvider userInfo={user}>{forms}</UserInfoProvider> : forms}
+            {user && <UserInfoProvider userInfo={user}>{forms}</UserInfoProvider>}
           </div>
           {isLoading && <LoadingOverlay description="Loading your settings" />}
         </SpacedContainer>
