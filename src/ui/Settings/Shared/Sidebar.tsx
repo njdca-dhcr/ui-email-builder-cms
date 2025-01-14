@@ -1,8 +1,9 @@
-import React, { FC, ReactNode } from 'react'
-import { useCurrentUser } from 'src/network/users'
-import { LoadingOverlay } from '../../LoadingOverlay'
+import React, { FC, ReactElement, ReactNode } from 'react'
 import { Link } from 'gatsby'
 import classNames from 'classnames'
+import { useCurrentUser } from 'src/network/users'
+import { LoadingOverlay } from '../../LoadingOverlay'
+import { GroupsIcon, UsersIcon, EmailSettingsIcon } from './Icons'
 
 export const Sidebar: FC = () => {
   const { data: currentUser, isLoading, error } = useCurrentUser()
@@ -11,23 +12,29 @@ export const Sidebar: FC = () => {
     <div className="settings-sidebar">
       {error && <SidebarError error={error} />}
       <nav>
-        <SidebarList>
-          <SidebarLink to="/settings/groups" label="Groups" className="section-link">
+        <SidebarList className="outer">
+          <SidebarLink
+            to="/settings/groups"
+            label="Groups"
+            className="section-link"
+            icon={<GroupsIcon />}
+          >
             {currentUser?.groups ? (
-              <SidebarList>
+              <SidebarList className="inner">
                 {currentUser.groups.map((group) => (
                   <SidebarLink
                     key={group.id}
                     to={`/settings/groups/${group.id}`}
                     label={group.name}
                     partiallyActive
+                    icon={<GroupsIcon />}
                   />
                 ))}
               </SidebarList>
             ) : null}
           </SidebarLink>
-          <SidebarLink to="/settings/users" label="Users" partiallyActive />
-          <SidebarLink to="/settings/email" label="Email Settings" />
+          <SidebarLink to="/settings/users" label="Users" partiallyActive icon={<UsersIcon />} />
+          <SidebarLink to="/settings/email" label="Email Settings" icon={<EmailSettingsIcon />} />
         </SidebarList>
       </nav>
 
@@ -40,28 +47,37 @@ const SidebarError: FC<{ error: Error }> = ({ error }) => {
   return <p>{error.message}</p>
 }
 
-const SidebarList: FC<{ children: ReactNode }> = ({ children }) => {
-  return <ul>{children}</ul>
+const SidebarList: FC<{ children: ReactNode; className?: string }> = ({ children, className }) => {
+  return <ul className={classNames('settings-sidebar-list', className)}>{children}</ul>
 }
 
 interface SidebarLinkProps {
-  to: string
   children?: ReactNode
   className?: string
+  icon: ReactElement
   label: string
   partiallyActive?: boolean
+  to: string
 }
 
-const SidebarLink: FC<SidebarLinkProps> = ({ to, children, label, className, partiallyActive }) => {
+const SidebarLink: FC<SidebarLinkProps> = ({
+  children,
+  className,
+  icon,
+  label,
+  partiallyActive,
+  to,
+}) => {
   return (
-    <li>
+    <li className="settings-sidebar-list-item">
       <Link
         partiallyActive={partiallyActive}
         activeClassName="active"
-        className={classNames(className)}
+        className={classNames('link', className)}
         to={to}
       >
-        {label}
+        <span className="icon">{icon}</span>
+        <span className="label">{label}</span>
       </Link>
       {children}
     </li>
