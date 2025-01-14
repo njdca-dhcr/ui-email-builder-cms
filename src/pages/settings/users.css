@@ -1,20 +1,26 @@
 .user-list {
   margin-top: 3rem;
   margin-bottom: 3rem;
+
+  .list-item {
+    gap: 0.25rem;
+    border: 0;
+    padding: 1rem 0;
+    margin-block-end: 0.5rem;
+  }
 }
 
 .user-email {
   align-items: center;
   color: var(--black);
   display: flex;
-  font-size: 1.25rem;
+  font-size: var(--font-large);
   font-weight: bold;
   text-decoration: none;
 }
 
 .user-role {
-  color: var(--gray-dark);
-  font-style: italic;
+  color: var(--gray-medium-dark);
 
   div {
     display: flex;

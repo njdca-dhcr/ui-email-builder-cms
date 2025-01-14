@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import capitalize from 'lodash/capitalize'
 import UsersPage from '../users'
 import { asMock, buildUserIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
 import { useUsers, UsersIndex, useCurrentUser } from 'src/network/users'
@@ -64,10 +63,10 @@ describe('Users page', () => {
       expect(secondLink).not.toBeNull()
       expect(secondLink!.href).toEqual(urlFor(`/settings/users/${user2.id}`))
 
-      const firstRole = queryByText(capitalize(user1.role))
+      const firstRole = queryByText(user1.role)
       expect(firstRole).not.toBeNull()
 
-      const secondRole = queryByText(capitalize(user2.role))
+      const secondRole = queryByText(user2.role)
       expect(secondRole).not.toBeNull()
     })
   })

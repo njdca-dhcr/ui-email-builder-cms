@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import capitalize from 'lodash.capitalize'
 import { HeadFC, Link } from 'gatsby'
 import { List, ListItem, LoadingOverlay } from 'src/ui'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
@@ -16,8 +15,10 @@ const UsersPage: FC = () => {
     <Layout>
       <Sidebar />
       <PageContent>
-        <h1>Users</h1>
-        <p>All of the users can be found here</p>
+        <div className="settings-header">
+          <h1>Users</h1>
+          <p>All of the users can be found here</p>
+        </div>
         {error && <p>{error.message}</p>}
         {users && users.length > 0 && (
           <List className="user-list">
@@ -26,7 +27,7 @@ const UsersPage: FC = () => {
                 <Link to={`/settings/users/${user.id}`} className="user-email">
                   {user.email}
                 </Link>
-                <span className="user-role">{capitalize(user.role)}</span>
+                <span className="user-role">{user.role}</span>
               </ListItem>
             ))}
           </List>
