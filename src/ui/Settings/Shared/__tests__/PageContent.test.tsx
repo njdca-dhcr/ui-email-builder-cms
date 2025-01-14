@@ -13,4 +13,14 @@ describe('PageContent', () => {
     )
     expect(baseElement).toContainHTML(`<span>${text}</span>`)
   })
+
+  it('accepts a className', async () => {
+    const className = faker.lorem.word()
+    const { baseElement } = render(
+      <PageContent className={className}>
+        <span />
+      </PageContent>,
+    )
+    expect(baseElement.querySelector(`.${className}`)).toBeTruthy()
+  })
 })

@@ -21,7 +21,7 @@ import './settings.css'
 
 const SettingsPage: FC = () => {
   useRedirectIfNotSignedIn()
-  const { data: user, isLoading, error, enabled } = useCurrentUser()
+  const { data: user, isLoading, error } = useCurrentUser()
 
   const forms = (
     <>
