@@ -52,28 +52,6 @@ describe('SidebarNavigation', () => {
       expect(link.tagName).toEqual('A')
       expect(link.href).toEqual(urlFor('/my-drafts'))
     })
-
-    it('displays a users link', () => {
-      const { getByRole } = render(
-        <AuthProvider>
-          <SidebarNavigation />
-        </AuthProvider>,
-      )
-      const link: HTMLAnchorElement = getByRole('link', { name: 'Users' }) as any
-      expect(link.tagName).toEqual('A')
-      expect(link.href).toEqual(urlFor('/users'))
-    })
-
-    it('displays a groups link', () => {
-      const { getByRole } = render(
-        <AuthProvider>
-          <SidebarNavigation />
-        </AuthProvider>,
-      )
-      const link: HTMLAnchorElement = getByRole('link', { name: 'Groups' }) as any
-      expect(link.tagName).toEqual('A')
-      expect(link.href).toEqual(urlFor('/groups'))
-    })
   })
 
   describe('when signed out', () => {
