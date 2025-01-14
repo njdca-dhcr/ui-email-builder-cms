@@ -118,6 +118,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                               currentUser={currentUser ?? { id: 'placeholder' }}
                               readOnly={inTranslationMode}
                               preview={previewTypeOptions.current}
+                              emailPreviewRef={inTranslationMode ? undefined : previewRef}
                               actions={
                                 inTranslationMode ? null : (
                                   <>
@@ -181,6 +182,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                       currentUser={currentUser ?? { id: 'placeholder' }}
                                       actions={null}
                                       preview={previewTypeOptions.current}
+                                      emailPreviewRef={previewRef}
                                     />
                                   </motion.div>
                                 </PreviewText>
