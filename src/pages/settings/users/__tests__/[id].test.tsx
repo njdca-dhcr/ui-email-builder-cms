@@ -11,18 +11,9 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
 import { useCurrentUser, useUpdateUser, UserShow, useUser, useDestroyUser } from 'src/network/users'
 
-jest.mock('src/utils/useCurrentRole', () => {
-  return { useCurrentRole: jest.fn() }
-})
+jest.mock('src/utils/useCurrentRole')
 
-jest.mock('src/network/users', () => {
-  return {
-    useCurrentUser: jest.fn(),
-    useUpdateUser: jest.fn(),
-    useUser: jest.fn(),
-    useDestroyUser: jest.fn(),
-  }
-})
+jest.mock('src/network/users')
 
 describe('User Show Page', () => {
   beforeEach(() => {
@@ -35,6 +26,8 @@ describe('User Show Page', () => {
       ...buildUseQueryResult({ data: currentUser }),
       enabled: true,
     })
+    const query = buildUseQueryResult<UserShow>({ isLoading: true, data: undefined })
+    asMock(useUser).mockReturnValue(query)
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -57,17 +50,13 @@ describe('User Show Page', () => {
   }
 
   it('is displayed in a layout', () => {
-    const query = buildUseQueryResult<UserShow>({ isLoading: true, data: undefined })
-    asMock(useUser).mockReturnValue(query)
     const { baseElement } = renderPage()
-    expect(baseElement.querySelector('.layout')).not.toBeNull()
+    expect(baseElement.querySelector('.settings-layout')).toBeTruthy()
   })
 
   it('displays the sidebar navigation', () => {
-    const query = buildUseQueryResult<UserShow>({ isLoading: true, data: undefined })
-    asMock(useUser).mockReturnValue(query)
-    const { queryByTestId } = renderPage()
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-sidebar')).toBeTruthy()
   })
 
   it('loads the correct user', () => {

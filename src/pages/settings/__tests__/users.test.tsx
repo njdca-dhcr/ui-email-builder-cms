@@ -2,20 +2,15 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import capitalize from 'lodash/capitalize'
 import UsersPage from '../users'
-import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { asMock, buildUserIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
-import { useUsers, UsersIndex } from 'src/network/users'
+import { useUsers, UsersIndex, useCurrentUser } from 'src/network/users'
 import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-jest.mock('src/network/users', () => {
-  return {
-    useUsers: jest.fn(),
-  }
-})
+jest.mock('src/network/users')
 
 describe('Users page', () => {
-  const renderUsersPage = () => {
+  const renderPage = () => {
     return render(
       <QueryClientProvider client={new QueryClient()}>
         <UsersPage />
@@ -23,25 +18,31 @@ describe('Users page', () => {
     )
   }
 
-  it('is displayed in a layout', () => {
+  beforeEach(async () => {
     const query = buildUseQueryResult<UsersIndex[]>({ isLoading: true, data: undefined })
     asMock(useUsers).mockReturnValue(query)
-    const { baseElement } = renderUsersPage()
-    expect(baseElement.querySelector('.layout')).not.toBeNull()
+
+    asMock(useCurrentUser).mockReturnValue({ ...buildUseQueryResult({}), enabled: true })
+  })
+
+  it('is displayed in a layout', () => {
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-layout')).toBeTruthy()
   })
 
   it('displays the sidebar navigation', () => {
-    const query = buildUseQueryResult<UsersIndex[]>({ isLoading: true, data: undefined })
-    asMock(useUsers).mockReturnValue(query)
-    const { queryByTestId } = renderUsersPage()
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-sidebar')).toBeTruthy()
   })
 
   describe('when loading', () => {
-    it('displays an loading spinner', () => {
+    beforeEach(async () => {
       const query = buildUseQueryResult<UsersIndex[]>({ isLoading: true, data: undefined })
       asMock(useUsers).mockReturnValue(query)
-      const { queryByText } = renderUsersPage()
+    })
+
+    it('displays an loading spinner', () => {
+      const { queryByText } = renderPage()
       expect(queryByText('Loading the users')).not.toBeNull()
     })
   })
@@ -53,15 +54,15 @@ describe('Users page', () => {
       const query = buildUseQueryResult({ data: users })
       asMock(useUsers).mockReturnValue(query)
 
-      const { queryByText } = renderUsersPage()
+      const { queryByText } = renderPage()
 
       const firstLink: HTMLAnchorElement | null = queryByText(user1.email) as any
       expect(firstLink).not.toBeNull()
-      expect(firstLink!.href).toEqual(urlFor(`/users/${user1.id}`))
+      expect(firstLink!.href).toEqual(urlFor(`/settings/users/${user1.id}`))
 
       const secondLink: HTMLAnchorElement | null = queryByText(user2.email) as any
       expect(secondLink).not.toBeNull()
-      expect(secondLink!.href).toEqual(urlFor(`/users/${user2.id}`))
+      expect(secondLink!.href).toEqual(urlFor(`/settings/users/${user2.id}`))
 
       const firstRole = queryByText(capitalize(user1.role))
       expect(firstRole).not.toBeNull()
@@ -76,7 +77,7 @@ describe('Users page', () => {
       const error = new Error(faker.lorem.sentence())
       const query = buildUseQueryResult<UsersIndex[]>({ error, isError: true })
       asMock(useUsers).mockReturnValue(query)
-      const { queryByText } = renderUsersPage()
+      const { queryByText } = renderPage()
       expect(queryByText(error.message)).not.toBeNull()
     })
   })

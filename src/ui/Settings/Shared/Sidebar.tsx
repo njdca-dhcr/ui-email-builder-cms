@@ -26,7 +26,7 @@ export const Sidebar: FC = () => {
               </SidebarList>
             ) : null}
           </SidebarLink>
-          <SidebarLink to="/settings/users" label="Users" />
+          <SidebarLink to="/settings/users" label="Users" partiallyActive />
           <SidebarLink to="/settings/email" label="Email Settings" />
         </SidebarList>
       </nav>
