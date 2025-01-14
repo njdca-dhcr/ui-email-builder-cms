@@ -10,23 +10,21 @@ import {
 import { useGroup, GroupShow, useUpdateGroup } from 'src/network/groups'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
-import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { navigate } from 'gatsby'
 
-jest.mock('src/network/groups', () => {
-  return { useGroup: jest.fn(), useUpdateGroup: jest.fn() }
-})
+jest.mock('src/network/groups')
 
-jest.mock('src/utils/useRedirectIfNotAdmin', () => {
-  return { useRedirectIfNotAdmin: jest.fn() }
-})
+jest.mock('src/utils/useRedirectIfNotAdmin')
 
 describe('Group Edit Page', () => {
   beforeEach(() => {
     const mutationResult = buildUseMutationResult<ReturnType<typeof useUpdateGroup>>()
     asMock(useUpdateGroup).mockReturnValue(mutationResult)
+
+    const query = buildUseQueryResult<GroupShow>({ isLoading: false, data: buildGroupShow() })
+    asMock(useGroup).mockReturnValue(query)
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -49,17 +47,13 @@ describe('Group Edit Page', () => {
   }
 
   it('is displayed in a layout', () => {
-    const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
-    asMock(useGroup).mockReturnValue(query)
     const { baseElement } = renderPage()
-    expect(baseElement.querySelector('.layout')).not.toBeNull()
+    expect(baseElement.querySelector('.settings-layout')).toBeTruthy()
   })
 
   it('displays the sidebar navigation', () => {
-    const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
-    asMock(useGroup).mockReturnValue(query)
-    const { queryByTestId } = renderPage()
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-sidebar')).toBeTruthy()
   })
 
   it('loads the correct group', () => {

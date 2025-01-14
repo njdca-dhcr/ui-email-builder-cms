@@ -20,6 +20,7 @@ export const Sidebar: FC = () => {
                     key={group.id}
                     to={`/settings/groups/${group.id}`}
                     label={group.name}
+                    partiallyActive
                   />
                 ))}
               </SidebarList>
@@ -48,12 +49,18 @@ interface SidebarLinkProps {
   children?: ReactNode
   className?: string
   label: string
+  partiallyActive?: boolean
 }
 
-const SidebarLink: FC<SidebarLinkProps> = ({ to, children, label, className }) => {
+const SidebarLink: FC<SidebarLinkProps> = ({ to, children, label, className, partiallyActive }) => {
   return (
     <li>
-      <Link activeClassName="active" className={classNames(className)} to={to}>
+      <Link
+        partiallyActive={partiallyActive}
+        activeClassName="active"
+        className={classNames(className)}
+        to={to}
+      >
         {label}
       </Link>
       {children}

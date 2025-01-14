@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render } from '@testing-library/react'
 import React from 'react'
-import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import NewGroupPage from '../new'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { buildUseMutationResult } from 'src/factories'
@@ -11,13 +10,8 @@ import { useCreateGroup } from 'src/network/groups'
 import { navigate } from 'gatsby'
 import { AuthProvider } from 'src/utils/AuthContext'
 
-jest.mock('src/network/groups', () => {
-  return { useCreateGroup: jest.fn() }
-})
-
-jest.mock('src/utils/useRedirectIfNotAdmin', () => {
-  return { useRedirectIfNotAdmin: jest.fn() }
-})
+jest.mock('src/network/groups')
+jest.mock('src/utils/useRedirectIfNotAdmin')
 
 describe('New Group Page', () => {
   let user: UserEvent
@@ -41,12 +35,12 @@ describe('New Group Page', () => {
 
   it('is displayed in a layout', () => {
     const { baseElement } = renderPage()
-    expect(baseElement.querySelector('.layout')).not.toBeNull()
+    expect(baseElement.querySelector('.settings-layout')).toBeTruthy()
   })
 
   it('displays the sidebar navigation', () => {
-    const { queryByTestId } = renderPage()
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-sidebar')).toBeTruthy()
   })
 
   it('displays a loading spinner while saving', async () => {

@@ -22,7 +22,7 @@ const GroupsPage: FC = () => {
             <p>All of the groups can be found here</p>
           </div>
           <div>
-            <Link to="/groups/new" className="new-group-link">
+            <Link to="/settings/groups/new" className="new-group-link">
               <UswdsIcon icon="GroupAdd" />
               <VisuallyHidden>New Group</VisuallyHidden>
             </Link>

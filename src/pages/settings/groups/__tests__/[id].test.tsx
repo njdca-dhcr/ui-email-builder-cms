@@ -11,24 +11,23 @@ import {
 import { useGroup, GroupShow, useDestroyGroup } from 'src/network/groups'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
-import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
 
-jest.mock('src/network/groups', () => {
-  return { useGroup: jest.fn(), useDestroyGroup: jest.fn() }
-})
-
-jest.mock('src/utils/useCurrentRole', () => {
-  return { useCurrentRole: jest.fn() }
-})
+jest.mock('src/network/groups')
+jest.mock('src/utils/useCurrentRole')
 
 describe('Group Show Page', () => {
   beforeEach(async () => {
-    const mutationResult = buildUseMutationResult<ReturnType<typeof useDestroyGroup>>({})
-    asMock(useDestroyGroup).mockReturnValue(mutationResult)
+    asMock(useDestroyGroup).mockReturnValue(
+      buildUseMutationResult<ReturnType<typeof useDestroyGroup>>({}),
+    )
 
     asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
+
+    asMock(useGroup).mockReturnValue(
+      buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined }),
+    )
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -51,31 +50,29 @@ describe('Group Show Page', () => {
   }
 
   it('is displayed in a layout', () => {
-    const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
-    asMock(useGroup).mockReturnValue(query)
     const { baseElement } = renderPage()
-    expect(baseElement.querySelector('.layout')).not.toBeNull()
+    expect(baseElement.querySelector('.settings-layout')).toBeTruthy()
   })
 
   it('displays the sidebar navigation', () => {
-    const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
-    asMock(useGroup).mockReturnValue(query)
-    const { queryByTestId } = renderPage()
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-sidebar')).toBeTruthy()
   })
 
   it('loads the correct group', () => {
     const groupId = randomUUID()
-    const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
-    asMock(useGroup).mockReturnValue(query)
     renderPage({ params: { id: groupId } })
     expect(useGroup).toHaveBeenCalledWith(groupId)
   })
 
   describe('when loading', () => {
+    beforeEach(async () => {
+      asMock(useGroup).mockReturnValue(
+        buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined }),
+      )
+    })
+
     it('displays an loading spinner', () => {
-      const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
-      asMock(useGroup).mockReturnValue(query)
       const { queryByText } = renderPage()
       expect(queryByText('Loading group')).not.toBeNull()
     })
@@ -88,8 +85,7 @@ describe('Group Show Page', () => {
       group = buildGroupShow({
         users: [buildGroupUserIndex(), buildGroupUserIndex({ role: 'admin' })],
       })
-      const query = buildUseQueryResult({ data: group })
-      asMock(useGroup).mockReturnValue(query)
+      asMock(useGroup).mockReturnValue(buildUseQueryResult({ data: group }))
     })
 
     it('displays the group', () => {
@@ -111,15 +107,19 @@ describe('Group Show Page', () => {
       const addLink = queryByRole('link', { name: 'Add a Member to this Group' })
 
       expect(addLink).not.toBeNull()
-      expect(addLink).toHaveAttribute('href', `/groups/${group.id}/add-member`)
+      expect(addLink).toHaveAttribute('href', `/settings/groups/${group.id}/add-member`)
     })
   })
 
   describe('when there is an error', () => {
+    let error: Error
+
+    beforeEach(async () => {
+      error = new Error(faker.lorem.sentence())
+      asMock(useGroup).mockReturnValue(buildUseQueryResult<GroupShow>({ error, isError: true }))
+    })
+
     it('displays an error', () => {
-      const error = new Error(faker.lorem.sentence())
-      const query = buildUseQueryResult<GroupShow>({ error, isError: true })
-      asMock(useGroup).mockReturnValue(query)
       const { queryByText } = renderPage()
       expect(queryByText(error.message)).not.toBeNull()
     })

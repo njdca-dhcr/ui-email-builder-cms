@@ -10,33 +10,17 @@ import {
 } from 'src/testHelpers'
 import { useGroup, GroupShow } from 'src/network/groups'
 import { useCreateMembership, useMembershipsForGroup } from 'src/network/memberships'
-import { UsersIndex, useUsers } from 'src/network/users'
+import { CurrentUser, useCurrentUser, UsersIndex, useUsers } from 'src/network/users'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
-import { SIDEBAR_NAVIGATION_TEST_ID as sidebarNavigationTestId } from 'src/ui/SidebarNavigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { navigate } from 'gatsby'
 
-jest.mock('src/network/users', () => {
-  return { useUsers: jest.fn() }
-})
-
-jest.mock('src/network/groups', () => {
-  return { useGroup: jest.fn() }
-})
-
-jest.mock('src/network/memberships', () => {
-  return {
-    useMembership: jest.fn(),
-    useCreateMembership: jest.fn(),
-    useMembershipsForGroup: jest.fn(),
-  }
-})
-
-jest.mock('src/utils/useRedirectIfNotAdmin', () => {
-  return { useRedirectIfNotAdmin: jest.fn() }
-})
+jest.mock('src/network/users')
+jest.mock('src/network/groups')
+jest.mock('src/network/memberships')
+jest.mock('src/utils/useRedirectIfNotAdmin')
 
 describe('Add Member Page', () => {
   beforeEach(() => {
@@ -44,11 +28,13 @@ describe('Add Member Page', () => {
     const query = buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined })
     const usersQuery = buildUseQueryResult<UsersIndex[]>({ isLoading: true, data: undefined })
     const membersQuery = buildUseQueryResult<UsersIndex[]>({ isLoading: true, data: undefined })
+    const currentUserQuery = buildUseQueryResult<CurrentUser>({ isLoading: true, data: undefined })
 
     asMock(useCreateMembership).mockReturnValue(mutationResult)
     asMock(useGroup).mockReturnValue(query)
     asMock(useUsers).mockReturnValue(usersQuery)
     asMock(useMembershipsForGroup).mockReturnValue(membersQuery)
+    asMock(useCurrentUser).mockReturnValue({ ...currentUserQuery, enabled: true })
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -72,12 +58,12 @@ describe('Add Member Page', () => {
 
   it('is displayed in a layout', () => {
     const { baseElement } = renderPage()
-    expect(baseElement.querySelector('.layout')).not.toBeNull()
+    expect(baseElement.querySelector('.settings-layout')).toBeTruthy()
   })
 
   it('displays the sidebar navigation', () => {
-    const { queryByTestId } = renderPage()
-    expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.settings-sidebar')).toBeTruthy()
   })
 
   it('loads the correct group', () => {
