@@ -254,7 +254,6 @@ describe('Email Template Show Page', () => {
       })
 
       it('can display the email in desktop or mobile', async () => {
-        window.scrollTo = jest.fn()
         const user = userEvent.setup()
         const { baseElement, getByLabelText } = await renderEmailTemplateShowPageInTranslationMode()
 

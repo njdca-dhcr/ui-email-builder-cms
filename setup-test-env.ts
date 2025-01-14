@@ -20,6 +20,7 @@ class ResizeObserver {
 beforeEach(() => {
   jest.clearAllMocks()
   fetchMock.resetMocks()
+  window.scrollTo = jest.fn()
   window.HTMLElement.prototype.hasPointerCapture = jest.fn()
   window.HTMLElement.prototype.scrollIntoView = jest.fn()
 })
