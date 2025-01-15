@@ -60,14 +60,14 @@
   }
 
   .log-out-button {
-    background-color: transparent;
-    border: 1px solid var(--gray-medium-dark);
-    border-radius: 3px;
+    background-color: #2c2c2c;
+    border: none;
+    border-radius: 8px;
     color: var(--white);
     cursor: pointer;
     font-family: var(--sans-serif);
     font-size: 1rem;
-    font-weight: var(--weight-bold-light);
+    font-weight: var(--weight-normal);
     padding: 0.75rem 1.5rem;
     transition: background-color ease-in-out 100ms;
   }
@@ -78,14 +78,25 @@
   }
 
   .settings-link {
-    margin-inline-start: 1rem;
+    margin-inline-end: 1rem;
     display: flex;
     align-items: center;
     justify-items: center;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    padding-inline: 0.75rem;
+    color: var(--white);
+    text-decoration: none;
 
-    img {
-      height: 1.75rem;
-      width: 1.75rem;
+    &:hover,
+    &:focus {
+      background-color: var(--gray-dark-extra);
+    }
+
+    svg {
+      margin-inline-start: 0.5rem;
+      height: 41px;
+      width: 41px;
     }
   }
 }

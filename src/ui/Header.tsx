@@ -6,8 +6,8 @@ import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 import { useAuth } from 'src/utils/AuthContext'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
 import { SkipNavLink } from './Layout'
-import { UswdsIcon } from './UswdsIcon'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { GearIcon } from './Svg/GearIcon'
 
 interface Props {}
 
@@ -35,8 +35,8 @@ export const Header: FC<Props> = () => {
           </span>
         </div>
         <div>
-          <LogOutButton />
           <SettingsButton />
+          <LogOutButton />
         </div>
       </header>
     </div>
@@ -62,8 +62,8 @@ export const LogOutButton: FC = () => {
 export const SettingsButton: FC = () => {
   return (
     <Link to="/settings/email" className="settings-link">
-      <UswdsIcon icon="Settings" />
-      <VisuallyHidden>Settings</VisuallyHidden>
+      Settings
+      <GearIcon />
     </Link>
   )
 }

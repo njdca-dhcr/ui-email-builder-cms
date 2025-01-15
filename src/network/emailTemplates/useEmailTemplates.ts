@@ -4,6 +4,7 @@ import { useAuthedFetch } from '../useAuthedFetch'
 export interface EmailTemplateIndexItem {
   id: string
   userId: string
+  groupId?: string
   name: string
   description?: string
 }

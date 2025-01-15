@@ -5,6 +5,7 @@ import { UswdsIcon } from '../UswdsIcon'
 import { Dialog } from '../Dialog'
 import { LoadingOverlay } from '../LoadingOverlay'
 import { Form } from '../Form'
+import { DeleteIcon } from '../Svg/DeleteIcon'
 import './DestroyDialog.css'
 
 interface Props {
@@ -31,7 +32,7 @@ export const DestroyDialog: FC<Props> = ({
       trigger={
         <ButtonLike className="destroy-dialog-trigger">
           <VisuallyHidden>{trigger}</VisuallyHidden>
-          <UswdsIcon icon="Delete" />
+          <DeleteIcon />
         </ButtonLike>
       }
       title={title}
