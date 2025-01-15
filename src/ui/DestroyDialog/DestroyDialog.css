@@ -13,12 +13,12 @@
 
   &:hover path,
   &:focus path {
-    stroke: #cf6161;
+    stroke: var(--warning-delete);
   }
 
   &:hover .can,
   &:focus .can {
-    fill: #cf6161;
+    fill: var(--warning-delete);
   }
 }
 

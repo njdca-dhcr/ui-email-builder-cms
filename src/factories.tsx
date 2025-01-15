@@ -142,11 +142,12 @@ export const buildEmailTemplateIndexItem = (
 export const buildEmailTemplateIndexGroup = (
   options?: Partial<EmailTemplateIndexGroup>,
 ): EmailTemplateIndexGroup => {
+  const groupId = uniqueId()
   return {
-    id: uniqueId(),
+    id: groupId,
     name: faker.lorem.words(3),
     description: faker.lorem.sentence(),
-    templates: [buildEmailTemplateIndexItem()],
+    templates: [],
     ...options,
   }
 }
