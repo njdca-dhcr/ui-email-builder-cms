@@ -5,18 +5,22 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
 
 describe('Dialog', () => {
+  const renderComponent = (props?: Partial<DialogProps>) => {
+    return render(
+      <Dialog
+        title={faker.lorem.words(3)}
+        contents={() => <p>{faker.lorem.sentence()}</p>}
+        trigger={<button>Open</button>}
+        {...props}
+      />,
+    )
+  }
+
   describe('when closed', () => {
     it('opens the dialog when the trigger is clicked', async () => {
       const user = userEvent.setup()
       const title = faker.lorem.words(3)
-      const { getByRole, baseElement } = render(
-        <Dialog
-          description={faker.lorem.words(3)}
-          title={title}
-          contents={() => <p>{faker.lorem.sentence()}</p>}
-          trigger={<button>Open</button>}
-        />,
-      )
+      const { getByRole, baseElement } = renderComponent({ title })
       expect(baseElement.querySelector('[data-state="open"]')).toBeNull()
       await user.click(getByRole('button', { name: 'Open' }))
       expect(baseElement.querySelector('[data-state="open"]')).not.toBeNull()
@@ -31,15 +35,7 @@ describe('Dialog', () => {
     })
 
     const renderAndOpenDialog = async (props: Partial<DialogProps>) => {
-      const rendered = render(
-        <Dialog
-          description={faker.lorem.words(3)}
-          title={faker.lorem.words(3)}
-          contents={() => <p>{faker.lorem.sentence()}</p>}
-          trigger={<button>Open</button>}
-          {...props}
-        />,
-      )
+      const rendered = renderComponent(props)
       await user.click(rendered.getByRole('button', { name: 'Open' }))
       return rendered
     }
@@ -51,11 +47,12 @@ describe('Dialog', () => {
       expect(baseElement.querySelector(`.${titleClassName}`)).toHaveTextContent(title)
     })
 
-    it('displays the given description', async () => {
+    it('renders a visually hidden description', async () => {
       const description = faker.lorem.words(3)
-      const descriptionClassName = faker.lorem.word()
-      const { baseElement } = await renderAndOpenDialog({ description, descriptionClassName })
-      expect(baseElement.querySelector(`.${descriptionClassName}`)).toHaveTextContent(description)
+      const { baseElement } = await renderAndOpenDialog({ description })
+      expect(baseElement.querySelector(`.dialog-description`)).toHaveTextContent(description)
+      // checks for visually hidden
+      expect(baseElement.querySelector(`span > .dialog-description`)).toBeTruthy()
     })
 
     it('closes when the close button is clicked', async () => {

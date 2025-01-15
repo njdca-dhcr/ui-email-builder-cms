@@ -1,5 +1,5 @@
 .dialog-overlay {
-  background-color: rgba(241, 241, 241, 0.8);
+  background-color: rgba(0, 0, 0, 0.65);
   position: fixed;
   top: 0;
   left: 0;
@@ -8,31 +8,36 @@
   z-index: 10;
 }
 
+.dialog-content-outer {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
+  width: 100vw;
+  height: 100vh;
+}
+
 .dialog-content {
   background-color: var(--white);
-  border-radius: 3px;
-  box-shadow: 0 0 0.5rem var(--blue-gray-light);
-  left: 25vw;
+  border-radius: 0.5rem;
   max-height: 68vh;
   overflow-y: auto;
-  padding: 3rem;
-  position: fixed;
-  right: 25vw;
-  top: 10vh;
-  width: 50vw;
+  padding: 2rem;
+  width: 36vw;
   z-index: 20;
+  position: relative;
 }
 
 .dialog-title {
-  font-size: 2rem;
+  font-size: 1.25rem;
+  font-weight: var(--weight-bold);
   margin: 0;
   margin-bottom: 1rem;
-  text-align: center;
-}
-
-.dialog-description {
-  font-size: 1rem;
-  margin: 1rem 0;
 }
 
 .dialog-close {
