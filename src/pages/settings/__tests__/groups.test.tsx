@@ -3,8 +3,14 @@ import { render } from '@testing-library/react'
 import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import GroupsPage from '../groups'
-import { asMock, buildGroupIndex, buildUseQueryResult, urlFor } from 'src/testHelpers'
-import { useGroups, GroupsIndex } from 'src/network/groups'
+import {
+  asMock,
+  buildGroupIndex,
+  buildUseMutationResult,
+  buildUseQueryResult,
+  urlFor,
+} from 'src/testHelpers'
+import { useGroups, GroupsIndex, useDestroyGroup } from 'src/network/groups'
 
 jest.mock('src/network/groups')
 
@@ -18,6 +24,7 @@ describe('Groups page', () => {
   }
 
   beforeEach(async () => {
+    asMock(useDestroyGroup).mockReturnValue(buildUseMutationResult())
     asMock(useGroups).mockReturnValue(
       buildUseQueryResult<GroupsIndex[]>({ isLoading: true, data: undefined }),
     )

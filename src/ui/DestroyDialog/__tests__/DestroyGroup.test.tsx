@@ -9,9 +9,7 @@ import { randomUUID } from 'crypto'
 import { faker } from '@faker-js/faker'
 import { navigate } from 'gatsby'
 
-jest.mock('src/network/groups', () => {
-  return { useDestroyGroup: jest.fn() }
-})
+jest.mock('src/network/groups')
 
 describe('DestroyGroup', () => {
   let user: UserEvent

@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { navigate } from 'gatsby'
-import { GroupShow, useDestroyGroup } from 'src/network/groups'
+import { GroupsIndex, useDestroyGroup } from 'src/network/groups'
 import { DestroyDialog } from './DestroyDialog'
 
 interface DestroyGroupProps {
-  group: GroupShow
+  group: GroupsIndex
 }
 
 export const DestroyGroup: FC<DestroyGroupProps> = ({ group }) => {

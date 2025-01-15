@@ -1,87 +1,55 @@
-.heading-with-actions {
-  display: flex;
-  justify-content: space-between;
-}
+.settings-header.groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'title actions'
+    'description .';
 
-.new-group-link {
-  align-items: center;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  width: 3rem;
-
-  &:hover,
-  &:focus {
-    filter: invert(31%) sepia(4%) saturate(6370%) hue-rotate(153deg) brightness(99%) contrast(86%);
-  }
-}
-
-.group-attributes {
-  padding-top: 3rem;
-  border-bottom: 1px solid var(--gray-light);
-}
-
-.group-name {
-  align-items: center;
-  color: var(--black);
-  display: flex;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-  text-decoration: none;
-}
-
-.group-description {
-  color: var(--black);
-  padding-top: 0.5rem;
-}
-
-.members-heading {
-  font-size: 1.75rem;
-  margin: 0;
-  padding-top: 2rem;
-}
-
-.group-members ul {
-  margin-bottom: 1.5rem;
-  margin-top: 1rem;
-
-  .user-item {
-    flex-direction: row;
-  }
-}
-
-.group-edit-action-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.add-member-form {
-  max-width: 30rem;
-
-  label {
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .select {
-    margin-bottom: 0.5rem;
-  }
-
-  .error-messages {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .error-messages p {
-    background-color: var(--alert-error-light);
-    border-radius: 3px;
-    font-size: var(--font-small);
-    font-style: italic;
+  h1 {
+    grid-area: title;
     margin: 0;
-    padding: 0 0.25rem;
   }
+
+  p {
+    grid-area: description;
+  }
+
+  .settings-actions {
+    grid-area: actions;
+    justify-self: end;
+  }
+
+  .add-new-group-link {
+    text-decoration: none;
+  }
+}
+
+.library-list.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.group {
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0;
+  padding: 1rem;
+  padding-left: 1.5rem;
+  transition: background-color ease-in 100ms;
+
+  .name-and-description {
+  }
+}
+
+.group:focus-within,
+.group:hover {
+  background-color: var(--gray-light);
+}
+
+.library-name-container.group-name {
+  margin-block-end: 0.25rem;
 }
