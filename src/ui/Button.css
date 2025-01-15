@@ -29,3 +29,37 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
+.black-button {
+  align-items: center;
+  background-color: var(--black);
+  border-width: 0;
+  border-radius: 4px;
+  color: var(--white);
+  display: flex;
+  font-size: var(--font-medium);
+  font-weight: var(--weight-normal);
+  padding: 0.5rem 1.5rem;
+
+  span {
+    font-size: var(--font-large);
+    margin-inline-start: 0.5rem;
+  }
+}
+
+.white-button {
+  background-color: var(--white);
+  color: var(--black);
+  border-width: 1px;
+  font-weight: var(--weight-normal);
+  font-size: var(--font-medium);
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+
+  span {
+    font-size: var(--font-large);
+    margin-inline-start: 0.5rem;
+  }
+}

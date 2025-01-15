@@ -10,7 +10,8 @@ import React, {
 import { HeadFC, Link } from 'gatsby'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import {
-  ButtonLike,
+  BlackButton,
+  WhiteButton,
   Heading,
   Layout,
   List,
@@ -191,9 +192,9 @@ const NewDraftMenu: FC<NewDraftMenuProps> = ({ children }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <ButtonLike aria-label="New Draft" className="new-draft-menu-trigger">
+        <BlackButton aria-label="New Draft">
           New Draft <span>+</span>
-        </ButtonLike>
+        </BlackButton>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
