@@ -40,14 +40,22 @@ describe('My Drafts page', () => {
   }
 
   it('is displayed in a layout', () => {
-    const query = buildUseQueryResult<EmailTemplateIndex>({ isLoading: true, data: undefined, status: 'pending' })
+    const query = buildUseQueryResult<EmailTemplateIndex>({
+      isLoading: true,
+      data: undefined,
+      status: 'pending',
+    })
     asMock(useEmailTemplates).mockReturnValue(query)
     const { baseElement } = renderMyDraftsPage()
     expect(baseElement.querySelector('.layout')).not.toBeNull()
   })
 
   it('displays the sidebar navigation', () => {
-    const query = buildUseQueryResult<EmailTemplateIndex>({ isLoading: true, data: undefined, status: 'pending' })
+    const query = buildUseQueryResult<EmailTemplateIndex>({
+      isLoading: true,
+      data: undefined,
+      status: 'pending',
+    })
     asMock(useEmailTemplates).mockReturnValue(query)
     const { queryByTestId } = renderMyDraftsPage()
     expect(queryByTestId(sidebarNavigationTestId)).not.toBeNull()
@@ -55,7 +63,11 @@ describe('My Drafts page', () => {
 
   describe('when loading', () => {
     it('displays an loading spinner', () => {
-      const query = buildUseQueryResult<EmailTemplateIndex>({ isLoading: true, data: undefined, status: 'pending' })
+      const query = buildUseQueryResult<EmailTemplateIndex>({
+        isLoading: true,
+        data: undefined,
+        status: 'pending',
+      })
       asMock(useEmailTemplates).mockReturnValue(query)
       const { queryByText } = renderMyDraftsPage()
       expect(queryByText('Loading your email templates')).not.toBeNull()
@@ -112,7 +124,11 @@ describe('My Drafts page', () => {
   describe('when there is an error', () => {
     it('displays an error', () => {
       const error = new Error(faker.lorem.sentence())
-      const query = buildUseQueryResult<EmailTemplateIndex>({ error, isError: true, status: 'error' })
+      const query = buildUseQueryResult<EmailTemplateIndex>({
+        error,
+        isError: true,
+        status: 'error',
+      })
       asMock(useEmailTemplates).mockReturnValue(query)
       const { queryByText } = renderMyDraftsPage()
       expect(queryByText(error.message)).not.toBeNull()
