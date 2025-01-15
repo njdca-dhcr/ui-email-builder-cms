@@ -23,6 +23,7 @@
 .new-draft-menu-buttons {
   border: 1px solid var(--gray-light-medium);
   border-radius: 4px;
+  background-color: var(--white);
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
