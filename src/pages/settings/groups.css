@@ -53,3 +53,8 @@
 .library-name-container.group-name {
   margin-block-end: 0.25rem;
 }
+
+.group .members {
+  margin-top: 0.75rem;
+  color: #888888;
+}

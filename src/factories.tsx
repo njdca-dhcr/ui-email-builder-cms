@@ -230,6 +230,7 @@ const buildGroup = (): GroupsIndex => ({
   id: uniqueId(),
   name: faker.lorem.words(3),
   description: faker.lorem.paragraph(),
+  members: [],
 })
 
 export const buildGroupIndex = (options?: Partial<GroupsIndex>): GroupsIndex => {

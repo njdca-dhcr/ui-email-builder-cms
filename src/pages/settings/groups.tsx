@@ -37,6 +37,9 @@ const GroupsPage: FC = () => {
                     </Link>
                   </div>
                   <p className="library-description">{group.description}</p>
+                  <div className="members">
+                    {group.members.map((member) => member.email).join(', ')}
+                  </div>
                 </div>
                 <DestroyGroup group={group} />
               </ListItem>

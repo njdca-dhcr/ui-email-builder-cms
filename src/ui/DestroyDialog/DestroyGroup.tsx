@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import { GroupsIndex, useDestroyGroup } from 'src/network/groups'
+import { useDestroyGroup } from 'src/network/groups'
 import { DestroyDialog } from './DestroyDialog'
 
 interface DestroyGroupProps {
-  group: GroupsIndex
+  group: { id: string; name: string }
 }
 
 export const DestroyGroup: FC<DestroyGroupProps> = ({ group }) => {
