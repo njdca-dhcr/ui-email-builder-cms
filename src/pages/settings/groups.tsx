@@ -30,7 +30,7 @@ const GroupsPage: FC = () => {
           <List className="library-list groups">
             {groups.map((group) => (
               <ListItem key={group.id} className="group">
-                <div className="name-and-description">
+                <div>
                   <div className="library-name-container group-name">
                     <Link to={`/settings/groups/${group.id}`} className="library-name">
                       {group.name}

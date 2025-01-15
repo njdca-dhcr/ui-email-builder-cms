@@ -40,9 +40,6 @@
   padding: 1rem;
   padding-left: 1.5rem;
   transition: background-color ease-in 100ms;
-
-  .name-and-description {
-  }
 }
 
 .group:focus-within,
