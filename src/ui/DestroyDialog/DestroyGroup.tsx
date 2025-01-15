@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { navigate } from 'gatsby'
 import { GroupsIndex, useDestroyGroup } from 'src/network/groups'
 import { DestroyDialog } from './DestroyDialog'
 
@@ -17,7 +16,6 @@ export const DestroyGroup: FC<DestroyGroupProps> = ({ group }) => {
       description={`Are you sure you want to delete ${group.name}?`}
       onDelete={async () => {
         await mutateAsync(group.id)
-        navigate('/groups', { replace: true })
       }}
       loading={isPending}
       loadingMessage="Deleting group"

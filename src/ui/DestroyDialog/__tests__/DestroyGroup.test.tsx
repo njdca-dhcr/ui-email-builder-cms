@@ -43,7 +43,7 @@ describe('DestroyGroup', () => {
       return rendered
     }
 
-    it('confirms and destroys the group successfully, closes the modal, and redirects', async () => {
+    it('confirms and destroys the group successfully and closes the modal', async () => {
       const mutateAsync = jest.fn()
       const mutationResult = buildUseMutationResult<ReturnType<typeof useDestroyGroup>>({
         mutateAsync,
@@ -52,14 +52,12 @@ describe('DestroyGroup', () => {
       const { getByRole, queryByRole } = await renderAndOpen()
 
       expect(mutateAsync).not.toHaveBeenCalled()
-      expect(navigate).not.toHaveBeenCalled()
       expect(queryByRole('dialog')).not.toBeNull()
 
       await user.click(getByRole('button', { name: 'Delete' }))
 
       expect(mutateAsync).toHaveBeenCalledWith(id)
       expect(queryByRole('dialog')).toBeNull()
-      expect(navigate).toHaveBeenCalledWith('/groups', { replace: true })
     })
 
     it('displays a loading spinner when destroying the group', async () => {
