@@ -55,3 +55,37 @@
   margin-top: 0.75rem;
   color: #888888;
 }
+
+.new-group-form {
+  .label-container {
+    padding-block-end: 0.5rem;
+  }
+
+  label {
+    font-weight: var(--weight-normal);
+  }
+
+  .input {
+    border-radius: 0.25rem;
+    border-color: var(--gray-light-medium);
+
+    &::placeholder {
+      color: var(--gray-medium-dark);
+    }
+  }
+
+  [name='description'] {
+    height: 3.5rem;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-block-start: 1.8125rem;
+
+    button {
+      padding: 10px 1.5rem;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { DestroyGroup } from 'src/ui/DestroyDialog'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
+import { NewGroupDialog } from 'src/ui/Settings/Groups/NewGroupDialog'
 import './groups.css'
 
 const GroupsPage: FC = () => {
@@ -20,9 +21,7 @@ const GroupsPage: FC = () => {
           <h1>Groups</h1>
           <p>All of the groups can be found here</p>
           <div className="settings-actions">
-            <Link to="/settings/groups/new" className="black-button add-new-group-link">
-              Add New Group <span>+</span>
-            </Link>
+            <NewGroupDialog />
           </div>
         </div>
         {error && <p>{error.message}</p>}

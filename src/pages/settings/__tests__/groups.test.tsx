@@ -10,7 +10,7 @@ import {
   buildUseQueryResult,
   urlFor,
 } from 'src/testHelpers'
-import { useGroups, GroupsIndex, useDestroyGroup } from 'src/network/groups'
+import { useGroups, GroupsIndex, useDestroyGroup, useCreateGroup } from 'src/network/groups'
 
 jest.mock('src/network/groups')
 
@@ -28,6 +28,8 @@ describe('Groups page', () => {
     asMock(useGroups).mockReturnValue(
       buildUseQueryResult<GroupsIndex[]>({ isLoading: true, data: undefined }),
     )
+    const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>()
+    asMock(useCreateGroup).mockReturnValue(mutationResult)
   })
 
   it('is displayed in a layout', () => {
