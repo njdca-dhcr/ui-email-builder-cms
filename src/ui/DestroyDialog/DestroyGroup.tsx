@@ -13,7 +13,8 @@ export const DestroyGroup: FC<DestroyGroupProps> = ({ group }) => {
     <DestroyDialog
       trigger="Delete"
       title="Delete Group"
-      description={`Are you sure you want to delete ${group.name}?`}
+      subject={group.name}
+      description={`Confirm the deletion of this group`}
       onDelete={async () => {
         await mutateAsync(group.id)
       }}

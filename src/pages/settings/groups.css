@@ -1,10 +1,10 @@
 .settings-header.groups {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    'title actions'
-    'description .';
+    'title title title actions'
+    'description description description .';
 
   h1 {
     grid-area: title;
@@ -25,13 +25,15 @@
   }
 }
 
-.library-list.groups {
+.library-list.groups,
+.library-list.members {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.group {
+.group,
+.member {
   border-radius: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -43,11 +45,14 @@
 }
 
 .group:focus-within,
-.group:hover {
+.member:focus-within,
+.group:hover,
+.member:hover {
   background-color: var(--gray-light);
 }
 
-.library-name-container.group-name {
+.library-name-container.group-name,
+.library-name-container.member-email {
   margin-block-end: 0.25rem;
 }
 
@@ -56,10 +61,23 @@
   color: #888888;
 }
 
-.dialog-content:has(.new-group-form) {
-  min-width: 28vw;
+.member .role {
+  margin-top: 0.25rem;
+  color: #888888;
 }
 
+.dialog-content:has(.edit-group-form),
+.dialog-content:has(.new-group-form) {
+  min-width: 35vw;
+}
+
+.edit-group-button {
+  display: flex;
+  gap: 0.5rem;
+  padding-right: 0.75rem;
+}
+
+.edit-group-form,
 .new-group-form {
   .label-container {
     padding-block-end: 0.5rem;

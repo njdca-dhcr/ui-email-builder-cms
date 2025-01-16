@@ -13,6 +13,7 @@ interface Props {
   title: string
   description: string
   subject?: string
+  object?: string
   comment?: string
   onDelete: () => Promise<void>
   loading: boolean
@@ -25,6 +26,7 @@ export const DestroyDialog: FC<Props> = ({
   title,
   description,
   subject,
+  object,
   comment,
   onDelete,
   loading,
@@ -46,7 +48,7 @@ export const DestroyDialog: FC<Props> = ({
           <>
             <Paragraph>Are you sure you want to delete</Paragraph>
             {subject && <Paragraph className="destroy-dialog-subject">{subject}</Paragraph>}
-            <Paragraph>from the platform?</Paragraph>
+            <Paragraph>from {object ?? 'the platform'}?</Paragraph>
             <Paragraph className="destroy-dialog-warning">This action cannot be undone.</Paragraph>
             {comment && <Paragraph className="destroy-dialog-comment">{comment}</Paragraph>}
             <Form

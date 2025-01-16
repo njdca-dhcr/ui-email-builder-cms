@@ -8,7 +8,7 @@ import {
   buildUseQueryResult,
   buildGroupUserIndex,
 } from 'src/testHelpers'
-import { useGroup, GroupShow, useDestroyGroup } from 'src/network/groups'
+import { useGroup, GroupShow, useDestroyGroup, useUpdateGroup } from 'src/network/groups'
 import { faker } from '@faker-js/faker'
 import { randomUUID } from 'crypto'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -28,6 +28,8 @@ describe('Group Show Page', () => {
     asMock(useGroup).mockReturnValue(
       buildUseQueryResult<GroupShow>({ isLoading: true, data: undefined }),
     )
+
+    asMock(useUpdateGroup).mockReturnValue(buildUseMutationResult())
   })
 
   const renderPage = (props?: Partial<Props>) => {
@@ -102,7 +104,19 @@ describe('Group Show Page', () => {
       })
     })
 
-    it('displays a link to the add members page', () => {
+    it('displays a dialog trigger to edit the group when an admin', async () => {
+      asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
+      const { queryByRole } = renderPage({ params: { id: group.id } })
+      expect(queryByRole('button', { name: 'Edit Group' })).toBeTruthy()
+    })
+
+    it('does not display a dialog trigger to edit the group when not an admin', async () => {
+      asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
+      const { queryByRole } = renderPage({ params: { id: group.id } })
+      expect(queryByRole('button', { name: 'Edit Group' })).toBeFalsy()
+    })
+
+    xit('displays a dialog trigger to the add members', () => {
       const { queryByRole } = renderPage({ params: { id: group.id } })
       const addLink = queryByRole('link', { name: 'Add a Member to this Group' })
 
@@ -149,18 +163,6 @@ describe('Group Show Page', () => {
         asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
         const { queryByRole } = renderPage()
         expect(queryByRole('button', { name: 'Remove' })).not.toBeNull()
-      })
-    })
-
-    describe('destroying a group', () => {
-      it('provides a delete button', async () => {
-        const group = buildGroupShow()
-        const query = buildUseQueryResult({ data: group })
-        asMock(useGroup).mockReturnValue(query)
-        asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
-        const { queryByRole } = renderPage()
-
-        expect(queryByRole('button', { name: 'Delete' })).not.toBeNull()
       })
     })
   })

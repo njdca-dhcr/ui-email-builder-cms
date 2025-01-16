@@ -17,7 +17,9 @@ export const DestroyMembership: FC<DestroyMembershipProps> = ({ group, membershi
     <DestroyDialog
       trigger="Remove"
       title="Delete Membership"
-      description={`Are you sure you want to remove ${user.email} from ${group.name}?`}
+      subject={user.email}
+      object={group.name}
+      description={`Confirm the removal of this user from the group`}
       onDelete={async () => {
         await mutateAsync(membership)
       }}
