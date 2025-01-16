@@ -12,7 +12,7 @@ export const Sidebar: FC = () => {
     <div className="settings-sidebar">
       {error && <SidebarError error={error} />}
       <nav>
-        <SidebarList className="outer">
+        <SidebarList>
           <SidebarLink
             to="/settings/groups"
             label="Groups"
