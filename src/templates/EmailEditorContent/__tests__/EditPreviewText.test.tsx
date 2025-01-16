@@ -4,6 +4,14 @@ import { EditPreviewText } from '../EditPreviewText'
 import { faker } from '@faker-js/faker'
 import userEvent from '@testing-library/user-event'
 import sample from 'lodash.sample'
+import { AnimatePresence } from 'motion/react'
+
+jest.mock('motion/react', () => {
+  return {
+    ...jest.requireActual('motion/react'),
+    AnimatePresence: ({ children }: any) => children,
+  }
+})
 
 describe('EditPreviewText', () => {
   it('displays the preview text', async () => {
@@ -31,5 +39,20 @@ describe('EditPreviewText', () => {
     )
     expect(baseElement.querySelectorAll('[readonly]')).toHaveLength(1)
     expect(baseElement.querySelectorAll('[aria-readonly]')).toHaveLength(1)
+  })
+
+  describe('collapsibility', () => {
+    it('can be collapsed and expanded', async () => {
+      const user = userEvent.setup()
+      const { getByRole, baseElement } = render(
+        <EditPreviewText value={faker.lorem.word()} onChange={jest.fn()} />,
+      )
+
+      expect(baseElement.querySelector('textarea')).toBeTruthy()
+      await user.click(getByRole('button', { name: 'Collapse preview text' }))
+      expect(baseElement.querySelector('textarea')).toBeFalsy()
+      await user.click(getByRole('button', { name: 'Expand preview text' }))
+      expect(baseElement.querySelector('textarea')).toBeTruthy()
+    })
   })
 })
