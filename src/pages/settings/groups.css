@@ -56,6 +56,10 @@
   color: #888888;
 }
 
+.dialog-content:has(.new-group-form) {
+  min-width: 28vw;
+}
+
 .new-group-form {
   .label-container {
     padding-block-end: 0.5rem;
