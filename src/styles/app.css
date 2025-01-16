@@ -13,7 +13,9 @@
   --gray-dark-extra: #454545;
   --white: #ffffff;
 
-  --warning-delete: #cf6161;
+  --warning-delete-light: #ffe2e2;
+  --warning-delete-medium: #ffb5b5;
+  --warning-delete-dark: #cf6161;
 
   --alert-error-dark: #d54309;
   --alert-error-light: #f4e3db;

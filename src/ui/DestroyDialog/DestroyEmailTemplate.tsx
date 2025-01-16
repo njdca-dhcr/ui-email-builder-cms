@@ -12,9 +12,10 @@ export const DestroyEmailTemplate: FC<DestroyEmailTemplateProps> = ({ emailTempl
 
   return (
     <DestroyDialog
-      trigger="Delete"
+      trigger="Delete Template"
       title="Delete Email Template"
       description={`Are you sure you want to delete ${emailTemplate.name}?`}
+      subject={emailTemplate.name}
       onDelete={async () => {
         await mutateAsync(emailTemplate.id)
       }}

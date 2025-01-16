@@ -35,7 +35,7 @@ describe('DestroyEmailTemplate', () => {
         <DestroyEmailTemplate emailTemplate={emailTemplate} />,
       )
       expect(queryByRole('dialog')).toBeNull()
-      await user.click(getByRole('button', { name: 'Delete' }))
+      await user.click(getByRole('button', { name: 'Delete Template' }))
       expect(queryByRole('dialog')).not.toBeNull()
     })
   })
@@ -43,9 +43,23 @@ describe('DestroyEmailTemplate', () => {
   describe('when open', () => {
     const renderAndOpen = async () => {
       const rendered = render(<DestroyEmailTemplate emailTemplate={emailTemplate} />)
-      await user.click(rendered.getByRole('button', { name: 'Delete' }))
+      await user.click(rendered.getByRole('button', { name: 'Delete Template' }))
       return rendered
     }
+
+    it('can be closed', async () => {
+      const mutateAsync = jest.fn()
+      const mutationResult = buildUseMutationResult<ReturnType<typeof useDestroyEmailTemplate>>({
+        mutateAsync,
+      })
+
+      const { getByRole, queryByRole, queryByText } = await renderAndOpen()
+
+      expect(mutateAsync).not.toHaveBeenCalled()
+      expect(queryByRole('dialog')).not.toBeNull()
+      await user.click(getByRole('button', { name: 'Cancel' }))
+      expect(queryByRole('dialog')).toBeNull()
+    })
 
     it('confirms and destroys the email template successfully and closes the modal', async () => {
       const mutateAsync = jest.fn()
@@ -53,12 +67,13 @@ describe('DestroyEmailTemplate', () => {
         mutateAsync,
       })
       asMock(useDestroyEmailTemplate).mockReturnValue(mutationResult)
-      const { getByRole, queryByRole } = await renderAndOpen()
+      const { getByRole, queryByRole, queryByText } = await renderAndOpen()
 
       expect(mutateAsync).not.toHaveBeenCalled()
       expect(queryByRole('dialog')).not.toBeNull()
+      expect(queryByText(emailTemplate.name)).not.toBeNull()
 
-      await user.click(getByRole('button', { name: 'Delete' }))
+      await user.click(getByRole('button', { name: 'Delete Template' }))
 
       expect(mutateAsync).toHaveBeenCalledWith(id)
       expect(queryByRole('dialog')).toBeNull()
