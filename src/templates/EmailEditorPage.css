@@ -63,7 +63,6 @@
 
 .translation-mode .translation {
   --border: 1px solid var(--gray-light-medium);
-  --margin-left: 5.5vw;
 
   margin-left: 0;
   width: 50%;
@@ -116,17 +115,17 @@
 }
 
 .translation-mode .original-translation .email-editor-content {
-  margin-left: var(--margin-left);
+  margin-left: calc((50vw - var(--translation-content-width)) / 2);
 }
 
 .translation-mode .original-translation .translation-actions-inner {
-  margin-left: var(--margin-left);
+  margin-left: calc((50vw - var(--translation-content-width)) / 2);
 }
 
 .translation-mode .new-translation .email-editor-content {
-  margin-left: calc(var(--margin-left) / 2 + 1px);
+  margin-left: calc((50vw - var(--translation-content-width)) / 2);
 }
 
 .translation-mode .new-translation .translation-actions-inner {
-  margin-left: calc(var(--margin-left) / 2 + 1px);
+  margin-left: calc((50vw - var(--translation-content-width)) / 2);
 }
