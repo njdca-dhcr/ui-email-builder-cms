@@ -114,18 +114,9 @@
   width: var(--translation-content-width);
 }
 
-.translation-mode .original-translation .email-editor-content {
-  margin-left: calc((50vw - var(--translation-content-width)) / 2);
-}
-
-.translation-mode .original-translation .translation-actions-inner {
-  margin-left: calc((50vw - var(--translation-content-width)) / 2);
-}
-
-.translation-mode .new-translation .email-editor-content {
-  margin-left: calc((50vw - var(--translation-content-width)) / 2);
-}
-
+.translation-mode .original-translation .email-editor-content,
+.translation-mode .original-translation .translation-actions-inner,
+.translation-mode .new-translation .email-editor-content,
 .translation-mode .new-translation .translation-actions-inner {
   margin-left: calc((50vw - var(--translation-content-width)) / 2);
 }

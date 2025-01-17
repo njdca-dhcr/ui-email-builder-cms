@@ -83,8 +83,10 @@
 }
 
 .email-preview {
+  --preview-text-collapsible-height: 3.625rem;
+
   box-shadow: 0 0 0.5rem var(--blue-gray-light);
-  height: 70vh;
+  height: calc(70vh + var(--preview-text-collapsible-height));
   margin: 1rem auto 0;
   overflow: auto;
   width: var(--translation-content-width);
@@ -94,9 +96,17 @@
 }
 
 .translation-mode .email-preview {
-  height: 68vh;
+  height: calc(68vh + var(--preview-text-collapsible-height));
 }
 
 .email-preview-mobile {
   width: 23rem;
+}
+
+.email-editor-content:has(.edit-preview-text .expanded) .email-preview {
+  --preview-text-collapsible-height: 0rem;
+}
+
+.email-editor-content:has(.edit-preview-text .collapsed) .email-preview {
+  --preview-text-collapsible-height: 3.625rem;
 }
