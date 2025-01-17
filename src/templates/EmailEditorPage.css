@@ -58,7 +58,7 @@
 .translation {
   --translation-content-width: 37.5rem;
   --border: 1px solid transparent;
-  margin-left: 11vw;
+  margin-left: calc((67vw - var(--translation-content-width)) / 2);
 }
 
 .translation-mode .translation {
