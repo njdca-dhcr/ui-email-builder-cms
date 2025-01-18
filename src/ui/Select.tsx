@@ -12,10 +12,13 @@ interface Props {
   onChange: (value: string) => void
   options: { label: string | ReactElement; value: string }[]
   size?: 'small' | 'large'
+  align?: 'start' | 'center' | 'end'
   value: string
   renderValue?: (props: { value: string | null; valueLabel: string | null }) => ReactElement
   'data-testid'?: string
   name?: string
+  contentClassName?: string
+  sideOffset?: number
 }
 
 export const Select: FC<Props> = ({
@@ -27,6 +30,9 @@ export const Select: FC<Props> = ({
   size,
   value,
   name,
+  align = 'start',
+  contentClassName,
+  sideOffset = 0,
   ...props
 }) => {
   const mounted = useDidMount()
@@ -52,7 +58,12 @@ export const Select: FC<Props> = ({
           </BaseSelect.Icon>
         </BaseSelect.Trigger>
         <BaseSelect.Portal>
-          <BaseSelect.Content className={classNames('SelectContent', size)} position="popper">
+          <BaseSelect.Content
+            className={classNames('SelectContent', size, contentClassName)}
+            position="popper"
+            align={align}
+            sideOffset={sideOffset}
+          >
             <BaseSelect.ScrollUpButton className="SelectScrollButton">
               <ChevronUpIcon />
             </BaseSelect.ScrollUpButton>

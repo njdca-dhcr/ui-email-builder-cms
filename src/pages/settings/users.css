@@ -3,7 +3,9 @@
   margin-bottom: 3rem;
 
   .list-item {
+    flex-direction: row;
     gap: 0.25rem;
+    justify-content: space-between;
     padding: 1rem 0;
     margin-block-end: 0.5rem;
   }
@@ -20,33 +22,111 @@
 
 .user-role {
   color: var(--gray-medium-dark);
+}
 
-  div {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.user-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 
-  form {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-  }
+  .destroy-dialog-trigger {
+    margin-inline-start: 0;
 
-  select {
-    align-self: stretch;
-    cursor: pointer;
-    padding: 0 0.75rem;
+    path {
+      stroke: var(--gray-medium-dark);
+    }
   }
 }
 
-.cancel-edit {
-  background-color: transparent;
-  border: 1px solid var(--gray-medium-dark);
-  color: var(--gray-dark-extra);
+.edit-user-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--gray-light);
+  color: var(--gray-medium-dark);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
 
   &:hover,
   &:focus {
-    background-color: var(--gray-light);
+    background-color: var(--gray-light-medium);
+    color: var(--black);
+
+    path {
+      stroke: var(--black);
+    }
+  }
+}
+
+.edit-user-dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .form-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+}
+
+.edit-user-dialog-form-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .SelectContainer {
+    border: none;
+    border-radius: 8px;
+    width: unset;
+
+    &:has([aria-expanded='true']) {
+      border-width: 1px;
+      border-radius: 8px;
+    }
+  }
+
+  .SelectTrigger {
+    border-radius: 8px;
+
+    &[aria-expanded='true'] {
+      border: 1px solid var(--black);
+    }
+  }
+
+  .SelectContainer button {
+    /* border-radius: 8px; */
+    width: unset;
+  }
+
+  .SelectIcon {
+    border-inline-start: none;
+    margin-inline-start: 0;
+  }
+}
+
+.edit-user-select-role-content {
+  border: 1px solid var(--gray-medium);
+  border-radius: 4px;
+  padding: 0.5rem;
+
+  .SelectItem {
+    border-radius: 4px;
+    padding-inline-end: 6rem;
+  }
+
+  .SelectItem:hover,
+  .SelectItem:focus {
+    background-color: var(--gray-medium);
+    color: var(--black);
+  }
+
+  .SelectItemIndicator {
+    margin-inline-start: 1rem;
   }
 }

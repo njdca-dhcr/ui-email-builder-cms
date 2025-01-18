@@ -33,7 +33,7 @@ describe('DestroyUser', () => {
     it('can be opened', async () => {
       const { getByRole, queryByRole } = render(<DestroyUser user={userToDestroy} />)
       expect(queryByRole('dialog')).toBeNull()
-      await user.click(getByRole('button', { name: 'Delete' }))
+      await user.click(getByRole('button', { name: `Delete ${userToDestroy.email}` }))
       expect(queryByRole('dialog')).not.toBeNull()
     })
   })
@@ -41,7 +41,7 @@ describe('DestroyUser', () => {
   describe('when open', () => {
     const renderAndOpen = async () => {
       const rendered = render(<DestroyUser user={userToDestroy} />)
-      await user.click(rendered.getByRole('button', { name: 'Delete' }))
+      await user.click(rendered.getByRole('button', { name: `Delete ${userToDestroy.email}` }))
       return rendered
     }
 
@@ -57,7 +57,7 @@ describe('DestroyUser', () => {
       expect(navigate).not.toHaveBeenCalled()
       expect(queryByRole('dialog')).not.toBeNull()
 
-      await user.click(getByRole('button', { name: 'Delete' }))
+      await user.click(getByRole('button', { name: `Delete ${userToDestroy.email}` }))
 
       expect(mutateAsync).toHaveBeenCalledWith(id)
       expect(queryByRole('dialog')).toBeNull()

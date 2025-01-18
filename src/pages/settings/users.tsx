@@ -1,14 +1,19 @@
 import React, { FC } from 'react'
-import { HeadFC, Link } from 'gatsby'
+import { HeadFC } from 'gatsby'
 import { List, ListItem, LoadingOverlay } from 'src/ui'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useUsers } from 'src/network/users'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import './users.css'
+import { DestroyUser } from 'src/ui/DestroyDialog'
+import { EditUserDialog } from 'src/ui/EditDialog/EditUserDialog'
+import { useRedirectIfNotAdmin } from 'src/utils/useRedirectIfNotAdmin'
 
 const UsersPage: FC = () => {
   useRedirectIfNotSignedIn()
+  useRedirectIfNotAdmin()
+
   const { data: users, isLoading, error } = useUsers()
 
   return (
@@ -24,10 +29,14 @@ const UsersPage: FC = () => {
           <List className="user-list">
             {users.map((user) => (
               <ListItem key={user.id}>
-                <Link to={`/settings/users/${user.id}`} className="user-email">
-                  {user.email}
-                </Link>
-                <span className="user-role">{user.role}</span>
+                <div className="user-details">
+                  <span className="user-email">{user.email}</span>
+                  <span className="user-role">{user.role}</span>
+                </div>
+                <div className="user-actions">
+                  <EditUserDialog user={user} />
+                  <DestroyUser user={user} />
+                </div>
               </ListItem>
             ))}
           </List>

@@ -12,9 +12,11 @@ export const DestroyUser: FC<DestroyUserProps> = ({ user }) => {
 
   return (
     <DestroyDialog
-      trigger="Delete"
+      trigger={`Delete ${user.email}`}
       title="Delete User"
       description={`Are you sure you want to delete ${user.email}?`}
+      subject={user.email}
+      comment="They will need a new invitation to regain access. All their template drafts will be deleted upon removal."
       onDelete={async () => {
         await mutateAsync(user.id)
         navigate('/users', { replace: true })
