@@ -41,7 +41,7 @@ export type Props = PageProps<null, null, null>
 
 const TRANSITION_DURATION = 0.5
 
-const div = document.createElement('div')
+const div = typeof document === 'undefined' ? null : document.createElement('div')
 
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
@@ -166,7 +166,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                         onPreviewTypeChange={previewTypeOptions.onChange}
                                       />
                                     </motion.div>,
-                                    beforeLayoutRef.current,
+                                    beforeLayoutRef.current as any,
                                   )}
                                   <motion.div
                                     key="fade-in-translation"
