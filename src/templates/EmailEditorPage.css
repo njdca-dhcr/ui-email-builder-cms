@@ -120,3 +120,35 @@
 .translation-mode .new-translation .translation-actions-inner {
   margin-left: calc((50vw - var(--translation-content-width)) / 2);
 }
+
+.translation-mode-header {
+  align-items: center;
+  background-color: var(--gray-light);
+  display: flex;
+  height: var(--header-height);
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  .select-preview-type .radio-button {
+    display: flex;
+    justify-content: center;
+    width: 5.5rem;
+  }
+
+  .exit-translation-mode-button-container {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+
+    button {
+      background-color: #2c2c2c;
+      font-size: var(--font-small);
+      height: 39px;
+    }
+  }
+}

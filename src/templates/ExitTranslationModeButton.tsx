@@ -2,18 +2,21 @@ import React, { FC } from 'react'
 import { useCurrentLanguage } from 'src/utils/EmailTemplateState'
 import { useTranslationHasChanges } from './EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
 import { Button } from 'src/ui'
+import classNames from 'classnames'
 
 export interface Props {
   label: string
+  component?: FC
 }
 
-export const ExitTranslationModeButton: FC<Props> = ({ label }) => {
+export const ExitTranslationModeButton: FC<Props> = ({ label, component }) => {
   const [_, setCurrentLanguage] = useCurrentLanguage()
   const translationHasChanges = useTranslationHasChanges()
+  const Component = component ?? Button
 
   return (
-    <Button
-      className="exit-translation-mode-button"
+    <Component
+      className={classNames({ 'exit-translation-mode-button': !component })}
       onClick={() => {
         if (
           !translationHasChanges ||
@@ -24,6 +27,6 @@ export const ExitTranslationModeButton: FC<Props> = ({ label }) => {
       }}
     >
       {label}
-    </Button>
+    </Component>
   )
 }

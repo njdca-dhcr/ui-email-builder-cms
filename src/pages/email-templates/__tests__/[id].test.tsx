@@ -228,9 +228,14 @@ describe('Email Template Show Page', () => {
         expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(2)
       })
 
+      it('displays the translation mode header', async () => {
+        const { baseElement } = await renderEmailTemplateShowPageInTranslationMode()
+        expect(baseElement.querySelector('.translation-mode-header')).toBeTruthy()
+      })
+
       it('is possible to exit translation mode', async () => {
         const { queryByRole } = await renderEmailTemplateShowPageInTranslationMode()
-        expect(queryByRole('button', { name: 'Edit Original Email' })).not.toBeNull()
+        expect(queryByRole('button', { name: 'Edit Original Email' })).toBeTruthy()
       })
 
       it('has a read only version of the original translation', async () => {

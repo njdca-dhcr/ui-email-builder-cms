@@ -34,10 +34,14 @@ import { useKeepHtmlTranslationsLinksPopulated } from 'src/network/useKeepHtmlTr
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import { useTitleValue } from 'src/templates/EmailTemplateSubComponents/Title'
 import capitalize from 'lodash.capitalize'
+import { TranslationModeHeader } from 'src/templates/TranslationModeHeader'
+import { createPortal } from 'react-dom'
 
 export type Props = PageProps<null, null, null>
 
 const TRANSITION_DURATION = 0.5
+
+const div = document.createElement('div')
 
 const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   useRedirectIfNotSignedIn()
@@ -48,6 +52,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
   const { data: queriedEmailTemplate, isLoading, error } = query
   const { data: currentUser } = useCurrentUser()
   const emailTemplate = queriedEmailTemplate ?? null
+  const beforeLayoutRef = useRef(div)
 
   return (
     <EmailTemplateState emailTemplate={emailTemplate}>
@@ -65,6 +70,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                     element="main"
                     className={classNames({ 'translation-mode': inTranslationMode })}
                   >
+                    <div ref={beforeLayoutRef as any} />
                     <EmailEditorSidebar
                       emailTranslation={currentTranslation}
                       heading={
@@ -91,7 +97,6 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                         </>
                       }
                     />
-
                     <PageContent element="div" className="email-editor-page-content-container">
                       {error && <Alert>{error.message}</Alert>}
                       {emailTemplate && (
@@ -148,6 +153,21 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                             {inTranslationMode && (
                               <EmailPartsContent>
                                 <PreviewText emailTranslation={currentTranslation}>
+                                  {createPortal(
+                                    <motion.div
+                                      key="fade-in-translation-mode-header"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      transition={{ duration: TRANSITION_DURATION }}
+                                    >
+                                      <TranslationModeHeader
+                                        previewType={previewTypeOptions.current}
+                                        onPreviewTypeChange={previewTypeOptions.onChange}
+                                      />
+                                    </motion.div>,
+                                    beforeLayoutRef.current,
+                                  )}
                                   <motion.div
                                     key="fade-in-translation"
                                     initial={{ opacity: 0 }}
@@ -157,7 +177,6 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                                     className="new-translation translation"
                                   >
                                     <TranslationActions title={capitalize(currentLanguage)}>
-                                      <SelectPreviewType {...previewTypeOptions} />
                                       <div className="share-and-save-buttons">
                                         <div className="save-and-update-buttons">
                                           <EmailTemplateUpdateDialog groups={currentUser?.groups} />
