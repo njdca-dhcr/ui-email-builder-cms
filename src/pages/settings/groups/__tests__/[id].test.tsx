@@ -116,12 +116,28 @@ describe('Group Show Page', () => {
       expect(queryByRole('button', { name: 'Edit Group' })).toBeFalsy()
     })
 
-    xit('displays a dialog trigger to the add members', () => {
-      const { queryByRole } = renderPage({ params: { id: group.id } })
-      const addLink = queryByRole('link', { name: 'Add a Member to this Group' })
+    describe('when an admin', () => {
+      beforeEach(async () => {
+        asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
+      })
 
-      expect(addLink).not.toBeNull()
-      expect(addLink).toHaveAttribute('href', `/settings/groups/${group.id}/add-member`)
+      it('displays a dialog trigger to the add members', () => {
+        const { queryByRole } = renderPage({ params: { id: group.id } })
+        const button = queryByRole('button', { name: 'Add User' })
+        expect(button).toBeTruthy()
+      })
+    })
+
+    describe('when not an admin', () => {
+      beforeEach(async () => {
+        asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
+      })
+
+      it('does not display a dialog trigger to add members', async () => {
+        const { queryByRole } = renderPage({ params: { id: group.id } })
+        const button = queryByRole('button', { name: 'Add User' })
+        expect(button).toBeFalsy()
+      })
     })
   })
 

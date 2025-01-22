@@ -5,6 +5,7 @@ import { useGroup } from 'src/network/groups'
 import { LoadingOverlay, List, ListItem } from 'src/ui'
 import { DestroyMembership } from 'src/ui/DestroyDialog'
 import { EditGroupDialog } from 'src/ui/Settings/Groups/EditGroupDialog'
+import { ManageMembersDialog } from 'src/ui/Settings/Groups/ManageMembersDialog'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
@@ -26,6 +27,9 @@ const GroupShowPage: FC<Props> = ({ params }) => {
           <p>{group?.description}</p>
           <div className="settings-actions">
             {isAdmin && group && <EditGroupDialog group={group} />}
+          </div>
+          <div className="additional-actions">
+            {isAdmin && group && <ManageMembersDialog group={group} />}
           </div>
         </div>
 

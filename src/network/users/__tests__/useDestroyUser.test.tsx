@@ -5,7 +5,7 @@ import { AuthProvider } from 'src/utils/AuthContext'
 import { asMock, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useDestroyUser } from '../useDestroyUser'
-import { USER_USERS_QUERY_KEY } from '../useUsers'
+import { USE_USERS_QUERY_KEY } from '../useUsers'
 import { buildUseUserQueryKey } from '../useUser'
 import { randomUUID } from 'crypto'
 
@@ -66,7 +66,7 @@ describe('useDestroyUser', () => {
     expect(client.invalidateQueries).not.toHaveBeenCalled()
     await result.current.mutateAsync(id)
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [USER_USERS_QUERY_KEY] })
+    expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [USE_USERS_QUERY_KEY] })
     expect(client.invalidateQueries).toHaveBeenCalledWith({ queryKey: [buildUseUserQueryKey(id)] })
   })
 })

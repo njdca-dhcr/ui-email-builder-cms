@@ -6,7 +6,7 @@ import { asMock, buildUserShow, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
 import { useUpdateUser } from '../useUpdateUser'
 import { buildUseUserQueryKey } from '../useUser'
-import { USER_USERS_QUERY_KEY } from '../useUsers'
+import { USE_USERS_QUERY_KEY } from '../useUsers'
 import { UserRole } from 'src/appTypes'
 
 jest.mock('../../useAuthedFetch')
@@ -73,7 +73,7 @@ describe('useUpdateUser', () => {
       queryKey: [buildUseUserQueryKey(user.id!)],
     })
     expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [USER_USERS_QUERY_KEY],
+      queryKey: [USE_USERS_QUERY_KEY],
     })
   })
 })

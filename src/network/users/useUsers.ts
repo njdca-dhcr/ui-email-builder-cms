@@ -8,13 +8,13 @@ export interface UsersIndex {
   role: UserRole
 }
 
-export const USER_USERS_QUERY_KEY = 'useUsers'
+export const USE_USERS_QUERY_KEY = 'useUsers'
 
 export const useUsers = () => {
   const authedFetch = useAuthedFetch()
 
   return useQuery({
-    queryKey: [USER_USERS_QUERY_KEY],
+    queryKey: [USE_USERS_QUERY_KEY],
     queryFn: async () => {
       const result = await authedFetch<{ users: UsersIndex[] }>({
         path: '/users',

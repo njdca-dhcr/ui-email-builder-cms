@@ -3,16 +3,8 @@ import { render } from '@testing-library/react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { faker } from '@faker-js/faker'
-import {
-  asMock,
-  buildUserIndex,
-  buildUseQueryResult,
-  urlFor,
-  userIsSignedIn,
-  buildUseMutationResult,
-} from 'src/testHelpers'
-import { useUsers, UsersIndex, useCurrentUser, useUpdateUser } from 'src/network/users'
-import { before } from 'node:test'
+import { asMock, buildUserIndex, userIsSignedIn, buildUseMutationResult } from 'src/testHelpers'
+import { UsersIndex, useUpdateUser } from 'src/network/users'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { EditUserDialog } from '../EditUserDialog'
 
@@ -36,7 +28,6 @@ describe('EditUserDialog', () => {
         <QueryClientProvider client={new QueryClient()}>
           <EditUserDialog user={appUser} />
         </QueryClientProvider>
-        ,
       </AuthProvider>,
     )
   }

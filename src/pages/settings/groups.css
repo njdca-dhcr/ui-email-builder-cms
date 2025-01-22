@@ -1,10 +1,15 @@
 .settings-header.groups {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 0.75fr;
   grid-template-areas:
     'title title title actions'
-    'description description description .';
+    'description description description .'
+    'additional-actions . . .';
+
+  &:has(.additional-actions) {
+    grid-template-rows: 1fr 0.75fr 0.75fr;
+  }
 
   h1 {
     grid-area: title;
@@ -13,11 +18,17 @@
 
   p {
     grid-area: description;
+    margin-block-start: 0.5rem;
+    margin-block-end: 3rem;
   }
 
   .settings-actions {
     grid-area: actions;
     justify-self: end;
+  }
+
+  .additional-actions {
+    grid-area: additional-actions;
   }
 
   .add-new-group-link {
@@ -77,6 +88,7 @@
   padding-right: 0.75rem;
 }
 
+.manage-group-members-form,
 .edit-group-form,
 .new-group-form {
   .label-container {
@@ -108,6 +120,63 @@
 
     button {
       padding: 10px 1.5rem;
+    }
+  }
+}
+
+.manage-group-members-form {
+  h3 {
+    color: var(--gray-medium-dark);
+    font-weight: var(--weight-normal);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-block-start: 0.5rem;
+  }
+
+  .form-checkbox {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .checkbox-container {
+    position: relative;
+    height: 1.5rem;
+
+    &:focus-within > :first-child {
+      border-radius: 8px;
+      outline: var(--default-browser-outline);
+    }
+
+    input,
+    .checked-icon-container {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+    }
+
+    .checked-icon-container {
+      transition: opacity ease-in 100ms;
+    }
+  }
+
+  .checkbox-container:has(:active) {
+    opacity: 0.5;
+  }
+
+  .checkbox-container:has(:checked) {
+    .checked-icon-container {
+      opacity: 1;
     }
   }
 }

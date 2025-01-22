@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useAuthedFetch } from '../useAuthedFetch'
 
 export interface MembershipShow {
@@ -18,7 +18,6 @@ export interface CreateMembershipErrorResponse {
 type CreateMembershipResponse = CreateMembershipSuccessfulResponse | CreateMembershipErrorResponse
 
 export const useCreateMembership = () => {
-  const client = useQueryClient()
   const authedFetch = useAuthedFetch()
 
   return useMutation({

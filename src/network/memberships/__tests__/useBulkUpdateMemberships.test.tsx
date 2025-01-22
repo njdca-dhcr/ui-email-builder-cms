@@ -2,31 +2,41 @@ import React from 'react'
 import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from 'src/utils/AuthContext'
-import { asMock, buildMembershipShow, userIsSignedIn } from 'src/testHelpers'
+import { asMock, userIsSignedIn } from 'src/testHelpers'
 import { AuthedFetch, useAuthedFetch } from '../../useAuthedFetch'
-import { useDestroyMembership } from '../useDestroyMembership'
+import { useBulkUpdateMemberships } from '../useBulkUpdateMemberships'
+import { randomUUID } from 'crypto'
 import { buildUseGroupQueryKey, QUERY_KEY as useGroupsQueryKey } from 'src/network/groups'
 
 jest.mock('../../useAuthedFetch')
 
-describe('useDestroyMembership', () => {
+describe('useBulkUpdateMemberships', () => {
   let mockAuthedFetch: AuthedFetch
+  let userIdsToAdd: string[]
+  let membershipIdsToDelete: string[]
+  let groupId: string
 
   beforeEach(() => {
     userIsSignedIn()
     mockAuthedFetch = jest.fn()
+
+    userIdsToAdd = [randomUUID(), randomUUID()]
+    membershipIdsToDelete = [randomUUID(), randomUUID()]
+
+    groupId = randomUUID()
+
     asMock(useAuthedFetch).mockReturnValue(mockAuthedFetch)
   })
 
-  it('destroys the membership', async () => {
+  it('creates a deletes memberships', async () => {
     const client = new QueryClient()
-    const membership = buildMembershipShow()
+
     asMock(mockAuthedFetch).mockResolvedValue({
       statusCode: 200,
-      json: { membership: { id: membership.id } },
+      json: {},
     })
 
-    const { result } = renderHook(() => useDestroyMembership(), {
+    const { result } = renderHook(() => useBulkUpdateMemberships(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -36,26 +46,35 @@ describe('useDestroyMembership', () => {
       },
     })
     expect(mockAuthedFetch).not.toHaveBeenCalled()
-    await result.current.mutateAsync(membership)
+    await result.current.mutateAsync({ userIdsToAdd, membershipIdsToDelete, groupId })
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
-    expect(mockAuthedFetch).toHaveBeenCalledWith({
-      path: `/memberships/${membership.id}`,
-      method: 'DELETE',
+
+    userIdsToAdd.forEach((userId) => {
+      expect(mockAuthedFetch).toHaveBeenCalledWith({
+        path: '/memberships',
+        method: 'POST',
+        body: { membership: { userId, groupId } },
+      })
     })
-    expect(result.current.data).toEqual({ membership: { id: membership.id } })
+
+    membershipIdsToDelete.forEach((membershipId) => {
+      expect(mockAuthedFetch).toHaveBeenCalledWith({
+        path: `/memberships/${membershipId}`,
+        method: 'DELETE',
+      })
+    })
   })
 
-  it('invalidates the useMembership, useGroup, and useUser queries', async () => {
+  it('invalidates the useGroup, useGroups, and useUser queries', async () => {
     const client = new QueryClient()
-    const membership = buildMembershipShow()
     asMock(mockAuthedFetch).mockResolvedValue({
       statusCode: 200,
-      json: { membership: { id: membership.id } },
+      json: {},
     })
 
     jest.spyOn(client, 'invalidateQueries')
 
-    const { result } = renderHook(() => useDestroyMembership(), {
+    const { result } = renderHook(() => useBulkUpdateMemberships(), {
       wrapper: ({ children }) => {
         return (
           <QueryClientProvider client={client}>
@@ -65,10 +84,10 @@ describe('useDestroyMembership', () => {
       },
     })
     expect(client.invalidateQueries).not.toHaveBeenCalled()
-    await result.current.mutateAsync(membership)
+    await result.current.mutateAsync({ userIdsToAdd, membershipIdsToDelete, groupId })
     await waitFor(() => expect(result.current.isSuccess).toEqual(true))
     expect(client.invalidateQueries).toHaveBeenCalledWith({
-      queryKey: [buildUseGroupQueryKey(membership.groupId)],
+      queryKey: [buildUseGroupQueryKey(groupId)],
     })
     expect(client.invalidateQueries).toHaveBeenCalledWith({
       queryKey: [useGroupsQueryKey],
