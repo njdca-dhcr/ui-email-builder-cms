@@ -11,7 +11,6 @@ import { HeadFC, Link } from 'gatsby'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import {
   BlackButton,
-  WhiteButton,
   Heading,
   Layout,
   List,
