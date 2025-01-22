@@ -74,15 +74,35 @@
     padding: 0.25rem 0.75rem;
   }
 
+  &:hover,
+  &:focus-within {
+    background-color: var(--gray-medium);
+  }
+
   &:has(:checked) {
     background-color: var(--black);
     color: var(--white);
+  }
+
+  &:hover:has(:checked),
+  &:focus-within:has(:checked) {
+    background-color: var(--gray-dark-extra);
   }
 }
 
 .library-list {
   margin-top: 1.5rem;
   margin-bottom: 6rem;
+}
+
+.library-item.email-template {
+  border-radius: 0.5rem;
+  transition: background-color ease-in 100ms;
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--gray-light);
+  }
 }
 
 .library-name-container {

@@ -109,7 +109,7 @@ const LibaryPage: FC = () => {
           {filteredEmailTemplates.length > 0 ? (
             <List className="library-list">
               {filteredEmailTemplates.map(({ id, name, description, path }) => (
-                <ListItem key={id} className="library-item">
+                <ListItem key={id} className="library-item email-template">
                   <Link to={path} className="library-name">
                     {name}
                   </Link>
