@@ -87,6 +87,7 @@ const additionalDisclaimerStyles: CSSProperties = {
   ...Text.caption.small.regular,
   color: '#777777',
   lineHeight: 1.5,
+  letterSpacing: '-0.1px',
 }
 
 const imageWidth = 30

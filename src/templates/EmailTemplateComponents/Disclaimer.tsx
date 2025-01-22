@@ -33,6 +33,7 @@ export const styles: CSSProperties = {
   ...Text.caption.small.regular,
   backgroundColor: Colors.grayLight,
   color: Colors.gray,
+  letterSpacing: '-0.1px',
   margin: 0,
   padding: 0,
   paddingBottom: Spacing.size.large,
