@@ -54,5 +54,13 @@ describe('ManageMembersDialog', () => {
       await user.click(getByRole('button', { name: 'Cancel' }))
       expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
     })
+
+    it('closes the dialog when it succeeds', async () => {
+      const { baseElement, getByRole } = await renderAndOpen()
+
+      expect(baseElement.querySelector('[data-state="open"]')).toBeTruthy()
+      await user.click(getByRole('button', { name: 'Save' }))
+      expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
+    })
   })
 })

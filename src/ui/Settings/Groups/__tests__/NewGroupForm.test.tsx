@@ -5,10 +5,11 @@ import userEvent, { UserEvent } from '@testing-library/user-event'
 import { buildUseMutationResult } from 'src/factories'
 import { faker } from '@faker-js/faker'
 import { asMock, userIsSignedIn } from 'src/testHelpers'
-import { useCreateGroup } from 'src/network/groups'
+import { CreateGroupResponse, useCreateGroup } from 'src/network/groups'
 import { navigate } from 'gatsby'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { NewGroupForm, Props } from '../NewGroupForm'
+import { randomUUID } from 'crypto'
 
 jest.mock('src/network/groups')
 
@@ -26,7 +27,7 @@ describe('NewGroupForm', () => {
     return render(
       <AuthProvider>
         <QueryClientProvider client={new QueryClient()}>
-          <NewGroupForm onCancel={jest.fn()} {...options} />
+          <NewGroupForm onCancel={jest.fn()} onSuccess={jest.fn()} {...options} />
         </QueryClientProvider>
       </AuthProvider>,
     )
@@ -52,15 +53,20 @@ describe('NewGroupForm', () => {
   })
 
   describe('successful mutation', () => {
-    it('creates a group', async () => {
-      const mutate = jest.fn().mockReturnValue({})
+    it('creates a group and calls onSuccess', async () => {
+      const createGroupResponse: CreateGroupResponse = {
+        group: { id: randomUUID(), name: faker.lorem.words(3) },
+      }
+      const mutate = jest.fn().mockReturnValue(createGroupResponse)
       const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>({
         mutateAsync: mutate,
       })
       asMock(useCreateGroup).mockReturnValue(mutationResult)
-      const { getByRole, getByLabelText, baseElement } = renderComponent()
+      const onSuccess = jest.fn()
+      const { getByRole, getByLabelText } = renderComponent({ onSuccess })
 
       expect(mutate).not.toHaveBeenCalled()
+      expect(onSuccess).not.toHaveBeenCalled()
 
       const groupName = faker.lorem.words(3)
       const groupDescription = faker.lorem.sentence()
@@ -73,6 +79,7 @@ describe('NewGroupForm', () => {
         name: groupName,
         description: groupDescription,
       })
+      expect(onSuccess).toHaveBeenCalledWith(createGroupResponse.group)
     })
   })
 

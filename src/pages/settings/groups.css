@@ -8,7 +8,7 @@
     'additional-actions . . .';
 
   &:has(.additional-actions) {
-    grid-template-rows: 1fr 0.75fr 0.75fr;
+    grid-template-rows: 1fr 0.75fr 0.85fr;
   }
 
   h1 {

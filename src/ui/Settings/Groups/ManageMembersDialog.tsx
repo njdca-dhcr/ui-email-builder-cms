@@ -20,7 +20,14 @@ export const ManageMembersDialog: FC<Props> = ({ group }) => {
       title={`Manage ${group.name} Users`}
       description="Select the users you would like to be in this group"
       contents={({ close }) => {
-        return <ManageGroupMembersForm group={group} memberships={memberships} onCancel={close} />
+        return (
+          <ManageGroupMembersForm
+            group={group}
+            memberships={memberships}
+            onCancel={close}
+            onSuccess={close}
+          />
+        )
       }}
     />
   )

@@ -3,12 +3,13 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { buildUseMutationResult } from 'src/factories'
-import { faker } from '@faker-js/faker'
 import { asMock, userIsSignedIn } from 'src/testHelpers'
 import { useCreateGroup } from 'src/network/groups'
-import { navigate } from 'gatsby'
 import { AuthProvider } from 'src/utils/AuthContext'
 import { NewGroupDialog } from '../NewGroupDialog'
+import { faker } from '@faker-js/faker'
+import { randomUUID } from 'crypto'
+import { navigate } from 'gatsby'
 
 jest.mock('src/network/groups')
 
@@ -18,7 +19,7 @@ describe('NewGroupDialog', () => {
   beforeEach(async () => {
     user = userEvent.setup()
     userIsSignedIn()
-    const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>()
+    const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>({})
     asMock(useCreateGroup).mockReturnValue(mutationResult)
   })
 
@@ -38,6 +39,17 @@ describe('NewGroupDialog', () => {
     return rendered
   }
 
+  const renderAndCreateGroup = async (options?: { groupName?: string }) => {
+    const rendered = await renderAndOpen()
+
+    const { getByLabelText, getByRole } = rendered
+
+    await user.type(getByLabelText('Name'), options?.groupName ?? faker.lorem.word())
+    await user.click(getByRole('button', { name: 'Create' }))
+
+    return rendered
+  }
+
   it('displays a button that opens the new group dialog', async () => {
     const { getByRole, baseElement } = renderComponent()
     expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
@@ -45,7 +57,7 @@ describe('NewGroupDialog', () => {
     expect(baseElement.querySelector('[data-state="open"]')).toBeTruthy()
   })
 
-  describe('the dialog', () => {
+  describe('the dialog when creating a group', () => {
     it('has a title', async () => {
       const { baseElement } = await renderAndOpen()
       expect(baseElement).toHaveTextContent('Create a New Group')
@@ -58,71 +70,59 @@ describe('NewGroupDialog', () => {
       await user.click(getByRole('button', { name: 'Cancel' }))
       expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
     })
-  })
 
-  describe('pending mutation', () => {
-    beforeEach(async () => {
-      asMock(useCreateGroup).mockReturnValue(buildUseMutationResult({ isPending: true }))
-    })
-
-    it('displays a loading spinner', async () => {
-      const { baseElement } = await renderAndOpen()
-      expect(baseElement).toHaveTextContent('Creating group')
-    })
-  })
-
-  describe('successful mutation', () => {
-    it('creates a group and closes the modal', async () => {
-      const mutate = jest.fn().mockReturnValue({})
+    it('moves on to managing members after creating the group', async () => {
+      const groupName = faker.lorem.words(3)
       const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>({
-        mutateAsync: mutate,
+        mutateAsync: jest.fn().mockResolvedValue({ group: { id: randomUUID(), name: groupName } }),
       })
       asMock(useCreateGroup).mockReturnValue(mutationResult)
-      const { getByRole, getByLabelText, baseElement } = await renderAndOpen()
 
-      expect(mutate).not.toHaveBeenCalled()
-      expect(baseElement.querySelector('[data-state="open"]')).toBeTruthy()
-
-      const groupName = faker.lorem.words(3)
-      const groupDescription = faker.lorem.sentence()
+      const { getByLabelText, getByRole, baseElement, debug } = await renderAndOpen()
 
       await user.type(getByLabelText('Name'), groupName)
-      await user.type(getByLabelText('Description'), groupDescription)
+      await user.type(getByLabelText('Description'), faker.lorem.sentence())
       await user.click(getByRole('button', { name: 'Create' }))
 
-      expect(mutate).toHaveBeenCalledWith({
-        name: groupName,
-        description: groupDescription,
-      })
-      expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
+      expect(baseElement).not.toHaveTextContent('Create a New Group')
+      expect(baseElement).toHaveTextContent(groupName)
     })
   })
 
-  describe('unsuccessful mutation', () => {
-    it('displays an error message when the request goes wrong', async () => {
-      const error = new Error(faker.lorem.sentence())
+  describe('the dialog after creating a group', () => {
+    let group: { id: string; name: string }
+
+    beforeEach(() => {
+      group = { id: randomUUID(), name: faker.lorem.words(3) }
       const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>({
-        error,
+        mutateAsync: jest.fn().mockResolvedValue({ group }),
       })
       asMock(useCreateGroup).mockReturnValue(mutationResult)
-      const { baseElement } = await renderAndOpen()
-
-      expect(baseElement).toHaveTextContent(error.message)
     })
 
-    it('displays an error message when there are validation errors', async () => {
-      const errorsResponse = { errors: { name: faker.lorem.sentence() } }
-      const mutateAsync = jest.fn().mockResolvedValue(errorsResponse)
-      const mutationResult = buildUseMutationResult<ReturnType<typeof useCreateGroup>>({
-        mutateAsync,
-      })
-      asMock(useCreateGroup).mockReturnValue(mutationResult)
-      const { baseElement, getByLabelText, getByRole } = await renderAndOpen()
-      await user.type(getByLabelText('Name'), faker.lorem.word())
-      await user.click(getByRole('button', { name: 'Create' }))
+    it('has a title', async () => {
+      const { baseElement } = await renderAndCreateGroup({ groupName: group.name })
+      expect(baseElement).toHaveTextContent(`Manage ${group.name} Users`)
+    })
 
-      expect(baseElement).toHaveTextContent(errorsResponse.errors.name)
+    it('displays the manage users form', async () => {
+      const { baseElement } = await renderAndCreateGroup({ groupName: group.name })
+      expect(baseElement.querySelector('.manage-group-members-form')).toBeTruthy()
+    })
+
+    it('can be canceled', async () => {
+      const { baseElement, getByRole } = await renderAndCreateGroup({ groupName: group.name })
+
+      expect(baseElement.querySelector('[data-state="open"]')).toBeTruthy()
+      await user.click(getByRole('button', { name: 'Cancel' }))
+      expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
+    })
+
+    it('navigates to the group show page when on successful save', async () => {
+      const { getByRole } = await renderAndCreateGroup({ groupName: group.name })
       expect(navigate).not.toHaveBeenCalled()
+      await user.click(getByRole('button', { name: 'Save' }))
+      expect(navigate).toHaveBeenCalledWith(`/settings/groups/${group.id}`)
     })
   })
 })

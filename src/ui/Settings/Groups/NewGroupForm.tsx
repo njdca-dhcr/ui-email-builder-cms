@@ -1,5 +1,9 @@
 import React, { FC, useState } from 'react'
-import { CreateGroupErrorResponse, useCreateGroup } from 'src/network/groups'
+import {
+  CreateGroupErrorResponse,
+  CreateGroupSuccessfulResponse,
+  useCreateGroup,
+} from 'src/network/groups'
 import { BlackButton, WhiteButton } from 'src/ui/Button'
 import { Form, FormField } from 'src/ui/Form'
 import { LoadingOverlay } from 'src/ui/LoadingOverlay'
@@ -7,9 +11,10 @@ import { stringFromFormData } from 'src/utils/stringFromFormData'
 
 export interface Props {
   onCancel: () => void
+  onSuccess: (group: CreateGroupSuccessfulResponse['group']) => void
 }
 
-export const NewGroupForm: FC<Props> = ({ onCancel }) => {
+export const NewGroupForm: FC<Props> = ({ onCancel, onSuccess }) => {
   const { error, mutateAsync, isPending } = useCreateGroup()
   const [validationErrors, setValidationErrors] = useState<
     CreateGroupErrorResponse['errors'] | null
@@ -30,8 +35,8 @@ export const NewGroupForm: FC<Props> = ({ onCancel }) => {
 
           if (result && 'errors' in result) {
             setValidationErrors(result.errors)
-          } else {
-            onCancel()
+          } else if (result) {
+            onSuccess(result.group)
           }
         }}
       >
