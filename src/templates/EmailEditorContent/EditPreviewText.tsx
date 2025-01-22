@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { ButtonLike } from 'src/ui'
 import './EditPreviewText.css'
-import { ChevronDown } from 'src/ui/Svg/ChevronDown'
+import { ChevronDown } from 'src/ui/Svg'
 import classNames from 'classnames'
 import { AnimatePresence, motion } from 'motion/react'
 

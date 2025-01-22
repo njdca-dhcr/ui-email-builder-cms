@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from 'react'
-import { SideBarList, SideBarListItem, SpacedSidebarContainer } from './Layout'
 import { Link } from 'gatsby'
-import { UswdsIcon } from './UswdsIcon'
 import classNames from 'classnames'
+import { SideBarList, SideBarListItem, SpacedSidebarContainer } from './Layout'
 import { WhenSignedIn } from 'src/utils/WhenSignedIn'
+import { HomeIcon, LibraryIcon, MyDraftsIcon, TipsTricksIcon } from './Svg'
 
 interface Props {}
 
@@ -13,23 +13,18 @@ export const SidebarNavigation: FC<Props> = () => {
   return (
     <nav data-testid={SIDEBAR_NAVIGATION_TEST_ID}>
       <SideBarList>
-        <SpacedLink to="/" text="Home" icon={<UswdsIcon icon="Home" />} />
-        <SpacedLink to="/library" text="Library" icon={<UswdsIcon icon="AccountBalance" />} />
+        <SpacedLink to="/" text="Home" icon={<HomeIcon />} />
+        <SpacedLink to="/library" text="Library" icon={<LibraryIcon />} />
         <WhenSignedIn>
-          <SpacedLink to="/my-drafts" text="My Drafts" icon={<UswdsIcon icon="FolderOpen" />} />
+          <SpacedLink to="/my-drafts" text="My Drafts" icon={<MyDraftsIcon />} />
         </WhenSignedIn>
-        <SpacedLink
-          to="/tips-and-tricks"
-          text="Tips & Tricks"
-          icon={<UswdsIcon icon="Support" />}
-        />
+        <SpacedLink to="/tips-and-tricks" text="Tips & Tricks" icon={<TipsTricksIcon />} />
       </SideBarList>
     </nav>
   )
 }
 
 interface SpacedLinkProps {
-  bottom?: boolean
   icon: ReactElement
   partiallyActive?: boolean
   text: string
@@ -37,14 +32,7 @@ interface SpacedLinkProps {
   className?: string
 }
 
-const SpacedLink: FC<SpacedLinkProps> = ({
-  bottom,
-  icon,
-  partiallyActive,
-  text,
-  to,
-  className,
-}) => {
+const SpacedLink: FC<SpacedLinkProps> = ({ icon, partiallyActive, text, to, className }) => {
   return (
     <SideBarListItem>
       <SpacedSidebarContainer>
@@ -54,9 +42,8 @@ const SpacedLink: FC<SpacedLinkProps> = ({
           to={to}
           partiallyActive={partiallyActive}
         >
-          {!bottom && icon}
+          {icon}
           <span>{text}</span>
-          {bottom && icon}
         </Link>
       </SpacedSidebarContainer>
     </SideBarListItem>

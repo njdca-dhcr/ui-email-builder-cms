@@ -2,7 +2,7 @@ import React, { FC, ReactElement, ReactNode, useCallback, useState } from 'react
 import classNames from 'classnames'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Content, Description, Overlay, Portal, Root, Title, Trigger } from '@radix-ui/react-dialog'
-import { CloseIcon } from './Svg/CloseIcon'
+import { CloseIcon } from './Svg'
 import './Dialog.css'
 
 export interface DialogProps {

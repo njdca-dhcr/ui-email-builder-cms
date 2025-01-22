@@ -4,7 +4,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Dialog } from '../Dialog'
 import { LoadingOverlay } from '../LoadingOverlay'
 import { Form } from '../Form'
-import { DeleteIcon } from '../Svg/DeleteIcon'
+import { DeleteIcon } from '../Svg'
 import './DestroyDialog.css'
 import { Paragraph } from '../Layout'
 

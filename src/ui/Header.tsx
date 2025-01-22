@@ -6,8 +6,7 @@ import { buildDepartmentSealUrl } from 'src/utils/siteUrl'
 import { useAuth } from 'src/utils/AuthContext'
 import { DEPARTMENT_SEALS, departmentSealsForState } from 'src/utils/departmentSeals'
 import { SkipNavLink } from './Layout'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { GearIcon } from './Svg/GearIcon'
+import { GearIcon } from './Svg'
 
 interface Props {}
 
