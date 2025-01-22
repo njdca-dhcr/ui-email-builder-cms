@@ -31,6 +31,7 @@
   width: 25vw;
   z-index: 20;
   position: relative;
+  min-width: 570px;
 }
 
 .dialog-title {
