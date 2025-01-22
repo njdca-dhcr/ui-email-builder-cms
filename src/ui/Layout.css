@@ -133,6 +133,7 @@
 
 .email-editor-sidebar {
   flex: unset;
+  overflow-y: auto;
   width: 33.33vw;
   transition: width var(--easing) var(--duration);
 }
