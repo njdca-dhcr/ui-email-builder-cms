@@ -1,12 +1,4 @@
-import React, {
-  Children,
-  FC,
-  forwardRef,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react'
+import React, { Children, FC, forwardRef, ReactElement, ReactNode, useState } from 'react'
 import { HeadFC, Link } from 'gatsby'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import {
@@ -23,7 +15,7 @@ import {
   SkipNavContent,
   SpacedContainer,
 } from 'src/ui'
-import { EmailTemplateIndexItem, useEmailTemplates } from 'src/network/emailTemplates'
+import { useEmailTemplates } from 'src/network/emailTemplates'
 import { DestroyEmailTemplate } from 'src/ui/DestroyDialog'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import './my-drafts.css'
@@ -36,10 +28,17 @@ const MyDraftsPage: FC = () => {
   useRedirectIfNotSignedIn()
   const [showGroups, setShowGroups] = useState(false)
   const [groupFilters, setGroupFilters] = useState<string[]>([])
-  const { data, isLoading, error, status } = useEmailTemplates()
-  const [allTemplates, setAllTemplates] = useState<EmailTemplateIndexItem[]>([])
-  const [currentTemplates, setCurrentTemplates] = useState<EmailTemplateIndexItem[]>([])
-  const [allGroupTemplates, setAllGroupTemplates] = useState<EmailTemplateIndexItem[]>([])
+  const { data, isLoading, error } = useEmailTemplates()
+
+  const userEmailTemplates = data?.user ?? []
+  const groups = data?.groups ?? []
+
+  const currentTemplates = [
+    ...(showGroups ? [] : userEmailTemplates),
+    ...groups
+      .filter((group) => groupFilters.length === 0 || groupFilters.includes(group.id))
+      .flatMap((group) => group.templates),
+  ].sort((a, b) => a.name.localeCompare(b.name))
 
   const handleGroupFilterClick = (groupId: string) => {
     if (groupFilters.includes(groupId)) {
@@ -48,42 +47,6 @@ const MyDraftsPage: FC = () => {
       setGroupFilters([...groupFilters, groupId])
     }
   }
-
-  useEffect(() => {
-    if (status === 'success') {
-      const userTemplates = data?.user ?? []
-      const groupTemplates: EmailTemplateIndexItem[] = data?.groups.reduce((acc, currentGroup) => {
-        return [...acc, ...currentGroup.templates] as any
-      }, [])
-      const combinedTemplates = userTemplates.concat(groupTemplates)
-
-      setAllGroupTemplates(groupTemplates.sort((a, b) => a.name.localeCompare(b.name)))
-      setAllTemplates(combinedTemplates.sort((a, b) => a.name.localeCompare(b.name)))
-    }
-  }, [status])
-
-  useEffect(() => {
-    if (!showGroups) {
-      setGroupFilters([])
-      setCurrentTemplates(allTemplates)
-    }
-  }, [showGroups])
-
-  useEffect(() => {
-    if (showGroups) {
-      if (groupFilters.length > 0) {
-        setCurrentTemplates(
-          allTemplates.filter(
-            (template) => template.groupId && groupFilters.includes(template.groupId),
-          ),
-        )
-      } else {
-        setCurrentTemplates(allTemplates.filter((template) => template.groupId))
-      }
-    } else {
-      setCurrentTemplates(allTemplates)
-    }
-  }, [showGroups, groupFilters, allGroupTemplates])
 
   return (
     <Layout element="div">
