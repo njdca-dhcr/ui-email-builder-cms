@@ -65,6 +65,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  box-sizing: border-box;
 }
 
 .edit-preview-text-text-area-container textarea::placeholder {
