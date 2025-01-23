@@ -73,4 +73,30 @@ describe('ExitTranslationModeButton', () => {
       expect(setCurrentLanguage).toHaveBeenCalledWith('english')
     })
   })
+
+  describe('when there not unsaved changes but force is true', () => {
+    beforeEach(async () => {
+      asMock(useTranslationHasChanges).mockReturnValue(false)
+    })
+
+    it('exits translation mode when the user confirms', async () => {
+      jest.spyOn(window, 'confirm').mockReturnValue(true)
+      const label = 'Exit translation mode'
+      const { getByRole } = await renderComponent({ label, forceWarning: true })
+      await user.click(getByRole('button', { name: label }))
+
+      expect(window.confirm).toHaveBeenCalled()
+      expect(setCurrentLanguage).toHaveBeenCalledWith('english')
+    })
+
+    it('does not exit translation mode when the user cancels', async () => {
+      jest.spyOn(window, 'confirm').mockReturnValue(false)
+      const label = 'Exit translation mode'
+      const { getByRole } = await renderComponent({ label, forceWarning: true })
+      await user.click(getByRole('button', { name: label }))
+
+      expect(window.confirm).toHaveBeenCalled()
+      expect(setCurrentLanguage).not.toHaveBeenCalled()
+    })
+  })
 })

@@ -20,7 +20,6 @@ describe('EmailEditorPage', () => {
   let defaultPreviewText: string
 
   beforeEach(() => {
-    const client = new QueryClient()
     user = userEvent.setup()
     userIsSignedIn()
     mockBackendUrl(faker.internet.url())
@@ -102,6 +101,15 @@ describe('EmailEditorPage', () => {
     expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
   })
 
+  it('allows a translation to be added', async () => {
+    const { getByRole, baseElement } = renderPage()
+    // In the sidebar
+    await user.click(getByRole('button', { name: 'Add Translation' }))
+    // In the modal
+    await user.click(getByRole('button', { name: 'Add Translation' }))
+    expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(1)
+  })
+
   describe('Head', () => {
     it("uses the email template's name as the title", () => {
       const { baseElement } = render(<Head pageContext={{ emailTemplate }} {...({} as any)} />)
@@ -168,19 +176,88 @@ describe('EmailEditorPage', () => {
     it('prevents the user from updating email template', async () => {
       const { queryByRole } = renderPage()
 
-      expect(queryByRole('button', { name: 'Update' })).toBeNull()
+      expect(queryByRole('button', { name: 'Update' })).toBeFalsy()
     })
 
     it('allows users to save the email template as a new email template', async () => {
       const { queryByRole } = renderPage()
 
-      expect(queryByRole('button', { name: 'Save As' })).not.toBeNull()
+      expect(queryByRole('button', { name: 'Save As' })).toBeTruthy()
     })
 
-    it('displays the export email template button', async () => {
+    it('does not display the export email template button', async () => {
       const { queryByRole } = renderPage()
 
-      expect(queryByRole('button', { name: 'Share' })).toBeDefined()
+      expect(queryByRole('button', { name: 'Share' })).toBeFalsy()
+    })
+  })
+
+  describe('translation mode', () => {
+    let user: UserEvent
+
+    beforeEach(async () => {
+      user = userEvent.setup()
+    })
+
+    const renderPageInTranslationMode = async () => {
+      const rendered = renderPage()
+
+      // In the sidebar
+      await user.click(rendered.getByRole('button', { name: 'Add Translation' }))
+      // In the modal
+      await user.click(rendered.getByRole('button', { name: 'Add Translation' }))
+
+      return rendered
+    }
+
+    it('displays two translations in translation mode', async () => {
+      const { baseElement } = await renderPageInTranslationMode()
+      expect(baseElement.querySelectorAll('.email-editor-content')).toHaveLength(2)
+    })
+
+    it('displays the translation mode header', async () => {
+      const { baseElement } = await renderPageInTranslationMode()
+      expect(baseElement.querySelector('.translation-mode-header')).toBeTruthy()
+    })
+
+    it('is possible to exit translation mode', async () => {
+      const { queryByRole } = await renderPageInTranslationMode()
+      expect(queryByRole('button', { name: 'Edit Original Email' })).toBeTruthy()
+    })
+
+    it('has a read only version of the original translation', async () => {
+      const { baseElement } = await renderPageInTranslationMode()
+      const originalTranslationContainer = baseElement.querySelector('.original-translation')
+
+      expect(originalTranslationContainer).toBeTruthy()
+      expect(originalTranslationContainer!.querySelectorAll('[readonly]').length).toBeGreaterThan(0)
+    })
+
+    it('has a writable version of the other translation', async () => {
+      const { baseElement } = await renderPageInTranslationMode()
+      const otherTranslationContainer = baseElement.querySelector('.new-translation')
+
+      expect(otherTranslationContainer).toBeTruthy()
+      expect(
+        otherTranslationContainer!.querySelectorAll('[contenteditable="true"]').length,
+      ).toBeGreaterThan(0)
+    })
+
+    it('can display the email in desktop or mobile', async () => {
+      const user = userEvent.setup()
+      const { baseElement, getByLabelText } = await renderPageInTranslationMode()
+
+      expect(baseElement.querySelectorAll('.email-preview-desktop')).toHaveLength(2)
+      expect(baseElement.querySelectorAll('.email-preview-mobile')).toHaveLength(0)
+
+      await user.click(getByLabelText('Mobile'))
+
+      expect(baseElement.querySelectorAll('.email-preview-desktop')).toHaveLength(0)
+      expect(baseElement.querySelectorAll('.email-preview-mobile')).toHaveLength(2)
+
+      await user.click(getByLabelText('Desktop'))
+      expect(baseElement.querySelectorAll('.email-preview-desktop')).toHaveLength(2)
+      expect(baseElement.querySelectorAll('.email-preview-mobile')).toHaveLength(0)
     })
   })
 })

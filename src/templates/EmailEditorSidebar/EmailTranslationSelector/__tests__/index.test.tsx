@@ -149,7 +149,7 @@ describe('EmailTranslationSelector', () => {
       expect(button).toBeNull()
     })
 
-    it('does not render for template library templates', () => {
+    it('renders for template library templates', () => {
       const { queryByRole } = renderSelector(
         buildUniqueEmailConfig({
           id: undefined,
@@ -157,7 +157,7 @@ describe('EmailTranslationSelector', () => {
       )
 
       const button = queryByRole('button', { name: 'Add Translation' })
-      expect(button).toBeNull()
+      expect(button).toBeTruthy()
     })
 
     it('renders when there is an available language', async () => {

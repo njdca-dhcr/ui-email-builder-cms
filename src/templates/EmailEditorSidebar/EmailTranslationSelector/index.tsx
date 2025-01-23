@@ -51,7 +51,7 @@ export const EmailTranslationSelector: FC = () => {
         }))}
         value={currentLanguage}
       />
-      {availableLanguages.length > 0 && emailTemplate.id && (
+      {availableLanguages.length > 0 && (
         <AddTranslationDialog availableLanguages={availableLanguages} />
       )}
       {currentLanguage !== 'english' && (

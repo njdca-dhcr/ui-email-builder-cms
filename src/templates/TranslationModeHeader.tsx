@@ -4,17 +4,26 @@ import { PreviewType, SelectPreviewType } from './EmailEditorContent/SelectPrevi
 import { BlackButton } from 'src/ui'
 
 interface Props {
+  forceWarning?: boolean
   previewType: PreviewType
   onPreviewTypeChange: (value: PreviewType) => void
 }
 
-export const TranslationModeHeader: FC<Props> = ({ previewType, onPreviewTypeChange }) => {
+export const TranslationModeHeader: FC<Props> = ({
+  previewType,
+  onPreviewTypeChange,
+  forceWarning,
+}) => {
   return (
     <div className="translation-mode-header">
       <div />
       <SelectPreviewType current={previewType} onChange={onPreviewTypeChange} />
       <div className="exit-translation-mode-button-container">
-        <ExitTranslationModeButton label="Exit Translation Mode" component={BlackButton} />
+        <ExitTranslationModeButton
+          label="Exit Translation Mode"
+          component={BlackButton}
+          forceWarning={forceWarning}
+        />
       </div>
     </div>
   )
