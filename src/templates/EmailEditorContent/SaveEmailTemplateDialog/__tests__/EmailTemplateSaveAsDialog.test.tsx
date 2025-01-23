@@ -120,8 +120,9 @@ describe('EmailTemplateSaveAsDialog', () => {
     expect(useCreateEmailTemplate).toHaveBeenCalled()
   })
 
-  it('navigates to /my-drafts when successful', async () => {
-    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: { id: randomUUID() } })
+  it('navigates to the new email template show page when successful', async () => {
+    const newEmaiilTemplateId = randomUUID()
+    const mutateAsync = jest.fn().mockResolvedValue({ emailTemplate: { id: newEmaiilTemplateId } })
     asMock(useCreateEmailTemplate).mockReturnValue(buildUseMutationResult({ mutateAsync }))
 
     const { getByRole } = renderDialog()
@@ -130,6 +131,6 @@ describe('EmailTemplateSaveAsDialog', () => {
     expect(mutateAsync).not.toHaveBeenCalled()
     await user.click(getByRole('button', { name: 'Create' }))
     expect(mutateAsync).toHaveBeenCalled()
-    expect(navigate).toHaveBeenCalledWith('/my-drafts')
+    expect(navigate).toHaveBeenCalledWith(`/email-templates/${newEmaiilTemplateId}`)
   })
 })

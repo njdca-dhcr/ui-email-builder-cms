@@ -16,7 +16,7 @@ export const EmailTemplateSaveAsDialog: FC<DialogProps> = ({ groups }) => {
       loading={isPending}
       loadingMessage="Creating email template"
       mutate={mutateAsync}
-      onSuccess={() => navigate('/my-drafts')}
+      onSuccess={(emailTemplate) => navigate(`/email-templates/${emailTemplate.id}`)}
       title="Save As"
       trigger="Save As"
       submitButtonText="Create"
