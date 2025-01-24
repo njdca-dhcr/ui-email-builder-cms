@@ -129,3 +129,31 @@
 .library-empty-message {
   padding-top: 7.5rem;
 }
+
+.add-translation-link-container {
+  align-items: center;
+  display: flex;
+  width: fit-content;
+  min-width: 160px;
+  justify-content: center;
+  z-index: 12;
+}
+
+.add-translation-link {
+  align-items: center;
+  background-color: var(--gray-light);
+  border-radius: 0.25rem;
+  color: var(--gray-dark);
+  height: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  line-height: 1.5;
+  padding: 0 0.5rem;
+  text-decoration: none;
+  transition: background-color ease-in 100ms;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-medium);
+  }
+}

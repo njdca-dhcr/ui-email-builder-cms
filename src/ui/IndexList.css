@@ -11,6 +11,7 @@
   border-radius: 0.5rem;
   display: flex;
   flex-direction: row;
+  gap: 1rem;
   justify-content: space-between;
   padding: 1rem 1rem 1rem 1.5rem;
   position: relative;
@@ -21,7 +22,7 @@
     background-color: var(--gray-light);
   }
 
-  a::before {
+  a:not(.own-size)::before {
     content: '';
     position: absolute;
     top: 0px;

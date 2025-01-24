@@ -17,6 +17,7 @@ import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { AddSquareIcon } from 'src/ui/Svg/AddSquareIcon'
 import './library.css'
 
 const TYPE_FILTERS = [
@@ -116,6 +117,14 @@ const LibaryPage: FC = () => {
                         {name}
                       </Link>
                       <p className="library-description">{description}</p>
+                    </div>
+                    <div className="add-translation-link-container">
+                      <Link
+                        to={`${path}?add-translation`}
+                        className="add-translation-link own-size"
+                      >
+                        Add Translation <AddSquareIcon />
+                      </Link>
                     </div>
                   </IndexListItem>
                 ))}
