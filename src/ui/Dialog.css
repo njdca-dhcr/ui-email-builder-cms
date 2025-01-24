@@ -8,30 +8,19 @@
   z-index: 10;
 }
 
-.dialog-content-outer {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 11;
-  width: 100vw;
-  height: 100vh;
-}
-
 .dialog-content {
   background-color: var(--white);
   border-radius: 0.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-height: 68vh;
+  min-width: 570px;
   overflow-y: auto;
   padding: 2rem;
+  position: fixed;
   width: 25vw;
   z-index: 20;
-  position: relative;
-  min-width: 570px;
 }
 
 .dialog-title {

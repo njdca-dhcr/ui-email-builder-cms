@@ -24,22 +24,24 @@ export const Dialog: FC<DialogProps> = ({
   const close = useCallback(() => setOpen(false), [setOpen])
 
   return (
-    <Root open={open} onOpenChange={setOpen}>
+    <Root open={open} onOpenChange={setOpen} modal>
       <Trigger asChild>{trigger}</Trigger>
       <Portal>
         <Overlay className="dialog-overlay" />
-        <Content className="dialog-content-outer">
-          <div className="dialog-content">
-            <button className="dialog-close" onClick={close}>
-              <VisuallyHidden>Close</VisuallyHidden>
-              <CloseIcon />
-            </button>
-            <Title className={classNames('dialog-title', titleClassName)}>{title}</Title>
-            <VisuallyHidden>
-              <Description className="dialog-description">{description}</Description>
-            </VisuallyHidden>
-            {contents({ close })}
-          </div>
+        <Content
+          className="dialog-content"
+          onPointerDownOutside={() => console.log('onPointerDownOutside')}
+          onInteractOutside={() => console.log('onInteractOutside')}
+        >
+          <button className="dialog-close" onClick={close}>
+            <VisuallyHidden>Close</VisuallyHidden>
+            <CloseIcon />
+          </button>
+          <Title className={classNames('dialog-title', titleClassName)}>{title}</Title>
+          <VisuallyHidden>
+            <Description className="dialog-description">{description}</Description>
+          </VisuallyHidden>
+          {contents({ close })}
         </Content>
       </Portal>
     </Root>
