@@ -54,10 +54,21 @@ describe('EmailEditorPage', () => {
     })
   })
 
-  const renderPage = () => {
+  const renderPage = (options?: { location: { search?: string } }) => {
     return render(
       <QueryClientProvider client={new QueryClient()}>
-        <EmailEditorPage pageContext={{ emailTemplate }} />
+        <EmailEditorPage
+          pageContext={{ emailTemplate }}
+          uri=""
+          path=""
+          location={{} as any}
+          pageResources={{} as any}
+          params={{}}
+          children={undefined}
+          data={{}}
+          serverData={{}}
+          {...options}
+        />
       </QueryClientProvider>,
     )
   }
@@ -101,6 +112,11 @@ describe('EmailEditorPage', () => {
     expect(baseElement.querySelector('.email-preview-mobile')).toBeNull()
   })
 
+  it('does not open in translation mode by default', async () => {
+    const { baseElement } = renderPage({ location: {} })
+    expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(0)
+  })
+
   it('allows a translation to be added', async () => {
     const { getByRole, baseElement } = renderPage()
     // In the sidebar
@@ -108,6 +124,12 @@ describe('EmailEditorPage', () => {
     // In the modal
     await user.click(getByRole('button', { name: 'Add Translation' }))
     expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(1)
+  })
+
+  it('opens in translation mode when the add-translation search param is present', async () => {
+    const { baseElement } = renderPage({ location: { search: '?add-translation' } })
+    expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(1)
+    expect(baseElement.querySelector('.new-translation .email-preview table')).toBeTruthy()
   })
 
   describe('Head', () => {

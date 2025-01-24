@@ -1,5 +1,5 @@
-import React, { FC, ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { type HeadFC } from 'gatsby'
+import React, { FC, ReactNode, useEffect, useRef, useState } from 'react'
+import { PageProps, type HeadFC } from 'gatsby'
 import uniqueId from 'lodash.uniqueid'
 import { Layout, PageContent } from 'src/ui'
 import type { EmailParts, EmailTemplate } from 'src/appTypes'
@@ -10,7 +10,12 @@ import { EmailEditorHeadingAndSelect } from './EmailEditorSidebar/EmailEditorHea
 import { EmailEditorSidebar } from './EmailEditorSidebar'
 import { EmailPartsContent } from './EmailPartsContent'
 import { EmailTemplateSaveAsDialog } from './EmailEditorContent/SaveEmailTemplateDialog'
-import { EmailTemplateState } from 'src/utils/EmailTemplateState'
+import {
+  EmailTemplateState,
+  useCurrentEmailTemplate,
+  useCurrentLanguage,
+  useCurrentTranslation,
+} from 'src/utils/EmailTemplateState'
 import { EmailTranslationSelector } from './EmailEditorSidebar/EmailTranslationSelector'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { PreviewText } from './PreviewText'
@@ -24,20 +29,23 @@ import { ExitTranslationModeButton } from './ExitTranslationModeButton'
 import { createPortal } from 'react-dom'
 import { TranslationModeHeader } from './TranslationModeHeader'
 import capitalize from 'lodash.capitalize'
+import { addOrRemoveTranslationLinks } from 'src/utils/addOrRemoveTranslationLinks'
 import './EmailEditorPage.css'
 
 interface PageContext {
   emailTemplate: EmailTemplate.Base.Config
 }
 
-interface Props {
-  pageContext: PageContext
-}
+type Props = PageProps<object, PageContext, {}>
 
 const TRANSITION_DURATION = 0.5
 
-const EmailEditorPage: FC<Props> = ({ pageContext }) => {
+const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
   useRedirectIfNotSignedIn()
+
+  const searchParams = new URLSearchParams(location.search)
+  const addTranslationByDefault = searchParams.has('add-translation')
+
   const previewTypeOptions = usePreviewType()
   const { data: currentUser } = useCurrentUser()
   const beforeLayoutRef = useRef()
@@ -60,6 +68,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext }) => {
             <SyncSidebarAndPreviewScroll>
               <ClearCurrentlyActiveEmailPart />
               <EmailPartsContent>
+                <TranslationModeByDefault translationModeByDefault={addTranslationByDefault} />
                 <PreviewText emailTranslation={currentTranslation}>
                   <Layout
                     element="main"
@@ -213,4 +222,28 @@ const TranslationActions: FC<{ children: ReactNode; title: string }> = ({ childr
       </div>
     </div>
   )
+}
+
+const TranslationModeByDefault: FC<{ translationModeByDefault: boolean }> = ({
+  translationModeByDefault,
+}) => {
+  const [_currentLanguage, setCurrentLanguage] = useCurrentLanguage()
+  const [currentEmailTemplate, setCurrentEmailTemplate] = useCurrentEmailTemplate()
+  const translations = currentEmailTemplate.translations ?? []
+  const currentTranslation = useCurrentTranslation()
+  const language = 'spanish'
+
+  useEffect(() => {
+    if (translationModeByDefault) {
+      setCurrentEmailTemplate(
+        addOrRemoveTranslationLinks({
+          ...currentEmailTemplate,
+          translations: [...translations, { ...currentTranslation, language }],
+        }),
+      )
+      setCurrentLanguage(language)
+    }
+  }, [])
+
+  return null
 }
