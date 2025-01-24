@@ -93,6 +93,14 @@
       background-color: var(--gray-light);
       padding: 0.5rem 0.75rem;
       border-radius: 4px;
+      transition:
+        color ease-in 75ms,
+        background-color ease-in 75ms;
+
+      &:hover,
+      &:focus-within {
+        background-color: var(--gray-light-medium);
+      }
 
       &:has(input:checked) {
         background-color: var(--gray-medium);
