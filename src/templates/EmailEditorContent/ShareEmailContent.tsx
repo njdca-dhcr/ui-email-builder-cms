@@ -1,7 +1,8 @@
 import React, { FC, ReactElement, Children } from 'react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { ButtonLike, UswdsIcon } from 'src/ui'
+import { ButtonLike } from 'src/ui'
 import { useDidMount } from 'src/utils/useDidMount'
+import { DownloadIcon } from 'src/ui/Svg/DownloadIcon'
 
 interface Props {
   children: (ReactElement | null | boolean)[]
@@ -16,7 +17,7 @@ export const ShareEmailContent: FC<Props> = ({ children }) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <ButtonLike aria-label="Share" className="share-trigger">
-          <UswdsIcon icon="SaveAlt" />
+          <DownloadIcon />
         </ButtonLike>
       </DropdownMenu.Trigger>
 

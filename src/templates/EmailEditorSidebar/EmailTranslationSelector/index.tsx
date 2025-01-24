@@ -12,6 +12,7 @@ import {
 import { DeleteTranslationDialog } from './DeleteTranslationDialog'
 import { addOrRemoveTranslationLinks } from 'src/utils/addOrRemoveTranslationLinks'
 import { useTranslationHasChanges } from 'src/templates/EmailEditorContent/SaveEmailTemplateDialog/useTranslationHasChanges'
+import { AddCircleIcon } from 'src/ui/Svg/AddCircleIcon'
 
 import './index.css'
 
@@ -82,7 +83,7 @@ const AddTranslationDialog: FC<AddTranslationDialogProps> = ({ availableLanguage
       trigger={
         <ButtonLike className="add-translation-trigger">
           <VisuallyHidden>Add Translation</VisuallyHidden>
-          <UswdsIcon icon="AddCircle" />
+          <AddCircleIcon />
         </ButtonLike>
       }
       title="New Translation"
