@@ -9,9 +9,9 @@ import {
   SkipNavContent,
   SpacedContainer,
   SidebarNavigation,
-  List,
+  IndexList,
   Input,
-  ListItem,
+  IndexListItem,
 } from 'src/ui'
 import { useEmailTemplatesData } from 'src/utils/useEmailTemplatesData'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
@@ -106,22 +106,26 @@ const LibaryPage: FC = () => {
               />
             ))}
           </ul>
-          {filteredEmailTemplates.length > 0 ? (
-            <List className="library-list">
-              {filteredEmailTemplates.map(({ id, name, description, path }) => (
-                <ListItem key={id} className="library-item email-template">
-                  <Link to={path} className="library-name">
-                    {name}
-                  </Link>
-                  <p className="library-description">{description}</p>
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            <Paragraph className="library-empty-message">
-              Sorry, we don't have any email templates that match the current filter.
-            </Paragraph>
-          )}
+          <div className="library-list-container">
+            {filteredEmailTemplates.length > 0 ? (
+              <IndexList>
+                {filteredEmailTemplates.map(({ id, name, description, path }) => (
+                  <IndexListItem key={id}>
+                    <div>
+                      <Link to={path} className="library-name">
+                        {name}
+                      </Link>
+                      <p className="library-description">{description}</p>
+                    </div>
+                  </IndexListItem>
+                ))}
+              </IndexList>
+            ) : (
+              <Paragraph className="library-empty-message">
+                Sorry, we don't have any email templates that match the current filter.
+              </Paragraph>
+            )}
+          </div>
         </SpacedContainer>
       </PageContent>
     </Layout>

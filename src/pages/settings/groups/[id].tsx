@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { HeadFC, PageProps } from 'gatsby'
 import React, { FC } from 'react'
 import { useGroup } from 'src/network/groups'
-import { LoadingOverlay, List, ListItem } from 'src/ui'
+import { LoadingOverlay, IndexList, IndexListItem } from 'src/ui'
 import { DestroyMembership } from 'src/ui/DestroyDialog'
 import { EditGroupDialog } from 'src/ui/Settings/Groups/EditGroupDialog'
 import { ManageMembersDialog } from 'src/ui/Settings/Groups/ManageMembersDialog'
@@ -41,14 +41,14 @@ const GroupShowPage: FC<Props> = ({ params }) => {
             </VisuallyHidden>
 
             {group.users.length !== 0 ? (
-              <List className="library-list members">
+              <IndexList>
                 {group.users.map((user) => (
-                  <ListItem key={user.id} className="member">
+                  <IndexListItem key={user.id}>
                     <div>
                       <div className="library-name-container member-email">
                         <span className="user-email">{user.email}</span>
                       </div>
-                      <div className="role">{user.role}</div>
+                      <div className="group-members-list-item-role">{user.role}</div>
                     </div>
                     {isAdmin && (
                       <DestroyMembership
@@ -61,9 +61,9 @@ const GroupShowPage: FC<Props> = ({ params }) => {
                         user={user}
                       />
                     )}
-                  </ListItem>
+                  </IndexListItem>
                 ))}
-              </List>
+              </IndexList>
             ) : (
               <p>This group doesn't have any members yet.</p>
             )}

@@ -107,9 +107,10 @@
 
 .settings-header {
   border-bottom: 1px solid var(--gray-light-medium);
-  padding-block-start: var(--top-spacing);
   margin-block-end: 1.5rem;
-  margin-left: 0.5rem;
+  padding-block-start: var(--top-spacing);
+  padding-left: 1.5rem;
+  padding-right: 1rem;
 
   h1,
   p {

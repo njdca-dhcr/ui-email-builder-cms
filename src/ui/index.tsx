@@ -18,6 +18,7 @@ export {
   SpacedSidebarContainer,
 } from './Layout'
 export { List, ListItem } from './List'
+export { IndexList, IndexListItem } from './IndexList'
 export { LoadingOverlay } from './LoadingOverlay'
 export { RightPointer } from './RightPointer'
 export { Select } from './Select'

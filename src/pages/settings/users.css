@@ -1,16 +1,3 @@
-.user-list {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-
-  .list-item {
-    flex-direction: row;
-    gap: 0.25rem;
-    justify-content: space-between;
-    padding: 1rem 0;
-    margin-block-end: 0.5rem;
-  }
-}
-
 .user-email {
   align-items: center;
   color: var(--black);
@@ -31,10 +18,6 @@
 
   .destroy-dialog-trigger {
     margin-inline-start: 0;
-
-    path {
-      stroke: var(--gray-medium-dark);
-    }
   }
 }
 
@@ -52,7 +35,7 @@
 
   &:hover,
   &:focus {
-    background-color: var(--gray-light-medium);
+    background-color: var(--gray-medium);
     color: var(--black);
 
     path {

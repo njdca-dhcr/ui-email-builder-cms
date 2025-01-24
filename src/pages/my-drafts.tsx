@@ -5,8 +5,8 @@ import {
   BlackButton,
   Heading,
   Layout,
-  List,
-  ListItem,
+  IndexList,
+  IndexListItem,
   LoadingOverlay,
   PageContent,
   Paragraph,
@@ -66,7 +66,9 @@ const MyDraftsPage: FC = () => {
               </NewDraftMenu>
             </div>
           </div>
-          <Paragraph>All of your saved templates can be found here</Paragraph>
+          <Paragraph className="my-drafts-page-description">
+            All of your saved templates can be found here
+          </Paragraph>
           <div className="draft-filters">
             <ol className="draft-view-types">
               <DraftsViewRadioButton
@@ -100,9 +102,9 @@ const MyDraftsPage: FC = () => {
           </div>
           {error && <Paragraph>{error.message}</Paragraph>}
           {currentTemplates.length > 0 ? (
-            <List className="draft-list">
+            <IndexList>
               {currentTemplates.map((emailTemplate) => (
-                <ListItem key={emailTemplate.id} className="draft-item">
+                <IndexListItem key={emailTemplate.id}>
                   <div className="draft-info">
                     <div className="draft-name-container">
                       <Link to={`/email-templates/${emailTemplate.id}`} className="draft-name">
@@ -112,9 +114,9 @@ const MyDraftsPage: FC = () => {
                     <p className="draft-description">{emailTemplate.description}</p>
                   </div>
                   <DestroyEmailTemplate emailTemplate={emailTemplate} />
-                </ListItem>
+                </IndexListItem>
               ))}
-            </List>
+            </IndexList>
           ) : (
             <Paragraph className="my-drafts-empty-message">
               Make your first draft using the New Draft button above

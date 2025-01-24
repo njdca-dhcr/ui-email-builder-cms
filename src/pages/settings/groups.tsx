@@ -1,7 +1,7 @@
 import { HeadFC, Link } from 'gatsby'
 import React, { FC } from 'react'
 import { useGroups } from 'src/network/groups'
-import { List, ListItem, LoadingOverlay } from 'src/ui'
+import { IndexList, IndexListItem, LoadingOverlay } from 'src/ui'
 import { DestroyGroup } from 'src/ui/DestroyDialog'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
@@ -26,9 +26,9 @@ const GroupsPage: FC = () => {
         </div>
         {error && <p>{error.message}</p>}
         {groups && (
-          <List className="library-list groups">
+          <IndexList>
             {groups.map((group) => (
-              <ListItem key={group.id} className="group">
+              <IndexListItem key={group.id}>
                 <div>
                   <div className="library-name-container group-name">
                     <Link to={`/settings/groups/${group.id}`} className="library-name">
@@ -36,14 +36,14 @@ const GroupsPage: FC = () => {
                     </Link>
                   </div>
                   <p className="library-description">{group.description}</p>
-                  <div className="members">
+                  <div className="list-item-group-members">
                     {group.members.map((member) => member.email).join(', ')}
                   </div>
                 </div>
                 <DestroyGroup group={group} />
-              </ListItem>
+              </IndexListItem>
             ))}
-          </List>
+          </IndexList>
         )}
         {isLoading && <LoadingOverlay description="Loading groups" />}
       </PageContent>

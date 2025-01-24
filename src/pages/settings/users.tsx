@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { HeadFC } from 'gatsby'
-import { List, ListItem, LoadingOverlay } from 'src/ui'
+import { IndexList, IndexListItem, LoadingOverlay } from 'src/ui'
 import { DestroyUser } from 'src/ui/DestroyDialog'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
@@ -26,9 +26,9 @@ const UsersPage: FC = () => {
         </div>
         {error && <p>{error.message}</p>}
         {users && users.length > 0 && (
-          <List className="user-list">
+          <IndexList>
             {users.map((user) => (
-              <ListItem key={user.id}>
+              <IndexListItem key={user.id}>
                 <div className="user-details">
                   <span className="user-email">{user.email}</span>
                   <span className="user-role">{user.role}</span>
@@ -37,9 +37,9 @@ const UsersPage: FC = () => {
                   <EditUserDialog user={user} />
                   <DestroyUser user={user} />
                 </div>
-              </ListItem>
+              </IndexListItem>
             ))}
-          </List>
+          </IndexList>
         )}
 
         {isLoading && <LoadingOverlay description="Loading the users" />}
