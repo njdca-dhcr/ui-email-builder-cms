@@ -1,12 +1,28 @@
-.homepage {
+.sign-in-page {
   display: grid;
-  grid-template: 1fr / minmax(30rem, 1.5fr) 3fr;
-  gap: clamp(1rem, 5%, 8rem);
+  grid-template: 1fr / minmax(30rem, 2fr) 2fr;
+  overflow: hidden;
 
-  .homepage-panel {
+  header {
+    font-size: var(--font-huge);
+    font-weight: var(--weight-bold);
+  }
+
+  h1 {
+    margin-block-start: 3.25rem;
+  }
+
+  .form-field label {
+    font-weight: var(--weight-normal);
+  }
+
+  .form-field input {
+    border-radius: 5px;
+  }
+
+  .sign-in-panel {
     padding-block: 8rem 0;
-    min-height: 100vh;
-    max-height: 100vh;
+    height: 100%;
   }
 
   .login-panel-wrapper {
@@ -22,22 +38,25 @@
       padding-block-end: 0;
     }
 
-    div:has(.forgot-password) {
-      margin-block-end: 1rem;
-    }
-
     .forgot-password {
       color: var(--blue-dark);
       font-size: var(--font-small);
+      display: block;
+      margin-block-start: 0.5rem;
       text-decoration: none;
 
       &:hover {
         text-decoration: underline;
       }
     }
+
+    button[type='submit'] {
+      margin-block-start: 1.5rem;
+    }
   }
 
   .image-panel {
+    justify-content: center;
     display: flex;
     position: relative;
     --top-padding: 62px;
@@ -45,14 +64,15 @@
     .template-images-wrapper {
       padding-top: var(--top-padding);
       margin: 0;
+      width: 484px;
     }
 
     .template-images {
-      height: calc(var(--top-padding) + 540px);
+      height: calc(var(--top-padding) + 510px);
       position: relative;
       overflow: hidden;
-      min-width: 557px;
-      padding-left: 3rem;
+      width: 100%;
+      padding-left: 2.25rem;
     }
 
     .gatsby-image-wrapper {
@@ -62,14 +82,14 @@
     }
 
     .template-desktop {
-      min-width: 460px;
+      max-width: 348px;
     }
 
     .template-mobile {
       position: absolute;
       top: 160px;
-      left: 330px;
-      min-width: 222px;
+      left: 284px;
+      max-width: 168px;
     }
 
     figcaption {
@@ -99,6 +119,7 @@
     font-size: var(--font-huge);
     font-weight: var(--weight-bold);
     line-height: 2rem;
-    padding: 3rem 0;
+    padding-block-start: 2.25rem;
+    padding-block-end: 1.875rem;
   }
 }

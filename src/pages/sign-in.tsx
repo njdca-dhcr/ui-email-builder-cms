@@ -28,9 +28,9 @@ const SignInPage: FC = () => {
   return (
     <Layout element="div">
       <RedirectIfSignedIn />
-      <main className="page-content homepage">
+      <main className="page-content sign-in-page">
         <div className="login-panel-wrapper">
-          <div className="login-panel homepage-panel">
+          <div className="login-panel sign-in-panel">
             <div className="login-container">
               <header>
                 {departmentSeal && (
@@ -86,14 +86,11 @@ const SignInPage: FC = () => {
                   value={password}
                   required
                 />
-                <div>
-                  {forgotPasswordUrl && (
-                    <a href={forgotPasswordUrl} className="forgot-password">
-                      Forgot your password?
-                    </a>
-                  )}
-                  &nbsp;
-                </div>
+                {forgotPasswordUrl && (
+                  <a href={forgotPasswordUrl} className="forgot-password">
+                    Forgot your password?
+                  </a>
+                )}
                 <Button type="submit">Sign In</Button>
               </Form>
 
@@ -110,8 +107,8 @@ const SignInPage: FC = () => {
             </div>
           </div>
         </div>
-        <div className="image-panel-wrapper">
-          <div className="image-panel homepage-panel">
+        <div>
+          <div className="image-panel sign-in-panel">
             <figure className="template-images-wrapper">
               <div className="template-images">
                 <StaticImage
