@@ -24,7 +24,6 @@ import './dashboard.css'
 const DashboardPage: FC = () => {
   useRedirectIfNotSignedIn()
   const { data, isLoading, error } = useEmailTemplates()
-  console.log({data})
 
   return (
     <Layout element="div">
