@@ -124,6 +124,7 @@
 
 .library-description {
   margin: 0;
+  max-width: 85%;
 }
 
 .library-empty-message {
