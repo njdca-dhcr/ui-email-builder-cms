@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Link, type HeadFC } from 'gatsby'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { format } from 'date-fns'
+import { flatten, sortBy } from 'lodash'
 import {
   Heading,
   Layout,
@@ -24,6 +25,13 @@ import './dashboard.css'
 const DashboardPage: FC = () => {
   useRedirectIfNotSignedIn()
   const { data, isLoading, error } = useEmailTemplates()
+  const templates = [
+    ...(data?.user || []),
+    ...flatten(data?.groups.map((group) => group.templates) || []),
+  ]
+  const currentDrafts = sortBy(templates, ({ updatedAt }) => updatedAt)
+    .toReversed()
+    .slice(0, 3)
 
   return (
     <Layout element="div">
@@ -38,18 +46,16 @@ const DashboardPage: FC = () => {
         <section className="home-page-section drafts-section">
           <div className="drafts-header">
             <Heading element="h2">My Drafts</Heading>
-            {data?.user?.length && data?.user?.length > 0 ? (
-              <Link to="/my-drafts">See All Drafts</Link>
-            ) : null}
+            {currentDrafts.length > 0 ? <Link to="/my-drafts">See All Drafts</Link> : null}
           </div>
           {error && (
             <p className="error-message">
               There was an error loading your drafts. Please refresh the page.
             </p>
           )}
-          {data?.user?.length && data?.user?.length > 0 ? (
+          {currentDrafts.length > 0 ? (
             <List className="home-page-drafts-list">
-              {data.user.map((emailTemplate) => (
+              {currentDrafts.map((emailTemplate) => (
                 <EmailTemplateDraftsListItem key={emailTemplate.id} emailTemplate={emailTemplate} />
               ))}
             </List>
