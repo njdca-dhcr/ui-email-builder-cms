@@ -58,10 +58,10 @@ const LibaryPage: FC = () => {
 
   return (
     <Layout element="div">
-      <Sidebar>
+      <Sidebar className="main-nav-sidebar">
         <SidebarNavigation />
       </Sidebar>
-      <PageContent element="main">
+      <PageContent className="library-page" element="main">
         <SkipNavContent />
         <SpacedContainer>
           <div className="library-header-container">

@@ -50,10 +50,10 @@ const MyDraftsPage: FC = () => {
 
   return (
     <Layout element="div">
-      <Sidebar>
+      <Sidebar className="main-nav-sidebar">
         <SidebarNavigation />
       </Sidebar>
-      <PageContent element="main">
+      <PageContent className="my-drafts-page" element="main">
         <SkipNavContent />
         <SpacedContainer>
           <div className="my-drafts-header">

@@ -19,7 +19,7 @@
 
 .page-wrapper:has(.global-header) .layout {
   margin-top: var(--header-height);
-  height: calc(100% - var(--header-height) - 1px);
+  height: calc(100vh - var(--header-height));
 }
 
 .header-wrapper {
@@ -129,6 +129,7 @@
   position: relative;
   height: 100%;
   flex: 1;
+  background-color: #f1f1f1;
 }
 
 .email-editor-sidebar {
@@ -150,6 +151,10 @@
   overflow: auto;
   overflow-x: hidden;
   width: 100%;
+}
+
+.main-nav-sidebar .sidebar-inner {
+  padding-top: 6rem;
 }
 
 .email-editor-sidebar .sidebar-inner {
@@ -210,6 +215,11 @@
   line-height: 4rem;
   margin: 0;
   margin-bottom: 0.6rem;
+}
+
+h2.heading {
+  font-size: 2.5rem;
+  line-height: 3rem;
 }
 
 .subheading {

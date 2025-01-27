@@ -111,7 +111,31 @@
 
 .my-drafts-empty-message {
   color: #888888;
-  padding-left: 1.5rem;
+
+}
+
+.draft-item {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.my-drafts-page .draft-item {
+  border-radius: 0.5rem;
+  transition: background-color ease-in 100ms;
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--gray-light);
+  }
+}
+
+.draft-list {
+  margin-top: 1.5rem;
+  margin-bottom: 6rem;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .draft-name-container {
