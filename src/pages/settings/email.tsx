@@ -25,15 +25,17 @@ const EmailSettingsPage: FC = () => {
           </p>
         </div>
 
-        {error && <p>{error.message}</p>}
-        {currentUser && (
-          <UserInfoProvider userInfo={currentUser}>
-            <EditBanner />
-            <EditDepartmentSeal />
-            <EditStateSeal />
-            <EditDisclaimer />
-          </UserInfoProvider>
-        )}
+        <div className="email-settings-forms">
+          {error && <p>{error.message}</p>}
+          {currentUser && (
+            <UserInfoProvider userInfo={currentUser}>
+              <EditBanner />
+              <EditDepartmentSeal />
+              <EditStateSeal />
+              <EditDisclaimer />
+            </UserInfoProvider>
+          )}
+        </div>
         {isLoading && <LoadingOverlay description="Loading email settings" />}
       </PageContent>
     </Layout>
