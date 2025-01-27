@@ -28,10 +28,12 @@ export const Header: FC<Props> = () => {
               />
             </Link>
           )}
-          <span className="header-title">
-            {state && `${state.name} `}
-            Email Builder (Beta)
-          </span>
+          <Link to="/">
+            <span className="header-title">
+              {state && `${state.name} `}
+              Email Builder (Beta)
+            </span>
+          </Link>
         </div>
         <div>
           <SettingsButton />

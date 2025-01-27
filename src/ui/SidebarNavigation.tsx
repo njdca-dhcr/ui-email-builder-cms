@@ -14,10 +14,10 @@ export const SidebarNavigation: FC<Props> = () => {
     <nav data-testid={SIDEBAR_NAVIGATION_TEST_ID}>
       <SideBarList>
         <SpacedLink to="/" text="Home" icon={<HomeIcon />} />
-        <SpacedLink to="/library" text="Library" icon={<LibraryIcon />} />
         <WhenSignedIn>
           <SpacedLink to="/my-drafts" text="My Drafts" icon={<MyDraftsIcon />} />
         </WhenSignedIn>
+        <SpacedLink to="/library" text="Library" icon={<LibraryIcon />} />
         <SpacedLink to="/tips-and-tricks" text="Tips & Tricks" icon={<TipsTricksIcon />} />
       </SideBarList>
     </nav>

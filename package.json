@@ -42,6 +42,7 @@
     "autoprefixer": "^10.4.20",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
+    "date-fns": "^4.1.0",
     "decap-cms-app": "^3.3.3",
     "gatsby": "^5.13.7",
     "gatsby-omni-font-loader": "^2.0.2",

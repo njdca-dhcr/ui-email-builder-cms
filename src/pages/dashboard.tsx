@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Link, type HeadFC } from 'gatsby'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { format } from 'date-fns'
 import {
   Heading,
   Layout,
@@ -23,6 +24,7 @@ import './dashboard.css'
 const DashboardPage: FC = () => {
   useRedirectIfNotSignedIn()
   const { data, isLoading, error } = useEmailTemplates()
+  console.log({data})
 
   return (
     <Layout element="div">
@@ -121,9 +123,14 @@ const EmailTemplateDraftsListItem: FC<{ emailTemplate: EmailTemplateIndexItem }>
         <p className="draft-name">{emailTemplate.name}</p>
         <p className="draft-description">{emailTemplate.description}</p>
       </div>
-      <Link to={`/email-templates/${emailTemplate.id}`} className="draft-link">
-        Go to Draft
-      </Link>
+      <div className="draft-link-wrapper">
+        <Link to={`/email-templates/${emailTemplate.id}`} className="draft-link">
+          Go to Draft
+        </Link>
+        {emailTemplate.updatedAt && (
+          <span>Last saved {format(emailTemplate.updatedAt, 'LLL d, yyyy @ h:mmaaa')}</span>
+        )}
+      </div>
     </ListItem>
   )
 }

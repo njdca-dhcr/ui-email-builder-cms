@@ -7,6 +7,7 @@ export interface EmailTemplateIndexItem {
   groupId?: string
   name: string
   description?: string
+  updatedAt?: string
 }
 
 export interface EmailTemplateIndexGroup {

@@ -51,6 +51,11 @@
     margin-left: 1.5rem;
   }
 
+  a {
+    color: var(--white);
+    text-decoration: none;
+  }
+
   .header-title {
     display: block;
     font-size: 1.35rem;
@@ -182,6 +187,10 @@
   gap: 1.25rem;
   flex: 1;
   line-height: 2rem;
+}
+
+.sidebar-list-item {
+  padding-left: 1rem;
 }
 
 .sidebar-spacer {
