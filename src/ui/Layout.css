@@ -5,7 +5,7 @@
 
 .layout {
   --easing: ease-in;
-  --duration: 500ms;
+  --duration: 750ms;
   --header-height: 87px;
   align-items: stretch;
   display: flex;

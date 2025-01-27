@@ -38,7 +38,7 @@ interface PageContext {
 
 type Props = PageProps<object, PageContext, {}>
 
-const TRANSITION_DURATION = 0.5
+const TRANSITION_DURATION = 0.75
 
 const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
   useRedirectIfNotSignedIn()

@@ -39,7 +39,7 @@ import { createPortal } from 'react-dom'
 
 export type Props = PageProps<null, null, null>
 
-const TRANSITION_DURATION = 0.5
+const TRANSITION_DURATION = 0.75
 
 const div = typeof document === 'undefined' ? null : document.createElement('div')
 
