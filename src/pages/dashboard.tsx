@@ -63,7 +63,7 @@ const DashboardPage: FC = () => {
             !error && (
               <div className="no-drafts-message">
                 <QuillHand />
-                <p>Looks like you don&rsquo;t have any drafts. Sad.</p>
+                <p>Looks like you don&rsquo;t have any drafts.</p>
                 <span>Start creating an email using the options below.</span>
               </div>
             )
