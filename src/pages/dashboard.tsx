@@ -30,7 +30,7 @@ const DashboardPage: FC = () => {
     ...flatten(data?.groups.map((group) => group.templates) || []),
   ]
   const currentDrafts = sortBy(templates, ({ updatedAt }) => updatedAt)
-    .toReversed()
+    .reverse()
     .slice(0, 3)
 
   return (
