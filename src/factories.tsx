@@ -135,6 +135,7 @@ export const buildEmailTemplateIndexItem = (
     userId: uniqueId(),
     name: faker.lorem.words(3),
     description: faker.lorem.sentence(),
+    updatedAt: new Date().toISOString(),
     ...options,
   }
 }
