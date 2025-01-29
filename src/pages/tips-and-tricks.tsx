@@ -35,7 +35,9 @@ const TipsAndTricksPage: FC = () => {
       <PageContent element="main" className="tips-and-tricks">
         <SpacedContainer>
           <Heading element="h1">Tips & Tricks</Heading>
-          <Paragraph>Check'em out</Paragraph>
+          <Paragraph>
+            Learn more about how to use this tool to create beautiful, plain language emails.
+          </Paragraph>
 
           <nav aria-labelledby="contents">
             <h2 id="contents">Contents</h2>

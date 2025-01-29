@@ -76,7 +76,7 @@
   .draft-view-types {
     font-weight: var(--weight-bold);
 
-    li{
+    li {
       &.checked,
       &:hover,
       &:focus {
