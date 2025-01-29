@@ -128,7 +128,12 @@
 }
 
 .library-empty-message {
-  padding-top: 7.5rem;
+  color: #888888;
+  padding-left: 1.5rem;
+}
+
+.name-and-description {
+  flex: 1;
 }
 
 .add-translation-link-container {
@@ -155,6 +160,13 @@
 
   &:hover,
   &:focus {
+    background-color: var(--gray-medium);
+  }
+}
+
+li:hover,
+li:focus {
+  .add-translation-link {
     background-color: var(--gray-medium);
   }
 }

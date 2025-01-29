@@ -58,7 +58,8 @@ describe('Library page', () => {
     it('displays a message when all of the email templates are filtered out', async () => {
       const user = userEvent.setup()
       const { getByLabelText, queryByText } = render(<LibraryPage />)
-      const emptyMessage = "Sorry, we don't have any email templates that match the current filter."
+      const emptyMessage =
+        "Sorry, we don't have any email templates that match the current filters."
 
       expect(queryByText(emptyMessage)).toBeNull()
       await user.type(getByLabelText('Filter'), 'zzzzzzz')

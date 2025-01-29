@@ -111,6 +111,7 @@
 
 .my-drafts-empty-message {
   color: #888888;
+  padding-left: 1.5rem;
 }
 
 .draft-item {

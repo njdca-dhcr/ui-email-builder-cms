@@ -112,7 +112,7 @@ const LibaryPage: FC = () => {
               <IndexList>
                 {filteredEmailTemplates.map(({ id, name, description, path }) => (
                   <IndexListItem key={id}>
-                    <div>
+                    <div className="name-and-description">
                       <Link to={path} className="library-name">
                         {name}
                       </Link>
@@ -131,7 +131,7 @@ const LibaryPage: FC = () => {
               </IndexList>
             ) : (
               <Paragraph className="library-empty-message">
-                Sorry, we don't have any email templates that match the current filter.
+                Sorry, we don't have any email templates that match the current filters.
               </Paragraph>
             )}
           </div>
