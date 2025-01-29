@@ -7,10 +7,15 @@
   padding: 0.25em;
   width: 34px;
   z-index: 10;
+  transition: background-color 100ms ease-in;
 
   &:hover,
   &:focus {
     background-color: var(--gray-medium);
+  }
+
+  path {
+    transition: stroke 50ms ease-in;
   }
 
   &:hover path,
@@ -18,9 +23,20 @@
     stroke: var(--warning-delete-dark);
   }
 
+  .can {
+    transition: fill 50ms ease-in;
+  }
+
   &:hover .can,
   &:focus .can {
     fill: var(--warning-delete-dark);
+  }
+}
+
+li:has(a):focus-within,
+li:has(a):hover {
+  .destroy-dialog-trigger {
+    background-color: var(--gray-medium);
   }
 }
 
