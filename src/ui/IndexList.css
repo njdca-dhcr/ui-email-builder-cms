@@ -17,8 +17,8 @@
   position: relative;
   transition: background-color ease-in 100ms;
 
-  &:hover,
-  &:focus-within {
+  &:hover:has(a),
+  &:focus-within:has(a) {
     background-color: var(--gray-light);
   }
 
