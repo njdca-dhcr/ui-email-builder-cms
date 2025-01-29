@@ -24,6 +24,7 @@
   --border-color: var(--gray-medium);
   background-color: var(--white);
   border: 1px solid var(--border-color);
+  cursor: pointer;
   display: flex;
   font-size: var(--font-tiny);
   font-style: italic;
@@ -53,6 +54,12 @@
   --border-color: var(--gray-dark-extra);
   background-color: var(--gray-dark-extra);
   color: var(--white);
+}
+
+.radio-button:hover,
+.radio-button:focus {
+  background-color: var(--gray-medium);
+  border-color: var(--gray-medium);
 }
 
 .radio-button:not(:has(:checked)) {

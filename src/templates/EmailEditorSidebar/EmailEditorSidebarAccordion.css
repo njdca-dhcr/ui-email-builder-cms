@@ -23,14 +23,19 @@
 .sidebar-accordion-container .accordion-controls button {
   background-color: var(--white);
   border: 0;
+  cursor: pointer;
   font-family: var(--sans-serif);
   font-size: var(--font-small);
   padding: 0.5rem 1rem;
   transition: background-color 50ms ease-in-out;
+
+  &:hover {
+    background-color: var(--gray-light);
+  }
 }
 
 .sidebar-accordion-container .accordion-controls button:active {
-  background-color: var(--gray-light);
+  background-color: var(--gray-medium-light);
 }
 
 .sidebar-accordion-container .accordion-controls button:last-of-type {
