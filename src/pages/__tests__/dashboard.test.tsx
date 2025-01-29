@@ -121,12 +121,53 @@ describe('Dashboard page', () => {
   })
 
   describe('when the user has no drafts', () => {
-    it('shows a message that there are no drafts', () => {})
+    it('shows a message that there are no drafts', () => {
+      const query = buildUseQueryResult<EmailTemplateIndex>({
+        isLoading: false,
+        data: { user: [], groups: [] },
+        status: 'success',
+      })
+      asMock(useEmailTemplates).mockReturnValue(query)
+      const { queryByText } = renderDashboardPage()
+      expect(queryByText('Start creating an email using the options below.')).not.toBeNull()
+    })
   })
 
-  it('has links to create a template', () => {})
+  it('has links to create a template', () => {
+    const query = buildUseQueryResult<EmailTemplateIndex>({
+      isLoading: false,
+      data: { user: [], groups: [] },
+      status: 'success',
+    })
+    asMock(useEmailTemplates).mockReturnValue(query)
+    const { baseElement } = renderDashboardPage()
+    const templateWrappers = baseElement.querySelectorAll('.template-wrapper')
+    expect(templateWrappers).toHaveLength(3)
+    expect(templateWrappers[0].querySelector('a')).toHaveAttribute(
+      'href',
+      '/email-templates/blank-slate/',
+    )
+    expect(templateWrappers[1].querySelector('a')).toHaveAttribute(
+      'href',
+      '/email-templates/everything-bagel/',
+    )
+    expect(templateWrappers[2].querySelector('a')).toHaveAttribute('href', '/library/')
+  })
 
   describe('when there is an error loading drafts', () => {
-    it('shows an error message', () => {})
+    it('shows an error message', () => {
+      const error = new Error(faker.lorem.sentence())
+      const query = buildUseQueryResult<EmailTemplateIndex>({
+        isLoading: false,
+        status: 'error',
+        isError: true,
+        error,
+      })
+      asMock(useEmailTemplates).mockReturnValue(query)
+      const { queryByText } = renderDashboardPage()
+      expect(
+        queryByText('There was an error loading your drafts. Please refresh the page.'),
+      ).not.toBeNull()
+    })
   })
 })
