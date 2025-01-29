@@ -1,15 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { HeadFC, navigate, PageProps } from 'gatsby'
-import {
-  Button,
-  Form,
-  FormField,
-  Heading,
-  Layout,
-  LoadingOverlay,
-  Paragraph,
-  SpacedContainer,
-} from 'src/ui'
+import { Button, Form, FormField, Heading, Layout, LoadingOverlay, Paragraph } from 'src/ui'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { newPasswordRequired } from 'src/network/auth'
 import { useAuth } from 'src/utils/AuthContext'
@@ -50,107 +41,117 @@ const NewPasswordRequiredPage: FC<Props> = ({ location }) => {
   return (
     <Layout element="div">
       <RedirectIfSignedIn />
-      <main className="page-content homepage">
-        <div className="login-pane">
-          <div className="login-container">
-            <header>
-              {departmentSeal && (
-                <img
-                  alt={departmentSeal.label}
-                  src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
-                />
-              )}
-              <div>
-                {state && `${state.name} `}
-                Email Builder (Beta)
-              </div>
-            </header>
-            <Heading element="h1">New Password Required</Heading>
-            <Paragraph>Please replace the administrator set password before continuing</Paragraph>
-            <Form
-              errorMessage={errorMessage}
-              onSubmit={async () => {
-                if (!hasCorrectState(locationState)) return
-                setErrorMessage('')
-                setPasswordIsInvalid(false)
-                setPasswordConfirmationIsInvalid(false)
-                setLoading(true)
+      <main className="page-content sign-in-page">
+        <div className="login-panel-wrapper">
+          <div className="login-panel sign-in-panel">
+            <div className="login-container">
+              <header>
+                {departmentSeal && (
+                  <img
+                    alt={departmentSeal.label}
+                    src={buildDepartmentSealUrl(`/${departmentSeal.imageName}`)}
+                  />
+                )}
+                <div>
+                  {state && `${state.name} `}
+                  Email Builder (Beta)
+                </div>
+              </header>
+              <Heading element="h1">New Password Required</Heading>
+              <Paragraph>Please replace the administrator set password before continuing</Paragraph>
+              <Form
+                errorMessage={errorMessage}
+                onSubmit={async () => {
+                  if (!hasCorrectState(locationState)) return
+                  setErrorMessage('')
+                  setPasswordIsInvalid(false)
+                  setPasswordConfirmationIsInvalid(false)
+                  setLoading(true)
 
-                if (password !== passwordConfirmation) {
-                  setPasswordConfirmationIsInvalid(true)
-                  setErrorMessage('Password and confirmation must match')
+                  if (password !== passwordConfirmation) {
+                    setPasswordConfirmationIsInvalid(true)
+                    setErrorMessage('Password and confirmation must match')
+                    setLoading(false)
+                    return
+                  }
+
+                  const result = await newPasswordRequired({
+                    password,
+                    email: locationState.username,
+                    session: locationState.session,
+                  })
+
+                  switch (result.kind) {
+                    case 'NOT_AUTHORIZED':
+                      setErrorMessage(result.error.message)
+                      break
+                    case 'INVALID_PASSWORD':
+                      setPasswordIsInvalid(true)
+                      setErrorMessage('Password is invalid')
+                      break
+                    case 'SUCCESS':
+                      setAuth({
+                        idToken: result.AuthenticationResult.IdToken,
+                        refreshToken: result.AuthenticationResult.RefreshToken,
+                      })
+                      break
+                  }
+
                   setLoading(false)
-                  return
-                }
-
-                const result = await newPasswordRequired({
-                  password,
-                  email: locationState.username,
-                  session: locationState.session,
-                })
-
-                switch (result.kind) {
-                  case 'NOT_AUTHORIZED':
-                    setErrorMessage(result.error.message)
-                    break
-                  case 'INVALID_PASSWORD':
-                    setPasswordIsInvalid(true)
-                    setErrorMessage('Password is invalid')
-                    break
-                  case 'SUCCESS':
-                    setAuth({
-                      idToken: result.AuthenticationResult.IdToken,
-                      refreshToken: result.AuthenticationResult.RefreshToken,
-                    })
-                    break
-                }
-
-                setLoading(false)
-              }}
-            >
-              <FormField
-                type="password"
-                id={passwordId}
-                label="Password"
-                value={password}
-                onTextChange={setPassword}
-                error={passwordIsInvalid ? 'is invalid' : undefined}
-                description="must be at least 8 characters long and contain least one number, one lowercase letter, one uppercase letter, and one symbol"
-                required
-                minLength={8}
-              />
-              <FormField
-                type="password"
-                id={passwordConfirmationId}
-                label="Confirm Password"
-                value={passwordConfirmation}
-                onTextChange={setPasswordConfirmation}
-                error={passwordConfirmationIsInvalid ? 'must match password' : undefined}
-                description="must match the password"
-                required
-                minLength={8}
-              />
-              <Button type="submit">Update Password</Button>
-            </Form>
+                }}
+              >
+                <FormField
+                  type="password"
+                  id={passwordId}
+                  label="Password"
+                  value={password}
+                  onTextChange={setPassword}
+                  error={passwordIsInvalid ? 'is invalid' : undefined}
+                  description="must be at least 8 characters long and contain least one number, one lowercase letter, one uppercase letter, and one symbol"
+                  required
+                  minLength={8}
+                />
+                <FormField
+                  type="password"
+                  id={passwordConfirmationId}
+                  label="Confirm Password"
+                  value={passwordConfirmation}
+                  onTextChange={setPasswordConfirmation}
+                  error={passwordConfirmationIsInvalid ? 'must match password' : undefined}
+                  description="must match the password"
+                  required
+                  minLength={8}
+                />
+                <Button type="submit">Update Password</Button>
+              </Form>
+            </div>
           </div>
         </div>
-        <div className="image-pane">
-          <SpacedContainer>
-            <StaticImage
-              src="../images/email-template.png"
-              alt="email template"
-              placeholder="blurred"
-              width={460}
-              className="template-desktop"
-            />
-            <StaticImage
-              src="../images/email-template-mobile.png"
-              alt="email template mobile"
-              placeholder="blurred"
-              width={222}
-              className="template-mobile"
-            />
-          </SpacedContainer>
+        <div>
+          <div className="image-panel sign-in-panel">
+            <figure className="template-images-wrapper">
+              <div className="template-images">
+                <StaticImage
+                  src="../images/email-template.png"
+                  alt="email template"
+                  placeholder="blurred"
+                  width={460}
+                  className="template-desktop"
+                />
+                <StaticImage
+                  src="../images/email-template-mobile.png"
+                  alt="email template mobile"
+                  placeholder="blurred"
+                  width={222}
+                  className="template-mobile"
+                />
+              </div>
+              <figcaption>
+                Write action-forward, HTML ready emails
+                <br /> proven to increase engagement with claimants.
+              </figcaption>
+            </figure>
+          </div>
         </div>
         {loading && <LoadingOverlay description="Updating Password" />}
       </main>
