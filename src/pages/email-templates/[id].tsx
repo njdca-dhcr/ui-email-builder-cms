@@ -72,6 +72,7 @@ const EmailTemplateShowPage: FC<Props> = ({ params }) => {
                   >
                     <div ref={beforeLayoutRef as any} />
                     <EmailEditorSidebar
+                      linkBackTo="/my-drafts"
                       emailTranslation={currentTranslation}
                       heading={
                         <>

@@ -21,6 +21,7 @@ describe('EmailEditorSidebar', () => {
       <EmailEditorSidebar
         heading={<h1>{faker.lorem.words(3)}</h1>}
         emailTranslation={emailTranslation}
+        linkBackTo={`/${faker.lorem.word()}`}
       />,
     )
     const link: HTMLAnchorElement = baseElement.querySelector('.back-link') as any
@@ -30,7 +31,11 @@ describe('EmailEditorSidebar', () => {
   it('displays the given heading', () => {
     const title = faker.lorem.words(3)
     const { baseElement } = render(
-      <EmailEditorSidebar emailTranslation={emailTranslation} heading={<h1>{title}</h1>} />,
+      <EmailEditorSidebar
+        emailTranslation={emailTranslation}
+        heading={<h1>{title}</h1>}
+        linkBackTo={`/${faker.lorem.word()}`}
+      />,
     )
     expect(baseElement).toContainHTML(`<h1>${title}</h1>`)
   })
@@ -52,6 +57,7 @@ describe('EmailEditorSidebar', () => {
       <EmailEditorSidebar
         emailTranslation={emailTranslation}
         heading={<h1>{faker.lorem.words(3)}</h1>}
+        linkBackTo={`/${faker.lorem.word()}`}
       />,
     )
 
@@ -70,6 +76,7 @@ describe('EmailEditorSidebar', () => {
         <EmailEditorSidebar
           emailTranslation={buildEmailTranslation({ language: 'not-set' })}
           heading={<h1>{faker.lorem.words(3)}</h1>}
+          linkBackTo={`/${faker.lorem.word()}`}
         />,
       )
 

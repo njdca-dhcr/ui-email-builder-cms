@@ -1,8 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { faker } from '@faker-js/faker'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { randomUUID } from 'crypto'
 import DashboardPage from '../dashboard'
 import {
   EmailTemplateIndex,
@@ -17,7 +15,6 @@ import {
   urlFor,
 } from 'src/testHelpers'
 import { SIDEBAR_NAVIGATION_TEST_ID } from 'src/ui'
-import { group } from 'console'
 
 jest.mock('src/network/emailTemplates', () => {
   return {

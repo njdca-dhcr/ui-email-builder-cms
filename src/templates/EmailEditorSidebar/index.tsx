@@ -7,15 +7,16 @@ import { EmailEditorSidebarAccordion } from './EmailEditorSidebarAccordion'
 interface Props {
   heading: ReactElement
   emailTranslation: EmailTranslation.Unique
+  linkBackTo: string
 }
 
-export const EmailEditorSidebar: FC<Props> = ({ heading, emailTranslation }) => {
+export const EmailEditorSidebar: FC<Props> = ({ heading, emailTranslation, linkBackTo }) => {
   const components = emailTranslation.components
 
   return (
     <Sidebar id="sidebar-container" className="email-editor-sidebar">
       <SpacedSidebarContainer>
-        <BackLink />
+        <BackLink to={linkBackTo} />
         <SkipNavContent />
         {heading}
       </SpacedSidebarContainer>

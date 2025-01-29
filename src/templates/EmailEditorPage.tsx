@@ -76,6 +76,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
                   >
                     <div ref={beforeLayoutRef as any} />
                     <EmailEditorSidebar
+                      linkBackTo="/library"
                       emailTranslation={currentTranslation}
                       heading={
                         <>

@@ -2,9 +2,13 @@ import React, { FC } from 'react'
 import { Link, navigate } from 'gatsby'
 import { BackArrowIcon } from 'src/ui'
 
-export const BackLink: FC = () => {
+interface Props {
+  to: string
+}
+
+export const BackLink: FC<Props> = ({ to }) => {
   return (
-    <Link to="#" onClick={() => navigate(-1)} className="back-link">
+    <Link to={to} className="back-link">
       <BackArrowIcon />
       <span className="back-link-text">Back</span>
     </Link>

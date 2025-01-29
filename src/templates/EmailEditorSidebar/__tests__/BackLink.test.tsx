@@ -1,17 +1,15 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { navigate } from 'gatsby'
 import { BackLink } from '../BackLink'
+import { faker } from '@faker-js/faker'
+import { urlFor } from 'src/testHelpers'
 
 describe('BackLink', () => {
   it('is a link that goes back when clicked', async () => {
-    const user = userEvent.setup()
-    const { baseElement } = render(<BackLink />)
-    const link = baseElement.querySelector('a')
+    const path = `/${faker.lorem.word()}`
+    const { baseElement } = render(<BackLink to={path} />)
+    const link: HTMLAnchorElement = baseElement.querySelector('a') as any
     expect(link).toHaveTextContent('Back')
-    expect(navigate).not.toHaveBeenCalled()
-    await user.click(link!)
-    expect(navigate).toHaveBeenCalledWith(-1)
+    expect(link.href).toEqual(urlFor(path))
   })
 })
