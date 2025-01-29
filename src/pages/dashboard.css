@@ -18,8 +18,7 @@
   padding-inline: 5.25rem 9.75rem;
 
   &.drafts-section {
-    padding-block: 6rem 4rem;
-    min-height: 23rem;
+    padding-block: 6rem 3rem;
   }
 
   &:last-child {
@@ -48,6 +47,7 @@
   }
 
   .draft-info {
+    min-width: 20rem;
     max-width: 42rem;
   }
 
@@ -66,6 +66,7 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 0.5rem;
+    min-width: 14rem;
 
     span {
       font-style: italic;
@@ -81,6 +82,11 @@
     padding: 0.75rem 4rem;
     border: 1.25px solid var(--black);
     border-radius: 4px;
+
+    &:hover,
+    &:focus {
+      background-color: var(--gray-light-medium);
+    }
   }
 }
 
