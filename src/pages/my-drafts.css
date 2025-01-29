@@ -76,8 +76,12 @@
   .draft-view-types {
     font-weight: var(--weight-bold);
 
-    li.checked {
-      border-bottom: 2.5px solid var(--black);
+    li{
+      &.checked,
+      &:hover,
+      &:focus {
+        border-bottom: 2.5px solid var(--black);
+      }
     }
   }
 
