@@ -73,7 +73,9 @@ const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
           if (addTranslationByDefault) {
             navigate(location.pathname, { replace: true })
             const [translation, ..._otherTranslations] = currentEmailTemplate.translations ?? []
-            setCurrentEmailTemplate({ ...currentEmailTemplate, translations: [translation] })
+            setCurrentEmailTemplate(
+              addOrRemoveTranslationLinks({ ...currentEmailTemplate, translations: [translation] }),
+            )
           }
         }
 
