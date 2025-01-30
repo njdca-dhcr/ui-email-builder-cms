@@ -13,27 +13,36 @@ export const Sidebar: FC = () => {
       {error && <SidebarError error={error} />}
       <nav>
         <SidebarList>
-          <SidebarLink
-            to="/settings/groups"
-            label="Groups"
-            className="section-link"
-            icon={<GroupsIcon />}
-          >
-            {currentUser?.groups ? (
-              <SidebarList className="inner">
-                {currentUser.groups.map((group) => (
-                  <SidebarLink
-                    key={group.id}
-                    to={`/settings/groups/${group.id}`}
-                    label={group.name}
-                    partiallyActive
-                    icon={<GroupsIcon />}
-                  />
-                ))}
-              </SidebarList>
-            ) : null}
-          </SidebarLink>
-          <SidebarLink to="/settings/users" label="Users" partiallyActive icon={<UsersIcon />} />
+          {currentUser?.role === 'admin' && (
+            <>
+              <SidebarLink
+                to="/settings/groups"
+                label="Groups"
+                className="section-link"
+                icon={<GroupsIcon />}
+              >
+                {currentUser?.groups ? (
+                  <SidebarList className="inner">
+                    {currentUser.groups.map((group) => (
+                      <SidebarLink
+                        key={group.id}
+                        to={`/settings/groups/${group.id}`}
+                        label={group.name}
+                        partiallyActive
+                        icon={<GroupsIcon />}
+                      />
+                    ))}
+                  </SidebarList>
+                ) : null}
+              </SidebarLink>
+              <SidebarLink
+                to="/settings/users"
+                label="Users"
+                partiallyActive
+                icon={<UsersIcon />}
+              />
+            </>
+          )}
           <SidebarLink to="/settings/email" label="Email Settings" icon={<EmailSettingsIcon />} />
         </SidebarList>
       </nav>

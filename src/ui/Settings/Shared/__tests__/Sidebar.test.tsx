@@ -31,50 +31,67 @@ describe('Sidebar', () => {
     })
   })
 
-  describe('with data (no groups)', () => {
-    beforeEach(() => {
-      asMock(useCurrentUser).mockReturnValue({
-        ...buildUseQueryResult({ isLoading: false, data: buildUserShow() }),
-        enabled: true,
-      })
-    })
-
-    it('displays links that do not require server data', async () => {
+  describe('as a member', () => {
+    it('only displays authorized links', async () => {
       const { queryByRole } = renderComponent()
 
-      expect(queryByRole('link', { name: 'Groups' })).toBeTruthy()
-      expect(queryByRole('link', { name: 'Users' })).toBeTruthy()
       expect(queryByRole('link', { name: 'Email Settings' })).toBeTruthy()
+      expect(queryByRole('link', { name: 'Groups' })).not.toBeTruthy()
+      expect(queryByRole('link', { name: 'Users' })).not.toBeTruthy()
     })
   })
 
-  describe('with data (including groups)', () => {
-    let groups: { name: string; id: string }[]
+  describe('as an admin', () => {
     let currentUser: CurrentUser
+    let groups: { name: string; id: string }[]
 
     beforeEach(() => {
       groups = [buildGroupIndex(), buildGroupIndex()]
-      currentUser = { ...buildUserShow(), groups }
+      currentUser = { ...buildUserShow({ role: 'admin' }), groups }
+    })
 
-      asMock(useCurrentUser).mockReturnValue({
-        ...buildUseQueryResult({ isLoading: false, data: currentUser }),
-        enabled: true,
+    describe('with data (no groups)', () => {
+      beforeEach(() => {
+        asMock(useCurrentUser).mockReturnValue({
+          ...buildUseQueryResult({ isLoading: false, data: buildUserShow({ role: 'admin' }) }),
+          enabled: true,
+        })
+      })
+
+      it('displays links that do not require server data', async () => {
+        const { queryByRole } = renderComponent()
+
+        expect(queryByRole('link', { name: 'Groups' })).toBeTruthy()
+        expect(queryByRole('link', { name: 'Users' })).toBeTruthy()
+        expect(queryByRole('link', { name: 'Email Settings' })).toBeTruthy()
       })
     })
 
-    it('displays links that do not require server data', async () => {
-      const { queryByRole } = renderComponent()
+    describe('with data (including groups)', () => {
+      beforeEach(() => {
+        groups = [buildGroupIndex(), buildGroupIndex()]
+        currentUser = { ...buildUserShow({ role: 'admin' }), groups }
 
-      expect(queryByRole('link', { name: 'Groups' })).toBeTruthy()
-      expect(queryByRole('link', { name: 'Users' })).toBeTruthy()
-      expect(queryByRole('link', { name: 'Email Settings' })).toBeTruthy()
-    })
+        asMock(useCurrentUser).mockReturnValue({
+          ...buildUseQueryResult({ isLoading: false, data: currentUser }),
+          enabled: true,
+        })
+      })
 
-    it('displays the groups', async () => {
-      const { queryByRole } = renderComponent()
+      it('displays links that do not require server data', async () => {
+        const { queryByRole } = renderComponent()
 
-      groups.forEach((group) => {
-        expect(queryByRole('link', { name: group.name })).toBeTruthy()
+        expect(queryByRole('link', { name: 'Groups' })).toBeTruthy()
+        expect(queryByRole('link', { name: 'Users' })).toBeTruthy()
+        expect(queryByRole('link', { name: 'Email Settings' })).toBeTruthy()
+      })
+
+      it('displays the groups', async () => {
+        const { queryByRole } = renderComponent()
+
+        groups.forEach((group) => {
+          expect(queryByRole('link', { name: group.name })).toBeTruthy()
+        })
       })
     })
   })
@@ -100,8 +117,8 @@ describe('Sidebar', () => {
     it('displays links that do not require server data', async () => {
       const { queryByRole } = renderComponent()
 
-      expect(queryByRole('link', { name: 'Groups' })).toBeTruthy()
-      expect(queryByRole('link', { name: 'Users' })).toBeTruthy()
+      expect(queryByRole('link', { name: 'Groups' })).not.toBeTruthy()
+      expect(queryByRole('link', { name: 'Users' })).not.toBeTruthy()
       expect(queryByRole('link', { name: 'Email Settings' })).toBeTruthy()
     })
   })
