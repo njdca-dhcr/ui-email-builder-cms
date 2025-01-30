@@ -7,12 +7,14 @@ interface Props {
   forceWarning?: boolean
   previewType: PreviewType
   onPreviewTypeChange: (value: PreviewType) => void
+  onExit?: () => void
 }
 
 export const TranslationModeHeader: FC<Props> = ({
   previewType,
   onPreviewTypeChange,
   forceWarning,
+  onExit,
 }) => {
   return (
     <div className="translation-mode-header">
@@ -23,6 +25,7 @@ export const TranslationModeHeader: FC<Props> = ({
           label="Exit Translation Mode"
           component={BlackButton}
           forceWarning={forceWarning}
+          onExit={onExit}
         />
       </div>
     </div>

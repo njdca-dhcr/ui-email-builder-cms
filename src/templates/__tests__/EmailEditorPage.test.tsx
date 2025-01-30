@@ -13,6 +13,8 @@ import {
 } from 'src/testHelpers'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import { faker } from '@faker-js/faker'
+import { navigate } from 'gatsby'
+import { AuthProvider } from 'src/utils/AuthContext'
 
 describe('EmailEditorPage', () => {
   let emailTemplate: EmailTemplate.Base.Config
@@ -20,6 +22,7 @@ describe('EmailEditorPage', () => {
   let defaultPreviewText: string
 
   beforeEach(() => {
+    jest.resetAllMocks()
     user = userEvent.setup()
     userIsSignedIn()
     mockBackendUrl(faker.internet.url())
@@ -54,22 +57,24 @@ describe('EmailEditorPage', () => {
     })
   })
 
-  const renderPage = (options?: { location: { search?: string } }) => {
+  const renderPage = (options?: { location: { search?: string; pathname?: string } }) => {
     return render(
-      <QueryClientProvider client={new QueryClient()}>
-        <EmailEditorPage
-          pageContext={{ emailTemplate }}
-          uri=""
-          path=""
-          location={{} as any}
-          pageResources={{} as any}
-          params={{}}
-          children={undefined}
-          data={{}}
-          serverData={{}}
-          {...options}
-        />
-      </QueryClientProvider>,
+      <AuthProvider>
+        <QueryClientProvider client={new QueryClient()}>
+          <EmailEditorPage
+            pageContext={{ emailTemplate }}
+            uri=""
+            path=""
+            location={{} as any}
+            pageResources={{} as any}
+            params={{}}
+            children={undefined}
+            data={{}}
+            serverData={{}}
+            {...options}
+          />
+        </QueryClientProvider>
+      </AuthProvider>,
     )
   }
 
@@ -86,8 +91,8 @@ describe('EmailEditorPage', () => {
   })
 
   it('displays the EmailEditorSidebar', () => {
-    const { queryByText } = renderPage()
-    expect(queryByText('Back')).not.toBeNull()
+    const { baseElement } = renderPage()
+    expect(baseElement.querySelector('.email-editor-sidebar')).toBeTruthy()
   })
 
   it('displays the heading and select navigator', () => {
@@ -130,6 +135,25 @@ describe('EmailEditorPage', () => {
     const { baseElement } = renderPage({ location: { search: '?add-translation' } })
     expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(1)
     expect(baseElement.querySelector('.new-translation .email-preview table')).toBeTruthy()
+  })
+
+  it('removes the search param and the translation when opened in translation mode and then exited', async () => {
+    userIsSignedIn()
+    jest.spyOn(window, 'confirm').mockReturnValue(true)
+    const pathname = `/${faker.lorem.word()}`
+    const { baseElement, getByRole, queryByRole } = renderPage({
+      location: { pathname, search: '?add-translation' },
+    })
+
+    expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(1)
+    expect(queryByRole('button', { name: 'Add Translation' })).toBeFalsy()
+    expect(navigate).not.toHaveBeenCalled()
+
+    await user.click(getByRole('button', { name: 'Edit Original Email' }))
+
+    expect(queryByRole('button', { name: 'Add Translation' })).toBeTruthy()
+    expect(baseElement.querySelectorAll('.translation-mode')).toHaveLength(0)
+    expect(navigate).toHaveBeenCalledWith(pathname, { replace: true })
   })
 
   describe('Head', () => {

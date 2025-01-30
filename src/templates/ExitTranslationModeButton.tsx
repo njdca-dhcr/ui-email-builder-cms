@@ -8,21 +8,32 @@ export interface Props {
   component?: FC
   forceWarning?: boolean
   label: string
+  onExit?: () => void
 }
 
-export const ExitTranslationModeButton: FC<Props> = ({ label, component, forceWarning }) => {
+export const ExitTranslationModeButton: FC<Props> = ({
+  label,
+  component,
+  forceWarning,
+  onExit,
+}) => {
   const [_, setCurrentLanguage] = useCurrentLanguage()
   const translationHasChanges = useTranslationHasChanges()
   const Component = component ?? Button
+
+  const handleExit = () => {
+    setCurrentLanguage('english')
+    onExit && onExit()
+  }
 
   return (
     <Component
       className={classNames({ 'exit-translation-mode-button': !component })}
       onClick={() => {
         if (forceWarning) {
-          getConfirmation() && setCurrentLanguage('english')
+          getConfirmation() && handleExit()
         } else if (!translationHasChanges || getConfirmation()) {
-          setCurrentLanguage('english')
+          handleExit()
         }
       }}
     >

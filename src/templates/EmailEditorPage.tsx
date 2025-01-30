@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useRef, useState } from 'react'
-import { PageProps, type HeadFC } from 'gatsby'
+import { navigate, PageProps, type HeadFC } from 'gatsby'
 import uniqueId from 'lodash.uniqueid'
 import { Layout, PageContent } from 'src/ui'
 import type { EmailParts, EmailTemplate } from 'src/appTypes'
@@ -60,8 +60,22 @@ const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
 
   return (
     <EmailTemplateState emailTemplate={emailTemplateConfig}>
-      {({ currentLanguage, currentEmailTemplate, currentTranslation, englishTranslation }) => {
+      {({
+        currentLanguage,
+        currentEmailTemplate,
+        currentTranslation,
+        englishTranslation,
+        setCurrentEmailTemplate,
+      }) => {
         const inTranslationMode = !['not-set', 'english'].includes(currentLanguage)
+
+        const handleExit = () => {
+          if (addTranslationByDefault) {
+            navigate(location.pathname, { replace: true })
+            const [translation, ..._otherTranslations] = currentEmailTemplate.translations ?? []
+            setCurrentEmailTemplate({ ...currentEmailTemplate, translations: [translation] })
+          }
+        }
 
         return (
           <CurrentlyActiveEmailPart>
@@ -101,6 +115,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
                                   <ExitTranslationModeButton
                                     label="Edit Original Email"
                                     forceWarning
+                                    onExit={handleExit}
                                   />
                                 </TranslationActions>
                               </motion.div>
@@ -142,6 +157,7 @@ const EmailEditorPage: FC<Props> = ({ pageContext, location }) => {
                                       forceWarning
                                       previewType={previewTypeOptions.current}
                                       onPreviewTypeChange={previewTypeOptions.onChange}
+                                      onExit={handleExit}
                                     />
                                   </motion.div>,
                                   beforeLayoutRef.current as any,

@@ -13,15 +13,19 @@ jest.mock('src/utils/EmailTemplateState')
 describe('ExitTranslationModeButton', () => {
   let user: UserEvent
   let setCurrentLanguage: jest.Mock
+  let onExit: jest.Mock
 
   beforeEach(async () => {
     user = userEvent.setup()
+    onExit = jest.fn()
     setCurrentLanguage = jest.fn()
     asMock(useCurrentLanguage).mockReturnValue(['spanish', setCurrentLanguage])
   })
 
   const renderComponent = (options?: Partial<Props>) => {
-    const rendered = render(<ExitTranslationModeButton label={faker.lorem.word()} {...options} />)
+    const rendered = render(
+      <ExitTranslationModeButton label={faker.lorem.word()} onExit={onExit} {...options} />,
+    )
 
     return rendered
   }
@@ -45,6 +49,7 @@ describe('ExitTranslationModeButton', () => {
 
       expect(window.confirm).toHaveBeenCalled()
       expect(setCurrentLanguage).toHaveBeenCalledWith('english')
+      expect(onExit).toHaveBeenCalled()
     })
 
     it('does not exit translation mode when the user cancels', async () => {
@@ -55,6 +60,7 @@ describe('ExitTranslationModeButton', () => {
 
       expect(window.confirm).toHaveBeenCalled()
       expect(setCurrentLanguage).not.toHaveBeenCalled()
+      expect(onExit).not.toHaveBeenCalled()
     })
   })
 
