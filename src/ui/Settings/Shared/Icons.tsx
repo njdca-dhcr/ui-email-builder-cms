@@ -2,6 +2,21 @@ import React, { FC } from 'react'
 
 export const GroupsIcon: FC = () => {
   return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" fill="none" aria-hidden>
+      <g stroke="#000" strokeLinecap="round" strokeLinejoin="round" clipPath="url(#a)">
+        <path d="M17 19.04v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 9.04a4 4 0 1 0 0-8.001 4 4 0 0 0 0 8ZM23 19.039v-2a4 4 0 0 0-3-3.87M16 1.169a4 4 0 0 1 0 7.75" />
+      </g>
+      <defs>
+        <clipPath id="a">
+          <path fill="#fff" d="M0 0h24v20H0z" />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export const GroupIcon: FC = () => {
+  return (
     <svg aria-hidden xmlns="http://www.w3.org/2000/svg" width="31" height="24" fill="none">
       <path
         stroke="#000"

@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import classNames from 'classnames'
 import { useCurrentUser } from 'src/network/users'
 import { LoadingOverlay } from '../../LoadingOverlay'
-import { GroupsIcon, UsersIcon, EmailSettingsIcon } from './Icons'
+import { GroupsIcon, UsersIcon, EmailSettingsIcon, GroupIcon } from './Icons'
 
 export const Sidebar: FC = () => {
   const { data: currentUser, isLoading, error } = useCurrentUser()
@@ -29,7 +29,7 @@ export const Sidebar: FC = () => {
                         to={`/settings/groups/${group.id}`}
                         label={group.name}
                         partiallyActive
-                        icon={<GroupsIcon />}
+                        icon={<GroupIcon />}
                       />
                     ))}
                   </SidebarList>
