@@ -43,7 +43,7 @@ describe('EditGroupDialog', () => {
   it('displays a button that opens the edit group dialog', async () => {
     const { getByRole, baseElement } = renderComponent()
     expect(baseElement.querySelector('[data-state="open"]')).toBeFalsy()
-    await user.click(getByRole('button', { name: 'Edit Group' }))
+    await user.click(getByRole('button', { name: 'Edit' }))
     expect(baseElement.querySelector('[data-state="open"]')).toBeTruthy()
   })
 

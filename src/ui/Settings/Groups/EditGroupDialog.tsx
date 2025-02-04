@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { useUpdateGroup, UpdateGroupErrorResponse } from 'src/network/groups'
 import { LoadingOverlay } from 'src/ui/LoadingOverlay'
-import { BlackButton, WhiteButton } from 'src/ui/Button'
+import { BlackButton, ButtonLike, WhiteButton } from 'src/ui/Button'
 import { Dialog } from 'src/ui/Dialog'
 import { stringFromFormData } from 'src/utils/stringFromFormData'
 import { Form, FormField } from 'src/ui/Form'
@@ -24,9 +24,9 @@ export const EditGroupDialog: FC<Props> = ({ group }) => {
   return (
     <Dialog
       trigger={
-        <BlackButton className="edit-group-button">
-          Edit Group <EditGroupIcon />
-        </BlackButton>
+        <ButtonLike className="edit-group-button">
+          <EditGroupIcon /> Edit
+        </ButtonLike>
       }
       title="Edit Group"
       description="Enter a new name and/or description for the group"

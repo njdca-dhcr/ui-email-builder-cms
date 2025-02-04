@@ -1,5 +1,5 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { HeadFC, PageProps } from 'gatsby'
+import { HeadFC, Link, PageProps } from 'gatsby'
 import React, { FC } from 'react'
 import { useGroup } from 'src/network/groups'
 import { LoadingOverlay, IndexList, IndexListItem } from 'src/ui'
@@ -7,6 +7,7 @@ import { DestroyMembership } from 'src/ui/DestroyDialog'
 import { EditGroupDialog } from 'src/ui/Settings/Groups/EditGroupDialog'
 import { ManageMembersDialog } from 'src/ui/Settings/Groups/ManageMembersDialog'
 import { Layout, PageContent, Sidebar } from 'src/ui/Settings/Shared'
+import { ChevronLeft } from 'src/ui/Svg/ChevronLeft'
 import { formatPageTitle } from 'src/utils/formatPageTitle'
 import { useCurrentRole } from 'src/utils/useCurrentRole'
 import { useRedirectIfNotSignedIn } from 'src/utils/useRedirectIfNotSignedIn'
@@ -23,14 +24,18 @@ const GroupShowPage: FC<Props> = ({ params }) => {
       <Sidebar />
       <PageContent>
         <div className="settings-header groups">
-          <h1>{group?.name ?? 'Group'}</h1>
-          <p>{group?.description}</p>
-          <div className="settings-actions">
-            {isAdmin && group && <EditGroupDialog group={group} />}
-          </div>
-          <div className="additional-actions">
+          <Link to="/settings/groups" className="back-to-all-groups">
+            <ChevronLeft />
+            Back to All Groups
+          </Link>
+          <div className="groups-heading">
+            <div className="title-container">
+              <h1>{group?.name ?? 'Group'}</h1>
+              {isAdmin && group && <EditGroupDialog group={group} />}
+            </div>
             {isAdmin && group && <ManageMembersDialog group={group} />}
           </div>
+          <p>{group?.description}</p>
         </div>
 
         {error && <p>{error.message}</p>}

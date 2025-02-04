@@ -107,13 +107,13 @@ describe('Group Show Page', () => {
     it('displays a dialog trigger to edit the group when an admin', async () => {
       asMock(useCurrentRole).mockReturnValue({ role: 'admin', isAdmin: true, isLoading: false })
       const { queryByRole } = renderPage({ params: { id: group.id } })
-      expect(queryByRole('button', { name: 'Edit Group' })).toBeTruthy()
+      expect(queryByRole('button', { name: 'Edit' })).toBeTruthy()
     })
 
     it('does not display a dialog trigger to edit the group when not an admin', async () => {
       asMock(useCurrentRole).mockReturnValue({ role: 'member', isAdmin: false, isLoading: false })
       const { queryByRole } = renderPage({ params: { id: group.id } })
-      expect(queryByRole('button', { name: 'Edit Group' })).toBeFalsy()
+      expect(queryByRole('button', { name: 'Edit' })).toBeFalsy()
     })
 
     describe('when an admin', () => {

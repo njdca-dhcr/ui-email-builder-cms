@@ -18,11 +18,13 @@ const GroupsPage: FC = () => {
       <Sidebar />
       <PageContent>
         <div className="settings-header groups">
-          <h1>Groups</h1>
-          <p>All of the groups can be found here</p>
-          <div className="settings-actions">
+          <div className="groups-heading">
+            <div className="title-container">
+              <h1>Groups</h1>
+            </div>
             <NewGroupDialog />
           </div>
+          <p>All of the groups can be found here</p>
         </div>
         {error && <p>{error.message}</p>}
         {groups && (

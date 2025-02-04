@@ -1,38 +1,48 @@
 .settings-header.groups {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 0.75fr;
-  grid-template-areas:
-    'title title title actions'
-    'description description description .'
-    'additional-actions . . .';
+  .back-to-all-groups {
+    align-items: center;
+    color: var(--black);
+    display: flex;
+    gap: 10px;
+    padding-block-end: 2rem;
+    text-decoration: none;
 
-  &:has(.additional-actions) {
-    grid-template-rows: 1fr 0.75fr 0.85fr;
+    svg {
+      border-radius: 5px;
+      transition: background-color ease-in-out 100ms;
+    }
+
+    &:hover {
+      text-decoration: underline;
+
+      svg {
+        background-color: var(--gray-light);
+      }
+    }
+  }
+
+  .groups-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title-container {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
   }
 
   h1 {
-    grid-area: title;
+    font-size: 40px;
+    line-height: 46px;
     margin: 0;
   }
 
   p {
-    grid-area: description;
-    margin-block-start: 0.5rem;
-    margin-block-end: 3rem;
-  }
-
-  .settings-actions {
-    grid-area: actions;
-    justify-self: end;
-  }
-
-  .additional-actions {
-    grid-area: additional-actions;
-  }
-
-  .add-new-group-link {
-    text-decoration: none;
+    margin-block-start: 1rem;
+    margin-block-end: 2rem;
   }
 }
 
@@ -56,9 +66,17 @@
 }
 
 .edit-group-button {
+  align-items: center;
+  border-radius: 0.25rem;
   display: flex;
   gap: 0.5rem;
-  padding-right: 0.75rem;
+  margin-block-start: 0.5rem;
+  padding: 0.5rem;
+  transition: background-color ease-in-out 100ms;
+
+  &:hover {
+    background-color: var(--gray-light);
+  }
 }
 
 .manage-group-members-form,
@@ -139,7 +157,7 @@
     }
 
     .checked-icon-container {
-      transition: opacity ease-in 100ms;
+      transition: opacity ease-in-out 100ms;
     }
   }
 

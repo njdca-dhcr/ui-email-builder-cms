@@ -62,10 +62,16 @@
   font-weight: var(--weight-normal);
   line-height: 1.1;
   padding: 0.5rem 1.5rem;
-  cursor: pointer;
+  text-decoration: none;
+  transition: background-color ease-in-out 100ms;
 
   span {
     font-size: var(--font-large);
     margin-inline-start: 0.5rem;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-light);
   }
 }
