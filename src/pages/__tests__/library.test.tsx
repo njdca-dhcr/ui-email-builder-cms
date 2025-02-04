@@ -79,7 +79,7 @@ describe('Library page', () => {
       expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).not.toBeNull()
     })
 
-    it('filters by the selected types', async () => {
+    it('filters by the select type', async () => {
       const user = userEvent.setup()
       const { getByLabelText, queryByText } = render(<LibraryPage />)
 
@@ -88,21 +88,21 @@ describe('Library page', () => {
 
       await user.click(meucCheckbox)
 
-      expect(queryByText(FIRST_EMAIL_TEMPLATE_NAME)).not.toBeNull()
-      expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).toBeNull()
+      expect(queryByText(FIRST_EMAIL_TEMPLATE_NAME)).toBeTruthy()
+      expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).toBeFalsy()
 
       await user.click(monetaryCheckbox)
 
-      expect(queryByText(FIRST_EMAIL_TEMPLATE_NAME)).not.toBeNull()
-      expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).not.toBeNull()
+      expect(queryByText(FIRST_EMAIL_TEMPLATE_NAME)).toBeFalsy()
+      expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).toBeTruthy()
 
       await user.click(monetaryCheckbox)
 
-      expect(queryByText(FIRST_EMAIL_TEMPLATE_NAME)).not.toBeNull()
-      expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).toBeNull()
+      expect(queryByText(FIRST_EMAIL_TEMPLATE_NAME)).toBeTruthy()
+      expect(queryByText(SECOND_EMAIL_TEMPLATE_NAME)).toBeTruthy()
     })
 
-    it('deselects all when other types are selected and deselects those types when all is selected', async () => {
+    it('deselects all when another type is selected and deselects that type when all is selected', async () => {
       const user = userEvent.setup()
       const { getByLabelText } = render(<LibraryPage />)
 
@@ -118,7 +118,7 @@ describe('Library page', () => {
       await user.click(monetaryCheckbox)
 
       expect(allCheckbox).not.toBeChecked()
-      expect(meucCheckbox).toBeChecked()
+      expect(meucCheckbox).not.toBeChecked()
       expect(monetaryCheckbox).toBeChecked()
 
       await user.click(allCheckbox)

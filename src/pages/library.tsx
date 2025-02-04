@@ -40,13 +40,13 @@ type TypeFilter = (typeof TYPE_FILTERS)[number]['value']
 const LibaryPage: FC = () => {
   useRedirectIfNotSignedIn()
   const [filterQuery, setFilterQuery] = useState('')
-  const [typeFilters, setTypeFilters] = useState<TypeFilter[]>([])
+  const [typeFilter, setTypeFilter] = useState<TypeFilter | null>(null)
   const lowerCaseFilterQuery = filterQuery.toLowerCase()
   const emailTemplates = useEmailTemplatesData()
-  const allTypeFiltersSelected = typeFilters.length === 0
+  const allTypeFiltersSelected = !Boolean(typeFilter)
 
   const filteredByTypeEmailTemplates = emailTemplates.filter(({ name }) => {
-    return allTypeFiltersSelected || typeFilters.some((typeFilter) => name.startsWith(typeFilter))
+    return allTypeFiltersSelected || (typeFilter && name.startsWith(typeFilter))
   })
 
   const filteredEmailTemplates = filteredByTypeEmailTemplates.filter(({ name, description }) => {
@@ -95,15 +95,15 @@ const LibaryPage: FC = () => {
             <LibraryFilterCheckbox
               label="All"
               checked={allTypeFiltersSelected}
-              onChange={() => setTypeFilters([])}
+              onChange={() => setTypeFilter(null)}
             />
             {TYPE_FILTERS.map(({ label, value }) => (
               <LibraryTypeFilterCheckbox
                 key={value}
                 label={label}
-                typeFilter={value}
-                typeFilters={typeFilters}
-                setTypeFilters={setTypeFilters}
+                value={value}
+                typeFilter={typeFilter}
+                setTypeFilter={setTypeFilter}
               />
             ))}
           </ul>
@@ -166,19 +166,19 @@ const LibraryFilterCheckbox: FC<{
 
 const LibraryTypeFilterCheckbox: FC<{
   label: string
-  typeFilter: TypeFilter
-  typeFilters: TypeFilter[]
-  setTypeFilters: (typeFilters: TypeFilter[]) => void
-}> = ({ label, typeFilter, typeFilters, setTypeFilters }) => {
+  value: TypeFilter
+  typeFilter: TypeFilter | null
+  setTypeFilter: (typeFilter: TypeFilter | null) => void
+}> = ({ label, value, typeFilter, setTypeFilter }) => {
   return (
     <LibraryFilterCheckbox
       label={label}
-      checked={typeFilters.includes(typeFilter)}
+      checked={typeFilter === value}
       onChange={() => {
-        if (typeFilters.includes(typeFilter)) {
-          setTypeFilters(typeFilters.filter((activeTypeFilter) => activeTypeFilter !== typeFilter))
+        if (typeFilter === value) {
+          setTypeFilter(null)
         } else {
-          setTypeFilters([...typeFilters, typeFilter])
+          setTypeFilter(value)
         }
       }}
     />
