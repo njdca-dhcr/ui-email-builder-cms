@@ -105,6 +105,7 @@ export const SaveEmailTemplateDialog: FC<Props> = ({
             }}
           >
             <FormField
+              autoComplete="false"
               id="name"
               name="name"
               label="Name"
