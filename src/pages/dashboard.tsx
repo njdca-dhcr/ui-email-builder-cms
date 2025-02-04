@@ -122,14 +122,17 @@ const DashboardPage: FC = () => {
 const EmailTemplateDraftsListItem: FC<{ emailTemplate: EmailTemplateIndexItem }> = ({
   emailTemplate,
 }) => {
+  const path = `/email-templates/${emailTemplate.id}`
   return (
     <ListItem key={emailTemplate.id} className="draft-item">
       <div className="draft-info">
-        <p className="draft-name">{emailTemplate.name}</p>
+        <Link to={path} className="draft-name">
+          {emailTemplate.name}
+        </Link>
         <p className="draft-description">{emailTemplate.description}</p>
       </div>
       <div className="draft-link-wrapper">
-        <Link to={`/email-templates/${emailTemplate.id}`} className="draft-link">
+        <Link to={path} className="draft-link">
           Go to Draft
         </Link>
         {emailTemplate.updatedAt && (
