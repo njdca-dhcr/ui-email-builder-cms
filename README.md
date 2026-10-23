@@ -27,7 +27,7 @@ More to come. [Netlify](https://www.netlify.com)? [Amplify](https://aws.amazon.c
 
 ### Installation
 
-You should have NodeJS v18.3.0 or higher installed.
+You should have NodeJS v22 (run `nvm use`) and npm v10 or higher installed.
 
 1. Clone the repo with `git clone git@github.com:newjersey/ui-email-builder-cms.git`
 1. Install dependencies with `npm install`
@@ -57,6 +57,8 @@ run `npm run lint:fix`.
 
 Testing is done using [Jest](https://jestjs.io/). The tests can be run with `npm run test` or in watch mode with `npm run test:watch`. For convenience,
 you can run `npm run validate` which will typecheck (`npm run typecheck`), lint (`npm run lint`), and run the tests.
+
+On a fresh checkout, start `npm run develop` once to generate `src/gatsby-types.d.ts` before running typecheck. Gatsby generates these GraphQL types during development, not during a production build.
 
 ### Config
 

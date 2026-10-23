@@ -27,7 +27,8 @@
     "react": "^18.3.1",
     "@types/react": "^18.3.7",
     "react-dom": "^18.3.1",
-    "slate": "^0.103.0"
+    "slate": "^0.103.0",
+    "sharp": "0.35.5"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^4.1.0",
@@ -117,8 +118,8 @@
     "typescript": "^5.6.2"
   },
   "engines": {
-    "npm": ">=8.11.0",
-    "node": ">=18.3.0"
+    "npm": ">=10",
+    "node": ">=22.0.0 <23"
   },
   "browserslist": [
     "last 2 versions",
